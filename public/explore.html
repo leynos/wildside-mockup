@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0D1A26',
+                        'brand-dark-200': '#152433',
+                        'brand-dark-300': '#203445',
+                        'brand-teal': '#4AF0D5',
+                        'brand-teal-dark': '#3CCAB4',
+                        'brand-gray': '#8998A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+    <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+        
+        <div id="top-bar-placeholder" class="absolute top-0 left-0 right-0 h-12 bg-transparent z-10">
+        </div>
+
+        <div id="main-content" class="relative z-10 h-full overflow-y-auto pb-20">
+            
+            <header id="discover-header" class="px-6 pt-16 pb-4">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white mb-1">Discover</h1>
+                        <p class="text-brand-gray">Explore curated walks & hidden gems</p>
+                    </div>
+                    <button class="w-10 h-10 bg-brand-dark-200 rounded-full flex items-center justify-center border border-brand-dark-300">
+                        <i class="fa-solid fa-filter text-brand-teal"></i>
+                    </button>
+                </div>
+                
+                <div id="search-bar" class="relative">
+                    <input type="text" placeholder="Search walks, places, themes..." class="w-full bg-brand-dark-200 text-white placeholder-brand-gray rounded-xl px-4 py-3 pl-12 border border-brand-dark-300 focus:border-brand-teal focus:outline-none">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-brand-gray"></i>
+                </div>
+            </header>
+
+            <section id="featured-categories" class="px-6 mb-6">
+                <div class="flex gap-3 overflow-x-auto pb-2">
+                    <div class="flex-shrink-0 bg-gradient-to-r from-green-600 to-teal-600 rounded-xl p-4 min-w-[140px]">
+                        <i class="fa-solid fa-leaf text-white text-xl mb-2"></i>
+                        <p class="text-white font-semibold text-sm">Nature Walks</p>
+                        <p class="text-green-100 text-xs">23 routes</p>
+                    </div>
+                    <div class="flex-shrink-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-xl p-4 min-w-[140px]">
+                        <i class="fa-solid fa-palette text-white text-xl mb-2"></i>
+                        <p class="text-white font-semibold text-sm">Street Art</p>
+                        <p class="text-orange-100 text-xs">18 routes</p>
+                    </div>
+                    <div class="flex-shrink-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-4 min-w-[140px]">
+                        <i class="fa-solid fa-landmark text-white text-xl mb-2"></i>
+                        <p class="text-white font-semibold text-sm">Historic</p>
+                        <p class="text-blue-100 text-xs">15 routes</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="featured-walk" class="px-6 mb-6">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-yellow-400"></i>
+                    Walk of the Week
+                </h2>
+                <div class="bg-brand-dark-200 rounded-2xl overflow-hidden border border-brand-dark-300">
+                    <div class="h-48 relative overflow-hidden">
+                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/12c98d9a27-c8889b97b2657bea9387.png" alt="scenic waterfront walkway with city skyline, golden hour lighting, urban photography style" />
+                        <div class="absolute top-3 left-3 bg-yellow-400 text-brand-dark px-3 py-1 rounded-full text-xs font-bold">
+                            FEATURED
+                        </div>
+                        <div class="absolute top-3 right-3 flex gap-1">
+                            <div class="bg-black/50 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
+                                <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                                <span class="text-white text-xs font-medium">4.9</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold text-lg mb-1">Sunset Harbor Circuit</h3>
+                            <div class="flex items-center gap-4 text-sm text-gray-300">
+                                <span class="flex items-center gap-1">
+                                    <i class="fa-solid fa-route text-xs"></i>
+                                    4.2 km
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <i class="fa-regular fa-clock text-xs"></i>
+                                    75 min
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <i class="fa-solid fa-users text-xs"></i>
+                                    234 walkers
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded-full text-xs">Waterfront</span>
+                            <span class="bg-orange-600/20 text-orange-400 px-2 py-1 rounded-full text-xs">Sunset Views</span>
+                            <span class="bg-green-600/20 text-green-400 px-2 py-1 rounded-full text-xs">Easy</span>
+                        </div>
+                        <div class="h-16 bg-brand-dark-300 rounded-lg mb-3 overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/ca7781496e-4f5bd63e8bd5c0478961.png" alt="minimalist route map with teal path markers and points of interest, dark theme" />
+                        </div>
+                        <button class="w-full bg-brand-teal text-brand-dark font-semibold py-3 rounded-xl hover:bg-brand-teal-dark transition-colors">
+                            Start This Walk
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="popular-themes" class="px-6 mb-6">
+                <h2 class="text-lg font-bold text-white mb-4">Popular Themes</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="h-24 bg-brand-dark-300 rounded-lg mb-3 overflow-hidden relative">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/00379b3179-9aa4b61c93b325ad197e.png" alt="cozy coffee shops and cafes street view, warm lighting, urban photography" />
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute top-2 right-2 bg-brand-teal text-brand-dark px-2 py-1 rounded-full text-xs font-bold">
+                                12
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Coffee Culture</h3>
+                        <p class="text-brand-gray text-xs mb-2">Best cafés & roasters</p>
+                        <div class="flex items-center gap-2 text-xs text-brand-gray">
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-route"></i>
+                                1.5-3km
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-star text-yellow-400"></i>
+                                4.7
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="h-24 bg-brand-dark-300 rounded-lg mb-3 overflow-hidden relative">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6df0dd40dc-a40fec4f0e9c9bed5678.png" alt="hidden gardens and secret parks in urban setting, lush greenery, peaceful atmosphere" />
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute top-2 right-2 bg-brand-teal text-brand-dark px-2 py-1 rounded-full text-xs font-bold">
+                                8
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Hidden Gardens</h3>
+                        <p class="text-brand-gray text-xs mb-2">Secret green spaces</p>
+                        <div class="flex items-center gap-2 text-xs text-brand-gray">
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-route"></i>
+                                2-4km
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-star text-yellow-400"></i>
+                                4.8
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="h-24 bg-brand-dark-300 rounded-lg mb-3 overflow-hidden relative">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/c44d8c772e-7afb24af76ebfb5be904.png" alt="vibrant street art murals and graffiti walls, colorful urban art scene" />
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute top-2 right-2 bg-brand-teal text-brand-dark px-2 py-1 rounded-full text-xs font-bold">
+                                15
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Street Art Hunt</h3>
+                        <p class="text-brand-gray text-xs mb-2">Murals & installations</p>
+                        <div class="flex items-center gap-2 text-xs text-brand-gray">
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-route"></i>
+                                1-5km
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-star text-yellow-400"></i>
+                                4.6
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="h-24 bg-brand-dark-300 rounded-lg mb-3 overflow-hidden relative">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/2a09d665ca-58719661a5f50e054983.png" alt="bustling local markets and food stalls, vibrant atmosphere, street food scene" />
+                            <div class="absolute inset-0 bg-black/20"></div>
+                            <div class="absolute top-2 right-2 bg-brand-teal text-brand-dark px-2 py-1 rounded-full text-xs font-bold">
+                                9
+                            </div>
+                        </div>
+                        <h3 class="text-white font-semibold mb-1">Market Hopping</h3>
+                        <p class="text-brand-gray text-xs mb-2">Local food & crafts</p>
+                        <div class="flex items-center gap-2 text-xs text-brand-gray">
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-route"></i>
+                                2-3km
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <i class="fa-solid fa-star text-yellow-400"></i>
+                                4.5
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="curated-collections" class="px-6 mb-6">
+                <h2 class="text-lg font-bold text-white mb-4">Curated Collections</h2>
+                <div class="space-y-4">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 bg-brand-dark-300 rounded-lg overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6600a8c74e-dc95247accf0466ded6d.png" alt="sunday morning peaceful streets with soft lighting, quiet urban scene" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-white font-semibold mb-1">Sunday Coffee Loops</h3>
+                                <p class="text-brand-gray text-sm mb-2">Perfect lazy morning routes</p>
+                                <div class="flex items-center gap-4 text-xs text-brand-gray">
+                                    <span class="flex items-center gap-1">
+                                        <i class="fa-solid fa-route"></i>
+                                        1-2km
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i class="fa-regular fa-clock"></i>
+                                        30-45min
+                                    </span>
+                                    <span class="bg-green-600/20 text-green-400 px-2 py-1 rounded-full">Easy</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-brand-teal font-bold text-lg">6</div>
+                                <div class="text-brand-gray text-xs">routes</div>
+                            </div>
+                        </div>
+                        <div class="mt-3 h-12 bg-brand-dark-300 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/823299ea0b-e0264157719b86f8a6e0.png" alt="simple route map showing coffee shop locations with teal markers, minimal design" />
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 bg-brand-dark-300 rounded-lg overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/9f5e934e59-0662115197edd15386a0.png" alt="evening city lights and nighttime urban atmosphere, moody lighting" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-white font-semibold mb-1">After Dark Adventures</h3>
+                                <p class="text-brand-gray text-sm mb-2">Safe, well-lit evening routes</p>
+                                <div class="flex items-center gap-4 text-xs text-brand-gray">
+                                    <span class="flex items-center gap-1">
+                                        <i class="fa-solid fa-route"></i>
+                                        2-4km
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i class="fa-regular fa-clock"></i>
+                                        45-90min
+                                    </span>
+                                    <span class="bg-orange-600/20 text-orange-400 px-2 py-1 rounded-full">Moderate</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-brand-teal font-bold text-lg">4</div>
+                                <div class="text-brand-gray text-xs">routes</div>
+                            </div>
+                        </div>
+                        <div class="mt-3 h-12 bg-brand-dark-300 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/037bb6c020-6a1ce2fcc55dc6480cb9.png" alt="nighttime route map with illuminated pathways and safety markers, dark theme" />
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 bg-brand-dark-300 rounded-lg overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d74ae551dc-579930825ae3184fbeb7.png" alt="historic architecture and vintage buildings, classic urban photography" />
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-white font-semibold mb-1">Architecture Gems</h3>
+                                <p class="text-brand-gray text-sm mb-2">Historic & modern marvels</p>
+                                <div class="flex items-center gap-4 text-xs text-brand-gray">
+                                    <span class="flex items-center gap-1">
+                                        <i class="fa-solid fa-route"></i>
+                                        3-6km
+                                    </span>
+                                    <span class="flex items-center gap-1">
+                                        <i class="fa-regular fa-clock"></i>
+                                        60-120min
+                                    </span>
+                                    <span class="bg-red-600/20 text-red-400 px-2 py-1 rounded-full">Challenging</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-brand-teal font-bold text-lg">11</div>
+                                <div class="text-brand-gray text-xs">routes</div>
+                            </div>
+                        </div>
+                        <div class="mt-3 h-12 bg-brand-dark-300 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b106c740b9-79274462536c6130c51f.png" alt="detailed route map highlighting architectural landmarks with teal waypoints" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trending-now" class="px-6 mb-6">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-orange-400"></i>
+                    Trending Now
+                </h2>
+                <div class="space-y-3">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-dark-300 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a7e1933db7-7a9064fb0236307df8d8.png" alt="cherry blossoms in spring park setting, pink flowers, seasonal beauty" />
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-white font-semibold text-sm">Cherry Blossom Trail</h3>
+                            <p class="text-brand-gray text-xs">Limited time - Spring only</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="flex items-center gap-1 text-orange-400 text-xs">
+                                <i class="fa-solid fa-trending-up"></i>
+                                <span>+127%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-dark-300 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/aad2e58ec5-0f3a7244c99ac5d8bde3.png" alt="food truck festival scene with colorful vendors and crowds" />
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-white font-semibold text-sm">Food Truck Friday</h3>
+                            <p class="text-brand-gray text-xs">Weekly event route</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="flex items-center gap-1 text-orange-400 text-xs">
+                                <i class="fa-solid fa-trending-up"></i>
+                                <span>+89%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-dark-300 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a0da2ab4e8-181906e7c1316884df60.png" alt="rooftop bars and elevated city views, urban nightlife scene" />
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-white font-semibold text-sm">Rooftop Views Circuit</h3>
+                            <p class="text-brand-gray text-xs">Best skyline spots</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="flex items-center gap-1 text-orange-400 text-xs">
+                                <i class="fa-solid fa-trending-up"></i>
+                                <span>+56%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="community-favorites" class="px-6 mb-8">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-users text-brand-teal"></i>
+                    Community Favorites
+                </h2>
+                <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="user avatar" />
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-medium text-sm">Sarah's Pick</p>
+                            <p class="text-brand-gray text-xs">Most shared this week</p>
+                        </div>
+                        <div class="flex items-center gap-1 text-yellow-400">
+                            <i class="fa-solid fa-star text-xs"></i>
+                            <span class="text-white text-sm">4.9</span>
+                        </div>
+                    </div>
+                    <h3 class="text-white font-semibold mb-2">Bookstore & Bistro Crawl</h3>
+                    <p class="text-brand-gray text-sm mb-3">A perfect blend of literary gems and cozy eateries through the cultural district</p>
+                    <div class="flex items-center gap-4 text-xs text-brand-gray mb-3">
+                        <span class="flex items-center gap-1">
+                            <i class="fa-solid fa-route"></i>
+                            2.8 km
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <i class="fa-regular fa-clock"></i>
+                            65 min
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <i class="fa-solid fa-share"></i>
+                            156 shares
+                        </span>
+                    </div>
+                    <button class="w-full bg-brand-teal text-brand-dark font-semibold py-2.5 rounded-lg hover:bg-brand-teal-dark transition-colors">
+                        Try Sarah's Route
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+            <div class="flex justify-around h-20">
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-map text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Map</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Explore</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Saved</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-user text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Profile</span>
+                </span>
+            </div>
+        </nav>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const categoryCards = document.querySelectorAll('#featured-categories > div > div');
+                const themeCards = document.querySelectorAll('#popular-themes .bg-brand-dark-200');
+                const collectionCards = document.querySelectorAll('#curated-collections .bg-brand-dark-200');
+                
+                categoryCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        this.classList.add('scale-95');
+                        setTimeout(() => {
+                            this.classList.remove('scale-95');
+                        }, 150);
+                    });
+                });
+
+                themeCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 150);
+                    });
+                });
+
+                const searchInput = document.querySelector('#search-bar input');
+                searchInput.addEventListener('focus', function() {
+                    this.parentElement.classList.add('ring-2', 'ring-brand-teal/50');
+                });
+                
+                searchInput.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('ring-2', 'ring-brand-teal/50');
+                });
+            });
+        </script>
+
+        <style>
+            .bg-gradient-to-r {
+                transition: all 0.3s ease;
+            }
+            
+            .bg-gradient-to-r:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(74, 240, 213, 0.15);
+            }
+            
+            .grid > div {
+                transition: transform 0.2s ease;
+            }
+            
+            .grid > div:hover {
+                transform: translateY(-1px);
+            }
+            
+            input:focus {
+                box-shadow: 0 0 0 3px rgba(74, 240, 213, 0.1);
+            }
+        </style>
+    </main>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walk Summary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0D1A26',
+                        'brand-dark-200': '#152433',
+                        'brand-dark-300': '#203445',
+                        'brand-teal': '#4AF0D5',
+                        'brand-teal-dark': '#3CCAB4',
+                        'brand-gray': '#8998A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+    <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+        
+        <div id="top-bar-placeholder" class="absolute top-0 left-0 right-0 h-12 bg-transparent z-10">
+        </div>
+
+        <div id="celebration-confetti" class="absolute inset-0 z-5 pointer-events-none">
+            <div class="confetti-piece absolute top-20 left-12 w-2 h-2 bg-brand-teal rounded animate-bounce"></div>
+            <div class="confetti-piece absolute top-32 right-16 w-1 h-1 bg-yellow-400 rounded animate-pulse"></div>
+            <div class="confetti-piece absolute top-24 left-1/3 w-1.5 h-1.5 bg-pink-400 rounded animate-bounce"></div>
+            <div class="confetti-piece absolute top-40 right-1/4 w-1 h-1 bg-green-400 rounded animate-pulse"></div>
+            <div class="confetti-piece absolute top-28 left-3/4 w-2 h-2 bg-blue-400 rounded animate-bounce"></div>
+        </div>
+
+        <div id="main-content" class="relative z-10 h-full overflow-y-auto pb-20">
+            
+            <header id="celebration-header" class="px-6 pt-16 pb-6 text-center">
+                <div class="mb-4">
+                    <i class="fa-solid fa-trophy text-6xl text-yellow-400 mb-4 animate-pulse"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-white mb-2">Walk Complete!</h1>
+                <p class="text-brand-gray text-lg">Amazing adventure through the city</p>
+            </header>
+
+            <section id="route-map-card" class="mx-6 mb-6">
+                <div class="bg-brand-dark-200 rounded-2xl p-4 border border-brand-dark-300">
+                    <div class="h-48 bg-brand-dark-300 rounded-xl mb-4 relative overflow-hidden">
+                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/06e75c31a1-bce51b16eb8b338859bf.png" alt="aerial map view of walking route with marked stops and path, dark theme, teal accent markers" />
+                        <div class="absolute top-3 left-3 bg-brand-teal text-brand-dark px-2 py-1 rounded-full text-xs font-semibold">
+                            Route Completed
+                        </div>
+                        <div class="absolute bottom-3 right-3 flex gap-2">
+                            <div class="w-8 h-8 bg-white rounded-full border-2 border-brand-teal overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/9a2e080e31-0b85ae78995813d7fbcf.png" alt="small thumbnail photo of a coffee shop storefront" />
+                            </div>
+                            <div class="w-8 h-8 bg-white rounded-full border-2 border-brand-teal overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6e3f2e7bfd-7c70d8ad83f16d812bad.png" alt="small thumbnail photo of a park with trees" />
+                            </div>
+                            <div class="w-8 h-8 bg-white rounded-full border-2 border-brand-teal overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/01db370fbf-f881030cf4f386080975.png" alt="small thumbnail photo of street art mural" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stats-overview" class="mx-6 mb-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fa-solid fa-route text-brand-teal text-xl"></i>
+                            <span class="text-brand-gray text-sm">Distance</span>
+                        </div>
+                        <p class="text-2xl font-bold text-white">3.2 km</p>
+                    </div>
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fa-regular fa-clock text-brand-teal text-xl"></i>
+                            <span class="text-brand-gray text-sm">Duration</span>
+                        </div>
+                        <p class="text-2xl font-bold text-white">58 min</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="additional-stats" class="mx-6 mb-6">
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 text-center">
+                        <i class="fa-solid fa-fire text-orange-400 text-lg mb-2"></i>
+                        <p class="text-lg font-semibold text-white">247</p>
+                        <p class="text-xs text-brand-gray">Calories</p>
+                    </div>
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 text-center">
+                        <i class="fa-solid fa-location-dot text-red-400 text-lg mb-2"></i>
+                        <p class="text-lg font-semibold text-white">7</p>
+                        <p class="text-xs text-brand-gray">Stops</p>
+                    </div>
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 text-center">
+                        <i class="fa-solid fa-star text-yellow-400 text-lg mb-2"></i>
+                        <p class="text-lg font-semibold text-white">3</p>
+                        <p class="text-xs text-brand-gray">Starred</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="favorite-moments" class="mx-6 mb-6">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                    <i class="fa-solid fa-heart text-pink-400"></i>
+                    Favourite Moments
+                </h2>
+                <div class="space-y-3">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/03fdb8eff5-0706dc4eec4e2208ca2d.png" alt="cozy coffee shop interior with warm lighting" />
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-medium">Blue Bottle Coffee</p>
+                            <p class="text-brand-gray text-sm">Perfect cortado & friendly barista</p>
+                        </div>
+                        <i class="fa-solid fa-star text-yellow-400"></i>
+                    </div>
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7c8c56a54b-101578a06001bb190271.png" alt="colorful street art mural on brick wall" />
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-medium">Hidden Mural</p>
+                            <p class="text-brand-gray text-sm">Amazing street art in quiet alley</p>
+                        </div>
+                        <i class="fa-solid fa-star text-yellow-400"></i>
+                    </div>
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/ad4258f4ad-817a02de971280a8ef8b.png" alt="peaceful park with pond and ducks" />
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-medium">Meridian Hill Park</p>
+                            <p class="text-brand-gray text-sm">Peaceful pond with friendly ducks</p>
+                        </div>
+                        <i class="fa-solid fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+            </section>
+
+            <section id="action-buttons" class="mx-6 mb-6">
+                <div class="space-y-3">
+                    <button class="w-full bg-brand-teal text-brand-dark font-semibold py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-brand-teal-dark transition-colors">
+                        <i class="fa-solid fa-star"></i>
+                        Rate This Walk
+                    </button>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="bg-brand-dark-200 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 border border-brand-dark-300 hover:bg-brand-dark-300 transition-colors">
+                            <i class="fa-solid fa-share"></i>
+                            Share
+                        </button>
+                        <button class="bg-brand-dark-200 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2 border border-brand-dark-300 hover:bg-brand-dark-300 transition-colors">
+                            <i class="fa-solid fa-bookmark"></i>
+                            Save Route
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="remix-suggestion" class="mx-6 mb-6">
+                <div class="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-xl p-4 border border-purple-400/30">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-xl"></i>
+                        <h3 class="text-white font-semibold">Try a Remix?</h3>
+                    </div>
+                    <p class="text-brand-gray text-sm mb-4">Generate a new route keeping your favorite spots but discovering new hidden gems</p>
+                    <button class="w-full bg-purple-500 text-white font-medium py-3 rounded-lg hover:bg-purple-600 transition-colors">
+                        Remix This Walk
+                    </button>
+                </div>
+            </section>
+
+            <section id="social-share" class="mx-6 mb-8">
+                <h3 class="text-white font-semibold mb-4 text-center">Share your adventure</h3>
+                <div class="flex justify-center gap-4">
+                    <button class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                        <i class="fa-brands fa-facebook text-white"></i>
+                    </button>
+                    <button class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors">
+                        <i class="fa-brands fa-instagram text-white"></i>
+                    </button>
+                    <button class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                        <i class="fa-brands fa-twitter text-white"></i>
+                    </button>
+                    <button class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors">
+                        <i class="fa-brands fa-whatsapp text-white"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+            <div class="flex justify-around h-20">
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-map text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Map</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Explore</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Saved</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-trophy text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Summary</span>
+                </span>
+            </div>
+        </nav>
+
+        <style>
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            .confetti-piece {
+                animation-duration: 2s;
+                animation-iteration-count: infinite;
+            }
+            
+            .confetti-piece:nth-child(2) {
+                animation-delay: 0.5s;
+            }
+            
+            .confetti-piece:nth-child(3) {
+                animation-delay: 1s;
+            }
+            
+            .confetti-piece:nth-child(4) {
+                animation-delay: 1.5s;
+            }
+            
+            .confetti-piece:nth-child(5) {
+                animation-delay: 0.8s;
+            }
+        </style>
+
+        <script>
+            // Add interactive rating functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const rateButton = document.querySelector('button:has(i.fa-star)');
+                if (rateButton) {
+                    rateButton.addEventListener('click', function() {
+                        // Create rating modal or navigate to rating screen
+                        this.innerHTML = '<i class="fa-solid fa-check"></i> Thanks for rating!';
+                        this.classList.add('bg-green-500');
+                        this.classList.remove('bg-brand-teal');
+                    });
+                }
+            });
+        </script>
+    </main>
+</body>
+</html>

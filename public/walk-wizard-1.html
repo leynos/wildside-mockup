@@ -1,0 +1,236 @@
+<!DOCTYPE html><html><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            inter: ['Inter', 'sans-serif'],
+                        },
+                        colors: {
+                            'brand-dark': '#0D1A26',
+                            'brand-dark-200': '#152433',
+                            'brand-dark-300': '#203445',
+                            'brand-teal': '#4AF0D5',
+                            'brand-teal-dark': '#3CCAB4',
+                            'brand-gray': '#8998A8',
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+        <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+            
+            <header id="wizard-header" class="absolute top-0 left-0 right-0 z-30 bg-brand-dark/90 backdrop-blur-lg border-b border-brand-dark-300">
+    <div class="flex items-center justify-between p-4 pt-12">
+        <button id="back-button" class="w-10 h-10 rounded-full bg-brand-dark-300 flex items-center justify-center">
+            <i class="fa-solid fa-arrow-left text-white"></i>
+        </button>
+        <h1 class="text-lg font-bold text-white">Walk Wizard</h1>
+        <button id="help-button" class="w-10 h-10 rounded-full bg-brand-dark-300 flex items-center justify-center">
+            <i class="fa-solid fa-question text-white"></i>
+        </button>
+    </div>
+    <div id="wizard-progress" class="px-4 pb-4">
+    <div class="flex items-center justify-center gap-2 mb-2">
+        <div class="relative">
+            <div class="w-2 h-2 bg-brand-teal rounded-full"></div>
+            <div class="absolute -top-1 -left-1 w-4 h-4 border-2 border-brand-teal rounded-full animate-pulse"></div>
+        </div>
+        <div class="w-8 h-0.5 bg-brand-dark-300"></div>
+        <div class="w-2 h-2 bg-brand-dark-300 rounded-full"></div>
+        <div class="w-8 h-0.5 bg-brand-dark-300"></div>
+        <div class="w-2 h-2 bg-brand-dark-300 rounded-full"></div>
+    </div>
+    <p class="text-xs text-brand-gray text-center">Advanced Controls</p>
+</div>
+</header>
+
+            <div id="wizard-content" class="absolute top-20 left-0 right-0 bottom-20 overflow-y-auto p-6 pt-4">
+                
+                <div id="duration-section" class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <i class="fa-regular fa-clock text-brand-teal"></i>Duration
+                    </h2>
+                    <div class="bg-brand-dark-200 rounded-2xl p-5">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-white font-medium">Walk Time</span>
+                            <span class="text-2xl font-bold text-brand-teal">60 min</span>
+                        </div>
+                        <input type="range" min="15" max="180" value="60" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider mb-2">
+                        <div class="flex justify-between text-sm text-brand-gray">
+                            <span>15m</span>
+                            <span>90m</span>
+                            <span>180m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="interests-section" class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <i class="fa-solid fa-heart text-brand-teal"></i>Interests
+                    </h2>
+                    <div class="bg-brand-dark-200 rounded-2xl p-5">
+                        <div class="flex flex-wrap gap-3">
+                            <button class="chip-button bg-brand-teal text-brand-dark font-semibold">
+                                <i class="fa-solid fa-tree mr-2"></i>Parks
+                            </button>
+                            <button class="chip-button bg-brand-dark-300">
+                                <i class="fa-solid fa-coffee mr-2"></i>Coffee
+                            </button>
+                            <button class="chip-button bg-brand-dark-300">
+                                <i class="fa-solid fa-palette mr-2"></i>Street art
+                            </button>
+                            <button class="chip-button bg-brand-teal text-brand-dark font-semibold">
+                                <i class="fa-solid fa-landmark mr-2"></i>Historic
+                            </button>
+                            <button class="chip-button bg-brand-dark-300">
+                                <i class="fa-solid fa-water mr-2"></i>Waterfront
+                            </button>
+                            <button class="chip-button bg-brand-dark-300">
+                                <i class="fa-solid fa-store mr-2"></i>Markets
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="advanced-options" class="mb-8">
+                    <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <i class="fa-solid fa-sliders text-brand-teal"></i>Walk Options
+                    </h2>
+                    <div class="bg-brand-dark-200 rounded-2xl p-5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-white">Starting point</span>
+                            <button class="text-brand-teal font-medium">Current location</button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white">Walk type</span>
+                            <button class="text-brand-teal font-medium">Loop</button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white">Difficulty</span>
+                            <button class="text-brand-teal font-medium">Easy</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="wizard-actions" class="absolute bottom-20 left-0 right-0 p-6 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300">
+                <button id="generate-advanced-walk" class="w-full bg-brand-teal text-brand-dark font-bold py-4 rounded-2xl flex items-center justify-center gap-3 text-lg">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Generate Custom Walk
+                </button>
+            </div>
+
+            <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+                <div class="flex justify-around h-20">
+                    <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-map text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Map</span>
+                    </span>
+                    <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Explore</span>
+                    </span>
+                    <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Saved</span>
+                    </span>
+                    <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-user text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Profile</span>
+                    </span>
+                </div>
+            </nav>
+            
+            <style>
+                .range-slider::-webkit-slider-thumb, .discovery-slider::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    width: 24px;
+                    height: 24px;
+                    background: #4AF0D5;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    border: 4px solid #0D1A26;
+                }
+
+                .range-slider::-moz-range-thumb, .discovery-slider::-moz-range-thumb {
+                    width: 24px;
+                    height: 24px;
+                    background: #4AF0D5;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    border: 4px solid #0D1A26;
+                }
+                
+                .chip-button {
+                    padding: 10px 16px;
+                    border-radius: 9999px;
+                    font-size: 14px;
+                    color: white;
+                    transition: all 0.2s;
+                    display: flex;
+                    align-items: center;
+                }
+                .chip-button:hover {
+                    background-color: #2a4157;
+                    transform: scale(1.05);
+                }
+                .chip-button.bg-brand-teal:hover {
+                    background-color: #3CCAB4;
+                }
+
+                .toggle-switch {
+                    position: relative;
+                    width: 50px;
+                    height: 26px;
+                }
+
+                .toggle-label {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 50px;
+                    height: 26px;
+                    background-color: #203445;
+                    border-radius: 13px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+
+                .toggle-label:before {
+                    content: '';
+                    position: absolute;
+                    top: 3px;
+                    left: 3px;
+                    width: 20px;
+                    height: 20px;
+                    background-color: #8998A8;
+                    border-radius: 50%;
+                    transition: transform 0.3s;
+                }
+
+                input[type="checkbox"]:checked + .toggle-label {
+                    background-color: #4AF0D5;
+                }
+
+                input[type="checkbox"]:checked + .toggle-label:before {
+                    transform: translateX(24px);
+                    background-color: #0D1A26;
+                }
+            </style>
+        </main>
+    
+</body></html>

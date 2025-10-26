@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0D1A26',
+                        'brand-dark-200': '#152433',
+                        'brand-dark-300': '#203445',
+                        'brand-teal': '#4AF0D5',
+                        'brand-teal-dark': '#3CCAB4',
+                        'brand-gray': '#8998A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+    <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+        
+        <div id="top-bar-placeholder" class="absolute top-0 left-0 right-0 h-12 bg-transparent z-10">
+        </div>
+
+        <div id="main-content" class="relative z-10 h-full overflow-y-auto pb-20">
+            
+            <header id="offline-header" class="px-6 pt-16 pb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <button class="w-10 h-10 rounded-full bg-brand-dark-200 flex items-center justify-center border border-brand-dark-300">
+                        <i class="fa-solid fa-arrow-left text-white"></i>
+                    </button>
+                    <h1 class="text-xl font-bold text-white">Offline Maps</h1>
+                    <button class="w-10 h-10 rounded-full bg-brand-dark-200 flex items-center justify-center border border-brand-dark-300">
+                        <i class="fa-solid fa-plus text-brand-teal"></i>
+                    </button>
+                </div>
+                <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fa-solid fa-download text-brand-teal text-lg"></i>
+                        <span class="text-white font-medium">Storage Overview</span>
+                    </div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="flex-1">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-brand-gray">Used</span>
+                                <span class="text-white">2.8 GB of 8 GB</span>
+                            </div>
+                            <div class="w-full bg-brand-dark-300 rounded-full h-2">
+                                <div class="bg-brand-teal h-2 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-brand-gray text-xs">Auto-delete unused maps after 30 days</p>
+                </div>
+            </header>
+
+            <section id="travel-hints" class="mx-6 mb-6">
+                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-3">
+                    <i class="fa-solid fa-lightbulb text-yellow-400"></i>
+                    Smart Travel Hints
+                </h2>
+                <div class="space-y-3">
+                    <div class="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl p-4 border border-blue-400/30">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-plane text-blue-400 text-lg mt-1"></i>
+                            <div class="flex-1">
+                                <h3 class="text-white font-medium mb-1">Upcoming Trip Detected</h3>
+                                <p class="text-brand-gray text-sm mb-3">Add Reykjavik before your Iceland trip next week</p>
+                                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+                                    Download Reykjavik
+                                </button>
+                            </div>
+                            <button class="text-brand-gray hover:text-white">
+                                <i class="fa-solid fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-green-600/20 to-teal-600/20 rounded-xl p-4 border border-green-400/30">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-wifi-slash text-green-400 text-lg mt-1"></i>
+                            <div class="flex-1">
+                                <h3 class="text-white font-medium mb-1">Low Coverage Area</h3>
+                                <p class="text-brand-gray text-sm mb-3">Download Brooklyn for better offline experience</p>
+                                <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors">
+                                    Download Brooklyn
+                                </button>
+                            </div>
+                            <button class="text-brand-gray hover:text-white">
+                                <i class="fa-solid fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="downloaded-regions" class="mx-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-map-marked-alt text-brand-teal"></i>
+                        Downloaded Regions
+                    </h2>
+                    <span class="text-brand-gray text-sm">4 regions</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3a482bbb0c-0525f42e8762fd8ae8a2.png" alt="aerial satellite view of Manhattan New York with central park, dark theme map style" />
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h3 class="text-white font-medium">Manhattan, NYC</h3>
+                                    <div class="flex items-center gap-2">
+                                        <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded-full">Update Available</span>
+                                        <button class="text-brand-gray hover:text-white">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="text-brand-gray text-sm mb-2">Downloaded 3 days ago • 847 MB</p>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1">
+                                        <div class="w-full bg-brand-dark-300 rounded-full h-1.5">
+                                            <div class="bg-brand-teal h-1.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-brand-gray">Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1ee5c3f4e6-26f337b26e695afe4c11.png" alt="aerial satellite view of San Francisco bay area with golden gate bridge, dark theme map style" />
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h3 class="text-white font-medium">San Francisco, CA</h3>
+                                    <div class="flex items-center gap-2">
+                                        <button class="text-brand-gray hover:text-white">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="text-brand-gray text-sm mb-2">Downloaded 1 week ago • 623 MB</p>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1">
+                                        <div class="w-full bg-brand-dark-300 rounded-full h-1.5">
+                                            <div class="bg-brand-teal h-1.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-brand-gray">Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/0588c62612-0e0ea0cdb4f311e59cfd.png" alt="aerial satellite view of London Thames river with tower bridge, dark theme map style" />
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h3 class="text-white font-medium">London, UK</h3>
+                                    <div class="flex items-center gap-2">
+                                        <button class="text-brand-gray hover:text-white">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="text-brand-gray text-sm mb-2">Downloaded 2 weeks ago • 1.2 GB</p>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1">
+                                        <div class="w-full bg-brand-dark-300 rounded-full h-1.5">
+                                            <div class="bg-yellow-400 h-1.5 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-yellow-400">Downloading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-start gap-4">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden">
+                                <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b7dd597aa7-9e7bf9778f78b1a81b28.png" alt="aerial satellite view of Tokyo with Mount Fuji in distance, dark theme map style" />
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h3 class="text-white font-medium">Tokyo, Japan</h3>
+                                    <div class="flex items-center gap-2">
+                                        <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full">Expired</span>
+                                        <button class="text-brand-gray hover:text-white">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p class="text-brand-gray text-sm mb-2">Downloaded 45 days ago • 934 MB</p>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1">
+                                        <div class="w-full bg-brand-dark-300 rounded-full h-1.5">
+                                            <div class="bg-red-400 h-1.5 rounded-full" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-red-400">Needs Update</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="auto-settings" class="mx-6 mb-6">
+                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-3">
+                    <i class="fa-solid fa-cog text-brand-teal"></i>
+                    Auto-Management
+                </h2>
+                <div class="space-y-4">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-trash-alt text-orange-400"></i>
+                                <span class="text-white font-medium">Auto-delete old maps</span>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+                        <p class="text-brand-gray text-sm">Remove maps older than 30 days automatically</p>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-wifi text-brand-teal"></i>
+                                <span class="text-white font-medium">WiFi-only downloads</span>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+                        <p class="text-brand-gray text-sm">Only download maps when connected to WiFi</p>
+                    </div>
+
+                    <div class="bg-brand-dark-200 rounded-xl p-4 border border-brand-dark-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-sync-alt text-purple-400"></i>
+                                <span class="text-white font-medium">Auto-update maps</span>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+                        <p class="text-brand-gray text-sm">Automatically update maps when new versions are available</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quick-actions" class="mx-6 mb-6">
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="bg-brand-teal text-brand-dark font-semibold py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-brand-teal-dark transition-colors">
+                        <i class="fa-solid fa-download"></i>
+                        Download New
+                    </button>
+                    <button class="bg-brand-dark-200 text-white font-medium py-4 rounded-xl flex items-center justify-center gap-2 border border-brand-dark-300 hover:bg-brand-dark-300 transition-colors">
+                        <i class="fa-solid fa-sync-alt"></i>
+                        Update All
+                    </button>
+                </div>
+            </section>
+
+            <section id="storage-tips" class="mx-6 mb-8">
+                <div class="bg-gradient-to-r from-indigo-600/20 to-purple-600/20 rounded-xl p-4 border border-indigo-400/30">
+                    <div class="flex items-center gap-3 mb-3">
+                        <i class="fa-solid fa-info-circle text-indigo-400 text-lg"></i>
+                        <h3 class="text-white font-semibold">Storage Tips</h3>
+                    </div>
+                    <ul class="space-y-2 text-brand-gray text-sm">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle text-indigo-400 text-xs mt-1.5"></i>
+                            <span>Download only areas you frequently visit</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle text-indigo-400 text-xs mt-1.5"></i>
+                            <span>Enable auto-delete to save storage space</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle text-indigo-400 text-xs mt-1.5"></i>
+                            <span>Update maps before traveling to new areas</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+            <div class="flex justify-around h-20">
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-map text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Map</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Explore</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Saved</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-download text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Offline</span>
+                </span>
+            </div>
+        </nav>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Toggle switches functionality
+                const toggles = document.querySelectorAll('input[type="checkbox"]');
+                toggles.forEach(toggle => {
+                    toggle.addEventListener('change', function() {
+                        // Add visual feedback or API calls here
+                        console.log('Setting toggled:', this.checked);
+                    });
+                });
+
+                // Download progress simulation
+                const downloadingRegion = document.querySelector('.bg-yellow-400');
+                if (downloadingRegion) {
+                    let progress = 65;
+                    const interval = setInterval(() => {
+                        progress += Math.random() * 5;
+                        if (progress >= 100) {
+                            progress = 100;
+                            downloadingRegion.style.width = '100%';
+                            downloadingRegion.classList.remove('bg-yellow-400');
+                            downloadingRegion.classList.add('bg-brand-teal');
+                            downloadingRegion.parentElement.nextElementSibling.textContent = 'Complete';
+                            downloadingRegion.parentElement.nextElementSibling.classList.remove('text-yellow-400');
+                            downloadingRegion.parentElement.nextElementSibling.classList.add('text-brand-gray');
+                            clearInterval(interval);
+                        } else {
+                            downloadingRegion.style.width = progress + '%';
+                        }
+                    }, 2000);
+                }
+
+                // Hint card dismiss functionality
+                const dismissButtons = document.querySelectorAll('.fa-times');
+                dismissButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        this.closest('.bg-gradient-to-r').style.display = 'none';
+                    });
+                });
+            });
+        </script>
+    </main>
+</body>
+</html>

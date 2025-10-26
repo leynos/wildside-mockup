@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walk Wizard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0D1A26',
+                        'brand-dark-200': '#152433',
+                        'brand-dark-300': '#203445',
+                        'brand-teal': '#4AF0D5',
+                        'brand-teal-dark': '#3CCAB4',
+                        'brand-gray': '#8998A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+    <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+        
+        <header id="wizard-header" class="absolute top-0 left-0 right-0 z-30 bg-brand-dark/90 backdrop-blur-lg border-b border-brand-dark-300">
+            <div class="flex items-center justify-between p-4 pt-12">
+                <button id="back-button" class="w-10 h-10 rounded-full bg-brand-dark-300 flex items-center justify-center">
+                    <i class="fa-solid fa-arrow-left text-white"></i>
+                </button>
+                <h1 class="text-lg font-bold text-white">Walk Wizard</h1>
+                <button id="help-button" class="w-10 h-10 rounded-full bg-brand-dark-300 flex items-center justify-center">
+                    <i class="fa-solid fa-question text-white"></i>
+                </button>
+            </div>
+            <div id="wizard-progress" class="px-4 pb-4">
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="w-2 h-2 bg-brand-teal rounded-full"></div>
+                    <div class="w-8 h-0.5 bg-brand-teal"></div>
+                    <div class="w-2 h-2 bg-brand-teal rounded-full"></div>
+                    <div class="w-8 h-0.5 bg-brand-teal"></div>
+                    <div class="relative">
+                        <div class="w-2 h-2 bg-brand-teal rounded-full"></div>
+                        <div class="absolute -top-1 -left-1 w-4 h-4 border-2 border-brand-teal rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+                <p class="text-xs text-brand-gray text-center">Walk Generated!</p>
+            </div>
+        </header>
+
+        <div id="wizard-content" class="absolute top-32 left-0 right-0 bottom-20 overflow-y-auto p-6">
+            
+            <div id="success-animation" class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-br from-brand-teal to-brand-teal-dark rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse">
+                    <i class="fa-solid fa-check text-brand-dark text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white mb-2">Perfect Walk Created!</h2>
+                <p class="text-brand-gray text-sm">Your personalized route is ready to explore</p>
+            </div>
+
+            <div id="walk-summary" class="mb-6">
+                <div class="bg-gradient-to-r from-brand-teal/10 to-purple-500/10 rounded-2xl p-6 border border-brand-teal/20">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">Hidden Gems Loop</h3>
+                        <div class="px-2 py-1 bg-brand-teal/20 rounded-lg">
+                            <span class="text-xs text-brand-teal font-medium">CUSTOM</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 mb-4">
+                        <div class="text-center">
+                            <div class="text-brand-teal text-xl font-bold">2.3</div>
+                            <div class="text-xs text-brand-gray">miles</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-brand-teal text-xl font-bold">45</div>
+                            <div class="text-xs text-brand-gray">minutes</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-brand-teal text-xl font-bold">7</div>
+                            <div class="text-xs text-brand-gray">stops</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="px-2 py-1 bg-brand-dark-300 rounded-lg text-xs text-brand-gray">Well-lit</span>
+                        <span class="px-2 py-1 bg-brand-dark-300 rounded-lg text-xs text-brand-gray">Hidden gems</span>
+                        <span class="px-2 py-1 bg-brand-dark-300 rounded-lg text-xs text-brand-gray">Easy difficulty</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="route-highlights" class="mb-6">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-star text-brand-teal"></i>
+                    Route Highlights
+                </h3>
+                <div class="space-y-3">
+                    <div class="bg-brand-dark-200 rounded-xl p-4 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-dark-300 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-coffee text-brand-teal"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-medium">Moonlight Café</h4>
+                            <p class="text-xs text-brand-gray">Local favorite with outdoor seating</p>
+                            <div class="flex items-center gap-1 mt-1">
+                                <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+                                <span class="text-xs text-brand-gray">4.8 • 0.2 miles in</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-brand-dark-200 rounded-xl p-4 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-dark-300 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-palette text-brand-teal"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-medium">Secret Mural Alley</h4>
+                            <p class="text-xs text-brand-gray">Instagram-worthy street art collection</p>
+                            <div class="flex items-center gap-1 mt-1">
+                                <i class="fa-solid fa-camera text-purple-400 text-xs"></i>
+                                <span class="text-xs text-brand-gray">Photo spot • 1.1 miles in</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-brand-dark-200 rounded-xl p-4 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-brand-dark-300 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-tree text-brand-teal"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-white font-medium">Whispering Oak Garden</h4>
+                            <p class="text-xs text-brand-gray">Peaceful pocket park with benches</p>
+                            <div class="flex items-center gap-1 mt-1">
+                                <i class="fa-solid fa-leaf text-green-400 text-xs"></i>
+                                <span class="text-xs text-brand-gray">Rest area • 1.8 miles in</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="walk-preferences" class="mb-6">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-brand-teal"></i>
+                    Your Preferences Applied
+                </h3>
+                <div class="bg-brand-dark-200 rounded-xl p-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-green-400 text-sm"></i>
+                            <span class="text-sm text-white">Well-lit paths</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-eye-slash text-brand-teal text-sm"></i>
+                            <span class="text-sm text-white">Hidden gems focus</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-route text-blue-400 text-sm"></i>
+                            <span class="text-sm text-white">Loop route</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-simple text-purple-400 text-sm"></i>
+                            <span class="text-sm text-white">Easy difficulty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="weather-info" class="mb-6">
+                <div class="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-xl p-4 border border-blue-500/20">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-sun text-yellow-400 text-xl"></i>
+                            <div>
+                                <span class="text-white font-medium">Perfect walking weather</span>
+                                <p class="text-xs text-brand-gray">72°F, light breeze, clear skies</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-brand-teal font-bold">72°</div>
+                            <div class="text-xs text-brand-gray">Ideal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="action-buttons" class="space-y-3">
+                <button id="start-walk" class="w-full bg-gradient-to-r from-brand-teal to-brand-teal-dark text-brand-dark font-bold py-4 rounded-2xl flex items-center justify-center gap-3 text-lg shadow-lg">
+                    <i class="fa-solid fa-play"></i>
+                    Start Walking Now
+                </button>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="preview-route" class="bg-brand-dark-300 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-map"></i>
+                        Preview Route
+                    </button>
+                    <button id="save-walk" class="bg-brand-dark-300 text-white font-medium py-3 rounded-xl flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bookmark"></i>
+                        Save Walk
+                    </button>
+                </div>
+                
+                <button id="create-another" class="w-full border border-brand-teal text-brand-teal font-medium py-3 rounded-xl flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus"></i>
+                    Create Another Walk
+                </button>
+            </div>
+        </div>
+
+        <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+            <div class="flex justify-around h-20">
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-map text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Map</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Explore</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Saved</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-user text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Profile</span>
+                </span>
+            </div>
+        </nav>
+    </main>
+</body>
+</html>

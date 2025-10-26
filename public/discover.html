@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0D1A26',
+                        'brand-dark-200': '#152433',
+                        'brand-dark-300': '#203445',
+                        'brand-teal': '#4AF0D5',
+                        'brand-teal-dark': '#3CCAB4',
+                        'brand-gray': '#8998A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+    <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+        
+        <div id="onboarding-background" class="absolute inset-0 bg-gradient-to-br from-brand-dark via-brand-dark-200 to-brand-dark-300"></div>
+
+        <div id="top-bar-placeholder" class="absolute top-0 left-0 right-0 h-12 bg-transparent z-10"></div>
+
+        <div id="skip-button" class="absolute top-16 right-6 z-30">
+            <button class="text-brand-gray hover:text-white text-sm font-medium px-4 py-2 rounded-full transition-colors">
+                Skip
+            </button>
+        </div>
+
+        <div id="onboarding-content" class="relative z-20 flex flex-col h-full px-6 pt-24">
+            
+            <div id="header-section" class="text-center mb-8">
+                <div class="w-20 h-20 bg-brand-teal/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-wand-magic-sparkles text-3xl text-brand-teal"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-white mb-3">Discover Your Perfect Walk</h1>
+                <p class="text-brand-gray text-lg leading-relaxed">Tell us what interests you and we'll create magical walking routes tailored just for you</p>
+            </div>
+
+            <div id="interests-section" class="flex-1">
+                <div class="mb-6">
+                    <h2 class="text-xl font-semibold text-white mb-2">What sparks your curiosity?</h2>
+                    <p class="text-brand-gray text-sm">Select a few themes that catch your eye</p>
+                </div>
+
+                <div id="interests-grid" class="grid grid-cols-2 gap-3 mb-8">
+                    <button class="interest-chip group" data-interest="parks">
+                        <div class="w-full bg-brand-dark-300 rounded-2xl p-4 border-2 border-transparent group-hover:border-brand-teal/30 transition-all duration-200">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-tree text-2xl text-green-400"></i>
+                            </div>
+                            <h3 class="text-white font-medium text-center">Parks & Nature</h3>
+                        </div>
+                    </button>
+
+                    <button class="interest-chip group" data-interest="coffee">
+                        <div class="w-full bg-brand-dark-300 rounded-2xl p-4 border-2 border-transparent group-hover:border-brand-teal/30 transition-all duration-200">
+                            <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-mug-hot text-2xl text-amber-400"></i>
+                            </div>
+                            <h3 class="text-white font-medium text-center">Coffee Spots</h3>
+                        </div>
+                    </button>
+
+                    <button class="interest-chip group selected" data-interest="street-art">
+                        <div class="w-full bg-brand-teal/20 rounded-2xl p-4 border-2 border-brand-teal transition-all duration-200">
+                            <div class="w-12 h-12 bg-brand-teal/30 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-palette text-2xl text-brand-teal"></i>
+                            </div>
+                            <h3 class="text-brand-teal font-medium text-center">Street Art</h3>
+                        </div>
+                    </button>
+
+                    <button class="interest-chip group" data-interest="historic">
+                        <div class="w-full bg-brand-dark-300 rounded-2xl p-4 border-2 border-transparent group-hover:border-brand-teal/30 transition-all duration-200">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-landmark text-2xl text-purple-400"></i>
+                            </div>
+                            <h3 class="text-white font-medium text-center">Historic Sites</h3>
+                        </div>
+                    </button>
+
+                    <button class="interest-chip group selected" data-interest="waterfront">
+                        <div class="w-full bg-brand-teal/20 rounded-2xl p-4 border-2 border-brand-teal transition-all duration-200">
+                            <div class="w-12 h-12 bg-brand-teal/30 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-water text-2xl text-brand-teal"></i>
+                            </div>
+                            <h3 class="text-brand-teal font-medium text-center">Waterfront</h3>
+                        </div>
+                    </button>
+
+                    <button class="interest-chip group" data-interest="markets">
+                        <div class="w-full bg-brand-dark-300 rounded-2xl p-4 border-2 border-transparent group-hover:border-brand-teal/30 transition-all duration-200">
+                            <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-store text-2xl text-orange-400"></i>
+                            </div>
+                            <h3 class="text-white font-medium text-center">Markets</h3>
+                        </div>
+                    </button>
+                </div>
+
+                <div id="selection-indicator" class="text-center mb-8">
+                    <p class="text-brand-gray text-sm">
+                        <span id="selected-count" class="text-brand-teal font-medium">2</span> themes selected
+                    </p>
+                </div>
+            </div>
+
+            <div id="bottom-actions" class="pb-8">
+                <button id="continue-button" class="w-full bg-brand-teal text-brand-dark font-semibold py-4 rounded-2xl text-lg transition-all duration-200 hover:bg-brand-teal-dark active:scale-[0.98] mb-4">
+                    Start Exploring
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <p class="text-center text-brand-gray text-sm">You can always change these later</p>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.interest-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                    const chipContent = this.querySelector('div');
+                    const icon = this.querySelector('i');
+                    const title = this.querySelector('h3');
+                    
+                    if (this.classList.contains('selected')) {
+                        chipContent.classList.remove('bg-brand-dark-300', 'border-transparent');
+                        chipContent.classList.add('bg-brand-teal/20', 'border-brand-teal');
+                        title.classList.remove('text-white');
+                        title.classList.add('text-brand-teal');
+                    } else {
+                        chipContent.classList.remove('bg-brand-teal/20', 'border-brand-teal');
+                        chipContent.classList.add('bg-brand-dark-300', 'border-transparent');
+                        title.classList.remove('text-brand-teal');
+                        title.classList.add('text-white');
+                    }
+                    
+                    updateSelectedCount();
+                });
+            });
+
+            function updateSelectedCount() {
+                const selectedCount = document.querySelectorAll('.interest-chip.selected').length;
+                document.getElementById('selected-count').textContent = selectedCount;
+            }
+
+            document.getElementById('continue-button').addEventListener('click', function() {
+                this.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Creating your experience...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    window.location.href = '#map-hub';
+                }, 1500);
+            });
+        </script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html><html><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+        <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <style>::-webkit-scrollbar { display: none;}</style>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            inter: ['Inter', 'sans-serif'],
+                        },
+                        colors: {
+                            'brand-dark': '#0D1A26',
+                            'brand-dark-200': '#152433',
+                            'brand-dark-300': '#203445',
+                            'brand-teal': '#4AF0D5',
+                            'brand-teal-dark': '#3CCAB4',
+                            'brand-gray': '#8998A8',
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+        <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+            
+            <div id="map-background" class="absolute inset-0">
+                <img class="w-full h-full object-cover opacity-50" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/ba98316c6a-339af7a71b2bf241cb90.png" alt="A satellite map view of a city with winding streets and parks, dark mode, blurred background, artistic style">
+            </div>
+
+            <div id="top-bar-placeholder" class="absolute top-0 left-0 right-0 h-12 bg-transparent z-10">
+                <!-- Placeholder for status bar elements like time, battery, etc. -->
+            </div>
+
+            <div id="bottom-sheet-container" class="absolute bottom-0 left-0 right-0 z-20">
+                <button id="generate-walk-fab" class="absolute right-6 -top-8 w-16 h-16 bg-brand-teal rounded-full flex items-center justify-center shadow-lg transform transition-transform hover:scale-105 active:scale-95">
+                    <i class="fa-solid fa-wand-magic-sparkles text-2xl text-brand-dark"></i>
+                </button>
+
+                <div id="quick-controls-drawer" class="bg-brand-dark-200/80 backdrop-blur-xl rounded-t-3xl p-6 pt-4">
+                    <div class="w-12 h-1.5 bg-brand-gray/30 rounded-full mx-auto mb-6"></div>
+                    
+                    <div id="duration-control" class="mb-6">
+    <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold text-white flex items-center gap-3"><i class="fa-regular fa-clock text-brand-teal"></i>Duration</h2>
+        <span class="text-lg font-medium text-white">60 min</span>
+    </div>
+    <div class="relative">
+        <input type="range" min="15" max="180" value="60" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+        <div class="flex justify-between text-sm text-brand-gray mt-1">
+            <span>15m</span>
+            <span>90m</span>
+            <span>180m</span>
+        </div>
+    </div>
+</div>
+
+                    <div id="interests-control">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-heart text-brand-teal"></i>Interests</h2>
+                            <span class="text-sm text-brand-gray">Tap to select</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                             <button class="chip-button bg-brand-dark-300">Parks</button>
+                             <button class="chip-button bg-brand-dark-300">Coffee</button>
+                             <button class="chip-button bg-brand-dark-300">Street art</button>
+                             <button class="chip-button bg-brand-dark-300">Historic</button>
+                             <button class="chip-button bg-brand-teal text-brand-dark font-semibold"><i class="fa-solid fa-water mr-2"></i>Waterfront</button>
+                             <button class="chip-button bg-brand-dark-300">Markets</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+                <div class="flex justify-around h-20">
+                    <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-map text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Map</span>
+                    </span>
+                    <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Explore</span>
+                    </span>
+                    <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Saved</span>
+                    </span>
+                    <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                        <i class="fa-solid fa-user text-2xl mb-1"></i>
+                        <span class="text-xs font-medium">Profile</span>
+                    </span>
+                </div>
+            </nav>
+            
+            <style>
+                .range-slider::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    width: 24px;
+                    height: 24px;
+                    background: #4AF0D5;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    border: 4px solid #0D1A26;
+                }
+
+                .range-slider::-moz-range-thumb {
+                    width: 24px;
+                    height: 24px;
+                    background: #4AF0D5;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    border: 4px solid #0D1A26;
+                }
+                
+                #bottom-sheet-container {
+                    padding-bottom: 80px; /* Height of the bottom nav */
+                }
+                
+                .chip-button {
+                    padding: 8px 16px;
+                    border-radius: 9999px;
+                    font-size: 14px;
+                    color: white;
+                    transition: background-color 0.2s;
+                }
+                .chip-button:hover {
+                    background-color: #2a4157;
+                }
+                .chip-button.bg-brand-teal:hover {
+                    background-color: #3CCAB4;
+                }
+            </style>
+        </main>
+    
+</body></html>

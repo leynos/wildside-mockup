@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Customizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0D1A26',
+                        'brand-dark-200': '#152433',
+                        'brand-dark-300': '#203445',
+                        'brand-teal': '#4AF0D5',
+                        'brand-teal-dark': '#3CCAB4',
+                        'brand-gray': '#8998A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+    <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+        
+        <div id="top-bar-placeholder" class="absolute top-0 left-0 right-0 h-12 bg-transparent z-10"></div>
+
+        <header id="customizer-header" class="relative z-20 px-6 pt-16 pb-4 bg-gradient-to-b from-brand-dark to-transparent">
+            <div class="flex items-center justify-between mb-4">
+                <button class="w-10 h-10 rounded-full bg-brand-dark-200 flex items-center justify-center border border-brand-dark-300">
+                    <i class="fa-solid fa-arrow-left text-white"></i>
+                </button>
+                <h1 class="text-xl font-bold text-white">Customize Route</h1>
+                <button class="w-10 h-10 rounded-full bg-brand-dark-200 flex items-center justify-center border border-brand-dark-300">
+                    <i class="fa-solid fa-question text-brand-teal"></i>
+                </button>
+            </div>
+            <p class="text-brand-gray text-sm text-center">Fine-tune your walking adventure</p>
+        </header>
+
+        <div id="main-content" class="relative z-10 h-full overflow-y-auto pb-32 px-6">
+            
+            <section id="distance-control" class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-route text-brand-teal"></i>
+                        Distance
+                    </h2>
+                    <div class="bg-brand-dark-200 px-3 py-1 rounded-full border border-brand-dark-300">
+                        <span class="text-white font-medium">3.2 km</span>
+                    </div>
+                </div>
+                <div class="relative mb-2">
+                    <input type="range" min="1" max="10" value="3.2" step="0.1" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+                </div>
+                <div class="flex justify-between text-xs text-brand-gray">
+                    <span>1 km</span>
+                    <span>5 km</span>
+                    <span>10 km</span>
+                </div>
+            </section>
+
+            <section id="duration-control" class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-white flex items-center gap-3">
+                        <i class="fa-regular fa-clock text-brand-teal"></i>
+                        Duration
+                    </h2>
+                    <div class="bg-brand-dark-200 px-3 py-1 rounded-full border border-brand-dark-300">
+                        <span class="text-white font-medium">75 min</span>
+                    </div>
+                </div>
+                <div class="relative mb-2">
+                    <input type="range" min="15" max="180" value="75" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+                </div>
+                <div class="flex justify-between text-xs text-brand-gray">
+                    <span>15m</span>
+                    <span>90m</span>
+                    <span>180m</span>
+                </div>
+            </section>
+
+            <section id="crowd-level-control" class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-users text-brand-teal"></i>
+                        Crowd Level
+                    </h2>
+                    <div class="bg-brand-dark-200 px-3 py-1 rounded-full border border-brand-dark-300">
+                        <span class="text-white font-medium">Moderate</span>
+                    </div>
+                </div>
+                <div class="relative mb-2">
+                    <input type="range" min="1" max="5" value="3" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+                </div>
+                <div class="flex justify-between text-xs text-brand-gray">
+                    <span>Quiet</span>
+                    <span>Moderate</span>
+                    <span>Busy</span>
+                </div>
+            </section>
+
+            <section id="incline-control" class="mb-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-mountain text-brand-teal"></i>
+                        Incline Tolerance
+                    </h2>
+                    <div class="bg-brand-dark-200 px-3 py-1 rounded-full border border-brand-dark-300">
+                        <span class="text-white font-medium">Medium</span>
+                    </div>
+                </div>
+                <div class="relative mb-2">
+                    <input type="range" min="1" max="5" value="3" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+                </div>
+                <div class="flex justify-between text-xs text-brand-gray">
+                    <span>Flat</span>
+                    <span>Medium</span>
+                    <span>Steep</span>
+                </div>
+            </section>
+
+            <section id="surface-type-control" class="mb-8">
+                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-3">
+                    <i class="fa-solid fa-road text-brand-teal"></i>
+                    Surface Type
+                </h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="surface-option bg-brand-teal text-brand-dark font-medium py-3 px-4 rounded-xl flex items-center gap-2">
+                        <i class="fa-solid fa-road"></i>
+                        Paved
+                    </button>
+                    <button class="surface-option bg-brand-dark-200 text-white font-medium py-3 px-4 rounded-xl flex items-center gap-2 border border-brand-dark-300">
+                        <i class="fa-solid fa-tree"></i>
+                        Trail
+                    </button>
+                    <button class="surface-option bg-brand-dark-200 text-white font-medium py-3 px-4 rounded-xl flex items-center gap-2 border border-brand-dark-300">
+                        <i class="fa-solid fa-water"></i>
+                        Boardwalk
+                    </button>
+                    <button class="surface-option bg-brand-dark-200 text-white font-medium py-3 px-4 rounded-xl flex items-center gap-2 border border-brand-dark-300">
+                        <i class="fa-solid fa-palette"></i>
+                        Mixed
+                    </button>
+                </div>
+            </section>
+
+            <section id="interest-mix-control" class="mb-8">
+                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-3">
+                    <i class="fa-solid fa-heart text-brand-teal"></i>
+                    Interest Mix
+                </h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-white font-medium flex items-center gap-2">
+                                <i class="fa-solid fa-leaf text-green-400"></i>
+                                Nature
+                            </span>
+                            <span class="text-brand-teal font-medium">40%</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="40" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-white font-medium flex items-center gap-2">
+                                <i class="fa-solid fa-building text-blue-400"></i>
+                                History
+                            </span>
+                            <span class="text-brand-teal font-medium">30%</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="30" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-white font-medium flex items-center gap-2">
+                                <i class="fa-solid fa-coffee text-yellow-400"></i>
+                                Food & Drink
+                            </span>
+                            <span class="text-brand-teal font-medium">30%</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="30" class="w-full h-2 bg-brand-dark-300 rounded-lg appearance-none cursor-pointer range-slider">
+                    </div>
+                </div>
+            </section>
+
+            <section id="route-preview-section" class="mb-8">
+                <div class="bg-brand-dark-200 rounded-2xl p-4 border border-brand-dark-300">
+                    <h3 class="text-white font-semibold mb-4 flex items-center gap-3">
+                        <i class="fa-solid fa-eye text-brand-teal"></i>
+                        Route Preview
+                    </h3>
+                    
+                    <div class="grid grid-cols-3 gap-2 mb-4">
+                        <div class="route-candidate bg-brand-dark-300 rounded-lg p-3 border-2 border-brand-teal cursor-pointer">
+                            <div class="h-16 bg-gradient-to-br from-brand-teal/20 to-blue-400/20 rounded mb-2 flex items-center justify-center">
+                                <i class="fa-solid fa-route text-brand-teal"></i>
+                            </div>
+                            <p class="text-xs text-white font-medium">Route A</p>
+                            <p class="text-xs text-brand-gray">3.2km • 75min</p>
+                        </div>
+                        
+                        <div class="route-candidate bg-brand-dark-300 rounded-lg p-3 border border-brand-dark-300 cursor-pointer hover:border-brand-teal">
+                            <div class="h-16 bg-gradient-to-br from-green-400/20 to-yellow-400/20 rounded mb-2 flex items-center justify-center">
+                                <i class="fa-solid fa-route text-green-400"></i>
+                            </div>
+                            <p class="text-xs text-white font-medium">Route B</p>
+                            <p class="text-xs text-brand-gray">2.8km • 68min</p>
+                        </div>
+                        
+                        <div class="route-candidate bg-brand-dark-300 rounded-lg p-3 border border-brand-dark-300 cursor-pointer hover:border-brand-teal">
+                            <div class="h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded mb-2 flex items-center justify-center">
+                                <i class="fa-solid fa-route text-purple-400"></i>
+                            </div>
+                            <p class="text-xs text-white font-medium">Route C</p>
+                            <p class="text-xs text-brand-gray">3.6km • 82min</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button class="flex-1 bg-brand-dark-300 text-white py-2 px-4 rounded-lg text-sm font-medium border border-brand-dark-300 hover:bg-brand-dark-200">
+                            <i class="fa-solid fa-refresh mr-2"></i>
+                            Regenerate
+                        </button>
+                        <button class="flex-1 bg-brand-teal text-brand-dark py-2 px-4 rounded-lg text-sm font-semibold hover:bg-brand-teal-dark">
+                            <i class="fa-solid fa-play mr-2"></i>
+                            Start Route
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="advanced-options" class="mb-8">
+                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-3">
+                    <i class="fa-solid fa-gear text-brand-teal"></i>
+                    Advanced Options
+                </h2>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between bg-brand-dark-200 p-4 rounded-xl border border-brand-dark-300">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-shield-halved text-brand-teal"></i>
+                            <div>
+                                <p class="text-white font-medium">Safety Priority</p>
+                                <p class="text-brand-gray text-sm">Well-lit, busy routes</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="safety-toggle" class="toggle-input">
+                            <label for="safety-toggle" class="toggle-label"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between bg-brand-dark-200 p-4 rounded-xl border border-brand-dark-300">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-wheelchair text-brand-teal"></i>
+                            <div>
+                                <p class="text-white font-medium">Accessibility</p>
+                                <p class="text-brand-gray text-sm">Step-free routes</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="accessibility-toggle" class="toggle-input" checked>
+                            <label for="accessibility-toggle" class="toggle-label"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between bg-brand-dark-200 p-4 rounded-xl border border-brand-dark-300">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-camera text-brand-teal"></i>
+                            <div>
+                                <p class="text-white font-medium">Photo Opportunities</p>
+                                <p class="text-brand-gray text-sm">Scenic viewpoints</p>
+                            </div>
+                        </div>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="photo-toggle" class="toggle-input">
+                            <label for="photo-toggle" class="toggle-label"></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="save-preset" class="mb-8">
+                <div class="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-xl p-4 border border-purple-400/30">
+                    <h3 class="text-white font-semibold mb-2 flex items-center gap-3">
+                        <i class="fa-solid fa-bookmark text-purple-400"></i>
+                        Save as Preset
+                    </h3>
+                    <p class="text-brand-gray text-sm mb-4">Save these settings for quick access later</p>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Preset name..." class="flex-1 bg-brand-dark-300 text-white px-3 py-2 rounded-lg border border-brand-dark-300 text-sm placeholder-brand-gray">
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-600">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+            <div class="flex justify-around h-20">
+                <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-map text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Map</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Explore</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Saved</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-user text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Profile</span>
+                </span>
+            </div>
+        </nav>
+
+        <style>
+            .range-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                background: #4AF0D5;
+                cursor: pointer;
+                border-radius: 50%;
+                border: 3px solid #0D1A26;
+                box-shadow: 0 2px 8px rgba(74, 240, 213, 0.3);
+            }
+
+            .range-slider::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                background: #4AF0D5;
+                cursor: pointer;
+                border-radius: 50%;
+                border: 3px solid #0D1A26;
+                box-shadow: 0 2px 8px rgba(74, 240, 213, 0.3);
+            }
+
+            .surface-option:hover {
+                transform: translateY(-1px);
+                transition: transform 0.2s ease;
+            }
+
+            .route-candidate:hover {
+                transform: translateY(-2px);
+                transition: transform 0.2s ease;
+            }
+
+            .toggle-switch {
+                position: relative;
+                width: 48px;
+                height: 24px;
+            }
+
+            .toggle-input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .toggle-label {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #203445;
+                border: 1px solid #203445;
+                border-radius: 24px;
+                transition: 0.3s;
+            }
+
+            .toggle-label:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 18px;
+                left: 2px;
+                bottom: 2px;
+                background-color: #8998A8;
+                border-radius: 50%;
+                transition: 0.3s;
+            }
+
+            .toggle-input:checked + .toggle-label {
+                background-color: #4AF0D5;
+                border-color: #4AF0D5;
+            }
+
+            .toggle-input:checked + .toggle-label:before {
+                transform: translateX(24px);
+                background-color: #0D1A26;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Surface type selection
+                const surfaceButtons = document.querySelectorAll('.surface-option');
+                surfaceButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        surfaceButtons.forEach(btn => {
+                            btn.classList.remove('bg-brand-teal', 'text-brand-dark');
+                            btn.classList.add('bg-brand-dark-200', 'text-white');
+                        });
+                        this.classList.remove('bg-brand-dark-200', 'text-white');
+                        this.classList.add('bg-brand-teal', 'text-brand-dark');
+                    });
+                });
+
+                // Route candidate selection
+                const routeCandidates = document.querySelectorAll('.route-candidate');
+                routeCandidates.forEach(candidate => {
+                    candidate.addEventListener('click', function() {
+                        routeCandidates.forEach(c => {
+                            c.classList.remove('border-brand-teal');
+                            c.classList.add('border-brand-dark-300');
+                        });
+                        this.classList.remove('border-brand-dark-300');
+                        this.classList.add('border-brand-teal');
+                    });
+                });
+
+                // Update slider values dynamically
+                const sliders = document.querySelectorAll('input[type="range"]');
+                sliders.forEach(slider => {
+                    slider.addEventListener('input', function() {
+                        const value = this.value;
+                        const valueDisplay = this.parentElement.previousElementSibling.querySelector('span');
+                        
+                        if (valueDisplay) {
+                            if (this.min === '1' && this.max === '10') {
+                                valueDisplay.textContent = `${value} km`;
+                            } else if (this.min === '15' && this.max === '180') {
+                                valueDisplay.textContent = `${value} min`;
+                            } else if (this.min === '1' && this.max === '5') {
+                                const crowdLevels = ['', 'Quiet', 'Low', 'Moderate', 'High', 'Busy'];
+                                const inclineLevels = ['', 'Flat', 'Gentle', 'Medium', 'Steep', 'Very Steep'];
+                                if (valueDisplay.textContent.includes('Quiet') || valueDisplay.textContent.includes('Busy')) {
+                                    valueDisplay.textContent = crowdLevels[value];
+                                } else {
+                                    valueDisplay.textContent = inclineLevels[value];
+                                }
+                            } else if (this.min === '0' && this.max === '100') {
+                                valueDisplay.textContent = `${value}%`;
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0D1A26',
+                        'brand-dark-200': '#152433',
+                        'brand-dark-300': '#203445',
+                        'brand-teal': '#4AF0D5',
+                        'brand-teal-dark': '#3CCAB4',
+                        'brand-gray': '#8998A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center font-inter" style="height: 100vh;">
+    <main id="mobile-app-container" class="relative w-[390px] h-[844px] bg-brand-dark overflow-hidden rounded-[40px] shadow-2xl border-4 border-gray-700">
+        
+        <div id="top-bar-placeholder" class="absolute top-0 left-0 right-0 h-12 bg-transparent z-10">
+        </div>
+
+        <div id="main-content" class="relative z-10 h-full overflow-y-auto pb-20">
+            
+            <header id="settings-header" class="px-6 pt-16 pb-6">
+                <div class="flex items-center gap-4 mb-6">
+                    <button class="w-10 h-10 bg-brand-dark-200 rounded-full flex items-center justify-center border border-brand-dark-300 hover:bg-brand-dark-300 transition-colors">
+                        <i class="fa-solid fa-arrow-left text-brand-teal"></i>
+                    </button>
+                    <h1 class="text-2xl font-bold text-white">Safety & Accessibility</h1>
+                </div>
+                <p class="text-brand-gray">Customize your walking routes for comfort and safety</p>
+            </header>
+
+            <section id="mobility-preferences" class="mx-6 mb-8">
+                <div class="bg-brand-dark-200 rounded-2xl p-6 border border-brand-dark-300">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-wheelchair text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Mobility Support</h2>
+                            <p class="text-brand-gray text-sm">Route adjustments for easier navigation</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-5">
+                        <div id="step-free-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-stairs text-green-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Step-free routes</p>
+                                    <p class="text-brand-gray text-xs">Avoid stairs and steps</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="avoid-hills-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-mountain text-orange-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Avoid steep hills</p>
+                                    <p class="text-brand-gray text-xs">Keep routes relatively flat</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="resting-points-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-chair text-purple-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Show resting points</p>
+                                    <p class="text-brand-gray text-xs">Highlight benches and seating</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="wide-paths-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-indigo-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-road text-indigo-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Prefer wide paths</p>
+                                    <p class="text-brand-gray text-xs">Choose broader walkways</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="safety-preferences" class="mx-6 mb-8">
+                <div class="bg-brand-dark-200 rounded-2xl p-6 border border-brand-dark-300">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-shield-halved text-yellow-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Safety Features</h2>
+                            <p class="text-brand-gray text-sm">Enhanced security for your walks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-5">
+                        <div id="well-lit-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-lightbulb text-yellow-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Well-lit routes</p>
+                                    <p class="text-brand-gray text-xs">Prioritize illuminated paths</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="busy-areas-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-pink-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-people-group text-pink-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Prefer busy areas</p>
+                                    <p class="text-brand-gray text-xs">Stay in populated zones</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="emergency-contacts-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-phone text-red-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Emergency sharing</p>
+                                    <p class="text-brand-gray text-xs">Share location with contacts</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="avoid-isolated-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gray-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-eye-slash text-gray-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Avoid isolated areas</p>
+                                    <p class="text-brand-gray text-xs">Skip secluded locations</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="comfort-preferences" class="mx-6 mb-8">
+                <div class="bg-brand-dark-200 rounded-2xl p-6 border border-brand-dark-300">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-leaf text-green-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Comfort Settings</h2>
+                            <p class="text-brand-gray text-sm">Personalize your walking experience</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-5">
+                        <div id="shade-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-tree text-green-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Prioritize shade</p>
+                                    <p class="text-brand-gray text-xs">Choose tree-lined paths</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="weather-adaptive-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-cloud-sun text-blue-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Weather-adaptive</p>
+                                    <p class="text-brand-gray text-xs">Adjust routes for weather</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="quiet-routes-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-teal-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-volume-low text-teal-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Prefer quiet routes</p>
+                                    <p class="text-brand-gray text-xs">Minimize traffic noise</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+
+                        <div id="bathroom-stops-toggle" class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-restroom text-cyan-400 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">Show bathroom stops</p>
+                                    <p class="text-brand-gray text-xs">Highlight public restrooms</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" checked>
+                                <div class="w-11 h-6 bg-brand-dark-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-teal"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="visual-illustrations" class="mx-6 mb-8">
+                <div class="bg-gradient-to-r from-brand-teal/10 to-blue-500/10 rounded-2xl p-6 border border-brand-teal/20">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-eye text-brand-teal"></i>
+                        How it works
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-brand-dark-300 rounded-xl mx-auto mb-3 flex items-center justify-center">
+                                <i class="fa-solid fa-route text-brand-teal text-2xl"></i>
+                            </div>
+                            <p class="text-white text-sm font-medium mb-1">Before</p>
+                            <p class="text-brand-gray text-xs">Standard route with stairs and hills</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-brand-teal/20 rounded-xl mx-auto mb-3 flex items-center justify-center">
+                                <i class="fa-solid fa-check-circle text-brand-teal text-2xl"></i>
+                            </div>
+                            <p class="text-white text-sm font-medium mb-1">After</p>
+                            <p class="text-brand-gray text-xs">Accessible route with ramps and flat paths</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="preset-profiles" class="mx-6 mb-8">
+                <h3 class="text-lg font-bold text-white mb-4">Quick Profiles</h3>
+                <div class="space-y-3">
+                    <button class="w-full bg-brand-dark-200 border border-brand-dark-300 rounded-xl p-4 text-left hover:bg-brand-dark-300 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-wheelchair text-blue-400"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-medium">Wheelchair Accessible</p>
+                                <p class="text-brand-gray text-sm">Step-free, wide paths, avoid hills</p>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-brand-dark-200 border border-brand-dark-300 rounded-xl p-4 text-left hover:bg-brand-dark-300 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-walking text-green-400"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-medium">Senior Friendly</p>
+                                <p class="text-brand-gray text-sm">Gentle slopes, resting points, well-lit</p>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <button class="w-full bg-brand-dark-200 border border-brand-dark-300 rounded-xl p-4 text-left hover:bg-brand-dark-300 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-moon text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-medium">Night Walker</p>
+                                <p class="text-brand-gray text-sm">Well-lit, busy areas, emergency sharing</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </section>
+
+            <section id="save-settings" class="mx-6 mb-8">
+                <button class="w-full bg-brand-teal text-brand-dark font-semibold py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-brand-teal-dark transition-colors">
+                    <i class="fa-solid fa-save"></i>
+                    Save Preferences
+                </button>
+            </section>
+        </div>
+
+        <nav id="bottom-navigation" class="absolute bottom-0 left-0 right-0 bg-brand-dark/90 backdrop-blur-lg border-t border-brand-dark-300 z-30">
+            <div class="flex justify-around h-20">
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-map text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Map</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-compass text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Explore</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-gray hover:text-white w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-bookmark text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Saved</span>
+                </span>
+                <span class="flex flex-col items-center justify-center text-brand-teal w-1/4 cursor-pointer">
+                    <i class="fa-solid fa-cog text-2xl mb-1"></i>
+                    <span class="text-xs font-medium">Settings</span>
+                </span>
+            </div>
+        </nav>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggles = document.querySelectorAll('input[type="checkbox"]');
+                const saveButton = document.querySelector('#save-settings button');
+                const profileButtons = document.querySelectorAll('#preset-profiles button');
+                
+                // Toggle functionality
+                toggles.forEach(toggle => {
+                    toggle.addEventListener('change', function() {
+                        // Visual feedback on change
+                        const container = this.closest('.flex');
+                        if (this.checked) {
+                            container.classList.add('bg-brand-teal/5');
+                            setTimeout(() => container.classList.remove('bg-brand-teal/5'), 200);
+                        }
+                    });
+                });
+
+                // Profile presets
+                profileButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Remove active state from all buttons
+                        profileButtons.forEach(btn => btn.classList.remove('border-brand-teal', 'bg-brand-teal/10'));
+                        
+                        // Add active state to clicked button
+                        this.classList.add('border-brand-teal', 'bg-brand-teal/10');
+                        
+                        // Apply preset based on button clicked
+                        const profileType = this.querySelector('p').textContent;
+                        applyPreset(profileType);
+                    });
+                });
+
+                // Save functionality
+                saveButton.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fa-solid fa-check"></i> Preferences Saved!';
+                    this.classList.add('bg-green-500');
+                    this.classList.remove('bg-brand-teal');
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fa-solid fa-save"></i> Save Preferences';
+                        this.classList.remove('bg-green-500');
+                        this.classList.add('bg-brand-teal');
+                    }, 2000);
+                });
+
+                function applyPreset(profileType) {
+                    const allToggles = document.querySelectorAll('input[type="checkbox"]');
+                    
+                    // Reset all toggles
+                    allToggles.forEach(toggle => toggle.checked = false);
+                    
+                    if (profileType === 'Wheelchair Accessible') {
+                        document.querySelector('#step-free-toggle input').checked = true;
+                        document.querySelector('#avoid-hills-toggle input').checked = true;
+                        document.querySelector('#wide-paths-toggle input').checked = true;
+                        document.querySelector('#resting-points-toggle input').checked = true;
+                    } else if (profileType === 'Senior Friendly') {
+                        document.querySelector('#avoid-hills-toggle input').checked = true;
+                        document.querySelector('#resting-points-toggle input').checked = true;
+                        document.querySelector('#well-lit-toggle input').checked = true;
+                        document.querySelector('#bathroom-stops-toggle input').checked = true;
+                    } else if (profileType === 'Night Walker') {
+                        document.querySelector('#well-lit-toggle input').checked = true;
+                        document.querySelector('#busy-areas-toggle input').checked = true;
+                        document.querySelector('#emergency-contacts-toggle input').checked = true;
+                        document.querySelector('#avoid-isolated-toggle input').checked = true;
+                    }
+                }
+            });
+        </script>
+    </main>
+</body>
+</html>
