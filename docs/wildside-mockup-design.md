@@ -41,6 +41,34 @@ Last updated: 26 October 2025
 - `docs/` includes guidance on Tailwind v4 migration and DaisyUI v5 usage,
   which we must observe when shaping new configuration and documentation.
 
+## Palette inventory
+
+- Base surfaces referenced across the mockups:
+  - `#0D1A26` (primary background), `#152433` (elevated background), `#203445`
+    (card surface), and `#2A4157` (desaturated overlay in wizard/map screens).
+- Accent colours:
+  - `#4AF0D5` (teal highlight), `#3CCAB4` (hover/pressed), and `#8998A8`
+    (muted text + iconography).
+- A single warm accent appears as `#FEA` (`#FFEEAA` in RGB) within
+  `explore.html`; treat this as a contextual badge/warning rather than a core
+  brand tone.
+- Typography defaults to white (`#FFFFFF`) for the dark theme and shades of the
+  neutral stack for secondary labels.
+
+Mapping guidance:
+
+- Assign the four dark neutrals to `color.neutral.{900,850,800,700}` so we can
+  drive DaisyUI `base-100` through `base-300` directly from tokens.
+- Map `#4AF0D5` to `color.accent.500` and `#3CCAB4` to `color.accent.600` to
+  preserve hover contrast. Keep `color.primary` reserved for future brand
+  highlights (orange) but consider introducing a `brand` semantic token that
+  points to accent teal for now.
+- Capture `#8998A8` as `color.neutral.400` to inform muted text, icon strokes,
+  and borders.
+- Light mode will reuse the same teal accent values but invert the neutral stack
+  (introduce lighter surface tones in the `color.neutral.0-200` range while
+  mapping darker greys back onto text tokens).
+
 ## Design token strategy
 
 - Extract colour samples from each mockup screen, grouping them into candidate
@@ -57,6 +85,14 @@ Last updated: 26 October 2025
   Plan to import that object inside `tailwind.config.cjs`.
 - Keep the repository free of generated assets. Document the GitHub Action step
   responsible for building and publishing tokens alongside the site bundle.
+- Define a deterministic light theme by inverting the neutral ladder:
+  - Base backgrounds: new values around `#F6FBFF`, `#E9F1F7`, and `#D5DEE8`.
+  - Foreground text: reuse `#0D1A26` and `#203445` as `fg.default`/`fg.muted`.
+  - Maintain `accent` teal unchanged to avoid perceptual colour drift between
+    themes.
+- Extend semantic tokens to include utility hues (`success`, `warning`,
+  `error`, `info`). Derive them from accessible palette pairs (target >=4.5:1
+  contrast). Add placeholders now and refine once we build concrete UI states.
 
 ## Tailwind and DaisyUI integration
 
