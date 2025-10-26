@@ -350,7 +350,7 @@ for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
   rootDeclarations[`--font-family-${key}`] = value;
 }
 
-let tokensCss = GENERATED_BANNER + formatCssBlock(":root", rootDeclarations) + "\n";
+let tokensCss = `${GENERATED_BANNER}${formatCssBlock(":root", rootDeclarations)}\n`;
 
 const daisyPluginThemes = themes.map((theme) => {
   const flags = [];
@@ -372,7 +372,7 @@ if (daisyPluginThemes.length > 0) {
 for (const theme of themes) {
   const selector = `:root[data-theme="${theme.meta.name}"],\n[data-theme="${theme.meta.name}"]`;
   tokensCss += `/* Theme: ${theme.meta.displayName} (${theme.meta.name}) */\n`;
-  tokensCss += formatCssBlock(selector, theme.cssVariables) + "\n";
+  tokensCss += `${formatCssBlock(selector, theme.cssVariables)}\n`;
   tokensCss += `@theme ${theme.meta.name} {\n`;
   tokensCss += Object.entries(theme.cssVariables)
     .sort(([a], [b]) => collator.compare(a, b))

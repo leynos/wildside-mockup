@@ -124,11 +124,14 @@ Mapping guidance:
   4. Update `tailwind.config.cjs` to consume the generated JS exports:
      - Spread `theme.extend` with spacing, radius, and colour tokens.
      - Register DaisyUI themes so `wildsideNight` is the default and
-       `wildsideDay` is marked with `--preferslight`.
+     `wildsideDay` is marked with `--preferslight`.
   5. Include `@tailwindcss/vite` in `vite.config.ts` to ensure HMR picks up
      token rebuilds, and wire watch paths to `tokens/dist`.
   6. Ensure the GitHub Pages workflow runs `bun run tokens:build` before
      `bun run build` so compiled CSS/JS are fresh.
+- Tokens CSS now contains both the DaisyUI `@plugin` configuration and the
+  theme definitions, letting the app import a single file for runtime tokens,
+  Tailwind `@theme`, and DaisyUI setup.
 
 ## Component architecture direction
 
