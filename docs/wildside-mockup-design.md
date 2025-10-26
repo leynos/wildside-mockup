@@ -142,6 +142,45 @@ Mapping guidance:
   containers and child components. Place feature-specific hooks and fixtures
   alongside their components.
 
+### Proposed module layout
+
+- `src/app/providers`
+  - `theme-provider.tsx`: wraps children, reads generated DaisyUI themes, and
+    exposes helpers for toggling `data-theme` (reusing `applyTheme` + context).
+  - `query-client.tsx`: initialises TanStack Query for future data wiring, even
+    if mock data is static today.
+- `src/app/layout`
+  - `mobile-shell.tsx`: renders the 390 x 844 device frame, optional background
+    gradients, safe-area padding, and a slot for page content.
+  - `app-header.tsx`: shared top bar with configurable actions (back, share,
+    help).
+- `src/app/features`
+  - `discover`: onboarding carousel, interest chips (`Radix ToggleGroup`),
+    progress indicator.
+  - `map`: map view shell with Radix `Tabs` for switching stops/map/notes and a
+    sheet component for point-of-interest details.
+  - `wizard`: multi-step flow leveraging `Stepper` built from Radix
+    `Tabs`/`Progress`/`Slider`.
+  - `safety`, `offline`, `auth`: standalone pages with shared layout tokens.
+- `src/app/routes`
+  - Static routes powered by TanStack Router (e.g., `/discover`, `/map/quick`,
+    `/wizard/advanced`). Each route composes the relevant feature module.
+- `src/app/data`
+  - JSON/TS modules representing the mock content (walk cards, interests,
+    stats) to keep JSX clean and enable future API wiring.
+
+### Radix primitive mapping
+
+- `Dialog`/`Sheet`: saved walk share modal, offline download prompt, wizard
+  confirmation.
+- `Tabs`: map/stops/notes switches, onboarding stepper controls.
+- `Accordion`: safety checklist sections.
+- `Progress`: wizard step indicator and completion stats.
+- `Slider`: duration control, pace selectors.
+- `Checkbox`/`ToggleGroup`: interest chips and accessibility filters.
+- `Toast`: feedback when saving walks or completing actions.
+- `Popover`/`Tooltip`: inline help icons, map annotations.
+
 ## Migration workflow
 
 - Sequence the conversion by user journey: onboarding (`discover`, `explore`),
