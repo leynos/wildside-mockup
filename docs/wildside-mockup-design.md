@@ -93,6 +93,10 @@ Mapping guidance:
 - Extend semantic tokens to include utility hues (`success`, `warning`,
   `error`, `info`). Derive them from accessible palette pairs (target >=4.5:1
   contrast). Add placeholders now and refine once we build concrete UI states.
+- Track the feedback palette directly in `tokens.json` (`color.info`,
+  `color.success`, `color.warning`, `color.error`) so Style Dictionary can emit
+  consistent values for both themes. Current picks mirror Tailwind Sky, Emerald,
+  Amber, and Rose scales tuned for ≥4.5:1 contrast on the chosen foregrounds.
 
 ## Tailwind and DaisyUI integration
 

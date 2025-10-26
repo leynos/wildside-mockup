@@ -1,0 +1,114 @@
+{
+  "name": "wildside-day",
+  "displayName": "Wildside Day",
+  "prefersLight": true,
+  "colorScheme": "light",
+  "semantic": {
+    "bg": {
+      "default": {
+        "value": "{color.neutral.50}",
+        "description": "Default app canvas"
+      },
+      "subtle": {
+        "value": "{color.neutral.0}",
+        "description": "Raised surfaces such as cards"
+      },
+      "muted": {
+        "value": "{color.neutral.100}",
+        "description": "Secondary container tone"
+      },
+      "overlay": {
+        "value": "{color.neutral.200}",
+        "description": "Translucent overlays and strokes"
+      },
+      "inverted": {
+        "value": "{color.neutral.900}",
+        "description": "Inverted surface for dark elements"
+      }
+    },
+    "fg": {
+      "default": {
+        "value": "{color.neutral.900}",
+        "description": "Primary foreground"
+      },
+      "muted": {
+        "value": "{color.neutral.600}",
+        "description": "Secondary text and icons"
+      },
+      "inverted": {
+        "value": "{color.neutral.0}",
+        "description": "Text on dark surfaces"
+      }
+    },
+    "brand": {
+      "default": {
+        "value": "{color.primary.500}",
+        "description": "Primary brand colour (orange)"
+      },
+      "hover": {
+        "value": "{color.primary.600}",
+        "description": "Brand hover state"
+      },
+      "contrast": {
+        "value": "{color.neutral.900}",
+        "description": "Text on brand elements"
+      }
+    },
+    "accent": {
+      "default": {
+        "value": "{color.secondary.500}",
+        "description": "Accent colour (teal)"
+      },
+      "hover": {
+        "value": "{color.secondary.600}",
+        "description": "Accent hover state"
+      },
+      "contrast": {
+        "value": "{color.neutral.900}",
+        "description": "Text on accent elements"
+      }
+    },
+    "status": {
+      "info": {
+        "default": {
+          "value": "{color.info.500}",
+          "description": "Information highlight"
+        },
+        "contrast": {
+          "value": "{color.neutral.900}",
+          "description": "Text on info surfaces"
+        }
+      },
+      "success": {
+        "default": {
+          "value": "{color.success.500}",
+          "description": "Success highlight"
+        },
+        "contrast": {
+          "value": "{color.neutral.900}",
+          "description": "Text on success surfaces"
+        }
+      },
+      "warning": {
+        "default": {
+          "value": "{color.warning.500}",
+          "description": "Warning highlight"
+        },
+        "contrast": {
+          "value": "{color.neutral.900}",
+          "description": "Text on warning surfaces"
+        }
+      },
+      "error": {
+        "default": {
+          "value": "{color.error.500}",
+          "description": "Error highlight"
+        },
+        "contrast": {
+          "value": "{color.neutral.900}",
+          "description": "Text on error surfaces"
+        }
+      }
+    }
+  }
+}
