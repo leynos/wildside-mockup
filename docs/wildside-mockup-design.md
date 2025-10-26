@@ -183,20 +183,37 @@ Mapping guidance:
 
 ## Migration workflow
 
-- Sequence the conversion by user journey: onboarding (`discover`, `explore`),
-  walk discovery (`map-*`, `saved`), customisation (`customize`, wizard pages),
-  safety/offline flows (`offline`, `safety-accessibility`, `walk-complete`),
-  and authentication (`sign-in`).
-- For each page:
-  1. Catalogue existing UI states and interactions from the HTML mockup.
-  2. Map static elements to Radix components and DaisyUI classes.
-  3. Implement React components with Tailwind classes referencing token-driven
-     variables.
-  4. Write Vitest + Testing Library snapshots or interaction tests where Radix
-     behaviour matters (for example, wizard progression).
-  5. Verify styling parity manually via local Vite preview.
-- Update documentation in `docs/` and this design log when decisions affect the
-  wider team (for example, new token naming conventions).
+- Stage 0 – Foundations:
+  1. Implement token build pipeline and DaisyUI theme plumbing.
+  2. Ship shared layout components and global providers.
+  3. Load mock data fixtures (walk metadata, interests, safety tips).
+- Stage 1 – Onboarding and discovery:
+  - `discover`, `explore`, `customize`.
+  - Focus on Radix `Tabs`/`Carousel` patterns, interest chips, CTA buttons.
+- Stage 2 – Map experiences:
+  - `map-quick-walk`, `map-itiniary`, `saved`.
+  - Introduce map canvas placeholder, Radix `Tabs` for stops/map/notes, and
+    sheet/dialog overlays for POI detail.
+- Stage 3 – Wizard flow:
+  - `walk-wizard-1/2/3`.
+  - Build shared wizard stepper, slider, and Radix `Dialog` for confirmations.
+- Stage 4 – Completion and offline support:
+  - `walk-complete`, `offline`, `safety-accessibility`.
+  - Emphasise `Accordion` for safety lists and celebratory toasts/modals.
+- Stage 5 – Account handling:
+  - `sign-in`.
+  - Wire Radix `Dialog`/`Popover` patterns for tooltips and integrate form
+    validation scaffolding.
+- For each page implementation:
+  1. Catalogue UI states from the mockup and confirm data dependencies.
+  2. Map UI elements to reusable components defined in the architecture plan.
+  3. Implement route component and supporting feature pieces (hooks, fixtures).
+  4. Cover interactive logic with Vitest + Testing Library (tabs, dialog open,
+     slider updates, toasts).
+  5. Manually validate in Vite preview, capture notes in this design log, and
+     update documentation where behaviour diverges.
+- Reassess the backlog after each stage to identify refinements or newly shared
+  components worth extracting.
 
 ## Verification plan
 
