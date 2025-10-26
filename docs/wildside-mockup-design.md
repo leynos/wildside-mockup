@@ -107,6 +107,24 @@ Mapping guidance:
 - Confirm that Tailwind v4 JIT features (colour functions, arbitrary values)
   work with our generated CSS variables; document any quirks discovered during
   implementation.
+- Implementation checklist:
+  1. Extend the Style Dictionary build to output:
+     - `tokens/dist/tailwind.theme.cjs` exporting `theme.extend` fragments and
+       DaisyUI theme objects.
+     - `tokens/dist/tokens.css` containing CSS custom properties (for Radix and
+       raw CSS consumers) plus an `@theme` block Tailwind can pick up.
+  2. Import `tokens/dist/tokens.css` at the top of `src/index.css` before the
+     Tailwind `@import`.
+  3. Add `@config "./tailwind.config.cjs";` to `src/index.css` so Tailwind v4
+     reads the JS config.
+  4. Update `tailwind.config.cjs` to consume the generated JS exports:
+     - Spread `theme.extend` with spacing, radius, and colour tokens.
+     - Register DaisyUI themes so `wildsideNight` is the default and
+       `wildsideDay` is marked with `--preferslight`.
+  5. Include `@tailwindcss/vite` in `vite.config.ts` to ensure HMR picks up
+     token rebuilds, and wire watch paths to `tokens/dist`.
+  6. Ensure the GitHub Pages workflow runs `bun run tokens:build` before
+     `bun run build` so compiled CSS/JS are fresh.
 
 ## Component architecture direction
 
