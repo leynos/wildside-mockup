@@ -1,0 +1,23 @@
+@import "../tokens/dist/tokens.css";
+@import "tailwindcss";
+@config "./tailwind.config.cjs";
+
+@layer base {
+  :root {
+    font-family: var(--font-family-sans);
+    min-height: 100%;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-base-200 text-base-content antialiased;
+  }
+
+  #root {
+    min-height: 100%;
+  }
+}

@@ -352,6 +352,23 @@ for (const [key, value] of Object.entries(resolvedTokens.font?.family ?? {})) {
 
 let tokensCss = GENERATED_BANNER + formatCssBlock(":root", rootDeclarations) + "\n";
 
+const daisyPluginThemes = themes.map((theme) => {
+  const flags = [];
+  if (theme.meta.default) flags.push("--default");
+  if (theme.meta.prefersDark) flags.push("--prefersdark");
+  if (theme.meta.prefersLight) flags.push("--preferslight");
+  return `${theme.meta.name}${flags.length ? ` ${flags.join(" ")}` : ""}`;
+});
+
+if (daisyPluginThemes.length > 0) {
+  tokensCss += '@plugin "daisyui" {\n';
+  tokensCss += "  themes:\n";
+  tokensCss += daisyPluginThemes
+    .map((entry, index) => `    ${entry}${index < daisyPluginThemes.length - 1 ? "," : ";"}`)
+    .join("\n");
+  tokensCss += "\n}\n\n";
+}
+
 for (const theme of themes) {
   const selector = `:root[data-theme="${theme.meta.name}"],\n[data-theme="${theme.meta.name}"]`;
   tokensCss += `/* Theme: ${theme.meta.displayName} (${theme.meta.name}) */\n`;
