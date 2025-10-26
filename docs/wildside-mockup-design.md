@@ -217,10 +217,30 @@ Mapping guidance:
 
 ## Verification plan
 
-- Run `make fmt`, `make lint`, `make test`, `make check-fmt`, and
-  `make markdownlint` before any commits leave the branch.
-- Consider adding visual regression tooling (for example, Playwright + Axe) if
-  manual QA proves insufficient. Record findings in this document.
+- Local automation:
+  - `bun run fmt` (Biome write mode) before staging to keep Markdown and TS in
+    sync with formatting rules.
+  - `bun run lint` (Biome CI). Address existing rule violations incrementally;
+    track outstanding suppressions in this log.
+  - `bun run check:types` to ensure TS stays strict as components are migrated.
+  - `bun run test` to execute Vitest suites. Add coverage thresholds once the
+    component set stabilises.
+  - `bun run tokens:build` (to be added) ahead of `bun run dev`/`bun run build`
+    so generated CSS/JS reflect current token definitions.
+- Visual QA:
+  - Capture Storybook-style reference states using Vite preview + Playwright
+    screenshots once key flows exist.
+  - Run `bunx playwright test --project=chromium --grep @a11y` for targeted Axe
+    scans (tests to be authored) and document deltas here.
+- Documentation checks:
+  - `bunx markdownlint 'docs/**/*.md'` until a dedicated `make markdownlint`
+    target exists.
+  - Update this file and relevant docs after every significant decision or
+    deviation from mockups.
+- CI alignment:
+  - Ensure the GitHub Pages workflow runs the same commands (`fmt`, `lint`,
+    `check:types`, `test`, `tokens:build`, `build`) and fails fast on token or
+    lint regressions.
 
 ## Open questions
 
