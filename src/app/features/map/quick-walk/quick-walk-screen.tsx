@@ -116,10 +116,11 @@ export function QuickWalkScreen(): JSX.Element {
               handleDismissPanels();
               return;
             }
-            setActiveTab(value as TabKey);
+            const nextTab = value as TabKey;
+            setActiveTab(nextTab);
             navigate({
               to: ".",
-              hash: value,
+              hash: nextTab === "map" ? undefined : nextTab,
             });
           }}
           className="flex h-full flex-col"
@@ -269,7 +270,7 @@ export function QuickWalkScreen(): JSX.Element {
 
           <Tabs.List className="grid grid-cols-3 shrink-0 border-t border-base-300/60 bg-base-200/80">
             <Tabs.Trigger value="map" className={tabTriggerClass}>
-              Map
+              Explore
             </Tabs.Trigger>
             <Tabs.Trigger value="stops" className={tabTriggerClass}>
               Stops

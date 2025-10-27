@@ -347,9 +347,9 @@ export function CustomizeScreen(): JSX.Element {
           leading={
             <button
               type="button"
-              aria-label="Back to discover"
+              aria-label="Back to map"
               className="flex h-full w-full items-center justify-center"
-              onClick={() => navigate({ to: "/explore" })}
+              onClick={() => navigate({ to: "/map/quick" })}
             >
               <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
             </button>

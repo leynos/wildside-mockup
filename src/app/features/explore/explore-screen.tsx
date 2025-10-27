@@ -281,7 +281,7 @@ export function ExploreScreen(): JSX.Element {
           trailing={
             <button
               type="button"
-              onClick={() => navigate({ to: "/customize" })}
+              onClick={() => navigate({ to: "/discover" })}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60 text-accent shadow-sm shadow-base-300/30 transition hover:border-accent/60 hover:text-accent"
               aria-label="Filter walks"
             >
@@ -316,6 +316,7 @@ export function ExploreScreen(): JSX.Element {
           items={bottomNavigation.map((item) => ({
             ...item,
             isActive: item.id === "discover",
+            href: item.id === "discover" ? undefined : item.href,
           }))}
         />
       </div>

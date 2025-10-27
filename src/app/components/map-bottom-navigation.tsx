@@ -23,8 +23,8 @@ export interface MapBottomNavigationProps {
 
 const baseItems: BottomNavItem[] = [
   { id: "map", label: "Map", iconToken: "{icon.navigation.map}", href: "/map/quick" },
-  { id: "explore", label: "Explore", iconToken: "{icon.navigation.explore}", href: "/explore" },
-  { id: "saved", label: "Saved", iconToken: "{icon.navigation.saved}", href: "/saved" },
+  { id: "discover", label: "Discover", iconToken: "{icon.navigation.explore}", href: "/explore" },
+  { id: "routes", label: "Routes", iconToken: "{icon.object.route}", href: "/customize" },
   { id: "profile", label: "Profile", iconToken: "{icon.navigation.profile}", href: "/offline" },
 ];
 

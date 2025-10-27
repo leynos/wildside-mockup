@@ -82,7 +82,7 @@ describe("Stage 1 routed flows", () => {
     expect(indicator?.querySelector("span")?.textContent).toBe("3");
   });
 
-  it("navigates from explore to customize via the filter button", async () => {
+  it("navigates from explore to discover via the filter button", async () => {
     ({ mount, root } = await renderRoute("/explore"));
     const container = requireContainer(mount);
     const filterButton = container.querySelector<HTMLButtonElement>(
@@ -98,7 +98,7 @@ describe("Stage 1 routed flows", () => {
     const header = Array.from(container.querySelectorAll("h1, h2"))
       .map((node) => node.textContent?.trim())
       .filter(Boolean);
-    expect(header).toContain("Customise Route");
+    expect(header).toContain("Discover Your Perfect Walk");
   });
 
   it("toggles advanced switches on the customize route", async () => {
@@ -150,13 +150,18 @@ describe("Stage 2 routed flows", () => {
     );
     expect(selectionBadge?.textContent).toContain("3 selected");
 
-    const savedNav = Array.from(container.querySelectorAll("button")).find(
-      (btn) => btn.textContent?.trim() === "Saved",
+    const routesNav = Array.from(container.querySelectorAll("button")).find(
+      (btn) => btn.textContent?.trim() === "Routes",
     );
-    expect(savedNav).toBeTruthy();
+    expect(routesNav).toBeTruthy();
+
+    const saveAction = container.querySelector<HTMLButtonElement>(
+      "button[aria-label='Save quick walk']",
+    );
+    expect(saveAction).toBeTruthy();
 
     await act(async () => {
-      savedNav?.click();
+      saveAction?.click();
       await Promise.resolve();
     });
 

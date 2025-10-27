@@ -44,9 +44,9 @@ export function OfflineScreen(): JSX.Element {
             leading={
               <button
                 type="button"
-                aria-label="Back to saved routes"
+                aria-label="Back to map"
                 className="flex h-full w-full items-center justify-center"
-                onClick={() => navigate({ to: "/saved" })}
+                onClick={() => navigate({ to: "/map/quick" })}
               >
                 <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
               </button>

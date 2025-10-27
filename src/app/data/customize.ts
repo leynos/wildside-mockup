@@ -184,7 +184,7 @@ export const advancedOptions: AdvancedToggleOption[] = [
 
 export const bottomNavigation: BottomNavigationItem[] = [
   { id: "map", label: "Map", iconToken: "{icon.navigation.map}", href: "/map/quick" },
-  { id: "discover", label: "Discover", iconToken: "{icon.navigation.explore}", href: "/discover" },
+  { id: "discover", label: "Discover", iconToken: "{icon.navigation.explore}", href: "/explore" },
   {
     id: "routes",
     label: "Routes",
