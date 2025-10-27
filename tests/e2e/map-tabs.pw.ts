@@ -33,6 +33,18 @@ async function expectTablistStable(tablist: Locator, baseline: ViewportMetrics, 
 }
 
 test.describe("Map tab bar alignment", () => {
+  test("quick map honours fragment on initial load", async ({ page }) => {
+    await page.goto("/map/quick#stops");
+    const canvas = page.locator(".maplibregl-canvas");
+    await expect(canvas).toBeVisible();
+    await expect(page.getByRole("tab", { name: "Stops" })).toHaveAttribute("data-state", "active");
+    await expect(page.getByTestId("quick-walk-stops-panel")).toBeVisible();
+
+    await page.goto("/map/quick#notes");
+    await expect(page.getByRole("tab", { name: "Notes" })).toHaveAttribute("data-state", "active");
+    await expect(page.getByTestId("quick-walk-notes-panel")).toBeVisible();
+  });
+
   test("quick map retains its tab bar across tabs", async ({ page }) => {
     await page.goto("/map/quick");
     const tablist = page.getByRole("tablist").first();
@@ -46,8 +58,9 @@ test.describe("Map tab bar alignment", () => {
     await page.getByRole("tab", { name: "Stops" }).click();
     await expectTablistStable(tablist, baseline);
     await expect(canvas).toBeVisible();
-    await expect(page.locator("text=Blue Bottle Coffee")).toBeVisible();
     await expect(page).toHaveURL(/#stops$/);
+    const stopsPanel = page.getByTestId("quick-walk-stops-panel");
+    await expect(stopsPanel).toBeVisible();
 
     await page.getByRole("tab", { name: "Notes" }).click();
     await expectTablistStable(tablist, baseline);
@@ -58,6 +71,16 @@ test.describe("Map tab bar alignment", () => {
     await page.getByRole("tab", { name: "Map" }).click();
     await expect(canvas).toBeVisible();
     await expect(page).not.toHaveURL(/#(stops|notes)$/);
+
+    await page.getByRole("tab", { name: "Stops" }).click();
+    await expect(page).toHaveURL(/#stops$/);
+    await page.getByRole("tab", { name: "Notes" }).click();
+    await expect(page).toHaveURL(/#notes$/);
+
+    await page.goBack();
+    await expect(page).toHaveURL(/#stops$/);
+    await expect(canvas).toBeVisible();
+    await expect(stopsPanel).toBeVisible();
   });
 
   test("saved map retains its tab bar across tabs", async ({ page }) => {

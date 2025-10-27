@@ -61,8 +61,9 @@ export function QuickWalkScreen(): JSX.Element {
     ...defaultSelectedInterests,
   ]);
   const location = useLocation();
-  const initialTab = location.hash?.slice(1) || "map";
-  const [activeTab, setActiveTab] = useState(initialTab);
+  const [activeTab, setActiveTab] = useState(() =>
+    typeof window === "undefined" ? "map" : getHashTab(window.location.hash),
+  );
   const navigate = useNavigate();
 
   const selectedLabel = useMemo(
@@ -71,8 +72,19 @@ export function QuickWalkScreen(): JSX.Element {
   );
 
   useEffect(() => {
-    const next = location.hash?.slice(1) || "map";
-    setActiveTab((current) => (current === next ? current : next));
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+    const handleHashChange = () => setActiveTab(getHashTab(window.location.hash));
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    setActiveTab((current) => {
+      const next = getHashTab(location.hash);
+      return current === next ? current : next;
+    });
   }, [location.hash]);
 
   return (
@@ -174,7 +186,10 @@ export function QuickWalkScreen(): JSX.Element {
                 className="flex h-full flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
-                  <div className="max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur">
+                  <div
+                    className="max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur"
+                    data-testid="quick-walk-stops-panel"
+                  >
                     <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
                   </div>
                 </div>
@@ -186,7 +201,10 @@ export function QuickWalkScreen(): JSX.Element {
                 className="flex h-full flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
-                  <div className="max-h-[50vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur">
+                  <div
+                    className="max-h-[50vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur"
+                    data-testid="quick-walk-notes-panel"
+                  >
                     <p className="text-base font-semibold text-base-100/90">Planning notes</p>
                     <ul className="mt-3 list-disc space-y-2 pl-5">
                       <li>Sync the plan with your calendar to block out discovery time.</li>
@@ -230,4 +248,12 @@ export function QuickWalkScreen(): JSX.Element {
       </main>
     </MobileShell>
   );
+}
+
+function getHashTab(hash?: string | null): string {
+  if (!hash || hash.length <= 1) {
+    return "map";
+  }
+  const candidate = hash.startsWith("#") ? hash.slice(1) : hash;
+  return candidate === "stops" || candidate === "notes" ? candidate : "map";
 }
