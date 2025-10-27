@@ -197,6 +197,30 @@ Mapping guidance:
 - `Toast`: feedback when saving walks or completing actions.
 - `Popover`/`Tooltip`: inline help icons, map annotations.
 
+## Map state persistence plan
+
+- Preserve a single MapLibre instance per page view by letting
+  `WildsideMap` cache the map handle in a ref, defaulting to shared
+  constants for `center`/`zoom`. This prevents React re-renders from
+  tearing the canvas down when chips, sliders, or dialogs toggle state.
+- Create a lightweight `MapStateProvider` (React context backed by
+  `useSyncExternalStore`) so overlays can read and mutate viewport data
+  without causing the map canvas to re-render. The provider should expose
+  imperative helpers (`setViewport`, `highlightPois`, `toggleLayer`) that
+  translate to MapLibre API calls.
+- Mount the provider at the route root for `/map/*` screens so the map’s
+  camera, selected stops, and layer visibility persist when navigating
+  between tabs or into `/saved` and back.
+- Refactor `MapViewport` to consume the provider for derived UI state
+  (e.g., active POI, hover state) while memoising overlay components to
+  avoid unnecessary React diffs.
+- Defer expensive GeoJSON loading until the provider initialises the map,
+  then stream updates through the shared instance rather than passing data
+  via props on every render.
+- Add regression tests that simulate interest toggles and favourite
+  switches, asserting that the map ref remains stable and layers stay
+  attached, ensuring future UI tweaks do not reintroduce canvas churn.
+
 ## Migration workflow
 
 - Stage 0 – Foundations:

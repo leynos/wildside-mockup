@@ -1,6 +1,10 @@
 /** @file MapLibre wrapper rendering the Wildside demo map. */
 
+import type { Map as MapLibreMap } from "maplibre-gl";
 import { useEffect, useRef } from "react";
+
+const DEFAULT_CENTER: Readonly<[number, number]> = Object.freeze([11.404, 47.267]);
+const DEFAULT_ZOOM = 12;
 
 export interface WildsideMapProps {
   /** Longitude/latitude pair for the initial view. */
@@ -14,8 +18,11 @@ export interface WildsideMapProps {
  * The map initialises lazily so tests and non-WebGL environments can opt out
  * without throwing.
  */
-export function WildsideMap({ center = [11.404, 47.267], zoom = 12 }: WildsideMapProps) {
+export function WildsideMap({ center = DEFAULT_CENTER, zoom = DEFAULT_ZOOM }: WildsideMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<MapLibreMap | null>(null);
+  const centerRef = useRef(center);
+  const zoomRef = useRef(zoom);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -27,8 +34,6 @@ export function WildsideMap({ center = [11.404, 47.267], zoom = 12 }: WildsideMa
     }
 
     let isCancelled = false;
-    let mapInstance: import("maplibre-gl").Map | undefined;
-
     async function initialiseMap() {
       const [{ default: maplibre }] = await Promise.all([
         import("maplibre-gl"),
@@ -38,13 +43,14 @@ export function WildsideMap({ center = [11.404, 47.267], zoom = 12 }: WildsideMa
       if (isCancelled) return;
 
       try {
-        mapInstance = new maplibre.Map({
+        const mapInstance = new maplibre.Map({
           container,
           style: "https://demotiles.maplibre.org/styles/osm-bright-gl-style/style.json",
-          center,
-          zoom,
+          center: centerRef.current,
+          zoom: zoomRef.current,
           attributionControl: false,
         });
+        mapRef.current = mapInstance;
         mapInstance.addControl(
           new maplibre.NavigationControl({ visualizePitch: true }),
           "top-right",
@@ -113,9 +119,22 @@ export function WildsideMap({ center = [11.404, 47.267], zoom = 12 }: WildsideMa
 
     return () => {
       isCancelled = true;
-      mapInstance?.remove();
+      mapRef.current?.remove();
+      mapRef.current = null;
     };
-  }, [center, zoom]);
+  }, []);
+
+  useEffect(() => {
+    centerRef.current = center;
+    if (!mapRef.current) return;
+    mapRef.current.easeTo({ center, animate: false });
+  }, [center]);
+
+  useEffect(() => {
+    zoomRef.current = zoom;
+    if (!mapRef.current) return;
+    mapRef.current.setZoom(zoom);
+  }, [zoom]);
 
   return <div ref={containerRef} className="h-full w-full" />;
 }
