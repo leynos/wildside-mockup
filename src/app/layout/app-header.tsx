@@ -39,7 +39,8 @@ export function AppHeader({
 }: AppHeaderProps): JSX.Element {
   const isWizard = variant === "wizard";
 
-  const headerClassName = "select-none px-6 border-b border-base-300/60 bg-base-100/80 pb-4 pt-8 text-base-content";
+  const headerClassName =
+    "select-none px-6 border-b border-base-300/60 bg-base-100/80 pb-4 pt-8 text-base-content";
 
   const leadingContainerClassName = [
     "flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60",

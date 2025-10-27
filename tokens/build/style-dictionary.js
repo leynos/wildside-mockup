@@ -366,6 +366,8 @@ if (daisyPluginThemes.length > 0) {
   tokensCss += daisyPluginThemes
     .map((entry, index) => `    ${entry}${index < daisyPluginThemes.length - 1 ? "," : ";"}`)
     .join("\n");
+  tokensCss += "\n";
+  tokensCss += "  exclude: properties, radialprogress;\n";
   tokensCss += "\n}\n\n";
 }
 

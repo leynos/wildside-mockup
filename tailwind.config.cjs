@@ -11,13 +11,6 @@ function loadGeneratedTokens() {
 
 const generated = loadGeneratedTokens();
 const themeExtend = generated.tailwind?.extend ?? {};
-const generatedThemeNames =
-  (Array.isArray(generated.themeNames) && generated.themeNames.length > 0
-    ? generated.themeNames
-    : Array.isArray(generated.daisyThemes)
-      ? generated.daisyThemes.map((theme) => theme.name)
-      : []) ?? [];
-
 /** @type {import("tailwindcss").Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}", "./tokens/dist/tokens.css"],
@@ -25,7 +18,4 @@ module.exports = {
     extend: themeExtend,
   },
   plugins: [require("daisyui")],
-  daisyui: {
-    themes: generatedThemeNames.length > 0 ? generatedThemeNames : ["light", "dark"],
-  },
 };

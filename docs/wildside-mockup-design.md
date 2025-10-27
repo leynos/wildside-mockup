@@ -101,7 +101,8 @@ Mapping guidance:
 ## Tailwind and DaisyUI integration
 
 - Update `tailwind.config.cjs` to load generated token exports and feed them
-  into both `theme.extend` and `daisyui.themes`. Ensure content paths include
+  into `theme.extend`. Generated CSS handles DaisyUI theme registration, so the
+  config only needs to expose Tailwind primitives. Ensure content paths include
   the forthcoming component directories.
 - Validate whether PostCSS needs additional plugins (for example,
   `@tailwindcss/typography`). If so, record rationale and update `postcss.config.cjs`
@@ -111,6 +112,11 @@ Mapping guidance:
 - Confirm that Tailwind v4 JIT features (colour functions, arbitrary values)
   work with our generated CSS variables; document any quirks discovered during
   implementation.
+- Have the Style Dictionary build emit `@plugin "daisyui"` metadata that
+  excludes the `properties` base block and `radialprogress` component because
+  Vite's Lightning CSS optimiser still warns on the Houdini `@property` rule it
+  injects. Re-enable once the optimiser accepts `@property` or a project
+  requirement introduces the component.
 - Implementation checklist:
   1. Extend the Style Dictionary build to output:
      - `tokens/dist/tailwind.theme.cjs` exporting `theme.extend` fragments and
