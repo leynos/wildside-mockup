@@ -163,6 +163,25 @@ describe("Stage 2 routed flows", () => {
     expect(heading).toBeTruthy();
   });
 
+  it("launches the wizard from the quick walk magic wand", async () => {
+    ({ mount, root } = await renderRoute("/map/quick"));
+    const container = requireContainer(mount);
+    const wandTrigger = container.querySelector<HTMLButtonElement>(
+      "button[aria-label='Generate a new walk']",
+    );
+    expect(wandTrigger).toBeTruthy();
+
+    await act(async () => {
+      wandTrigger?.click();
+      await Promise.resolve();
+    });
+
+    const wizardHeading = Array.from(container.querySelectorAll("h1")).find((h1) =>
+      h1.textContent?.includes("Walk Wizard"),
+    );
+    expect(wizardHeading).toBeTruthy();
+  });
+
   it("toggles itinerary favourites and opens the share dialog", async () => {
     ({ mount, root } = await renderRoute("/map/itinerary"));
     const container = requireContainer(mount);

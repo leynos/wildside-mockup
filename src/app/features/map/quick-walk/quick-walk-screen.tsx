@@ -93,6 +93,7 @@ export function QuickWalkScreen(): JSX.Element {
                         type="button"
                         className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-base-900 shadow-lg shadow-accent/40 transition hover:scale-105"
                         aria-label="Generate a new walk"
+                        onClick={() => navigate({ to: "/wizard/step-1" })}
                       >
                         <FontAwesomeIcon name="fa-solid fa-wand-magic-sparkles" />
                       </button>

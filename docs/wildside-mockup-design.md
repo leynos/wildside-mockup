@@ -292,6 +292,9 @@ Mapping guidance:
 - Tests exercise the new tabbed experiences and share modals; the Happy DOM
   harness now polyfills `NodeFilter`/`HTMLInputElement` so Radix focus scopes
   operate without runtime errors even when MapLibre short-circuits.
+- The quick map "magic wand" routes directly into the walk wizard to keep the
+  exploratory and guided flows connected; coverage ensures the navigation
+  remains intact.
 
 ### Stage 3 implementation notes (27 October 2025)
 
