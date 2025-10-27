@@ -4,7 +4,7 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
-import { FontAwesomeIcon } from "../../components/font-awesome-icon";
+import { Icon } from "../../components/icon";
 import {
   type DiscoverInterest,
   defaultSelectedInterests,
@@ -23,10 +23,10 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
       className="group rounded-2xl border-2 border-transparent bg-base-300/40 p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=on]:border-accent data-[state=on]:bg-accent/10"
     >
       <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-base-200/70 text-xl text-base-content/70 group-data-[state=on]:bg-accent/20">
-        <FontAwesomeIcon
-          name={interest.icon}
+        <Icon
+          token={interest.iconToken}
           className={`${interest.iconColorClass} text-2xl`}
-          label={interest.label}
+          aria-hidden
         />
       </div>
       <h3 className="text-center text-sm font-medium text-base-content group-data-[state=on]:text-accent">
@@ -69,7 +69,7 @@ export function DiscoverScreen(): JSX.Element {
 
         <section className="text-center">
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 text-accent">
-            <FontAwesomeIcon name="fa-solid fa-wand-magic-sparkles" className="text-3xl" />
+            <Icon token="{icon.object.magic}" className="text-3xl" aria-hidden />
           </div>
           <h1 className="text-3xl font-semibold text-base-content">Discover Your Perfect Walk</h1>
           <p className="mt-3 text-base text-base-content/70">
@@ -109,13 +109,13 @@ export function DiscoverScreen(): JSX.Element {
           >
             {isGenerating ? (
               <span className="flex items-center justify-center gap-2">
-                <FontAwesomeIcon name="fa-solid fa-spinner" className="fa-spin" label="Loading" />
+                <Icon token="{icon.action.loading}" className="h-5 w-5 animate-spin" aria-hidden />
                 Creating your experience...
               </span>
             ) : (
               <span className="flex items-center justify-center gap-2">
                 Start Exploring
-                <FontAwesomeIcon name="fa-solid fa-arrow-right" />
+                <Icon token="{icon.navigation.forward}" aria-hidden className="h-4 w-4" />
               </span>
             )}
           </button>

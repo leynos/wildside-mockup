@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import type { WizardStep } from "../data/wizard";
 import { MobileShell } from "../layout/mobile-shell";
-import { FontAwesomeIcon } from "./font-awesome-icon";
+import { Icon } from "./icon";
 import { WizardStepper } from "./wizard-stepper";
 
 export interface WizardLayoutProps {
@@ -35,7 +35,7 @@ export function WizardLayout({
               className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60"
               onClick={onBack}
             >
-              <FontAwesomeIcon name="fa-solid fa-arrow-left" />
+              <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
             </button>
             <h1 className="text-lg font-semibold">Walk Wizard</h1>
             <button
@@ -44,7 +44,7 @@ export function WizardLayout({
               className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60"
               onClick={onHelp}
             >
-              <FontAwesomeIcon name="fa-solid fa-question" />
+              <Icon token="{icon.action.help}" aria-hidden className="h-5 w-5" />
             </button>
           </div>
           <WizardStepper steps={steps} activeStepId={activeStepId} />

@@ -5,7 +5,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { FontAwesomeIcon } from "../../../components/font-awesome-icon";
+import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
@@ -50,7 +50,7 @@ export function SavedScreen(): JSX.Element {
                       className="flex h-10 w-10 items-center justify-center rounded-full bg-base-900/70"
                       onClick={() => navigate({ to: "/map/quick" })}
                     >
-                      <FontAwesomeIcon name="fa-solid fa-arrow-left" />
+                      <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
                     </button>
                     <Dialog.Root open={shareOpen} onOpenChange={setShareOpen}>
                       <Dialog.Trigger asChild>
@@ -59,7 +59,7 @@ export function SavedScreen(): JSX.Element {
                           aria-label="Share"
                           className="flex h-10 w-10 items-center justify-center rounded-full bg-base-900/70"
                         >
-                          <FontAwesomeIcon name="fa-solid fa-share" />
+                          <Icon token="{icon.action.share}" aria-hidden className="h-5 w-5" />
                         </button>
                       </Dialog.Trigger>
                       <Dialog.Portal>
@@ -89,15 +89,15 @@ export function SavedScreen(): JSX.Element {
                     <h1 className="text-2xl font-semibold">{savedRoute.title}</h1>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
                       <span className="flex items-center gap-1">
-                        <FontAwesomeIcon name="fa-solid fa-route" className="text-accent" />
+                        <Icon token="{icon.object.route}" className="text-accent" aria-hidden />
                         {savedRoute.distance}
                       </span>
                       <span className="flex items-center gap-1">
-                        <FontAwesomeIcon name="fa-regular fa-clock" className="text-accent" />
+                        <Icon token="{icon.object.duration}" className="text-accent" aria-hidden />
                         {savedRoute.duration}
                       </span>
                       <span className="flex items-center gap-1">
-                        <FontAwesomeIcon name="fa-solid fa-location-dot" className="text-accent" />
+                        <Icon token="{icon.object.stops}" className="text-accent" aria-hidden />
                         {savedRoute.stopsCount} stops
                       </span>
                     </div>
@@ -166,9 +166,7 @@ export function SavedScreen(): JSX.Element {
             aria-pressed={isFavourite}
             onClick={() => setIsFavourite((prev) => !prev)}
           >
-            <FontAwesomeIcon
-              name={isFavourite ? "fa-solid fa-bookmark" : "fa-regular fa-bookmark"}
-            />
+            <Icon token={isFavourite ? "{icon.action.save}" : "{icon.action.unsave}"} aria-hidden />
           </button>
         </div>
 

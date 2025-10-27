@@ -5,7 +5,7 @@ import * as Toast from "@radix-ui/react-toast";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { FontAwesomeIcon } from "../../components/font-awesome-icon";
+import { Icon } from "../../components/icon";
 import {
   walkCompletionMapImage,
   walkCompletionMoments,
@@ -29,7 +29,7 @@ export function WalkCompleteScreen(): JSX.Element {
             <header className="px-6 pt-16 pb-8 text-center text-base-100">
               <div className="mb-6 flex justify-center">
                 <span className="flex h-20 w-20 items-center justify-center rounded-full bg-amber-400/20 text-5xl text-amber-300 shadow-inner shadow-amber-400/40">
-                  <FontAwesomeIcon name="fa-solid fa-trophy" className="animate-pulse" />
+                  <Icon token="{icon.object.trophy}" className="animate-pulse" aria-hidden />
                 </span>
               </div>
               <h1 className="text-3xl font-semibold tracking-tight">Walk complete!</h1>
@@ -71,7 +71,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     className="rounded-2xl border border-base-300/60 bg-base-200/30 p-4 shadow-inner shadow-base-300/30"
                   >
                     <div className="mb-2 flex items-center gap-3 text-base-300">
-                      <FontAwesomeIcon name={stat.icon} className="text-accent" />
+                      <Icon token={stat.iconToken} className="text-accent" aria-hidden />
                       <span className="text-sm font-medium">{stat.label}</span>
                     </div>
                     <p className="text-2xl font-semibold text-base-100">{stat.value}</p>
@@ -87,7 +87,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     key={stat.id}
                     className="rounded-2xl border border-base-300/60 bg-base-200/30 p-4 text-center"
                   >
-                    <FontAwesomeIcon name={stat.icon} className="mb-2 text-lg text-accent" />
+                    <Icon token={stat.iconToken} className="mb-2 text-lg text-accent" aria-hidden />
                     <p className="text-lg font-semibold text-base-100">{stat.value}</p>
                     <p className="text-xs text-base-300">{stat.label}</p>
                   </article>
@@ -97,7 +97,7 @@ export function WalkCompleteScreen(): JSX.Element {
 
             <section className="mt-6 px-6">
               <h2 className="mb-4 flex items-center gap-3 text-lg font-semibold text-base-100">
-                <FontAwesomeIcon name="fa-solid fa-heart" className="text-pink-400" />
+                <Icon token="{icon.action.like}" className="text-pink-400" aria-hidden />
                 Favourite moments
               </h2>
               <div className="space-y-3">
@@ -115,7 +115,7 @@ export function WalkCompleteScreen(): JSX.Element {
                       <p className="font-semibold text-base-100">{moment.name}</p>
                       <p className="text-sm text-base-300">{moment.description}</p>
                     </div>
-                    <FontAwesomeIcon name="fa-solid fa-star" className="text-amber-300" />
+                    <Icon token="{icon.object.star}" className="text-amber-300" aria-hidden />
                   </article>
                 ))}
               </div>
@@ -128,7 +128,7 @@ export function WalkCompleteScreen(): JSX.Element {
                   className="btn btn-accent btn-lg w-full justify-center gap-3 text-base-900"
                   onClick={() => setToastOpen(true)}
                 >
-                  <FontAwesomeIcon name="fa-solid fa-star" />
+                  <Icon token="{icon.object.star}" aria-hidden />
                   Rate this walk
                 </button>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -137,7 +137,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     className="btn btn-outline w-full justify-center gap-2"
                     onClick={() => setShareOpen(true)}
                   >
-                    <FontAwesomeIcon name="fa-solid fa-share-nodes" />
+                    <Icon token="{icon.action.share}" aria-hidden />
                     Share
                   </button>
                   <button
@@ -145,7 +145,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     className="btn btn-outline w-full justify-center gap-2"
                     onClick={() => navigate({ to: "/saved" })}
                   >
-                    <FontAwesomeIcon name="fa-solid fa-bookmark" />
+                    <Icon token="{icon.action.save}" aria-hidden />
                     Save route
                   </button>
                 </div>
@@ -155,10 +155,7 @@ export function WalkCompleteScreen(): JSX.Element {
             <section className="mt-6 px-6">
               <div className="rounded-2xl border border-purple-400/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4">
                 <div className="mb-3 flex items-center gap-3">
-                  <FontAwesomeIcon
-                    name="fa-solid fa-wand-magic-sparkles"
-                    className="text-purple-300"
-                  />
+                  <Icon token="{icon.object.magic}" className="text-purple-300" aria-hidden />
                   <h3 className="text-base font-semibold text-base-100">Try a remix?</h3>
                 </div>
                 <p className="text-sm text-base-300">
@@ -186,7 +183,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     aria-label={option.label}
                     className={`flex h-12 w-12 items-center justify-center rounded-full ${option.accentClass} text-white shadow`}
                   >
-                    <FontAwesomeIcon name={option.icon} />
+                    <Icon token={option.iconToken} aria-hidden />
                   </button>
                 ))}
               </div>
@@ -211,7 +208,7 @@ export function WalkCompleteScreen(): JSX.Element {
                   key={option.id}
                   className="flex items-center gap-2 rounded-full border border-base-300/60 px-3 py-1"
                 >
-                  <FontAwesomeIcon name={option.icon} />
+                  <Icon token={option.iconToken} aria-hidden />
                   {option.label}
                 </span>
               ))}
@@ -237,7 +234,7 @@ export function WalkCompleteScreen(): JSX.Element {
         duration={4000}
       >
         <div className="alert alert-success shadow-lg">
-          <FontAwesomeIcon name="fa-solid fa-star" />
+          <Icon token="{icon.object.star}" aria-hidden />
           <span className="font-semibold">Thanks! Rating saved for future suggestions.</span>
         </div>
       </Toast.Root>

@@ -7,7 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
-import { FontAwesomeIcon } from "../../components/font-awesome-icon";
+import { Icon } from "../../components/icon";
 import {
   type SegmentOption,
   advancedOptions,
@@ -24,17 +24,17 @@ import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 
 function SectionTitle({
-  icon,
+  iconToken,
   label,
   iconClassName = "text-accent",
 }: {
-  icon: string;
+  iconToken: string;
   label: string;
   iconClassName?: string;
 }): JSX.Element {
   return (
     <h2 className="mb-4 flex items-center gap-3 text-lg font-semibold text-base-content">
-      <FontAwesomeIcon name={icon} className={iconClassName} />
+      <Icon token={iconToken} className={iconClassName} aria-hidden />
       {label}
     </h2>
   );
@@ -43,7 +43,7 @@ function SectionTitle({
 interface SliderBlockProps {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   iconColorClass: string;
   min: number;
   max: number;
@@ -55,13 +55,24 @@ interface SliderBlockProps {
 }
 
 function SliderBlock(props: SliderBlockProps): JSX.Element {
-  const { id, icon, iconColorClass, label, markers, max, min, step, unit, value, onValueChange } =
-    props;
+  const {
+    id,
+    iconToken,
+    iconColorClass,
+    label,
+    markers,
+    max,
+    min,
+    step,
+    unit,
+    value,
+    onValueChange,
+  } = props;
 
   return (
     <section className="mb-8">
       <div className="mb-4 flex items-center justify-between">
-        <SectionTitle icon={icon} label={label} iconClassName={iconColorClass} />
+        <SectionTitle iconToken={iconToken} label={label} iconClassName={iconColorClass} />
         <span className="rounded-full border border-base-300/70 bg-base-200/60 px-3 py-1 text-sm font-semibold text-base-content">
           {formatSliderValue(id, value)}
         </span>
@@ -94,14 +105,14 @@ function SliderBlock(props: SliderBlockProps): JSX.Element {
 interface SegmentPickerProps {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   options: SegmentOption[];
   value: string;
   onChange: (value: string) => void;
 }
 
 function SegmentPicker({
-  icon,
+  iconToken,
   id,
   label,
   onChange,
@@ -110,7 +121,7 @@ function SegmentPicker({
 }: SegmentPickerProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle icon={icon} label={label} />
+      <SectionTitle iconToken={iconToken} label={label} />
       <ToggleGroup.Root
         type="single"
         value={value}
@@ -141,7 +152,7 @@ interface SurfacePickerProps {
 function SurfacePicker({ onChange, value }: SurfacePickerProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle icon="fa-solid fa-road" label="Surface Type" />
+      <SectionTitle iconToken="{icon.category.paved}" label="Surface Type" />
       <ToggleGroup.Root
         type="single"
         value={value}
@@ -155,7 +166,7 @@ function SurfacePicker({ onChange, value }: SurfacePickerProps): JSX.Element {
             value={surface.id}
             className="flex items-center gap-3 rounded-xl border border-base-300/70 bg-base-200/60 px-4 py-3 text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition data-[state=on]:border-accent data-[state=on]:bg-accent/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           >
-            <FontAwesomeIcon name={surface.icon} className="text-base" />
+            <Icon token={surface.iconToken} className="text-base" aria-hidden />
             {surface.label}
           </ToggleGroup.Item>
         ))}
@@ -172,7 +183,7 @@ interface InterestMixProps {
 function InterestMix({ onChange, values }: InterestMixProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle icon="fa-solid fa-heart" label="Interest Mix" />
+      <SectionTitle iconToken="{icon.action.like}" label="Interest Mix" />
       <div className="space-y-6">
         {interestMix.map((slice) => {
           const value = values[slice.id];
@@ -180,7 +191,7 @@ function InterestMix({ onChange, values }: InterestMixProps): JSX.Element {
             <div key={slice.id}>
               <div className="mb-2 flex items-center justify-between">
                 <span className="flex items-center gap-2 text-sm font-medium text-base-content">
-                  <FontAwesomeIcon name={slice.icon} className={slice.iconColorClass} />
+                  <Icon token={slice.iconToken} className={slice.iconColorClass} aria-hidden />
                   {slice.label}
                 </span>
                 <span className="text-sm font-semibold text-accent">{value}%</span>
@@ -214,7 +225,7 @@ interface RoutePreviewProps {
 function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle icon="fa-solid fa-eye" label="Route Preview" />
+      <SectionTitle iconToken="{icon.action.preview}" label="Route Preview" />
       <div className="grid grid-cols-3 gap-3">
         {routePreviews.map((route) => {
           const isActive = route.id === selected;
@@ -233,10 +244,10 @@ function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
               <div
                 className={`mb-2 flex h-16 items-center justify-center rounded bg-gradient-to-br ${route.gradientClass}`}
               >
-                <FontAwesomeIcon
-                  name="fa-solid fa-route"
+                <Icon
+                  token="{icon.object.route}"
                   className={`text-xl ${route.iconColorClass}`}
-                  label={`${route.title} icon`}
+                  aria-hidden
                 />
               </div>
               <p className="font-semibold">{route.title}</p>
@@ -252,14 +263,14 @@ function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
           type="button"
           className="btn btn-ghost btn-sm flex-1 rounded-xl border border-base-300/70 bg-base-200/60 text-base-content"
         >
-          <FontAwesomeIcon name="fa-solid fa-rotate-right" className="mr-2" />
+          <Icon token="{icon.action.regenerate}" aria-hidden className="mr-2 h-4 w-4" />
           Regenerate
         </button>
         <button
           type="button"
           className="btn btn-accent btn-sm flex-1 rounded-xl text-base font-semibold"
         >
-          <FontAwesomeIcon name="fa-solid fa-play" className="mr-2" />
+          <Icon token="{icon.action.play}" aria-hidden className="mr-2 h-4 w-4" />
           Start Route
         </button>
       </div>
@@ -275,7 +286,7 @@ interface AdvancedOptionsProps {
 function AdvancedOptions({ onToggle, values }: AdvancedOptionsProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle icon="fa-solid fa-gear" label="Advanced Options" />
+      <SectionTitle iconToken="{icon.action.settings}" label="Advanced Options" />
       <div className="space-y-3">
         {advancedOptions.map((option) => {
           const checked = values[option.id];
@@ -285,7 +296,7 @@ function AdvancedOptions({ onToggle, values }: AdvancedOptionsProps): JSX.Elemen
               className="flex items-center justify-between rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-base-content"
             >
               <div className="flex items-center gap-3">
-                <FontAwesomeIcon name={option.icon} className="text-accent" />
+                <Icon token={option.iconToken} className="text-accent" aria-hidden />
                 <div>
                   <p className="text-sm font-semibold text-base-content">{option.label}</p>
                   <p className="text-xs text-base-content/60">{option.description}</p>
@@ -352,7 +363,7 @@ export function CustomizeScreen(): JSX.Element {
               className="flex h-full w-full items-center justify-center"
               onClick={() => navigate({ to: "/explore" })}
             >
-              <FontAwesomeIcon name="fa-solid fa-arrow-left" />
+              <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
             </button>
           }
           trailing={
@@ -361,7 +372,7 @@ export function CustomizeScreen(): JSX.Element {
               aria-label="Help"
               className="flex h-full w-full items-center justify-center text-accent"
             >
-              <FontAwesomeIcon name="fa-solid fa-circle-question" />
+              <Icon token="{icon.action.help}" aria-hidden className="h-5 w-5" />
             </button>
           }
         />
@@ -382,7 +393,7 @@ export function CustomizeScreen(): JSX.Element {
           <SegmentPicker
             id="crowd"
             label="Crowd Level"
-            icon="fa-solid fa-users"
+            iconToken="{icon.object.family}"
             options={crowdLevelOptions}
             value={crowdLevel}
             onChange={setCrowdLevel}
@@ -390,7 +401,7 @@ export function CustomizeScreen(): JSX.Element {
           <SegmentPicker
             id="elevation"
             label="Elevation Preference"
-            icon="fa-solid fa-mountain"
+            iconToken="{icon.accessibility.elevation}"
             options={elevationOptions}
             value={elevation}
             onChange={setElevation}

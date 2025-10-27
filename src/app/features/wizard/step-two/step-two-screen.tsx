@@ -5,7 +5,7 @@ import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { FontAwesomeIcon } from "../../../components/font-awesome-icon";
+import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { accessibilityOptions, wizardSteps } from "../../../data/wizard";
 
@@ -46,7 +46,7 @@ export function WizardStepTwo(): JSX.Element {
       <section className="mb-8 rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="flex items-center gap-3 text-lg font-semibold text-base-content">
-            <FontAwesomeIcon name="fa-solid fa-compass" className="text-accent" />
+            <Icon token="{icon.navigation.explore}" className="text-accent" aria-hidden />
             Discovery style
           </h2>
           <span className="rounded-lg bg-accent/20 px-2 py-1 text-xs font-medium text-accent">
@@ -99,7 +99,7 @@ export function WizardStepTwo(): JSX.Element {
               >
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-base-300/60 text-base-content">
-                    <FontAwesomeIcon name={option.icon} className="text-accent" />
+                    <Icon token={option.iconToken} className="text-accent" aria-hidden />
                   </span>
                   <div>
                     <p className="text-sm font-semibold text-base-content">{option.label}</p>

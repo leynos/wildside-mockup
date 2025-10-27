@@ -3,12 +3,12 @@
 import { useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import { FontAwesomeIcon } from "./font-awesome-icon";
+import { Icon } from "./icon";
 
 export interface BottomNavItem {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   href: string;
 }
 
@@ -22,10 +22,10 @@ export interface MapBottomNavigationProps {
 }
 
 const baseItems: BottomNavItem[] = [
-  { id: "map", label: "Map", icon: "fa-solid fa-map", href: "/map/quick" },
-  { id: "explore", label: "Explore", icon: "fa-solid fa-compass", href: "/explore" },
-  { id: "saved", label: "Saved", icon: "fa-solid fa-bookmark", href: "/saved" },
-  { id: "profile", label: "Profile", icon: "fa-solid fa-user", href: "/offline" },
+  { id: "map", label: "Map", iconToken: "{icon.navigation.map}", href: "/map/quick" },
+  { id: "explore", label: "Explore", iconToken: "{icon.navigation.explore}", href: "/explore" },
+  { id: "saved", label: "Saved", iconToken: "{icon.navigation.saved}", href: "/saved" },
+  { id: "profile", label: "Profile", iconToken: "{icon.navigation.profile}", href: "/offline" },
 ];
 
 function resolveItems(customItems?: BottomNavItem[]): BottomNavItem[] {
@@ -58,7 +58,7 @@ export function MapBottomNavigation({
                 isActive ? "text-base-content" : "text-base-content/60"
               }`}
             >
-              <FontAwesomeIcon name={item.icon} className="text-lg" label={item.label} />
+              <Icon token={item.iconToken} className="text-lg" label={item.label} />
               {item.label}
             </button>
           );

@@ -4,7 +4,7 @@ import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
-import { FontAwesomeIcon } from "../../components/font-awesome-icon";
+import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
 import {
   communityPick,
@@ -27,7 +27,7 @@ function CategoryScroller(): JSX.Element {
               key={category.id}
               className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}
             >
-              <FontAwesomeIcon name={category.icon} className="text-lg" />
+              <Icon token={category.iconToken} className="text-lg" aria-hidden />
               <p className="text-sm font-semibold">{category.title}</p>
               <p className="text-xs text-white/70">{category.summary}</p>
             </article>
@@ -46,7 +46,7 @@ function FeaturedWalkCard(): JSX.Element {
   return (
     <section className="space-y-4 rounded-2xl border border-base-300/70 bg-base-200/60 p-4 shadow-inner shadow-base-300/30">
       <h2 className="flex items-center gap-2 text-lg font-semibold text-base-content">
-        <FontAwesomeIcon name="fa-solid fa-crown" className="text-amber-400" />
+        <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
         Walk of the Week
       </h2>
       <figure className="overflow-hidden rounded-xl border border-base-300/50">
@@ -65,18 +65,18 @@ function FeaturedWalkCard(): JSX.Element {
           </div>
           <div className="flex flex-col items-end text-sm text-base-content/60">
             <span className="flex items-center gap-1 font-semibold text-base-content">
-              <FontAwesomeIcon name="fa-solid fa-route" />
+              <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
               {featuredWalk.distance}
             </span>
             <span className="mt-1 flex items-center gap-1">
-              <FontAwesomeIcon name="fa-regular fa-clock" />
+              <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
               {featuredWalk.duration}
             </span>
           </div>
         </div>
         <div className="flex items-center gap-3 text-sm text-base-content/80">
           <span className="flex items-center gap-1 text-amber-400">
-            <FontAwesomeIcon name="fa-solid fa-star" />
+            <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
             {formatRating(featuredWalk.rating)}
           </span>
           {featuredWalk.badges.map((badge) => (
@@ -119,11 +119,11 @@ function PopularThemesGrid(): JSX.Element {
             <p className="mt-1 text-xs text-base-content/60">{theme.description}</p>
             <div className="mt-2 flex items-center justify-between text-xs text-base-content/60">
               <span className="flex items-center gap-1">
-                <FontAwesomeIcon name="fa-solid fa-route" />
+                <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
                 {theme.distanceRange}
               </span>
               <span className="flex items-center gap-1 text-amber-400">
-                <FontAwesomeIcon name="fa-solid fa-star" />
+                <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
                 {formatRating(theme.rating)}
               </span>
             </div>
@@ -158,11 +158,11 @@ function CuratedCollectionsList(): JSX.Element {
                 <p className="text-sm text-base-content/70">{collection.description}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-base-content/60">
                   <span className="flex items-center gap-1">
-                    <FontAwesomeIcon name="fa-solid fa-route" />
+                    <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
                     {collection.distanceRange}
                   </span>
                   <span className="flex items-center gap-1">
-                    <FontAwesomeIcon name="fa-regular fa-clock" />
+                    <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
                     {collection.durationRange}
                   </span>
                   <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-emerald-300">
@@ -213,7 +213,7 @@ function TrendingRoutesList(): JSX.Element {
               <p className="text-xs text-base-content/60">{route.subtitle}</p>
             </div>
             <span className="flex items-center gap-1 text-sm font-semibold text-orange-300">
-              <FontAwesomeIcon name="fa-solid fa-chart-line" />
+              <Icon token="{icon.object.trend}" aria-hidden className="h-4 w-4" />
               {route.trendDelta}
             </span>
           </article>
@@ -227,7 +227,7 @@ function CommunityPickPanel(): JSX.Element {
   return (
     <section className="rounded-2xl border border-base-300/60 bg-base-200/70 p-4 shadow-inner shadow-base-300/20">
       <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-base-content">
-        <FontAwesomeIcon name="fa-solid fa-users" className="text-accent" />
+        <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
         Community Favourite
       </h2>
       <div className="mb-3 flex items-center gap-3">
@@ -244,7 +244,7 @@ function CommunityPickPanel(): JSX.Element {
           <p className="text-xs text-base-content/60">Most shared this week</p>
         </div>
         <span className="flex items-center gap-1 text-sm font-semibold text-amber-400">
-          <FontAwesomeIcon name="fa-solid fa-star" />
+          <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
           {formatRating(communityPick.rating)}
         </span>
       </div>
@@ -252,15 +252,15 @@ function CommunityPickPanel(): JSX.Element {
       <p className="mt-2 text-sm text-base-content/70">{communityPick.description}</p>
       <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-base-content/60">
         <span className="flex items-center gap-1">
-          <FontAwesomeIcon name="fa-solid fa-route" />
+          <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
           {communityPick.distance}
         </span>
         <span className="flex items-center gap-1">
-          <FontAwesomeIcon name="fa-regular fa-clock" />
+          <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
           {communityPick.duration}
         </span>
         <span className="flex items-center gap-1">
-          <FontAwesomeIcon name="fa-solid fa-bookmark" />
+          <Icon token="{icon.action.save}" aria-hidden className="h-4 w-4" />
           {communityPick.saves} saves
         </span>
       </div>
@@ -286,13 +286,14 @@ export function ExploreScreen(): JSX.Element {
               className="flex h-11 w-11 items-center justify-center rounded-full border border-base-300/70 bg-base-200/70 text-accent shadow-sm shadow-base-300/30"
               aria-label="Filter walks"
             >
-              <FontAwesomeIcon name="fa-solid fa-filter" />
+              <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />
             </button>
           </div>
           <div className="relative mt-4">
-            <FontAwesomeIcon
-              name="fa-solid fa-magnifying-glass"
+            <Icon
+              token="{icon.action.search}"
               className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50"
+              aria-hidden
             />
             <input
               type="search"

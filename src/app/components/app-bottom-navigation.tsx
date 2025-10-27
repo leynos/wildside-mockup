@@ -2,12 +2,12 @@
 
 import { useNavigate } from "@tanstack/react-router";
 
-import { FontAwesomeIcon } from "./font-awesome-icon";
+import { Icon } from "./icon";
 
 export interface AppBottomNavigationItem {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   href?: string;
   isActive?: boolean;
 }
@@ -35,7 +35,7 @@ export function AppBottomNavigation({ items }: AppBottomNavigationProps): JSX.El
               }
             }}
           >
-            <FontAwesomeIcon name={item.icon} className="text-lg" label={item.label} />
+            <Icon token={item.iconToken} className="text-lg" label={item.label} />
             {item.label}
           </button>
         ))}

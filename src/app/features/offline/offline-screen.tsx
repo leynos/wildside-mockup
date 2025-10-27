@@ -7,7 +7,7 @@ import { useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
-import { FontAwesomeIcon } from "../../components/font-awesome-icon";
+import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
 import { autoManagementOptions, offlineDownloads, offlineSuggestions } from "../../data/stage-four";
 import { AppHeader } from "../../layout/app-header";
@@ -48,7 +48,7 @@ export function OfflineScreen(): JSX.Element {
                 className="flex h-full w-full items-center justify-center"
                 onClick={() => navigate({ to: "/saved" })}
               >
-                <FontAwesomeIcon name="fa-solid fa-arrow-left" />
+                <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
               </button>
             }
             trailing={
@@ -58,7 +58,7 @@ export function OfflineScreen(): JSX.Element {
                   aria-label="Add offline area"
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/30 text-accent transition hover:border-accent/60 hover:text-accent"
                 >
-                  <FontAwesomeIcon name="fa-solid fa-plus" />
+                  <Icon token="{icon.action.add}" aria-hidden className="h-5 w-5" />
                 </button>
               </Dialog.Trigger>
             }
@@ -67,7 +67,7 @@ export function OfflineScreen(): JSX.Element {
           <main className="flex-1 space-y-6 overflow-y-auto px-6 pb-28 pt-6">
             <section className="rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20">
               <div className="mb-4 flex items-center gap-3">
-                <FontAwesomeIcon name="fa-solid fa-download" className="text-accent" />
+                <Icon token="{icon.action.download}" className="text-accent" aria-hidden />
                 <div>
                   <p className="text-sm font-medium text-base-content">Storage overview</p>
                   <p className="text-xs text-base-content/70">
@@ -107,9 +107,10 @@ export function OfflineScreen(): JSX.Element {
                     className={`rounded-2xl border border-base-300/60 bg-gradient-to-r ${suggestion.accentClass} p-4 shadow-lg`}
                   >
                     <div className="flex items-start gap-3 text-base-100">
-                      <FontAwesomeIcon
-                        name={suggestion.icon}
+                      <Icon
+                        token={suggestion.iconToken}
                         className={`text-xl ${suggestion.iconClassName ?? ""}`.trim()}
+                        aria-hidden
                       />
                       <div className="flex-1">
                         <h3 className="text-base font-semibold text-base-100">
@@ -169,7 +170,7 @@ export function OfflineScreen(): JSX.Element {
                         className="absolute right-2 top-2 text-base-content/60 transition hover:text-error"
                         onClick={() => handleDeleteDownload(download.id)}
                       >
-                        <FontAwesomeIcon name="fa-solid fa-remove" className="text-lg" />
+                        <Icon token="{icon.action.remove}" className="text-lg" aria-hidden />
                       </button>
                     ) : null}
                     <img
@@ -211,7 +212,7 @@ export function OfflineScreen(): JSX.Element {
             </section>
             <section className="space-y-4">
               <header className="flex items-center gap-3">
-                <FontAwesomeIcon name="fa-solid fa-cog" className="text-accent" />
+                <Icon token="{icon.action.settings}" className="text-accent" aria-hidden />
                 <h2 className="text-base font-semibold text-base-content">Auto-Management</h2>
               </header>
               <div className="space-y-4">
@@ -224,9 +225,10 @@ export function OfflineScreen(): JSX.Element {
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex flex-1 items-start gap-3">
-                          <FontAwesomeIcon
-                            name={option.icon}
+                          <Icon
+                            token={option.iconToken}
                             className={`${option.iconClassName} text-lg`}
+                            aria-hidden
                           />
                           <div>
                             <h3 className="text-sm font-semibold text-base-content">

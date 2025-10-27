@@ -16,7 +16,7 @@ export interface WalkPointOfInterest {
   rating?: number;
   imageUrl?: string;
   openHours?: string;
-  categoryIcon: string;
+  categoryIconToken: string;
   categoryColorClass: string;
 }
 
@@ -73,7 +73,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       description: "Pour-over specialists in a cosy warehouse setting.",
       tags: ["Coffee", "Local favourite"],
       rating: 4.7,
-      categoryIcon: "fa-solid fa-mug-hot",
+      categoryIconToken: "{icon.category.food}",
       categoryColorClass: "text-amber-400",
       openHours: "7:00 AM – 8:00 PM",
     },
@@ -83,7 +83,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       description: "Panoramic harbour vistas – perfect for golden hour snaps.",
       tags: ["Views", "Photos", "Free"],
       rating: 4.9,
-      categoryIcon: "fa-solid fa-camera",
+      categoryIconToken: "{icon.category.photography}",
       categoryColorClass: "text-sky-400",
       openHours: "24/7",
     },
@@ -93,7 +93,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       description: "Rotating gallery of local street art tucked behind the main drag.",
       tags: ["Art", "Instagram"],
       rating: 4.4,
-      categoryIcon: "fa-solid fa-palette",
+      categoryIconToken: "{icon.category.art}",
       categoryColorClass: "text-purple-400",
       openHours: "10:00 AM – 7:00 PM",
     },
@@ -103,7 +103,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       description: "Lush boardwalk planted with native flora and shaded seating.",
       tags: ["Nature", "Rest stop"],
       rating: 4.6,
-      categoryIcon: "fa-solid fa-leaf",
+      categoryIconToken: "{icon.category.nature}",
       categoryColorClass: "text-emerald-400",
       openHours: "6:00 AM – 9:00 PM",
     },
@@ -113,7 +113,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       description: "Weekly stalls with small batch bakers, makers, and live music.",
       tags: ["Market", "Local"],
       rating: 4.5,
-      categoryIcon: "fa-solid fa-store",
+      categoryIconToken: "{icon.category.shops}",
       categoryColorClass: "text-orange-400",
       openHours: "Saturdays 8:00 AM – 2:00 PM",
     },
@@ -123,7 +123,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       description: "Suspended skywalk linking two cultural precincts over the water.",
       tags: ["Architecture", "Landmark"],
       rating: 4.8,
-      categoryIcon: "fa-solid fa-landmark",
+      categoryIconToken: "{icon.category.landmarks}",
       categoryColorClass: "text-cyan-300",
       openHours: "8:00 AM – 10:00 PM",
     },

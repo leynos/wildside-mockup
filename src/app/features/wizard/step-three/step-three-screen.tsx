@@ -4,7 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { FontAwesomeIcon } from "../../../components/font-awesome-icon";
+import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
 import {
   wizardGeneratedStops,
@@ -103,7 +103,7 @@ export function WizardStepThree(): JSX.Element {
               key={highlight.id}
               className="flex items-start gap-2 rounded-xl bg-base-300/40 px-3 py-2"
             >
-              <FontAwesomeIcon name={highlight.icon} className="text-accent" />
+              <Icon token={highlight.iconToken} className="text-accent" aria-hidden />
               <div>
                 <p className="font-semibold">{highlight.label}</p>
                 <p className="text-xs text-base-content/60">{highlight.detail}</p>
@@ -122,7 +122,7 @@ export function WizardStepThree(): JSX.Element {
               className="flex items-start gap-3 rounded-2xl border border-base-300/60 bg-base-300/30 px-4 py-3"
             >
               <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-base-300/60 text-base-content">
-                <FontAwesomeIcon name={stop.icon} className={stop.accentClass} />
+                <Icon token={stop.iconToken} className={stop.accentClass} aria-hidden />
               </span>
               <div>
                 <p className="text-base font-semibold">{stop.name}</p>
@@ -136,7 +136,7 @@ export function WizardStepThree(): JSX.Element {
 
       <section className="rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content">
         <h3 className="flex items-center gap-2 text-lg font-semibold">
-          <FontAwesomeIcon name="fa-solid fa-sun" className="text-amber-400" />
+          <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
           {wizardWeatherSummary.title}
         </h3>
         <div className="mt-3 flex items-center justify-between rounded-2xl border border-amber-200/40 bg-amber-200/10 px-4 py-3">

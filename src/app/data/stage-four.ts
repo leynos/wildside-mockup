@@ -4,18 +4,18 @@ export interface WalkCompletionStat {
   id: string;
   label: string;
   value: string;
-  icon: string;
+  iconToken: string;
 }
 
 export const walkCompletionPrimaryStats: WalkCompletionStat[] = [
-  { id: "distance", label: "Distance", value: "3.2 km", icon: "fa-solid fa-route" },
-  { id: "duration", label: "Duration", value: "58 min", icon: "fa-regular fa-clock" },
+  { id: "distance", label: "Distance", value: "3.2 km", iconToken: "{icon.object.distance}" },
+  { id: "duration", label: "Duration", value: "58 min", iconToken: "{icon.object.duration}" },
 ];
 
 export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
-  { id: "calories", label: "Calories", value: "247", icon: "fa-solid fa-fire" },
-  { id: "stops", label: "Stops", value: "7", icon: "fa-solid fa-location-dot" },
-  { id: "starred", label: "Starred", value: "3", icon: "fa-solid fa-star" },
+  { id: "calories", label: "Calories", value: "247", iconToken: "{icon.object.calories}" },
+  { id: "stops", label: "Stops", value: "7", iconToken: "{icon.object.stops}" },
+  { id: "starred", label: "Starred", value: "3", iconToken: "{icon.object.star}" },
 ];
 
 export interface WalkCompletionMoment {
@@ -52,19 +52,29 @@ export const walkCompletionMoments: WalkCompletionMoment[] = [
 export interface WalkCompletionShareOption {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   accentClass: string;
 }
 
 export const walkCompletionShareOptions: WalkCompletionShareOption[] = [
-  { id: "facebook", label: "Facebook", icon: "fa-brands fa-facebook", accentClass: "bg-blue-600" },
+  {
+    id: "facebook",
+    label: "Facebook",
+    iconToken: "{icon.brand.facebook}",
+    accentClass: "bg-blue-600",
+  },
   {
     id: "instagram",
     label: "Instagram",
-    icon: "fa-brands fa-instagram",
+    iconToken: "{icon.brand.instagram}",
     accentClass: "bg-pink-600",
   },
-  { id: "twitter", label: "Twitter", icon: "fa-brands fa-x-twitter", accentClass: "bg-blue-400" },
+  {
+    id: "twitter",
+    label: "Twitter",
+    iconToken: "{icon.brand.x}",
+    accentClass: "bg-blue-400",
+  },
 ];
 
 export const walkCompletionMapImage =
@@ -75,7 +85,7 @@ export interface OfflineSuggestion {
   title: string;
   description: string;
   callToAction: string;
-  icon: string;
+  iconToken: string;
   accentClass: string;
   iconClassName?: string;
 }
@@ -84,7 +94,7 @@ export interface AutoManagementOption {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  iconToken: string;
   iconClassName: string;
   defaultEnabled: boolean;
 }
@@ -95,7 +105,7 @@ export const offlineSuggestions: OfflineSuggestion[] = [
     title: "Upcoming Trip Detected",
     description: "Add Reykjavik before your Iceland trip next week",
     callToAction: "Download Reykjavik",
-    icon: "fa-solid fa-plane",
+    iconToken: "{icon.object.travel}",
     accentClass: "from-sky-500 via-indigo-500 to-purple-600",
     iconClassName: "text-[color:var(--b3)]",
   },
@@ -148,7 +158,7 @@ export const autoManagementOptions: AutoManagementOption[] = [
     id: "auto-delete",
     title: "Auto-delete old maps",
     description: "Remove maps older than 30 days automatically",
-    icon: "fa-solid fa-trash-alt",
+    iconToken: "{icon.offline.delete}",
     iconClassName: "text-amber-400",
     defaultEnabled: true,
   },
@@ -156,7 +166,7 @@ export const autoManagementOptions: AutoManagementOption[] = [
     id: "wifi-only",
     title: "WiFi-only downloads",
     description: "Only download maps when connected to WiFi",
-    icon: "fa-solid fa-wifi",
+    iconToken: "{icon.offline.connectivity}",
     iconClassName: "text-accent",
     defaultEnabled: true,
   },
@@ -164,7 +174,7 @@ export const autoManagementOptions: AutoManagementOption[] = [
     id: "auto-update",
     title: "Auto-update maps",
     description: "Automatically update maps when new versions are available",
-    icon: "fa-solid fa-sync-alt",
+    iconToken: "{icon.offline.sync}",
     iconClassName: "text-purple-400",
     defaultEnabled: false,
   },
@@ -174,7 +184,7 @@ export interface SafetyToggle {
   id: string;
   label: string;
   description: string;
-  icon: string;
+  iconToken: string;
   accentClass: string;
   defaultChecked: boolean;
 }
@@ -182,7 +192,7 @@ export interface SafetyToggle {
 export interface SafetyAccordionSection {
   id: string;
   title: string;
-  icon: string;
+  iconToken: string;
   accentClass: string;
   description: string;
   toggles: SafetyToggle[];
@@ -192,7 +202,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
   {
     id: "mobility",
     title: "Mobility Support",
-    icon: "fa-solid fa-wheelchair",
+    iconToken: "{icon.accessibility.stepFree}",
     accentClass: "bg-sky-500/20 text-sky-400",
     description: "Route adjustments for easier navigation",
     toggles: [
@@ -200,7 +210,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "step-free",
         label: "Step-free routes",
         description: "Avoid stairs and steps",
-        icon: "fa-solid fa-stairs",
+        iconToken: "{icon.accessibility.stepFree}",
         accentClass: "bg-green-500/20 text-green-400",
         defaultChecked: true,
       },
@@ -208,7 +218,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "avoid-hills",
         label: "Avoid steep hills",
         description: "Limit inclines above 5%",
-        icon: "fa-solid fa-mountain",
+        iconToken: "{icon.accessibility.elevation}",
         accentClass: "bg-orange-500/20 text-orange-400",
         defaultChecked: false,
       },
@@ -216,7 +226,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "wider-paths",
         label: "Prefer wider paths",
         description: "Optimised for chairs, buggies, or group walking",
-        icon: "fa-solid fa-road",
+        iconToken: "{icon.category.paved}",
         accentClass: "bg-purple-500/20 text-purple-400",
         defaultChecked: true,
       },
@@ -225,7 +235,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
   {
     id: "safety",
     title: "Safety Features",
-    icon: "fa-solid fa-shield-halved",
+    iconToken: "{icon.safety.priority}",
     accentClass: "bg-yellow-500/20 text-yellow-400",
     description: "Enhanced security for your walks",
     toggles: [
@@ -233,7 +243,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "well-lit",
         label: "Well-lit routes",
         description: "Prioritise illuminated paths",
-        icon: "fa-solid fa-lightbulb",
+        iconToken: "{icon.object.guidance}",
         accentClass: "bg-amber-500/20 text-amber-400",
         defaultChecked: true,
       },
@@ -241,7 +251,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "busy-areas",
         label: "Prefer busy areas",
         description: "Stay in populated zones",
-        icon: "fa-solid fa-people-group",
+        iconToken: "{icon.safety.group}",
         accentClass: "bg-pink-500/20 text-pink-400",
         defaultChecked: false,
       },
@@ -249,7 +259,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "emergency-sharing",
         label: "Emergency sharing",
         description: "Share location with contacts",
-        icon: "fa-solid fa-phone",
+        iconToken: "{icon.safety.emergencyPhone}",
         accentClass: "bg-red-500/20 text-red-400",
         defaultChecked: false,
       },
@@ -257,7 +267,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "avoid-isolated",
         label: "Avoid isolated areas",
         description: "Skip secluded locations",
-        icon: "fa-solid fa-eye-slash",
+        iconToken: "{icon.safety.hide}",
         accentClass: "bg-slate-500/20 text-slate-300",
         defaultChecked: true,
       },
@@ -266,7 +276,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
   {
     id: "comfort",
     title: "Comfort Settings",
-    icon: "fa-solid fa-leaf",
+    iconToken: "{icon.environment.toggle}",
     accentClass: "bg-emerald-500/20 text-emerald-400",
     description: "Personalise your walking experience",
     toggles: [
@@ -274,7 +284,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "shade",
         label: "Prioritise shade",
         description: "Choose tree-lined paths",
-        icon: "fa-solid fa-tree",
+        iconToken: "{icon.category.trails}",
         accentClass: "bg-emerald-500/20 text-emerald-400",
         defaultChecked: false,
       },
@@ -282,7 +292,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "weather-adaptive",
         label: "Weather-adaptive",
         description: "Adjust routes for weather",
-        icon: "fa-solid fa-cloud-sun",
+        iconToken: "{icon.object.weatherSunny}",
         accentClass: "bg-blue-500/20 text-blue-400",
         defaultChecked: true,
       },
@@ -290,7 +300,7 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         id: "quiet-routes",
         label: "Prefer quiet routes",
         description: "Minimise traffic noise",
-        icon: "fa-solid fa-volume-low",
+        iconToken: "{icon.object.audio}",
         accentClass: "bg-teal-500/20 text-teal-400",
         defaultChecked: false,
       },
@@ -302,7 +312,7 @@ export interface SafetyPreset {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  iconToken: string;
   accentClass: string;
 }
 
@@ -311,21 +321,21 @@ export const safetyPresets: SafetyPreset[] = [
     id: "family",
     title: "Family Friendly",
     description: "Gentle pace, playground stops, shade",
-    icon: "fa-solid fa-children",
+    iconToken: "{icon.object.family}",
     accentClass: "bg-amber-500/20 text-amber-400",
   },
   {
     id: "senior",
     title: "Senior Friendly",
     description: "Gentle slopes, resting points, well-lit",
-    icon: "fa-solid fa-walking-cane",
+    iconToken: "{icon.accessibility.mobilityAid}",
     accentClass: "bg-green-500/20 text-green-400",
   },
   {
     id: "night",
     title: "Night Walker",
     description: "Well-lit, busy areas, emergency sharing",
-    icon: "fa-solid fa-moon",
+    iconToken: "{icon.object.weatherNight}",
     accentClass: "bg-indigo-500/20 text-indigo-300",
   },
 ];

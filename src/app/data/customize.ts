@@ -3,7 +3,7 @@
 export interface SliderConfig {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   iconColorClass: string;
   min: number;
   max: number;
@@ -22,14 +22,14 @@ export interface SegmentOption {
 export interface SurfaceOption {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   emphasis?: boolean;
 }
 
 export interface InterestMixSlice {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   iconColorClass: string;
   allocation: number;
 }
@@ -48,14 +48,14 @@ export interface AdvancedToggleOption {
   id: string;
   label: string;
   description: string;
-  icon: string;
+  iconToken: string;
   defaultEnabled: boolean;
 }
 
 export interface BottomNavigationItem {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   href?: string;
   active?: boolean;
 }
@@ -64,7 +64,7 @@ export const sliders: SliderConfig[] = [
   {
     id: "distance",
     label: "Distance",
-    icon: "fa-solid fa-route",
+    iconToken: "{icon.object.distance}",
     iconColorClass: "text-accent",
     min: 1,
     max: 10,
@@ -76,7 +76,7 @@ export const sliders: SliderConfig[] = [
   {
     id: "duration",
     label: "Duration",
-    icon: "fa-regular fa-clock",
+    iconToken: "{icon.object.duration}",
     iconColorClass: "text-accent",
     min: 15,
     max: 180,
@@ -100,31 +100,31 @@ export const elevationOptions: SegmentOption[] = [
 ];
 
 export const surfaceOptions: SurfaceOption[] = [
-  { id: "paved", label: "Paved", icon: "fa-solid fa-road", emphasis: true },
-  { id: "trail", label: "Trail", icon: "fa-solid fa-tree" },
-  { id: "boardwalk", label: "Boardwalk", icon: "fa-solid fa-water" },
-  { id: "mixed", label: "Mixed", icon: "fa-solid fa-palette" },
+  { id: "paved", label: "Paved", iconToken: "{icon.category.paved}", emphasis: true },
+  { id: "trail", label: "Trail", iconToken: "{icon.category.trails}" },
+  { id: "boardwalk", label: "Boardwalk", iconToken: "{icon.category.water}" },
+  { id: "mixed", label: "Mixed", iconToken: "{icon.object.route}" },
 ];
 
 export const interestMix: InterestMixSlice[] = [
   {
     id: "nature",
     label: "Nature",
-    icon: "fa-solid fa-leaf",
+    iconToken: "{icon.category.nature}",
     iconColorClass: "text-emerald-400",
     allocation: 40,
   },
   {
     id: "history",
     label: "History",
-    icon: "fa-solid fa-building",
+    iconToken: "{icon.category.history}",
     iconColorClass: "text-sky-400",
     allocation: 30,
   },
   {
     id: "food",
     label: "Food & Drink",
-    icon: "fa-solid fa-mug-saucer",
+    iconToken: "{icon.category.food}",
     iconColorClass: "text-amber-400",
     allocation: 30,
   },
@@ -163,30 +163,36 @@ export const advancedOptions: AdvancedToggleOption[] = [
     id: "safety",
     label: "Safety Priority",
     description: "Well-lit, busy routes",
-    icon: "fa-solid fa-shield-halved",
+    iconToken: "{icon.safety.priority}",
     defaultEnabled: false,
   },
   {
     id: "accessibility",
     label: "Accessibility",
     description: "Step-free routes",
-    icon: "fa-solid fa-wheelchair",
+    iconToken: "{icon.accessibility.stepFree}",
     defaultEnabled: true,
   },
   {
     id: "download",
     label: "Offline download",
     description: "Preload maps and audio",
-    icon: "fa-solid fa-download",
+    iconToken: "{icon.action.download}",
     defaultEnabled: false,
   },
 ];
 
 export const bottomNavigation: BottomNavigationItem[] = [
-  { id: "map", label: "Map", icon: "fa-solid fa-map", href: "/map/quick" },
-  { id: "discover", label: "Discover", icon: "fa-solid fa-compass", href: "/discover" },
-  { id: "routes", label: "Routes", icon: "fa-solid fa-route", href: "/customize", active: true },
-  { id: "profile", label: "Profile", icon: "fa-solid fa-user", href: "/offline" },
+  { id: "map", label: "Map", iconToken: "{icon.navigation.map}", href: "/map/quick" },
+  { id: "discover", label: "Discover", iconToken: "{icon.navigation.explore}", href: "/discover" },
+  {
+    id: "routes",
+    label: "Routes",
+    iconToken: "{icon.object.route}",
+    href: "/customize",
+    active: true,
+  },
+  { id: "profile", label: "Profile", iconToken: "{icon.navigation.profile}", href: "/offline" },
 ];
 
 /**

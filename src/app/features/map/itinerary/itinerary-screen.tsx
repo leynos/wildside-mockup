@@ -5,7 +5,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { FontAwesomeIcon } from "../../../components/font-awesome-icon";
+import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
@@ -40,7 +40,7 @@ export function ItineraryScreen(): JSX.Element {
                       aria-label="Back"
                       onClick={() => navigate({ to: "/map/quick" })}
                     >
-                      <FontAwesomeIcon name="fa-solid fa-arrow-left" />
+                      <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
                     </button>
                     <div className="rounded-2xl border border-base-300/60 bg-base-200/80 px-4 py-2 text-xs text-base-content/70 shadow-lg shadow-base-300/30 backdrop-blur">
                       <div className="flex items-center gap-4">
@@ -69,7 +69,7 @@ export function ItineraryScreen(): JSX.Element {
                       className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/70 bg-base-200/80 text-base-content"
                       aria-label="Locate"
                     >
-                      <FontAwesomeIcon name="fa-solid fa-location-arrow" />
+                      <Icon token="{icon.object.locationArrow}" aria-hidden className="h-5 w-5" />
                     </button>
                   </div>
 
@@ -105,8 +105,9 @@ export function ItineraryScreen(): JSX.Element {
                         aria-pressed={isFavourite}
                         onClick={() => setIsFavourite((prev) => !prev)}
                       >
-                        <FontAwesomeIcon
-                          name={isFavourite ? "fa-solid fa-heart" : "fa-regular fa-heart"}
+                        <Icon
+                          token={isFavourite ? "{icon.action.like}" : "{icon.action.unlike}"}
+                          aria-hidden
                         />
                       </button>
                       <Dialog.Root open={shareOpen} onOpenChange={setShareOpen}>
@@ -115,7 +116,7 @@ export function ItineraryScreen(): JSX.Element {
                             type="button"
                             className="flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/70 px-4 py-2 text-sm font-medium text-base-content"
                           >
-                            <FontAwesomeIcon name="fa-solid fa-share" />
+                            <Icon token="{icon.action.share}" aria-hidden />
                             Share
                           </button>
                         </Dialog.Trigger>

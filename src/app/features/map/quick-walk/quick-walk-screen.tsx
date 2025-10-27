@@ -6,7 +6,7 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
-import { FontAwesomeIcon } from "../../../components/font-awesome-icon";
+import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
@@ -36,14 +36,17 @@ function InterestChips({
       {quickWalkConfig.interestIds.map((id) => {
         const interest = interestLookup.get(id);
         if (!interest) return null;
-        const iconClass = `${interest.icon} ${interest.iconColorClass}`;
         return (
           <ToggleGroup.Item
             key={id}
             value={id}
             className="flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/50 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-100"
           >
-            <FontAwesomeIcon name={iconClass} />
+            <Icon
+              token={interest.iconToken}
+              className={`text-lg ${interest.iconColorClass}`}
+              aria-hidden
+            />
             {interest.label}
           </ToggleGroup.Item>
         );
@@ -129,14 +132,18 @@ export function QuickWalkScreen(): JSX.Element {
                         aria-label="Generate a new walk"
                         onClick={() => navigate({ to: "/wizard/step-1" })}
                       >
-                        <FontAwesomeIcon name="fa-solid fa-wand-magic-sparkles" />
+                        <Icon token="{icon.object.magic}" aria-hidden className="h-6 w-6" />
                       </button>
                     </header>
 
                     <section className="mb-6">
                       <div className="mb-3 flex items-center justify-between text-base-content">
                         <h2 className="flex items-center gap-2 text-lg font-semibold">
-                          <FontAwesomeIcon name="fa-regular fa-clock" className="text-accent" />
+                          <Icon
+                            token="{icon.object.duration}"
+                            className="text-accent"
+                            aria-hidden
+                          />
                           Duration
                         </h2>
                         <span className="text-sm font-semibold">{formatDuration(duration)}</span>
@@ -168,7 +175,7 @@ export function QuickWalkScreen(): JSX.Element {
                     <section>
                       <div className="mb-3 flex items-center justify-between">
                         <h2 className="flex items-center gap-2 text-lg font-semibold text-base-content">
-                          <FontAwesomeIcon name="fa-solid fa-heart" className="text-accent" />
+                          <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
                           Interests
                         </h2>
                         <span className="text-xs font-medium text-base-content/60">
@@ -242,7 +249,7 @@ export function QuickWalkScreen(): JSX.Element {
             aria-label="Save quick walk"
             onClick={() => navigate({ to: "/saved" })}
           >
-            <FontAwesomeIcon name="fa-solid fa-bookmark" />
+            <Icon token="{icon.action.save}" aria-hidden />
           </button>
         </div>
         <MapBottomNavigation activeId="map" />

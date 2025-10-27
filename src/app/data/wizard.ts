@@ -15,7 +15,7 @@ export const wizardSteps: WizardStep[] = [
 export interface DiscoveryPreferenceOption {
   id: string;
   label: string;
-  icon: string;
+  iconToken: string;
   description: string;
 }
 
@@ -23,26 +23,26 @@ export const accessibilityOptions: DiscoveryPreferenceOption[] = [
   {
     id: "well-lit",
     label: "Well-lit paths",
-    icon: "fa-solid fa-lightbulb",
+    iconToken: "{icon.object.guidance}",
     description: "Prioritise brightly lit evening routes",
   },
   {
     id: "wheelchair",
     label: "Wheelchair friendly",
-    icon: "fa-solid fa-wheelchair",
+    iconToken: "{icon.accessibility.stepFree}",
     description: "Smooth, wide pathways",
   },
   {
     id: "paved",
     label: "Paved surfaces",
-    icon: "fa-solid fa-road",
+    iconToken: "{icon.category.paved}",
     description: "Avoid dirt trails and grass",
   },
 ];
 
 export interface WizardSummaryHighlight {
   id: string;
-  icon: string;
+  iconToken: string;
   label: string;
   detail: string;
 }
@@ -50,25 +50,25 @@ export interface WizardSummaryHighlight {
 export const wizardSummaryHighlights: WizardSummaryHighlight[] = [
   {
     id: "lighting",
-    icon: "fa-solid fa-lightbulb",
+    iconToken: "{icon.object.guidance}",
     label: "Well-lit paths",
     detail: "Safe evening sections with smart lighting",
   },
   {
     id: "hidden-gems",
-    icon: "fa-solid fa-eye-slash",
+    iconToken: "{icon.safety.hide}",
     label: "Hidden gems focus",
     detail: "Expect quiet street art laneways and indie cafés",
   },
   {
     id: "loop",
-    icon: "fa-solid fa-route",
+    iconToken: "{icon.object.route}",
     label: "Loop route",
     detail: "Starts and ends near your current location",
   },
   {
     id: "easy",
-    icon: "fa-solid fa-gauge-simple",
+    iconToken: "{icon.customizer.gauge}",
     label: "Easy difficulty",
     detail: "Gradual inclines suitable for relaxed pacing",
   },
@@ -85,7 +85,7 @@ export interface WizardGeneratedStop {
   id: string;
   name: string;
   description: string;
-  icon: string;
+  iconToken: string;
   accentClass: string;
   note: string;
 }
@@ -95,7 +95,7 @@ export const wizardGeneratedStops: WizardGeneratedStop[] = [
     id: "café",
     name: "Midtown Roastery",
     description: "Small-batch espresso with window seating",
-    icon: "fa-solid fa-mug-hot",
+    iconToken: "{icon.customizer.warmBeverage}",
     accentClass: "text-amber-400",
     note: "Friendly baristas, ideal for takeaway",
   },
@@ -103,7 +103,7 @@ export const wizardGeneratedStops: WizardGeneratedStop[] = [
     id: "art",
     name: "Graffiti Passage",
     description: "Open-air gallery of rotating murals",
-    icon: "fa-solid fa-spray-can",
+    iconToken: "{icon.customizer.decoration}",
     accentClass: "text-purple-400",
     note: "Photo spot • 1.1 miles in",
   },
@@ -111,7 +111,7 @@ export const wizardGeneratedStops: WizardGeneratedStop[] = [
     id: "garden",
     name: "Whispering Oak Garden",
     description: "Peaceful pocket park with shaded benches",
-    icon: "fa-solid fa-tree",
+    iconToken: "{icon.category.trails}",
     accentClass: "text-emerald-400",
     note: "Rest area • 1.8 miles in",
   },

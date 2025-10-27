@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 
 import type { WalkPointOfInterest } from "../data/map";
-import { FontAwesomeIcon } from "./font-awesome-icon";
+import { Icon } from "./icon";
 
 export interface PointOfInterestListProps {
   points: WalkPointOfInterest[];
@@ -26,14 +26,18 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
                 </div>
                 {poi.rating ? (
                   <span className="flex items-center gap-1 text-sm font-semibold text-amber-400">
-                    <FontAwesomeIcon name="fa-solid fa-star" />
+                    <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
                     {poi.rating.toFixed(1)}
                   </span>
                 ) : null}
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-accent">
                 <span className="flex items-center gap-1 rounded-full bg-base-300/60 px-2 py-0.5 text-base-content/80">
-                  <FontAwesomeIcon name={poi.categoryIcon} className={poi.categoryColorClass} />
+                  <Icon
+                    token={poi.categoryIconToken}
+                    className={`h-4 w-4 ${poi.categoryColorClass}`}
+                    aria-hidden
+                  />
                   Highlight
                 </span>
                 {poi.tags.map((tag) => (
@@ -80,7 +84,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
                 ) : null}
                 {poi.openHours ? (
                   <p className="flex items-center gap-2 text-xs text-base-content/60">
-                    <FontAwesomeIcon name="fa-regular fa-clock" />
+                    <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
                     {poi.openHours}
                   </p>
                 ) : null}

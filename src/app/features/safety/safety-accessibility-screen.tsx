@@ -6,7 +6,7 @@ import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
-import { FontAwesomeIcon } from "../../components/font-awesome-icon";
+import { Icon } from "../../components/icon";
 import { type SafetyToggle, safetyAccordionSections, safetyPresets } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
 
@@ -41,7 +41,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
               className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/30"
               onClick={() => navigate({ to: "/explore" })}
             >
-              <FontAwesomeIcon name="fa-solid fa-arrow-left" className="text-accent" />
+              <Icon token="{icon.navigation.back}" className="text-accent" aria-hidden />
             </button>
             <h1 className="text-2xl font-semibold">Safety &amp; Accessibility</h1>
           </div>
@@ -68,16 +68,17 @@ export function SafetyAccessibilityScreen(): JSX.Element {
                       <span
                         className={`flex h-12 w-12 items-center justify-center rounded-full ${section.accentClass}`}
                       >
-                        <FontAwesomeIcon name={section.icon} />
+                        <Icon token={section.iconToken} aria-hidden />
                       </span>
                       <div>
                         <p className="text-base font-semibold text-base-100">{section.title}</p>
                         <p className="text-xs text-base-300">{section.description}</p>
                       </div>
                     </div>
-                    <FontAwesomeIcon
-                      name="fa-solid fa-chevron-down"
+                    <Icon
+                      token="{icon.navigation.chevronDown}"
                       className="text-base-300 transition data-[state=open]:rotate-180"
+                      aria-hidden
                     />
                   </Accordion.Trigger>
                 </Accordion.Header>
@@ -91,7 +92,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
                         <span
                           className={`flex h-10 w-10 items-center justify-center rounded-xl ${toggle.accentClass}`}
                         >
-                          <FontAwesomeIcon name={toggle.icon} />
+                          <Icon token={toggle.iconToken} aria-hidden />
                         </span>
                         <div>
                           <p className="font-medium text-base-100">{toggle.label}</p>
@@ -127,7 +128,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
                   <span
                     className={`flex h-10 w-10 items-center justify-center rounded-full ${preset.accentClass}`}
                   >
-                    <FontAwesomeIcon name={preset.icon} />
+                    <Icon token={preset.iconToken} aria-hidden />
                   </span>
                   <div>
                     <p className="font-semibold text-base-100">{preset.title}</p>
@@ -144,7 +145,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
               className="btn btn-accent w-full justify-center gap-2"
               onClick={() => setDialogOpen(true)}
             >
-              <FontAwesomeIcon name="fa-solid fa-save" />
+              <Icon token="{icon.action.savePrefs}" aria-hidden />
               Save preferences
             </button>
           </section>

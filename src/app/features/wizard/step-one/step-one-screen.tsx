@@ -5,7 +5,7 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
-import { FontAwesomeIcon } from "../../../components/font-awesome-icon";
+import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { defaultSelectedInterests, discoverInterests } from "../../../data/discover";
 import { wizardSteps } from "../../../data/wizard";
@@ -34,14 +34,17 @@ function InterestChips({
         .map((id) => {
           const interest = interestLookup.get(id);
           if (!interest) return null;
-          const iconClass = `${interest.icon} ${interest.iconColorClass}`;
           return (
             <ToggleGroup.Item
               key={id}
               value={id}
               className="flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-900"
             >
-              <FontAwesomeIcon name={iconClass} />
+              <Icon
+                token={interest.iconToken}
+                className={`text-lg ${interest.iconColorClass}`}
+                aria-hidden
+              />
               {interest.label}
             </ToggleGroup.Item>
           );
@@ -81,7 +84,7 @@ export function WizardStepOne(): JSX.Element {
       <section className="mb-8 rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
         <header className="mb-4 flex items-center justify-between text-base-content">
           <h2 className="flex items-center gap-3 text-lg font-semibold">
-            <FontAwesomeIcon name="fa-regular fa-clock" className="text-accent" />
+            <Icon token="{icon.object.duration}" className="text-accent" aria-hidden />
             Walk duration
           </h2>
           <span className="text-xl font-semibold text-accent">{formatDuration(duration)}</span>
@@ -113,7 +116,7 @@ export function WizardStepOne(): JSX.Element {
       <section className="rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
         <header className="mb-4 flex items-center justify-between">
           <h2 className="flex items-center gap-3 text-lg font-semibold text-base-content">
-            <FontAwesomeIcon name="fa-solid fa-heart" className="text-accent" />
+            <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
             Interests
           </h2>
           <span className="text-xs font-medium text-base-content/60">{selectedLabel}</span>

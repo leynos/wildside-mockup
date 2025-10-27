@@ -13,10 +13,10 @@
       "!dist",
       "!!public/assets",
       "!!tokens/build",
-      "!!tokens/dist",
       "!!df12-www/public/assets",
       "!!df12-www/public/images"
     ],
+    "ignore": ["dist", "dist/**", "tokens/dist", "tokens/dist/**"],
     "ignoreUnknown": true
   },
   "vcs": { "useIgnoreFile": true },
