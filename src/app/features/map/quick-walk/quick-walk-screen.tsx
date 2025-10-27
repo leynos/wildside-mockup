@@ -101,7 +101,7 @@ export function QuickWalkScreen(): JSX.Element {
           }}
           className="flex h-full flex-col"
         >
-          <div className="relative flex-1 overflow-hidden">
+          <div className="relative flex flex-1 flex-col overflow-hidden">
             <MapViewport
               map={<WildsideMap />}
               gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
