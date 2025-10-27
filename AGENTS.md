@@ -45,7 +45,8 @@
 - Documentation must use en-GB-oxendict ("-ize" / "-yse" / "-our") spelling
   and grammar. (EXCEPTION: the naming of the "LICENSE" file, which is to be
   left unchanged for community consistency.)
-- A documentation style guide is provided at `docs/documentation-style-guide.md`.
+- A documentation style guide lives in
+  `docs/documentation-style-guide.md`.
 
 ## Change Quality & Committing
 
@@ -60,10 +61,10 @@
     behaviour being corrected both to validate the fix and to guard against
     regression.
   - Passes all relevant unit and behavioural tests according to the guidelines
-    above. (Use `make test` to verify).
-  - Passes lint checks. (Use `make lint` to verify).
+    above. (Use `bun test` to verify).
+  - Passes lint checks. (Use `bun lint` to verify).
   - Adheres to formatting standards tested using a formatting validator. (Use
-    `make check-fmt` to verify).
+    `bun fmt` to verify).
 
 - **Committing:**
 
@@ -116,10 +117,10 @@
 
 ## Markdown Guidance
 
-- Validate Markdown files using `make markdownlint`.
-- Run `make fmt` after any documentation changes to format all Markdown
+- Validate Markdown files using `bunx markdownlint-cli \"docs/**/*.md\"`.
+- Run `bun fmt` after any documentation changes to format all Markdown
   files and fix table markup.
-- Validate Mermaid diagrams in Markdown files by running `make nixie`.
+- Validate Mermaid diagrams in Markdown files by running `bunx nixie`.
 - Markdown paragraphs and bullet points must be wrapped at 80 columns.
 - Code blocks must be wrapped at 120 columns.
 - Tables and headings must not be wrapped.
@@ -145,40 +146,31 @@ browser‑only runtime.
   define the support matrix; drop legacy where feasible. Prefer native Web APIs
   (Fetch, URL, AbortController, Streams).
 - **Bun as runner**: Use Bun for scripts and dev server invocations. Prefer
-  `bun run` for scripts and `bunx` for one‑off CLIs.
+  `bun <script>` for package scripts and `bunx` for one‑off CLIs.
 - **Workspaces (optional)**: If a monorepo, use `pnpm` or Bun workspaces with
   clear package boundaries and TS project references.
 - **Vite**: Default bundler for dev/build. Enable code‑splitting, prefetch
   hints, and asset hashing. Esbuild handles TS/JS transforms in dev; production
   uses Rollup via Vite.
 - **Project scripts (Bun)**:
-- `fmt`: `biome format --write .`
-- `lint`: `biome ci . && tsc -p tsconfig.json --noEmit`
-- `typecheck`: `tsc -p tsconfig.json --noEmit`
+- `fmt`: `bunx biome format --write .`
+- `lint`: `bunx biome ci .`
+- `check:types`: `tsc --noEmit`
 - `dev`: `vite`
 - `build`: `vite build`
 - `preview`: `vite preview`
-- `test`: `vitest run --coverage`
-- `audit`: `bun x pnpm@latest audit`
-- `audit:snyk`: `bun x snyk test`
-- Note: `audit` requires a committed `bun.lock`; `audit:snyk` requires
-      installed dependencies—run `bun install` before invoking it.
+- `tokens:build`: `node tokens/build/style-dictionary.js`
+- `test`: `bun test --preload ./tests/setup-happy-dom.ts`
+- `test:e2e`: `playwright test`
 
-  In this repository, Biome is orchestrated via the Makefile along with Rust
-  tooling. Prefer these entry points locally and in CI:
+  Prefer Bun's direct shortcuts: `bun fmt`, `bun lint`, `bun check:types`,
+  `bun test`, and `bun test:e2e`. Bun accepts `bun run <name>` too, but the
+  terse form is faster to type. `lint` covers Biome checks, whilst
+  `check:types` keeps TypeScript errors visible. The `test` script uses Bun's
+  built-in runner, preloading the Happy DOM shim so component tests can render
+  without a browser.
 
-  ```bash
-  # Format all code (Rust + JS/TS via Biome)
-  make fmt
-
-  # Lint all code (Clippy + Biome CI)
-  make lint
-
-  # Check formatting only (no writes)
-  make check-fmt
-  ```
-
-  You can also call Biome directly through Bun when needed:
+  Call Biome or other CLIs through `bunx` when ad hoc execution makes sense:
 
   ```bash
   bun x biome format --write
@@ -254,16 +246,16 @@ Keep docs close to code.
 
 ### Testing (Unit, Behavioural, and UI)
 
-- **Runner**: Vitest with `jsdom` (or `happy-dom`) for component tests. Keep
-  tests parallel‑safe and deterministic.
+- **Runner**: Use `bun test` with the Happy DOM preload so component suites stay
+  deterministic and parallel‑safe.
 - **Fixtures**: Use factories/builders for component props and server
   responses. Avoid ad hoc object literals in tests.
-- **Parameterised tests**: Prefer table‑driven cases via `test.each` /
-  `it.each`.
-- **Mocking**: Use `vi.mock` for module boundaries. Inject adapters for
-  env/time/storage/fetch; do not monkey‑patch globals in product code.
-- **Fake timers**: `vi.useFakeTimers()` for time‑based logic; restore after
-  each test.
+- **Parameterised tests**: Drive variations with helper builders or tight loops
+  rather than copy‑pasting cases.
+- **Mocking**: Prefer dependency injection; if you must stub modules, lean on
+  the `mock` helpers provided by `bun:test`.
+- **Fake timers**: Encapsulate clocks behind adapters; fall back to
+  `mock.timers` from `bun:test` only when necessary.
 - **Snapshots**: Keep deterministic by sorting keys and fixing seeds. Limit
   snapshot scope to stable UI fragments.
 - **E2E (optional)**: Playwright for flows critical to revenue or safety; keep
@@ -276,8 +268,8 @@ Keep docs close to code.
   (`~x.y.z`) only with a documented justification.
 - **Lockfile**: Commit `bun.lock`. Recreate on major tool upgrades; keep
   `bun.lockb` ignored.
-- **Audit**: Run `bun run audit` locally and in automation. Track exceptions
-  with explicit expiry dates.
+- **Audit**: Run `bun x pnpm@latest audit` locally and in automation. Track
+  exceptions with explicit expiry dates.
 - **Culling**: Prefer small, actively maintained packages. Remove unmaintained
   or risky dependencies swiftly.
 
@@ -286,10 +278,10 @@ Keep docs close to code.
 - **Biome**: One tool for format + lint. Configure with strict rules: disallow
   `any`, no non‑null `!`, forbid `@ts-ignore` in favour of `@ts-expect-error`
   (with a reason).
-  - In this repo: use `make fmt`, `make lint`, and `make check-fmt`.
+  - In this repo: use `bun fmt`, `bun lint`, and `bun check:types`.
   - Biome respects `.biomeignore` and VCS ignore files; large build trees like
     any `target/` directory are excluded.
-- **Type‑checking**: `tsc --noEmit` as part of `lint` to catch type errors
+- **Type‑checking**: Run `bun check:types` to surface TypeScript issues
   early.
 - **Import hygiene**: Enforce sorted, grouped imports; no unused or extraneous
   dependencies.
@@ -339,7 +331,7 @@ Keep docs close to code.
   classes for presentation.
 - **Purity**: Export view components as pure functions with props treated as
   read‑only. Move state, effects, and translations into dedicated `use*` hooks.
-- **Component tests**: Use React Testing Library under Vitest for rendering and
+- **Component tests**: Use React Testing Library under `bun test` for rendering
   user‑centric assertions.
 
 ### TanStack Usage Notes
@@ -364,15 +356,16 @@ Keep docs close to code.
 - **Hooks**: Call `useTranslation` within logic hooks and pass all translated
   strings to view components via props.
 
-### Testing (Vitest & Playwright)
+### Testing (`bun test` & Playwright)
 
-- **Vitest config**: Use the `jsdom` environment, include `tests/setup.ts`, and
-  prioritize running `**/*.a11y.test.ts` in a dedicated Vitest invocation
-  before the rest of the suite.
-- **axe integration**: Import `vitest-axe/extend-expect` in `tests/setup.ts` and
-  list this file in `tsconfig.json` so the matcher types load.
-- **Rule gaps**: Disable `color-contrast` and `scrollable-region-focusable`
-  rules in Vitest (jsdom limits these checks); verify them in Playwright.
+- **Bun test config**: `bun test` preloads `tests/setup-happy-dom.ts` to supply
+  a Happy DOM window. Keep accessibility-focused specs grouped under
+  `**/*.a11y.test.ts` and run them first when order matters.
+- **axe integration**: Prefer Playwright's `@axe-core/playwright` for end-to-end
+  audits; wire any unit-level accessibility assertions through helpers that
+  operate against Happy DOM.
+- **Rule gaps**: Happy DOM omits some layout semantics; document any disabled
+  checks next to the helper and cover them in Playwright instead.
 - **Playwright**: Run `@axe-core/playwright` scans, exercise keyboard
   navigation, capture accessibility tree snapshots, and emulate locales to test
   translations.
@@ -411,9 +404,8 @@ Keep docs close to code.
 
 ### Quick Checklist (Before Commit)
 
-- `bun run fmt`, `bun run lint`, `bun run test` all clean; no Biome warnings;
-  no TypeScript errors; coverage thresholds hold.
-- `bun run audit` passes or has justified, time‑boxed exceptions.
+- `bun fmt`, `bun lint`, `bun check:types`, `bun test` all clean; no Biome
+  warnings; no TypeScript errors; coverage thresholds hold.
 - No `any`, no `@ts-ignore`; use `@ts-expect-error` only with a reason.
 - All async APIs accept `AbortSignal` where relevant; all fetchers validated
   against runtime schemas.
