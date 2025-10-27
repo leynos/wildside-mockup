@@ -314,7 +314,7 @@ export function ExploreScreen(): JSX.Element {
         <AppBottomNavigation
           items={bottomNavigation.map((item) => ({
             ...item,
-            isActive: item.id === "explore",
+            isActive: item.id === "discover",
           }))}
         />
       </div>

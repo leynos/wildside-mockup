@@ -302,6 +302,8 @@ Mapping guidance:
   generator card no longer overlaps when switching tabs.
 - Bottom navigation styling is now shared between explore and map flows,
   with end-to-end coverage confirming the handset baseline stays consistent.
+- Updated the explore bottom navigation ordering to emphasise the map-first
+  journey while retaining parity with the map screens.
 
 ### Stage 3 implementation notes (27 October 2025)
 

@@ -183,8 +183,8 @@ export const advancedOptions: AdvancedToggleOption[] = [
 ];
 
 export const bottomNavigation: BottomNavigationItem[] = [
-  { id: "discover", label: "Discover", icon: "fa-solid fa-compass", href: "/discover" },
   { id: "map", label: "Map", icon: "fa-solid fa-map", href: "/map/quick" },
+  { id: "discover", label: "Discover", icon: "fa-solid fa-compass", href: "/discover" },
   { id: "routes", label: "Routes", icon: "fa-solid fa-route", href: "/customize", active: true },
   { id: "profile", label: "Profile", icon: "fa-solid fa-user", href: "/profile" },
 ];
