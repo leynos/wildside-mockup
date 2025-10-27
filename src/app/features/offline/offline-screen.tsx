@@ -56,7 +56,7 @@ export function OfflineScreen(): JSX.Element {
                 <button
                   type="button"
                   aria-label="Add offline area"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/30 text-accent transition hover:border-accent/60 hover:text-accent"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60 text-accent shadow-sm shadow-base-300/30 transition hover:border-accent/60 hover:text-accent"
                 >
                   <Icon token="{icon.action.add}" aria-hidden className="h-5 w-5" />
                 </button>

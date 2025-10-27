@@ -15,6 +15,7 @@ import {
   popularThemes,
   trendingRoutes,
 } from "../../data/explore";
+import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 
 function CategoryScroller(): JSX.Element {
@@ -274,22 +275,21 @@ export function ExploreScreen(): JSX.Element {
   return (
     <MobileShell>
       <div className="flex h-full flex-col">
-        <header className="px-6 pb-4 pt-16">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold text-base-content">Discover</h1>
-              <p className="text-sm text-base-content/60">Explore curated walks & hidden gems</p>
-            </div>
+        <AppHeader
+          title="Discover"
+          subtitle="Explore curated walks & hidden gems"
+          trailing={
             <button
               type="button"
               onClick={() => navigate({ to: "/customize" })}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-base-300/70 bg-base-200/70 text-accent shadow-sm shadow-base-300/30"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60 text-accent shadow-sm shadow-base-300/30 transition hover:border-accent/60 hover:text-accent"
               aria-label="Filter walks"
             >
               <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />
             </button>
-          </div>
-          <div className="relative mt-4">
+          }
+        >
+          <div className="relative">
             <Icon
               token="{icon.action.search}"
               className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50"
@@ -301,7 +301,7 @@ export function ExploreScreen(): JSX.Element {
               className="w-full rounded-xl border border-base-300/70 bg-base-200/60 py-3 pl-11 pr-4 text-sm text-base-content shadow-inner shadow-base-300/30 placeholder:text-base-content/50 focus:border-accent focus:outline-none"
             />
           </div>
-        </header>
+        </AppHeader>
         <main className="flex-1 overflow-y-auto px-6 pb-28">
           <div className="space-y-8">
             <CategoryScroller />

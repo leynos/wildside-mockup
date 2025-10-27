@@ -9,7 +9,7 @@ export interface WizardStepperProps {
 
 export function WizardStepper({ activeStepId, steps }: WizardStepperProps): JSX.Element {
   return (
-    <div className="px-6 pb-4">
+    <div className="pb-2">
       <div className="flex items-center justify-center gap-2">
         {steps.map((step, index) => {
           const isActive = step.id === activeStepId;
@@ -33,7 +33,7 @@ export function WizardStepper({ activeStepId, steps }: WizardStepperProps): JSX.
           );
         })}
       </div>
-      <p className="mt-2 text-xs text-base-content/60 text-center">
+      <p className="mt-4 text-center text-xs">
         {steps.find((step) => step.id === activeStepId)?.title ?? ""}
       </p>
     </div>
