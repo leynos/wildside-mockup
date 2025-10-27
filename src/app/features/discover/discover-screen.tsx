@@ -20,9 +20,11 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
   return (
     <ToggleGroup.Item
       value={interest.id}
-      className="group rounded-2xl border-2 border-transparent bg-base-300/40 p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=on]:border-accent data-[state=on]:bg-accent/10"
+      className="group flex h-full flex-col items-center rounded-2xl border-2 border-transparent bg-base-300/40 p-4 text-center transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=on]:border-accent data-[state=on]:bg-accent/10"
     >
-      <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-base-200/70 text-xl text-base-content/70 group-data-[state=on]:bg-accent/20">
+      <div
+        className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl text-base-content/70 transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-accent/20 group-data-[state=on]:text-accent ${interest.iconBackgroundClass}`}
+      >
         <Icon
           token={interest.iconToken}
           className={`${interest.iconColorClass} text-2xl`}
@@ -58,7 +60,7 @@ export function DiscoverScreen(): JSX.Element {
         <div className="h-full w-full bg-[radial-gradient(circle_at_top,_rgba(74,240,213,0.08),_transparent_55%),linear-gradient(135deg,_rgba(13,26,38,1)_0%,_rgba(32,52,69,0.85)_100%)]" />
       }
     >
-      <div className="relative flex flex-1 flex-col px-6 pb-10 pt-20">
+      <div className="relative flex flex-1 flex-col overflow-y-auto px-6 pb-10 pt-20">
         <button
           type="button"
           onClick={() => navigate({ to: "/explore" })}
