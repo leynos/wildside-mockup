@@ -450,6 +450,19 @@ The following tooling is available in this environment:
   and enables editing by syntax tree patterns.
 - `difft` **(Difftastic)** – Semantic diff tool that compares code structure
   rather than just text differences.
+- `Playwright MCP` – Validate UI changes against the running dev server without
+  leaving the CLI. Start your preview server (for example, `bun dev`), then:
+  1. Call `playwright.navigate` with the target URL to load the page you
+     have modified.
+  2. Call `playwright.screenshot` (set `fullPage: true` when useful) to
+     capture current visuals. Screenshots are written under
+     `/tmp/playwright-mcp-output/`; inspect them before you commit.
+  3. Repeat after making refinements so you can spot regressions early.
+- `a11y MCP` – Run fast accessibility sweeps on the same pages you test with
+  Playwright. After navigating, invoke `a11y.scan_page` to collect
+  automated issues. Review the findings, fix blockers, and rerun the
+  scan until it is clean. Pair this with manual keyboard checks before
+  shipping.
 
 ## Key Takeaway
 
