@@ -4,7 +4,7 @@ Last updated: 26 October 2025
 
 ## Goals
 
-- Replace the static `public/*.html` mockups with Radix UI driven React
+- Replace the static `public/mockups/*.html` mockups with Radix UI driven React
   components styled via Tailwind CSS v4 and DaisyUI v5.
 - Derive colour palettes and design tokens from the existing mockups and build
   them via the scripts under `tokens/`, ensuring tokens flow into Tailwind and
@@ -24,10 +24,11 @@ Last updated: 26 October 2025
 
 ## Current assets
 
-- `public/` contains 12 HTML screens. They hand-roll Tailwind config through
-  inline `<script>` blocks and rely on Font Awesome. Each file hints at the
-  intended palette for its flow (for example, `discover.html` uses the dark
-  teal gradient).
+- `public/mockups/` contains 12 HTML screens preserved from the original
+  prototype. They hand-roll Tailwind config through inline `<script>` blocks
+  and rely on Font Awesome. Each file hints at the intended palette for its flow
+  (for example, `discover.html` uses the dark teal gradient). Keeping them in a
+  nested folder prevents GitHub Pages from serving them over the new SPA routes.
 - `src/index.tsx` demonstrates Radix UI primitives already wired to DaisyUI,
   confirming the dependency set and basic theme switching functions.
 - `tailwind.config.cjs` is minimal: it scans `./index.html` and `./src/**` and
