@@ -90,14 +90,14 @@ export function QuickWalkScreen(): JSX.Element {
           className="flex h-full flex-col"
         >
           <div className="relative flex-1 overflow-hidden">
-            <Tabs.Content
-              value="map"
-              forceMount
-              className="absolute inset-0 flex flex-col data-[state=inactive]:hidden"
+            <MapViewport
+              map={<WildsideMap />}
+              gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
             >
-              <MapViewport
-                map={<WildsideMap />}
-                gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
+              <Tabs.Content
+                value="map"
+                forceMount
+                className="flex h-full flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
                   <div className="rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
@@ -166,34 +166,24 @@ export function QuickWalkScreen(): JSX.Element {
                     </section>
                   </div>
                 </div>
-              </MapViewport>
-            </Tabs.Content>
+              </Tabs.Content>
 
-            <Tabs.Content
-              value="stops"
-              forceMount
-              className="absolute inset-0 flex flex-col data-[state=inactive]:hidden"
-            >
-              <MapViewport
-                map={<WildsideMap />}
-                gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/20 to-transparent"
+              <Tabs.Content
+                value="stops"
+                forceMount
+                className="flex h-full flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
                   <div className="max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur">
                     <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
                   </div>
                 </div>
-              </MapViewport>
-            </Tabs.Content>
+              </Tabs.Content>
 
-            <Tabs.Content
-              value="notes"
-              forceMount
-              className="absolute inset-0 flex flex-col data-[state=inactive]:hidden"
-            >
-              <MapViewport
-                map={<WildsideMap />}
-                gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/20 to-transparent"
+              <Tabs.Content
+                value="notes"
+                forceMount
+                className="flex h-full flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
                   <div className="max-h-[50vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur">
@@ -209,8 +199,8 @@ export function QuickWalkScreen(): JSX.Element {
                     </ul>
                   </div>
                 </div>
-              </MapViewport>
-            </Tabs.Content>
+              </Tabs.Content>
+            </MapViewport>
           </div>
 
           <Tabs.List className="grid grid-cols-3 shrink-0 border-t border-base-300/60 bg-base-200/80">

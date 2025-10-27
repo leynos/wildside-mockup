@@ -38,13 +38,26 @@ test.describe("Map tab bar alignment", () => {
     const tablist = page.getByRole("tablist").first();
     await expect(tablist).toBeVisible();
 
+    const canvas = page.locator(".maplibregl-canvas");
+    await expect(canvas).toBeVisible();
+
     const baseline = await readViewportMetrics(tablist);
 
     await page.getByRole("tab", { name: "Stops" }).click();
     await expectTablistStable(tablist, baseline);
+    await expect(canvas).toBeVisible();
+    await expect(page.locator("text=Blue Bottle Coffee")).toBeVisible();
+    await expect(page).toHaveURL(/#stops$/);
 
     await page.getByRole("tab", { name: "Notes" }).click();
     await expectTablistStable(tablist, baseline);
+    await expect(canvas).toBeVisible();
+    await expect(page.locator("text=Planning notes")).toBeVisible();
+    await expect(page).toHaveURL(/#notes$/);
+
+    await page.getByRole("tab", { name: "Map" }).click();
+    await expect(canvas).toBeVisible();
+    await expect(page).not.toHaveURL(/#(stops|notes)$/);
   });
 
   test("saved map retains its tab bar across tabs", async ({ page }) => {

@@ -307,6 +307,9 @@ Mapping guidance:
 - Added Playwright + axe accessibility smoke tests for `/explore`, `/map/quick`,
   and `/wizard/step-1`, applying targeted slider labelling and landmark fixes to
   keep results clean.
+- Map tabs synchronise with URL fragments (`#map`, `#stops`, `#notes`) while
+  keeping the MapLibre canvas mounted, so deep links preserve context without
+  blanking the background.
 
 ### Stage 3 implementation notes (27 October 2025)
 
