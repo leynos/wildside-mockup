@@ -295,6 +295,9 @@ Mapping guidance:
 - The quick map "magic wand" routes directly into the walk wizard to keep the
   exploratory and guided flows connected; coverage ensures the navigation
   remains intact.
+- Tab bar layout now uses a non-shrinking tab list so the Map/Stops/Notes
+  triggers remain pinned; Playwright regression coverage protects the layout
+  across tab switches.
 
 ### Stage 3 implementation notes (27 October 2025)
 
@@ -312,6 +315,8 @@ Mapping guidance:
   `ToggleGroup`, `Switch`) to drive interactive controls.
 - Expand router coverage to include the wizard flow, ensuring the stepper
   highlights the correct stage and that dialog-driven confirmations render.
+- Wizard layout renders inside `MobileShell` so wizard screens inherit the
+  device frame and tonal styling used by other routes.
 
 ## Verification plan
 
@@ -323,6 +328,7 @@ Mapping guidance:
   - `bun run check:types` to ensure TS stays strict as components are migrated.
   - `bun run test` to execute Vitest suites. Add coverage thresholds once the
     component set stabilises.
+  - `bun run test:e2e` for Playwright smoke coverage over high-risk flows.
   - `bun run tokens:build` (to be added) ahead of `bun run dev`/`bun run build`
     so generated CSS/JS reflect current token definitions.
 - Visual QA:

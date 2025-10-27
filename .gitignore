@@ -8,3 +8,5 @@ tokens/dist/
 tokens/.npm-cache/
 
 df12-www/
+playwright-report/
+test-results/

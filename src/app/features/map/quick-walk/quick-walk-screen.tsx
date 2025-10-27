@@ -73,7 +73,7 @@ export function QuickWalkScreen(): JSX.Element {
       <div className="relative flex h-full flex-col">
         <Tabs.Root value={activeTab} onValueChange={setActiveTab} className="flex h-full flex-col">
           <div className="relative flex-1 overflow-hidden">
-            <Tabs.Content value="map" forceMount className="flex h-full flex-col">
+            <Tabs.Content value="map" forceMount className="absolute inset-0 flex flex-col">
               <MapViewport
                 map={<WildsideMap />}
                 gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
@@ -145,13 +145,16 @@ export function QuickWalkScreen(): JSX.Element {
               </MapViewport>
             </Tabs.Content>
 
-            <Tabs.Content value="stops" className="h-full overflow-y-auto px-6 pb-28 pt-6">
+            <Tabs.Content
+              value="stops"
+              className="absolute inset-0 overflow-y-auto px-6 pb-28 pt-6"
+            >
               <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
             </Tabs.Content>
 
             <Tabs.Content
               value="notes"
-              className="h-full overflow-y-auto px-6 pb-28 pt-6 text-sm text-base-content/70"
+              className="absolute inset-0 overflow-y-auto px-6 pb-28 pt-6 text-sm text-base-content/70"
             >
               <p>Personalise the walk with quick notes:</p>
               <ul className="mt-3 list-disc space-y-2 pl-5">
@@ -164,7 +167,7 @@ export function QuickWalkScreen(): JSX.Element {
             </Tabs.Content>
           </div>
 
-          <Tabs.List className="grid grid-cols-3 border-t border-base-300/60 bg-base-200/80">
+          <Tabs.List className="grid grid-cols-3 shrink-0 border-t border-base-300/60 bg-base-200/80">
             <Tabs.Trigger value="map" className={tabTriggerClass}>
               Map
             </Tabs.Trigger>
