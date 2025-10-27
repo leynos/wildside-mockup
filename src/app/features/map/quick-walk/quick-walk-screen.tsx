@@ -3,8 +3,8 @@
 import * as Slider from "@radix-ui/react-slider";
 import * as Tabs from "@radix-ui/react-tabs";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
-import { useNavigate } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useLocation, useNavigate } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
 
 import { FontAwesomeIcon } from "../../../components/font-awesome-icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
@@ -60,7 +60,9 @@ export function QuickWalkScreen(): JSX.Element {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([
     ...defaultSelectedInterests,
   ]);
-  const [activeTab, setActiveTab] = useState("map");
+  const location = useLocation();
+  const initialTab = location.hash?.slice(1) || "map";
+  const [activeTab, setActiveTab] = useState(initialTab);
   const navigate = useNavigate();
 
   const selectedLabel = useMemo(
@@ -68,10 +70,25 @@ export function QuickWalkScreen(): JSX.Element {
     [selectedInterests.length],
   );
 
+  useEffect(() => {
+    const next = location.hash?.slice(1) || "map";
+    setActiveTab((current) => (current === next ? current : next));
+  }, [location.hash]);
+
   return (
     <MobileShell tone="dark">
       <main className="relative flex h-full flex-col">
-        <Tabs.Root value={activeTab} onValueChange={setActiveTab} className="flex h-full flex-col">
+        <Tabs.Root
+          value={activeTab}
+          onValueChange={(value) => {
+            setActiveTab(value);
+            navigate({
+              to: ".",
+              hash: value === "map" ? undefined : value,
+            });
+          }}
+          className="flex h-full flex-col"
+        >
           <div className="relative flex-1 overflow-hidden">
             <Tabs.Content
               value="map"
@@ -154,23 +171,45 @@ export function QuickWalkScreen(): JSX.Element {
 
             <Tabs.Content
               value="stops"
-              className="absolute inset-0 overflow-y-auto bg-base-200/80 px-6 pb-28 pt-6 backdrop-blur data-[state=inactive]:hidden"
+              forceMount
+              className="absolute inset-0 flex flex-col data-[state=inactive]:hidden"
             >
-              <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
+              <MapViewport
+                map={<WildsideMap />}
+                gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/20 to-transparent"
+              >
+                <div className="mt-auto px-6 pb-6">
+                  <div className="max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur">
+                    <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
+                  </div>
+                </div>
+              </MapViewport>
             </Tabs.Content>
 
             <Tabs.Content
               value="notes"
-              className="absolute inset-0 overflow-y-auto bg-base-200/80 px-6 pb-28 pt-6 text-sm text-base-content/70 backdrop-blur data-[state=inactive]:hidden"
+              forceMount
+              className="absolute inset-0 flex flex-col data-[state=inactive]:hidden"
             >
-              <p>Personalise the walk with quick notes:</p>
-              <ul className="mt-3 list-disc space-y-2 pl-5">
-                <li>Sync the plan with your calendar to block out discovery time.</li>
-                <li>
-                  Pack a reusable bottle – refill points are highlighted along the waterfront.
-                </li>
-                <li>Invite friends and keep pace options flexible for an inclusive stroll.</li>
-              </ul>
+              <MapViewport
+                map={<WildsideMap />}
+                gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/20 to-transparent"
+              >
+                <div className="mt-auto px-6 pb-6">
+                  <div className="max-h-[50vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur">
+                    <p className="text-base font-semibold text-base-100/90">Planning notes</p>
+                    <ul className="mt-3 list-disc space-y-2 pl-5">
+                      <li>Sync the plan with your calendar to block out discovery time.</li>
+                      <li>
+                        Pack a reusable bottle – refill points are highlighted along the waterfront.
+                      </li>
+                      <li>
+                        Invite friends and keep pace options flexible for an inclusive stroll.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </MapViewport>
             </Tabs.Content>
           </div>
 
