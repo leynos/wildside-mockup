@@ -39,7 +39,10 @@ export function MapViewport({
   gradientClassName,
   map,
 }: MapViewportProps): JSX.Element {
-  const containerClasses = joinClassNames("relative flex-1 overflow-hidden", className);
+  const containerClasses = joinClassNames(
+    "relative flex flex-1 flex-col overflow-hidden",
+    className,
+  );
 
   return (
     <div className={containerClasses}>
