@@ -105,6 +105,7 @@ export function QuickWalkScreen(): JSX.Element {
             <MapViewport
               map={<WildsideMap />}
               gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
+              containerTestId="quick-walk-map-container"
             >
               <Tabs.Content
                 value="map"
@@ -202,7 +203,7 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="mt-auto px-6 pb-6">
                   <div
-                    className="max-h-[50vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur"
+                    className="max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-notes-panel"
                   >
                     <p className="text-base font-semibold text-base-100/90">Planning notes</p>

@@ -15,6 +15,8 @@ export interface MapViewportProps {
   gradientClassName?: string;
   /** Extra classes passed to the container. */
   className?: string;
+  /** Optional test id applied to the outer container for UI tests. */
+  containerTestId?: string;
 }
 
 function joinClassNames(...tokens: Array<string | undefined | null | false>): string {
@@ -37,6 +39,7 @@ export function MapViewport({
   children,
   className,
   gradientClassName,
+  containerTestId,
   map,
 }: MapViewportProps): JSX.Element {
   const containerClasses = joinClassNames(
@@ -45,7 +48,7 @@ export function MapViewport({
   );
 
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} data-testid={containerTestId}>
       {map ? <div className="absolute inset-0">{map}</div> : null}
       {!map && backgroundImageUrl ? (
         <img
