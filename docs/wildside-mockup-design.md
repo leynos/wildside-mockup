@@ -304,6 +304,9 @@ Mapping guidance:
   with end-to-end coverage confirming the handset baseline stays consistent.
 - Updated the explore bottom navigation ordering to emphasise the map-first
   journey while retaining parity with the map screens.
+- Added Playwright + axe accessibility smoke tests for `/explore`, `/map/quick`,
+  and `/wizard/step-1`, applying targeted slider labelling and landmark fixes to
+  keep results clean.
 
 ### Stage 3 implementation notes (27 October 2025)
 

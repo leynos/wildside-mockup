@@ -70,7 +70,7 @@ export function QuickWalkScreen(): JSX.Element {
 
   return (
     <MobileShell tone="dark">
-      <div className="relative flex h-full flex-col">
+      <main className="relative flex h-full flex-col">
         <Tabs.Root value={activeTab} onValueChange={setActiveTab} className="flex h-full flex-col">
           <div className="relative flex-1 overflow-hidden">
             <Tabs.Content
@@ -123,7 +123,10 @@ export function QuickWalkScreen(): JSX.Element {
                         <Slider.Track className="relative h-2 flex-1 rounded-full bg-base-300/60">
                           <Slider.Range className="absolute h-full rounded-full bg-accent" />
                         </Slider.Track>
-                        <Slider.Thumb className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70" />
+                        <Slider.Thumb
+                          aria-label="Adjust walk duration"
+                          className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+                        />
                       </Slider.Root>
                       <div className="mt-2 flex justify-between text-xs text-base-content/50">
                         <span>{quickWalkConfig.durationRange.min}m</span>
@@ -195,7 +198,7 @@ export function QuickWalkScreen(): JSX.Element {
           </button>
         </div>
         <MapBottomNavigation activeId="map" />
-      </div>
+      </main>
     </MobileShell>
   );
 }

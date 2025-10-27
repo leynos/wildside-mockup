@@ -98,7 +98,10 @@ export function WizardStepOne(): JSX.Element {
           <Slider.Track className="relative h-2 flex-1 rounded-full bg-base-300/60">
             <Slider.Range className="absolute h-full rounded-full bg-accent" />
           </Slider.Track>
-          <Slider.Thumb className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70" />
+          <Slider.Thumb
+            aria-label="Adjust walk duration"
+            className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+          />
         </Slider.Root>
         <div className="mt-2 flex justify-between text-xs text-base-content/50">
           <span>15m</span>
