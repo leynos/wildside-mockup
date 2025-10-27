@@ -25,7 +25,7 @@ const baseItems: BottomNavItem[] = [
   { id: "map", label: "Map", icon: "fa-solid fa-map", href: "/map/quick" },
   { id: "explore", label: "Explore", icon: "fa-solid fa-compass", href: "/explore" },
   { id: "saved", label: "Saved", icon: "fa-solid fa-bookmark", href: "/saved" },
-  { id: "profile", label: "Profile", icon: "fa-solid fa-user", href: "/profile" },
+  { id: "profile", label: "Profile", icon: "fa-solid fa-user", href: "/offline" },
 ];
 
 function resolveItems(customItems?: BottomNavItem[]): BottomNavItem[] {
