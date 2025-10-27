@@ -58,8 +58,13 @@ function InterestChips({
   );
 }
 
+type TabKey = "map" | "stops" | "notes";
+const NEUTRAL_TAB_VALUE = "__neutral__" as const;
+
 const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
+
+const panelHandleClass = "mx-auto mb-4 block h-2 w-12 rounded-full bg-base-300/70";
 
 export function QuickWalkScreen(): JSX.Element {
   const [duration, setDuration] = useState<number>(quickWalkConfig.defaultDuration);
@@ -67,10 +72,18 @@ export function QuickWalkScreen(): JSX.Element {
     ...defaultSelectedInterests,
   ]);
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState(() =>
-    typeof window === "undefined" ? "map" : getHashTab(window.location.hash),
-  );
+  const [activeTab, setActiveTab] = useState<TabKey | null>(() => {
+    if (typeof window === "undefined") {
+      return "map";
+    }
+    return getHashTab(window.location.hash) ?? "map";
+  });
   const navigate = useNavigate();
+
+  const handleDismissPanels = () => {
+    setActiveTab(null);
+    navigate({ to: ".", hash: undefined });
+  };
 
   const selectedLabel = useMemo(
     () => `${selectedInterests.length} selected`,
@@ -97,12 +110,16 @@ export function QuickWalkScreen(): JSX.Element {
     <MobileShell tone="dark">
       <main className="relative flex h-full flex-col">
         <Tabs.Root
-          value={activeTab}
+          value={activeTab ?? NEUTRAL_TAB_VALUE}
           onValueChange={(value) => {
-            setActiveTab(value);
+            if (value === NEUTRAL_TAB_VALUE) {
+              handleDismissPanels();
+              return;
+            }
+            setActiveTab(value as TabKey);
             navigate({
               to: ".",
-              hash: value === "map" ? undefined : value,
+              hash: value,
             });
           }}
           className="flex h-full flex-col"
@@ -120,6 +137,12 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="mt-auto px-6 pb-6">
                   <div className="rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
+                    <button
+                      type="button"
+                      onClick={handleDismissPanels}
+                      className={panelHandleClass}
+                      aria-label="Dismiss panel"
+                    />
                     <header className="mb-6 flex items-center justify-between">
                       <div>
                         <h1 className="text-xl font-semibold text-base-content">
@@ -201,6 +224,12 @@ export function QuickWalkScreen(): JSX.Element {
                     className="max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-stops-panel"
                   >
+                    <button
+                      type="button"
+                      onClick={handleDismissPanels}
+                      className={panelHandleClass}
+                      aria-label="Dismiss panel"
+                    />
                     <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
                   </div>
                 </div>
@@ -216,6 +245,12 @@ export function QuickWalkScreen(): JSX.Element {
                     className="max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-notes-panel"
                   >
+                    <button
+                      type="button"
+                      onClick={handleDismissPanels}
+                      className={panelHandleClass}
+                      aria-label="Dismiss panel"
+                    />
                     <p className="text-base font-semibold text-base-100/90">Planning notes</p>
                     <ul className="mt-3 list-disc space-y-2 pl-5">
                       <li>Sync the plan with your calendar to block out discovery time.</li>
@@ -261,10 +296,12 @@ export function QuickWalkScreen(): JSX.Element {
   );
 }
 
-function getHashTab(hash?: string | null): string {
+function getHashTab(hash?: string | null): TabKey | null {
   if (!hash || hash.length <= 1) {
-    return "map";
+    return null;
   }
   const candidate = hash.startsWith("#") ? hash.slice(1) : hash;
-  return candidate === "stops" || candidate === "notes" ? candidate : "map";
+  return candidate === "map" || candidate === "stops" || candidate === "notes"
+    ? (candidate as TabKey)
+    : null;
 }
