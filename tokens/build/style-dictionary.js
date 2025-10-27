@@ -57,7 +57,7 @@ function unwrap(input) {
   if (Array.isArray(input)) {
     return input.map(unwrap);
   }
-  if (Object.prototype.hasOwnProperty.call(input, "value")) {
+  if (Object.hasOwn(input, "value")) {
     return input.value;
   }
   return Object.fromEntries(

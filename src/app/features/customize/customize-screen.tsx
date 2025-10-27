@@ -8,8 +8,8 @@ import { useMemo, useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
+import type { SegmentOption } from "../../data/customize";
 import {
-  type SegmentOption,
   advancedOptions,
   bottomNavigation,
   crowdLevelOptions,
@@ -48,26 +48,14 @@ interface SliderBlockProps {
   min: number;
   max: number;
   step: number;
-  unit: string;
   markers: string[];
   value: number;
   onValueChange: (value: number) => void;
 }
 
 function SliderBlock(props: SliderBlockProps): JSX.Element {
-  const {
-    id,
-    iconToken,
-    iconColorClass,
-    label,
-    markers,
-    max,
-    min,
-    step,
-    unit,
-    value,
-    onValueChange,
-  } = props;
+  const { id, iconToken, iconColorClass, label, markers, max, min, step, value, onValueChange } =
+    props;
 
   return (
     <section className="mb-8">
@@ -120,7 +108,7 @@ function SegmentPicker({
   value,
 }: SegmentPickerProps): JSX.Element {
   return (
-    <section className="mb-8">
+    <section className="mb-8" data-segment-id={id}>
       <SectionTitle iconToken={iconToken} label={label} />
       <ToggleGroup.Root
         type="single"
@@ -377,15 +365,22 @@ export function CustomizeScreen(): JSX.Element {
           }
         />
         <main className="flex-1 overflow-y-auto px-6 pb-6 pt-4">
-          {sliders.map((slider) => (
+          {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => (
             <SliderBlock
-              key={slider.id}
-              {...slider}
-              value={sliderValues[slider.id]}
+              key={id}
+              id={id}
+              iconToken={iconToken}
+              iconColorClass={iconColorClass}
+              label={label}
+              markers={markers}
+              max={max}
+              min={min}
+              step={step}
+              value={sliderValues[id]}
               onValueChange={(value) =>
                 setSliderValues((current) => ({
                   ...current,
-                  [slider.id]: Number.isNaN(value) ? current[slider.id] : value,
+                  [id]: Number.isNaN(value) ? current[id] : value,
                 }))
               }
             />

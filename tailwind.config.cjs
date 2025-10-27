@@ -1,7 +1,7 @@
 function loadGeneratedTokens() {
   try {
     return require("./tokens/dist/tailwind.theme.cjs");
-  } catch (error) {
+  } catch (_error) {
     console.warn(
       "⚠️  Missing design token build output. Run `bun run tokens:build` before compiling Tailwind.",
     );

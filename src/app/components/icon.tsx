@@ -1,6 +1,5 @@
 /** @file Renders Tabler icons based on design token references. */
 
-import React from "react";
 import type { SVGProps } from "react";
 
 import { resolveToken } from "../tokens/resolve-token";

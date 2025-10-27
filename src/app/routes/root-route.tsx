@@ -1,6 +1,6 @@
 /** @file Root TanStack Router route hosting the SPA outlet. */
 
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 import { useTheme } from "../providers/theme-provider";
 

@@ -19,7 +19,10 @@ function formatDuration(value: number) {
 function InterestChips({
   selected,
   onChange,
-}: { selected: string[]; onChange: (next: string[]) => void }) {
+}: {
+  selected: string[];
+  onChange: (next: string[]) => void;
+}) {
   return (
     <ToggleGroup.Root
       type="multiple"

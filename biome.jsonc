@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/stable/schema.json",
   "files": {
-    "include": [
+    "includes": [
       "**/*",
       "!node_modules",
       "!tokens/node_modules",
@@ -11,15 +11,16 @@
       "!.artifacts",
       "!.act-stubs",
       "!dist",
-      "!!public/assets",
-      "!!tokens/build",
-      "!!df12-www/public/assets",
-      "!!df12-www/public/images"
+      "!tokens/dist"
     ],
-    "ignore": ["dist", "dist/**", "tokens/dist", "tokens/dist/**"],
     "ignoreUnknown": true
   },
   "vcs": { "useIgnoreFile": true },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -52,23 +53,24 @@
   },
   "overrides": [
     {
-      "include": ["**/*.d.ts"],
+      "includes": ["**/*.d.ts"],
       "formatter": { "enabled": false },
       "linter": { "enabled": false }
     },
     {
-      "include": ["**/*.html"],
+      "includes": ["**/*.html"],
       "formatter": {
         "indentStyle": "space",
         "indentWidth": 2
-      }
-    },
-    {
-      "include": ["**/*.css"],
+      },
       "linter": { "enabled": false }
     },
     {
-      "include": ["**/*.md"],
+      "includes": ["**/*.css"],
+      "linter": { "enabled": false }
+    },
+    {
+      "includes": ["**/*.md"],
       "formatter": {
         "indentStyle": "space",
         "indentWidth": 2,

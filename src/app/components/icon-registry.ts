@@ -1,7 +1,6 @@
 /** @file Maps Tabler icon component names to actual React components. */
 
 import * as TablerIcons from "@tabler/icons-react";
-import type { ElementType } from "react";
 
 /**
  * Registry of Tabler icon components keyed by their exported names.
@@ -16,5 +15,5 @@ export const iconRegistry = TablerIcons;
  * @returns True when the name is a registered icon component.
  */
 export function isValidIconName(name: string): name is keyof typeof iconRegistry {
-  return Object.prototype.hasOwnProperty.call(iconRegistry, name);
+  return Object.hasOwn(iconRegistry, name);
 }

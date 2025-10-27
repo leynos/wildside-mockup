@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import type { ReactElement } from "react";
 import { act } from "react";
-import { type Root, createRoot } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 
 import { MobileShell } from "../src/app/layout/mobile-shell";
 import { ThemeProvider, useTheme } from "../src/app/providers/theme-provider";
