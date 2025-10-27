@@ -298,6 +298,8 @@ Mapping guidance:
 - Tab bar layout now uses a non-shrinking tab list so the Map/Stops/Notes
   triggers remain pinned; Playwright regression coverage protects the layout
   across tab switches.
+- Quick map Stops/Notes panels now render on their own blurred surfaces so the
+  generator card no longer overlaps when switching tabs.
 
 ### Stage 3 implementation notes (27 October 2025)
 
