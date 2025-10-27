@@ -364,6 +364,34 @@ describe("Stage 4 completion flows", () => {
     expect(header).toBeTruthy();
   });
 
+  it("allows removing a download when managing the offline list", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Manage"),
+    );
+    expect(manageButton).toBeTruthy();
+
+    const cardsBefore = container.querySelectorAll("[data-testid='offline-download-card']");
+    expect(cardsBefore.length).toBeGreaterThan(0);
+
+    await act(async () => {
+      manageButton?.click();
+      await Promise.resolve();
+    });
+
+    const deleteButtons = container.querySelectorAll("[data-testid='offline-delete-button']");
+    expect(deleteButtons.length).toBe(cardsBefore.length);
+
+    await act(async () => {
+      deleteButtons[0]?.click();
+      await Promise.resolve();
+    });
+
+    const cardsAfter = container.querySelectorAll("[data-testid='offline-download-card']");
+    expect(cardsAfter.length).toBe(cardsBefore.length - 1);
+  });
+
   it("allows toggling a safety preference and saving", async () => {
     ({ mount, root } = await renderRoute("/safety-accessibility"));
     const container = requireContainer(mount);

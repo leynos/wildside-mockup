@@ -77,7 +77,7 @@ export interface OfflineSuggestion {
   callToAction: string;
   icon: string;
   accentClass: string;
-  accentButtonClass: string;
+  iconClassName?: string;
 }
 
 export const offlineSuggestions: OfflineSuggestion[] = [
@@ -87,8 +87,8 @@ export const offlineSuggestions: OfflineSuggestion[] = [
     description: "Add Reykjavik before your Iceland trip next week",
     callToAction: "Download Reykjavik",
     icon: "fa-solid fa-plane",
-    accentClass: "from-sky-500/20 to-purple-500/20",
-    accentButtonClass: "bg-sky-500",
+    accentClass: "from-sky-500 via-indigo-500 to-purple-600",
+    iconClassName: "text-[color:var(--b3)]",
   },
 ];
 
@@ -109,8 +109,7 @@ export const offlineDownloads: OfflineDownload[] = [
     subtitle: "Downloaded 3 days ago",
     size: "847 MB",
     progress: 1,
-    imageUrl:
-      "https://storage.googleapis.com/uxpilot-auth.appspot.com/0af5194b68-62214b1aa2184141b529.png",
+    imageUrl: "/images/empire.png",
     status: "complete",
   },
   {

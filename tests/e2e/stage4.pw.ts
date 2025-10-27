@@ -17,6 +17,15 @@ test.describe("Stage 4 routes", () => {
     await expect(page.locator("article").first()).toBeVisible();
   });
 
+  test("offline manager delete flow", async ({ page }) => {
+    await page.goto("/offline");
+    await page.getByRole("button", { name: /manage/i }).click();
+    const cardsBefore = await page.getByTestId("offline-download-card").count();
+    await expect(page.getByTestId("offline-delete-button")).toHaveCount(cardsBefore);
+    await page.getByTestId("offline-delete-button").first().click();
+    await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore - 1);
+  });
+
   test("safety preferences accordion toggles", async ({ page }) => {
     await page.goto("/safety-accessibility");
     const toggle = page.getByRole("switch").first();
