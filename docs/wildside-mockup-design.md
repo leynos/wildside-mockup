@@ -293,6 +293,23 @@ Mapping guidance:
   harness now polyfills `NodeFilter`/`HTMLInputElement` so Radix focus scopes
   operate without runtime errors even when MapLibre short-circuits.
 
+### Stage 3 implementation notes (27 October 2025)
+
+- Introduce a `WizardLayout` that centralises header actions (back/help), the
+  three-step progress indicator, and sticky action bar. Each step screen plugs
+  in content via slots to keep transitions lightweight.
+- Build a `WizardStepper` component that can render active, completed, and
+  pending states for the three steps; reuse it to drive in-screen progress and
+  help with automated testing.
+- Extract wizard-specific data (`wizardSteps`, chip/toggle options, summary
+  highlights) so steps share semantics and the confirmation summary can reflect
+  configured preferences.
+- Use Radix `Dialog` for confirmation prompts (e.g., generating the custom
+  route) and re-use existing slider/toggle primitives (Radix `Slider`,
+  `ToggleGroup`, `Switch`) to drive interactive controls.
+- Expand router coverage to include the wizard flow, ensuring the stepper
+  highlights the correct stage and that dialog-driven confirmations render.
+
 ## Verification plan
 
 - Local automation:

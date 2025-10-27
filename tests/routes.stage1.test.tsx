@@ -11,7 +11,10 @@ type TestRoute =
   | "/customize"
   | "/map/quick"
   | "/map/itinerary"
-  | "/saved";
+  | "/saved"
+  | "/wizard/step-1"
+  | "/wizard/step-2"
+  | "/wizard/step-3";
 
 async function renderRoute(path: TestRoute) {
   window.history.replaceState(null, "", path);
@@ -216,5 +219,73 @@ describe("Stage 2 routed flows", () => {
     expect(favouriteButton).toBeTruthy();
     act(() => favouriteButton?.click());
     expect(favouriteButton?.getAttribute("aria-pressed")).toBe("false");
+  });
+});
+
+describe("Stage 3 wizard flows", () => {
+  let root: Root | null = null;
+  let mount: HTMLDivElement | null = null;
+
+  function cleanup() {
+    if (root && mount) {
+      act(() => {
+        root?.unmount();
+      });
+    }
+    root = null;
+    mount?.remove();
+    mount = null;
+    document.body.innerHTML = "";
+  }
+
+  beforeEach(() => {
+    cleanup();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("advances from wizard step one to step two", async () => {
+    ({ mount, root } = await renderRoute("/wizard/step-1"));
+    const container = requireContainer(mount);
+    const continueButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Continue to preferences"),
+    );
+    expect(continueButton).toBeTruthy();
+
+    await act(async () => {
+      continueButton?.click();
+      await Promise.resolve();
+    });
+
+    const heading = Array.from(container.querySelectorAll("h2")).find((node) =>
+      node.textContent?.includes("Discovery style"),
+    );
+    expect(heading).toBeTruthy();
+  });
+
+  it("opens the wizard confirmation dialog on step three", async () => {
+    ({ mount, root } = await renderRoute("/wizard/step-3"));
+    const container = requireContainer(mount);
+
+    const saveButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Save walk"),
+    );
+    expect(saveButton).toBeTruthy();
+
+    await act(async () => {
+      saveButton?.click();
+      await Promise.resolve();
+    });
+
+    const dialog = document.querySelector("[role='dialog']");
+    expect(dialog).toBeTruthy();
+
+    const closeButton = Array.from(dialog?.querySelectorAll("button") ?? []).find((btn) =>
+      btn.textContent?.includes("Close"),
+    );
+    expect(closeButton).toBeTruthy();
+    act(() => closeButton?.click());
   });
 });
