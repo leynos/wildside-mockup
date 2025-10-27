@@ -300,6 +300,8 @@ Mapping guidance:
   across tab switches.
 - Quick map Stops/Notes panels now render on their own blurred surfaces so the
   generator card no longer overlaps when switching tabs.
+- Bottom navigation styling is now shared between explore and map flows,
+  with end-to-end coverage confirming the handset baseline stays consistent.
 
 ### Stage 3 implementation notes (27 October 2025)
 

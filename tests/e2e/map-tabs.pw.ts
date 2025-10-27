@@ -3,14 +3,14 @@
 import type { Locator } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
-interface TablistMetrics {
+interface ViewportMetrics {
   bottom: number;
   top: number;
   viewportHeight: number;
 }
 
-async function readTablistMetrics(locator: Locator): Promise<TablistMetrics> {
-  return locator.evaluate<TablistMetrics>((element) => {
+async function readViewportMetrics(locator: Locator): Promise<ViewportMetrics> {
+  return locator.evaluate<ViewportMetrics>((element) => {
     const rect = element.getBoundingClientRect();
     return {
       top: rect.top,
@@ -20,11 +20,15 @@ async function readTablistMetrics(locator: Locator): Promise<TablistMetrics> {
   });
 }
 
-async function expectTablistStable(tablist: Locator, baseline: TablistMetrics, tolerance = 4) {
+function computeBottomOffset(metrics: ViewportMetrics): number {
+  return metrics.viewportHeight - metrics.bottom;
+}
+
+async function expectTablistStable(tablist: Locator, baseline: ViewportMetrics, tolerance = 4) {
   await expect(tablist).toBeVisible();
-  const { bottom, viewportHeight } = await readTablistMetrics(tablist);
-  const baselineOffset = baseline.viewportHeight - baseline.bottom;
-  const currentOffset = viewportHeight - bottom;
+  const metrics = await readViewportMetrics(tablist);
+  const baselineOffset = computeBottomOffset(baseline);
+  const currentOffset = computeBottomOffset(metrics);
   expect(Math.abs(currentOffset - baselineOffset)).toBeLessThanOrEqual(tolerance);
 }
 
@@ -34,7 +38,7 @@ test.describe("Map tab bar alignment", () => {
     const tablist = page.getByRole("tablist").first();
     await expect(tablist).toBeVisible();
 
-    const baseline = await readTablistMetrics(tablist);
+    const baseline = await readViewportMetrics(tablist);
 
     await page.getByRole("tab", { name: "Stops" }).click();
     await expectTablistStable(tablist, baseline);
@@ -48,12 +52,31 @@ test.describe("Map tab bar alignment", () => {
     const tablist = page.getByRole("tablist").first();
     await expect(tablist).toBeVisible();
 
-    const baseline = await readTablistMetrics(tablist);
+    const baseline = await readViewportMetrics(tablist);
 
     await page.getByRole("tab", { name: "Stops" }).click();
     await expectTablistStable(tablist, baseline);
 
     await page.getByRole("tab", { name: "Notes" }).click();
     await expectTablistStable(tablist, baseline);
+  });
+
+  test("bottom navigation aligns between map and explore routes", async ({ page }) => {
+    await page.goto("/map/quick");
+    const mapNav = page.getByRole("navigation").first();
+    const tablist = page.getByRole("tablist").first();
+    const mapNavMetrics = await readViewportMetrics(mapNav);
+    const tablistMetrics = await readViewportMetrics(tablist);
+
+    expect(tablistMetrics.bottom).toBeLessThanOrEqual(mapNavMetrics.top);
+    const mapNavOffset = computeBottomOffset(mapNavMetrics);
+    expect(mapNavOffset).toBeLessThanOrEqual(2);
+
+    await page.goto("/explore");
+    const exploreNav = page.getByRole("navigation").first();
+    const exploreNavMetrics = await readViewportMetrics(exploreNav);
+    const exploreOffset = computeBottomOffset(exploreNavMetrics);
+
+    expect(Math.abs(exploreOffset - mapNavOffset)).toBeLessThanOrEqual(4);
   });
 });
