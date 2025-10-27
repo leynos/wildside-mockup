@@ -25,6 +25,13 @@ export function WizardStepThree(): JSX.Element {
       onHelp={() => window.alert("Contextual help coming soon")}
       footer={
         <div className="flex flex-col gap-3">
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={() => navigate({ to: "/wizard/step-1" })}
+          >
+            Start over
+          </button>
           <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild>
               <button type="button" className="btn btn-accent btn-lg w-full">
@@ -58,13 +65,6 @@ export function WizardStepThree(): JSX.Element {
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>
-          <button
-            type="button"
-            className="btn btn-ghost"
-            onClick={() => navigate({ to: "/wizard/step-1" })}
-          >
-            Start over
-          </button>
         </div>
       }
     >
