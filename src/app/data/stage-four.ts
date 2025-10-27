@@ -137,8 +137,7 @@ export const offlineDownloads: OfflineDownload[] = [
     subtitle: "Downloaded 1 week ago",
     size: "623 MB",
     progress: 1,
-    imageUrl:
-      "https://storage.googleapis.com/uxpilot-auth.appspot.com/1ee5c3f4e6-26f337b26e695afe4c11.png",
+    imageUrl: "/images/goldengate.png",
     status: "complete",
   },
   {
@@ -147,8 +146,7 @@ export const offlineDownloads: OfflineDownload[] = [
     subtitle: "Downloading • 1.2 GB",
     size: "1.2 GB",
     progress: 0.65,
-    imageUrl:
-      "https://storage.googleapis.com/uxpilot-auth.appspot.com/0588c62612-0e0ea0cdb4f311e59cfd.png",
+    imageUrl: "/images/londoneye.png",
     status: "downloading",
   },
 ];
