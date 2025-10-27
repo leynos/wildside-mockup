@@ -4,8 +4,25 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 
 import { routeTree } from "./route-tree";
 
+function normalizeBasePath(input: string | undefined): string {
+  if (!input || input === "/") {
+    return "/";
+  }
+  const trimmed = input.trim();
+  if (trimmed === "" || trimmed === "/") {
+    return "/";
+  }
+  const prefixed = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+  return prefixed.endsWith("/") ? prefixed.slice(0, -1) : prefixed;
+}
+
+const routerBasePath = normalizeBasePath(import.meta.env.BASE_URL);
+
 export function createAppRouter() {
-  return createRouter({ routeTree });
+  return createRouter({
+    routeTree,
+    basepath: routerBasePath,
+  });
 }
 
 export const router = createAppRouter();

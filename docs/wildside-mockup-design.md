@@ -179,6 +179,8 @@ Mapping guidance:
 - `src/app/routes`
   - Static routes powered by TanStack Router (e.g., `/discover`, `/map/quick`,
     `/wizard/advanced`). Each route composes the relevant feature module.
+  - Router instances normalise `import.meta.env.BASE_URL` to honour GitHub Pages
+    prefixes (for example, `/wildside-mockup`) so direct deep links resolve.
 - `src/app/data`
   - JSON/TS modules representing the mock content (walk cards, interests,
     stats) to keep JSX clean and enable future API wiring.
