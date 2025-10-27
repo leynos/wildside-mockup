@@ -15,6 +15,7 @@
     "test": "bun test --preload ./tests/setup-happy-dom.ts"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@radix-ui/react-accordion": "^1.1.1",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-checkbox": "^1.1.0",
@@ -30,7 +31,9 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-toast": "^1.2.0",
+    "@radix-ui/react-toggle-group": "^1.1.11",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@tanstack/react-router": "^1.133.32",
     "daisyui": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -38,16 +41,16 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.7.1",
-    "bun-types": "^1.1.3",
+    "@tailwindcss/postcss": "^4.1.16",
+    "@tailwindcss/vite": "^4.1.16",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@tailwindcss/vite": "^4.1.16",
-    "@tailwindcss/postcss": "^4.1.16",
+    "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "bun-types": "^1.1.3",
     "happy-dom": "^15.11.2",
     "postcss": "^8.4.49",
     "typescript": "^5.6.3",
-    "vite": "^5.4.10",
-    "@vitejs/plugin-react": "^4.3.1"
+    "vite": "^5.4.10"
   }
 }

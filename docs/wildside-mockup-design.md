@@ -197,6 +197,7 @@ Mapping guidance:
 - Stage 1 – Onboarding and discovery:
   - `discover`, `explore`, `customize`.
   - Focus on Radix `Tabs`/`Carousel` patterns, interest chips, CTA buttons.
+  - See the implementation notes below for component breakdown and routing.
 - Stage 2 – Map experiences:
   - `map-quick-walk`, `map-itiniary`, `saved`.
   - Introduce map canvas placeholder, Radix `Tabs` for stops/map/notes, and
@@ -221,6 +222,74 @@ Mapping guidance:
      update documentation where behaviour diverges.
 - Reassess the backlog after each stage to identify refinements or newly shared
   components worth extracting.
+
+### Stage 1 implementation notes (26 October 2025)
+
+- Adopt TanStack Router for the shell to unlock simple route-level code
+  splitting and future data loaders. Each page module will live under
+  `src/app/routes/<slug>/route.tsx` with colocated feature components inside
+  `src/app/features/<slug>/`.
+- `discover` will wrap Radix `ToggleGroup` (multi-select) for interest chips,
+  reflecting the mockup’s chip states and counter. Shared chip styling moves
+  into an `InterestChip` component so future flows can reuse the pattern.
+- `explore` renders catalogue data (cards, collections, activity feed) sourced
+  from structured fixtures. Horizontal scrollers use Radix `ScrollArea` for
+  accessible overflow controls, while cards lean on DaisyUI `card` tokens to
+  keep markup concise.
+- `customize` replaces raw `<input type="range">` sliders with Radix `Slider`,
+  adds segmented toggles for crowd/elevation preferences, and surfaces helper
+  copy via the shared header. Slider values remain mock-driven but exposed
+  through component state for testing.
+- Continue loading Font Awesome via `@fortawesome/fontawesome-free` for icon
+  parity with the mockups. Evaluate Tabler/Remix in a later spike once flows
+  are ported.
+
+#### Progress (26 October 2025)
+
+- `discover`, `explore`, and `customize` screens now render via Radix feature
+  modules and TanStack Router routes. Components consume generated tokens and
+  DaisyUI primitives instead of inline Tailwind scripts.
+- Introduced a shared `FontAwesomeIcon` wrapper to centralise icon rendering
+  and accessibility handling. This keeps Font Awesome in play while we plan
+  future icon set evaluations.
+- Added smoke tests for the three routes to exercise Radix interactions
+  (toggle chips, navigation buttons, switch toggles). Tests mount the router
+  with a memory history to mirror the SPA shell.
+- Outstanding follow-ups: hook up real TanStack query data sources once mock
+  fixtures stabilise, and extend coverage to the remaining mockup flows per the
+  migration workflow.
+
+### Stage 2 implementation notes (26 October 2025)
+
+- Map experiences rely heavily on stacked overlays. Introduce a `MapViewport`
+  helper that renders a background image (placeholder for an eventual map SDK)
+  and positions Radix sheets/controls without reimplementing layout per page.
+- Reuse Radix `Slider` for quick duration adjustments and `ToggleGroup` for
+  interest chips in the quick walk generator. Chips will come from the existing
+  discover fixtures to keep terminology aligned.
+- The itinerary view will lean on Radix `Accordion` for collapsible stop
+  details once additional states land; initial migration renders static cards
+  with CTA buttons and uses Radix `Dialog` for share actions.
+- Saved walks page behaves like a scrollable detail sheet. Extract a
+  `WalkStopCard` component so itinerary and saved flows maintain visual parity
+  while sharing badge/CTA handling.
+- Extend router coverage to verify: (a) quick walk duration slider updates,
+  (b) navigating via bottom navigation between map and saved routes, and (c)
+  itinerary CTA toggling state (favourites, share dialog placeholder).
+
+#### Progress (26 October 2025)
+
+- Ported the Stage 2 map experiences: quick generator (`/map/quick`), detailed
+  itinerary (`/map/itinerary`), and saved walk detail (`/saved`). Shared map
+  layout primitives (`MapViewport`, `MapBottomNavigation`) keep overlays
+  consistent across flows.
+- Added Radix `Dialog` stubs for share actions so future integrations only need
+  to wire network calls. Tests exercise the open/close path to guard against
+  regressions in portal handling with Happy DOM.
+- Extended `routes.stage1.test.tsx` to cover Stage 2 journeys: chip selection,
+  bottom navigation jumps, favourite toggles, and share dialog presence. Test
+  harness now polyfills DOM globals (`NodeFilter`, `HTMLInputElement`) required
+  by Radix focus scopes.
 
 ## Verification plan
 
