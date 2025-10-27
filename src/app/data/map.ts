@@ -36,6 +36,7 @@ export interface WalkRouteSummary {
   description: string;
   highlights: string[];
   pointsOfInterest: WalkPointOfInterest[];
+  notes: string[];
 }
 
 export const quickWalkConfig: QuickWalkConfig = {
@@ -126,6 +127,11 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       categoryColorClass: "text-cyan-300",
       openHours: "8:00 AM – 10:00 PM",
     },
+  ],
+  notes: [
+    "Allow extra time at the harbour lookout – it becomes busy around sunset.",
+    "Keep the boardwalk section for last if you plan to record timelapses.",
+    "Weekend market opening times vary; check the community board for pop-up vendors.",
   ],
 };
 

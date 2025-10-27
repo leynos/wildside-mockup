@@ -1,0 +1,94 @@
+/** @file Shared list rendering points of interest with Radix dialog sheets. */
+
+import * as Dialog from "@radix-ui/react-dialog";
+
+import type { WalkPointOfInterest } from "../data/map";
+import { FontAwesomeIcon } from "./font-awesome-icon";
+
+export interface PointOfInterestListProps {
+  points: WalkPointOfInterest[];
+}
+
+export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.Element {
+  return (
+    <div className="space-y-3">
+      {points.map((poi) => (
+        <Dialog.Root key={poi.id}>
+          <Dialog.Trigger asChild>
+            <button
+              type="button"
+              className="w-full rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-left shadow-sm shadow-base-300/30 transition hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-base font-semibold text-base-content">{poi.name}</h3>
+                  <p className="mt-1 text-sm text-base-content/70">{poi.description}</p>
+                </div>
+                {poi.rating ? (
+                  <span className="flex items-center gap-1 text-sm font-semibold text-amber-400">
+                    <FontAwesomeIcon name="fa-solid fa-star" />
+                    {poi.rating.toFixed(1)}
+                  </span>
+                ) : null}
+              </div>
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-accent">
+                <span className="flex items-center gap-1 rounded-full bg-base-300/60 px-2 py-0.5 text-base-content/80">
+                  <FontAwesomeIcon name={poi.categoryIcon} className={poi.categoryColorClass} />
+                  Highlight
+                </span>
+                {poi.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-base-300/60 bg-base-100 px-2 py-0.5 text-base-content/70"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </button>
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Dialog.Overlay className="fixed inset-0 bg-black/60" />
+            <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 rounded-t-3xl border border-base-300/60 bg-base-100 p-6 shadow-2xl">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <Dialog.Title className="text-lg font-semibold text-base-content">
+                    {poi.name}
+                  </Dialog.Title>
+                  <Dialog.Description className="mt-1 text-sm text-base-content/70">
+                    {poi.description}
+                  </Dialog.Description>
+                </div>
+                <Dialog.Close asChild>
+                  <button type="button" className="btn btn-ghost btn-sm">
+                    Close
+                  </button>
+                </Dialog.Close>
+              </div>
+              <div className="mt-4 space-y-2 text-sm text-base-content/70">
+                {poi.tags.length > 0 ? (
+                  <div className="flex flex-wrap gap-2">
+                    {poi.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+                {poi.openHours ? (
+                  <p className="flex items-center gap-2 text-xs text-base-content/60">
+                    <FontAwesomeIcon name="fa-regular fa-clock" />
+                    {poi.openHours}
+                  </p>
+                ) : null}
+              </div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+      ))}
+    </div>
+  );
+}

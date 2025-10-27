@@ -3,14 +3,22 @@
 import type { ReactNode } from "react";
 
 export interface MapViewportProps {
-  /** Background image URL representing the map snapshot. */
-  backgroundImageUrl: string;
+  /** Background image URL representing the map snapshot (fallback when map is absent). */
+  backgroundImageUrl?: string;
   /** Accessible description for the decorative background. */
-  backgroundAlt: string;
-  /** Optional overlay element rendered above the background (controls, etc.). */
-  children: ReactNode;
-  /** Optional gradient overlay appended above the image. */
+  backgroundAlt?: string;
+  /** Optional live map canvas rendered beneath the overlays. */
+  map?: ReactNode;
+  /** Overlay content rendered above the map/placeholder. */
+  children?: ReactNode;
+  /** Optional gradient overlay appended above the image/map for contrast. */
   gradientClassName?: string;
+  /** Extra classes passed to the container. */
+  className?: string;
+}
+
+function joinClassNames(...tokens: Array<string | undefined | null | false>): string {
+  return tokens.filter(Boolean).join(" ");
 }
 
 /**
@@ -27,17 +35,29 @@ export function MapViewport({
   backgroundAlt,
   backgroundImageUrl,
   children,
-  gradientClassName = "bg-black/50",
+  className,
+  gradientClassName,
+  map,
 }: MapViewportProps): JSX.Element {
+  const containerClasses = joinClassNames("relative flex-1 overflow-hidden", className);
+
   return (
-    <div className="relative flex-1 overflow-hidden">
-      <img
-        src={backgroundImageUrl}
-        alt={backgroundAlt}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-      <div className={`absolute inset-0 ${gradientClassName}`} aria-hidden="true" />
-      <div className="relative z-[1] h-full w-full">{children}</div>
+    <div className={containerClasses}>
+      {map ? <div className="absolute inset-0">{map}</div> : null}
+      {!map && backgroundImageUrl ? (
+        <img
+          src={backgroundImageUrl}
+          alt={backgroundAlt ?? "Map background"}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : null}
+      {gradientClassName ? (
+        <div
+          className={`pointer-events-none absolute inset-0 ${gradientClassName}`}
+          aria-hidden="true"
+        />
+      ) : null}
+      <div className="relative z-[1] flex h-full flex-col">{children}</div>
     </div>
   );
 }

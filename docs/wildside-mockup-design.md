@@ -259,37 +259,39 @@ Mapping guidance:
   fixtures stabilise, and extend coverage to the remaining mockup flows per the
   migration workflow.
 
-### Stage 2 implementation notes (26 October 2025)
+### Stage 2 implementation notes (27 October 2025)
 
-- Map experiences rely heavily on stacked overlays. Introduce a `MapViewport`
-  helper that renders a background image (placeholder for an eventual map SDK)
-  and positions Radix sheets/controls without reimplementing layout per page.
-- Reuse Radix `Slider` for quick duration adjustments and `ToggleGroup` for
-  interest chips in the quick walk generator. Chips will come from the existing
-  discover fixtures to keep terminology aligned.
-- The itinerary view will lean on Radix `Accordion` for collapsible stop
-  details once additional states land; initial migration renders static cards
-  with CTA buttons and uses Radix `Dialog` for share actions.
-- Saved walks page behaves like a scrollable detail sheet. Extract a
-  `WalkStopCard` component so itinerary and saved flows maintain visual parity
-  while sharing badge/CTA handling.
-- Extend router coverage to verify: (a) quick walk duration slider updates,
-  (b) navigating via bottom navigation between map and saved routes, and (c)
-  itinerary CTA toggling state (favourites, share dialog placeholder).
+- Replace static map placeholders with a reusable `WildsideMap` component that
+  lazily initialises MapLibre against the OpenMapTiles Bright demo style. The
+  loader guards against non-WebGL environments so unit tests continue to run.
+- Update `MapViewport` to accept either a live map or fallback imagery while
+  keeping overlay positioning consistent across flows.
+- Wrap the quick generator, itinerary, and saved screens in Radix `Tabs`
+  (`Map`, `Stops`, `Notes`) so content is discoverable without scrolling.
+  Persist tab content with `forceMount` for accessibility and easier test
+  targeting.
+- Surface point-of-interest (POI) details via a shared
+  `PointOfInterestList` component backed by Radix `Dialog`, giving us mobile
+  sheet behaviour for both the itinerary and saved flows.
+- Keep quick adjustments (sliders, interest chips) on the map tab while
+  exposing the POI list and planning notes in adjacent tabs to mirror the
+  mockup’s emphasis on lightweight switching between contexts.
+- Extend router coverage to verify map-tab interactions (chip toggles and
+  navigation), share dialogs, and favourite toggles so future changes to the
+  MapLibre integration remain tested.
 
-#### Progress (26 October 2025)
+#### Progress (27 October 2025)
 
-- Ported the Stage 2 map experiences: quick generator (`/map/quick`), detailed
-  itinerary (`/map/itinerary`), and saved walk detail (`/saved`). Shared map
-  layout primitives (`MapViewport`, `MapBottomNavigation`) keep overlays
-  consistent across flows.
-- Added Radix `Dialog` stubs for share actions so future integrations only need
-  to wire network calls. Tests exercise the open/close path to guard against
-  regressions in portal handling with Happy DOM.
-- Extended `routes.stage1.test.tsx` to cover Stage 2 journeys: chip selection,
-  bottom navigation jumps, favourite toggles, and share dialog presence. Test
-  harness now polyfills DOM globals (`NodeFilter`, `HTMLInputElement`) required
-  by Radix focus scopes.
+- `/map/quick`, `/map/itinerary`, and `/saved` now render MapLibre canvases
+  with gradient overlays, Radix tabs, and sheet-style POI dialogs. The quick
+  generator retains the duration/interest controls within the `Map` tab, while
+  the other tabs surface stops and planning notes.
+- Introduced shared components (`WildsideMap`, `PointOfInterestList`,
+  `AppBottomNavigation`) to eliminate duplicated markup between map flows and
+  the explore/customise screens.
+- Tests exercise the new tabbed experiences and share modals; the Happy DOM
+  harness now polyfills `NodeFilter`/`HTMLInputElement` so Radix focus scopes
+  operate without runtime errors even when MapLibre short-circuits.
 
 ## Verification plan
 
