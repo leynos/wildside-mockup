@@ -1,6 +1,7 @@
 /** @file Offline download management screen with storage overview. */
 
 import * as Dialog from "@radix-ui/react-dialog";
+import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
 import { FontAwesomeIcon } from "../../components/font-awesome-icon";
 import { bottomNavigation } from "../../data/customize";
-import { offlineDownloads, offlineSuggestions } from "../../data/stage-four";
+import { autoManagementOptions, offlineDownloads, offlineSuggestions } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
 
 export function OfflineScreen(): JSX.Element {
@@ -17,9 +18,19 @@ export function OfflineScreen(): JSX.Element {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [downloads, setDownloads] = useState(offlineDownloads);
   const [isManaging, setIsManaging] = useState(false);
+  const [autoSettings, setAutoSettings] = useState<Record<string, boolean>>(() =>
+    autoManagementOptions.reduce<Record<string, boolean>>((acc, option) => {
+      acc[option.id] = option.defaultEnabled;
+      return acc;
+    }, {}),
+  );
 
   const handleDeleteDownload = (downloadId: string) => {
     setDownloads((current) => current.filter((entry) => entry.id !== downloadId));
+  };
+
+  const handleToggleAutoSetting = (id: string, next: boolean) => {
+    setAutoSettings((current) => ({ ...current, [id]: next }));
   };
 
   return (
@@ -216,6 +227,46 @@ export function OfflineScreen(): JSX.Element {
                   </div>
                 </article>
               ))}
+            </div>
+          </section>
+          <section className="space-y-4">
+            <header className="flex items-center gap-3">
+              <FontAwesomeIcon name="fa-solid fa-cog" className="text-accent" />
+              <h2 className="text-base font-semibold text-base-content">Auto-Management</h2>
+            </header>
+            <div className="space-y-4">
+              {autoManagementOptions.map((option) => {
+                const checked = autoSettings[option.id];
+                return (
+                  <article
+                    key={option.id}
+                    className="rounded-2xl border border-base-300/60 bg-base-200/70 p-4 shadow-sm shadow-base-300/20"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex flex-1 items-start gap-3">
+                        <FontAwesomeIcon
+                          name={option.icon}
+                          className={`${option.iconClassName} text-lg`}
+                        />
+                        <div>
+                          <h3 className="text-sm font-semibold text-base-content">
+                            {option.title}
+                          </h3>
+                          <p className="mt-1 text-sm text-base-content/70">{option.description}</p>
+                        </div>
+                      </div>
+                      <Switch.Root
+                        checked={checked}
+                        onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
+                        className="relative inline-flex h-6 w-11 items-center rounded-full border border-base-300/60 bg-base-200/60 transition data-[state=checked]:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
+                        data-testid={`auto-management-switch-${option.id}`}
+                      >
+                        <Switch.Thumb className="block h-5 w-5 translate-x-[2px] rounded-full bg-base-100 shadow transition-transform duration-200 data-[state=checked]:translate-x-[22px]" />
+                      </Switch.Root>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </section>
         </main>

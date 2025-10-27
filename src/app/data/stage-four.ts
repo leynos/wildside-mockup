@@ -80,6 +80,15 @@ export interface OfflineSuggestion {
   iconClassName?: string;
 }
 
+export interface AutoManagementOption {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  iconClassName: string;
+  defaultEnabled: boolean;
+}
+
 export const offlineSuggestions: OfflineSuggestion[] = [
   {
     id: "reykjavik",
@@ -131,6 +140,33 @@ export const offlineDownloads: OfflineDownload[] = [
     imageUrl:
       "https://storage.googleapis.com/uxpilot-auth.appspot.com/0588c62612-0e0ea0cdb4f311e59cfd.png",
     status: "downloading",
+  },
+];
+
+export const autoManagementOptions: AutoManagementOption[] = [
+  {
+    id: "auto-delete",
+    title: "Auto-delete old maps",
+    description: "Remove maps older than 30 days automatically",
+    icon: "fa-solid fa-trash-alt",
+    iconClassName: "text-amber-400",
+    defaultEnabled: true,
+  },
+  {
+    id: "wifi-only",
+    title: "WiFi-only downloads",
+    description: "Only download maps when connected to WiFi",
+    icon: "fa-solid fa-wifi",
+    iconClassName: "text-accent",
+    defaultEnabled: true,
+  },
+  {
+    id: "auto-update",
+    title: "Auto-update maps",
+    description: "Automatically update maps when new versions are available",
+    icon: "fa-solid fa-sync-alt",
+    iconClassName: "text-purple-400",
+    defaultEnabled: false,
   },
 ];
 

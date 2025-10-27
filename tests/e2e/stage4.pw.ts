@@ -26,6 +26,14 @@ test.describe("Stage 4 routes", () => {
     await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore - 1);
   });
 
+  test("auto-management switches respond to toggling", async ({ page }) => {
+    await page.goto("/offline");
+    const autoSwitch = page.getByTestId("auto-management-switch-auto-update");
+    await expect(autoSwitch).toHaveAttribute("data-state", "unchecked");
+    await autoSwitch.click();
+    await expect(autoSwitch).toHaveAttribute("data-state", "checked");
+  });
+
   test("safety preferences accordion toggles", async ({ page }) => {
     await page.goto("/safety-accessibility");
     const toggle = page.getByRole("switch").first();

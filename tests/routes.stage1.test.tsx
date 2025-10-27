@@ -392,6 +392,25 @@ describe("Stage 4 completion flows", () => {
     expect(cardsAfter.length).toBe(cardsBefore.length - 1);
   });
 
+  it("toggles auto-management switches", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const switches = container.querySelectorAll<HTMLElement>(
+      "[data-testid^='auto-management-switch-']",
+    );
+    expect(switches.length).toBeGreaterThan(0);
+
+    const firstSwitch = switches[0];
+    const initialState = firstSwitch.getAttribute("data-state");
+
+    await act(async () => {
+      firstSwitch.click();
+      await Promise.resolve();
+    });
+
+    expect(firstSwitch.getAttribute("data-state")).not.toBe(initialState);
+  });
+
   it("allows toggling a safety preference and saving", async () => {
     ({ mount, root } = await renderRoute("/safety-accessibility"));
     const container = requireContainer(mount);
