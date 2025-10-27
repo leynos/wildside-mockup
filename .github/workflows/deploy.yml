@@ -27,7 +27,12 @@ jobs:
 
       - run: npm ci
       - run: npm run tokens:build
-      - run: npm run build
+      - name: Build site
+        run: npm run build
+        env:
+          APP_BASE_PATH: /wildside-mockup
+      - name: Add SPA fallback
+        run: cp dist/index.html dist/404.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
