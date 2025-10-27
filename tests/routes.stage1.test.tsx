@@ -14,7 +14,10 @@ type TestRoute =
   | "/saved"
   | "/wizard/step-1"
   | "/wizard/step-2"
-  | "/wizard/step-3";
+  | "/wizard/step-3"
+  | "/walk-complete"
+  | "/offline"
+  | "/safety-accessibility";
 
 async function renderRoute(path: TestRoute) {
   window.history.replaceState(null, "", path);
@@ -306,5 +309,83 @@ describe("Stage 3 wizard flows", () => {
     );
     expect(closeButton).toBeTruthy();
     act(() => closeButton?.click());
+  });
+});
+
+describe("Stage 4 completion flows", () => {
+  let root: Root | null = null;
+  let mount: HTMLDivElement | null = null;
+
+  function cleanup() {
+    if (root && mount) {
+      act(() => {
+        root?.unmount();
+      });
+    }
+    root = null;
+    mount?.remove();
+    mount = null;
+    document.body.innerHTML = "";
+  }
+
+  beforeEach(() => {
+    cleanup();
+  });
+
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("shows a celebratory toast when rating a completed walk", async () => {
+    ({ mount, root } = await renderRoute("/walk-complete"));
+    const container = requireContainer(mount);
+    const rateButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Rate this walk"),
+    );
+    expect(rateButton).toBeTruthy();
+
+    await act(async () => {
+      rateButton?.click();
+      await Promise.resolve();
+    });
+
+    const toast = document.querySelector(".alert-success");
+    expect(toast?.textContent).toContain("Rating saved");
+  });
+
+  it("lists existing downloads on the offline manager route", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const downloadCards = container.querySelectorAll("article");
+    expect(downloadCards.length).toBeGreaterThan(0);
+    const header = Array.from(container.querySelectorAll("h2")).find((node) =>
+      node.textContent?.includes("Downloaded areas"),
+    );
+    expect(header).toBeTruthy();
+  });
+
+  it("allows toggling a safety preference and saving", async () => {
+    ({ mount, root } = await renderRoute("/safety-accessibility"));
+    const container = requireContainer(mount);
+    const switches = container.querySelectorAll<HTMLButtonElement>("[role='switch']");
+    expect(switches.length).toBeGreaterThan(0);
+
+    const firstSwitch = switches[0];
+    const initialState = firstSwitch.getAttribute("data-state");
+    act(() => firstSwitch.click());
+    expect(firstSwitch.getAttribute("data-state")).not.toBe(initialState);
+
+    const saveButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Save preferences"),
+    );
+    expect(saveButton).toBeTruthy();
+
+    await act(async () => {
+      saveButton?.click();
+      await Promise.resolve();
+    });
+
+    const dialog = document.querySelector("[role='dialog']");
+    expect(dialog).toBeTruthy();
   });
 });

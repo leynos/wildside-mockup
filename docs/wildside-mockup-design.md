@@ -311,6 +311,20 @@ Mapping guidance:
   keeping the MapLibre canvas mounted, so deep links preserve context without
   blanking the background.
 
+### Stage 4 implementation notes (27 October 2025)
+
+- Ported the walk completion summary, offline manager, and safety & accessibility
+  routes using the shared shell. The completion view introduces a Radix toast
+  and share dialog to deliver the celebratory experience from the mockups.
+- Built offline storage fixtures and travel hints so the screen can surface
+  download progress, dismissible suggestions, and future map actions.
+- Implemented the safety screen with Radix Accordion + Switch components, making
+  the toggles stateful and surfacing a confirmation dialog when preferences are
+  saved.
+- Added happy-dom unit coverage for fragment-driven tabs and new Stage 4 routes
+  alongside Playwright smoke tests to ensure rating toasts, offline cards, and
+  accordion interactions remain functional.
+
 ### Stage 3 implementation notes (27 October 2025)
 
 - Introduce a `WizardLayout` that centralises header actions (back/help), the
