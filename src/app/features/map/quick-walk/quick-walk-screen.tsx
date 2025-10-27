@@ -188,7 +188,7 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="mt-auto px-6 pb-6">
                   <div
-                    className="max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur"
+                    className="max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-stops-panel"
                   >
                     <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
