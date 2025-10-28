@@ -3,6 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 
 import type { WalkPointOfInterest } from "../data/map";
+import { useOptionalMapStore } from "../features/map/map-state";
 import { Icon } from "./icon";
 
 export interface PointOfInterestListProps {
@@ -10,6 +11,9 @@ export interface PointOfInterestListProps {
 }
 
 export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.Element {
+  const mapStore = useOptionalMapStore();
+  const highlightPois = mapStore?.actions.highlightPois;
+
   return (
     <div className="space-y-3">
       {points.map((poi) => (
@@ -18,6 +22,10 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
             <button
               type="button"
               className="w-full rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-left shadow-sm shadow-base-300/30 transition hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+              onMouseEnter={() => highlightPois?.([poi.id])}
+              onFocus={() => highlightPois?.([poi.id])}
+              onMouseLeave={() => highlightPois?.([])}
+              onBlur={() => highlightPois?.([])}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>

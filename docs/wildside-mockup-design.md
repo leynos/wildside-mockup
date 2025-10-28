@@ -340,6 +340,13 @@ Mapping guidance:
 - Added Playwright + axe accessibility smoke tests for `/explore`, `/map/quick`,
   and `/wizard/step-1`, applying targeted slider labelling and landmark fixes to
   keep results clean.
+- Added a `MapStateProvider` so `/map/*` routes and `/saved` share a single
+  MapLibre instance. `WildsideMap` now registers with the provider to reuse
+  the active viewport and avoid canvas churn when overlays update.
+- Provider-backed highlight helpers keep POI interactions reactive: hovering
+  a stop toggles feature-state on the shared source without re-rendering the
+  map, and new unit tests guard the store’s behaviour with mocked MapLibre
+  calls.
 - Map tabs synchronise with URL fragments (`#map`, `#stops`, `#notes`) while
   keeping the MapLibre canvas mounted, so deep links preserve context without
   blanking the background.

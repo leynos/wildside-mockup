@@ -3,10 +3,10 @@
 import { createRoute } from "@tanstack/react-router";
 
 import { ItineraryScreen } from "../../features/map";
-import { rootRoute } from "../root-route";
+import { mapLayoutRoute } from "./layout-route";
 
 export const mapItineraryRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/map/itinerary",
+  getParentRoute: () => mapLayoutRoute,
+  path: "itinerary",
   component: ItineraryScreen,
 });
