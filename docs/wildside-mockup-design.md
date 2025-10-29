@@ -1,6 +1,6 @@
 # Wildside mockup migration notes
 
-Last updated: 26 October 2025
+Last updated: 29 October 2025
 
 ## Goals
 
@@ -417,3 +417,67 @@ Mapping guidance:
 - Determine timeline and success criteria for evaluating alternative icon sets.
 - Define local developer ergonomics for token rebuilds (for example, `bun run
   tokens:build`) and ensure documentation reflects the expected workflow.
+
+## Display mode toggle roadmap (29 October 2025)
+
+- Objective: introduce a persistent display-mode toggle so the mockup can
+  switch between the framed handset shell and a responsive full-browser view.
+  Full-browser mode must hide the controls within a tabbed drawer and be the
+  default for mobile visitors, while desktop browsers land in the hosted shell.
+- Assumptions: the existing theme toggle remains in the UI; layout logic lives
+  client-side (no SSR). We can rely on `window.matchMedia` and viewport width
+  to infer device class, and degrade gracefully when the APIs are unavailable.
+
+### Plan
+
+- Create `DisplayModeProvider` under `src/app/providers` mirroring the theme
+  context. Persist the selected mode to `localStorage`, honour device defaults
+  on first load, and expose helpers to query and set the active mode.
+- Extend the root route (`src/app/routes/root-route.tsx`) with a combined
+  floating control stack. Embed the theme toggle and a new display toggle, then
+  surface the same controls inside a retractable tab drawer when in
+  full-browser mode. Ensure keyboard focus and ARIA labelling work in both
+  presentations.
+- Refactor `MobileShell` to render either the existing 390 × 844 frame or a
+  responsive wrapper. Preserve the `background` slot and add sensible paddings
+  for wide layouts. Screens should opt-in implicitly via the provider rather
+  than updating imports.
+- Audit feature screens for responsive gaps. Add max-width containers and
+  flex/grid fallbacks so expanding beyond the handset width does not create
+  sparse or broken layouts. Prioritise the discover, map, wizard, and offline
+  flows, which carry the densest UI.
+- Implement a tabbed drawer component that tucks controls away in
+  full-browser mode. The drawer should collapse to a discreet edge tab,
+  re-expand on focus/hover, and respect reduced-motion preferences.
+
+### Roadmap
+
+1. Provider and defaults (0.5 day)
+   - Ship `DisplayModeProvider`, hook it into `AppRoutes`, and cover detection
+     logic with unit tests.
+   - Add localStorage contract tests and document fallbacks when storage is
+     unavailable.
+2. Layout integration (0.75 day)
+   - Update `MobileShell` and affected feature screens; run responsive sweeps
+     at key breakpoints (360 px, 768 px, 1024 px).
+   - Replace the existing floating button with the combined control stack and
+     drawer, validating accessibility (focus traps, labelling) via tests and
+     Playwright axe scans.
+3. Stabilisation (0.75 day)
+   - Expand unit/interaction tests (Happy DOM) to cover mode toggling and
+     persistence.
+   - Extend documentation (this file, plus any user-facing guides) and rerun
+     `bun fmt`, `bun lint`, `bun check:types`, and `bun test` to close the
+     loop.
+
+### Risks and mitigations
+
+- Responsive regressions: multiple screens assume a fixed width. Mitigate by
+  introducing shared `content` wrappers with max widths and by snapshotting key
+  layouts before and after adjustments.
+- Drawer discoverability: users might miss the controls when hidden. Provide a
+  subtle label and maintain keyboard focus outlines so the tab remains obvious,
+  and document any follow-up usability findings.
+- Default detection flash: initial hydration might briefly show the wrong
+  mode. Handle by initialising state in an effect based on device heuristics,
+  and gate rendering until the mode resolves.
