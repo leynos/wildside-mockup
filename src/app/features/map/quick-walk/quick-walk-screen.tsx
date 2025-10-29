@@ -217,16 +217,28 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div
-                    className="pointer-events-auto max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur"
+                    className="pointer-events-auto relative max-h-[53vh] overflow-hidden rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-stops-panel"
                   >
-                    <button
-                      type="button"
-                      onClick={handleDismissPanels}
-                      className={panelHandleClass}
-                      aria-label="Dismiss panel"
+                    <div className="sticky top-0 z-20 flex justify-center bg-base-900/70 pb-3 pt-3">
+                      <button
+                        type="button"
+                        onClick={handleDismissPanels}
+                        className="mx-auto block h-2 w-12 rounded-full bg-base-300/70"
+                        aria-label="Dismiss panel"
+                      />
+                    </div>
+                    <div className="max-h-full overflow-y-auto px-4 pb-5">
+                      <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
+                    </div>
+                    <div
+                      className="pointer-events-none absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-base-900/70 to-transparent"
+                      aria-hidden="true"
                     />
-                    <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
+                    <div
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-base-900/80 to-transparent"
+                      aria-hidden="true"
+                    />
                   </div>
                 </div>
               </Tabs.Content>
