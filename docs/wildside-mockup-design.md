@@ -481,3 +481,18 @@ Mapping guidance:
 - Default detection flash: initial hydration might briefly show the wrong
   mode. Handle by initialising state in an effect based on device heuristics,
   and gate rendering until the mode resolves.
+
+#### Progress (29 October 2025)
+
+- Shipped the `DisplayModeProvider` with localStorage persistence and viewport
+  heuristics. Unit tests cover default inference, persistence, and resets.
+- Refactored `MobileShell` to render hosted and full-browser layouts, adding a
+  max-width surface for wide screens. Route and fragment tests wrap the router
+  in the new provider to mirror production.
+- Introduced `GlobalControls`, combining theme and display toggles. Hosted mode
+  renders a floating button stack; full-browser mode exposes a right-edge
+  drawer with accessible labelling. New unit coverage exercises toggle flows
+  and reset behaviour.
+- Updated Playwright suites to expect the drawer, simplifying tab alignment
+  checks to accommodate both layouts while ensuring all axe scans remain
+  passing.
