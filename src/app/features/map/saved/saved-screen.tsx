@@ -34,8 +34,12 @@ export function SavedScreen(): JSX.Element {
 
   return (
     <MobileShell tone="dark">
-      <main className="relative flex h-full flex-col">
-        <Tabs.Root value={activeTab} onValueChange={setActiveTab} className="flex h-full flex-col">
+      <main className="relative flex flex-1 min-h-0 flex-col overflow-hidden">
+        <Tabs.Root
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="flex flex-1 min-h-0 flex-col overflow-hidden"
+        >
           <div className="relative flex flex-1 flex-col overflow-hidden">
             <Tabs.Content value="map" forceMount className="absolute inset-0 flex flex-col">
               <MapViewport

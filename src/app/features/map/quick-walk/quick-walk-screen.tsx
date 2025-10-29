@@ -107,7 +107,7 @@ export function QuickWalkScreen(): JSX.Element {
 
   return (
     <MobileShell tone="dark">
-      <main className="relative flex h-full flex-col">
+      <main className="relative flex flex-1 min-h-0 flex-col overflow-hidden">
         <Tabs.Root
           value={activeTab}
           onValueChange={(value) => {
@@ -118,7 +118,7 @@ export function QuickWalkScreen(): JSX.Element {
               hash: nextTab === "map" ? undefined : nextTab,
             });
           }}
-          className="flex h-full flex-col"
+          className="flex flex-1 min-h-0 flex-col overflow-hidden"
         >
           <div className="relative flex flex-1 flex-col overflow-hidden">
             <MapViewport
@@ -129,7 +129,7 @@ export function QuickWalkScreen(): JSX.Element {
               <Tabs.Content
                 value="map"
                 forceMount
-                className="flex h-full flex-col data-[state=inactive]:hidden"
+                className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
                   <div className="rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
@@ -213,7 +213,7 @@ export function QuickWalkScreen(): JSX.Element {
               <Tabs.Content
                 value="stops"
                 forceMount
-                className="flex h-full flex-col data-[state=inactive]:hidden"
+                className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
                   <div
@@ -234,7 +234,7 @@ export function QuickWalkScreen(): JSX.Element {
               <Tabs.Content
                 value="notes"
                 forceMount
-                className="flex h-full flex-col data-[state=inactive]:hidden"
+                className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
               >
                 <div className="mt-auto px-6 pb-6">
                   <div

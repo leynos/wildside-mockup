@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 
+import { useDisplayMode } from "../providers/display-mode-provider";
+
 export interface AppHeaderProps {
   /** Main heading displayed within the shell. */
   title: string;
@@ -38,9 +40,14 @@ export function AppHeader({
   variant = "default",
 }: AppHeaderProps): JSX.Element {
   const isWizard = variant === "wizard";
+  const { isFullBrowser } = useDisplayMode();
 
-  const headerClassName =
-    "select-none px-6 border-b border-base-300/60 bg-base-100/80 pb-4 pt-8 text-base-content";
+  const headerClassName = [
+    "select-none px-6 border-b border-base-300/60 bg-base-100/80 pb-4 pt-8 text-base-content",
+    isFullBrowser ? "sticky top-0 inset-x-0 z-30 backdrop-blur" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const leadingContainerClassName = [
     "flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60",

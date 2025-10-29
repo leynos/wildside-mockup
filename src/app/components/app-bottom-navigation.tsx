@@ -20,7 +20,7 @@ export function AppBottomNavigation({ items }: AppBottomNavigationProps): JSX.El
   const navigate = useNavigate();
 
   return (
-    <nav className="border-t border-base-300/60 bg-base-200/80 px-2 pb-3 pt-2 backdrop-blur">
+    <nav className="sticky bottom-0 left-0 right-0 z-30 border-t border-base-300/60 bg-base-200/80 px-2 pb-3 pt-2 backdrop-blur">
       <div className="grid grid-cols-4 gap-1 text-xs font-medium">
         {items.map((item) => (
           <button

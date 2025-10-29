@@ -87,7 +87,7 @@ function Drawer(): JSX.Element {
   const headingId = useId();
 
   return (
-    <div className="fixed inset-y-1/2 right-0 z-50 flex -translate-y-1/2 flex-col items-end gap-3 pr-2 sm:pr-4">
+    <div className="fixed inset-y-1/2 right-0 z-50 flex -translate-y-1/2 flex-col items-end gap-3 pr-0 sm:pr-3">
       <button
         type="button"
         aria-controls="global-controls-drawer"
