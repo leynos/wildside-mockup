@@ -31,7 +31,11 @@ export function ItineraryScreen(): JSX.Element {
           className="flex flex-1 min-h-0 flex-col justify-end overflow-hidden"
         >
           <div className="relative flex flex-1 flex-col justify-end overflow-hidden">
-            <Tabs.Content value="map" forceMount className="absolute inset-0 flex flex-col">
+            <Tabs.Content
+              value="map"
+              forceMount
+              className="absolute inset-0 flex flex-col justify-end"
+            >
               <MapViewport
                 map={<WildsideMap />}
                 gradientClassName="bg-gradient-to-t from-base-900/85 via-base-900/40 to-transparent"
@@ -156,7 +160,7 @@ export function ItineraryScreen(): JSX.Element {
               </MapViewport>
             </Tabs.Content>
 
-            <Tabs.Content value="stops" className="absolute inset-0 flex flex-col">
+            <Tabs.Content value="stops" className="absolute inset-0 flex flex-col justify-end">
               <div className="pointer-events-none px-6 pb-6">
                 <div className="pointer-events-auto max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-5 text-base-100 shadow-2xl backdrop-blur">
                   <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
@@ -164,7 +168,7 @@ export function ItineraryScreen(): JSX.Element {
               </div>
             </Tabs.Content>
 
-            <Tabs.Content value="notes" className="absolute inset-0 flex flex-col">
+            <Tabs.Content value="notes" className="absolute inset-0 flex flex-col justify-end">
               <div className="pointer-events-none px-6 pb-6">
                 <div className="pointer-events-auto max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-5 text-sm text-base-100 shadow-2xl backdrop-blur">
                   <p className="text-base font-semibold text-base-100">Route notes</p>

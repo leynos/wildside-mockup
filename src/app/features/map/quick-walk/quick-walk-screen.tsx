@@ -129,7 +129,7 @@ export function QuickWalkScreen(): JSX.Element {
               <Tabs.Content
                 value="map"
                 forceMount
-                className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
+                className="flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden"
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div className="pointer-events-auto rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
@@ -213,7 +213,7 @@ export function QuickWalkScreen(): JSX.Element {
               <Tabs.Content
                 value="stops"
                 forceMount
-                className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
+                className="flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden"
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div
@@ -234,7 +234,7 @@ export function QuickWalkScreen(): JSX.Element {
               <Tabs.Content
                 value="notes"
                 forceMount
-                className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
+                className="flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden"
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div
