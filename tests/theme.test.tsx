@@ -120,7 +120,7 @@ describe("MobileShell layout", () => {
 
     const frame = mount.querySelector("div.h-\\[844px\\]");
     expect(frame).toBeTruthy();
-    const surface = mount.querySelector("div.flex.min-h-screen");
+    const surface = mount.querySelector("[data-mobile-shell='hosted']");
     expect(surface).toBeTruthy();
 
     act(() => {
@@ -145,7 +145,7 @@ describe("MobileShell layout", () => {
       );
     });
 
-    const fullSurface = mount.querySelector("div.min-h-screen.max-w-6xl");
+    const fullSurface = mount.querySelector("[data-mobile-shell='full']");
     expect(fullSurface).toBeTruthy();
     const hostedFrame = mount.querySelector("div.h-\\[844px\\]");
     expect(hostedFrame).toBeNull();

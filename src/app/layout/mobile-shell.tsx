@@ -54,7 +54,10 @@ export function MobileShell({
     );
 
     return (
-      <div className="flex min-h-screen items-center justify-center bg-base-200/80 px-4 py-10">
+      <div
+        className="flex min-h-screen items-center justify-center bg-base-200/80 px-4 py-10"
+        data-mobile-shell="hosted"
+      >
         <div className={frameClasses}>
           {backgroundNode}
           <div className="relative flex h-full flex-col">{children}</div>
@@ -64,21 +67,16 @@ export function MobileShell({
   }
 
   const surfaceClasses = joinClassNames(
-    "relative min-h-screen w-full bg-base-200 text-base-content",
-    tone === "dark" ? "bg-base-200/90" : "bg-base-100",
+    "relative min-h-screen w-full text-base-content",
+    tone === "dark" ? "bg-base-200" : "bg-base-100",
   );
 
-  const contentClasses = joinClassNames(
-    "relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-6 lg:px-12",
-    className,
-  );
+  const contentClasses = joinClassNames("relative flex min-h-screen w-full flex-col", className);
 
   return (
-    <div className={surfaceClasses}>
+    <div className={surfaceClasses} data-mobile-shell="full">
       {backgroundNode}
-      <div className={contentClasses}>
-        <div className="relative flex flex-1 flex-col">{children}</div>
-      </div>
+      <div className={contentClasses}>{children}</div>
     </div>
   );
 }
