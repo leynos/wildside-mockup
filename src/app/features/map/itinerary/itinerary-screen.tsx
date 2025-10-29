@@ -30,7 +30,7 @@ export function ItineraryScreen(): JSX.Element {
           onValueChange={setActiveTab}
           className="flex flex-1 min-h-0 flex-col overflow-hidden"
         >
-          <div className="relative flex flex-1 flex-col overflow-hidden">
+          <div className="relative flex flex-1 flex-col justify-end overflow-hidden">
             <Tabs.Content value="map" forceMount className="absolute inset-0 flex flex-col">
               <MapViewport
                 map={<WildsideMap />}
