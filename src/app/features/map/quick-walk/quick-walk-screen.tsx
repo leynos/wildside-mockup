@@ -131,8 +131,8 @@ export function QuickWalkScreen(): JSX.Element {
                 forceMount
                 className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
               >
-                <div className="mt-auto px-6 pb-6">
-                  <div className="rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
+                <div className="pointer-events-none px-6 pb-6">
+                  <div className="pointer-events-auto rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
                     <button
                       type="button"
                       onClick={handleDismissPanels}
@@ -215,9 +215,9 @@ export function QuickWalkScreen(): JSX.Element {
                 forceMount
                 className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
               >
-                <div className="mt-auto px-6 pb-6">
+                <div className="pointer-events-none px-6 pb-6">
                   <div
-                    className="max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur"
+                    className="pointer-events-auto max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-4 text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-stops-panel"
                   >
                     <button
@@ -236,9 +236,9 @@ export function QuickWalkScreen(): JSX.Element {
                 forceMount
                 className="flex flex-1 min-h-0 flex-col data-[state=inactive]:hidden"
               >
-                <div className="mt-auto px-6 pb-6">
+                <div className="pointer-events-none px-6 pb-6">
                   <div
-                    className="max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur"
+                    className="pointer-events-auto max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-notes-panel"
                   >
                     <button

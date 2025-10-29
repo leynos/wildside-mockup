@@ -63,7 +63,7 @@ export function MapViewport({
           aria-hidden="true"
         />
       ) : null}
-      <div className="relative z-[1] flex h-full flex-col">{children}</div>
+      <div className="relative z-[1] flex h-full flex-col justify-end">{children}</div>
     </div>
   );
 }

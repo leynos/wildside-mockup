@@ -156,23 +156,25 @@ export function ItineraryScreen(): JSX.Element {
               </MapViewport>
             </Tabs.Content>
 
-            <Tabs.Content
-              value="stops"
-              className="absolute inset-0 overflow-y-auto px-6 pb-28 pt-6"
-            >
-              <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
+            <Tabs.Content value="stops" className="absolute inset-0 flex flex-col">
+              <div className="pointer-events-none px-6 pb-6">
+                <div className="pointer-events-auto max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-5 text-base-100 shadow-2xl backdrop-blur">
+                  <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
+                </div>
+              </div>
             </Tabs.Content>
 
-            <Tabs.Content
-              value="notes"
-              className="absolute inset-0 overflow-y-auto px-6 pb-28 pt-6 text-sm text-base-content/70"
-            >
-              <p className="text-base font-semibold text-base-content">Route notes</p>
-              <ul className="mt-3 list-disc space-y-2 pl-5">
-                {waterfrontDiscoveryRoute.notes.map((note) => (
-                  <li key={note}>{note}</li>
-                ))}
-              </ul>
+            <Tabs.Content value="notes" className="absolute inset-0 flex flex-col">
+              <div className="pointer-events-none px-6 pb-6">
+                <div className="pointer-events-auto max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-5 text-sm text-base-100 shadow-2xl backdrop-blur">
+                  <p className="text-base font-semibold text-base-100">Route notes</p>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-base-100/80">
+                    {waterfrontDiscoveryRoute.notes.map((note) => (
+                      <li key={note}>{note}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </Tabs.Content>
           </div>
 

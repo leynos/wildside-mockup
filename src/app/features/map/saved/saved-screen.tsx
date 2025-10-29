@@ -110,40 +110,40 @@ export function SavedScreen(): JSX.Element {
               </MapViewport>
             </Tabs.Content>
 
-            <Tabs.Content
-              value="stops"
-              className="absolute inset-0 overflow-y-auto px-6 pb-28 pt-6"
-            >
-              <PointOfInterestList points={savedRoute.pointsOfInterest} />
+            <Tabs.Content value="stops" className="absolute inset-0 flex flex-col">
+              <div className="pointer-events-none px-6 pb-6">
+                <div className="pointer-events-auto max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-5 text-base-100 shadow-2xl backdrop-blur">
+                  <PointOfInterestList points={savedRoute.pointsOfInterest} />
+                </div>
+              </div>
             </Tabs.Content>
 
-            <Tabs.Content
-              value="notes"
-              className="absolute inset-0 overflow-y-auto px-6 pb-28 pt-6 text-sm text-base-content/70"
-            >
-              <div className="space-y-6">
-                <div className="grid grid-cols-4 gap-4">
-                  <Metric label="Rating" value={savedRoute.rating.toFixed(1)} />
-                  <Metric label="Saves" value={savedRoute.saves.toString()} />
-                  <Metric label="Difficulty" value={savedRoute.difficulty} />
-                  <Metric label="Updated" value={savedRoute.updatedAgo} />
+            <Tabs.Content value="notes" className="absolute inset-0 flex flex-col">
+              <div className="pointer-events-none px-6 pb-6">
+                <div className="pointer-events-auto max-h-[60vh] overflow-y-auto space-y-6 rounded-3xl border border-base-300/60 bg-base-900/70 p-5 text-sm text-base-100 shadow-2xl backdrop-blur">
+                  <div className="grid grid-cols-4 gap-4 text-base-100">
+                    <Metric label="Rating" value={savedRoute.rating.toFixed(1)} />
+                    <Metric label="Saves" value={savedRoute.saves.toString()} />
+                    <Metric label="Difficulty" value={savedRoute.difficulty} />
+                    <Metric label="Updated" value={savedRoute.updatedAgo} />
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {savedRoute.highlights.map((highlight) => (
+                      <span
+                        key={highlight}
+                        className="rounded-full border border-accent/40 bg-base-200/80 px-3 py-1 text-xs font-medium text-accent"
+                      >
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-base-100/80">{savedRoute.description}</p>
+                  <ul className="list-disc space-y-2 pl-5 text-base-100/80">
+                    {savedRoute.notes.map((note) => (
+                      <li key={note}>{note}</li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {savedRoute.highlights.map((highlight) => (
-                    <span
-                      key={highlight}
-                      className="rounded-full border border-accent/40 bg-base-200/80 px-3 py-1 text-xs font-medium text-accent"
-                    >
-                      {highlight}
-                    </span>
-                  ))}
-                </div>
-                <p>{savedRoute.description}</p>
-                <ul className="list-disc space-y-2 pl-5">
-                  {savedRoute.notes.map((note) => (
-                    <li key={note}>{note}</li>
-                  ))}
-                </ul>
               </div>
             </Tabs.Content>
           </div>
