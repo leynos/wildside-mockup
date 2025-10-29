@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 
+import { useDisplayMode } from "../providers/display-mode-provider";
+
 export interface MobileShellProps {
   /** Main content rendered inside the framed device shell. */
   children: ReactNode;
@@ -35,17 +37,47 @@ export function MobileShell({
   className,
   tone = "dark",
 }: MobileShellProps): JSX.Element {
-  const frameClasses = joinClassNames(
-    "relative h-[844px] w-[390px] overflow-hidden rounded-[40px] border bg-base-100 shadow-2xl",
-    tone === "dark" ? "border-base-300/40 bg-base-100/95" : "border-base-200 bg-base-100",
+  const { mode } = useDisplayMode();
+
+  const hasBackground = Boolean(background);
+  const backgroundNode = hasBackground ? (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+      {background}
+    </div>
+  ) : null;
+
+  if (mode === "hosted") {
+    const frameClasses = joinClassNames(
+      "relative h-[844px] w-[390px] overflow-hidden rounded-[40px] border bg-base-100 shadow-2xl",
+      tone === "dark" ? "border-base-300/40 bg-base-100/95" : "border-base-200 bg-base-100",
+      className,
+    );
+
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-base-200/80 px-4 py-10">
+        <div className={frameClasses}>
+          {backgroundNode}
+          <div className="relative flex h-full flex-col">{children}</div>
+        </div>
+      </div>
+    );
+  }
+
+  const surfaceClasses = joinClassNames(
+    "relative min-h-screen w-full bg-base-200 text-base-content",
+    tone === "dark" ? "bg-base-200/90" : "bg-base-100",
+  );
+
+  const contentClasses = joinClassNames(
+    "relative mx-auto flex min-h-screen w-full max-w-6xl flex-col px-4 py-8 sm:px-6 lg:px-12",
     className,
   );
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-base-200/80 px-4 py-10">
-      <div className={frameClasses}>
-        {background ? <div className="absolute inset-0">{background}</div> : null}
-        <div className="relative flex h-full flex-col">{children}</div>
+    <div className={surfaceClasses}>
+      {backgroundNode}
+      <div className={contentClasses}>
+        <div className="relative flex flex-1 flex-col">{children}</div>
       </div>
     </div>
   );

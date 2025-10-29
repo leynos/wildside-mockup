@@ -4,6 +4,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import { MobileShell } from "../src/app/layout/mobile-shell";
+import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider, useTheme } from "../src/app/providers/theme-provider";
 
 describe("ThemeProvider", () => {
@@ -87,9 +88,11 @@ describe("MobileShell layout", () => {
 
     act(() => {
       root.render(
-        <MobileShell background={<div data-testid="overlay" />}>
-          <section>content</section>
-        </MobileShell>,
+        <DisplayModeProvider>
+          <MobileShell background={<div data-testid="overlay" />}>
+            <section>content</section>
+          </MobileShell>
+        </DisplayModeProvider>,
       );
     });
 
@@ -97,5 +100,59 @@ describe("MobileShell layout", () => {
     act(() => {
       root.unmount();
     });
+    window.localStorage.removeItem("wildside.displayMode");
+  });
+
+  it("applies hosted frame layout when display mode is hosted", () => {
+    const mount = document.createElement("div");
+    document.body.appendChild(mount);
+    const root = createRoot(mount);
+
+    act(() => {
+      root.render(
+        <DisplayModeProvider>
+          <MobileShell>
+            <section>framed</section>
+          </MobileShell>
+        </DisplayModeProvider>,
+      );
+    });
+
+    const frame = mount.querySelector("div.h-\\[844px\\]");
+    expect(frame).toBeTruthy();
+    const surface = mount.querySelector("div.flex.min-h-screen");
+    expect(surface).toBeTruthy();
+
+    act(() => {
+      root.unmount();
+    });
+  });
+
+  it("expands to full-browser layout when display mode is persisted as full", () => {
+    window.localStorage.setItem("wildside.displayMode", "full-browser");
+
+    const mount = document.createElement("div");
+    document.body.appendChild(mount);
+    const root = createRoot(mount);
+
+    act(() => {
+      root.render(
+        <DisplayModeProvider>
+          <MobileShell>
+            <section>full layout</section>
+          </MobileShell>
+        </DisplayModeProvider>,
+      );
+    });
+
+    const fullSurface = mount.querySelector("div.min-h-screen.max-w-6xl");
+    expect(fullSurface).toBeTruthy();
+    const hostedFrame = mount.querySelector("div.h-\\[844px\\]");
+    expect(hostedFrame).toBeNull();
+
+    act(() => {
+      root.unmount();
+    });
+    window.localStorage.removeItem("wildside.displayMode");
   });
 });

@@ -68,8 +68,7 @@ function matchMediaQuery(query: string): boolean {
 
 function detectPreferredDisplayMode(): DisplayMode {
   const prefersMobileViewport = matchMediaQuery("(max-width: 768px)");
-  const prefersCoarsePointer = matchMediaQuery("(pointer: coarse)");
-  if (prefersMobileViewport || prefersCoarsePointer) {
+  if (prefersMobileViewport) {
     return MOBILE_DEFAULT_MODE;
   }
   return DESKTOP_DEFAULT_MODE;
@@ -125,17 +124,13 @@ export function DisplayModeProvider({ children }: DisplayModeProviderProps): JSX
       });
     };
 
-    const pointerQuery = window.matchMedia("(pointer: coarse)");
     const widthQuery = window.matchMedia("(max-width: 768px)");
 
     evaluate();
 
     const listeners: Array<
       [MediaQueryList, (event: MediaQueryList | MediaQueryListEvent) => void]
-    > = [
-      [pointerQuery, evaluate],
-      [widthQuery, evaluate],
-    ];
+    > = [[widthQuery, evaluate]];
 
     listeners.forEach(([mediaQuery, listener]) => {
       if (typeof mediaQuery.addEventListener === "function") {

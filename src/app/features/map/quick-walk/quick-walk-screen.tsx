@@ -59,7 +59,6 @@ function InterestChips({
 }
 
 type TabKey = "map" | "stops" | "notes";
-const NEUTRAL_TAB_VALUE = "__neutral__" as const;
 
 const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
@@ -72,7 +71,7 @@ export function QuickWalkScreen(): JSX.Element {
     ...defaultSelectedInterests,
   ]);
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState<TabKey | null>(() => {
+  const [activeTab, setActiveTab] = useState<TabKey>(() => {
     if (typeof window === "undefined") {
       return "map";
     }
@@ -81,7 +80,7 @@ export function QuickWalkScreen(): JSX.Element {
   const navigate = useNavigate();
 
   const handleDismissPanels = () => {
-    setActiveTab(null);
+    setActiveTab("map");
     navigate({ to: ".", hash: undefined });
   };
 
@@ -94,14 +93,14 @@ export function QuickWalkScreen(): JSX.Element {
     if (typeof window === "undefined") {
       return undefined;
     }
-    const handleHashChange = () => setActiveTab(getHashTab(window.location.hash));
+    const handleHashChange = () => setActiveTab(getHashTab(window.location.hash) ?? "map");
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   useEffect(() => {
     setActiveTab((current) => {
-      const next = getHashTab(location.hash);
+      const next = getHashTab(location.hash) ?? "map";
       return current === next ? current : next;
     });
   }, [location.hash]);
@@ -110,12 +109,8 @@ export function QuickWalkScreen(): JSX.Element {
     <MobileShell tone="dark">
       <main className="relative flex h-full flex-col">
         <Tabs.Root
-          value={activeTab ?? NEUTRAL_TAB_VALUE}
+          value={activeTab}
           onValueChange={(value) => {
-            if (value === NEUTRAL_TAB_VALUE) {
-              handleDismissPanels();
-              return;
-            }
             const nextTab = value as TabKey;
             setActiveTab(nextTab);
             navigate({

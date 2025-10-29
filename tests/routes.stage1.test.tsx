@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
+import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
 
@@ -28,9 +29,11 @@ async function renderRoute(path: TestRoute) {
   const root = createRoot(mount);
   await act(async () => {
     root.render(
-      <ThemeProvider>
-        <AppRoutes routerInstance={routerInstance} />
-      </ThemeProvider>,
+      <DisplayModeProvider>
+        <ThemeProvider>
+          <AppRoutes routerInstance={routerInstance} />
+        </ThemeProvider>
+      </DisplayModeProvider>,
     );
     await Promise.resolve();
   });

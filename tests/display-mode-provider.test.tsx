@@ -113,10 +113,9 @@ describe("DisplayModeProvider", () => {
     cleanup();
   });
 
-  it("defaults to full-browser mode on coarse pointer devices", () => {
+  it("defaults to full-browser mode on narrow viewports", () => {
     matchMediaStub = createMatchMediaStub({
-      "(pointer: coarse)": true,
-      "(max-width: 768px)": false,
+      "(max-width: 768px)": true,
     });
 
     const Probe = () => {
