@@ -68,7 +68,7 @@ test.describe("Map tab bar alignment", () => {
     await expect(page.locator("text=Planning notes")).toBeVisible();
     await expect(page).toHaveURL(/#notes$/);
 
-    await page.getByRole("tab", { name: "Map" }).click();
+    await page.getByRole("tab", { name: "Explore" }).click();
     await expect(canvas).toBeVisible();
     await expect(page).not.toHaveURL(/#(stops|notes)$/);
 
