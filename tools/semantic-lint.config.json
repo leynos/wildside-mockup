@@ -11,5 +11,17 @@
     "tokenIndexSample": 5,
     "suppressPrefixes": ["prose-", "wysiwyg-"],
     "failOnViolation": false
+  },
+  "loopSiblingHints": {
+    "loopMinOccurrences": 3,
+    "siblingMinOccurrences": 3
+  },
+  "utilitySemanticScoring": {
+    "minUtilityTokens": 8,
+    "scoreThreshold": 6,
+    "semanticWeight": 2
+  },
+  "conceptHints": {
+    "disabled": []
   }
 }

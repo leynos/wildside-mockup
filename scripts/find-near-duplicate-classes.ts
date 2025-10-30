@@ -10,9 +10,32 @@ type NormalisedClass = {
   raw: string;
   tokens: string[];
   tokenSet: Set<string>;
+  signature: string;
+  context: ElementContext;
 };
 
-type NearDuplicateConfig = {
+type ElementContext = {
+  tagName: string;
+  parentTagName?: string;
+  ancestorTags: string[];
+  parentKey?: number;
+  mapKey?: number;
+  hasRole: boolean;
+  hasAria: boolean;
+  hasId: boolean;
+  hasData: boolean;
+  hasDataState: boolean;
+  hasEventHandler: boolean;
+  hasSpread: boolean;
+  isSemanticTag: boolean;
+};
+
+type Diagnostic = {
+  score: number;
+  message: string;
+};
+
+type NearDuplicateOptions = {
   minTokenCount: number;
   maxJaccardDistance: number;
   minOccurrences: number;
@@ -21,13 +44,49 @@ type NearDuplicateConfig = {
   failOnViolation: boolean;
 };
 
-type SemanticConfig = {
-  nearDuplicateClasses?: Partial<NearDuplicateConfig>;
+type LoopSiblingOptions = {
+  loopMinOccurrences: number;
+  siblingMinOccurrences: number;
+};
+
+type UtilityScoringOptions = {
+  minUtilityTokens: number;
+  scoreThreshold: number;
+  semanticWeight: number;
+};
+
+type ConceptDefinition = {
+  id: string;
+  label: string;
+  suggestion: string;
+  requiredTokens: string[];
+  optionalTokens?: string[];
+  minOptionalMatches?: number;
+  tagNames?: string[];
+  ancestorTags?: string[];
+  requiresDataState?: boolean;
+  requiresRole?: boolean;
+};
+
+type SemanticConfigFile = {
+  nearDuplicateClasses?: Partial<NearDuplicateOptions>;
+  loopSiblingHints?: Partial<LoopSiblingOptions>;
+  utilitySemanticScoring?: Partial<UtilityScoringOptions>;
+  conceptHints?: {
+    disabled?: string[];
+  };
+};
+
+type LoadedConfig = {
+  nearDuplicate: NearDuplicateOptions;
+  loopSibling: LoopSiblingOptions;
+  scoring: UtilityScoringOptions;
+  disabledConcepts: Set<string>;
 };
 
 const PROJECT_ROOT = process.cwd();
 const CONFIG_PATH = "tools/semantic-lint.config.json";
-const DEFAULT_CONFIG: NearDuplicateConfig = {
+const DEFAULT_NEAR_DUPLICATE: NearDuplicateOptions = {
   minTokenCount: 4,
   maxJaccardDistance: 0.25,
   minOccurrences: 2,
@@ -36,12 +95,91 @@ const DEFAULT_CONFIG: NearDuplicateConfig = {
   failOnViolation: false,
 };
 
-function loadConfig(): NearDuplicateConfig {
+const DEFAULT_LOOP_SIBLING: LoopSiblingOptions = {
+  loopMinOccurrences: 3,
+  siblingMinOccurrences: 3,
+};
+
+const DEFAULT_SCORING: UtilityScoringOptions = {
+  minUtilityTokens: 8,
+  scoreThreshold: 6,
+  semanticWeight: 2,
+};
+
+const CONCEPT_DICTIONARY: ConceptDefinition[] = [
+  {
+    id: "button-like",
+    label: "Button-like utility stack",
+    suggestion: "Extract a .btn or .btn-primary semantic class with @apply.",
+    requiredTokens: ["inline-flex", "items-center", "px-*", "py-*", "rounded-*", "bg-*"],
+    optionalTokens: ["gap-*", "font-medium", "text-*", "hover:*", "focus:*"],
+    minOptionalMatches: 2,
+  },
+  {
+    id: "chip",
+    label: "Chip / badge utility stack",
+    suggestion: "Extract a .chip or .badge semantic class with @apply.",
+    requiredTokens: ["inline-flex", "items-center", "rounded-full", "px-*", "py-*", "text-xs"],
+    optionalTokens: ["gap-*", "border", "border-*", "font-medium"],
+    minOptionalMatches: 1,
+  },
+  {
+    id: "card-surface",
+    label: "Card surface",
+    suggestion: "Extract a .card or .card__body semantic class with @apply.",
+    requiredTokens: ["rounded-*", "shadow-*", "p-*", "bg-*"],
+    optionalTokens: ["border", "border-*"],
+    minOptionalMatches: 1,
+  },
+  {
+    id: "toolbar",
+    label: "Toolbar / horizontal control bar",
+    suggestion: "Extract a .toolbar semantic class with @apply.",
+    requiredTokens: ["flex", "items-center", "gap-*", "px-*"],
+    optionalTokens: ["h-*", "border-b", "bg-*", "justify-between"],
+    minOptionalMatches: 2,
+  },
+  {
+    id: "tabs-trigger",
+    label: "Tab trigger slot",
+    suggestion: "Extract a .tabs__trigger semantic class with state-aware styles.",
+    requiredTokens: ["inline-flex", "items-center", "px-*", "py-*", "border-b"],
+    optionalTokens: ["text-*", "uppercase", "tracking-*"],
+    minOptionalMatches: 1,
+    requiresDataState: true,
+  },
+  {
+    id: "nav-link",
+    label: "Navigation link",
+    suggestion: "Extract a .nav__link semantic class (plus .nav__link--active variant).",
+    requiredTokens: ["inline-flex", "items-center", "gap-*", "text-*"],
+    optionalTokens: ["font-medium", "hover:text-*", "focus:*"],
+    minOptionalMatches: 1,
+    ancestorTags: ["nav"],
+  },
+];
+
+function loadConfig(): LoadedConfig {
   const raw = readFileSync(CONFIG_PATH, "utf8");
-  const parsed = JSON.parse(raw) as SemanticConfig;
-  return {
-    ...DEFAULT_CONFIG,
+  const parsed = JSON.parse(raw) as SemanticConfigFile;
+  const nearDuplicate = {
+    ...DEFAULT_NEAR_DUPLICATE,
     ...(parsed.nearDuplicateClasses ?? {}),
+  };
+  const loopSibling = {
+    ...DEFAULT_LOOP_SIBLING,
+    ...(parsed.loopSiblingHints ?? {}),
+  };
+  const scoring = {
+    ...DEFAULT_SCORING,
+    ...(parsed.utilitySemanticScoring ?? {}),
+  };
+  const disabledConcepts = new Set<string>(parsed.conceptHints?.disabled ?? []);
+  return {
+    nearDuplicate,
+    loopSibling,
+    scoring,
+    disabledConcepts,
   };
 }
 
@@ -59,11 +197,152 @@ function normaliseToken(token: string): string {
   return token.trim().toLowerCase();
 }
 
+function getTagName(node: ts.JsxOpeningLikeElement): string {
+  const tag = node.tagName;
+  if (ts.isIdentifier(tag)) return tag.text;
+  return tag.getText();
+}
+
+function describeParent(node: ts.Node | undefined): { tag?: string; key?: number } {
+  if (!node) return {};
+  if (ts.isJsxElement(node)) {
+    return { tag: getTagName(node.openingElement), key: node.getStart() };
+  }
+  if (ts.isJsxFragment(node)) {
+    return { tag: "fragment", key: node.getStart() };
+  }
+  return {};
+}
+
+function findAncestorMapCall(node: ts.Node | undefined): ts.CallExpression | undefined {
+  let current = node;
+  while (current) {
+    if (ts.isCallExpression(current) && ts.isPropertyAccessExpression(current.expression)) {
+      const access = current.expression;
+      if (access.name.text === "map") {
+        return current;
+      }
+    }
+    current = current.parent;
+  }
+  return undefined;
+}
+
+function collectAncestorTags(node: ts.Node | undefined): string[] {
+  const tags: string[] = [];
+  let current = node;
+  while (current) {
+    if (ts.isJsxElement(current)) {
+      tags.push(getTagName(current.openingElement).toLowerCase());
+    } else if (ts.isJsxSelfClosingElement(current)) {
+      tags.push(getTagName(current).toLowerCase());
+    } else if (ts.isJsxFragment(current)) {
+      tags.push("fragment");
+    }
+    current = current.parent;
+  }
+  return tags;
+}
+
+function collectElementContext(attribute: ts.JsxAttribute): ElementContext {
+  const attributes = attribute.parent;
+  const parentNode = attributes?.parent;
+  if (!parentNode) {
+    return {
+      tagName: "unknown",
+      ancestorTags: [],
+      hasRole: false,
+      hasAria: false,
+      hasId: false,
+      hasData: false,
+      hasDataState: false,
+      hasEventHandler: false,
+      hasSpread: false,
+      isSemanticTag: false,
+    };
+  }
+
+  let openingElement: ts.JsxOpeningLikeElement | undefined;
+  let elementNode: ts.Node | undefined;
+  if (ts.isJsxOpeningElement(parentNode)) {
+    openingElement = parentNode;
+    elementNode = parentNode.parent;
+  } else if (ts.isJsxSelfClosingElement(parentNode)) {
+    openingElement = parentNode;
+    elementNode = parentNode;
+  }
+
+  if (!openingElement) {
+    return {
+      tagName: "unknown",
+      ancestorTags: [],
+      hasRole: false,
+      hasAria: false,
+      hasId: false,
+      hasData: false,
+      hasDataState: false,
+      hasEventHandler: false,
+      hasSpread: false,
+      isSemanticTag: false,
+    };
+  }
+
+  const tagName = getTagName(openingElement);
+  let hasRole = false;
+  let hasAria = false;
+  let hasId = false;
+  let hasData = false;
+  let hasDataState = false;
+  let hasEventHandler = false;
+  let hasSpread = false;
+
+  for (const prop of openingElement.attributes.properties) {
+    if (ts.isJsxAttribute(prop)) {
+      const name = prop.name.text;
+      if (name === "role") hasRole = true;
+      if (name === "id") hasId = true;
+      if (name.startsWith("aria-")) hasAria = true;
+      if (name.startsWith("data-")) {
+        hasData = true;
+        if (name === "data-state") hasDataState = true;
+      }
+      if (name.length > 2 && name.startsWith("on") && name[2] === name[2]?.toUpperCase()) {
+        hasEventHandler = true;
+      }
+    } else if (ts.isJsxSpreadAttribute(prop)) {
+      hasSpread = true;
+    }
+  }
+
+  const elementContextNode = elementNode ?? openingElement;
+  const parentInfo = describeParent(elementContextNode.parent);
+  const mapCall = findAncestorMapCall(elementContextNode);
+  const ancestorTags = collectAncestorTags(elementContextNode.parent).filter(Boolean);
+  const isSemanticTag = !["div", "span"].includes(tagName.toLowerCase());
+
+  return {
+    tagName,
+    parentTagName: parentInfo.tag,
+    ancestorTags,
+    parentKey: parentInfo.key,
+    mapKey: mapCall?.getStart(),
+    hasRole,
+    hasAria,
+    hasId,
+    hasData,
+    hasDataState,
+    hasEventHandler,
+    hasSpread,
+    isSemanticTag,
+  };
+}
+
 function normaliseClassString(
   raw: string,
   filePath: string,
   loc: Location,
   suppressPrefixes: string[],
+  context: ElementContext,
 ): NormalisedClass | null {
   const tokens = raw.split(/\s+/).map(normaliseToken).filter(Boolean);
   if (tokens.length === 0) return null;
@@ -77,6 +356,8 @@ function normaliseClassString(
     raw,
     tokens: uniqueTokens,
     tokenSet: new Set(uniqueTokens),
+    signature: uniqueTokens.join(" "),
+    context,
   };
 }
 
@@ -164,6 +445,7 @@ function extractClassesFromTsx(filePath: string, suppressPrefixes: string[]): No
           filePath,
           { line: line + 1, column: character + 1 },
           suppressPrefixes,
+          collectElementContext(node),
         );
         if (norm) results.push(norm);
       }
@@ -221,16 +503,29 @@ function uniqueCandidates(
   return Array.from(candidateSet);
 }
 
-function main(): void {
-  const config = loadConfig();
-  const tsxFiles = globPaths("src/**/*.tsx");
-  const entries: NormalisedClass[] = [];
-  for (const file of tsxFiles) {
-    entries.push(...extractClassesFromTsx(file, config.suppressPrefixes));
-  }
+function selectAnchor(entries: NormalisedClass[]): NormalisedClass {
+  return entries.reduce((current, candidate) => {
+    if (!current) return candidate;
+    if (candidate.filePath < current.filePath) return candidate;
+    if (candidate.filePath > current.filePath) return current;
+    if (candidate.location.line < current.location.line) return candidate;
+    if (candidate.location.line > current.location.line) return current;
+    if (candidate.location.column < current.location.column) return candidate;
+    return current;
+  });
+}
 
+function average(values: number[]): number {
+  if (values.length === 0) return 0;
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+function createNearDuplicateDiagnostics(
+  entries: NormalisedClass[],
+  config: NearDuplicateOptions,
+): Diagnostic[] {
   const filtered = entries.filter((entry) => entry.tokens.length >= config.minTokenCount);
-  if (filtered.length === 0) return;
+  if (filtered.length === 0) return [];
 
   const index = buildIndex(filtered, config.tokenIndexSample);
   const seenPairs = new Set<string>();
@@ -267,22 +562,11 @@ function main(): void {
     group.members.push(...members);
   });
 
-  const results: { score: number; message: string }[] = [];
-  groups.forEach((group, _root) => {
+  const results: Diagnostic[] = [];
+  groups.forEach((group) => {
     const uniqueIndices = Array.from(new Set(group.members));
     if (uniqueIndices.length < config.minOccurrences) return;
-    const bestIndex = uniqueIndices.reduce((current, candidate) => {
-      const currentEntry = filtered[current];
-      const candidateEntry = filtered[candidate];
-      if (candidateEntry.filePath < currentEntry.filePath) return candidate;
-      if (candidateEntry.filePath > currentEntry.filePath) return current;
-      if (candidateEntry.location.line < currentEntry.location.line) return candidate;
-      if (candidateEntry.location.line > currentEntry.location.line) return current;
-      if (candidateEntry.location.column < currentEntry.location.column) return candidate;
-      return current;
-    }, uniqueIndices[0]);
-
-    const anchor = filtered[bestIndex];
+    const anchor = selectAnchor(uniqueIndices.map((index) => filtered[index]));
     const similarity = 1 - average(group.distances);
     const percentage = (similarity * 100).toFixed(0);
     const header = `${relative(PROJECT_ROOT, anchor.filePath)}:${anchor.location.line}:${anchor.location.column} near-duplicate class strings (~${percentage}% overlap)`;
@@ -302,13 +586,217 @@ function main(): void {
     });
   });
 
-  results
+  return results;
+}
+
+function normaliseNameForSuggestion(source: string | undefined): string {
+  if (!source) return "slot";
+  const cleaned = source
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return cleaned.length === 0 ? "slot" : cleaned;
+}
+
+function createLoopSiblingDiagnostics(
+  entries: NormalisedClass[],
+  config: LoopSiblingOptions,
+): Diagnostic[] {
+  const results: Diagnostic[] = [];
+  const loopGroups = new Map<string, NormalisedClass[]>();
+
+  entries.forEach((entry) => {
+    if (entry.context.mapKey === undefined) return;
+    const key = `${entry.context.mapKey}:${entry.signature}`;
+    const list = loopGroups.get(key);
+    if (list) {
+      list.push(entry);
+    } else {
+      loopGroups.set(key, [entry]);
+    }
+  });
+
+  loopGroups.forEach((list) => {
+    if (list.length < config.loopMinOccurrences) return;
+    const anchor = selectAnchor(list);
+    const file = relative(PROJECT_ROOT, anchor.filePath);
+    const parentTag = normaliseNameForSuggestion(list[0].context.parentTagName ?? "loop");
+    const utilities = list[0].tokens.join(" ");
+    const message = `${file}:${anchor.location.line}:${anchor.location.column} map()-generated elements share identical utility stack (${list.length} items)\n  • parent: ${parentTag}\n  • utilities: ${utilities}\nSuggestion: Extract a semantic child class (e.g. .${parentTag}__item) or lift shared layout into the container.`;
+    const score = list.length * list[0].tokens.length;
+    results.push({ score, message });
+  });
+
+  const siblingGroups = new Map<string, NormalisedClass[]>();
+  entries.forEach((entry) => {
+    if (entry.context.mapKey !== undefined) return;
+    if (entry.context.parentKey === undefined) return;
+    const key = `${entry.context.parentKey}:${entry.signature}`;
+    const list = siblingGroups.get(key);
+    if (list) {
+      list.push(entry);
+    } else {
+      siblingGroups.set(key, [entry]);
+    }
+  });
+
+  siblingGroups.forEach((list) => {
+    if (list.length < config.siblingMinOccurrences) return;
+    const anchor = selectAnchor(list);
+    const file = relative(PROJECT_ROOT, anchor.filePath);
+    const parentTag = normaliseNameForSuggestion(list[0].context.parentTagName ?? "fragment");
+    const utilities = list[0].tokens.join(" ");
+    const message = `${file}:${anchor.location.line}:${anchor.location.column} sibling elements reuse the same utility stack (${list.length} matches)\n  • parent: ${parentTag}\n  • utilities: ${utilities}\nSuggestion: Extract a named slot class (e.g. .${parentTag}__item) with @apply and reuse it.`;
+    const score = list.length * list[0].tokens.length;
+    results.push({ score, message });
+  });
+
+  return results;
+}
+
+function matchesTokenSpec(token: string, spec: string): boolean {
+  if (spec.endsWith("*")) {
+    return token.startsWith(spec.slice(0, -1));
+  }
+  return token === spec;
+}
+
+function tokenSetHas(tokens: string[], spec: string): boolean {
+  return tokens.some((token) => matchesTokenSpec(token, spec));
+}
+
+function countTokenMatches(tokens: string[], specs: string[] | undefined): number {
+  if (!specs || specs.length === 0) return 0;
+  return specs.reduce((count, spec) => (tokenSetHas(tokens, spec) ? count + 1 : count), 0);
+}
+
+function conceptMatches(entry: NormalisedClass, concept: ConceptDefinition): boolean {
+  const tokens = entry.tokens;
+  if (!concept.requiredTokens.every((spec) => tokenSetHas(tokens, spec))) {
+    return false;
+  }
+
+  if (concept.optionalTokens) {
+    const matches = countTokenMatches(tokens, concept.optionalTokens);
+    if ((concept.minOptionalMatches ?? 0) > matches) {
+      return false;
+    }
+  }
+
+  if (concept.tagNames) {
+    const lowerTag = entry.context.tagName.toLowerCase();
+    if (!concept.tagNames.some((tag) => tag.toLowerCase() === lowerTag)) {
+      return false;
+    }
+  }
+
+  if (concept.ancestorTags) {
+    const ancestorLower = entry.context.ancestorTags.map((tag) => tag.toLowerCase());
+    if (!concept.ancestorTags.some((tag) => ancestorLower.includes(tag.toLowerCase()))) {
+      return false;
+    }
+  }
+
+  if (concept.requiresDataState && !entry.context.hasDataState) {
+    return false;
+  }
+
+  if (concept.requiresRole && !entry.context.hasRole) {
+    return false;
+  }
+
+  return true;
+}
+
+function createConceptDiagnostics(
+  entries: NormalisedClass[],
+  disabledConcepts: Set<string>,
+): Diagnostic[] {
+  const results: Diagnostic[] = [];
+  const seen = new Set<string>();
+
+  entries.forEach((entry) => {
+    for (const concept of CONCEPT_DICTIONARY) {
+      if (disabledConcepts.has(concept.id)) continue;
+      if (!conceptMatches(entry, concept)) continue;
+      const key = `${concept.id}:${entry.filePath}:${entry.location.line}:${entry.location.column}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const file = relative(PROJECT_ROOT, entry.filePath);
+      const message = `${file}:${entry.location.line}:${entry.location.column} ${concept.label}\n  • ${entry.raw}\n${concept.suggestion}`;
+      const score =
+        entry.tokens.length +
+        concept.requiredTokens.length * 2 +
+        (concept.optionalTokens?.length ?? 0);
+      results.push({ score, message });
+    }
+  });
+
+  return results;
+}
+
+function computeSemanticSignals(context: ElementContext): number {
+  let score = 0;
+  if (context.isSemanticTag) score += 2;
+  if (context.hasRole) score += 3;
+  if (context.hasAria) score += 1;
+  if (context.hasId) score += 1;
+  if (context.hasData) score += 1;
+  if (context.hasDataState) score += 1;
+  if (context.hasEventHandler) score += 1;
+  if (context.hasSpread) score += 1;
+  if (
+    context.parentTagName &&
+    !["div", "span", "fragment"].includes(context.parentTagName.toLowerCase())
+  ) {
+    score += 1;
+  }
+  return score;
+}
+
+function createUtilityScoringDiagnostics(
+  entries: NormalisedClass[],
+  config: UtilityScoringOptions,
+): Diagnostic[] {
+  const results: Diagnostic[] = [];
+  entries.forEach((entry) => {
+    const utilityTokens = entry.tokens.length;
+    if (utilityTokens < config.minUtilityTokens) return;
+    const semanticSignals = computeSemanticSignals(entry.context);
+    const adjustedSemantics = semanticSignals * config.semanticWeight;
+    const score = utilityTokens - adjustedSemantics;
+    if (score < config.scoreThreshold) return;
+    const file = relative(PROJECT_ROOT, entry.filePath);
+    const tagSuggestion = normaliseNameForSuggestion(entry.context.tagName);
+    const message = `${file}:${entry.location.line}:${entry.location.column} heavy utility stack with limited semantics\n  • utilities: ${utilityTokens}\n  • semantic signals: ${semanticSignals} (weight ${config.semanticWeight})\nSuggestion: Name this element (e.g. .${tagSuggestion}-slot) or add role/aria landmarks before layering utilities.`;
+    results.push({ score, message });
+  });
+  return results;
+}
+
+function main(): void {
+  const config = loadConfig();
+  const tsxFiles = globPaths("src/**/*.tsx");
+  const entries: NormalisedClass[] = [];
+  for (const file of tsxFiles) {
+    entries.push(...extractClassesFromTsx(file, config.nearDuplicate.suppressPrefixes));
+  }
+
+  if (entries.length === 0) return;
+
+  const diagnostics: Diagnostic[] = [];
+  diagnostics.push(...createNearDuplicateDiagnostics(entries, config.nearDuplicate));
+  diagnostics.push(...createLoopSiblingDiagnostics(entries, config.loopSibling));
+  diagnostics.push(...createConceptDiagnostics(entries, config.disabledConcepts));
+  diagnostics.push(...createUtilityScoringDiagnostics(entries, config.scoring));
+
+  diagnostics
     .sort((a, b) => b.score - a.score)
-    .forEach((result) => {
-      console.error(result.message);
+    .forEach((diagnostic) => {
+      console.error(diagnostic.message);
     });
 
-  if (results.length > 0 && config.failOnViolation) {
+  if (diagnostics.length > 0 && config.nearDuplicate.failOnViolation) {
     process.exitCode = 1;
   }
 }
@@ -342,11 +830,6 @@ class UnionFind {
       this.rank[rootX] += 1;
     }
   }
-}
-
-function average(values: number[]): number {
-  if (values.length === 0) return 0;
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
 main();

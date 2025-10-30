@@ -116,7 +116,20 @@ pnpm add -D @biomejs/biome
     "./tools/grit/rule-daisyui-input-article.grit",
     "./tools/grit/rule-daisyui-input-li.grit",
     "./tools/grit/rule-daisyui-input-p.grit",
-    "./tools/grit/rule-repetition-length.grit"
+    "./tools/grit/rule-utility-wrapper.grit",
+    "./tools/grit/rule-landmark-slot.grit",
+    "./tools/grit/rule-state-slot-data-state.grit",
+    "./tools/grit/rule-state-slot-aria-selected.grit",
+    "./tools/grit/rule-state-slot-aria-current.grit",
+    "./tools/grit/rule-state-slot-role-tab.grit",
+    "./tools/grit/rule-layout-wrapper-div-flex.grit",
+    "./tools/grit/rule-layout-wrapper-div-grid.grit",
+    "./tools/grit/rule-layout-wrapper-section-flex.grit",
+    "./tools/grit/rule-layout-wrapper-section-grid.grit",
+    "./tools/grit/rule-heading-semantic-h1.grit",
+    "./tools/grit/rule-heading-semantic-h2.grit",
+    "./tools/grit/rule-heading-semantic-h3.grit",
+    "./tools/grit/rule-heading-semantic-h4.grit"
   ],
   "linter": { "enabled": true, "rules": { "recommended": true } }
 }
@@ -129,11 +142,31 @@ pnpm add -D @biomejs/biome
 **`tools/semantic-lint.config.json`** (thresholds & policy)
 ```json
 {
-  "repeatMinClasses": 4,             // count of utilities constituting a "chunk"
-  "repeatMinOccurrences": 2,         // instances before warning triggers
-  "maxClasslistLength": 12,          // soft ceiling; notify above this
+  "repeatMinClasses": 4,
+  "repeatMinOccurrences": 2,
+  "maxClasslistLength": 24,
   "allowProjectPrefixes": ["btn", "card", "nav__", "form-", "ws-"],
-  "disallowRawHex": true
+  "disallowRawHex": true,
+  "nearDuplicateClasses": {
+    "minTokenCount": 4,
+    "maxJaccardDistance": 0.25,
+    "minOccurrences": 2,
+    "tokenIndexSample": 5,
+    "suppressPrefixes": ["prose-", "wysiwyg-"],
+    "failOnViolation": false
+  },
+  "loopSiblingHints": {
+    "loopMinOccurrences": 3,
+    "siblingMinOccurrences": 3
+  },
+  "utilitySemanticScoring": {
+    "minUtilityTokens": 8,
+    "scoreThreshold": 6,
+    "semanticWeight": 2
+  },
+  "conceptHints": {
+    "disabled": []
+  }
 }
 ```
 
@@ -332,7 +365,7 @@ export default {
 
 **Install & config**
 ```bash
-pnpm add -D semgrep
+uv tool install semgrep
 ```
 
 **`tools/semgrep-semantic.yml`**
@@ -365,37 +398,76 @@ rules:
 
 ## 7) Unified CLI & Dev Workflow
 
-**`package.json`**
+**`package.json`** (current scripts)
 ```json
 {
   "scripts": {
-    "lint:semantic": "pnpm biome lint && pnpm semgrep --config tools/semgrep-semantic.yml && pnpm stylelint 'src/**/*.css'"
+    "semantic:lint": "bunx biome ci src tests tools docs && bun run lint:classlist && bun run lint:class-duplicates && uvx semgrep --config tools/semgrep-semantic.yml --include src/**/*.tsx --include tests/**/*.tsx && bunx stylelint 'src/**/*.css' --config tools/stylelint.config.cjs",
+    "semantic": "bun run semantic:lint",
+    "lint:classlist": "bun run scripts/check-classlist-length.ts",
+    "lint:class-duplicates": "bun run scripts/find-near-duplicate-classes.ts"
   }
 }
 ```
 
-- **Local dev:** run `pnpm lint:semantic` before commit.  
-- **Pre-commit (optional):** add Husky hook to run the script and block on errors/warnings.
-- **CI (GitHub Actions)** — **`.github/workflows/lint.yml`**
-```yaml
-name: semantic-lint
-on: [push, pull_request]
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with: { version: 9 }
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint:semantic
-```
+- **Local dev:** `bun semantic` runs Biome + Grit, class length, near-duplicate +
+  loop/sibling/concept checks, Semgrep, and Stylelint.
+- **Pre-commit (optional):** wire a Husky hook to `bun semantic`.
+- **CI:** `bun semantic` is the single gate invoked by `semantic-lint.yml`
+  (see `.github/workflows/semantic-lint.yml` in the repo).
 
-> If you prefer warnings locally but failures in CI, add `--error` flags or set Biome to warn and gate on Semgrep/Stylelint only.
+> `uvx semgrep` expects `uv` to be installed (https://github.com/astral-sh/uv).
+> The repo keeps the command consistent across local + CI environments.
 
 ---
 
-## 8) How to refactor into `@apply` (+ cascades)
+## 8) Companion semantic checker signals
+
+The `scripts/find-near-duplicate-classes.ts` analyser now emits several
+actionable diagnostics beyond near-duplicate detection:
+
+- **Near-duplicate class strings:** still groups similar utility stacks via
+  token Jaccard similarity. Use it to extract shared semantic classes.
+- **Loop / sibling repetition:** flags identical class strings produced inside a
+  `.map()` or rendered as repeated siblings. Suggestion: extract a named slot
+  (for example `.card-grid__item`) or move layout utilities to the container.
+- **Concept dictionary hints:** matches well-known Tailwind/DaisyUI patterns
+  (button-like, chip, card surface, toolbar, tabs trigger, nav link) and
+  proposes semantic class names with `@apply`.
+- **Utility-vs-semantics score:** highlights heavy utility stacks on elements
+  lacking semantic signals (role, aria, state attributes, semantic tags). Use it
+  to name the element, add landmarks, or move styling into `semantic.css`.
+
+Each diagnostic surfaces the paths, representative utilities, and a concrete
+next action. All heuristics are configurable via
+`tools/semantic-lint.config.json`.
+
+---
+
+## 9) Tuning thresholds and suppressing diagnostics
+
+- **Near duplicates:** tweak `nearDuplicateClasses` thresholds. To exempt whole
+  families (for example prose content), add prefixes to
+  `suppressPrefixes`. Setting `failOnViolation` to `true` escalates the check to
+  a hard failure.
+- **Loop/sibling warnings:** raise `loopMinOccurrences` or
+  `siblingMinOccurrences` if a component intentionally repeats short utility
+  bursts (for example icon strips).
+- **Concept hints:** add a concept `id` to `conceptHints.disabled` to silence
+  that pattern across the project.
+- **Utility scoring:** adjust `minUtilityTokens`, `scoreThreshold`, or
+  `semanticWeight` to match the team’s tolerance for inline utilities.
+- **Project-specific allowlists:** keep semantic class prefixes in
+  `allowProjectPrefixes`. When adding a new family, extend this array (this
+  unblocks class-length and repetition rules).
+
+Prefer addressing the underlying markup first, then reach for configuration.
+Inline suppression comments are intentionally not supported yet to encourage
+semantic fixes over ad hoc opt-outs.
+
+---
+
+## 10) How to refactor into `@apply` (+ cascades)
 
 1. **Spot repetition:** linter warns that a class chunk is repeated (e.g., `inline-flex items-center gap-2 text-sm font-medium text-base-content`).
 2. **Name the concept:** choose a **semantic** name that reflects purpose, not appearance: e.g., `.nav__link`.
@@ -418,7 +490,7 @@ jobs:
 
 ---
 
-## 9) Quick rule checklists (what the lints enforce)
+## 11) Quick rule checklists (what the lints enforce)
 
 - **Semantic & a11y**
   - No clickable `div/span` without role+keyboard; prefer `<button>/<a>`.
@@ -439,7 +511,7 @@ jobs:
 
 ---
 
-## 10) IDE tips
+## 12) IDE tips
 
 - Enable Tailwind IntelliSense for class hints and token names.
 - Configure Biome to format on save; run `pnpm lint:semantic` before commits.
@@ -447,7 +519,7 @@ jobs:
 
 ---
 
-## 11) Future extensions
+## 13) Future extensions
 
 - **Cross‑file repetition index** (cache normalized chunks to detect repeats across the whole repo).
 - **Contrast checks** (static heuristics on text/background utility pairs).
@@ -455,7 +527,7 @@ jobs:
 
 ---
 
-## 12) FAQ
+## 14) FAQ
 
 **Q: Will `@apply` bloat CSS?**  
 A: We extract only repeated patterns. Tailwind still tree‑shakes class‑based styles; the few semantic classes you add are minimal and intentionally reused.
@@ -468,7 +540,7 @@ A: Configurable. Start with `repeatMinClasses=4`, `repeatMinOccurrences=2`. Tigh
 
 ---
 
-### Ready-to-run checklist
+## 15) Ready-to-run checklist
 
 1) Add files: `tools/grit/*.grit`, `tools/semantic-lint.config.json`, `tools/stylelint.config.cjs`, `tools/semgrep-semantic.yml`.  
 2) Wire **Biome** plugin or wrapper to execute Grit rules (paths above).  
