@@ -207,18 +207,11 @@ Each file inverts a common misuse, e.g.
 The duplication keeps messages targeted whilst Biome’s current Grit plugin limits us to one pattern per file.
 
 ### D) Repetition → extract with `@apply`
-- `tools/grit/rule-repetition-length.grit`
+- `scripts/check-classlist-length.ts`
 
-```grit
-`className="$a $b $c $d $e $f $g $h $i $j $k $l $rest"` as $attr where {
-  register_diagnostic(
-    span = $attr,
-    message = "Class list exceeds 12 utilities; extract a semantic class via @apply."
-  )
-}
-```
+We rely on a lightweight TypeScript checker (run as part of `bun run semantic`) to flag class strings that exceed the configured threshold. The script reads `maxClasslistLength` from `tools/semantic-lint.config.json`, normalises whitespace, and reports any JSX `className` literal that contains more utilities than allowed.
 
-This is a simple heuristic counting twelve whitespace-delimited utilities. Fine‑tune the threshold in `tools/semantic-lint.config.json` if the team prefers a stricter or looser signal.
+> Adjust the `maxClasslistLength` value and re-run `bun run semantic` to enforce a different ceiling.
 
 ### E) Class allowlist (Tailwind, DaisyUI, project semantics)
 

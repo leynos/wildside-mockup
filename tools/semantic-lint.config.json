@@ -1,7 +1,7 @@
 {
   "repeatMinClasses": 4,
   "repeatMinOccurrences": 2,
-  "maxClasslistLength": 12,
+  "maxClasslistLength": 24,
   "allowProjectPrefixes": ["btn", "card", "nav__", "form-", "ws-"],
   "disallowRawHex": true
 }
