@@ -28,7 +28,11 @@
     "./tools/grit/rule-layout-wrapper-div-flex.grit",
     "./tools/grit/rule-layout-wrapper-div-grid.grit",
     "./tools/grit/rule-layout-wrapper-section-flex.grit",
-    "./tools/grit/rule-layout-wrapper-section-grid.grit"
+    "./tools/grit/rule-layout-wrapper-section-grid.grit",
+    "./tools/grit/rule-heading-semantic-h1.grit",
+    "./tools/grit/rule-heading-semantic-h2.grit",
+    "./tools/grit/rule-heading-semantic-h3.grit",
+    "./tools/grit/rule-heading-semantic-h4.grit"
   ],
   "files": {
     "includes": [
