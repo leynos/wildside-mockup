@@ -383,6 +383,11 @@ describe("Stage 4 completion flows", () => {
     const cardsBefore = container.querySelectorAll("[data-testid='offline-download-card']");
     expect(cardsBefore.length).toBeGreaterThan(0);
 
+    const firstCardTitle = cardsBefore[0]
+      ?.querySelector("h3")
+      ?.textContent?.trim();
+    expect(firstCardTitle).toBeTruthy();
+
     await act(async () => {
       manageButton?.click();
       await Promise.resolve();
@@ -398,6 +403,87 @@ describe("Stage 4 completion flows", () => {
 
     const cardsAfter = container.querySelectorAll("[data-testid='offline-download-card']");
     expect(cardsAfter.length).toBe(cardsBefore.length - 1);
+
+    const undoCards = container.querySelectorAll("[data-testid='offline-undo-card']");
+    expect(undoCards.length).toBe(1);
+    expect(undoCards[0]?.textContent).toContain(firstCardTitle ?? "");
+  });
+
+  it("restores a download via undo", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Manage"),
+    );
+    expect(manageButton).toBeTruthy();
+
+    const initialCards = container.querySelectorAll("[data-testid='offline-download-card']");
+    expect(initialCards.length).toBeGreaterThan(0);
+
+    await act(async () => {
+      manageButton?.click();
+      await Promise.resolve();
+    });
+
+    const deleteButtons = container.querySelectorAll("[data-testid='offline-delete-button']");
+    expect(deleteButtons.length).toBe(initialCards.length);
+
+    await act(async () => {
+      deleteButtons[0]?.click();
+      await Promise.resolve();
+    });
+
+    const undoButton = container.querySelector<HTMLButtonElement>("[data-testid='offline-undo-button']");
+    expect(undoButton).toBeTruthy();
+
+    await act(async () => {
+      undoButton?.click();
+      await Promise.resolve();
+    });
+
+    const cardsAfterUndo = container.querySelectorAll("[data-testid='offline-download-card']");
+    expect(cardsAfterUndo.length).toBe(initialCards.length);
+    expect(container.querySelectorAll("[data-testid='offline-undo-card']").length).toBe(0);
+  });
+
+  it("clears undo panels when finishing manage mode", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Manage"),
+    );
+    expect(manageButton).toBeTruthy();
+
+    await act(async () => {
+      manageButton?.click();
+      await Promise.resolve();
+    });
+
+    const deleteButtons = container.querySelectorAll("[data-testid='offline-delete-button']");
+    expect(deleteButtons.length).toBeGreaterThan(0);
+
+    await act(async () => {
+      deleteButtons[0]?.click();
+      await Promise.resolve();
+    });
+
+    const undoCard = container.querySelector("[data-testid='offline-undo-card']");
+    expect(undoCard).toBeTruthy();
+
+    const doneButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Done"),
+    );
+    expect(doneButton).toBeTruthy();
+
+    await act(async () => {
+      doneButton?.click();
+      await Promise.resolve();
+    });
+
+    expect(container.querySelectorAll("[data-testid='offline-undo-card']").length).toBe(0);
+    expect(container.querySelectorAll("[data-testid='offline-download-card']").length).toBe(
+      deleteButtons.length - 1,
+    );
   });
 
   it("toggles auto-management switches", async () => {

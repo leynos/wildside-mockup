@@ -20,9 +20,26 @@ test.describe("Stage 4 routes", () => {
   test("offline manager delete flow", async ({ page }) => {
     await page.goto("/offline");
     await page.getByRole("button", { name: /manage/i }).click();
+    const doneToggle = page.getByRole("button", { name: /^done$/i });
     const cardsBefore = await page.getByTestId("offline-download-card").count();
+    const firstCard = page.getByTestId("offline-download-card").first();
+    const deletedTitle = (await firstCard.locator("h3").textContent()) ?? "";
     await expect(page.getByTestId("offline-delete-button")).toHaveCount(cardsBefore);
     await page.getByTestId("offline-delete-button").first().click();
+    await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore - 1);
+    await expect(
+      page.getByTestId("offline-undo-card").filter({ hasText: deletedTitle.trim() }),
+    ).toBeVisible();
+    await page.getByTestId("offline-undo-button").click();
+    await expect(page.getByTestId("offline-undo-card")).toHaveCount(0);
+    await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore);
+
+    // Delete again and confirm Done clears the undo state permanently
+    await page.getByTestId("offline-delete-button").first().click();
+    await expect(page.getByTestId("offline-undo-card")).toHaveCount(1);
+    await doneToggle.click();
+    await expect(page.getByRole("button", { name: /manage/i })).toBeVisible();
+    await expect(page.getByTestId("offline-undo-card")).toHaveCount(0);
     await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore - 1);
   });
 

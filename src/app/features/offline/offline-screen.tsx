@@ -9,7 +9,12 @@ import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
 import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
-import { autoManagementOptions, offlineDownloads, offlineSuggestions } from "../../data/stage-four";
+import {
+  autoManagementOptions,
+  offlineDownloads,
+  offlineSuggestions,
+  type OfflineDownload,
+} from "../../data/stage-four";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 
@@ -17,7 +22,13 @@ export function OfflineScreen(): JSX.Element {
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState(offlineSuggestions);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [downloads, setDownloads] = useState(offlineDownloads);
+  type DownloadEntry =
+    | { kind: "download"; download: OfflineDownload }
+    | { kind: "undo"; download: OfflineDownload };
+
+  const [downloads, setDownloads] = useState<DownloadEntry[]>(() =>
+    offlineDownloads.map((download) => ({ kind: "download", download })),
+  );
   const [isManaging, setIsManaging] = useState(false);
   const [autoSettings, setAutoSettings] = useState<Record<string, boolean>>(() =>
     autoManagementOptions.reduce<Record<string, boolean>>((acc, option) => {
@@ -27,7 +38,24 @@ export function OfflineScreen(): JSX.Element {
   );
 
   const handleDeleteDownload = (downloadId: string) => {
-    setDownloads((current) => current.filter((entry) => entry.id !== downloadId));
+    if (!isManaging) return;
+    setDownloads((current) =>
+      current.map((entry) =>
+        entry.download.id === downloadId
+          ? { kind: "undo", download: entry.download }
+          : entry,
+      ),
+    );
+  };
+
+  const handleUndoDownload = (downloadId: string) => {
+    setDownloads((current) =>
+      current.map((entry) =>
+        entry.download.id === downloadId
+          ? { kind: "download", download: entry.download }
+          : entry,
+      ),
+    );
   };
 
   const handleToggleAutoSetting = (id: string, next: boolean) => {
@@ -149,65 +177,97 @@ export function OfflineScreen(): JSX.Element {
                   size="sm"
                   variant="ghost"
                   aria-pressed={isManaging}
-                  onClick={() => setIsManaging((prev) => !prev)}
+                  onClick={() =>
+                    setIsManaging((prev) => {
+                      if (prev) {
+                        setDownloads((current) =>
+                          current.filter((entry) => entry.kind === "download"),
+                        );
+                      }
+                      return !prev;
+                    })
+                  }
                 >
                   {isManaging ? "Done" : "Manage"}
                 </Button>
               </header>
 
               <div className="space-y-3">
-                {downloads.map((download) => (
-                  <article
-                    key={download.id}
-                    data-testid="offline-download-card"
-                    className="relative flex gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-4 shadow-inner shadow-base-300/30"
-                  >
-                    {isManaging ? (
+                {downloads.map((entry) =>
+                  entry.kind === "download" ? (
+                    <article
+                      key={entry.download.id}
+                      data-testid="offline-download-card"
+                      className="relative flex gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-4 shadow-inner shadow-base-300/30"
+                    >
+                      {isManaging ? (
+                        <button
+                          type="button"
+                          data-testid="offline-delete-button"
+                          aria-label={`Delete ${entry.download.title}`}
+                          className="absolute right-2 top-2 text-base-content/60 transition hover:text-error"
+                          onClick={() => handleDeleteDownload(entry.download.id)}
+                        >
+                          <Icon token="{icon.action.remove}" className="text-lg" aria-hidden />
+                        </button>
+                      ) : null}
+                      <img
+                        src={entry.download.imageUrl}
+                        alt={entry.download.title}
+                        className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
+                      />
+                      <div className="flex-1">
+                        <div className="mb-1 flex items-center justify-between">
+                          <div>
+                            <h3 className="font-semibold text-base-content">
+                              {entry.download.title}
+                            </h3>
+                            <p className="text-xs text-base-content/70">
+                              {entry.download.subtitle} • {entry.download.size}
+                            </p>
+                          </div>
+                          {entry.download.status === "complete" ? (
+                            <span className="badge badge-success badge-sm">Complete</span>
+                          ) : entry.download.status === "updating" ? (
+                            <span className="badge badge-warning badge-sm">Update available</span>
+                          ) : entry.download.status === "downloading" ? (
+                            <span className="badge badge-info badge-sm">Downloading</span>
+                          ) : null}
+                        </div>
+                        <div className="mt-2 flex items-center gap-3">
+                          <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
+                            <div
+                              className={`h-1.5 rounded-full ${entry.download.status === "downloading" ? "bg-amber-400" : "bg-accent"}`}
+                              style={{ width: `${Math.round(entry.download.progress * 100)}%` }}
+                            />
+                          </div>
+                          <span className="text-xs text-base-content/70">
+                            {Math.round(entry.download.progress * 100)}%
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                  ) : (
+                    <article
+                      key={`${entry.download.id}-undo`}
+                      data-testid="offline-undo-card"
+                      className="flex items-center justify-between rounded-2xl border border-dashed border-base-300/60 bg-base-200/70 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20"
+                    >
+                      <div>
+                        <p className="font-semibold">{entry.download.title} deleted</p>
+                        <p className="text-xs text-base-content/70">Tap undo to restore this map.</p>
+                      </div>
                       <button
                         type="button"
-                        data-testid="offline-delete-button"
-                        aria-label={`Delete ${download.title}`}
-                        className="absolute right-2 top-2 text-base-content/60 transition hover:text-error"
-                        onClick={() => handleDeleteDownload(download.id)}
+                        className="btn btn-sm btn-ghost"
+                        onClick={() => handleUndoDownload(entry.download.id)}
+                        data-testid="offline-undo-button"
                       >
-                        <Icon token="{icon.action.remove}" className="text-lg" aria-hidden />
+                        Undo
                       </button>
-                    ) : null}
-                    <img
-                      src={download.imageUrl}
-                      alt={download.title}
-                      className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
-                    />
-                    <div className="flex-1">
-                      <div className="mb-1 flex items-center justify-between">
-                        <div>
-                          <h3 className="font-semibold text-base-content">{download.title}</h3>
-                          <p className="text-xs text-base-content/70">
-                            {download.subtitle} • {download.size}
-                          </p>
-                        </div>
-                        {download.status === "complete" ? (
-                          <span className="badge badge-success badge-sm">Complete</span>
-                        ) : download.status === "updating" ? (
-                          <span className="badge badge-warning badge-sm">Update available</span>
-                        ) : download.status === "downloading" ? (
-                          <span className="badge badge-info badge-sm">Downloading</span>
-                        ) : null}
-                      </div>
-                      <div className="mt-2 flex items-center gap-3">
-                        <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
-                          <div
-                            className={`h-1.5 rounded-full ${download.status === "downloading" ? "bg-amber-400" : "bg-accent"}`}
-                            style={{ width: `${Math.round(download.progress * 100)}%` }}
-                          />
-                        </div>
-                        <span className="text-xs text-base-content/70">
-                          {Math.round(download.progress * 100)}%
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                ))}
+                    </article>
+                  ),
+                )}
               </div>
             </section>
             <section className="space-y-4">
