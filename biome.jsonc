@@ -20,7 +20,11 @@
     "./tools/grit/rule-daisyui-input-li.grit",
     "./tools/grit/rule-daisyui-input-p.grit",
     "./tools/grit/rule-utility-wrapper.grit",
-    "./tools/grit/rule-landmark-slot.grit"
+    "./tools/grit/rule-landmark-slot.grit",
+    "./tools/grit/rule-state-slot-data-state.grit",
+    "./tools/grit/rule-state-slot-aria-selected.grit",
+    "./tools/grit/rule-state-slot-aria-current.grit",
+    "./tools/grit/rule-state-slot-role-tab.grit"
   ],
   "files": {
     "includes": [
