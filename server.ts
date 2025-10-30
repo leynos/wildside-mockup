@@ -10,9 +10,9 @@ function normaliseBasePath(input: string | undefined): string {
   return prefixed.endsWith("/") ? prefixed : `${prefixed}/`;
 }
 
-const port = Number(process.env.PORT ?? 3000);
+const port = Number(process.env["PORT"] ?? 3000);
 const dist = new URL("./dist", import.meta.url).pathname;
-const basePath = normaliseBasePath(process.env.APP_BASE_PATH);
+const basePath = normaliseBasePath(process.env["APP_BASE_PATH"]);
 
 serve({
   port,

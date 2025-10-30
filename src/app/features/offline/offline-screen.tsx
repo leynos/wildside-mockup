@@ -11,9 +11,9 @@ import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
 import {
   autoManagementOptions,
+  type OfflineDownload,
   offlineDownloads,
   offlineSuggestions,
-  type OfflineDownload,
 } from "../../data/stage-four";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
@@ -41,9 +41,7 @@ export function OfflineScreen(): JSX.Element {
     if (!isManaging) return;
     setDownloads((current) =>
       current.map((entry) =>
-        entry.download.id === downloadId
-          ? { kind: "undo", download: entry.download }
-          : entry,
+        entry.download.id === downloadId ? { kind: "undo", download: entry.download } : entry,
       ),
     );
   };
@@ -51,9 +49,7 @@ export function OfflineScreen(): JSX.Element {
   const handleUndoDownload = (downloadId: string) => {
     setDownloads((current) =>
       current.map((entry) =>
-        entry.download.id === downloadId
-          ? { kind: "download", download: entry.download }
-          : entry,
+        entry.download.id === downloadId ? { kind: "download", download: entry.download } : entry,
       ),
     );
   };
@@ -255,7 +251,9 @@ export function OfflineScreen(): JSX.Element {
                     >
                       <div>
                         <p className="font-semibold">{entry.download.title} deleted</p>
-                        <p className="text-xs text-base-content/70">Tap undo to restore this map.</p>
+                        <p className="text-xs text-base-content/70">
+                          Tap undo to restore this map.
+                        </p>
                       </div>
                       <button
                         type="button"

@@ -383,9 +383,7 @@ describe("Stage 4 completion flows", () => {
     const cardsBefore = container.querySelectorAll("[data-testid='offline-download-card']");
     expect(cardsBefore.length).toBeGreaterThan(0);
 
-    const firstCardTitle = cardsBefore[0]
-      ?.querySelector("h3")
-      ?.textContent?.trim();
+    const firstCardTitle = cardsBefore[0]?.querySelector("h3")?.textContent?.trim();
     expect(firstCardTitle).toBeTruthy();
 
     await act(async () => {
@@ -433,7 +431,9 @@ describe("Stage 4 completion flows", () => {
       await Promise.resolve();
     });
 
-    const undoButton = container.querySelector<HTMLButtonElement>("[data-testid='offline-undo-button']");
+    const undoButton = container.querySelector<HTMLButtonElement>(
+      "[data-testid='offline-undo-button']",
+    );
     expect(undoButton).toBeTruthy();
 
     await act(async () => {

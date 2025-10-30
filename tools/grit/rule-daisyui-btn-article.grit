@@ -1,0 +1,3 @@
+`<article ... className="... btn ..." ...>$body</article>` where {
+  register_diagnostic(span=$body, message="DaisyUI `btn` belongs on interactive elements (<button>, <a>, or submit <input>).")
+}

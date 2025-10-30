@@ -1,0 +1,3 @@
+`className="$a $b $c $d $e $f $g $h $i $j $k $l $rest"` as $attr where {
+  register_diagnostic(span=$attr, message="Class list exceeds 12 utilities; extract a semantic class via @apply.")
+}

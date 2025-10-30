@@ -1,5 +1,26 @@
 {
   "$schema": "https://biomejs.dev/schemas/stable/schema.json",
+  "plugins": [
+    "./tools/grit/rule-a11y.grit",
+    "./tools/grit/rule-a11y-trailing.grit",
+    "./tools/grit/rule-a11y-leading.grit",
+    "./tools/grit/rule-a11y-span.grit",
+    "./tools/grit/rule-a11y-span-trailing.grit",
+    "./tools/grit/rule-a11y-span-leading.grit",
+    "./tools/grit/rule-daisyui-btn-div.grit",
+    "./tools/grit/rule-daisyui-btn-span.grit",
+    "./tools/grit/rule-daisyui-btn-section.grit",
+    "./tools/grit/rule-daisyui-btn-article.grit",
+    "./tools/grit/rule-daisyui-btn-li.grit",
+    "./tools/grit/rule-daisyui-btn-p.grit",
+    "./tools/grit/rule-daisyui-input-div.grit",
+    "./tools/grit/rule-daisyui-input-span.grit",
+    "./tools/grit/rule-daisyui-input-section.grit",
+    "./tools/grit/rule-daisyui-input-article.grit",
+    "./tools/grit/rule-daisyui-input-li.grit",
+    "./tools/grit/rule-daisyui-input-p.grit",
+    "./tools/grit/rule-repetition-length.grit"
+  ],
   "files": {
     "includes": [
       "**/*",
@@ -15,7 +36,9 @@
     ],
     "ignoreUnknown": true
   },
-  "vcs": { "useIgnoreFile": true },
+  "vcs": {
+    "useIgnoreFile": true
+  },
   "css": {
     "parser": {
       "tailwindDirectives": true
@@ -54,8 +77,12 @@
   "overrides": [
     {
       "includes": ["**/*.d.ts"],
-      "formatter": { "enabled": false },
-      "linter": { "enabled": false }
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      }
     },
     {
       "includes": ["**/*.html"],
@@ -63,11 +90,24 @@
         "indentStyle": "space",
         "indentWidth": 2
       },
-      "linter": { "enabled": false }
+      "linter": {
+        "enabled": false
+      }
     },
     {
       "includes": ["**/*.css"],
-      "linter": { "enabled": false }
+      "linter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["tools/**/*.cjs"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
     },
     {
       "includes": ["**/*.md"],
