@@ -1,5 +1,5 @@
-import { readFileSync } from "fs";
-import { join, relative } from "path";
+import { readFileSync } from "node:fs";
+import { relative } from "node:path";
 import ts from "typescript";
 
 interface SemanticConfig {
@@ -34,7 +34,13 @@ interface Violation {
 
 function analyseFile(filePath: string, maxLength: number, results: Violation[]): void {
   const content = readFileSync(filePath, "utf8");
-  const source = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const source = ts.createSourceFile(
+    filePath,
+    content,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
 
   const visit = (node: ts.Node) => {
     if (ts.isJsxAttribute(node) && node.name.text === "className" && node.initializer) {
@@ -89,7 +95,7 @@ function main() {
   for (const violation of violations) {
     const displayPath = relative(PROJECT_ROOT, violation.file);
     console.error(
-      `${displayPath}:${violation.line}:${violation.column} className has ${violation.length} utilities (max ${maxLength}).`
+      `${displayPath}:${violation.line}:${violation.column} className has ${violation.length} utilities (max ${maxLength}).`,
     );
   }
 

@@ -1,5 +1,5 @@
-import { readFileSync } from "fs";
-import { join, relative } from "path";
+import { readFileSync } from "node:fs";
+import { relative } from "node:path";
 import ts from "typescript";
 
 type Location = { line: number; column: number };
@@ -59,11 +59,13 @@ function normaliseToken(token: string): string {
   return token.trim().toLowerCase();
 }
 
-function normaliseClassString(raw: string, filePath: string, loc: Location, suppressPrefixes: string[]): NormalisedClass | null {
-  const tokens = raw
-    .split(/\s+/)
-    .map(normaliseToken)
-    .filter(Boolean);
+function normaliseClassString(
+  raw: string,
+  filePath: string,
+  loc: Location,
+  suppressPrefixes: string[],
+): NormalisedClass | null {
+  const tokens = raw.split(/\s+/).map(normaliseToken).filter(Boolean);
   if (tokens.length === 0) return null;
   const uniqueTokens = Array.from(new Set(tokens)).sort((a, b) => a.localeCompare(b));
   if (shouldSuppress(uniqueTokens, suppressPrefixes)) {
@@ -93,7 +95,10 @@ function extractStringLiteral(initialiser: ts.JsxAttributeValue): string | null 
       const spans = expr.templateSpans;
       const reconstructed: string[] = [head];
       for (const span of spans) {
-        if (ts.isStringLiteral(span.expression) || ts.isNoSubstitutionTemplateLiteral(span.expression)) {
+        if (
+          ts.isStringLiteral(span.expression) ||
+          ts.isNoSubstitutionTemplateLiteral(span.expression)
+        ) {
           reconstructed.push(span.expression.text, span.literal.text);
           continue;
         }
@@ -115,8 +120,14 @@ function extractStringLiteral(initialiser: ts.JsxAttributeValue): string | null 
             }
           } else if (ts.isObjectLiteralExpression(arg)) {
             for (const prop of arg.properties) {
-              if (ts.isPropertyAssignment(prop) && (ts.isStringLiteral(prop.name) || ts.isIdentifier(prop.name))) {
-                if (ts.isStringLiteral(prop.initializer) || ts.isNoSubstitutionTemplateLiteral(prop.initializer)) {
+              if (
+                ts.isPropertyAssignment(prop) &&
+                (ts.isStringLiteral(prop.name) || ts.isIdentifier(prop.name))
+              ) {
+                if (
+                  ts.isStringLiteral(prop.initializer) ||
+                  ts.isNoSubstitutionTemplateLiteral(prop.initializer)
+                ) {
                   literals.push(prop.name.text ?? prop.name.getText());
                 }
               }
@@ -134,7 +145,13 @@ function extractStringLiteral(initialiser: ts.JsxAttributeValue): string | null 
 
 function extractClassesFromTsx(filePath: string, suppressPrefixes: string[]): NormalisedClass[] {
   const sourceText = readFileSync(filePath, "utf8");
-  const sourceFile = ts.createSourceFile(filePath, sourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const sourceFile = ts.createSourceFile(
+    filePath,
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
   const results: NormalisedClass[] = [];
 
   const visit = (node: ts.Node) => {
@@ -142,7 +159,12 @@ function extractClassesFromTsx(filePath: string, suppressPrefixes: string[]): No
       const raw = extractStringLiteral(node.initializer);
       if (raw) {
         const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-        const norm = normaliseClassString(raw, filePath, { line: line + 1, column: character + 1 }, suppressPrefixes);
+        const norm = normaliseClassString(
+          raw,
+          filePath,
+          { line: line + 1, column: character + 1 },
+          suppressPrefixes,
+        );
         if (norm) results.push(norm);
       }
     }
@@ -150,23 +172,6 @@ function extractClassesFromTsx(filePath: string, suppressPrefixes: string[]): No
   };
 
   visit(sourceFile);
-  return results;
-}
-
-function extractClassesFromHtml(filePath: string, suppressPrefixes: string[]): NormalisedClass[] {
-  const text = readFileSync(filePath, "utf8");
-  const results: NormalisedClass[] = [];
-  const classRegex = /class\s*=\s*"([^"]+)"/g;
-  let match: RegExpExecArray | null;
-  while ((match = classRegex.exec(text)) !== null) {
-    const raw = match[1];
-    const index = match.index;
-    const upToMatch = text.slice(0, index);
-    const line = upToMatch.split(/\n/).length;
-    const column = index - upToMatch.lastIndexOf("\n");
-    const norm = normaliseClassString(raw, filePath, { line, column }, suppressPrefixes);
-    if (norm) results.push(norm);
-  }
   return results;
 }
 
@@ -186,14 +191,23 @@ function buildIndex(entries: NormalisedClass[], sample: number): Map<string, num
     const baseTokens = entry.tokens.slice(0, sample);
     for (const token of baseTokens) {
       const key = token;
-      if (!map.has(key)) map.set(key, []);
-      map.get(key)!.push(index);
+      const bucket = map.get(key);
+      if (bucket) {
+        bucket.push(index);
+      } else {
+        map.set(key, [index]);
+      }
     }
   });
   return map;
 }
 
-function uniqueCandidates(index: Map<string, number[]>, entry: NormalisedClass, sample: number, selfIndex: number): number[] {
+function uniqueCandidates(
+  index: Map<string, number[]>,
+  entry: NormalisedClass,
+  sample: number,
+  selfIndex: number,
+): number[] {
   const candidateSet = new Set<number>();
   const tokens = entry.tokens.slice(0, sample);
   for (const token of tokens) {
@@ -243,16 +257,18 @@ function main(): void {
 
   const groups = new Map<number, { members: number[]; distances: number[] }>();
   pairDistances.forEach((distance, key) => {
-    const members = pairMembers.get(key)!;
+    const members = pairMembers.get(key);
+    if (!members) return;
     const root = unions.find(members[0]);
     if (!groups.has(root)) groups.set(root, { members: [], distances: [] });
-    const group = groups.get(root)!;
+    const group = groups.get(root);
+    if (!group) return;
     group.distances.push(distance);
     group.members.push(...members);
   });
 
   const results: { score: number; message: string }[] = [];
-  groups.forEach((group, root) => {
+  groups.forEach((group, _root) => {
     const uniqueIndices = Array.from(new Set(group.members));
     if (uniqueIndices.length < config.minOccurrences) return;
     const bestIndex = uniqueIndices.reduce((current, candidate) => {
@@ -279,7 +295,7 @@ function main(): void {
       })
       .join("\n");
     const suffix = uniqueIndices.length > 5 ? `\n  • …and ${uniqueIndices.length - 5} more` : "";
-    const score = Math.pow(similarity, 2) * uniqueIndices.length;
+    const score = similarity ** 2 * uniqueIndices.length;
     results.push({
       score,
       message: `${header}\n${bulletLines}${suffix}\nConsider extracting a shared semantic class (e.g. add an @apply definition in semantic.css).`,
@@ -288,7 +304,9 @@ function main(): void {
 
   results
     .sort((a, b) => b.score - a.score)
-    .forEach((result) => console.error(result.message));
+    .forEach((result) => {
+      console.error(result.message);
+    });
 
   if (results.length > 0 && config.failOnViolation) {
     process.exitCode = 1;
