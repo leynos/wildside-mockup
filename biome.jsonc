@@ -19,7 +19,8 @@
     "./tools/grit/rule-daisyui-input-article.grit",
     "./tools/grit/rule-daisyui-input-li.grit",
     "./tools/grit/rule-daisyui-input-p.grit",
-    "./tools/grit/rule-utility-wrapper.grit"
+    "./tools/grit/rule-utility-wrapper.grit",
+    "./tools/grit/rule-landmark-slot.grit"
   ],
   "files": {
     "includes": [
