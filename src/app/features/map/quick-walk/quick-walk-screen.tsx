@@ -217,18 +217,18 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div
-                    className="pointer-events-auto relative max-h-[53vh] overflow-hidden rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur"
+                    className="pointer-events-auto relative flex max-h-[53vh] flex-col overflow-hidden rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur"
                     data-testid="quick-walk-stops-panel"
                   >
-                    <div className="sticky top-0 z-20 flex justify-center bg-base-900/70 pb-3 pt-3">
+                    <div className="flex justify-center bg-base-900/70 pb-3 pt-3">
                       <button
                         type="button"
                         onClick={handleDismissPanels}
-                        className="mx-auto block h-2 w-12 rounded-full bg-base-300/70"
+                        className={panelHandleClass}
                         aria-label="Dismiss panel"
                       />
                     </div>
-                    <div className="max-h-full overflow-y-auto px-4 pb-5">
+                    <div className="flex-1 overflow-y-auto px-4 pb-5">
                       <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
                     </div>
                     <div

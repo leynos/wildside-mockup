@@ -164,8 +164,8 @@ export function ItineraryScreen(): JSX.Element {
 
             <Tabs.Content value="stops" className="absolute inset-0 flex flex-col justify-end">
               <div className="pointer-events-none px-6 pb-6">
-                <div className="pointer-events-auto relative max-h-[60vh] overflow-hidden rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur">
-                  <div className="sticky top-0 z-20 flex justify-center bg-base-900/70 pb-3 pt-3">
+                <div className="pointer-events-auto relative flex max-h-[60vh] flex-col overflow-hidden rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur">
+                  <div className="flex justify-center bg-base-900/70 pb-3 pt-3">
                     <button
                       type="button"
                       className={stickyHandleClass}
@@ -173,7 +173,7 @@ export function ItineraryScreen(): JSX.Element {
                       onClick={() => setActiveTab("map")}
                     />
                   </div>
-                  <div className="max-h-full overflow-y-auto px-5 pb-5">
+                  <div className="flex-1 overflow-y-auto px-5 pb-5">
                     <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
                   </div>
                   <div
