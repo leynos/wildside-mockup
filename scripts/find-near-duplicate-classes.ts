@@ -251,7 +251,7 @@ function main(): void {
     group.members.push(...members);
   });
 
-  const messages: string[] = [];
+  const results: { score: number; message: string }[] = [];
   groups.forEach((group, root) => {
     const uniqueIndices = Array.from(new Set(group.members));
     if (uniqueIndices.length < config.minOccurrences) return;
@@ -267,8 +267,9 @@ function main(): void {
     }, uniqueIndices[0]);
 
     const anchor = filtered[bestIndex];
-    const similarity = ((1 - average(group.distances)) * 100).toFixed(0);
-    const header = `${relative(PROJECT_ROOT, anchor.filePath)}:${anchor.location.line}:${anchor.location.column} near-duplicate class strings (~${similarity}% overlap)`;
+    const similarity = 1 - average(group.distances);
+    const percentage = (similarity * 100).toFixed(0);
+    const header = `${relative(PROJECT_ROOT, anchor.filePath)}:${anchor.location.line}:${anchor.location.column} near-duplicate class strings (~${percentage}% overlap)`;
     const bulletLines = uniqueIndices
       .slice(0, 5)
       .map((idx) => {
@@ -278,14 +279,19 @@ function main(): void {
       })
       .join("\n");
     const suffix = uniqueIndices.length > 5 ? `\n  • …and ${uniqueIndices.length - 5} more` : "";
-    messages.push(`${header}\n${bulletLines}${suffix}\nConsider extracting a shared semantic class (e.g. add an @apply definition in semantic.css).`);
+    const score = Math.pow(similarity, 2) * uniqueIndices.length;
+    results.push({
+      score,
+      message: `${header}\n${bulletLines}${suffix}\nConsider extracting a shared semantic class (e.g. add an @apply definition in semantic.css).`,
+    });
   });
 
-  if (messages.length > 0) {
-    messages.forEach((msg) => console.error(msg));
-    if (config.failOnViolation) {
-      process.exitCode = 1;
-    }
+  results
+    .sort((a, b) => b.score - a.score)
+    .forEach((result) => console.error(result.message));
+
+  if (results.length > 0 && config.failOnViolation) {
+    process.exitCode = 1;
   }
 }
 
