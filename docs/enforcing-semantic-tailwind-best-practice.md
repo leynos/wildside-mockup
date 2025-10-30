@@ -208,10 +208,27 @@ The duplication keeps messages targeted whilst Biome’s current Grit plugin lim
 
 ### D) Repetition → extract with `@apply`
 - `scripts/check-classlist-length.ts`
+- `scripts/find-near-duplicate-classes.ts`
 
-We rely on a lightweight TypeScript checker (run as part of `bun run semantic`) to flag class strings that exceed the configured threshold. The script reads `maxClasslistLength` from `tools/semantic-lint.config.json`, normalises whitespace, and reports any JSX `className` literal that contains more utilities than allowed.
+We rely on lightweight TypeScript checkers (run as part of `bun run semantic`) to flag class strings that exceed the configured threshold **and** to warn about near-duplicate utility sets. The scripts read thresholds from `tools/semantic-lint.config.json`, normalise whitespace, and report literals that violate the agreed limits.
 
-> Adjust the `maxClasslistLength` value and re-run `bun run semantic` to enforce a different ceiling.
+> Adjust `maxClasslistLength` **and** the `nearDuplicateClasses` block and re-run `bun run semantic` to enforce different ceilings.
+
+### E) Near duplicate detection
+
+The near-duplicate checker tokenises each literal, deduplicates utilities, and compares token sets using Jaccard similarity. Any pair (or group) whose similarity exceeds the configured threshold produces a single diagnostic summarising the overlap and paths. Suggested defaults are bundled in `tools/semantic-lint.config.json`:
+
+```jsonc
+"nearDuplicateClasses": {
+  "minTokenCount": 4,
+  "maxJaccardDistance": 0.25,
+  "minOccurrences": 2,
+  "tokenIndexSample": 5,
+  "suppressPrefixes": ["prose-", "wysiwyg-"]
+}
+```
+
+Adjust these knobs to tune the signal. When the checker fires, extract a semantic `@apply` class (for example inside `semantic.css`) and reuse it instead of cloning similar utility lists.
 
 ### E) Class allowlist (Tailwind, DaisyUI, project semantics)
 

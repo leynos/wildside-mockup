@@ -3,5 +3,13 @@
   "repeatMinOccurrences": 2,
   "maxClasslistLength": 24,
   "allowProjectPrefixes": ["btn", "card", "nav__", "form-", "ws-"],
-  "disallowRawHex": true
+  "disallowRawHex": true,
+  "nearDuplicateClasses": {
+    "minTokenCount": 4,
+    "maxJaccardDistance": 0.25,
+    "minOccurrences": 2,
+    "tokenIndexSample": 5,
+    "suppressPrefixes": ["prose-", "wysiwyg-"],
+    "failOnViolation": false
+  }
 }

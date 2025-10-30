@@ -14,9 +14,10 @@
     "check:types": "tsc --noEmit --skipLibCheck",
     "test": "bun test --preload ./tests/setup-happy-dom.ts",
     "test:e2e": "playwright test",
-    "semantic:lint": "bunx biome ci src tests tools docs && bun run lint:classlist && uvx semgrep --config tools/semgrep-semantic.yml --include src/**/*.tsx --include tests/**/*.tsx && bunx stylelint 'src/**/*.css' --config tools/stylelint.config.cjs",
+    "semantic:lint": "bunx biome ci src tests tools docs && bun run lint:classlist && bun run lint:class-duplicates && uvx semgrep --config tools/semgrep-semantic.yml --include src/**/*.tsx --include tests/**/*.tsx && bunx stylelint 'src/**/*.css' --config tools/stylelint.config.cjs",
     "semantic": "bun run semantic:lint",
-    "lint:classlist": "bun run scripts/check-classlist-length.ts"
+    "lint:classlist": "bun run scripts/check-classlist-length.ts",
+    "lint:class-duplicates": "bun run scripts/find-near-duplicate-classes.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.1",
