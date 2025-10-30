@@ -230,6 +230,62 @@ The near-duplicate checker tokenises each literal, deduplicates utilities, and c
 
 Adjust these knobs to tune the signal. When the checker fires, extract a semantic `@apply` class (for example inside `semantic.css`) and reuse it instead of cloning similar utility lists.
 
+---
+
+## Proposed meaning-first semantic checks (roadmap)
+
+These heuristics focus on **structural intent** rather than raw class similarity. Each item describes what to detect, why it matters, and the preferred fix we will recommend in future lint passes.
+
+### 1) “Div/span soup” (utility-only wrapper chains)
+- **Signal**: Two or more nested `<div>`/`<span>` nodes whose only attribute is a utility-heavy `className` (no `role`, `aria-*`, `id`, `data-*`, event handlers).
+- **Meaning**: The wrapper is expressing a *layout concept* (stack, cluster, surface) without naming it.
+- **Action**: Warn and suggest extracting a named container class (e.g. `.stack`, `.cluster`, `.card__body`) via `@apply`.
+- **Implementation notes**: GritQL rule that walks parent/child utility-only nodes and fires when depth ≥ 2; fallback AST walker if needed.
+
+### 2) Landmarks and slot semantics
+- **Signal**: Utility-only child elements inside semantic regions such as `<nav>`, `<header>`, `<ul>`, `<form>`.
+- **Meaning**: These are *slots* (navigation links, menu items, form controls) that deserve a named semantic class.
+- **Action**: Suggest contextual names like `.nav__link`, `.nav__link--active`, `.menu__item`, `.form__label`.
+- **Implementation notes**: GritQL ancestor constraint rules that tailor the suggestion to the enclosing landmark.
+
+### 3) Repeated sibling pattern (loop intent)
+- **Signal**: Identical or near-identical class lists applied to siblings, especially those produced by `.map()` in TSX.
+- **Meaning**: Indicates a row/tile/card abstraction that should become a shared class.
+- **Action**: Recommend extracting both a container class (e.g. `.card-grid`) and an item class (e.g. `.card`).
+- **Implementation notes**: Extend the existing near-duplicate script to consider siblings grouped by parent, or add a dedicated GritQL rule for `.map()` return values.
+
+### 4) Token-to-concept mapping
+- **Signal**: Utility combinations that scream a known component (button, chip, badge, toolbar, tabs trigger).
+- **Meaning**: The element already behaves like a component but lacks a semantic name.
+- **Action**: Issue prescriptive suggestions derived from a concept dictionary (e.g. `.chip`, `.toolbar`, `.tabs__trigger`).
+- **Implementation notes**: Dictionary-driven matcher in the companion script or GritQL predicates that match presence/absence token sets.
+
+### 5) Stateful slots (Radix/DaisyUI attributes)
+- **Signal**: Elements with `data-state`, `aria-selected`, `aria-current`, `role="tab"` and long utility lists.
+- **Meaning**: State-driven UI pieces should expose a semantic class for styling the base and active states.
+- **Action**: Recommend classes like `.tabs__trigger` plus state modifiers in CSS.
+- **Implementation notes**: GritQL rule watching for state attributes plus utility load.
+
+### 6) Anonymous layout wrappers
+- **Signal**: Elements using only layout utilities (flex/grid/gap/justify/space) without semantics.
+- **Meaning**: These are layout patterns (stack/cluster/switcher) that deserve named abstractions.
+- **Action**: Suggest layout semantics (e.g. `.stack`, `.cluster`, `.sidebar`).
+- **Implementation notes**: Token classifier that recognises layout-only sets; fire in GritQL or the script.
+
+### 7) Heading/title repetition
+- **Signal**: The same utility bundle repeated across multiple headings (`<h1>`-`<h4>`) or section titles.
+- **Meaning**: Editorial roles should be expressed via `.section-title`, `.card__title`, etc.
+- **Action**: Recommend extracted title classes with `@apply`.
+- **Implementation notes**: GritQL rule that tracks heading class repetition counts.
+
+### 8) Utility load vs. semantic signal score
+- **Signal**: Elements with heavy utility usage but little semantic metadata (no role/id/aria/data).
+- **Meaning**: Frequent offender list for “this should have a name”.
+- **Action**: Soft warning nudging authors to introduce a semantic class summarising intent.
+- **Implementation notes**: Extend the companion script to compute a heuristic score `(tokenCount - semanticSignals)` and warn above a configurable threshold.
+
+Each proposal will ship with a concrete class name suggestion and will reference `src/styles/semantic.css` (or `@utility` helpers) so fixes are straightforward.
+
 ### E) Class allowlist (Tailwind, DaisyUI, project semantics)
 
 The current Biome plugin does not yet expose helpers such as `split_classes`. Until it does, the repository enforces the allowlist via **Semgrep** (`tools/semgrep-semantic.yml`, rule `class-token-uppercase`) which catches camelCase tokens and other non‑Tailwind/DaisyUI class names. When the Grit integration grows richer predicates we can migrate this rule back into Grit.
