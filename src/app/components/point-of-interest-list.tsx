@@ -61,41 +61,43 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-            <Dialog.Content className="fixed inset-x-0 bottom-0 z-50 rounded-t-3xl border border-base-300/60 bg-base-100 p-6 shadow-2xl">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <Dialog.Title className="text-lg font-semibold text-base-content">
-                    {poi.name}
-                  </Dialog.Title>
-                  <Dialog.Description className="mt-1 text-sm text-base-content/70">
-                    {poi.description}
-                  </Dialog.Description>
-                </div>
-                <Dialog.Close asChild>
-                  <button type="button" className="btn btn-ghost btn-sm">
-                    Close
-                  </button>
-                </Dialog.Close>
-              </div>
-              <div className="mt-4 space-y-2 text-sm text-base-content/70">
-                {poi.tags.length > 0 ? (
-                  <div className="flex flex-wrap gap-2">
-                    {poi.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div className="max-h-[min(80vh,32rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-base-300/60 bg-base-100 p-6 shadow-2xl">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <Dialog.Title className="text-lg font-semibold text-base-content">
+                      {poi.name}
+                    </Dialog.Title>
+                    <Dialog.Description className="mt-1 text-sm text-base-content/70">
+                      {poi.description}
+                    </Dialog.Description>
                   </div>
-                ) : null}
-                {poi.openHours ? (
-                  <p className="flex items-center gap-2 text-xs text-base-content/60">
-                    <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
-                    {poi.openHours}
-                  </p>
-                ) : null}
+                  <Dialog.Close asChild>
+                    <button type="button" className="btn btn-ghost btn-sm">
+                      Close
+                    </button>
+                  </Dialog.Close>
+                </div>
+                <div className="mt-4 space-y-2 text-sm text-base-content/70">
+                  {poi.tags.length > 0 ? (
+                    <div className="flex flex-wrap gap-2">
+                      {poi.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                  {poi.openHours ? (
+                    <p className="flex items-center gap-2 text-xs text-base-content/60">
+                      <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
+                      {poi.openHours}
+                    </p>
+                  ) : null}
+                </div>
               </div>
             </Dialog.Content>
           </Dialog.Portal>
