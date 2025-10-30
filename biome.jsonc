@@ -24,7 +24,11 @@
     "./tools/grit/rule-state-slot-data-state.grit",
     "./tools/grit/rule-state-slot-aria-selected.grit",
     "./tools/grit/rule-state-slot-aria-current.grit",
-    "./tools/grit/rule-state-slot-role-tab.grit"
+    "./tools/grit/rule-state-slot-role-tab.grit",
+    "./tools/grit/rule-layout-wrapper-div-flex.grit",
+    "./tools/grit/rule-layout-wrapper-div-grid.grit",
+    "./tools/grit/rule-layout-wrapper-section-flex.grit",
+    "./tools/grit/rule-layout-wrapper-section-grid.grit"
   ],
   "files": {
     "includes": [
