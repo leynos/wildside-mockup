@@ -17,6 +17,7 @@
     "test:a11y:watch": "vitest --watch --config vitest.a11y.config.ts",
     "test:e2e": "playwright test",
     "test:all": "bun lint && bun check:types && bun test && bun run test:a11y && bun semantic && bun test:e2e",
+    "ff": "bun run test:all",
     "semantic:lint": "bunx biome ci src tests tools docs && bun run lint:classlist && bun run lint:class-duplicates && uvx semgrep --config tools/semgrep-semantic.yml --include src/**/*.tsx --include tests/**/*.tsx && bunx stylelint 'src/**/*.css' --config tools/stylelint.config.cjs",
     "semantic": "bun run semantic:lint",
     "lint:classlist": "bun run scripts/check-classlist-length.ts",
