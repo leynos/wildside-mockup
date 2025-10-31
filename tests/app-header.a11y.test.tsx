@@ -8,8 +8,10 @@ import { renderWithProviders } from "./utils/render-with-providers";
 
 const hasAxeMatcher = (() => {
   try {
-    return typeof (expect as unknown as (value: unknown) => { toHaveNoViolations?: unknown })({})
-      .toHaveNoViolations === "function";
+    return (
+      typeof (expect as unknown as (value: unknown) => { toHaveNoViolations?: unknown })({})
+        .toHaveNoViolations === "function"
+    );
   } catch {
     return false;
   }
