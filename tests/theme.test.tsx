@@ -48,8 +48,8 @@ describe("ThemeProvider", () => {
     };
 
     const container = mountWithProvider(<Probe />);
-    const probe = container.querySelector("span[data-theme]");
-    expect(probe?.dataset.theme).toBe("wildside-night");
+    const probe = container.querySelector<HTMLSpanElement>("span[data-theme]");
+    expect(probe?.getAttribute("data-theme")).toBe("wildside-night");
     expect(document.documentElement.getAttribute("data-theme")).toBe("wildside-night");
     expect(document.body.getAttribute("data-theme")).toBe("wildside-night");
   });

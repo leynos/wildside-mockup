@@ -37,7 +37,7 @@ export interface SetViewportOptions {
   animate?: boolean;
 }
 
-interface MapStateStore {
+export interface MapStateStore {
   getSnapshot: () => MapStateSnapshot;
   subscribe(listener: () => void): () => void;
   actions: MapStateActions;
@@ -47,12 +47,12 @@ interface InternalState extends MapStateSnapshot {
   map: MapLibreMap | null;
 }
 
-const DEFAULT_CENTER: LngLatTuple = Object.freeze([11.404, 47.267]);
+const DEFAULT_CENTER: LngLatTuple = [11.404, 47.267];
 const DEFAULT_ZOOM = 12;
 
 const defaultSnapshot: MapStateSnapshot = {
   viewport: {
-    center: DEFAULT_CENTER,
+    center: [...DEFAULT_CENTER] as LngLatTuple,
     zoom: DEFAULT_ZOOM,
     bearing: 0,
     pitch: 0,
@@ -98,7 +98,10 @@ function createInternalState(): InternalState {
 
 function cloneSnapshot(state: InternalState): MapStateSnapshot {
   return {
-    viewport: { ...state.viewport },
+    viewport: {
+      ...state.viewport,
+      center: [...state.viewport.center] as LngLatTuple,
+    },
     highlightedPoiIds: [...state.highlightedPoiIds],
     visibleLayers: { ...state.visibleLayers },
   };
@@ -276,7 +279,9 @@ function createMapStateStore(): MapStateStore {
 
   function setViewport(options: SetViewportOptions) {
     const nextViewport: MapViewportSnapshot = {
-      center: options.center ?? state.viewport.center,
+      center: options.center
+        ? ([...options.center] as LngLatTuple)
+        : ([...state.viewport.center] as LngLatTuple),
       zoom: options.zoom ?? state.viewport.zoom,
       bearing: options.bearing ?? state.viewport.bearing,
       pitch: options.pitch ?? state.viewport.pitch,
@@ -368,6 +373,6 @@ export function useOptionalMapStore(): MapStateStore | null {
 }
 
 export const mapDefaults = {
-  center: DEFAULT_CENTER,
+  center: [...DEFAULT_CENTER] as LngLatTuple,
   zoom: DEFAULT_ZOOM,
-} as const;
+};

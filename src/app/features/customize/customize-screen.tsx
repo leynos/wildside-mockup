@@ -365,26 +365,35 @@ export function CustomizeScreen(): JSX.Element {
           }
         />
         <main className="flex-1 overflow-y-auto px-6 pb-6 pt-4">
-          {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => (
-            <SliderBlock
-              key={id}
-              id={id}
-              iconToken={iconToken}
-              iconColorClass={iconColorClass}
-              label={label}
-              markers={markers}
-              max={max}
-              min={min}
-              step={step}
-              value={sliderValues[id]}
-              onValueChange={(value) =>
-                setSliderValues((current) => ({
-                  ...current,
-                  [id]: Number.isNaN(value) ? current[id] : value,
-                }))
-              }
-            />
-          ))}
+          {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => {
+            const currentValue = sliderValues[id] ?? min;
+            return (
+              <SliderBlock
+                key={id}
+                id={id}
+                iconToken={iconToken}
+                iconColorClass={iconColorClass}
+                label={label}
+                markers={markers}
+                max={max}
+                min={min}
+                step={step}
+                value={currentValue}
+                onValueChange={(value) =>
+                  setSliderValues((current) => {
+                    const next =
+                      typeof value === "number" && !Number.isNaN(value)
+                        ? value
+                        : (current[id] ?? currentValue);
+                    return {
+                      ...current,
+                      [id]: next,
+                    };
+                  })
+                }
+              />
+            );
+          })}
           <SegmentPicker
             id="crowd"
             label="Crowd Level"

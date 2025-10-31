@@ -23,6 +23,17 @@ function InterestChips({
   selected: string[];
   onChange: (next: string[]) => void;
 }) {
+  const interestIds = useMemo(
+    () =>
+      Array.from(
+        new Set<string>([
+          ...defaultSelectedInterests,
+          ...discoverInterests.map((option) => option.id),
+        ]),
+      ),
+    [],
+  );
+
   return (
     <ToggleGroup.Root
       type="multiple"
@@ -31,27 +42,20 @@ function InterestChips({
       aria-label="Select walk interests"
       className="flex flex-wrap gap-2"
     >
-      {defaultSelectedInterests
-        .concat(discoverInterests.map((option) => option.id))
-        .filter((value, index, array) => array.indexOf(value) === index)
-        .map((id) => {
-          const interest = interestLookup.get(id);
-          if (!interest) return null;
-          return (
-            <ToggleGroup.Item
-              key={id}
-              value={id}
-              className="flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-900"
-            >
-              <Icon
-                token={interest.iconToken}
-                className={`text-lg ${interest.iconColorClass}`}
-                aria-hidden
-              />
-              {interest.label}
-            </ToggleGroup.Item>
-          );
-        })}
+      {interestIds.map((id) => {
+        const interest = interestLookup.get(id);
+        if (!interest) return null;
+        return (
+          <ToggleGroup.Item key={id} value={id} className="wizard-step__interest-chip">
+            <Icon
+              token={interest.iconToken}
+              className={`text-lg ${interest.iconColorClass}`}
+              aria-hidden
+            />
+            {interest.label}
+          </ToggleGroup.Item>
+        );
+      })}
     </ToggleGroup.Root>
   );
 }

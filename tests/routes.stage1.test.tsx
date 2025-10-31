@@ -20,6 +20,12 @@ type TestRoute =
   | "/offline"
   | "/safety-accessibility";
 
+const clickElement = (element: Element | null | undefined): void => {
+  if (element instanceof HTMLElement) {
+    element.click();
+  }
+};
+
 async function renderRoute(path: TestRoute) {
   window.history.replaceState(null, "", path);
   const routerInstance = createAppRouter();
@@ -77,7 +83,7 @@ describe("Stage 1 routed flows", () => {
     const chips = Array.from(container.querySelectorAll("button"));
     const parksChip = chips.find((chip) => chip.textContent?.includes("Parks & Nature"));
     expect(parksChip).toBeTruthy();
-    act(() => parksChip?.click());
+    act(() => clickElement(parksChip));
 
     const indicator = Array.from(container.querySelectorAll<HTMLParagraphElement>("p")).find((p) =>
       p.textContent?.includes("themes selected"),
@@ -94,7 +100,7 @@ describe("Stage 1 routed flows", () => {
     expect(filterButton).toBeTruthy();
 
     await act(async () => {
-      filterButton?.click();
+      clickElement(filterButton);
       // allow the router navigation microtask to flush
       await Promise.resolve();
     });
@@ -110,7 +116,7 @@ describe("Stage 1 routed flows", () => {
     const safetySwitch = container.querySelector<HTMLButtonElement>("#safety");
     expect(safetySwitch?.getAttribute("data-state")).toBe("unchecked");
 
-    act(() => safetySwitch?.click());
+    act(() => clickElement(safetySwitch));
     expect(safetySwitch?.getAttribute("data-state")).toBe("checked");
   });
 });
@@ -146,7 +152,7 @@ describe("Stage 2 routed flows", () => {
       btn.textContent?.includes("Coffee Spots"),
     );
     expect(coffeeChip).toBeTruthy();
-    act(() => coffeeChip?.click());
+    act(() => clickElement(coffeeChip));
 
     const selectionBadge = Array.from(container.querySelectorAll("span")).find((node) =>
       node.textContent?.includes("selected"),
@@ -164,7 +170,7 @@ describe("Stage 2 routed flows", () => {
     expect(saveAction).toBeTruthy();
 
     await act(async () => {
-      saveAction?.click();
+      clickElement(saveAction);
       await Promise.resolve();
     });
 
@@ -183,7 +189,7 @@ describe("Stage 2 routed flows", () => {
     expect(wandTrigger).toBeTruthy();
 
     await act(async () => {
-      wandTrigger?.click();
+      clickElement(wandTrigger);
       await Promise.resolve();
     });
 
@@ -201,7 +207,7 @@ describe("Stage 2 routed flows", () => {
     );
     expect(favouriteButton).toBeTruthy();
 
-    act(() => favouriteButton?.click());
+    act(() => clickElement(favouriteButton));
     expect(favouriteButton?.getAttribute("aria-pressed")).toBe("true");
 
     const shareButton = Array.from(container.querySelectorAll("button")).find((btn) =>
@@ -210,7 +216,7 @@ describe("Stage 2 routed flows", () => {
     expect(shareButton).toBeTruthy();
 
     await act(async () => {
-      shareButton?.click();
+      clickElement(shareButton);
       await Promise.resolve();
     });
 
@@ -220,7 +226,7 @@ describe("Stage 2 routed flows", () => {
       btn.textContent?.includes("Close"),
     );
     expect(closeControl).toBeTruthy();
-    act(() => closeControl?.click());
+    act(() => clickElement(closeControl));
   });
 
   it("opens the saved walk share dialog from the saved route", async () => {
@@ -232,7 +238,7 @@ describe("Stage 2 routed flows", () => {
     expect(shareTrigger).toBeTruthy();
 
     await act(async () => {
-      shareTrigger?.click();
+      clickElement(shareTrigger);
       await Promise.resolve();
     });
 
@@ -241,13 +247,13 @@ describe("Stage 2 routed flows", () => {
     const closeButton = Array.from(dialog?.querySelectorAll("button") ?? []).find((btn) =>
       btn.textContent?.includes("Close"),
     );
-    act(() => closeButton?.click());
+    act(() => clickElement(closeButton));
 
     const favouriteButton = container.querySelector<HTMLButtonElement>(
       "button[aria-pressed='true']",
     );
     expect(favouriteButton).toBeTruthy();
-    act(() => favouriteButton?.click());
+    act(() => clickElement(favouriteButton));
     expect(favouriteButton?.getAttribute("aria-pressed")).toBe("false");
   });
 });
@@ -285,7 +291,7 @@ describe("Stage 3 wizard flows", () => {
     expect(continueButton).toBeTruthy();
 
     await act(async () => {
-      continueButton?.click();
+      clickElement(continueButton);
       await Promise.resolve();
     });
 
@@ -305,7 +311,7 @@ describe("Stage 3 wizard flows", () => {
     expect(saveButton).toBeTruthy();
 
     await act(async () => {
-      saveButton?.click();
+      clickElement(saveButton);
       await Promise.resolve();
     });
 
@@ -316,7 +322,7 @@ describe("Stage 3 wizard flows", () => {
       btn.textContent?.includes("Close"),
     );
     expect(closeButton).toBeTruthy();
-    act(() => closeButton?.click());
+    act(() => clickElement(closeButton));
   });
 });
 
@@ -353,7 +359,7 @@ describe("Stage 4 completion flows", () => {
     expect(rateButton).toBeTruthy();
 
     await act(async () => {
-      rateButton?.click();
+      clickElement(rateButton);
       await Promise.resolve();
     });
 
@@ -387,7 +393,7 @@ describe("Stage 4 completion flows", () => {
     expect(firstCardTitle).toBeTruthy();
 
     await act(async () => {
-      manageButton?.click();
+      clickElement(manageButton);
       await Promise.resolve();
     });
 
@@ -395,7 +401,7 @@ describe("Stage 4 completion flows", () => {
     expect(deleteButtons.length).toBe(cardsBefore.length);
 
     await act(async () => {
-      deleteButtons[0]?.click();
+      clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
@@ -419,7 +425,7 @@ describe("Stage 4 completion flows", () => {
     expect(initialCards.length).toBeGreaterThan(0);
 
     await act(async () => {
-      manageButton?.click();
+      clickElement(manageButton);
       await Promise.resolve();
     });
 
@@ -427,7 +433,7 @@ describe("Stage 4 completion flows", () => {
     expect(deleteButtons.length).toBe(initialCards.length);
 
     await act(async () => {
-      deleteButtons[0]?.click();
+      clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
@@ -437,7 +443,7 @@ describe("Stage 4 completion flows", () => {
     expect(undoButton).toBeTruthy();
 
     await act(async () => {
-      undoButton?.click();
+      clickElement(undoButton);
       await Promise.resolve();
     });
 
@@ -455,7 +461,7 @@ describe("Stage 4 completion flows", () => {
     expect(manageButton).toBeTruthy();
 
     await act(async () => {
-      manageButton?.click();
+      clickElement(manageButton);
       await Promise.resolve();
     });
 
@@ -463,7 +469,7 @@ describe("Stage 4 completion flows", () => {
     expect(deleteButtons.length).toBeGreaterThan(0);
 
     await act(async () => {
-      deleteButtons[0]?.click();
+      clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
@@ -476,7 +482,7 @@ describe("Stage 4 completion flows", () => {
     expect(doneButton).toBeTruthy();
 
     await act(async () => {
-      doneButton?.click();
+      clickElement(doneButton);
       await Promise.resolve();
     });
 
@@ -495,10 +501,13 @@ describe("Stage 4 completion flows", () => {
     expect(switches.length).toBeGreaterThan(0);
 
     const firstSwitch = switches[0];
+    if (!firstSwitch) {
+      throw new Error("Expected at least one auto-management switch");
+    }
     const initialState = firstSwitch.getAttribute("data-state");
 
     await act(async () => {
-      firstSwitch.click();
+      clickElement(firstSwitch);
       await Promise.resolve();
     });
 
@@ -512,8 +521,11 @@ describe("Stage 4 completion flows", () => {
     expect(switches.length).toBeGreaterThan(0);
 
     const firstSwitch = switches[0];
+    if (!firstSwitch) {
+      throw new Error("Expected at least one safety switch");
+    }
     const initialState = firstSwitch.getAttribute("data-state");
-    act(() => firstSwitch.click());
+    act(() => clickElement(firstSwitch));
     expect(firstSwitch.getAttribute("data-state")).not.toBe(initialState);
 
     const saveButton = Array.from(container.querySelectorAll("button")).find((btn) =>
@@ -522,7 +534,7 @@ describe("Stage 4 completion flows", () => {
     expect(saveButton).toBeTruthy();
 
     await act(async () => {
-      saveButton?.click();
+      clickElement(saveButton);
       await Promise.resolve();
     });
 

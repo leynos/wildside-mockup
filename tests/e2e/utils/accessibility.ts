@@ -1,4 +1,4 @@
-import type { Page } from "@playwright/test";
+import type { Page, SerializedAXNode } from "@playwright/test";
 
 interface AccessibilityNodeSummary {
   role?: string;
@@ -34,7 +34,7 @@ function simplifyValue(value: unknown): string | number | boolean | undefined {
   return undefined;
 }
 
-function normaliseNode(node: any): AccessibilityNodeSummary | null {
+function normaliseNode(node: SerializedAXNode | null | undefined): AccessibilityNodeSummary | null {
   if (!node || typeof node !== "object") return null;
 
   const summary: AccessibilityNodeSummary = {
@@ -58,11 +58,18 @@ function normaliseNode(node: any): AccessibilityNodeSummary | null {
   return summary;
 }
 
-export async function captureAccessibilityTree(page: Page): Promise<AccessibilityNodeSummary | null> {
+export async function captureAccessibilityTree(
+  page: Page,
+): Promise<AccessibilityNodeSummary | null> {
   const rawTree = await page.accessibility.snapshot({ interestingOnly: false });
   return normaliseNode(rawTree);
 }
 
 export function slugifyPath(path: string): string {
-  return path.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase() || "root";
+  return (
+    path
+      .replace(/[^a-z0-9]+/gi, "-")
+      .replace(/^-|-$/g, "")
+      .toLowerCase() || "root"
+  );
 }

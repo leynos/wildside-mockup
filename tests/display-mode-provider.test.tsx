@@ -8,16 +8,57 @@ import { DisplayModeProvider, useDisplayMode } from "../src/app/providers/displa
 type MatchMediaMap = Record<string, boolean>;
 
 function createMatchMediaStub(matches: MatchMediaMap) {
-  const listeners = new Map<string, Set<(event: MediaQueryListEvent) => void>>();
+  type MediaQueryListener = (event: MediaQueryListEvent) => void;
+
+  const listeners = new Map<string, Set<MediaQueryListener>>();
+  const instances = new Map<
+    string,
+    Set<{ list: MediaQueryList; update(value: boolean, event: MediaQueryListEvent): void }>
+  >();
+  const listenerMap = new WeakMap<EventListenerOrEventListenerObject, MediaQueryListener>();
+  const legacyListenerMap = new WeakMap<
+    (this: MediaQueryList, ev: MediaQueryListEvent) => unknown,
+    MediaQueryListener
+  >();
+
+  const toEventListener = (listener: EventListenerOrEventListenerObject): MediaQueryListener => {
+    const existing = listenerMap.get(listener);
+    if (existing) {
+      return existing;
+    }
+    const wrapped: MediaQueryListener =
+      typeof listener === "function"
+        ? (event) => (listener as EventListener)(event)
+        : (event) => listener.handleEvent?.(event);
+    listenerMap.set(listener, wrapped);
+    return wrapped;
+  };
+
+  const toLegacyListener = (
+    listener: (this: MediaQueryList, ev: MediaQueryListEvent) => unknown,
+    owner: MediaQueryList,
+  ): MediaQueryListener => {
+    const existing = legacyListenerMap.get(listener);
+    if (existing) {
+      return existing;
+    }
+    const wrapped: MediaQueryListener = (event) => listener.call(owner, event);
+    legacyListenerMap.set(listener, wrapped);
+    return wrapped;
+  };
 
   function notify(query: string, matchesValue: boolean) {
-    const event: MediaQueryListEvent = {
+    const event = Object.assign(new Event("change"), {
       matches: matchesValue,
       media: query,
-      onchange: null,
-      addEventListener: () => undefined,
-      removeEventListener: () => undefined,
-    } as MediaQueryListEvent;
+    }) as MediaQueryListEvent;
+
+    const queryInstances = instances.get(query);
+    if (queryInstances) {
+      for (const instance of queryInstances) {
+        instance.update(matchesValue, event);
+      }
+    }
 
     const queryListeners = listeners.get(query);
     if (!queryListeners) {
@@ -30,29 +71,68 @@ function createMatchMediaStub(matches: MatchMediaMap) {
 
   function matchMedia(query: string): MediaQueryList {
     const initialMatches = Boolean(matches[query]);
-    const subscriptions = listeners.get(query) ?? new Set();
+    const subscriptions = listeners.get(query) ?? new Set<MediaQueryListener>();
     listeners.set(query, subscriptions);
 
-    const mediaQueryList: MediaQueryList = {
+    let currentMatches = initialMatches;
+    let changeHandler: ((this: MediaQueryList, ev: MediaQueryListEvent) => unknown) | null = null;
+
+    const mediaQueryList = {
       media: query,
-      matches: initialMatches,
-      onchange: null,
-      addEventListener: (eventName, listener) => {
-        if (eventName !== "change") return;
-        subscriptions.add(listener as (event: MediaQueryListEvent) => void);
+      get matches() {
+        return currentMatches;
       },
-      removeEventListener: (eventName, listener) => {
-        if (eventName !== "change") return;
-        subscriptions.delete(listener as (event: MediaQueryListEvent) => void);
+      get onchange() {
+        return changeHandler;
+      },
+      set onchange(handler) {
+        changeHandler = handler;
+      },
+      addEventListener: (
+        type: keyof MediaQueryListEventMap,
+        listener: EventListenerOrEventListenerObject | null,
+      ) => {
+        if (type !== "change" || listener == null) return;
+        const wrapped = toEventListener(listener);
+        subscriptions.add(wrapped);
+      },
+      removeEventListener: (
+        type: keyof MediaQueryListEventMap,
+        listener: EventListenerOrEventListenerObject | null,
+      ) => {
+        if (type !== "change" || listener == null) return;
+        const wrapped = listenerMap.get(listener);
+        if (wrapped) {
+          subscriptions.delete(wrapped);
+        }
       },
       addListener: (listener) => {
-        subscriptions.add(listener as (event: MediaQueryListEvent) => void);
+        if (!listener) return;
+        const wrapped = toLegacyListener(listener, mediaQueryList);
+        subscriptions.add(wrapped);
       },
       removeListener: (listener) => {
-        subscriptions.delete(listener as (event: MediaQueryListEvent) => void);
+        if (!listener) return;
+        const wrapped = legacyListenerMap.get(listener);
+        if (wrapped) {
+          subscriptions.delete(wrapped);
+        }
       },
       dispatchEvent: () => false,
-    };
+    } as MediaQueryList;
+
+    const registeredInstances =
+      instances.get(query) ??
+      new Set<{ list: MediaQueryList; update(value: boolean, event: MediaQueryListEvent): void }>();
+
+    registeredInstances.add({
+      list: mediaQueryList,
+      update(value, event) {
+        currentMatches = value;
+        changeHandler?.call(mediaQueryList, event);
+      },
+    });
+    instances.set(query, registeredInstances);
 
     return mediaQueryList;
   }
@@ -73,6 +153,7 @@ function createMatchMediaStub(matches: MatchMediaMap) {
         delete window.matchMedia;
       }
       listeners.clear();
+      instances.clear();
     },
   };
 }

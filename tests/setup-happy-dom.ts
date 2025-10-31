@@ -2,7 +2,12 @@ import { Window } from "happy-dom";
 
 const happyWindow = new Window();
 
-Object.assign(globalThis, {
+const extendedGlobal = globalThis as typeof globalThis & {
+  NodeFilter?: typeof NodeFilter;
+  IS_REACT_ACT_ENVIRONMENT?: boolean;
+};
+
+Object.assign(extendedGlobal, {
   window: happyWindow,
   document: happyWindow.document,
   navigator: happyWindow.navigator,
@@ -28,22 +33,38 @@ Object.assign(globalThis, {
   customElements: happyWindow.customElements,
 });
 
-Object.defineProperty(globalThis, "self", {
+Object.defineProperty(extendedGlobal, "self", {
   value: globalThis.window,
   writable: false,
   configurable: true,
 });
+class NodeFilterFallback {
+  static readonly FILTER_ACCEPT = 1;
+  static readonly FILTER_REJECT = 2;
+  static readonly FILTER_SKIP = 3;
+  static readonly SHOW_ALL = 0xffffffff;
+  static readonly SHOW_ATTRIBUTE = 2;
+  static readonly SHOW_CDATA_SECTION = 8;
+  static readonly SHOW_COMMENT = 128;
+  static readonly SHOW_DOCUMENT = 256;
+  static readonly SHOW_DOCUMENT_FRAGMENT = 1024;
+  static readonly SHOW_DOCUMENT_TYPE = 512;
+  static readonly SHOW_ELEMENT = 1;
+  static readonly SHOW_ENTITY = 32;
+  static readonly SHOW_ENTITY_REFERENCE = 16;
+  static readonly SHOW_NOTATION = 2048;
+  static readonly SHOW_PROCESSING_INSTRUCTION = 64;
+  static readonly SHOW_TEXT = 4;
 
-(globalThis as Record<string, unknown>).NodeFilter = (
-  happyWindow as unknown as { NodeFilter?: typeof NodeFilter }
-).NodeFilter ?? {
-  SHOW_ELEMENT: 1,
-  FILTER_ACCEPT: 1,
-  FILTER_REJECT: 2,
-  FILTER_SKIP: 3,
-};
+  acceptNode(_node: Node): number {
+    return NodeFilterFallback.FILTER_ACCEPT;
+  }
+}
 
-(globalThis as Record<string, unknown>).IS_REACT_ACT_ENVIRONMENT = true;
+extendedGlobal.NodeFilter =
+  (happyWindow as unknown as { NodeFilter?: typeof NodeFilter }).NodeFilter ?? NodeFilterFallback;
+
+extendedGlobal.IS_REACT_ACT_ENVIRONMENT = true;
 
 if (!globalThis.ResizeObserver) {
   class ResizeObserverStub {

@@ -13,7 +13,7 @@ import { WildsideMap } from "../../../components/wildside-map";
 import { savedRoutes } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
 
-const [savedRoute] = savedRoutes;
+const savedRoute = savedRoutes[0];
 const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
 
@@ -33,6 +33,18 @@ export function SavedScreen(): JSX.Element {
   const [isFavourite, setIsFavourite] = useState(true);
   const [shareOpen, setShareOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("map");
+
+  if (!savedRoute) {
+    return (
+      <MobileShell tone="dark">
+        <main className="map-shell__main">
+          <div className="flex flex-1 items-center justify-center px-6 text-center text-base-content/70">
+            <p>No saved routes are available yet.</p>
+          </div>
+        </main>
+      </MobileShell>
+    );
+  }
 
   return (
     <MobileShell tone="dark">

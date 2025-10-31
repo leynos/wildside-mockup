@@ -3,13 +3,22 @@ import type { Map as MapLibreMap } from "maplibre-gl";
 
 import { createMapStateStoreForTests, type MapStateStore } from "../src/app/features/map/map-state";
 
+type ViewportOptions = {
+  center?: [number, number];
+  zoom?: number;
+  bearing?: number;
+  pitch?: number;
+  animate?: boolean;
+  duration?: number;
+};
+
 class MapStub {
   center: [number, number];
   zoom: number;
   bearing: number;
   pitch: number;
-  readonly jumpToCalls: Array<Record<string, unknown>> = [];
-  readonly easeToCalls: Array<Record<string, unknown>> = [];
+  readonly jumpToCalls: ViewportOptions[] = [];
+  readonly easeToCalls: ViewportOptions[] = [];
   readonly layoutCalls: Array<{ id: string; property: string; value: unknown }> = [];
   readonly sources = new Map<string, unknown>();
   readonly layers = new Map<string, unknown>();
@@ -24,12 +33,12 @@ class MapStub {
     this.pitch = 0;
   }
 
-  jumpTo(options: Record<string, unknown>) {
+  jumpTo(options: ViewportOptions) {
     this.jumpToCalls.push(options);
     this.updatePose(options);
   }
 
-  easeTo(options: Record<string, unknown>) {
+  easeTo(options: ViewportOptions) {
     this.easeToCalls.push(options);
     this.updatePose(options);
   }
@@ -99,9 +108,9 @@ class MapStub {
     });
   }
 
-  private updatePose(options: Record<string, unknown>) {
+  private updatePose(options: ViewportOptions) {
     if (Array.isArray(options.center)) {
-      this.center = options.center as [number, number];
+      this.center = options.center;
     }
     if (typeof options.zoom === "number") {
       this.zoom = options.zoom;
@@ -138,7 +147,11 @@ describe("MapStateStore", () => {
     store.actions.registerMap(map as unknown as MapLibreMap);
 
     expect(map.jumpToCalls).toHaveLength(1);
-    expect(map.jumpToCalls[0].center).toEqual([11.45, 47.29]);
+    const firstJump = map.jumpToCalls[0];
+    if (!firstJump) {
+      throw new Error("Expected a recorded jumpTo call");
+    }
+    expect(firstJump.center).toEqual([11.45, 47.29]);
     expect(map.sources.has("wildside-pois")).toBe(true);
     expect(map.layers.has("wildside-pois-circles")).toBe(true);
     expect(map.featureStates.get("blue-bottle-coffee")).toEqual({ highlighted: true });
@@ -170,7 +183,11 @@ describe("MapStateStore", () => {
 
     store.actions.setViewport({ center: [11.39, 47.28] });
     expect(map.easeToCalls).toHaveLength(1);
-    expect(map.easeToCalls[0].center).toEqual([11.39, 47.28]);
+    const firstEase = map.easeToCalls[0];
+    if (!firstEase) {
+      throw new Error("Expected a recorded easeTo call");
+    }
+    expect(firstEase.center).toEqual([11.39, 47.28]);
 
     store.actions.setViewport({ zoom: 10, animate: false });
     expect(map.jumpToCalls.at(-1)?.zoom).toBe(10);

@@ -81,7 +81,7 @@ export function QuickWalkScreen(): JSX.Element {
 
   const handleDismissPanels = () => {
     setActiveTab("map");
-    navigate({ to: ".", hash: undefined });
+    navigate({ to: "." });
   };
 
   const selectedLabel = useMemo(
@@ -113,10 +113,11 @@ export function QuickWalkScreen(): JSX.Element {
           onValueChange={(value) => {
             const nextTab = value as TabKey;
             setActiveTab(nextTab);
-            navigate({
-              to: ".",
-              hash: nextTab === "map" ? undefined : nextTab,
-            });
+            if (nextTab === "map") {
+              navigate({ to: "." });
+            } else {
+              navigate({ to: ".", hash: nextTab });
+            }
           }}
           className="flex flex-1 min-h-0 flex-col justify-end overflow-hidden"
         >
