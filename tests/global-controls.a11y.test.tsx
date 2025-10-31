@@ -1,9 +1,9 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { axe } from "jest-axe";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { GlobalControls } from "../src/app/layout/global-controls";
+import { axe } from "./utils/axe";
 import { renderWithProviders } from "./utils/render-with-providers";
 
 const DISPLAY_KEY = "wildside.displayMode";

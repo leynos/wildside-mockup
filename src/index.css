@@ -20,3 +20,29 @@
     min-height: 100%;
   }
 }
+
+@layer components {
+  .preference-toggle {
+    @apply flex items-center justify-between rounded-2xl border border-base-300/60 bg-base-200/40 px-4 py-3;
+  }
+
+  .toggle-switch {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full border border-base-300/60 bg-base-300/60 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100;
+  }
+
+  .toggle-switch--muted {
+    @apply bg-base-200/60;
+  }
+
+  .toggle-switch--accent {
+    @apply data-[state=checked]:bg-accent/80;
+  }
+
+  .toggle-switch__thumb {
+    @apply block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px];
+  }
+
+  .wizard-step__interest-chip {
+    @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-900;
+  }
+}

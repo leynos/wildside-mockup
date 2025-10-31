@@ -1,4 +1,4 @@
-import type { Page, SerializedAXNode } from "@playwright/test";
+import type { Page } from "@playwright/test";
 
 interface AccessibilityNodeSummary {
   role?: string;
@@ -34,25 +34,44 @@ function simplifyValue(value: unknown): string | number | boolean | undefined {
   return undefined;
 }
 
-function normaliseNode(node: SerializedAXNode | null | undefined): AccessibilityNodeSummary | null {
-  if (!node || typeof node !== "object") return null;
+interface RawAccessibilityNode {
+  role?: string;
+  name?: string;
+  value?: unknown;
+  checked?: string | boolean;
+  selected?: boolean;
+  pressed?: boolean;
+  expanded?: boolean;
+  focused?: boolean;
+  level?: number;
+  children?: RawAccessibilityNode[];
+}
 
-  const summary: AccessibilityNodeSummary = {
-    role: node.role,
-    name: node.name,
-    value: simplifyValue(node.value),
-    checked: node.checked,
-    selected: node.selected,
-    pressed: node.pressed,
-    expanded: node.expanded,
-    focused: node.focused,
-    level: node.level,
-  };
+function normaliseNode(
+  node: RawAccessibilityNode | null | undefined,
+): AccessibilityNodeSummary | null {
+  if (!node) return null;
+
+  const summary: AccessibilityNodeSummary = {};
+
+  if (typeof node.role === "string") summary.role = node.role;
+  if (typeof node.name === "string") summary.name = node.name;
+
+  const simplifiedValue = simplifyValue(node.value);
+  if (simplifiedValue !== undefined) summary.value = simplifiedValue;
+
+  if (node.checked !== undefined) summary.checked = node.checked;
+  if (node.selected !== undefined) summary.selected = node.selected;
+  if (node.pressed !== undefined) summary.pressed = node.pressed;
+  if (node.expanded !== undefined) summary.expanded = node.expanded;
+  if (node.focused !== undefined) summary.focused = node.focused;
+  if (typeof node.level === "number") summary.level = node.level;
 
   if (Array.isArray(node.children) && node.children.length > 0) {
-    summary.children = node.children
-      .map((child: unknown) => normaliseNode(child))
-      .filter((child): child is AccessibilityNodeSummary => Boolean(child));
+    const normalisedChildren = node.children
+      .map((child: RawAccessibilityNode | null | undefined) => normaliseNode(child))
+      .filter((child): child is AccessibilityNodeSummary => child !== null);
+    if (normalisedChildren.length > 0) summary.children = normalisedChildren;
   }
 
   return summary;
@@ -61,7 +80,9 @@ function normaliseNode(node: SerializedAXNode | null | undefined): Accessibility
 export async function captureAccessibilityTree(
   page: Page,
 ): Promise<AccessibilityNodeSummary | null> {
-  const rawTree = await page.accessibility.snapshot({ interestingOnly: false });
+  const rawTree = (await page.accessibility.snapshot({
+    interestingOnly: false,
+  })) as RawAccessibilityNode | null;
   return normaliseNode(rawTree);
 }
 

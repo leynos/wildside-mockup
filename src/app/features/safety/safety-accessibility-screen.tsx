@@ -85,6 +85,8 @@ export function SafetyAccessibilityScreen(): JSX.Element {
                 <Accordion.Content className="space-y-5 px-5 pb-5 pt-2 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
                   {section.toggles.map((toggle) => {
                     const isEnabled = toggleState[toggle.id] ?? false;
+                    const labelId = `${toggle.id}-label`;
+                    const descriptionId = `${toggle.id}-description`;
                     return (
                       <div key={toggle.id} className="preference-toggle">
                         <div className="flex items-center gap-3">
@@ -94,13 +96,19 @@ export function SafetyAccessibilityScreen(): JSX.Element {
                             <Icon token={toggle.iconToken} aria-hidden />
                           </span>
                           <div>
-                            <p className="font-medium text-base-100">{toggle.label}</p>
-                            <p className="text-xs text-base-300">{toggle.description}</p>
+                            <p id={labelId} className="font-medium text-base-100">
+                              {toggle.label}
+                            </p>
+                            <p id={descriptionId} className="text-xs text-base-300">
+                              {toggle.description}
+                            </p>
                           </div>
                         </div>
                         <Switch.Root
                           className="toggle-switch toggle-switch--accent"
                           checked={isEnabled}
+                          aria-labelledby={labelId}
+                          aria-describedby={descriptionId}
                           onCheckedChange={(checked) => handleToggle(toggle, checked)}
                         >
                           <Switch.Thumb className="toggle-switch__thumb" />

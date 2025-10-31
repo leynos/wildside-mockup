@@ -1,14 +1,17 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 
 import { PointOfInterestList } from "../src/app/components/point-of-interest-list";
 import { waterfrontDiscoveryRoute } from "../src/app/data/map";
+import { axe } from "./utils/axe";
 import { renderWithProviders } from "./utils/render-with-providers";
 
 describe("PointOfInterestList accessibility", () => {
   const samplePoi = waterfrontDiscoveryRoute.pointsOfInterest[0];
+  if (!samplePoi) {
+    throw new Error("Expected at least one point of interest for accessibility tests");
+  }
 
   it("exposes accessible trigger buttons and modal content", async () => {
     const { container } = renderWithProviders(<PointOfInterestList points={[samplePoi]} />);

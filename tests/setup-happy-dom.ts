@@ -74,3 +74,5 @@ if (!globalThis.ResizeObserver) {
   }
   globalThis.ResizeObserver = ResizeObserverStub as unknown as typeof ResizeObserver;
 }
+
+await import("./setup-vitest-a11y");

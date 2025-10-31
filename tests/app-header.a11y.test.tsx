@@ -1,9 +1,8 @@
 import { screen } from "@testing-library/react";
-import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
-
 import { Icon } from "../src/app/components/icon";
 import { AppHeader } from "../src/app/layout/app-header";
+import { axe } from "./utils/axe";
 import { renderWithProviders } from "./utils/render-with-providers";
 
 const hasAxeMatcher = (() => {

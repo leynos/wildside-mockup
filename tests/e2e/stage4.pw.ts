@@ -53,9 +53,18 @@ test.describe("Stage 4 routes", () => {
 
   test("safety preferences accordion toggles", async ({ page }) => {
     await page.goto("/safety-accessibility");
-    const toggle = page.getByRole("switch").first();
+    const mobilitySection = page.getByRole("button", { name: /mobility support/i });
+    const triggerState = await mobilitySection.getAttribute("data-state");
+    if (triggerState !== "open") {
+      await mobilitySection.click();
+      await expect(mobilitySection).toHaveAttribute("data-state", "open");
+    }
+    const toggle = page.getByRole("switch", { name: /step-free routes/i });
     const initialState = await toggle.getAttribute("data-state");
-    await toggle.click();
+    await toggle.scrollIntoViewIfNeeded();
+    await toggle.evaluate((element) => {
+      (element as HTMLElement).click();
+    });
     await expect(toggle).not.toHaveAttribute("data-state", initialState ?? "");
     await page.getByRole("button", { name: /save preferences/i }).click();
     await expect(page.getByRole("dialog")).toBeVisible();

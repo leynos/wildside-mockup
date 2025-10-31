@@ -175,7 +175,7 @@ function InterestMix({ onChange, values }: InterestMixProps): JSX.Element {
       <SectionTitle iconToken="{icon.action.like}" label="Interest Mix" />
       <div className="space-y-6">
         {interestMix.map((slice) => {
-          const value = values[slice.id];
+          const value = values[slice.id] ?? slice.allocation;
           return (
             <div key={slice.id}>
               <div className="mb-2 flex items-center justify-between">
@@ -278,7 +278,7 @@ function AdvancedOptions({ onToggle, values }: AdvancedOptionsProps): JSX.Elemen
       <SectionTitle iconToken="{icon.action.settings}" label="Advanced Options" />
       <div className="space-y-3">
         {advancedOptions.map((option) => {
-          const checked = values[option.id];
+          const checked = values[option.id] ?? option.defaultEnabled;
           return (
             <div
               key={option.id}
@@ -433,7 +433,7 @@ export function CustomizeScreen(): JSX.Element {
           />
         </main>
         <AppBottomNavigation
-          items={bottomNavigation.map((item) => ({ ...item, isActive: item.active }))}
+          items={bottomNavigation.map((item) => ({ ...item, isActive: Boolean(item.active) }))}
         />
       </div>
     </MobileShell>

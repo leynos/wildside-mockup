@@ -18,7 +18,7 @@ test.describe("Accessibility tree snapshots", () => {
       await page.waitForTimeout(500);
 
       const tree = await captureAccessibilityTree(page);
-      const snapshotPayload = JSON.stringify(tree, null, 2);
+      const snapshotPayload = `${JSON.stringify(tree, null, 2)}\n`;
       expect(snapshotPayload).toMatchSnapshot(`${slugifyPath(target.path)}-aria-tree.json`);
     });
   }
