@@ -23,6 +23,7 @@ import {
 } from "../../data/customize";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+import { CustomizeSegmentToggle } from "./segment-toggle-card";
 
 function SectionTitle({
   iconToken,
@@ -119,14 +120,12 @@ function SegmentPicker({
         className="grid grid-cols-3 gap-3"
       >
         {options.map((option) => (
-          <ToggleGroup.Item
+          <CustomizeSegmentToggle
             key={option.id}
             value={option.id}
-            className="rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-left text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition data-[state=on]:border-accent data-[state=on]:bg-accent/15 data-[state=on]:shadow-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-          >
-            <p className="font-semibold text-base-content">{option.label}</p>
-            <p className="mt-1 text-xs text-base-content/60">{option.description}</p>
-          </ToggleGroup.Item>
+            label={option.label}
+            description={option.description}
+          />
         ))}
       </ToggleGroup.Root>
     </section>

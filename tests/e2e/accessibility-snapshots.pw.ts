@@ -8,6 +8,7 @@ const snapshotTargets = [
   { path: "/explore", label: "Explore" },
   { path: "/map/quick", label: "Quick Map" },
   { path: "/wizard/step-1", label: "Wizard Step 1" },
+  { path: "/customize", label: "Customize" },
 ];
 
 test.describe("Accessibility tree snapshots", () => {
