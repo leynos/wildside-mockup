@@ -3,7 +3,7 @@
 import * as Slider from "@radix-ui/react-slider";
 import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { type JSX, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";

@@ -1,6 +1,6 @@
 /** @file Shared top navigation bar for primary Wildside screens. */
 
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 
 import { useDisplayMode } from "../providers/display-mode-provider";
 

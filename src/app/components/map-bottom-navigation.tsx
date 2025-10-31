@@ -1,7 +1,7 @@
 /** @file Bottom navigation used across map-related flows. */
 
 import { useNavigate } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 
 import { Icon } from "./icon";
 

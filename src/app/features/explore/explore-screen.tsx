@@ -2,6 +2,7 @@
 
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
+import type { JSX } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
@@ -316,7 +317,7 @@ export function ExploreScreen(): JSX.Element {
           items={bottomNavigation.map((item) => ({
             ...item,
             isActive: item.id === "discover",
-            href: item.id === "discover" ? undefined : item.href,
+            ...(item.id === "discover" ? {} : { href: item.href }),
           }))}
         />
       </div>

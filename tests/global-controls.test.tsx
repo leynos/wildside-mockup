@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
-import { act } from "react";
+import { act, type JSX } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import { GlobalControls } from "../src/app/layout/global-controls";

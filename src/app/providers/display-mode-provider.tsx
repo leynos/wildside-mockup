@@ -1,6 +1,6 @@
 /** @file Display mode provider switching between hosted and full-browser layouts. */
 
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 const STORAGE_KEY = "wildside.displayMode";

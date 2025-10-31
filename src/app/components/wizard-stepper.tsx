@@ -1,5 +1,6 @@
 /** @file Stepper indicator for the three-step walk wizard. */
 
+import type { JSX } from "react";
 import type { WizardStep } from "../data/wizard";
 
 export interface WizardStepperProps {

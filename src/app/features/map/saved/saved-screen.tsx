@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { type JSX, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";

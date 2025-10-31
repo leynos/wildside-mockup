@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { type JSX, useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
@@ -275,7 +275,7 @@ export function OfflineScreen(): JSX.Element {
               </header>
               <div className="space-y-4">
                 {autoManagementOptions.map((option) => {
-                  const checked = autoSettings[option.id];
+                  const checked = autoSettings[option.id] ?? option.defaultEnabled;
                   return (
                     <article
                       key={option.id}
@@ -298,7 +298,7 @@ export function OfflineScreen(): JSX.Element {
                           </div>
                         </div>
                         <Switch.Root
-                          checked={checked}
+                          checked={Boolean(checked)}
                           onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
                           className="relative inline-flex h-6 w-11 items-center rounded-full border border-base-300/60 bg-base-200/60 transition data-[state=checked]:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
                           data-testid={`auto-management-switch-${option.id}`}

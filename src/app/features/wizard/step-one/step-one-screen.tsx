@@ -3,7 +3,7 @@
 import * as Slider from "@radix-ui/react-slider";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { type JSX, useMemo, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";

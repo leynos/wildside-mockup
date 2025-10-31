@@ -1,6 +1,6 @@
 /** @file Mobile device frame used to present the Wildside mockup screens. */
 
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 
 import { useDisplayMode } from "../providers/display-mode-provider";
 

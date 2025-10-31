@@ -1,7 +1,6 @@
 /** @file Renders Tabler icons based on design token references. */
 
-import type { SVGProps } from "react";
-
+import type { ComponentType, JSX, SVGProps } from "react";
 import { resolveToken } from "../tokens/resolve-token";
 import { iconRegistry, isValidIconName } from "./icon-registry";
 
@@ -38,7 +37,7 @@ export function Icon({ token, label, className, ...props }: IconProps): JSX.Elem
     return null;
   }
 
-  const IconComponent = iconRegistry[resolvedName];
+  const IconComponent = iconRegistry[resolvedName] as ComponentType<SVGProps<SVGSVGElement>>;
   const accessibilityProps = label ? { "aria-label": label, role: "img" } : { "aria-hidden": true };
 
   return (

@@ -25,12 +25,15 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
   const actions = store?.actions;
 
   const storedViewport = useMemo(() => store?.getSnapshot().viewport, [store]);
-  const resolvedCenter = center ?? storedViewport?.center ?? mapDefaults.center;
+  type MutableLngLat = [number, number];
+  const resolvedCenter = [
+    ...(center ?? storedViewport?.center ?? mapDefaults.center),
+  ] as MutableLngLat;
   const resolvedZoom = zoom ?? storedViewport?.zoom ?? mapDefaults.zoom;
   const resolvedBearing = storedViewport?.bearing ?? 0;
   const resolvedPitch = storedViewport?.pitch ?? 0;
 
-  const centerRef = useRef(resolvedCenter);
+  const centerRef = useRef<MutableLngLat>([...resolvedCenter] as MutableLngLat);
   const zoomRef = useRef(resolvedZoom);
   const bearingRef = useRef(resolvedBearing);
   const pitchRef = useRef(resolvedPitch);
@@ -49,6 +52,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    const containerElement: HTMLElement = container;
     if (typeof window === "undefined") return;
     if (!(window as typeof window & { WebGLRenderingContext?: unknown }).WebGLRenderingContext) {
       // Skip initialisation when WebGL is unavailable (e.g., unit tests).
@@ -68,9 +72,9 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
 
       try {
         mapInstance = new maplibre.Map({
-          container,
+          container: containerElement,
           style: "https://demotiles.maplibre.org/styles/osm-bright-gl-style/style.json",
-          center: centerRef.current,
+          center: [...centerRef.current] as MutableLngLat,
           zoom: zoomRef.current,
           bearing: bearingRef.current,
           pitch: pitchRef.current,
@@ -112,11 +116,11 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
 
   useEffect(() => {
     if (center === undefined) return;
-    centerRef.current = center;
+    centerRef.current = [...center] as MutableLngLat;
     if (actions) {
-      actions.setViewport({ center, animate: false });
+      actions.setViewport({ center: [...center] as MutableLngLat, animate: false });
     } else if (mapRef.current) {
-      mapRef.current.easeTo({ center, animate: false });
+      mapRef.current.easeTo({ center: [...center] as MutableLngLat, animate: false });
     }
   }, [actions, center]);
 

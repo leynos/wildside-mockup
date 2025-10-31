@@ -1,6 +1,6 @@
 /** @file Shared layout for wizard steps providing header, stepper, and footer actions. */
 
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 
 import type { WizardStep } from "../data/wizard";
 import { AppHeader } from "../layout/app-header";

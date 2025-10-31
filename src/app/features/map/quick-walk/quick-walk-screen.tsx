@@ -4,7 +4,7 @@ import * as Slider from "@radix-ui/react-slider";
 import * as Tabs from "@radix-ui/react-tabs";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useLocation, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { type JSX, useEffect, useMemo, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";

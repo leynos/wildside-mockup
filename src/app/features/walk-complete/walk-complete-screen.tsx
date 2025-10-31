@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Toast from "@radix-ui/react-toast";
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { type JSX, useState } from "react";
 
 import { Icon } from "../../components/icon";
 import {

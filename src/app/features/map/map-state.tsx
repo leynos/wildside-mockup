@@ -2,11 +2,18 @@
 
 import type { FeatureCollection, Point } from "geojson";
 import type { GeoJSONSource, Map as MapLibreMap } from "maplibre-gl";
-import { createContext, type ReactNode, useContext, useRef, useSyncExternalStore } from "react";
+import {
+  createContext,
+  type JSX,
+  type ReactNode,
+  useContext,
+  useRef,
+  useSyncExternalStore,
+} from "react";
 
 import { waterfrontDiscoveryRoute } from "../../data/map";
 
-type LngLatTuple = Readonly<[number, number]>;
+type LngLatTuple = [number, number];
 
 export interface MapViewportSnapshot {
   center: LngLatTuple;

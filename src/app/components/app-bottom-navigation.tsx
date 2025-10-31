@@ -1,6 +1,7 @@
 /** @file Shared bottom navigation bar used in discovery flows. */
 
 import { useNavigate } from "@tanstack/react-router";
+import type { JSX } from "react";
 
 import { Icon } from "./icon";
 

@@ -1,6 +1,6 @@
 /** @file Floating global controls for theme and display mode toggles. */
 
-import { useId, useState } from "react";
+import { type JSX, useId, useState } from "react";
 
 import { useDisplayMode } from "../providers/display-mode-provider";
 import { useTheme } from "../providers/theme-provider";

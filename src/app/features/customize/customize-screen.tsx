@@ -4,6 +4,7 @@ import * as Slider from "@radix-ui/react-slider";
 import * as Switch from "@radix-ui/react-switch";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
+import type { JSX } from "react";
 import { useMemo, useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";

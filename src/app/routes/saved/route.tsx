@@ -1,6 +1,7 @@
 /** @file Route exposing the saved walk detail screen. */
 
 import { createRoute } from "@tanstack/react-router";
+import type { JSX } from "react";
 
 import { SavedScreen } from "../../features/map";
 import { MapStateProvider } from "../../features/map/map-state";

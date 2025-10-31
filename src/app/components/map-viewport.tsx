@@ -1,6 +1,6 @@
 /** @file Utility wrapper rendering map placeholders with overlay slots. */
 
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 
 export interface MapViewportProps {
   /** Background image URL representing the map snapshot (fallback when map is absent). */

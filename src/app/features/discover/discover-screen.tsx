@@ -2,7 +2,7 @@
 
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { type JSX, useMemo, useState } from "react";
 
 import { Icon } from "../../components/icon";
 import {

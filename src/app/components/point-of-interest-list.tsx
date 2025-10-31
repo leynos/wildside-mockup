@@ -1,6 +1,7 @@
 /** @file Shared list rendering points of interest with Radix dialog sheets. */
 
 import * as Dialog from "@radix-ui/react-dialog";
+import type { JSX } from "react";
 
 import type { WalkPointOfInterest } from "../data/map";
 import { useOptionalMapStore } from "../features/map/map-state";

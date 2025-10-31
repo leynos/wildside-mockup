@@ -1,6 +1,6 @@
 /** @file Theme provider managing DaisyUI theme selection and persistence. */
 
-import type { ReactNode } from "react";
+import type { JSX, ReactNode } from "react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const STORAGE_KEY = "wildside.theme";

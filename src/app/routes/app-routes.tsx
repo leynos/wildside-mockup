@@ -1,6 +1,7 @@
 /** @file Configures TanStack Router with the application route tree. */
 
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import type { JSX } from "react";
 
 import { routeTree } from "./route-tree";
 
