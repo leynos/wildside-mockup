@@ -197,6 +197,33 @@ Mapping guidance:
 - `Toast`: feedback when saving walks or completing actions.
 - `Popover`/`Tooltip`: inline help icons, map annotations.
 
+## High-velocity accessibility-first testing plan
+
+- Roll out a dual-harness test stack that keeps Bun + Happy DOM for fast unit
+  and integration checks whilst introducing a Node + JSDOM harness for
+  `*.a11y.test.tsx` suites so `axe-core` can analyse rendered output without
+  fighting Happy DOM limitations. Surface both entry points via
+  `bun test:a11y`, `bun test:a11y --watch`, and document usage in the testing
+  guide.
+- Refactor component tests to rely on Testing Library helpers and accessible
+  queries only. Create shared assertions for ARIA, focus management, and
+  `data-theme` expectations to make accessibility verification cheap across
+  the Bun suites.
+- Enforce accessible-first habits with linting: extend Biome/Semgrep/GritQL to
+  warn when tests reach for `data-testid`, manual `querySelector`, or low-level
+  DOM events where an accessible query or `userEvent` style action applies.
+  Block merges on these diagnostics and provide guided suppressions for the
+  rare cases where semantics are genuinely absent.
+- Augment Playwright’s outer loop with in-browser `axe-core` runs, scripted
+  keyboard traversal, focus trap checks, and both visual and accessibility tree
+  snapshots. Create custom matchers (for example, `toMatchAriaSnapshot`) and
+  snapshot storage conventions so refactors cannot silently erode semantics or
+  layouts.
+- Wire a top-level `bun test:all` (or `bun verify`) orchestration that executes
+  lint, Bun suites, Node accessibility suites, and Playwright flows. Integrate
+  it into CI alongside per-commit quick checks, and schedule periodic snapshot
+  reviews so baselines remain trustworthy.
+
 ## Map state persistence plan
 
 - Preserve a single MapLibre instance per page view by letting
