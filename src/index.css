@@ -23,11 +23,34 @@
 
 @layer components {
   .customize-segment {
-    @apply rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-left text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50;
+    @apply rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-left text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition;
+  }
+
+  .customize-segment:focus-visible {
+    @apply outline-none ring-2 ring-accent/50;
   }
 
   .customize-segment[data-state="on"] {
-    @apply border-accent bg-accent/15 shadow-accent/20;
+    @apply border-accent bg-accent/15 text-accent-content;
+    box-shadow:
+      0 1px 3px 0 color-mix(in oklab, var(--color-accent) 20%, transparent),
+      0 1px 2px -1px color-mix(in oklab, var(--color-accent) 20%, transparent);
+  }
+
+  .wizard-step__interest-chip {
+    @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
+  }
+
+  .wizard-step__interest-chip:focus-visible {
+    @apply outline-none ring-2 ring-accent/60;
+  }
+
+  .wizard-step__interest-chip[data-state="on"] {
+    @apply border-accent bg-accent text-accent-content;
+  }
+
+  .wizard-step__interest-chip[data-state="on"] .tabler-icon {
+    @apply text-base-100;
   }
 
   .preference-toggle {
@@ -48,9 +71,5 @@
 
   .toggle-switch__thumb {
     @apply block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px];
-  }
-
-  .wizard-step__interest-chip {
-    @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-900;
   }
 }

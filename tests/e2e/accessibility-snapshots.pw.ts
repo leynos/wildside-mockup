@@ -2,13 +2,55 @@
 
 import { expect, test } from "@playwright/test";
 
-import { captureAccessibilityTree, slugifyPath } from "./utils/accessibility";
+import type { StyleTarget } from "./utils/accessibility";
+import {
+  captureAccessibilityTree,
+  captureComputedStyles,
+  slugifyPath,
+} from "./utils/accessibility";
 
-const snapshotTargets = [
+interface SnapshotTarget {
+  path: string;
+  label: string;
+  waitForSelector?: string;
+  styleTargets?: StyleTarget[];
+}
+
+const snapshotTargets: SnapshotTarget[] = [
   { path: "/explore", label: "Explore" },
   { path: "/map/quick", label: "Quick Map" },
   { path: "/wizard/step-1", label: "Wizard Step 1" },
-  { path: "/customize", label: "Customize" },
+  {
+    path: "/customize",
+    label: "Customize",
+    waitForSelector: "[data-segment-id='crowd'] [data-radix-collection-item]",
+    styleTargets: [
+      {
+        selector: "[data-segment-id='crowd'] [data-radix-collection-item][data-state='on']",
+        properties: [
+          "background-color",
+          "border-top-color",
+          "border-radius",
+          "box-shadow",
+          "padding-top",
+          "padding-left",
+          "color",
+        ],
+      },
+      {
+        selector: "[data-segment-id='crowd'] [data-radix-collection-item][data-state='off']",
+        properties: [
+          "background-color",
+          "border-top-color",
+          "border-radius",
+          "box-shadow",
+          "padding-top",
+          "padding-left",
+          "color",
+        ],
+      },
+    ],
+  },
 ];
 
 test.describe("Accessibility tree snapshots", () => {
@@ -17,9 +59,19 @@ test.describe("Accessibility tree snapshots", () => {
       await page.goto(target.path);
       await page.waitForLoadState("domcontentloaded");
       await page.waitForTimeout(500);
+      if (target.waitForSelector) {
+        await page.waitForSelector(target.waitForSelector);
+      }
 
       const tree = await captureAccessibilityTree(page);
-      const snapshotPayload = `${JSON.stringify(tree, null, 2)}\n`;
+      const styleSamples = target.styleTargets
+        ? await captureComputedStyles(page, target.styleTargets)
+        : [];
+      const snapshotPayload = `${JSON.stringify(
+        { accessibilityTree: tree, computedStyles: styleSamples },
+        null,
+        2,
+      )}\n`;
       expect(snapshotPayload).toMatchSnapshot(`${slugifyPath(target.path)}-aria-tree.json`);
     });
   }

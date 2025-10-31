@@ -1,1632 +1,1678 @@
 {
-  "role": "WebArea",
-  "name": "Wildside Mockup",
-  "children": [
+  "accessibilityTree": {
+    "role": "WebArea",
+    "name": "Wildside Mockup",
+    "children": [
+      {
+        "role": "none",
+        "name": "",
+        "children": [
+          {
+            "role": "none",
+            "name": "",
+            "children": [
+              {
+                "role": "generic",
+                "name": "",
+                "children": [
+                  {
+                    "role": "generic",
+                    "name": "",
+                    "children": [
+                      {
+                        "role": "generic",
+                        "name": "",
+                        "children": [
+                          {
+                            "role": "none",
+                            "name": "",
+                            "children": [
+                              {
+                                "role": "banner",
+                                "name": "",
+                                "children": [
+                                  {
+                                    "role": "none",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "button",
+                                                "name": "Back to map"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "heading",
+                                                "name": "Customise Route",
+                                                "level": 1,
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Customise Route",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Customise Route"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Fine-tune your walking adventure",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Fine-tune your walking adventure"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "button",
+                                            "name": "Help"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "role": "main",
+                                "name": "",
+                                "children": [
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "heading",
+                                            "name": "Distance",
+                                            "level": 2,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Distance",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Distance"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "3.2 km",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "3.2 km"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "generic",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "slider",
+                                                "name": "Distance slider",
+                                                "value": 3.200000047683716
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "1 km",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "1 km"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "5 km",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "5 km"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "10 km",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "10 km"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "heading",
+                                            "name": "Duration",
+                                            "level": 2,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Duration",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Duration"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "75 min",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "75 min"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "generic",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "slider",
+                                                "name": "Duration slider",
+                                                "value": 75
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "15m",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "15m"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "90m",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "90m"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "180m",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "180m"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "heading",
+                                        "name": "Crowd Level",
+                                        "level": 2,
+                                        "children": [
+                                          {
+                                            "role": "text",
+                                            "name": "Crowd Level",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Crowd Level"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "group",
+                                        "name": "Crowd Level",
+                                        "children": [
+                                          {
+                                            "role": "radio",
+                                            "name": "Quiet Tranquil streets",
+                                            "checked": false,
+                                            "children": [
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Quiet",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Quiet"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Tranquil streets",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Tranquil "
+                                                      },
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "streets"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "radio",
+                                            "name": "Balanced Local buzz",
+                                            "checked": true,
+                                            "children": [
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Balanced",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Balanced"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Local buzz",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Local buzz"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "radio",
+                                            "name": "Lively Popular spots",
+                                            "checked": false,
+                                            "children": [
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Lively",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Lively"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Popular spots",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Popular "
+                                                      },
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "spots"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "heading",
+                                        "name": "Elevation Preference",
+                                        "level": 2,
+                                        "children": [
+                                          {
+                                            "role": "text",
+                                            "name": "Elevation Preference",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Elevation Preference"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "group",
+                                        "name": "Elevation Preference",
+                                        "children": [
+                                          {
+                                            "role": "radio",
+                                            "name": "Flat Minimal climbs",
+                                            "checked": true,
+                                            "children": [
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Flat",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Flat"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Minimal climbs",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Minimal "
+                                                      },
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "climbs"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "radio",
+                                            "name": "Rolling Gentle hills",
+                                            "checked": false,
+                                            "children": [
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Rolling",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Rolling"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Gentle hills",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Gentle hills"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "radio",
+                                            "name": "Steep Challenge me",
+                                            "checked": false,
+                                            "children": [
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Steep",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Steep"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Challenge me",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Challenge "
+                                                      },
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "me"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "heading",
+                                        "name": "Surface Type",
+                                        "level": 2,
+                                        "children": [
+                                          {
+                                            "role": "text",
+                                            "name": "Surface Type",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Surface Type"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "group",
+                                        "name": "Surface type",
+                                        "children": [
+                                          {
+                                            "role": "radio",
+                                            "name": "Paved",
+                                            "checked": true,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Paved",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Paved"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "radio",
+                                            "name": "Trail",
+                                            "checked": false,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Trail",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Trail"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "radio",
+                                            "name": "Boardwalk",
+                                            "checked": false,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Boardwalk",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Boardwalk"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "radio",
+                                            "name": "Mixed",
+                                            "checked": false,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Mixed",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Mixed"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "heading",
+                                        "name": "Interest Mix",
+                                        "level": 2,
+                                        "children": [
+                                          {
+                                            "role": "text",
+                                            "name": "Interest Mix",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Interest Mix"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "text",
+                                                        "name": "Nature",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "Nature"
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "text",
+                                                        "name": "40",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "40"
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "text",
+                                                        "name": "%",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "%"
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "generic",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "none",
+                                                        "name": ""
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "slider",
+                                                        "name": "",
+                                                        "value": 40
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "text",
+                                                        "name": "History",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "History"
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "text",
+                                                        "name": "30",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "30"
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "text",
+                                                        "name": "%",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "%"
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "generic",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "none",
+                                                        "name": ""
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "slider",
+                                                        "name": "",
+                                                        "value": 30
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "text",
+                                                        "name": "Food & Drink",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "Food & Drink"
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "text",
+                                                        "name": "30",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "30"
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "text",
+                                                        "name": "%",
+                                                        "children": [
+                                                          {
+                                                            "role": "InlineTextBox",
+                                                            "name": "%"
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "generic",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "none",
+                                                        "name": ""
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "slider",
+                                                        "name": "",
+                                                        "value": 30
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "heading",
+                                        "name": "Route Preview",
+                                        "level": 2,
+                                        "children": [
+                                          {
+                                            "role": "text",
+                                            "name": "Route Preview",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Route Preview"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "button",
+                                            "name": "Route A 3.2 km • 75 min",
+                                            "pressed": true,
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Route A",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Route A"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "3.2 km",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "3.2 km"
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "text",
+                                                    "name": " • ",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": " • "
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "text",
+                                                    "name": "75 min",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "75 "
+                                                      },
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "min"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "button",
+                                            "name": "Route B 2.8 km • 68 min",
+                                            "pressed": false,
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Route B",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Route B"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "2.8 km",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "2.8 km"
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "text",
+                                                    "name": " • ",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": " • "
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "text",
+                                                    "name": "68 min",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "68 "
+                                                      },
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "min"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "button",
+                                            "name": "Route C 3.6 km • 82 min",
+                                            "pressed": false,
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": ""
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "Route C",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Route C"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "paragraph",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "3.6 km",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "3.6 km"
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "text",
+                                                    "name": " • ",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": " • "
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "role": "text",
+                                                    "name": "82 min",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "82 "
+                                                      },
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "min"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "button",
+                                            "name": "Regenerate",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Regenerate",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Regenerate"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "button",
+                                            "name": "Start Route",
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Start Route",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Start Route"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "role": "generic",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "heading",
+                                        "name": "Advanced Options",
+                                        "level": 2,
+                                        "children": [
+                                          {
+                                            "role": "text",
+                                            "name": "Advanced Options",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Advanced Options"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "none",
+                                        "name": "",
+                                        "children": [
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "paragraph",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "text",
+                                                            "name": "Safety Priority",
+                                                            "children": [
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Safety Priority"
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "paragraph",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "text",
+                                                            "name": "Well-lit, busy routes",
+                                                            "children": [
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Well-lit, busy routes"
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "switch",
+                                                "name": "",
+                                                "checked": false,
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "paragraph",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "text",
+                                                            "name": "Accessibility",
+                                                            "children": [
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Accessibility"
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "paragraph",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "text",
+                                                            "name": "Step-free routes",
+                                                            "children": [
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Step-free routes"
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "switch",
+                                                "name": "",
+                                                "checked": true,
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "none",
+                                            "name": "",
+                                            "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": "",
+                                                    "children": [
+                                                      {
+                                                        "role": "paragraph",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "text",
+                                                            "name": "Offline download",
+                                                            "children": [
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Offline download"
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "paragraph",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "text",
+                                                            "name": "Preload maps and audio",
+                                                            "children": [
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Preload maps and audio"
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "switch",
+                                                "name": "",
+                                                "checked": false,
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "role": "navigation",
+                                "name": "",
+                                "children": [
+                                  {
+                                    "role": "none",
+                                    "name": "",
+                                    "children": [
+                                      {
+                                        "role": "button",
+                                        "name": "Map Map",
+                                        "children": [
+                                          {
+                                            "role": "image",
+                                            "name": "Map"
+                                          },
+                                          {
+                                            "role": "text",
+                                            "name": "Map",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Map"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "button",
+                                        "name": "Discover Discover",
+                                        "children": [
+                                          {
+                                            "role": "image",
+                                            "name": "Discover"
+                                          },
+                                          {
+                                            "role": "text",
+                                            "name": "Discover",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Discover"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "button",
+                                        "name": "Routes Routes",
+                                        "children": [
+                                          {
+                                            "role": "image",
+                                            "name": "Routes"
+                                          },
+                                          {
+                                            "role": "text",
+                                            "name": "Routes",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Routes"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "role": "button",
+                                        "name": "Profile Profile",
+                                        "children": [
+                                          {
+                                            "role": "image",
+                                            "name": "Profile"
+                                          },
+                                          {
+                                            "role": "text",
+                                            "name": "Profile",
+                                            "children": [
+                                              {
+                                                "role": "InlineTextBox",
+                                                "name": "Profile"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "role": "generic",
+                    "name": "",
+                    "children": [
+                      {
+                        "role": "button",
+                        "name": "CONTROLS",
+                        "children": [
+                          {
+                            "role": "text",
+                            "name": "CONTROLS",
+                            "children": [
+                              {
+                                "role": "InlineTextBox",
+                                "name": "CONTROLS"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "computedStyles": [
     {
-      "role": "none",
-      "name": "",
-      "children": [
-        {
-          "role": "none",
-          "name": "",
-          "children": [
-            {
-              "role": "generic",
-              "name": "",
-              "children": [
-                {
-                  "role": "generic",
-                  "name": "",
-                  "children": [
-                    {
-                      "role": "generic",
-                      "name": "",
-                      "children": [
-                        {
-                          "role": "none",
-                          "name": "",
-                          "children": [
-                            {
-                              "role": "banner",
-                              "name": "",
-                              "children": [
-                                {
-                                  "role": "none",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "button",
-                                              "name": "Back to map"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "heading",
-                                              "name": "Customise Route",
-                                              "level": 1,
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Customise Route",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Customise Route"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Fine-tune your walking adventure",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Fine-tune your walking adventure"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "button",
-                                          "name": "Help"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "role": "main",
-                              "name": "",
-                              "children": [
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "heading",
-                                          "name": "Distance",
-                                          "level": 2,
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Distance",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Distance"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "3.2 km",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "3.2 km"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "generic",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": ""
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "slider",
-                                              "name": "Distance slider",
-                                              "value": 3.200000047683716
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "1 km",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "1 km"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "5 km",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "5 km"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "10 km",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "10 km"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "heading",
-                                          "name": "Duration",
-                                          "level": 2,
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Duration",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Duration"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "75 min",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "75 min"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "generic",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": ""
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "slider",
-                                              "name": "Duration slider",
-                                              "value": 75
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "15m",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "15m"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "90m",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "90m"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "180m",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "180m"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "heading",
-                                      "name": "Crowd Level",
-                                      "level": 2,
-                                      "children": [
-                                        {
-                                          "role": "text",
-                                          "name": "Crowd Level",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Crowd Level"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "group",
-                                      "name": "Crowd Level",
-                                      "children": [
-                                        {
-                                          "role": "radio",
-                                          "name": "Quiet Tranquil streets",
-                                          "checked": false,
-                                          "children": [
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Quiet",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Quiet"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Tranquil streets",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Tranquil streets"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "radio",
-                                          "name": "Balanced Local buzz",
-                                          "checked": true,
-                                          "children": [
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Balanced",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Balanced"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Local buzz",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Local buzz"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "radio",
-                                          "name": "Lively Popular spots",
-                                          "checked": false,
-                                          "children": [
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Lively",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Lively"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Popular spots",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Popular spots"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "heading",
-                                      "name": "Elevation Preference",
-                                      "level": 2,
-                                      "children": [
-                                        {
-                                          "role": "text",
-                                          "name": "Elevation Preference",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Elevation Preference"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "group",
-                                      "name": "Elevation Preference",
-                                      "children": [
-                                        {
-                                          "role": "radio",
-                                          "name": "Flat Minimal climbs",
-                                          "checked": true,
-                                          "children": [
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Flat",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Flat"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Minimal climbs",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Minimal climbs"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "radio",
-                                          "name": "Rolling Gentle hills",
-                                          "checked": false,
-                                          "children": [
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Rolling",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Rolling"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Gentle hills",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Gentle hills"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "radio",
-                                          "name": "Steep Challenge me",
-                                          "checked": false,
-                                          "children": [
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Steep",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Steep"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Challenge me",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Challenge me"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "heading",
-                                      "name": "Surface Type",
-                                      "level": 2,
-                                      "children": [
-                                        {
-                                          "role": "text",
-                                          "name": "Surface Type",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Surface Type"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "group",
-                                      "name": "Surface type",
-                                      "children": [
-                                        {
-                                          "role": "radio",
-                                          "name": "Paved",
-                                          "checked": true,
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Paved",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Paved"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "radio",
-                                          "name": "Trail",
-                                          "checked": false,
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Trail",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Trail"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "radio",
-                                          "name": "Boardwalk",
-                                          "checked": false,
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Boardwalk",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Boardwalk"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "radio",
-                                          "name": "Mixed",
-                                          "checked": false,
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Mixed",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Mixed"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "heading",
-                                      "name": "Interest Mix",
-                                      "level": 2,
-                                      "children": [
-                                        {
-                                          "role": "text",
-                                          "name": "Interest Mix",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Interest Mix"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "text",
-                                                      "name": "Nature",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "Nature"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "text",
-                                                      "name": "40",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "40"
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "role": "text",
-                                                      "name": "%",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "%"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "generic",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "none",
-                                                      "name": ""
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "slider",
-                                                      "name": "",
-                                                      "value": 40
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "text",
-                                                      "name": "History",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "History"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "text",
-                                                      "name": "30",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "30"
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "role": "text",
-                                                      "name": "%",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "%"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "generic",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "none",
-                                                      "name": ""
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "slider",
-                                                      "name": "",
-                                                      "value": 30
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "text",
-                                                      "name": "Food & Drink",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "Food & Drink"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "text",
-                                                      "name": "30",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "30"
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "role": "text",
-                                                      "name": "%",
-                                                      "children": [
-                                                        {
-                                                          "role": "InlineTextBox",
-                                                          "name": "%"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "generic",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "none",
-                                                      "name": ""
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "slider",
-                                                      "name": "",
-                                                      "value": 30
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "heading",
-                                      "name": "Route Preview",
-                                      "level": 2,
-                                      "children": [
-                                        {
-                                          "role": "text",
-                                          "name": "Route Preview",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Route Preview"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "button",
-                                          "name": "Route A 3.2 km • 75 min",
-                                          "pressed": true,
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": ""
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Route A",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Route A"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "3.2 km",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "3.2 km"
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "text",
-                                                  "name": " • ",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": " • "
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "text",
-                                                  "name": "75 min",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "75 "
-                                                    },
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "min"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "button",
-                                          "name": "Route B 2.8 km • 68 min",
-                                          "pressed": false,
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": ""
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Route B",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Route B"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "2.8 km",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "2.8 km"
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "text",
-                                                  "name": " • ",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": " • "
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "text",
-                                                  "name": "68 min",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "68 "
-                                                    },
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "min"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "button",
-                                          "name": "Route C 3.6 km • 82 min",
-                                          "pressed": false,
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": ""
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "Route C",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "Route C"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "paragraph",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "text",
-                                                  "name": "3.6 km",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "3.6 km"
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "text",
-                                                  "name": " • ",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": " • "
-                                                    }
-                                                  ]
-                                                },
-                                                {
-                                                  "role": "text",
-                                                  "name": "82 min",
-                                                  "children": [
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "82 "
-                                                    },
-                                                    {
-                                                      "role": "InlineTextBox",
-                                                      "name": "min"
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "button",
-                                          "name": "Regenerate",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Regenerate",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Regenerate"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "button",
-                                          "name": "Start Route",
-                                          "children": [
-                                            {
-                                              "role": "text",
-                                              "name": "Start Route",
-                                              "children": [
-                                                {
-                                                  "role": "InlineTextBox",
-                                                  "name": "Start Route"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "role": "generic",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "heading",
-                                      "name": "Advanced Options",
-                                      "level": 2,
-                                      "children": [
-                                        {
-                                          "role": "text",
-                                          "name": "Advanced Options",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Advanced Options"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "none",
-                                      "name": "",
-                                      "children": [
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "paragraph",
-                                                      "name": "",
-                                                      "children": [
-                                                        {
-                                                          "role": "text",
-                                                          "name": "Safety Priority",
-                                                          "children": [
-                                                            {
-                                                              "role": "InlineTextBox",
-                                                              "name": "Safety Priority"
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "role": "paragraph",
-                                                      "name": "",
-                                                      "children": [
-                                                        {
-                                                          "role": "text",
-                                                          "name": "Well-lit, busy routes",
-                                                          "children": [
-                                                            {
-                                                              "role": "InlineTextBox",
-                                                              "name": "Well-lit, busy routes"
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "switch",
-                                              "name": "",
-                                              "checked": false,
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": ""
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "paragraph",
-                                                      "name": "",
-                                                      "children": [
-                                                        {
-                                                          "role": "text",
-                                                          "name": "Accessibility",
-                                                          "children": [
-                                                            {
-                                                              "role": "InlineTextBox",
-                                                              "name": "Accessibility"
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "role": "paragraph",
-                                                      "name": "",
-                                                      "children": [
-                                                        {
-                                                          "role": "text",
-                                                          "name": "Step-free routes",
-                                                          "children": [
-                                                            {
-                                                              "role": "InlineTextBox",
-                                                              "name": "Step-free routes"
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "switch",
-                                              "name": "",
-                                              "checked": true,
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": ""
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "role": "none",
-                                          "name": "",
-                                          "children": [
-                                            {
-                                              "role": "none",
-                                              "name": "",
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": "",
-                                                  "children": [
-                                                    {
-                                                      "role": "paragraph",
-                                                      "name": "",
-                                                      "children": [
-                                                        {
-                                                          "role": "text",
-                                                          "name": "Offline download",
-                                                          "children": [
-                                                            {
-                                                              "role": "InlineTextBox",
-                                                              "name": "Offline download"
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    },
-                                                    {
-                                                      "role": "paragraph",
-                                                      "name": "",
-                                                      "children": [
-                                                        {
-                                                          "role": "text",
-                                                          "name": "Preload maps and audio",
-                                                          "children": [
-                                                            {
-                                                              "role": "InlineTextBox",
-                                                              "name": "Preload maps and audio"
-                                                            }
-                                                          ]
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "role": "switch",
-                                              "name": "",
-                                              "checked": false,
-                                              "children": [
-                                                {
-                                                  "role": "none",
-                                                  "name": ""
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "role": "navigation",
-                              "name": "",
-                              "children": [
-                                {
-                                  "role": "none",
-                                  "name": "",
-                                  "children": [
-                                    {
-                                      "role": "button",
-                                      "name": "Map Map",
-                                      "children": [
-                                        {
-                                          "role": "image",
-                                          "name": "Map"
-                                        },
-                                        {
-                                          "role": "text",
-                                          "name": "Map",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Map"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "button",
-                                      "name": "Discover Discover",
-                                      "children": [
-                                        {
-                                          "role": "image",
-                                          "name": "Discover"
-                                        },
-                                        {
-                                          "role": "text",
-                                          "name": "Discover",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Discover"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "button",
-                                      "name": "Routes Routes",
-                                      "children": [
-                                        {
-                                          "role": "image",
-                                          "name": "Routes"
-                                        },
-                                        {
-                                          "role": "text",
-                                          "name": "Routes",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Routes"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "role": "button",
-                                      "name": "Profile Profile",
-                                      "children": [
-                                        {
-                                          "role": "image",
-                                          "name": "Profile"
-                                        },
-                                        {
-                                          "role": "text",
-                                          "name": "Profile",
-                                          "children": [
-                                            {
-                                              "role": "InlineTextBox",
-                                              "name": "Profile"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "role": "generic",
-                  "name": "",
-                  "children": [
-                    {
-                      "role": "button",
-                      "name": "CONTROLS",
-                      "children": [
-                        {
-                          "role": "text",
-                          "name": "CONTROLS",
-                          "children": [
-                            {
-                              "role": "InlineTextBox",
-                              "name": "CONTROLS"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "selector": "[data-segment-id='crowd'] [data-radix-collection-item][data-state='on']",
+      "styles": {
+        "background-color": "oklab(0.718903 -0.108213 -0.0557673 / 0.15)",
+        "border-top-color": "rgb(14, 185, 203)",
+        "border-radius": "12px",
+        "box-shadow": "oklab(0.718903 -0.108213 -0.0557673 / 0.2) 0px 1px 3px 0px, oklab(0.718903 -0.108213 -0.0557673 / 0.2) 0px 1px 2px -1px",
+        "padding-top": "16px",
+        "padding-left": "16px",
+        "color": "rgb(13, 26, 38)"
+      },
+      "missing": false
+    },
+    {
+      "selector": "[data-segment-id='crowd'] [data-radix-collection-item][data-state='off']",
+      "styles": {
+        "background-color": "oklab(0.254477 -0.012388 -0.0328887 / 0.6)",
+        "border-top-color": "oklab(0.31608 -0.0167875 -0.0363289 / 0.7)",
+        "border-radius": "12px",
+        "box-shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklab(0.31608 -0.0167875 -0.0363289 / 0.2) 0px 1px 3px 0px, oklab(0.31608 -0.0167875 -0.0363289 / 0.2) 0px 1px 2px -1px",
+        "padding-top": "16px",
+        "padding-left": "16px",
+        "color": "oklab(0.999994 0.0000455677 0.0000200868 / 0.8)"
+      },
+      "missing": false
     }
   ]
 }

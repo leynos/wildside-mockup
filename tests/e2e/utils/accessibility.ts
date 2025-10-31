@@ -94,3 +94,43 @@ export function slugifyPath(path: string): string {
       .toLowerCase() || "root"
   );
 }
+
+export interface StyleTarget {
+  selector: string;
+  properties: string[];
+}
+
+export interface StyleSample {
+  selector: string;
+  styles?: Record<string, string>;
+  missing: boolean;
+}
+
+export async function captureComputedStyles(
+  page: Page,
+  targets: StyleTarget[],
+): Promise<StyleSample[]> {
+  if (targets.length === 0) return [];
+
+  return page.evaluate((styleTargets) => {
+    return styleTargets.map(({ selector, properties }) => {
+      const element = document.querySelector<HTMLElement>(selector);
+      if (!element) {
+        return {
+          selector,
+          missing: true,
+        };
+      }
+      const computed = window.getComputedStyle(element);
+      const styles: Record<string, string> = {};
+      for (const property of properties) {
+        styles[property] = computed.getPropertyValue(property);
+      }
+      return {
+        selector,
+        styles,
+        missing: false,
+      };
+    });
+  }, targets);
+}
