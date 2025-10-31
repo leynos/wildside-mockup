@@ -22,3 +22,23 @@ rules:
     message: "Class tokens should use lowercase Tailwind/DaisyUI utilities or project semantic prefixes (btn, card, nav__, form-, ws-)."
     languages: [javascript, typescript, html]
     severity: WARNING
+
+  - id: testing-library-no-testids
+    message: "Avoid test IDs; prefer accessible queries like getByRole, getByLabelText, or getByText."
+    languages: [javascript, typescript]
+    severity: ERROR
+    pattern-either:
+      - pattern: $SCREEN.getByTestId($ARG)
+      - pattern: $SCREEN.queryByTestId($ARG)
+      - pattern: $SCREEN.findByTestId($ARG)
+      - pattern: const { ..., getByTestId, ... } = $RENDER($ARGS)
+      - pattern: const { ..., queryByTestId, ... } = $RENDER($ARGS)
+      - pattern: const { ..., findByTestId, ... } = $RENDER($ARGS)
+    metadata:
+      applies_to: tests
+
+  - id: testing-no-data-testid-attr
+    message: "Avoid data-testid attributes; rely on accessible roles, names, or labels instead."
+    languages: [javascript, typescript, html]
+    severity: ERROR
+    pattern-regex: "data-testid"
