@@ -49,11 +49,11 @@ function InterestChips({
           <ToggleGroup.Item
             key={id}
             value={id}
-            className="wizard-step__interest-chip flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-900"
+            className="group flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-content"
           >
             <Icon
               token={interest.iconToken}
-              className={`text-lg ${interest.iconColorClass}`}
+              className={`text-lg transition ${interest.iconColorClass} group-data-[state=on]:text-base-100`}
               aria-hidden
             />
             {interest.label}
