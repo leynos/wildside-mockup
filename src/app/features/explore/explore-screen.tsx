@@ -21,9 +21,9 @@ import { MobileShell } from "../../layout/mobile-shell";
 
 function CategoryScroller(): JSX.Element {
   return (
-    <ScrollArea.Root className="w-full" type="scroll">
+    <ScrollArea.Root className="w-full pt-2" type="scroll">
       <ScrollArea.Viewport className="w-full">
-        <div className="flex gap-3 pb-2">
+        <div className="flex gap-3 pb-2 pr-6">
           {exploreCategories.map((category) => (
             <article
               key={category.id}
