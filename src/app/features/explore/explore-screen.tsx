@@ -139,10 +139,7 @@ function CuratedCollectionsList(): JSX.Element {
       <h2 className="mb-4 text-lg font-semibold text-base-content">Curated Collections</h2>
       <div className="space-y-4">
         {curatedCollections.map((collection) => (
-          <article
-            key={collection.id}
-            className="rounded-xl border border-base-300/60 bg-base-200/70 p-4 shadow-sm shadow-base-300/20"
-          >
+          <article key={collection.id} className="explore-collection__card">
             <div className="flex gap-4">
               <div className="h-16 w-16 overflow-hidden rounded-lg border border-base-300/50">
                 <img

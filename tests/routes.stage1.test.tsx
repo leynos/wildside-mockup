@@ -120,6 +120,9 @@ describe("Stage 1 routed flows", () => {
     const compactCards = container.querySelectorAll(".explore-compact__card");
     expect(compactCards.length).toBeGreaterThan(0);
 
+    const collectionCards = container.querySelectorAll(".explore-collection__card");
+    expect(collectionCards.length).toBeGreaterThan(0);
+
     const infoPanel = container.querySelector(".explore-info__panel");
     expect(infoPanel).toBeTruthy();
   });
