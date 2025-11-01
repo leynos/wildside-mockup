@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
+import { wizardSummaryHighlights } from "../src/app/data/wizard";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
@@ -418,6 +419,14 @@ describe("Stage 3 wizard flows", () => {
     expect(panels.length).toBeGreaterThanOrEqual(4);
     panels.forEach((panel) => {
       expect(panel.classList.contains("wizard-summary__panel")).toBe(true);
+    });
+
+    const highlights = container.querySelectorAll(".wizard-summary__highlight");
+    expect(highlights.length).toBe(wizardSummaryHighlights.length);
+    highlights.forEach((highlight) => {
+      expect(highlight.classList.contains("wizard-summary__highlight")).toBe(true);
+      const icon = highlight.querySelector(".wizard-summary__highlight-icon");
+      expect(icon).toBeTruthy();
     });
   });
 });

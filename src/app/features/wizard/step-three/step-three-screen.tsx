@@ -99,11 +99,12 @@ export function WizardStepThree(): JSX.Element {
         <h3 className="text-lg font-semibold">Your preferences applied</h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {wizardSummaryHighlights.map((highlight) => (
-            <div
-              key={highlight.id}
-              className="flex items-start gap-2 rounded-xl bg-base-300/40 px-3 py-2"
-            >
-              <Icon token={highlight.iconToken} className="text-accent" aria-hidden />
+            <div key={highlight.id} className="wizard-summary__highlight">
+              <Icon
+                token={highlight.iconToken}
+                className="wizard-summary__highlight-icon"
+                aria-hidden
+              />
               <div>
                 <p className="font-semibold">{highlight.label}</p>
                 <p className="text-xs text-base-content/60">{highlight.detail}</p>
