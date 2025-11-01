@@ -9,7 +9,7 @@ import { Icon } from "./icon";
 const interestLookup = new Map(discoverInterests.map((interest) => [interest.id, interest]));
 
 const CHIP_BASE_CLASSES =
-  "interest-chip group inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=on]:border-accent data-[state=on]:bg-accent data-[state=on]:text-base-100";
+  "interest-chip inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60";
 
 export interface InterestToggleGroupProps {
   interestIds: string[];

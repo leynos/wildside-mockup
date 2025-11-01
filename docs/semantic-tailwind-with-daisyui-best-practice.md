@@ -255,6 +255,12 @@ Markup stays semantic:
 > **Summary:** Use `@apply` for the base utility stack, then express Radix / ARIA
 > state through selectors. This mirrors daisyUI’s approach and keeps all visual
 > logic in the stylesheet instead of scattering utility soup through JSX.
+>
+> **Ordering hint:** When your markup keeps Tailwind utilities (e.g. `bg-base-200/60`
+> or `text-base-content/70`) alongside a semantic class, place the stateful
+> selectors in the `@layer utilities` block so they compile *after* the inline
+> utilities. Otherwise those utilities will win the cascade and your state
+> styles will never show up.
 
 ---
 

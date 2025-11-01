@@ -175,14 +175,6 @@
     @apply text-lg transition;
   }
 
-  .interest-chip[data-state="on"] {
-    @apply border-accent bg-accent text-base-100;
-  }
-
-  .interest-chip[data-state="on"] .interest-chip__icon {
-    @apply text-base-content;
-  }
-
   .slider-control {
     @apply mb-6;
   }
@@ -246,5 +238,15 @@
 
   .toggle-switch__thumb {
     @apply block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px];
+  }
+}
+
+@layer utilities {
+  .interest-chip[data-state="on"] {
+    @apply border-accent bg-accent text-base-100;
+  }
+
+  .interest-chip[data-state="on"] .interest-chip__icon {
+    @apply text-base-content;
   }
 }
