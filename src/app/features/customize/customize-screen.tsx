@@ -1,7 +1,6 @@
 /** @file Route customiser translating slider-heavy mockups to Radix UI. */
 
 import * as Slider from "@radix-ui/react-slider";
-import * as Switch from "@radix-ui/react-switch";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
 import type { JSX } from "react";
@@ -9,6 +8,7 @@ import { useMemo, useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
+import { PreferenceToggleCard } from "../../components/preference-toggle-card";
 import type { SegmentOption } from "../../data/customize";
 import {
   advancedOptions,
@@ -279,26 +279,15 @@ function AdvancedOptions({ onToggle, values }: AdvancedOptionsProps): JSX.Elemen
         {advancedOptions.map((option) => {
           const checked = values[option.id] ?? option.defaultEnabled;
           return (
-            <div
+            <PreferenceToggleCard
               key={option.id}
-              className="flex items-center justify-between rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-base-content"
-            >
-              <div className="flex items-center gap-3">
-                <Icon token={option.iconToken} className="text-accent" aria-hidden />
-                <div>
-                  <p className="text-sm font-semibold text-base-content">{option.label}</p>
-                  <p className="text-xs text-base-content/60">{option.description}</p>
-                </div>
-              </div>
-              <Switch.Root
-                id={option.id}
-                checked={checked}
-                onCheckedChange={(next) => onToggle(option.id, next)}
-                className="relative h-6 w-11 rounded-full border border-base-300/70 bg-base-300/60 transition data-[state=checked]:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-              >
-                <Switch.Thumb className="block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px]" />
-              </Switch.Root>
-            </div>
+              id={`advanced-${option.id}`}
+              iconToken={option.iconToken}
+              title={option.label}
+              description={option.description}
+              isChecked={checked}
+              onCheckedChange={(next) => onToggle(option.id, next)}
+            />
           );
         })}
       </div>

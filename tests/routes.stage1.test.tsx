@@ -127,7 +127,7 @@ describe("Stage 1 routed flows", () => {
   it("toggles advanced switches on the customize route", async () => {
     ({ mount, root } = await renderRoute("/customize"));
     const container = requireContainer(mount);
-    const safetySwitch = container.querySelector<HTMLButtonElement>("#safety");
+    const safetySwitch = container.querySelector<HTMLButtonElement>("#advanced-safety");
     expect(safetySwitch?.getAttribute("data-state")).toBe("unchecked");
 
     act(() => clickElement(safetySwitch));
@@ -618,7 +618,7 @@ describe("Stage 4 completion flows", () => {
     );
     expect(switches.length).toBeGreaterThan(0);
 
-    const automationCards = container.querySelectorAll(".offline-automation__card");
+    const automationCards = container.querySelectorAll(".preference-card");
     expect(automationCards.length).toBe(switches.length);
 
     switches.forEach((toggle) => {

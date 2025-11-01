@@ -1331,7 +1331,7 @@
                                         "name": "",
                                         "children": [
                                           {
-                                            "role": "none",
+                                            "role": "article",
                                             "name": "",
                                             "children": [
                                               {
@@ -1380,7 +1380,7 @@
                                               },
                                               {
                                                 "role": "switch",
-                                                "name": "",
+                                                "name": "Safety Priority",
                                                 "checked": false,
                                                 "children": [
                                                   {
@@ -1392,7 +1392,7 @@
                                             ]
                                           },
                                           {
-                                            "role": "none",
+                                            "role": "article",
                                             "name": "",
                                             "children": [
                                               {
@@ -1441,7 +1441,7 @@
                                               },
                                               {
                                                 "role": "switch",
-                                                "name": "",
+                                                "name": "Accessibility",
                                                 "checked": true,
                                                 "children": [
                                                   {
@@ -1453,7 +1453,7 @@
                                             ]
                                           },
                                           {
-                                            "role": "none",
+                                            "role": "article",
                                             "name": "",
                                             "children": [
                                               {
@@ -1502,7 +1502,7 @@
                                               },
                                               {
                                                 "role": "switch",
-                                                "name": "",
+                                                "name": "Offline download",
                                                 "checked": false,
                                                 "children": [
                                                   {

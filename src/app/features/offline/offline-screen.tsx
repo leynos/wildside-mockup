@@ -1,13 +1,13 @@
 /** @file Offline download management screen with storage overview. */
 
 import * as Dialog from "@radix-ui/react-dialog";
-import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
 import { Icon } from "../../components/icon";
+import { PreferenceToggleCard } from "../../components/preference-toggle-card";
 import { bottomNavigation } from "../../data/customize";
 import {
   autoManagementOptions,
@@ -277,33 +277,17 @@ export function OfflineScreen(): JSX.Element {
                 {autoManagementOptions.map((option) => {
                   const checked = autoSettings[option.id] ?? option.defaultEnabled;
                   return (
-                    <article key={option.id} className="offline-automation__card">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex flex-1 items-start gap-3">
-                          <Icon
-                            token={option.iconToken}
-                            className={`${option.iconClassName} text-lg`}
-                            aria-hidden
-                          />
-                          <div>
-                            <h3 className="text-sm font-semibold text-base-content">
-                              {option.title}
-                            </h3>
-                            <p className="mt-1 text-sm text-base-content/70">
-                              {option.description}
-                            </p>
-                          </div>
-                        </div>
-                        <Switch.Root
-                          checked={Boolean(checked)}
-                          onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
-                          className="toggle-switch toggle-switch--muted toggle-switch--accent"
-                          data-testid={`auto-management-switch-${option.id}`}
-                        >
-                          <Switch.Thumb className="toggle-switch__thumb" />
-                        </Switch.Root>
-                      </div>
-                    </article>
+                    <PreferenceToggleCard
+                      key={option.id}
+                      id={`auto-management-${option.id}`}
+                      iconToken={option.iconToken}
+                      iconClassName={option.iconClassName}
+                      title={option.title}
+                      description={option.description}
+                      isChecked={Boolean(checked)}
+                      onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
+                      switchTestId={`auto-management-switch-${option.id}`}
+                    />
                   );
                 })}
               </div>

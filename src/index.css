@@ -123,8 +123,32 @@
     @apply pointer-events-auto rounded-3xl border border-base-300/40 bg-base-200/80 p-6 text-base-content shadow-2xl backdrop-blur;
   }
 
-  .offline-automation__card {
-    @apply rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
+  .preference-card {
+    @apply flex items-start justify-between gap-3 rounded-xl border border-base-300/70 bg-base-200/60 p-4 text-base-content shadow-sm shadow-base-300/20;
+  }
+
+  .preference-card__content {
+    @apply flex flex-1 items-start gap-3;
+  }
+
+  .preference-card__icon {
+    @apply text-base;
+  }
+
+  .preference-card__copy {
+    @apply flex-1;
+  }
+
+  .preference-card__title {
+    @apply text-sm font-semibold text-base-content;
+  }
+
+  .preference-card__description {
+    @apply mt-1 text-xs text-base-content/60;
+  }
+
+  .preference-card__switch {
+    @apply flex-shrink-0;
   }
 
   .map-panel--stacked {
