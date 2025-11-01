@@ -1,11 +1,11 @@
 /** @file Walk wizard step one: duration and interests. */
 
-import * as Slider from "@radix-ui/react-slider";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useMemo, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
+import { SliderControl } from "../../../components/slider-control";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { defaultSelectedInterests, discoverInterests } from "../../../data/discover";
 import { wizardSteps } from "../../../data/wizard";
@@ -54,35 +54,19 @@ export function WizardStepOne(): JSX.Element {
       }
     >
       <section className="mb-8 rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
-        <header className="mb-4 flex items-center justify-between text-base-content">
-          <h2 className="flex items-center gap-3 text-lg font-semibold">
-            <Icon token="{icon.object.duration}" className="text-accent" aria-hidden />
-            Walk duration
-          </h2>
-          <span className="text-xl font-semibold text-accent">{formatDuration(duration)}</span>
-        </header>
-        <Slider.Root
-          value={[duration]}
+        <SliderControl
+          id="wizard-duration"
+          label="Walk duration"
+          iconToken="{icon.object.duration}"
+          value={duration}
           min={15}
           max={180}
           step={5}
-          onValueChange={(value) => setDuration(value[0] ?? duration)}
-          aria-label="Walk duration slider"
-          className="relative flex h-6 items-center"
-        >
-          <Slider.Track className="relative h-2 flex-1 rounded-full bg-base-300/60">
-            <Slider.Range className="absolute h-full rounded-full bg-accent" />
-          </Slider.Track>
-          <Slider.Thumb
-            aria-label="Adjust walk duration"
-            className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
-          />
-        </Slider.Root>
-        <div className="mt-2 flex justify-between text-xs text-base-content/50">
-          <span>15m</span>
-          <span>90m</span>
-          <span>180m</span>
-        </div>
+          valueFormatter={formatDuration}
+          markers={["15m", "90m", "180m"]}
+          ariaLabel="Walk duration slider"
+          onValueChange={setDuration}
+        />
       </section>
 
       <section className="rounded-3xl border border-base-300/40 bg-base-200/70 p-6">

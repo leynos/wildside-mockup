@@ -1,6 +1,5 @@
 /** @file Quick map generator flow with interactive MapLibre canvas and tabs. */
 
-import * as Slider from "@radix-ui/react-slider";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { type JSX, useEffect, useMemo, useState } from "react";
@@ -10,6 +9,7 @@ import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
+import { SliderControl } from "../../../components/slider-control";
 import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
@@ -116,41 +116,24 @@ export function QuickWalkScreen(): JSX.Element {
                       </button>
                     </header>
 
-                    <section className="mb-6">
-                      <div className="mb-3 flex items-center justify-between text-base-content">
-                        <h2 className="flex items-center gap-2 text-lg font-semibold">
-                          <Icon
-                            token="{icon.object.duration}"
-                            className="text-accent"
-                            aria-hidden
-                          />
-                          Duration
-                        </h2>
-                        <span className="text-sm font-semibold">{formatDuration(duration)}</span>
-                      </div>
-                      <Slider.Root
-                        value={[duration]}
-                        min={quickWalkConfig.durationRange.min}
-                        max={quickWalkConfig.durationRange.max}
-                        step={quickWalkConfig.durationRange.step}
-                        onValueChange={(value) => setDuration(value[0] ?? duration)}
-                        aria-label="Walk duration"
-                        className="relative flex h-6 items-center"
-                      >
-                        <Slider.Track className="relative h-2 flex-1 rounded-full bg-base-300/60">
-                          <Slider.Range className="absolute h-full rounded-full bg-accent" />
-                        </Slider.Track>
-                        <Slider.Thumb
-                          aria-label="Adjust walk duration"
-                          className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
-                        />
-                      </Slider.Root>
-                      <div className="mt-2 flex justify-between text-xs text-base-content/50">
-                        <span>{quickWalkConfig.durationRange.min}m</span>
-                        <span>90m</span>
-                        <span>{quickWalkConfig.durationRange.max}m</span>
-                      </div>
-                    </section>
+                    <SliderControl
+                      id="quick-walk-duration"
+                      label="Duration"
+                      iconToken="{icon.object.duration}"
+                      value={duration}
+                      min={quickWalkConfig.durationRange.min}
+                      max={quickWalkConfig.durationRange.max}
+                      step={quickWalkConfig.durationRange.step}
+                      valueFormatter={formatDuration}
+                      markers={[
+                        `${quickWalkConfig.durationRange.min}m`,
+                        "90m",
+                        `${quickWalkConfig.durationRange.max}m`,
+                      ]}
+                      ariaLabel="Walk duration"
+                      onValueChange={setDuration}
+                      className="mb-6"
+                    />
 
                     <section>
                       <div className="mb-3 flex items-center justify-between">

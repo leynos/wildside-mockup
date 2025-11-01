@@ -164,7 +164,7 @@
   }
 
   .interest-chip {
-    @apply group inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
+    @apply inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
   }
 
   .interest-chip:focus-visible {
@@ -181,6 +181,50 @@
 
   .interest-chip[data-state="on"] .interest-chip__icon {
     @apply text-base-content;
+  }
+
+  .slider-control {
+    @apply mb-6;
+  }
+
+  .slider-control__header {
+    @apply mb-3 flex items-center justify-between text-base-content;
+  }
+
+  .slider-control__title {
+    @apply flex items-center gap-2 text-lg font-semibold;
+  }
+
+  .slider-control__icon {
+    @apply text-accent;
+  }
+
+  .slider-control__value {
+    @apply rounded-full border border-base-300/70 bg-base-200/60 px-3 py-1 text-sm font-semibold text-base-content;
+  }
+
+  .slider-control__root {
+    @apply relative flex h-6 w-full items-center;
+  }
+
+  .slider-control__track {
+    @apply relative h-2 w-full overflow-hidden rounded-full bg-base-300/60;
+  }
+
+  .slider-control__range {
+    @apply absolute h-full rounded-full bg-accent;
+  }
+
+  .slider-control__thumb {
+    @apply block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/30 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70;
+  }
+
+  .slider-control__markers {
+    @apply mt-2 flex justify-between text-xs text-base-content/60;
+  }
+
+  .slider-control__marker {
+    @apply whitespace-nowrap;
   }
 
   .preference-toggle {

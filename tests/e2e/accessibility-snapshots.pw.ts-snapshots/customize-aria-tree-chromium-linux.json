@@ -113,7 +113,7 @@
                                     "name": "",
                                     "children": [
                                       {
-                                        "role": "none",
+                                        "role": "sectionheader",
                                         "name": "",
                                         "children": [
                                           {
@@ -134,18 +134,12 @@
                                             ]
                                           },
                                           {
-                                            "role": "none",
-                                            "name": "",
+                                            "role": "text",
+                                            "name": "3.2 km",
                                             "children": [
                                               {
-                                                "role": "text",
-                                                "name": "3.2 km",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "3.2 km"
-                                                  }
-                                                ]
+                                                "role": "InlineTextBox",
+                                                "name": "3.2 km"
                                               }
                                             ]
                                           }
@@ -153,80 +147,16 @@
                                       },
                                       {
                                         "role": "generic",
-                                        "name": "",
+                                        "name": "Distance slider",
                                         "children": [
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "none",
-                                                "name": ""
-                                              }
-                                            ]
-                                          },
                                           {
                                             "role": "none",
                                             "name": "",
                                             "children": [
                                               {
                                                 "role": "slider",
-                                                "name": "Distance slider",
+                                                "name": "Distance slider handle",
                                                 "value": 3.200000047683716
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      {
-                                        "role": "none",
-                                        "name": "",
-                                        "children": [
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "1 km",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "1 km"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "5 km",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "5 km"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "10 km",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "10 km"
-                                                  }
-                                                ]
                                               }
                                             ]
                                           }
@@ -239,7 +169,7 @@
                                     "name": "",
                                     "children": [
                                       {
-                                        "role": "none",
+                                        "role": "sectionheader",
                                         "name": "",
                                         "children": [
                                           {
@@ -260,18 +190,12 @@
                                             ]
                                           },
                                           {
-                                            "role": "none",
-                                            "name": "",
+                                            "role": "text",
+                                            "name": "75 min",
                                             "children": [
                                               {
-                                                "role": "text",
-                                                "name": "75 min",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "75 min"
-                                                  }
-                                                ]
+                                                "role": "InlineTextBox",
+                                                "name": "75 min"
                                               }
                                             ]
                                           }
@@ -279,80 +203,16 @@
                                       },
                                       {
                                         "role": "generic",
-                                        "name": "",
+                                        "name": "Duration slider",
                                         "children": [
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "none",
-                                                "name": ""
-                                              }
-                                            ]
-                                          },
                                           {
                                             "role": "none",
                                             "name": "",
                                             "children": [
                                               {
                                                 "role": "slider",
-                                                "name": "Duration slider",
+                                                "name": "Duration slider handle",
                                                 "value": 75
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      {
-                                        "role": "none",
-                                        "name": "",
-                                        "children": [
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "15m",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "15m"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "90m",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "90m"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "180m",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "180m"
-                                                  }
-                                                ]
                                               }
                                             ]
                                           }

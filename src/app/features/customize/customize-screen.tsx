@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
 import { PreferenceToggleCard } from "../../components/preference-toggle-card";
+import { SliderControl } from "../../components/slider-control";
 import type { SegmentOption } from "../../data/customize";
 import {
   advancedOptions,
@@ -39,56 +40,6 @@ function SectionTitle({
       <Icon token={iconToken} className={iconClassName} aria-hidden />
       {label}
     </h2>
-  );
-}
-
-interface SliderBlockProps {
-  id: string;
-  label: string;
-  iconToken: string;
-  iconColorClass: string;
-  min: number;
-  max: number;
-  step: number;
-  markers: string[];
-  value: number;
-  onValueChange: (value: number) => void;
-}
-
-function SliderBlock(props: SliderBlockProps): JSX.Element {
-  const { id, iconToken, iconColorClass, label, markers, max, min, step, value, onValueChange } =
-    props;
-
-  return (
-    <section className="mb-8">
-      <div className="mb-4 flex items-center justify-between">
-        <SectionTitle iconToken={iconToken} label={label} iconClassName={iconColorClass} />
-        <span className="rounded-full border border-base-300/70 bg-base-200/60 px-3 py-1 text-sm font-semibold text-base-content">
-          {formatSliderValue(id, value)}
-        </span>
-      </div>
-      <Slider.Root
-        value={[value]}
-        min={min}
-        max={max}
-        step={step}
-        onValueChange={(next) => onValueChange(next[0] ?? value)}
-        className="relative mb-2 flex h-5 w-full items-center"
-      >
-        <Slider.Track className="relative h-2 w-full overflow-hidden rounded-full bg-base-300/60">
-          <Slider.Range className="absolute h-full rounded-full bg-accent" />
-        </Slider.Track>
-        <Slider.Thumb
-          className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
-          aria-label={`${label} slider`}
-        />
-      </Slider.Root>
-      <div className="flex justify-between text-xs text-base-content/60">
-        {markers.map((marker) => (
-          <span key={marker}>{marker}</span>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -357,28 +308,25 @@ export function CustomizeScreen(): JSX.Element {
           {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => {
             const currentValue = sliderValues[id] ?? min;
             return (
-              <SliderBlock
+              <SliderControl
                 key={id}
                 id={id}
-                iconToken={iconToken}
-                iconColorClass={iconColorClass}
                 label={label}
-                markers={markers}
-                max={max}
+                iconToken={iconToken}
+                iconClassName={iconColorClass}
+                className="mb-8"
                 min={min}
+                max={max}
                 step={step}
                 value={currentValue}
+                valueFormatter={(value) => formatSliderValue(id, value)}
+                markers={markers}
+                ariaLabel={`${label} slider`}
                 onValueChange={(value) =>
-                  setSliderValues((current) => {
-                    const next =
-                      typeof value === "number" && !Number.isNaN(value)
-                        ? value
-                        : (current[id] ?? currentValue);
-                    return {
-                      ...current,
-                      [id]: next,
-                    };
-                  })
+                  setSliderValues((current) => ({
+                    ...current,
+                    [id]: value,
+                  }))
                 }
               />
             );

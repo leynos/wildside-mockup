@@ -254,7 +254,7 @@
                                                             "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "none",
+                                                                "role": "sectionheader",
                                                                 "name": "",
                                                                 "children": [
                                                                   {
@@ -275,18 +275,12 @@
                                                                     ]
                                                                   },
                                                                   {
-                                                                    "role": "none",
-                                                                    "name": "",
+                                                                    "role": "text",
+                                                                    "name": "60 min",
                                                                     "children": [
                                                                       {
-                                                                        "role": "text",
-                                                                        "name": "60 min",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "InlineTextBox",
-                                                                            "name": "60 min"
-                                                                          }
-                                                                        ]
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "60 min"
                                                                       }
                                                                     ]
                                                                   }
@@ -301,93 +295,9 @@
                                                                     "name": "",
                                                                     "children": [
                                                                       {
-                                                                        "role": "none",
-                                                                        "name": ""
-                                                                      }
-                                                                    ]
-                                                                  },
-                                                                  {
-                                                                    "role": "none",
-                                                                    "name": "",
-                                                                    "children": [
-                                                                      {
                                                                         "role": "slider",
-                                                                        "name": "Adjust walk duration",
+                                                                        "name": "Duration slider handle",
                                                                         "value": 60
-                                                                      }
-                                                                    ]
-                                                                  }
-                                                                ]
-                                                              },
-                                                              {
-                                                                "role": "none",
-                                                                "name": "",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "none",
-                                                                    "name": "",
-                                                                    "children": [
-                                                                      {
-                                                                        "role": "text",
-                                                                        "name": "15",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "InlineTextBox",
-                                                                            "name": "15"
-                                                                          }
-                                                                        ]
-                                                                      },
-                                                                      {
-                                                                        "role": "text",
-                                                                        "name": "m",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "InlineTextBox",
-                                                                            "name": "m"
-                                                                          }
-                                                                        ]
-                                                                      }
-                                                                    ]
-                                                                  },
-                                                                  {
-                                                                    "role": "none",
-                                                                    "name": "",
-                                                                    "children": [
-                                                                      {
-                                                                        "role": "text",
-                                                                        "name": "90m",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "InlineTextBox",
-                                                                            "name": "90m"
-                                                                          }
-                                                                        ]
-                                                                      }
-                                                                    ]
-                                                                  },
-                                                                  {
-                                                                    "role": "none",
-                                                                    "name": "",
-                                                                    "children": [
-                                                                      {
-                                                                        "role": "text",
-                                                                        "name": "180",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "InlineTextBox",
-                                                                            "name": "180"
-                                                                          }
-                                                                        ]
-                                                                      },
-                                                                      {
-                                                                        "role": "text",
-                                                                        "name": "m",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "InlineTextBox",
-                                                                            "name": "m"
-                                                                          }
-                                                                        ]
                                                                       }
                                                                     ]
                                                                   }

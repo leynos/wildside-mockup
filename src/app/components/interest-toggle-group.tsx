@@ -41,7 +41,7 @@ export function InterestToggleGroup({
           <ToggleGroup.Item key={id} value={id} className={CHIP_BASE_CLASSES}>
             <Icon
               token={interest.iconToken}
-              className={`interest-chip__icon text-lg transition ${interest.iconColorClass} group-data-[state=on]:text-base-content`}
+              className={`interest-chip__icon text-lg transition ${interest.iconColorClass}`}
               aria-hidden
             />
             {interest.label}
