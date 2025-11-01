@@ -621,6 +621,10 @@ describe("Stage 4 completion flows", () => {
     const automationCards = container.querySelectorAll(".offline-automation__card");
     expect(automationCards.length).toBe(switches.length);
 
+    switches.forEach((toggle) => {
+      expect(toggle.classList.contains("toggle-switch")).toBe(true);
+    });
+
     const firstSwitch = switches[0];
     if (!firstSwitch) {
       throw new Error("Expected at least one auto-management switch");

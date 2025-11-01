@@ -3,6 +3,28 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Stage 4 routes", () => {
+  const parseAlpha = (value: string): number => {
+    const compact = value.replace(/\s+/g, "");
+    const slashMatch = compact.match(/\/([0-9.]+)\)?$/);
+    if (slashMatch?.[1]) {
+      const parsed = Number.parseFloat(slashMatch[1]);
+      if (!Number.isNaN(parsed)) return parsed;
+    }
+    const rgbaMatch = compact.match(/rgba?\(([^)]+)\)/i);
+    if (rgbaMatch?.[1]) {
+      const parts = rgbaMatch[1]
+        .split(/[,\s/]+/)
+        .map((segment) => segment.trim())
+        .filter(Boolean);
+      if (parts.length === 4) {
+        const parsed = Number.parseFloat(parts[3] ?? "");
+        if (!Number.isNaN(parsed)) return parsed;
+      }
+      return 1;
+    }
+    return Number.NaN;
+  };
+
   test("walk complete triggers rating toast", async ({ page }) => {
     await page.goto("/walk-complete");
     await expect(page.getByRole("heading", { name: /walk complete/i })).toBeVisible();
@@ -47,8 +69,23 @@ test.describe("Stage 4 routes", () => {
     await page.goto("/offline");
     const autoSwitch = page.getByTestId("auto-management-switch-auto-update");
     await expect(autoSwitch).toHaveAttribute("data-state", "unchecked");
+    const offBackground = await autoSwitch.evaluate(
+      (element) => getComputedStyle(element as HTMLElement).backgroundColor,
+    );
+    const offAlpha = parseAlpha(offBackground);
+    expect(offAlpha).toBeGreaterThan(0);
+    expect(offAlpha).toBeLessThan(0.5);
+
     await autoSwitch.click();
     await expect(autoSwitch).toHaveAttribute("data-state", "checked");
+
+    const onBackground = await autoSwitch.evaluate(
+      (element) => getComputedStyle(element as HTMLElement).backgroundColor,
+    );
+    const onAlpha = parseAlpha(onBackground);
+    expect(onBackground).not.toBe(offBackground);
+    expect(onAlpha).toBeGreaterThan(offAlpha);
+    expect(onAlpha).toBeGreaterThan(0.5);
   });
 
   test("safety preferences accordion toggles", async ({ page }) => {

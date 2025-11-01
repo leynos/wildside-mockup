@@ -297,10 +297,10 @@ export function OfflineScreen(): JSX.Element {
                         <Switch.Root
                           checked={Boolean(checked)}
                           onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
-                          className="relative inline-flex h-6 w-11 items-center rounded-full border border-base-300/60 bg-base-200/60 transition data-[state=checked]:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
+                          className="toggle-switch toggle-switch--muted toggle-switch--accent"
                           data-testid={`auto-management-switch-${option.id}`}
                         >
-                          <Switch.Thumb className="block h-5 w-5 translate-x-[2px] rounded-full bg-base-100 shadow transition-transform duration-200 data-[state=checked]:translate-x-[22px]" />
+                          <Switch.Thumb className="toggle-switch__thumb" />
                         </Switch.Root>
                       </div>
                     </article>

@@ -36,17 +36,20 @@
   ],
   "files": {
     "includes": [
-      "**/*",
-      "!node_modules",
-      "!tokens/node_modules",
-      "!.bin",
-      "!.pnpm-store",
-      "!.cache",
-      "!.artifacts",
-      "!.act-stubs",
-      "!.grit",
-      "!dist",
-      "!tokens/dist"
+      "biome.jsonc",
+      "bunfig.toml",
+      "package.json",
+      "tsconfig.json",
+      "vite.config.ts",
+      "tailwind.config.cjs",
+      "postcss.config.cjs",
+      "src/**/*",
+      "tests/**/*",
+      "docs/**/*.md",
+      "tools/**/*.ts",
+      "tools/**/*.tsx",
+      "tools/**/*.cjs",
+      "scripts/**/*.ts"
     ],
     "ignoreUnknown": true
   },
