@@ -46,7 +46,7 @@ function CategoryScroller(): JSX.Element {
 
 function FeaturedWalkCard(): JSX.Element {
   return (
-    <section className="space-y-4 rounded-2xl border border-base-300/70 bg-base-200/60 p-4 shadow-inner shadow-base-300/30">
+    <section className="explore-featured__panel">
       <h2 className="flex items-center gap-2 text-lg font-semibold text-base-content">
         <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
         Walk of the Week
@@ -101,10 +101,7 @@ function PopularThemesGrid(): JSX.Element {
       <h2 className="mb-4 text-lg font-semibold text-base-content">Popular Themes</h2>
       <div className="grid grid-cols-2 gap-4">
         {popularThemes.map((theme) => (
-          <article
-            key={theme.id}
-            className="rounded-xl border border-base-300/60 bg-base-200/70 p-4 shadow-sm shadow-base-300/20"
-          >
+          <article key={theme.id} className="explore-compact__card">
             <div className="relative mb-3 h-24 overflow-hidden rounded-lg">
               <img
                 src={theme.imageUrl}
@@ -198,10 +195,7 @@ function TrendingRoutesList(): JSX.Element {
       <h2 className="mb-4 text-lg font-semibold text-base-content">Trending Now</h2>
       <div className="space-y-3">
         {trendingRoutes.map((route) => (
-          <article
-            key={route.id}
-            className="flex items-center gap-4 rounded-xl border border-base-300/60 bg-base-200/70 p-4 shadow-sm shadow-base-300/20"
-          >
+          <article key={route.id} className="explore-compact__card flex items-center gap-4">
             <div className="h-12 w-12 overflow-hidden rounded-lg border border-base-300/50">
               <img
                 src={route.imageUrl}
@@ -227,7 +221,7 @@ function TrendingRoutesList(): JSX.Element {
 
 function CommunityPickPanel(): JSX.Element {
   return (
-    <section className="rounded-2xl border border-base-300/60 bg-base-200/70 p-4 shadow-inner shadow-base-300/20">
+    <section className="explore-info__panel">
       <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-base-content">
         <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
         Community Favourite

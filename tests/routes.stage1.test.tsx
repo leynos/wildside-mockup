@@ -110,6 +110,20 @@ describe("Stage 1 routed flows", () => {
     expect(header).toContain("Discover Your Perfect Walk");
   });
 
+  it("renders explore panels using semantic classes", async () => {
+    ({ mount, root } = await renderRoute("/explore"));
+    const container = requireContainer(mount);
+
+    const featuredPanel = container.querySelector(".explore-featured__panel");
+    expect(featuredPanel).toBeTruthy();
+
+    const compactCards = container.querySelectorAll(".explore-compact__card");
+    expect(compactCards.length).toBeGreaterThan(0);
+
+    const infoPanel = container.querySelector(".explore-info__panel");
+    expect(infoPanel).toBeTruthy();
+  });
+
   it("toggles advanced switches on the customize route", async () => {
     ({ mount, root } = await renderRoute("/customize"));
     const container = requireContainer(mount);

@@ -94,6 +94,19 @@
     @apply flex items-center justify-between rounded-2xl border border-dashed border-base-300/60 bg-base-200/70 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20;
   }
 
+  /* Explore catalogue panels and cards. */
+  .explore-featured__panel {
+    @apply space-y-4 rounded-2xl border border-base-300/70 bg-base-200/60 p-4 text-base-content shadow-inner shadow-base-300/30;
+  }
+
+  .explore-info__panel {
+    @apply rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-inner shadow-base-300/20;
+  }
+
+  .explore-compact__card {
+    @apply rounded-xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
+  }
+
   .map-panel--stacked {
     @apply relative flex flex-col overflow-hidden;
   }
