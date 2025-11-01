@@ -218,7 +218,7 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div
-                    className="pointer-events-auto relative flex max-h-[53vh] flex-col overflow-hidden rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur"
+                    className="map-panel map-panel--stacked max-h-[53vh]"
                     data-testid="quick-walk-stops-panel"
                   >
                     <div className="flex justify-center bg-base-900/70 pb-3 pt-3">
@@ -251,7 +251,7 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div
-                    className="pointer-events-auto max-h-[53vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-6 text-sm text-base-100 shadow-2xl backdrop-blur"
+                    className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm"
                     data-testid="quick-walk-notes-panel"
                   >
                     <button

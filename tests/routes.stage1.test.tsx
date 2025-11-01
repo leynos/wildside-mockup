@@ -180,6 +180,21 @@ describe("Stage 2 routed flows", () => {
     expect(heading).toBeTruthy();
   });
 
+  it("uses semantic map panel classes on the quick walk route", async () => {
+    ({ mount, root } = await renderRoute("/map/quick"));
+    const container = requireContainer(mount);
+
+    const stopsPanel = container.querySelector("[data-testid='quick-walk-stops-panel']");
+    expect(stopsPanel).toBeTruthy();
+    expect(stopsPanel?.classList.contains("map-panel")).toBe(true);
+    expect(stopsPanel?.classList.contains("map-panel--stacked")).toBe(true);
+
+    const notesPanel = container.querySelector("[data-testid='quick-walk-notes-panel']");
+    expect(notesPanel).toBeTruthy();
+    expect(notesPanel?.classList.contains("map-panel")).toBe(true);
+    expect(notesPanel?.classList.contains("map-panel--scroll")).toBe(true);
+  });
+
   it("launches the wizard from the quick walk magic wand", async () => {
     ({ mount, root } = await renderRoute("/map/quick"));
     const container = requireContainer(mount);

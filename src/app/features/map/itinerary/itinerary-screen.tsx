@@ -164,7 +164,7 @@ export function ItineraryScreen(): JSX.Element {
 
             <Tabs.Content value="stops" className="absolute inset-0 flex flex-col justify-end">
               <div className="pointer-events-none px-6 pb-6">
-                <div className="pointer-events-auto relative flex max-h-[60vh] flex-col overflow-hidden rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur">
+                <div className="map-panel map-panel--stacked max-h-[60vh]">
                   <div className="flex justify-center bg-base-900/70 pb-3 pt-3">
                     <button
                       type="button"
@@ -190,7 +190,7 @@ export function ItineraryScreen(): JSX.Element {
 
             <Tabs.Content value="notes" className="absolute inset-0 flex flex-col justify-end">
               <div className="pointer-events-none px-6 pb-6">
-                <div className="pointer-events-auto max-h-[60vh] overflow-y-auto rounded-3xl border border-base-300/60 bg-base-900/70 p-5 text-sm text-base-100 shadow-2xl backdrop-blur">
+                <div className="map-panel map-panel--scroll max-h-[60vh] p-5 text-sm">
                   <p className="text-base font-semibold text-base-100">Route notes</p>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-base-100/80">
                     {waterfrontDiscoveryRoute.notes.map((note) => (
