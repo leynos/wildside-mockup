@@ -19,10 +19,12 @@ describe("PointOfInterestList accessibility", () => {
     expect(await axe(container)).toHaveNoViolations();
 
     const trigger = screen.getByRole("button", { name: new RegExp(samplePoi.name, "i") });
+    expect(trigger.classList.contains("poi-list__item")).toBe(true);
     await userEvent.click(trigger);
 
     const dialog = await screen.findByRole("dialog", { name: samplePoi.name });
     expect(dialog).toBeInTheDocument();
+    expect(dialog.querySelector(".poi-sheet")).not.toBeNull();
     expect(await axe(document.body)).toHaveNoViolations();
 
     await userEvent.click(screen.getByRole("button", { name: /close/i }));

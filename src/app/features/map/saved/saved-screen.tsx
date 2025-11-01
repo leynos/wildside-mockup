@@ -86,7 +86,7 @@ export function SavedScreen(): JSX.Element {
                       </Dialog.Trigger>
                       <Dialog.Portal>
                         <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-                        <Dialog.Content className="fixed inset-0 m-auto flex h-fit w-80 flex-col gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-6 shadow-2xl">
+                        <Dialog.Content className="dialog-surface">
                           <Dialog.Title className="text-lg\ font-semibold text-base-content">
                             Share saved walk
                           </Dialog.Title>

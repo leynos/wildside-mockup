@@ -37,6 +37,28 @@
       0 1px 2px -1px color-mix(in oklab, var(--color-accent) 20%, transparent);
   }
 
+  /* Card affordance for list items that open POI sheets; keeps hover/focus feedback consistent. */
+  .poi-list__item {
+    @apply w-full rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-left text-base-content shadow-sm shadow-base-300/30 transition;
+  }
+
+  .poi-list__item:hover {
+    @apply border-accent;
+  }
+
+  .poi-list__item:focus-visible {
+    @apply outline-none ring-2 ring-accent/60;
+  }
+
+  /* Sheet surface for detailed POI content, reused whenever map overlays need a panel shell. */
+  .poi-sheet {
+    @apply max-h-[min(80vh,32rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-base-300/60 bg-base-100 p-6 text-base-content shadow-2xl;
+  }
+
+  .dialog-surface {
+    @apply fixed inset-0 m-auto flex h-fit w-80 flex-col gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-6 shadow-2xl;
+  }
+
   .wizard-step__interest-chip {
     @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
   }

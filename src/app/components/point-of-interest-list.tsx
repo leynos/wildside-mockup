@@ -22,7 +22,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
           <Dialog.Trigger asChild>
             <button
               type="button"
-              className="w-full rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-left shadow-sm shadow-base-300/30 transition hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+              className="poi-list__item"
               onMouseEnter={() => highlightPois?.([poi.id])}
               onFocus={() => highlightPois?.([poi.id])}
               onMouseLeave={() => highlightPois?.([])}
@@ -63,7 +63,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
           <Dialog.Portal>
             <Dialog.Overlay className="fixed inset-0 bg-black/60" />
             <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <div className="max-h-[min(80vh,32rem)] w-full max-w-md overflow-y-auto rounded-3xl border border-base-300/60 bg-base-100 p-6 shadow-2xl">
+              <div className="poi-sheet">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <Dialog.Title className="text-lg font-semibold text-base-content">

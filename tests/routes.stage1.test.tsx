@@ -378,6 +378,24 @@ describe("Stage 4 completion flows", () => {
     expect(header).toBeTruthy();
   });
 
+  it("opens the offline download dialog with the semantic surface class", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const addButton = container.querySelector<HTMLButtonElement>(
+      "button[aria-label='Add offline area']",
+    );
+    expect(addButton).toBeTruthy();
+
+    await act(async () => {
+      clickElement(addButton);
+      await Promise.resolve();
+    });
+
+    const dialog = document.querySelector<HTMLElement>("[role='dialog']");
+    expect(dialog).toBeTruthy();
+    expect(dialog?.classList.contains("dialog-surface")).toBe(true);
+  });
+
   it("allows removing a download when managing the offline list", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const container = requireContainer(mount);
