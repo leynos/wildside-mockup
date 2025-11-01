@@ -127,6 +127,9 @@ describe("Stage 1 routed flows", () => {
 
     const infoPanel = container.querySelector(".explore-info__panel");
     expect(infoPanel).toBeTruthy();
+
+    const searchInput = container.querySelector<HTMLInputElement>(".explore-search__input");
+    expect(searchInput).toBeTruthy();
   });
 
   it("toggles advanced switches on the customize route", async () => {

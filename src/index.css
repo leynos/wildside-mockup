@@ -321,6 +321,10 @@
   .customize-surface__option[data-state="on"] {
     @apply border-accent bg-accent/15;
   }
+
+  .explore-search__input {
+    @apply w-full rounded-xl border border-base-300/70 bg-base-200/60 py-3 pl-11 pr-4 text-sm text-base-content shadow-inner shadow-base-300/30 placeholder:text-base-content/50 focus:border-accent focus:outline-none;
+  }
 }
 
 @layer utilities {
