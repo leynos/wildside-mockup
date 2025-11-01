@@ -244,6 +244,9 @@ describe("Stage 2 routed flows", () => {
   it("toggles itinerary favourites and opens the share dialog", async () => {
     ({ mount, root } = await renderRoute("/map/itinerary"));
     const container = requireContainer(mount);
+    const summaryPanel = container.querySelector(".map-route__summary");
+    expect(summaryPanel).toBeTruthy();
+
     const favouriteButton = container.querySelector<HTMLButtonElement>(
       "button[aria-pressed='false']",
     );

@@ -84,7 +84,7 @@ export function ItineraryScreen(): JSX.Element {
                   </div>
 
                   <div className="mt-auto space-y-4">
-                    <div className="rounded-3xl border border-base-300/60 bg-base-100/90 p-5 shadow-2xl backdrop-blur">
+                    <div className="map-route__summary">
                       <p className="text-sm font-medium text-base-content/60">Suggested route</p>
                       <h1 className="mt-1 text-2xl font-semibold text-base-content">
                         {waterfrontDiscoveryRoute.title}
