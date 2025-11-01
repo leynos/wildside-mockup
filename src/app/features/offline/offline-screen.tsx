@@ -194,7 +194,7 @@ export function OfflineScreen(): JSX.Element {
                     <article
                       key={entry.download.id}
                       data-testid="offline-download-card"
-                      className="relative flex gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-4 shadow-inner shadow-base-300/30"
+                      className="offline-download__card"
                     >
                       {isManaging ? (
                         <button
@@ -247,7 +247,7 @@ export function OfflineScreen(): JSX.Element {
                     <article
                       key={`${entry.download.id}-undo`}
                       data-testid="offline-undo-card"
-                      className="flex items-center justify-between rounded-2xl border border-dashed border-base-300/60 bg-base-200/70 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20"
+                      className="offline-download__undo"
                     >
                       <div>
                         <p className="font-semibold">{entry.download.title} deleted</p>

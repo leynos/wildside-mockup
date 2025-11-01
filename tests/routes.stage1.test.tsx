@@ -535,6 +535,40 @@ describe("Stage 4 completion flows", () => {
     );
   });
 
+  it("wraps offline download cards with semantic classes", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const downloadCards = container.querySelectorAll("[data-testid='offline-download-card']");
+    expect(downloadCards.length).toBeGreaterThan(0);
+    downloadCards.forEach((card) => {
+      expect(card.classList.contains("offline-download__card")).toBe(true);
+    });
+
+    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
+      btn.textContent?.includes("Manage"),
+    );
+    expect(manageButton).toBeTruthy();
+
+    await act(async () => {
+      clickElement(manageButton);
+      await Promise.resolve();
+    });
+
+    const deleteButton = container.querySelector<HTMLButtonElement>(
+      "[data-testid='offline-delete-button']",
+    );
+    expect(deleteButton).toBeTruthy();
+
+    await act(async () => {
+      clickElement(deleteButton);
+      await Promise.resolve();
+    });
+
+    const undoCard = container.querySelector("[data-testid='offline-undo-card']");
+    expect(undoCard).toBeTruthy();
+    expect(undoCard?.classList.contains("offline-download__undo")).toBe(true);
+  });
+
   it("toggles auto-management switches", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const container = requireContainer(mount);

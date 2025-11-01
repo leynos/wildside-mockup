@@ -85,6 +85,15 @@
     @apply mb-6 rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content;
   }
 
+  /* Offline downloads manager cards. */
+  .offline-download__card {
+    @apply relative flex gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-4 text-base-content shadow-inner shadow-base-300/30;
+  }
+
+  .offline-download__undo {
+    @apply flex items-center justify-between rounded-2xl border border-dashed border-base-300/60 bg-base-200/70 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20;
+  }
+
   .map-panel--stacked {
     @apply relative flex flex-col overflow-hidden;
   }
