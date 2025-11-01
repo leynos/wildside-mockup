@@ -1,28 +1,26 @@
 /** @file Walk wizard step one: duration and interests. */
 
 import * as Slider from "@radix-ui/react-slider";
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useMemo, useState } from "react";
 
 import { Icon } from "../../../components/icon";
+import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { defaultSelectedInterests, discoverInterests } from "../../../data/discover";
 import { wizardSteps } from "../../../data/wizard";
-
-const interestLookup = new Map(discoverInterests.map((interest) => [interest.id, interest]));
 
 function formatDuration(value: number) {
   return `${value} min`;
 }
 
-function InterestChips({
-  selected,
-  onChange,
-}: {
-  selected: string[];
-  onChange: (next: string[]) => void;
-}) {
+export function WizardStepOne(): JSX.Element {
+  const navigate = useNavigate();
+  const [duration, setDuration] = useState(60);
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([
+    ...defaultSelectedInterests,
+  ]);
+
   const interestIds = useMemo(
     () =>
       Array.from(
@@ -33,43 +31,6 @@ function InterestChips({
       ),
     [],
   );
-
-  return (
-    <ToggleGroup.Root
-      type="multiple"
-      value={selected}
-      onValueChange={onChange}
-      aria-label="Select walk interests"
-      className="flex flex-wrap gap-2"
-    >
-      {interestIds.map((id) => {
-        const interest = interestLookup.get(id);
-        if (!interest) return null;
-        return (
-          <ToggleGroup.Item
-            key={id}
-            value={id}
-            className="group flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-content"
-          >
-            <Icon
-              token={interest.iconToken}
-              className={`text-lg transition ${interest.iconColorClass} group-data-[state=on]:text-base-100`}
-              aria-hidden
-            />
-            {interest.label}
-          </ToggleGroup.Item>
-        );
-      })}
-    </ToggleGroup.Root>
-  );
-}
-
-export function WizardStepOne(): JSX.Element {
-  const navigate = useNavigate();
-  const [duration, setDuration] = useState(60);
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([
-    ...defaultSelectedInterests,
-  ]);
 
   const selectedLabel = useMemo(
     () => `${selectedInterests.length} selected`,
@@ -132,7 +93,12 @@ export function WizardStepOne(): JSX.Element {
           </h2>
           <span className="text-xs font-medium text-base-content/60">{selectedLabel}</span>
         </header>
-        <InterestChips selected={selectedInterests} onChange={setSelectedInterests} />
+        <InterestToggleGroup
+          interestIds={interestIds}
+          selected={selectedInterests}
+          onChange={setSelectedInterests}
+          ariaLabel="Select walk interests"
+        />
       </section>
     </WizardLayout>
   );

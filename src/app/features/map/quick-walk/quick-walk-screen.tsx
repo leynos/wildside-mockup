@@ -2,60 +2,21 @@
 
 import * as Slider from "@radix-ui/react-slider";
 import * as Tabs from "@radix-ui/react-tabs";
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { type JSX, useEffect, useMemo, useState } from "react";
 
 import { Icon } from "../../../components/icon";
+import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
 import { WildsideMap } from "../../../components/wildside-map";
-import { defaultSelectedInterests, discoverInterests } from "../../../data/discover";
+import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
 
-const interestLookup = new Map(discoverInterests.map((interest) => [interest.id, interest]));
-
 function formatDuration(value: number) {
   return `${value} min`;
-}
-
-function InterestChips({
-  selected,
-  onChange,
-}: {
-  selected: string[];
-  onChange: (next: string[]) => void;
-}) {
-  return (
-    <ToggleGroup.Root
-      type="multiple"
-      value={selected}
-      onValueChange={onChange}
-      aria-label="Select quick walk interests"
-      className="flex flex-wrap gap-2"
-    >
-      {quickWalkConfig.interestIds.map((id) => {
-        const interest = interestLookup.get(id);
-        if (!interest) return null;
-        return (
-          <ToggleGroup.Item
-            key={id}
-            value={id}
-            className="group flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/50 px-4 py-2 text-sm font-medium text-base-content/70 transition data-[state=on]:bg-accent data-[state=on]:text-base-100"
-          >
-            <Icon
-              token={interest.iconToken}
-              className={`text-lg transition ${interest.iconColorClass} group-data-[state=on]:text-base-content`}
-              aria-hidden
-            />
-            {interest.label}
-          </ToggleGroup.Item>
-        );
-      })}
-    </ToggleGroup.Root>
-  );
 }
 
 type TabKey = "map" | "stops" | "notes";
@@ -201,7 +162,12 @@ export function QuickWalkScreen(): JSX.Element {
                           {selectedLabel}
                         </span>
                       </div>
-                      <InterestChips selected={selectedInterests} onChange={setSelectedInterests} />
+                      <InterestToggleGroup
+                        interestIds={quickWalkConfig.interestIds}
+                        selected={selectedInterests}
+                        onChange={setSelectedInterests}
+                        ariaLabel="Select quick walk interests"
+                      />
                     </section>
                   </div>
                 </div>

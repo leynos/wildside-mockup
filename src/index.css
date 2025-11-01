@@ -163,20 +163,24 @@
     @apply fixed inset-0 m-auto flex h-fit w-80 flex-col gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-6 shadow-2xl;
   }
 
-  .wizard-step__interest-chip {
-    @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
+  .interest-chip {
+    @apply group inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
   }
 
-  .wizard-step__interest-chip:focus-visible {
+  .interest-chip:focus-visible {
     @apply outline-none ring-2 ring-accent/60;
   }
 
-  .wizard-step__interest-chip[data-state="on"] {
-    @apply border-accent bg-accent text-accent-content;
+  .interest-chip__icon {
+    @apply text-lg transition;
   }
 
-  .wizard-step__interest-chip[data-state="on"] .tabler-icon {
-    @apply text-base-100;
+  .interest-chip[data-state="on"] {
+    @apply border-accent bg-accent text-base-100;
+  }
+
+  .interest-chip[data-state="on"] .interest-chip__icon {
+    @apply text-base-content;
   }
 
   .preference-toggle {
