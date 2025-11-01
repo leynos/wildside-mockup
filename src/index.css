@@ -293,6 +293,14 @@
   .toggle-switch__thumb {
     @apply block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px];
   }
+
+  .customize-surface__option {
+    @apply flex items-center gap-3 rounded-xl border border-base-300/70 bg-base-200/60 px-4 py-3 text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50;
+  }
+
+  .customize-surface__option[data-state="on"] {
+    @apply border-accent bg-accent/15;
+  }
 }
 
 @layer utilities {

@@ -103,7 +103,7 @@ function SurfacePicker({ onChange, value }: SurfacePickerProps): JSX.Element {
           <ToggleGroup.Item
             key={surface.id}
             value={surface.id}
-            className="flex items-center gap-3 rounded-xl border border-base-300/70 bg-base-200/60 px-4 py-3 text-sm font-medium text-base-content/80 shadow-sm shadow-base-300/20 transition data-[state=on]:border-accent data-[state=on]:bg-accent/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+            className="customize-surface__option"
           >
             <Icon token={surface.iconToken} className="text-base" aria-hidden />
             {surface.label}

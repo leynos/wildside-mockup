@@ -135,6 +135,9 @@ describe("Stage 1 routed flows", () => {
 
     act(() => clickElement(safetySwitch));
     expect(safetySwitch?.getAttribute("data-state")).toBe("checked");
+
+    const surfaceOptions = container.querySelectorAll(".customize-surface__option");
+    expect(surfaceOptions.length).toBeGreaterThan(0);
   });
 });
 
