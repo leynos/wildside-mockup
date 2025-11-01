@@ -275,12 +275,18 @@
                                                                     ]
                                                                   },
                                                                   {
-                                                                    "role": "text",
-                                                                    "name": "60 min",
+                                                                    "role": "none",
+                                                                    "name": "",
                                                                     "children": [
                                                                       {
-                                                                        "role": "InlineTextBox",
-                                                                        "name": "60 min"
+                                                                        "role": "text",
+                                                                        "name": "60 min",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": "60 min"
+                                                                          }
+                                                                        ]
                                                                       }
                                                                     ]
                                                                   }
@@ -290,6 +296,16 @@
                                                                 "role": "generic",
                                                                 "name": "Walk duration",
                                                                 "children": [
+                                                                  {
+                                                                    "role": "none",
+                                                                    "name": "",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "none",
+                                                                        "name": ""
+                                                                      }
+                                                                    ]
+                                                                  },
                                                                   {
                                                                     "role": "none",
                                                                     "name": "",

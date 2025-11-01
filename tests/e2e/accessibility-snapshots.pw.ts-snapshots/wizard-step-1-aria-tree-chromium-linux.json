@@ -191,118 +191,70 @@
                                     "name": "",
                                     "children": [
                                       {
-                                        "role": "sectionheader",
+                                        "role": "generic",
                                         "name": "",
                                         "children": [
                                           {
-                                            "role": "heading",
-                                            "name": "Walk duration",
-                                            "level": 2,
+                                            "role": "sectionheader",
+                                            "name": "",
                                             "children": [
                                               {
-                                                "role": "text",
+                                                "role": "heading",
                                                 "name": "Walk duration",
+                                                "level": 2,
                                                 "children": [
                                                   {
-                                                    "role": "InlineTextBox",
-                                                    "name": "Walk duration"
+                                                    "role": "text",
+                                                    "name": "Walk duration",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "Walk duration"
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "text",
+                                                    "name": "60 min",
+                                                    "children": [
+                                                      {
+                                                        "role": "InlineTextBox",
+                                                        "name": "60 min"
+                                                      }
+                                                    ]
                                                   }
                                                 ]
                                               }
                                             ]
                                           },
                                           {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "60 min",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "60 min"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      {
-                                        "role": "generic",
-                                        "name": "Walk duration slider",
-                                        "children": [
-                                          {
-                                            "role": "none",
-                                            "name": "",
+                                            "role": "generic",
+                                            "name": "Walk duration slider",
                                             "children": [
                                               {
                                                 "role": "none",
-                                                "name": ""
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "slider",
-                                                "name": "Adjust walk duration",
-                                                "value": 60
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      {
-                                        "role": "none",
-                                        "name": "",
-                                        "children": [
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "15m",
+                                                "name": "",
                                                 "children": [
                                                   {
-                                                    "role": "InlineTextBox",
-                                                    "name": "15m"
+                                                    "role": "none",
+                                                    "name": ""
                                                   }
                                                 ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
+                                              },
                                               {
-                                                "role": "text",
-                                                "name": "90m",
+                                                "role": "none",
+                                                "name": "",
                                                 "children": [
                                                   {
-                                                    "role": "InlineTextBox",
-                                                    "name": "90m"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "none",
-                                            "name": "",
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "180m",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "180m"
+                                                    "role": "slider",
+                                                    "name": "Walk duration slider handle",
+                                                    "value": 60
                                                   }
                                                 ]
                                               }
