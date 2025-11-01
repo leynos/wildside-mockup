@@ -58,6 +58,7 @@
   /* Frosted map overlay base, used for bottom sheets across map variants. */
   .map-panel {
     @apply pointer-events-auto rounded-3xl border border-base-300/60 bg-base-900/70 text-base-100 shadow-2xl backdrop-blur;
+    background-color: color-mix(in oklab, var(--color-base-overlay, #2a4157) 70%, transparent);
   }
 
   .map-panel--stacked {
