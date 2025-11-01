@@ -110,9 +110,7 @@ function PopularThemesGrid(): JSX.Element {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-black/25" />
-              <span className="absolute right-2 top-2 rounded-full bg-accent px-2 py-1 text-xs font-semibold text-base-100">
-                {theme.walkCount}
-              </span>
+              <span className="explore-theme__badge">{theme.walkCount}</span>
             </div>
             <h3 className="text-sm font-semibold text-base-content">{theme.title}</h3>
             <p className="mt-1 text-xs text-base-content/60">{theme.description}</p>
