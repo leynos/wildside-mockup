@@ -68,7 +68,7 @@ export function WizardStepThree(): JSX.Element {
         </div>
       }
     >
-      <section className="mb-6 rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content">
+      <section className="wizard-summary__panel">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Hidden Gems Loop</h2>
           <span className="rounded-lg bg-accent/20 px-2 py-1 text-xs font-semibold text-accent">
@@ -95,7 +95,7 @@ export function WizardStepThree(): JSX.Element {
         </p>
       </section>
 
-      <section className="mb-6 rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content">
+      <section className="wizard-summary__panel">
         <h3 className="text-lg font-semibold">Your preferences applied</h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {wizardSummaryHighlights.map((highlight) => (
@@ -113,7 +113,7 @@ export function WizardStepThree(): JSX.Element {
         </div>
       </section>
 
-      <section className="mb-6 rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content">
+      <section className="wizard-summary__panel">
         <h3 className="text-lg font-semibold">Featured stops</h3>
         <div className="mt-4 space-y-3">
           {wizardGeneratedStops.map((stop) => (
@@ -134,7 +134,7 @@ export function WizardStepThree(): JSX.Element {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content">
+      <section className="wizard-summary__panel">
         <h3 className="flex items-center gap-2 text-lg font-semibold">
           <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
           {wizardWeatherSummary.title}

@@ -339,6 +339,16 @@ describe("Stage 3 wizard flows", () => {
     expect(closeButton).toBeTruthy();
     act(() => clickElement(closeButton));
   });
+
+  it("renders wizard summary panels with semantic class", async () => {
+    ({ mount, root } = await renderRoute("/wizard/step-3"));
+    const container = requireContainer(mount);
+    const panels = container.querySelectorAll(".wizard-summary__panel");
+    expect(panels.length).toBeGreaterThanOrEqual(4);
+    panels.forEach((panel) => {
+      expect(panel.classList.contains("wizard-summary__panel")).toBe(true);
+    });
+  });
 });
 
 describe("Stage 4 completion flows", () => {
