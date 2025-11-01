@@ -2,7 +2,11 @@ import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
-import { wizardGeneratedStops, wizardSummaryHighlights } from "../src/app/data/wizard";
+import {
+  accessibilityOptions,
+  wizardGeneratedStops,
+  wizardSummaryHighlights,
+} from "../src/app/data/wizard";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
@@ -373,6 +377,26 @@ describe("Stage 3 wizard flows", () => {
       node.textContent?.includes("Discovery style"),
     );
     expect(heading).toBeTruthy();
+  });
+
+  it("renders wizard step two surfaces with semantic classes", async () => {
+    ({ mount, root } = await renderRoute("/wizard/step-2"));
+    const container = requireContainer(mount);
+
+    const summary = container.querySelector(".wizard-discovery__summary");
+    expect(summary).toBeTruthy();
+
+    const options = container.querySelectorAll(".wizard-accessibility__option");
+    expect(options.length).toBe(accessibilityOptions.length);
+    options.forEach((option) => {
+      expect(option.classList.contains("wizard-accessibility__option")).toBe(true);
+      const icon = option.querySelector(".wizard-accessibility__icon");
+      expect(icon).toBeTruthy();
+      const toggle = option.querySelector(".wizard-accessibility__toggle");
+      expect(toggle).toBeTruthy();
+      const thumb = toggle?.querySelector(".wizard-accessibility__thumb");
+      expect(thumb).toBeTruthy();
+    });
   });
 
   it("opens the wizard confirmation dialog on step three", async () => {

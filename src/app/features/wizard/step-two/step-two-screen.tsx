@@ -78,7 +78,7 @@ export function WizardStepTwo(): JSX.Element {
             className="block h-6 w-6 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
           />
         </Slider.Root>
-        <div className="mt-3 rounded-xl border border-base-300/60 bg-base-200/80 px-4 py-3 text-center text-sm font-medium text-accent">
+        <div className="wizard-discovery__summary">
           {discoveryMix >= 70
             ? "Hidden gems heavy"
             : discoveryMix <= 30
@@ -93,12 +93,9 @@ export function WizardStepTwo(): JSX.Element {
           {accessibilityOptions.map((option) => {
             const checked = accessibility[option.id] ?? false;
             return (
-              <div
-                key={option.id}
-                className="flex items-center justify-between rounded-2xl border border-base-300/60 bg-base-300/30 px-4 py-3"
-              >
+              <div key={option.id} className="wizard-accessibility__option">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-base-300/60 text-base-content">
+                  <span className="wizard-accessibility__icon">
                     <Icon token={option.iconToken} className="text-accent" aria-hidden />
                   </span>
                   <div>
@@ -115,9 +112,9 @@ export function WizardStepTwo(): JSX.Element {
                       [option.id]: value,
                     }))
                   }
-                  className="relative h-6 w-11 rounded-full border border-base-300/60 bg-base-300/70 transition data-[state=checked]:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+                  className="wizard-accessibility__toggle"
                 >
-                  <Switch.Thumb className="block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px]" />
+                  <Switch.Thumb className="wizard-accessibility__thumb" />
                 </Switch.Root>
               </div>
             );

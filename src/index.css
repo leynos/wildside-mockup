@@ -93,6 +93,26 @@
     @apply text-accent;
   }
 
+  .wizard-discovery__summary {
+    @apply mt-3 rounded-xl border border-base-300/60 bg-base-200/80 px-4 py-3 text-center text-sm font-medium text-accent;
+  }
+
+  .wizard-accessibility__option {
+    @apply flex items-center justify-between rounded-2xl border border-base-300/60 bg-base-300/30 px-4 py-3;
+  }
+
+  .wizard-accessibility__icon {
+    @apply flex h-10 w-10 items-center justify-center rounded-xl bg-base-300/60 text-base-content;
+  }
+
+  .wizard-accessibility__toggle {
+    @apply relative h-6 w-11 rounded-full border border-base-300/60 bg-base-300/70 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=checked]:bg-accent/80;
+  }
+
+  .wizard-accessibility__thumb {
+    @apply block h-5 w-5 translate-x-0.5 rounded-full bg-base-100 shadow transition data-[state=checked]:translate-x-[22px];
+  }
+
   .wizard-summary__stop {
     @apply flex items-start gap-3 rounded-2xl border border-base-300/60 bg-base-300/30 px-4 py-3;
   }
