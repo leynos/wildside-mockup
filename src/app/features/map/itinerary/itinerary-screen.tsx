@@ -48,7 +48,7 @@ export function ItineraryScreen(): JSX.Element {
                     >
                       <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
                     </button>
-                    <div className="rounded-2xl border border-base-300/60 bg-base-200/80 px-4 py-2 text-xs text-base-content/70 shadow-lg shadow-base-300/30 backdrop-blur">
+                    <div className="map-route__meta">
                       <div className="flex items-center gap-4">
                         <span className="text-center">
                           <p className="text-lg font-semibold text-accent">

@@ -256,6 +256,8 @@ describe("Stage 2 routed flows", () => {
     expect(summaryPanel).toBeTruthy();
     const overlayPanels = container.querySelectorAll(".map-overlay");
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
+    const metaPanel = container.querySelector(".map-route__meta");
+    expect(metaPanel).toBeTruthy();
 
     const favouriteButton = container.querySelector<HTMLButtonElement>(
       "button[aria-pressed='false']",
