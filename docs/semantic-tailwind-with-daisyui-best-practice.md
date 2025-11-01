@@ -212,6 +212,50 @@ Examples:
 
 **Avoid** `@apply` with plugin component classes like `btn`/`card` — they are not Tailwind utilities. Compose them in markup, or rebuild a semantic equivalent using tokens as shown in `.cta` above.
 
+### 6.1 Encode state with selectors, not variant `@apply`
+
+Tailwind v4 only inlines **plain utilities** when you call `@apply`. Variant
+helpers such as `hover:`, `group-…`, or `data-[state=…]:…` are *not* expanded,
+which means the rule below will quietly drop the interactive parts:
+
+```css
+/* ❌ Variant prefixes are ignored when used inside @apply */
+.chip {
+  @apply inline-flex items-center gap-2 data-[state=on]:bg-accent;
+}
+```
+
+Instead, combine `@apply` (for the static bits) with explicit selectors for
+stateful styles. This keeps the markup clean *and* ensures Radix data attributes
+toggle the look correctly:
+
+```css
+.interest-chip {
+  @apply inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition;
+}
+
+.interest-chip[data-state="on"] {
+  @apply border-accent bg-accent text-base-100;
+}
+
+.interest-chip[data-state="on"] .interest-chip__icon {
+  @apply text-base-content;
+}
+```
+
+Markup stays semantic:
+
+```tsx
+<ToggleGroup.Item value={id} className="interest-chip">
+  <Icon className="interest-chip__icon text-lg transition" aria-hidden />
+  {interest.label}
+</ToggleGroup.Item>
+```
+
+> **Summary:** Use `@apply` for the base utility stack, then express Radix / ARIA
+> state through selectors. This mirrors daisyUI’s approach and keeps all visual
+> logic in the stylesheet instead of scattering utility soup through JSX.
+
 ---
 
 ## 7) Cascading styles without fights
@@ -485,4 +529,3 @@ If you want matching Tailwind utilities, back them with `@theme`:
 - Don’t `@apply` plugin component classes (`btn`, `card`); compose them in markup or rebuild with tokens.
 
 **Bottom line:** put *values* in `@theme`, map *roles* to daisyUI tokens, and style *states* with Radix data‑attrs + utility variants. One vocabulary, zero fights.
-
