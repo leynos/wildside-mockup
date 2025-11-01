@@ -277,10 +277,7 @@ export function OfflineScreen(): JSX.Element {
                 {autoManagementOptions.map((option) => {
                   const checked = autoSettings[option.id] ?? option.defaultEnabled;
                   return (
-                    <article
-                      key={option.id}
-                      className="rounded-2xl border border-base-300/60 bg-base-200/70 p-4 shadow-sm shadow-base-300/20"
-                    >
+                    <article key={option.id} className="offline-automation__card">
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex flex-1 items-start gap-3">
                           <Icon

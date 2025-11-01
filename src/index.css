@@ -123,6 +123,10 @@
     @apply pointer-events-auto rounded-3xl border border-base-300/40 bg-base-200/80 p-6 text-base-content shadow-2xl backdrop-blur;
   }
 
+  .offline-automation__card {
+    @apply rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
+  }
+
   .map-panel--stacked {
     @apply relative flex flex-col overflow-hidden;
   }
