@@ -242,15 +242,15 @@ function CommunityPickPanel(): JSX.Element {
       <h3 className="text-base font-semibold text-base-content">{communityPick.title}</h3>
       <p className="mt-2 text-sm text-base-content/70">{communityPick.description}</p>
       <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-base-content/60">
-        <span className="flex items-center gap-1">
+        <span className="route-metric">
           <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
           {communityPick.distance}
         </span>
-        <span className="flex items-center gap-1">
+        <span className="route-metric">
           <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
           {communityPick.duration}
         </span>
-        <span className="flex items-center gap-1">
+        <span className="route-metric">
           <Icon token="{icon.action.save}" aria-hidden className="h-4 w-4" />
           {communityPick.saves} saves
         </span>

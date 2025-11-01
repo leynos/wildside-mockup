@@ -133,6 +133,12 @@ describe("Stage 1 routed flows", () => {
 
     const themeBadge = container.querySelector(".explore-theme__badge");
     expect(themeBadge).toBeTruthy();
+
+    const metrics = container.querySelectorAll(".route-metric");
+    expect(metrics.length).toBeGreaterThanOrEqual(3);
+    metrics.forEach((metric) => {
+      expect(metric.classList.contains("route-metric")).toBe(true);
+    });
   });
 
   it("toggles advanced switches on the customize route", async () => {
