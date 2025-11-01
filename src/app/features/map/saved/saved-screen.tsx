@@ -156,8 +156,8 @@ export function SavedScreen(): JSX.Element {
 
             <Tabs.Content value="notes" className="absolute inset-0 flex flex-col justify-end">
               <div className="pointer-events-none px-6 pb-6">
-                <div className="map-panel map-panel--scroll max-h-[60vh] space-y-6 p-5 text-sm">
-                  <div className="grid grid-cols-4 gap-4 text-base-100">
+                <div className="map-panel map-panel--scroll max-h-[60vh] space-y-6 p-5 text-sm text-base-content">
+                  <div className="grid grid-cols-4 gap-4 text-base-content">
                     <Metric label="Rating" value={savedRoute.rating.toFixed(1)} />
                     <Metric label="Saves" value={savedRoute.saves.toString()} />
                     <Metric label="Difficulty" value={savedRoute.difficulty} />
@@ -173,8 +173,8 @@ export function SavedScreen(): JSX.Element {
                       </span>
                     ))}
                   </div>
-                  <p className="text-base-100/80">{savedRoute.description}</p>
-                  <ul className="list-disc space-y-2 pl-5 text-base-100/80">
+                  <p className="text-base-content/80">{savedRoute.description}</p>
+                  <ul className="list-disc space-y-2 pl-5 text-base-content/70">
                     {savedRoute.notes.map((note) => (
                       <li key={note}>{note}</li>
                     ))}

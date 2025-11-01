@@ -190,9 +190,9 @@ export function ItineraryScreen(): JSX.Element {
 
             <Tabs.Content value="notes" className="absolute inset-0 flex flex-col justify-end">
               <div className="pointer-events-none px-6 pb-6">
-                <div className="map-panel map-panel--scroll max-h-[60vh] p-5 text-sm">
-                  <p className="text-base font-semibold text-base-100">Route notes</p>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-base-100/80">
+                <div className="map-panel map-panel--scroll max-h-[60vh] p-5 text-sm text-base-content">
+                  <p className="text-base font-semibold text-base-content">Route notes</p>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-base-content/70">
                     {waterfrontDiscoveryRoute.notes.map((note) => (
                       <li key={note}>{note}</li>
                     ))}

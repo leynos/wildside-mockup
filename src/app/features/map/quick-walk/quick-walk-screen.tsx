@@ -251,7 +251,7 @@ export function QuickWalkScreen(): JSX.Element {
               >
                 <div className="pointer-events-none px-6 pb-6">
                   <div
-                    className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm"
+                    className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm text-base-content"
                     data-testid="quick-walk-notes-panel"
                   >
                     <button
@@ -260,8 +260,8 @@ export function QuickWalkScreen(): JSX.Element {
                       className={panelHandleClass}
                       aria-label="Dismiss panel"
                     />
-                    <p className="text-base font-semibold text-base-100/90">Planning notes</p>
-                    <ul className="mt-3 list-disc space-y-2 pl-5">
+                    <p className="text-base font-semibold text-base-content">Planning notes</p>
+                    <ul className="mt-3 list-disc space-y-2 pl-5 text-base-content/80">
                       <li>Sync the plan with your calendar to block out discovery time.</li>
                       <li>
                         Pack a reusable bottle – refill points are highlighted along the waterfront.
