@@ -59,6 +59,8 @@ describe("GlobalControls", () => {
       "button[aria-label='Switch to Full View']",
     );
     expect(displayToggle).toBeTruthy();
+    const stack = mountNode?.querySelector(".global-controls__stack");
+    expect(stack).toBeTruthy();
 
     act(() => {
       displayToggle?.click();
@@ -76,6 +78,7 @@ describe("GlobalControls", () => {
       "button[aria-controls='global-controls-drawer']",
     );
     expect(drawerTrigger).toBeTruthy();
+    expect(drawerTrigger?.classList.contains("global-controls__trigger")).toBe(true);
     expect(drawerTrigger?.getAttribute("aria-expanded")).toBe("false");
 
     act(() => {

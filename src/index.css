@@ -325,6 +325,18 @@
   .explore-search__input {
     @apply w-full rounded-xl border border-base-300/70 bg-base-200/60 py-3 pl-11 pr-4 text-sm text-base-content shadow-inner shadow-base-300/30 placeholder:text-base-content/50 focus:border-accent focus:outline-none;
   }
+
+  .global-controls__trigger {
+    @apply pointer-events-auto rounded-l-2xl border border-r-0 border-base-300/50 bg-base-100/90 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-base-content/70 shadow-xl shadow-base-300/40 backdrop-blur transition hover:text-base-content;
+  }
+
+  .global-controls__stack {
+    @apply fixed bottom-6 right-6 z-50 flex flex-col gap-3;
+  }
+
+  .global-controls__drawer {
+    @apply fixed inset-y-1/2 right-0 z-50 flex -translate-y-1/2 flex-col items-end gap-3 pr-0 sm:pr-3;
+  }
 }
 
 @layer utilities {

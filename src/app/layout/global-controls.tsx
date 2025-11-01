@@ -87,12 +87,12 @@ function Drawer(): JSX.Element {
   const headingId = useId();
 
   return (
-    <div className="fixed inset-y-1/2 right-0 z-50 flex -translate-y-1/2 flex-col items-end gap-3 pr-0 sm:pr-3">
+    <div className="global-controls__drawer">
       <button
         type="button"
         aria-controls="global-controls-drawer"
         aria-expanded={open}
-        className="pointer-events-auto rounded-l-2xl border border-r-0 border-base-300/50 bg-base-100/90 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-base-content/70 shadow-xl shadow-base-300/40 backdrop-blur transition hover:text-base-content"
+        className="global-controls__trigger"
         onClick={() => setOpen((prev) => !prev)}
       >
         Controls
@@ -117,7 +117,7 @@ function Drawer(): JSX.Element {
 
 function FloatingStack(): JSX.Element {
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <div className="global-controls__stack">
       <DisplayModeToggleButton />
       <ThemeToggleButton />
     </div>
