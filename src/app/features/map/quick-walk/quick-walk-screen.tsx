@@ -127,11 +127,7 @@ export function QuickWalkScreen(): JSX.Element {
               gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
               containerTestId="quick-walk-map-container"
             >
-              <Tabs.Content
-                value="map"
-                forceMount
-                className="flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden"
-              >
+              <Tabs.Content value="map" forceMount className="map-viewport__tab">
                 <div className="pointer-events-none px-6 pb-6">
                   <div className="pointer-events-auto rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
                     <button
@@ -211,11 +207,7 @@ export function QuickWalkScreen(): JSX.Element {
                 </div>
               </Tabs.Content>
 
-              <Tabs.Content
-                value="stops"
-                forceMount
-                className="flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden"
-              >
+              <Tabs.Content value="stops" forceMount className="map-viewport__tab">
                 <div className="pointer-events-none px-6 pb-6">
                   <div
                     className="map-panel map-panel--stacked max-h-[53vh]"
@@ -244,11 +236,7 @@ export function QuickWalkScreen(): JSX.Element {
                 </div>
               </Tabs.Content>
 
-              <Tabs.Content
-                value="notes"
-                forceMount
-                className="flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden"
-              >
+              <Tabs.Content value="notes" forceMount className="map-viewport__tab">
                 <div className="pointer-events-none px-6 pb-6">
                   <div
                     className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm text-base-content"

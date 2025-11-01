@@ -228,6 +228,16 @@ describe("Stage 2 routed flows", () => {
     expect(wizardHeading).toBeTruthy();
   });
 
+  it("applies semantic classes to quick walk tab panels", async () => {
+    ({ mount, root } = await renderRoute("/map/quick"));
+    const container = requireContainer(mount);
+    const tabPanels = container.querySelectorAll<HTMLElement>("[role='tabpanel']");
+    expect(tabPanels.length).toBeGreaterThanOrEqual(3);
+    tabPanels.forEach((panel) => {
+      expect(panel.classList.contains("map-viewport__tab")).toBe(true);
+    });
+  });
+
   it("toggles itinerary favourites and opens the share dialog", async () => {
     ({ mount, root } = await renderRoute("/map/itinerary"));
     const container = requireContainer(mount);
