@@ -5,6 +5,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useMemo, useState } from "react";
 
 import { Icon } from "../../components/icon";
+import { SectionHero } from "../../components/section-hero";
 import {
   type DiscoverInterest,
   defaultSelectedInterests,
@@ -69,15 +70,11 @@ export function DiscoverScreen(): JSX.Element {
           Skip
         </button>
 
-        <section className="text-center">
-          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 text-accent">
-            <Icon token="{icon.object.magic}" className="text-3xl" aria-hidden />
-          </div>
-          <h1 className="text-3xl font-semibold text-base-content">Discover Your Perfect Walk</h1>
-          <p className="mt-3 text-base text-base-content/70">
-            Tell us what interests you and we will craft magical routes tailored for you.
-          </p>
-        </section>
+        <SectionHero
+          iconToken="{icon.object.magic}"
+          title="Discover Your Perfect Walk"
+          description="Tell us what interests you and we will craft magical routes tailored for you."
+        />
 
         <section className="mt-10 flex flex-1 flex-col">
           <div className="mb-6 text-center">

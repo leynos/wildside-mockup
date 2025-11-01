@@ -6,6 +6,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useState } from "react";
 
 import { Icon } from "../../components/icon";
+import { SectionHero } from "../../components/section-hero";
 import {
   walkCompletionMapImage,
   walkCompletionMoments,
@@ -26,20 +27,19 @@ export function WalkCompleteScreen(): JSX.Element {
         <div className="relative flex h-full flex-col">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(74,240,213,0.12),_transparent_55%)]" />
           <main className="relative z-10 flex-1 overflow-y-auto pb-28">
-            <header className="px-6 pt-16 pb-8 text-center text-base-100">
-              <div className="mb-6 flex justify-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-amber-400/20 text-5xl text-amber-300 shadow-inner shadow-amber-400/40">
-                  <Icon token="{icon.object.trophy}" className="animate-pulse" aria-hidden />
-                </span>
-              </div>
-              <h1 className="text-3xl font-semibold tracking-tight">Walk complete!</h1>
-              <p className="mt-2 text-base text-base-200">
-                Amazing adventure through the city · Hidden Gems Loop
-              </p>
-            </header>
+            <div className="px-6 pt-16 pb-8">
+              <SectionHero
+                iconToken="{icon.object.trophy}"
+                iconClassName="animate-pulse"
+                title="Walk complete!"
+                description="Amazing adventure through the city · Hidden Gems Loop"
+                tone="inverted"
+                badgeTone="celebration"
+              />
+            </div>
 
             <section className="px-6">
-              <div className="rounded-3xl border border-base-300/60 bg-base-200/20 p-4 shadow-2xl backdrop-blur">
+              <div className="walk-complete__hero-card">
                 <div className="relative h-44 overflow-hidden rounded-2xl border border-base-300/60">
                   <img
                     src={walkCompletionMapImage}
@@ -66,10 +66,7 @@ export function WalkCompleteScreen(): JSX.Element {
             <section className="mt-6 px-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 {walkCompletionPrimaryStats.map((stat) => (
-                  <article
-                    key={stat.id}
-                    className="rounded-2xl border border-base-300/60 bg-base-200/30 p-4 shadow-inner shadow-base-300/30"
-                  >
+                  <article key={stat.id} className="walk-complete__stat-card">
                     <div className="mb-2 flex items-center gap-3 text-base-300">
                       <Icon token={stat.iconToken} className="text-accent" aria-hidden />
                       <span className="text-sm font-medium">{stat.label}</span>
