@@ -118,11 +118,8 @@ export function WizardStepThree(): JSX.Element {
         <h3 className="text-lg font-semibold">Featured stops</h3>
         <div className="mt-4 space-y-3">
           {wizardGeneratedStops.map((stop) => (
-            <div
-              key={stop.id}
-              className="flex items-start gap-3 rounded-2xl border border-base-300/60 bg-base-300/30 px-4 py-3"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-base-300/60 text-base-content">
+            <div key={stop.id} className="wizard-summary__stop">
+              <span className="wizard-summary__stop-icon">
                 <Icon token={stop.iconToken} className={stop.accentClass} aria-hidden />
               </span>
               <div>
