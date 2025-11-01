@@ -427,6 +427,8 @@ describe("Stage 4 completion flows", () => {
   it("shows a celebratory toast when rating a completed walk", async () => {
     ({ mount, root } = await renderRoute("/walk-complete"));
     const container = requireContainer(mount);
+    const badge = container.querySelector(".walk-complete__badge");
+    expect(badge).toBeTruthy();
     const rateButton = Array.from(container.querySelectorAll("button")).find((btn) =>
       btn.textContent?.includes("Rate this walk"),
     );

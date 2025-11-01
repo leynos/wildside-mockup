@@ -46,9 +46,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     alt="Overview of the completed route"
                     className="h-full w-full object-cover"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-base-900 shadow">
-                    Route completed
-                  </span>
+                  <span className="walk-complete__badge">Route completed</span>
                   <div className="absolute bottom-4 right-4 flex -space-x-2">
                     {walkCompletionMoments.slice(0, 3).map((moment) => (
                       <img
