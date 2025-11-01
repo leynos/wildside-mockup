@@ -354,6 +354,13 @@ describe("Stage 3 wizard flows", () => {
     act(() => clickElement(closeButton));
   });
 
+  it("renders saved summary panel with semantic class", async () => {
+    ({ mount, root } = await renderRoute("/saved"));
+    const container = requireContainer(mount);
+    const summaryPanel = container.querySelector(".saved-summary__panel");
+    expect(summaryPanel).toBeTruthy();
+  });
+
   it("renders wizard summary panels with semantic class", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);

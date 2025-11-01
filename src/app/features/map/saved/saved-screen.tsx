@@ -107,7 +107,7 @@ export function SavedScreen(): JSX.Element {
                     </Dialog.Root>
                   </div>
 
-                  <div className="mt-auto rounded-3xl border border-base-300/60 bg-base-100/90 p-6 text-base-content shadow-2xl backdrop-blur">
+                  <div className="mt-auto saved-summary__panel">
                     <h1 className="text-2xl font-semibold">{savedRoute.title}</h1>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
                       <span className="flex items-center gap-1">

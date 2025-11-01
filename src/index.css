@@ -107,6 +107,10 @@
     @apply rounded-xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
   }
 
+  .saved-summary__panel {
+    @apply rounded-3xl border border-base-300/60 bg-base-100/90 p-6 text-base-content shadow-2xl backdrop-blur;
+  }
+
   .map-panel--stacked {
     @apply relative flex flex-col overflow-hidden;
   }
