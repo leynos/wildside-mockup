@@ -85,6 +85,9 @@ describe("GlobalControls", () => {
     const drawer = mountNode?.querySelector<HTMLDivElement>("#global-controls-drawer");
     expect(drawer).toBeTruthy();
 
+    const panel = drawer?.querySelector(".global-controls__panel");
+    expect(panel).toBeTruthy();
+
     const closeButton = Array.from(
       drawer?.querySelectorAll<HTMLButtonElement>("button") ?? [],
     ).find((btn) => btn.getAttribute("aria-label") === "Close display controls");

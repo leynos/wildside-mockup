@@ -51,7 +51,7 @@ function DrawerPanel({
   const { hasUserPreference, resetToSystemDefault } = useDisplayMode();
 
   return (
-    <div className="flex w-56 flex-col gap-3 rounded-2xl border border-base-300/50 bg-base-100/95 p-4 shadow-2xl shadow-base-300/40 backdrop-blur">
+    <div className="global-controls__panel">
       <div className="flex items-center justify-between">
         <h2 id={headingId} className="text-sm font-semibold text-base-content">
           Display & theme
