@@ -19,10 +19,7 @@ interface InterestChipProps {
 
 function InterestChip({ interest }: InterestChipProps): JSX.Element {
   return (
-    <ToggleGroup.Item
-      value={interest.id}
-      className="group flex h-full flex-col items-center rounded-2xl border-2 border-transparent bg-base-300/40 p-4 text-center transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 data-[state=on]:border-accent data-[state=on]:bg-accent/10"
-    >
+    <ToggleGroup.Item value={interest.id} className="discover-interest__card group">
       <div
         className={`mb-3 flex h-12 w-12 items-center justify-center rounded-xl text-xl text-base-content/70 transition-transform group-data-[state=on]:scale-105 group-data-[state=on]:bg-accent/20 group-data-[state=on]:text-accent ${interest.iconBackgroundClass}`}
       >

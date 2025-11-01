@@ -167,6 +167,14 @@
     @apply text-base-200;
   }
 
+  .discover-interest__card {
+    @apply flex h-full flex-col items-center rounded-2xl border-2 border-transparent bg-base-300/40 p-4 text-center transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
+  }
+
+  .discover-interest__card[data-state="on"] {
+    @apply border-accent bg-accent/10;
+  }
+
   /* Celebration recap surfaces on the walk complete screen. */
   .walk-complete__hero-card {
     @apply rounded-3xl border border-base-300/60 bg-base-200/20 p-4 shadow-2xl backdrop-blur;
