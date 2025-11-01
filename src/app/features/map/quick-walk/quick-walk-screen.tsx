@@ -129,7 +129,7 @@ export function QuickWalkScreen(): JSX.Element {
             >
               <Tabs.Content value="map" forceMount className="map-viewport__tab">
                 <div className="pointer-events-none px-6 pb-6">
-                  <div className="pointer-events-auto rounded-3xl border border-base-300/40 bg-base-200/80 p-6 shadow-2xl backdrop-blur">
+                  <div className="quick-walk__panel">
                     <button
                       type="button"
                       onClick={handleDismissPanels}

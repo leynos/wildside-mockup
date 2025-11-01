@@ -236,6 +236,9 @@ describe("Stage 2 routed flows", () => {
     tabPanels.forEach((panel) => {
       expect(panel.classList.contains("map-viewport__tab")).toBe(true);
     });
+
+    const generatorPanel = container.querySelector(".quick-walk__panel");
+    expect(generatorPanel).toBeTruthy();
   });
 
   it("toggles itinerary favourites and opens the share dialog", async () => {
