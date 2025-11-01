@@ -252,6 +252,8 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const summaryPanel = container.querySelector(".map-route__summary");
     expect(summaryPanel).toBeTruthy();
+    const overlayPanels = container.querySelectorAll(".map-overlay");
+    expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
 
     const favouriteButton = container.querySelector<HTMLButtonElement>(
       "button[aria-pressed='false']",
@@ -283,6 +285,8 @@ describe("Stage 2 routed flows", () => {
   it("opens the saved walk share dialog from the saved route", async () => {
     ({ mount, root } = await renderRoute("/saved"));
     const container = requireContainer(mount);
+    const overlayPanels = container.querySelectorAll(".map-overlay");
+    expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
     const shareTrigger = Array.from(container.querySelectorAll("button")).find(
       (btn) => btn.getAttribute("aria-label") === "Share",
     );
