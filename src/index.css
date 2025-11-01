@@ -115,6 +115,11 @@
     @apply rounded-3xl border border-base-300/60 bg-base-100/90 p-6 text-base-content shadow-2xl backdrop-blur;
   }
 
+  /* Shared metric tokens for route summaries (saved + explore detail panels). */
+  .route-metric {
+    @apply flex items-center gap-1;
+  }
+
   .map-viewport__tab {
     @apply flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden;
   }

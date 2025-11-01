@@ -397,6 +397,12 @@ describe("Stage 3 wizard flows", () => {
     const container = requireContainer(mount);
     const summaryPanel = container.querySelector(".saved-summary__panel");
     expect(summaryPanel).toBeTruthy();
+
+    const metrics = container.querySelectorAll(".route-metric");
+    expect(metrics.length).toBeGreaterThanOrEqual(3);
+    metrics.forEach((metric) => {
+      expect(metric.classList.contains("route-metric")).toBe(true);
+    });
   });
 
   it("renders wizard summary panels with semantic class", async () => {
