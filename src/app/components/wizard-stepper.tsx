@@ -23,9 +23,7 @@ export function WizardStepper({ activeStepId, steps }: WizardStepperProps): JSX.
                     isActive || isCompleted ? "bg-accent" : "bg-base-300"
                   }`}
                 />
-                {isActive ? (
-                  <span className="absolute -top-1 -left-1 block h-4 w-4 animate-pulse rounded-full border-2 border-accent" />
-                ) : null}
+                {isActive ? <span className="wizard-stepper__pulse" /> : null}
               </div>
               {index < steps.length - 1 ? (
                 <span className={`h-0.5 w-8 ${isCompleted ? "bg-accent" : "bg-base-300"}`} />

@@ -350,6 +350,8 @@ describe("Stage 3 wizard flows", () => {
   it("advances from wizard step one to step two", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-1"));
     const container = requireContainer(mount);
+    const pulse = container.querySelector(".wizard-stepper__pulse");
+    expect(pulse).toBeTruthy();
     const continueButton = Array.from(container.querySelectorAll("button")).find((btn) =>
       btn.textContent?.includes("Continue to preferences"),
     );
