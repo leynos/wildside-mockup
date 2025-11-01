@@ -434,6 +434,13 @@ describe("Stage 4 completion flows", () => {
     expect(header).toBeTruthy();
   });
 
+  it("renders offline storage overview with semantic class", async () => {
+    ({ mount, root } = await renderRoute("/offline"));
+    const container = requireContainer(mount);
+    const overview = container.querySelector(".offline-overview__panel");
+    expect(overview).toBeTruthy();
+  });
+
   it("opens the offline download dialog with the semantic surface class", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const container = requireContainer(mount);

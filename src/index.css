@@ -115,6 +115,10 @@
     @apply flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden;
   }
 
+  .offline-overview__panel {
+    @apply rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20;
+  }
+
   .map-panel--stacked {
     @apply relative flex flex-col overflow-hidden;
   }

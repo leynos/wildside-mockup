@@ -89,7 +89,7 @@ export function OfflineScreen(): JSX.Element {
           />
 
           <main className="flex-1 space-y-6 overflow-y-auto px-6 pb-28 pt-6">
-            <section className="rounded-2xl border border-base-300/60 bg-base-200/70 p-4 text-base-content shadow-sm shadow-base-300/20">
+            <section className="offline-overview__panel">
               <div className="mb-4 flex items-center gap-3">
                 <Icon token="{icon.action.download}" className="text-accent" aria-hidden />
                 <div>
