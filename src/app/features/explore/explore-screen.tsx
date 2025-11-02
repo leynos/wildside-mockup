@@ -272,7 +272,7 @@ export function ExploreScreen(): JSX.Element {
             <button
               type="button"
               onClick={() => navigate({ to: "/discover" })}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60 text-accent shadow-sm shadow-base-300/30 transition hover:border-accent/60 hover:text-accent"
+              className="header-icon-button"
               aria-label="Filter walks"
             >
               <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />

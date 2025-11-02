@@ -106,6 +106,7 @@ describe("Stage 1 routed flows", () => {
       "button[aria-label='Filter walks']",
     );
     expect(filterButton).toBeTruthy();
+    expect(filterButton?.classList.contains("header-icon-button")).toBe(true);
 
     await act(async () => {
       clickElement(filterButton);
@@ -150,6 +151,9 @@ describe("Stage 1 routed flows", () => {
   it("toggles advanced switches on the customize route", async () => {
     ({ mount, root } = await renderRoute("/customize"));
     const container = requireContainer(mount);
+    const helpButton = container.querySelector<HTMLButtonElement>("button[aria-label='Help']");
+    expect(helpButton).toBeTruthy();
+    expect(helpButton?.classList.contains("header-icon-button")).toBe(true);
     const safetySwitch = container.querySelector<HTMLButtonElement>("#advanced-safety");
     expect(safetySwitch?.getAttribute("data-state")).toBe("unchecked");
 
