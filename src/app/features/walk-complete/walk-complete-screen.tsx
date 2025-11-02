@@ -61,7 +61,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="mt-6 px-6">
+            <section className="walk-complete__section">
               <div className="grid gap-4 sm:grid-cols-2">
                 {walkCompletionPrimaryStats.map((stat) => (
                   <article key={stat.id} className="walk-complete__stat-card">
@@ -75,7 +75,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="mt-4 px-6">
+            <section className="walk-complete__section walk-complete__section--compact">
               <div className="grid grid-cols-3 gap-3">
                 {walkCompletionSecondaryStats.map((stat) => (
                   <article
@@ -90,7 +90,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="mt-6 px-6">
+            <section className="walk-complete__section">
               <h2 className="mb-4 flex items-center gap-3 text-lg font-semibold text-base-100">
                 <Icon token="{icon.action.like}" className="text-pink-400" aria-hidden />
                 Favourite moments
@@ -116,7 +116,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="mt-6 px-6">
+            <section className="walk-complete__section">
               <div className="space-y-3">
                 <button
                   type="button"
@@ -147,7 +147,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="mt-6 px-6">
+            <section className="walk-complete__section">
               <div className="rounded-2xl border border-purple-400/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4">
                 <div className="mb-3 flex items-center gap-3">
                   <Icon token="{icon.object.magic}" className="text-purple-300" aria-hidden />
@@ -166,7 +166,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="mt-8 px-6 pb-12">
+            <section className="walk-complete__section walk-complete__section--spacious pb-12">
               <h3 className="mb-4 text-center text-base font-semibold text-base-100">
                 Share your adventure
               </h3>

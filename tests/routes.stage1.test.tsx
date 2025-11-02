@@ -503,6 +503,13 @@ describe("Stage 4 completion flows", () => {
     const container = requireContainer(mount);
     const badge = container.querySelector(".walk-complete__badge");
     expect(badge).toBeTruthy();
+
+    const sections = container.querySelectorAll(".walk-complete__section");
+    expect(sections.length).toBeGreaterThanOrEqual(5);
+    sections.forEach((section) => {
+      expect(section.classList.contains("walk-complete__section")).toBe(true);
+    });
+
     const rateButton = Array.from(container.querySelectorAll("button")).find((btn) =>
       btn.textContent?.includes("Rate this walk"),
     );
