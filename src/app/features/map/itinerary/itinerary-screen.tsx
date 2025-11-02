@@ -111,10 +111,7 @@ export function ItineraryScreen(): JSX.Element {
                       </button>
                       <Dialog.Root open={shareOpen} onOpenChange={setShareOpen}>
                         <Dialog.Trigger asChild>
-                          <button
-                            type="button"
-                            className="flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/70 px-4 py-2 text-sm font-medium text-base-content"
-                          >
+                          <button type="button" className="route-share__trigger">
                             <Icon token="{icon.action.share}" aria-hidden />
                             Share
                           </button>

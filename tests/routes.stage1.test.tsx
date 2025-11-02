@@ -314,6 +314,7 @@ describe("Stage 2 routed flows", () => {
       btn.textContent?.includes("Share"),
     );
     expect(shareButton).toBeTruthy();
+    expect(shareButton?.classList.contains("route-share__trigger")).toBe(true);
 
     await act(async () => {
       clickElement(shareButton);
