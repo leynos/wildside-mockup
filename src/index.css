@@ -234,6 +234,10 @@
     @apply text-xs text-base-content/70;
   }
 
+  .discover-interests__section {
+    @apply mt-10 flex flex-1 flex-col;
+  }
+
   .route-share__trigger {
     @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/70 px-4 py-2 text-sm font-medium text-base-content transition hover:bg-base-200/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
   }

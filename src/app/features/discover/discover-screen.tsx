@@ -73,7 +73,7 @@ export function DiscoverScreen(): JSX.Element {
           description="Tell us what interests you and we will craft magical routes tailored for you."
         />
 
-        <section className="mt-10 flex flex-1 flex-col">
+        <section className="discover-interests__section">
           <div className="mb-6 text-center">
             <h2 className="text-lg font-semibold text-base-content">What sparks your curiosity?</h2>
             <p className="mt-1 text-sm text-base-content/60">

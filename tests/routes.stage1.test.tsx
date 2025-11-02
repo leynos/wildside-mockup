@@ -90,6 +90,8 @@ describe("Stage 1 routed flows", () => {
     const chips = Array.from(container.querySelectorAll("button"));
     const parksChip = chips.find((chip) => chip.textContent?.includes("Parks & Nature"));
     expect(parksChip).toBeTruthy();
+    const interestsSection = container.querySelector(".discover-interests__section");
+    expect(interestsSection).toBeTruthy();
     const discoverCards = container.querySelectorAll(".discover-interest__card");
     expect(discoverCards.length).toBeGreaterThan(0);
     act(() => clickElement(parksChip));
