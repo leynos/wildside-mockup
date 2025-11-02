@@ -216,6 +216,31 @@ expect(displayToggle).toBeTruthy();
 
 Here we rely on the presence of `aria-label="Switch to Full View"` on the button. If that label were missing or changed, the test would fail – which is good, because the accessible contract of the UI changed. In a future refactor, we might rewrite such a query using Testing Library’s `getByRole('button', { name: 'Switch to Full View' })` for clarity. Either way, the test asserts something a screen reader user would care about: that there is a button with that label.
 
+#### 2.3.1 Exemplars awaiting refactor
+
+We still have a handful of high-visibility suites leaning on test IDs and DOM
+structure hooks. They are valuable targets when socialising the upcoming lint
+rule:
+
+- `tests/routes.stage1.test.tsx` (quick-map and offline manager flows) uses
+  selectors such as `[data-testid='quick-walk-stops-panel']` and
+  `offline-delete-button`. The fix is to surface accessible names – for
+  example, ensure the stops tab owns an `aria-labelledby`, label the delete
+  buttons “Delete {map name}”, and then switch the tests to
+  `getByRole('tabpanel', { name: /stops/i })` or
+  `getAllByRole('button', { name: /delete .* offline map/i })`.
+- `tests/global-controls.test.tsx` relies on a hidden
+  `<span data-testid="mode-probe">` shim to assert state transitions. Replace
+  this with assertions against the real control’s `aria-pressed` state and
+  visible label (`getByRole('button', { name: /display mode/i })`).
+- `tests/quick-map-fragment.test.tsx` queries map panels via
+  `[data-testid='quick-walk-map-container']`. Once the container has a sensible
+  label (for example `aria-label="Quick walk map"`), the test can use
+  `getByRole('region', { name: /quick walk map/i })` and remain resilient.
+
+Documenting these specific call sites gives reviewers a short list of “fix me
+next” examples and shows what the accessible alternative should look like.
+
 - **Assertions on Accessibility Outcomes:** In addition to low-level assertions (like “this state toggled” or “this element exists”), we add assertions specifically for accessibility expectations. For instance, after clicking a button that opens a modal, we might assert that focus moved to the modal dialog element (using `expect(dialog).toHaveFocus()` or checking `document.activeElement`). Or after toggling a theme, we assert that the `<html lang>` or `data-theme` attributes are correctly set. By writing these into tests, we ensure that accessibility features (focus management, ARIA attributes, language attributes, etc.) aren’t accidentally broken. It’s far easier to debug an automated test failure pointing to a missing `lang` attribute than to wait for a manual audit.
 
 To enforce these practices, we integrate ESLint rules and testing guidelines:
