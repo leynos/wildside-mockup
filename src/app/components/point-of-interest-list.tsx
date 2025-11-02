@@ -45,9 +45,9 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
                   <Icon
                     token={poi.categoryIconToken}
                     className={`h-4 w-4 ${poi.categoryColorClass}`}
-                    aria-hidden
+                    label={poi.categoryLabel}
                   />
-                  Highlight
+                  <span aria-hidden>Highlight</span>
                 </span>
                 {poi.tags.map((tag) => (
                   <span

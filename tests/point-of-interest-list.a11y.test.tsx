@@ -22,6 +22,12 @@ describe("PointOfInterestList accessibility", () => {
     expect(trigger.classList.contains("poi-list__item")).toBe(true);
     const highlightBadge = trigger.querySelector(".poi-highlight");
     expect(highlightBadge).not.toBeNull();
+    const highlightIcon = highlightBadge?.querySelector('[role="img"]');
+    expect(highlightIcon).not.toBeNull();
+    if (!highlightIcon) {
+      throw new Error("Expected highlight icon to be present");
+    }
+    expect(highlightIcon.getAttribute("aria-label")).toBe(samplePoi.categoryLabel);
 
     await userEvent.click(trigger);
 

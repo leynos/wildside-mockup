@@ -18,6 +18,8 @@ export interface WalkPointOfInterest {
   openHours?: string;
   categoryIconToken: string;
   categoryColorClass: string;
+  /** Localised description of the category icon for assistive tech. */
+  categoryLabel: string;
 }
 
 export interface WalkRouteSummary {
@@ -75,6 +77,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       rating: 4.7,
       categoryIconToken: "{icon.category.food}",
       categoryColorClass: "text-amber-400",
+      categoryLabel: "Coffee and pastries",
       openHours: "7:00 AM – 8:00 PM",
     },
     {
@@ -85,6 +88,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       rating: 4.9,
       categoryIconToken: "{icon.category.photography}",
       categoryColorClass: "text-sky-400",
+      categoryLabel: "Scenic viewpoint",
       openHours: "24/7",
     },
     {
@@ -95,6 +99,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       rating: 4.4,
       categoryIconToken: "{icon.category.art}",
       categoryColorClass: "text-purple-400",
+      categoryLabel: "Street art highlight",
       openHours: "10:00 AM – 7:00 PM",
     },
     {
@@ -105,6 +110,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       rating: 4.6,
       categoryIconToken: "{icon.category.nature}",
       categoryColorClass: "text-emerald-400",
+      categoryLabel: "Nature stop",
       openHours: "6:00 AM – 9:00 PM",
     },
     {
@@ -115,6 +121,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       rating: 4.5,
       categoryIconToken: "{icon.category.shops}",
       categoryColorClass: "text-orange-400",
+      categoryLabel: "Market stalls",
       openHours: "Saturdays 8:00 AM – 2:00 PM",
     },
     {
@@ -125,6 +132,7 @@ export const waterfrontDiscoveryRoute: WalkRouteSummary = {
       rating: 4.8,
       categoryIconToken: "{icon.category.landmarks}",
       categoryColorClass: "text-cyan-300",
+      categoryLabel: "Landmark bridge",
       openHours: "8:00 AM – 10:00 PM",
     },
   ],
