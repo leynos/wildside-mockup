@@ -170,6 +170,13 @@ describe("Stage 1 routed flows", () => {
 
     const surfaceOptions = container.querySelectorAll(".customize-surface__option");
     expect(surfaceOptions.length).toBeGreaterThan(0);
+
+    const interestSliders = container.querySelectorAll(".interest-mix__slider");
+    expect(interestSliders.length).toBeGreaterThan(0);
+    interestSliders.forEach((slider) => {
+      expect(slider.querySelector(".interest-mix__thumb")).toBeTruthy();
+      expect(slider.querySelector(".interest-mix__track")).toBeTruthy();
+    });
   });
 });
 

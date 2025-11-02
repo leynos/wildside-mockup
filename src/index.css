@@ -242,6 +242,22 @@
     @apply relative flex flex-1 flex-col overflow-y-auto px-6 pb-10 pt-20;
   }
 
+  .interest-mix__slider {
+    @apply relative flex h-5 w-full items-center;
+  }
+
+  .interest-mix__track {
+    @apply relative h-2 w-full overflow-hidden rounded-full bg-base-300/60;
+  }
+
+  .interest-mix__range {
+    @apply absolute h-full rounded-full bg-accent;
+  }
+
+  .interest-mix__thumb {
+    @apply block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow shadow-accent/30 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50;
+  }
+
   .route-share__trigger {
     @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/70 px-4 py-2 text-sm font-medium text-base-content transition hover:bg-base-200/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
   }

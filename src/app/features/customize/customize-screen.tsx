@@ -141,12 +141,15 @@ function InterestMix({ onChange, values }: InterestMixProps): JSX.Element {
                 max={100}
                 step={5}
                 onValueChange={(next) => onChange(slice.id, next[0] ?? value)}
-                className="relative flex h-5 w-full items-center"
+                className="interest-mix__slider"
               >
-                <Slider.Track className="relative h-2 w-full overflow-hidden rounded-full bg-base-300/60">
-                  <Slider.Range className="absolute h-full rounded-full bg-accent" />
+                <Slider.Track className="interest-mix__track">
+                  <Slider.Range className="interest-mix__range" />
                 </Slider.Track>
-                <Slider.Thumb className="block h-5 w-5 rounded-full border-2 border-base-100 bg-accent shadow shadow-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50" />
+                <Slider.Thumb
+                  className="interest-mix__thumb"
+                  aria-label={`${slice.label} allocation`}
+                />
               </Slider.Root>
             </div>
           );
