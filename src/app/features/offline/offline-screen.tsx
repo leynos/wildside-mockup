@@ -90,16 +90,16 @@ export function OfflineScreen(): JSX.Element {
                 <Icon token="{icon.action.download}" className="text-accent" aria-hidden />
                 <div>
                   <p className="text-sm font-medium text-base-content">Storage overview</p>
-                  <p className="text-xs text-base-content/70">
-                    Auto-delete unused maps after 30 days
-                  </p>
+                  <p className="offline-download__meta">Auto-delete unused maps after 30 days</p>
                 </div>
               </div>
               <div className="space-y-3">
                 <div>
-                  <div className="mb-1 flex items-center justify-between text-xs text-base-content/70">
-                    <span>Used</span>
-                    <span className="font-semibold text-base-content">2.8 GB of 8 GB</span>
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="offline-download__meta">Used</span>
+                    <span className="offline-download__meta font-semibold text-base-content">
+                      2.8 GB of 8 GB
+                    </span>
                   </div>
                   <div className="h-2 w-full rounded-full bg-base-300/60">
                     <div className="h-2 w-[35%] rounded-full bg-accent" />
@@ -163,7 +163,7 @@ export function OfflineScreen(): JSX.Element {
               <header className="flex items-center justify-between">
                 <div>
                   <h2 className="text-base font-semibold text-base-content">Downloaded areas</h2>
-                  <p className="text-xs text-base-content/70">Manage maps for offline navigation</p>
+                  <p className="offline-download__meta">Manage maps for offline navigation</p>
                 </div>
                 <Button
                   size="sm"
@@ -214,7 +214,7 @@ export function OfflineScreen(): JSX.Element {
                             <h3 className="font-semibold text-base-content">
                               {entry.download.title}
                             </h3>
-                            <p className="text-xs text-base-content/70">
+                            <p className="offline-download__meta">
                               {entry.download.subtitle} • {entry.download.size}
                             </p>
                           </div>
@@ -233,7 +233,7 @@ export function OfflineScreen(): JSX.Element {
                               style={{ width: `${Math.round(entry.download.progress * 100)}%` }}
                             />
                           </div>
-                          <span className="text-xs text-base-content/70">
+                          <span className="offline-download__meta">
                             {Math.round(entry.download.progress * 100)}%
                           </span>
                         </div>
@@ -247,9 +247,7 @@ export function OfflineScreen(): JSX.Element {
                     >
                       <div>
                         <p className="font-semibold">{entry.download.title} deleted</p>
-                        <p className="text-xs text-base-content/70">
-                          Tap undo to restore this map.
-                        </p>
+                        <p className="offline-download__meta">Tap undo to restore this map.</p>
                       </div>
                       <button
                         type="button"

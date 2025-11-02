@@ -613,6 +613,9 @@ describe("Stage 4 completion flows", () => {
     const cardsBefore = container.querySelectorAll("[data-testid='offline-download-card']");
     expect(cardsBefore.length).toBeGreaterThan(0);
 
+    const downloadMeta = container.querySelectorAll(".offline-download__meta");
+    expect(downloadMeta.length).toBeGreaterThanOrEqual(cardsBefore.length);
+
     const firstCardTitle = cardsBefore[0]?.querySelector("h3")?.textContent?.trim();
     expect(firstCardTitle).toBeTruthy();
 
