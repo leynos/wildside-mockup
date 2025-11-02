@@ -19,9 +19,9 @@ export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
 ];
 
 const withBasePath = (path: string): string => {
-  const trimmedBase = import.meta.env.BASE_URL.replace(/\/$/, "");
-  const trimmedPath = path.replace(/^\//, "");
-  return `${trimmedBase}/${trimmedPath}`;
+  const base = import.meta.env.BASE_URL ?? "/";
+  const cleanedPath = path.replace(/^\/+/, "");
+  return `${base}${cleanedPath}`.replace(/\/+/g, "/");
 };
 
 export interface WalkCompletionMoment {
