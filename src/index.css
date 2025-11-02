@@ -208,6 +208,28 @@
     @apply relative flex flex-1 flex-col justify-end overflow-hidden;
   }
 
+  .map-overlay__fade {
+    @apply pointer-events-none absolute inset-x-0;
+  }
+
+  .map-overlay__fade--top {
+    @apply top-0 h-6 bg-gradient-to-b;
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in oklch, #0d1a26 70%, transparent) 0%,
+      transparent 100%
+    );
+  }
+
+  .map-overlay__fade--bottom {
+    @apply bottom-0 h-10 bg-gradient-to-t;
+    background-image: linear-gradient(
+      to top,
+      color-mix(in oklch, #0d1a26 80%, transparent) 0%,
+      transparent 100%
+    );
+  }
+
   .bottom-nav {
     @apply sticky bottom-0 left-0 right-0 z-30 border-t border-base-300/60 bg-base-200/80 px-2 pb-3 pt-2 backdrop-blur;
   }

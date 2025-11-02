@@ -173,12 +173,9 @@ export function QuickWalkScreen(): JSX.Element {
                     <div className="flex-1 overflow-y-auto px-4 pb-5">
                       <PointOfInterestList points={waterfrontDiscoveryRoute.pointsOfInterest} />
                     </div>
+                    <div className="map-overlay__fade map-overlay__fade--top" aria-hidden="true" />
                     <div
-                      className="pointer-events-none absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-base-900/70 to-transparent"
-                      aria-hidden="true"
-                    />
-                    <div
-                      className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-base-900/80 to-transparent"
+                      className="map-overlay__fade map-overlay__fade--bottom"
                       aria-hidden="true"
                     />
                   </div>

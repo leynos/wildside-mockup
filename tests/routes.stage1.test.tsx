@@ -279,6 +279,11 @@ describe("Stage 2 routed flows", () => {
 
     const shellMain = container.querySelector(".map-shell__main");
     expect(shellMain).toBeTruthy();
+
+    const fadeTop = container.querySelector(".map-overlay__fade--top");
+    const fadeBottom = container.querySelector(".map-overlay__fade--bottom");
+    expect(fadeTop).toBeTruthy();
+    expect(fadeBottom).toBeTruthy();
   });
 
   it("toggles itinerary favourites and opens the share dialog", async () => {
