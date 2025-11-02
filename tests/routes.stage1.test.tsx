@@ -3,6 +3,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import { waterfrontDiscoveryRoute } from "../src/app/data/map";
+import { walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
   accessibilityOptions,
   wizardGeneratedStops,
@@ -522,6 +523,25 @@ describe("Stage 4 completion flows", () => {
 
     const toast = document.querySelector(".alert-success");
     expect(toast?.textContent).toContain("Rating saved");
+
+    const shareButton = Array.from(container.querySelectorAll("button")).find(
+      (btn) => btn.textContent?.trim() === "Share",
+    );
+    expect(shareButton).toBeTruthy();
+
+    await act(async () => {
+      clickElement(shareButton);
+      await Promise.resolve();
+    });
+
+    const dialog = document.querySelector<HTMLElement>("[role='dialog']");
+    expect(dialog).toBeTruthy();
+
+    const shareOptions = dialog?.querySelectorAll(".walk-share__option") ?? [];
+    expect(shareOptions.length).toBeGreaterThanOrEqual(walkCompletionShareOptions.length);
+    shareOptions.forEach((option) => {
+      expect(option.classList.contains("walk-share__option")).toBe(true);
+    });
   });
 
   it("lists existing downloads on the offline manager route", async () => {

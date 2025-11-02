@@ -199,10 +199,7 @@ export function WalkCompleteScreen(): JSX.Element {
             </Dialog.Description>
             <div className="flex flex-wrap gap-2 text-sm text-base-content/80">
               {walkCompletionShareOptions.map((option) => (
-                <span
-                  key={option.id}
-                  className="flex items-center gap-2 rounded-full border border-base-300/60 px-3 py-1"
-                >
+                <span key={option.id} className="walk-share__option">
                   <Icon token={option.iconToken} aria-hidden />
                   {option.label}
                 </span>
