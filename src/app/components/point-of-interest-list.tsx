@@ -41,7 +41,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
                 ) : null}
               </div>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-accent">
-                <span className="flex items-center gap-1 rounded-full bg-base-300/60 px-2 py-0.5 text-base-content/80">
+                <span className="poi-highlight">
                   <Icon
                     token={poi.categoryIconToken}
                     className={`h-4 w-4 ${poi.categoryColorClass}`}

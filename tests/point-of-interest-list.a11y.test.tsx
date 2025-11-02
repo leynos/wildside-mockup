@@ -20,6 +20,9 @@ describe("PointOfInterestList accessibility", () => {
 
     const trigger = screen.getByRole("button", { name: new RegExp(samplePoi.name, "i") });
     expect(trigger.classList.contains("poi-list__item")).toBe(true);
+    const highlightBadge = trigger.querySelector(".poi-highlight");
+    expect(highlightBadge).not.toBeNull();
+
     await userEvent.click(trigger);
 
     const dialog = await screen.findByRole("dialog", { name: samplePoi.name });
