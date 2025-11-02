@@ -90,10 +90,7 @@ export function ItineraryScreen(): JSX.Element {
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2">
                         {waterfrontDiscoveryRoute.highlights.map((highlight) => (
-                          <span
-                            key={highlight}
-                            className="rounded-full border border-accent/40 bg-base-200/70 px-3 py-1 text-xs font-medium text-accent"
-                          >
+                          <span key={highlight} className="route-highlight">
                             {highlight}
                           </span>
                         ))}

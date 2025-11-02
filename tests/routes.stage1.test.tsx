@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
+import { waterfrontDiscoveryRoute } from "../src/app/data/map";
 import {
   accessibilityOptions,
   wizardGeneratedStops,
@@ -283,6 +284,12 @@ describe("Stage 2 routed flows", () => {
 
     act(() => clickElement(favouriteButton));
     expect(favouriteButton?.getAttribute("aria-pressed")).toBe("true");
+
+    const highlights = container.querySelectorAll(".route-highlight");
+    expect(highlights.length).toBe(waterfrontDiscoveryRoute.highlights.length);
+    highlights.forEach((highlight) => {
+      expect(highlight.classList.contains("route-highlight")).toBe(true);
+    });
 
     const shareButton = Array.from(container.querySelectorAll("button")).find((btn) =>
       btn.textContent?.includes("Share"),

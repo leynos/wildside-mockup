@@ -161,10 +161,7 @@ export function SavedScreen(): JSX.Element {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {savedRoute.highlights.map((highlight) => (
-                      <span
-                        key={highlight}
-                        className="rounded-full border border-accent/40 bg-base-200/80 px-3 py-1 text-xs font-medium text-accent"
-                      >
+                      <span key={highlight} className="route-highlight">
                         {highlight}
                       </span>
                     ))}
