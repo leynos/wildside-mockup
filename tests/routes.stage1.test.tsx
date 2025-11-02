@@ -147,6 +147,9 @@ describe("Stage 1 routed flows", () => {
     metrics.forEach((metric) => {
       expect(metric.classList.contains("route-metric")).toBe(true);
     });
+
+    const appBottomNav = container.querySelector(".bottom-nav");
+    expect(appBottomNav).toBeTruthy();
   });
 
   it("toggles advanced switches on the customize route", async () => {
@@ -270,6 +273,9 @@ describe("Stage 2 routed flows", () => {
 
     const generatorPanel = container.querySelector(".quick-walk__panel");
     expect(generatorPanel).toBeTruthy();
+
+    const mapBottomNav = container.querySelector(".bottom-nav.bottom-nav--map");
+    expect(mapBottomNav).toBeTruthy();
   });
 
   it("toggles itinerary favourites and opens the share dialog", async () => {

@@ -44,9 +44,9 @@ export function MapBottomNavigation({
   const resolved = resolveItems(items);
 
   return (
-    <nav className="sticky bottom-0 left-0 right-0 z-30 border-t border-base-300/40 bg-base-200/80 px-2 pb-3 pt-2 backdrop-blur">
+    <nav className="bottom-nav bottom-nav--map">
       {trailingSlot}
-      <div className="grid grid-cols-4 gap-1 text-xs font-medium">
+      <div className="bottom-nav__grid">
         {resolved.map((item) => {
           const isActive = item.id === activeId;
           return (
@@ -54,9 +54,7 @@ export function MapBottomNavigation({
               key={item.id}
               type="button"
               onClick={() => navigate({ to: item.href })}
-              className={`flex flex-col items-center gap-1 rounded-xl py-2 transition hover:text-base-content ${
-                isActive ? "text-base-content" : "text-base-content/60"
-              }`}
+              className={`bottom-nav__item ${isActive ? "bottom-nav__item--active" : ""}`}
             >
               <Icon token={item.iconToken} className="text-lg" label={item.label} />
               {item.label}

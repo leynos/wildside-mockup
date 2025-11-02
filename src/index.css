@@ -192,6 +192,26 @@
     @apply flex items-center gap-2 rounded-full border border-base-300/60 px-3 py-1 text-sm text-base-content/80;
   }
 
+  .bottom-nav {
+    @apply sticky bottom-0 left-0 right-0 z-30 border-t border-base-300/60 bg-base-200/80 px-2 pb-3 pt-2 backdrop-blur;
+  }
+
+  .bottom-nav--map {
+    @apply border-base-300/40;
+  }
+
+  .bottom-nav__grid {
+    @apply grid grid-cols-4 gap-1 text-xs font-medium;
+  }
+
+  .bottom-nav__item {
+    @apply flex flex-col items-center gap-1 rounded-xl py-2 text-base-content/60 transition hover:text-base-content;
+  }
+
+  .bottom-nav__item--active {
+    @apply text-base-content;
+  }
+
   .map-viewport__tab {
     @apply flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden;
   }
