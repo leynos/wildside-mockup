@@ -472,6 +472,10 @@ describe("Stage 3 wizard flows", () => {
       const icon = stop.querySelector(".wizard-summary__stop-icon");
       expect(icon).toBeTruthy();
     });
+
+    const weather = container.querySelector(".wizard-summary__weather");
+    expect(weather).toBeTruthy();
+    expect(weather?.classList.contains("wizard-summary__weather")).toBe(true);
   });
 });
 

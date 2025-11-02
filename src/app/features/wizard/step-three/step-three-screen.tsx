@@ -137,7 +137,7 @@ export function WizardStepThree(): JSX.Element {
           <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
           {wizardWeatherSummary.title}
         </h3>
-        <div className="mt-3 flex items-center justify-between rounded-2xl border border-amber-200/40 bg-amber-200/10 px-4 py-3">
+        <div className="wizard-summary__weather">
           <div>
             <p className="font-semibold">{wizardWeatherSummary.summary}</p>
             <p className="text-xs text-base-content/60">Pack light layers just in case.</p>

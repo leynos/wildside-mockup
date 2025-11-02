@@ -121,6 +121,10 @@
     @apply flex h-12 w-12 items-center justify-center rounded-xl bg-base-300/60 text-base-content;
   }
 
+  .wizard-summary__weather {
+    @apply mt-3 flex items-center justify-between rounded-2xl border border-amber-200/40 bg-amber-200/10 px-4 py-3;
+  }
+
   /* Offline downloads manager cards. */
   .offline-download__card {
     @apply relative flex gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-4 text-base-content shadow-inner shadow-base-300/30;
