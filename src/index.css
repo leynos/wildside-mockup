@@ -196,6 +196,18 @@
     @apply flex items-center gap-1 rounded-full bg-base-300/60 px-2 py-0.5 text-base-content/80;
   }
 
+  .map-shell__main {
+    @apply relative flex flex-1 min-h-0 flex-col overflow-hidden;
+  }
+
+  .map-shell__pane {
+    @apply flex flex-1 min-h-0 flex-col justify-end overflow-hidden;
+  }
+
+  .map-shell__viewport {
+    @apply relative flex flex-1 flex-col justify-end overflow-hidden;
+  }
+
   .bottom-nav {
     @apply sticky bottom-0 left-0 right-0 z-30 border-t border-base-300/60 bg-base-200/80 px-2 pb-3 pt-2 backdrop-blur;
   }

@@ -26,13 +26,9 @@ export function ItineraryScreen(): JSX.Element {
 
   return (
     <MobileShell tone="dark">
-      <main className="relative flex flex-1 min-h-0 flex-col overflow-hidden">
-        <Tabs.Root
-          value={activeTab}
-          onValueChange={setActiveTab}
-          className="flex flex-1 min-h-0 flex-col justify-end overflow-hidden"
-        >
-          <div className="relative flex flex-1 flex-col justify-end overflow-hidden">
+      <main className="map-shell__main">
+        <Tabs.Root value={activeTab} onValueChange={setActiveTab} className="map-shell__pane">
+          <div className="map-shell__viewport">
             <Tabs.Content value="map" forceMount className="map-overlay">
               <MapViewport
                 map={<WildsideMap />}

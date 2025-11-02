@@ -276,6 +276,9 @@ describe("Stage 2 routed flows", () => {
 
     const mapBottomNav = container.querySelector(".bottom-nav.bottom-nav--map");
     expect(mapBottomNav).toBeTruthy();
+
+    const shellMain = container.querySelector(".map-shell__main");
+    expect(shellMain).toBeTruthy();
   });
 
   it("toggles itinerary favourites and opens the share dialog", async () => {
