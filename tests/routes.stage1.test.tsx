@@ -410,6 +410,8 @@ describe("Stage 3 wizard flows", () => {
     const container = requireContainer(mount);
     const pulse = container.querySelector(".wizard-stepper__pulse");
     expect(pulse).toBeTruthy();
+    const wizardSections = container.querySelectorAll(".wizard-section");
+    expect(wizardSections.length).toBeGreaterThanOrEqual(2);
     const continueButton = Array.from(container.querySelectorAll("button")).find((btn) =>
       btn.textContent?.includes("Continue to preferences"),
     );
@@ -432,6 +434,9 @@ describe("Stage 3 wizard flows", () => {
 
     const summary = container.querySelector(".wizard-discovery__summary");
     expect(summary).toBeTruthy();
+
+    const wizardSections = container.querySelectorAll(".wizard-section");
+    expect(wizardSections.length).toBeGreaterThanOrEqual(2);
 
     const options = container.querySelectorAll(".wizard-accessibility__option");
     expect(options.length).toBe(accessibilityOptions.length);
@@ -490,6 +495,7 @@ describe("Stage 3 wizard flows", () => {
     expect(panels.length).toBeGreaterThanOrEqual(4);
     panels.forEach((panel) => {
       expect(panel.classList.contains("wizard-summary__panel")).toBe(true);
+      expect(panel.classList.contains("wizard-section")).toBe(true);
     });
 
     const highlights = container.querySelectorAll(".wizard-summary__highlight");

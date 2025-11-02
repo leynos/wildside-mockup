@@ -7,6 +7,7 @@ import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { SliderControl } from "../../../components/slider-control";
 import { WizardLayout } from "../../../components/wizard-layout";
+import { WizardSection } from "../../../components/wizard-section";
 import { defaultSelectedInterests, discoverInterests } from "../../../data/discover";
 import { wizardSteps } from "../../../data/wizard";
 
@@ -53,7 +54,7 @@ export function WizardStepOne(): JSX.Element {
         </button>
       }
     >
-      <section className="mb-8 rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
+      <WizardSection className="mb-8">
         <SliderControl
           id="wizard-duration"
           label="Walk duration"
@@ -67,9 +68,9 @@ export function WizardStepOne(): JSX.Element {
           ariaLabel="Walk duration slider"
           onValueChange={setDuration}
         />
-      </section>
+      </WizardSection>
 
-      <section className="rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
+      <WizardSection>
         <header className="mb-4 flex items-center justify-between">
           <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
@@ -83,7 +84,7 @@ export function WizardStepOne(): JSX.Element {
           onChange={setSelectedInterests}
           ariaLabel="Select walk interests"
         />
-      </section>
+      </WizardSection>
     </WizardLayout>
   );
 }

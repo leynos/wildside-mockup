@@ -6,6 +6,7 @@ import { type JSX, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
+import { WizardSection } from "../../../components/wizard-section";
 import {
   wizardGeneratedStops,
   wizardSteps,
@@ -68,7 +69,7 @@ export function WizardStepThree(): JSX.Element {
         </div>
       }
     >
-      <section className="wizard-summary__panel">
+      <WizardSection className="wizard-summary__panel">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Hidden Gems Loop</h2>
           <span className="rounded-lg bg-accent/20 px-2 py-1 text-xs font-semibold text-accent">
@@ -93,9 +94,9 @@ export function WizardStepThree(): JSX.Element {
           A personalised walk blending street art laneways, independent cafés, and quiet waterfront
           viewpoints.
         </p>
-      </section>
+      </WizardSection>
 
-      <section className="wizard-summary__panel">
+      <WizardSection className="wizard-summary__panel">
         <h3 className="text-lg font-semibold">Your preferences applied</h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {wizardSummaryHighlights.map((highlight) => (
@@ -112,9 +113,9 @@ export function WizardStepThree(): JSX.Element {
             </div>
           ))}
         </div>
-      </section>
+      </WizardSection>
 
-      <section className="wizard-summary__panel">
+      <WizardSection className="wizard-summary__panel">
         <h3 className="text-lg font-semibold">Featured stops</h3>
         <div className="mt-4 space-y-3">
           {wizardGeneratedStops.map((stop) => (
@@ -130,9 +131,9 @@ export function WizardStepThree(): JSX.Element {
             </div>
           ))}
         </div>
-      </section>
+      </WizardSection>
 
-      <section className="wizard-summary__panel">
+      <WizardSection className="wizard-summary__panel">
         <h3 className="section-heading text-base-content">
           <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
           {wizardWeatherSummary.title}
@@ -147,7 +148,7 @@ export function WizardStepThree(): JSX.Element {
             <p className="text-xs text-base-content/60">{wizardWeatherSummary.sentiment}</p>
           </div>
         </div>
-      </section>
+      </WizardSection>
     </WizardLayout>
   );
 }

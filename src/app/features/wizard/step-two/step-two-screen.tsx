@@ -7,6 +7,7 @@ import { type JSX, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
+import { WizardSection } from "../../../components/wizard-section";
 import { accessibilityOptions, wizardSteps } from "../../../data/wizard";
 
 export function WizardStepTwo(): JSX.Element {
@@ -43,7 +44,7 @@ export function WizardStepTwo(): JSX.Element {
         </div>
       }
     >
-      <section className="mb-8 rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
+      <WizardSection className="mb-8">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.navigation.explore}" className="text-accent" aria-hidden />
@@ -85,9 +86,9 @@ export function WizardStepTwo(): JSX.Element {
               ? "Hotspot focused"
               : "Balanced mix"}
         </div>
-      </section>
+      </WizardSection>
 
-      <section className="rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
+      <WizardSection>
         <h2 className="mb-4 text-lg font-semibold text-base-content">Accessibility & safety</h2>
         <div className="space-y-4">
           {accessibilityOptions.map((option) => {
@@ -120,7 +121,7 @@ export function WizardStepTwo(): JSX.Element {
             );
           })}
         </div>
-      </section>
+      </WizardSection>
     </WizardLayout>
   );
 }

@@ -80,9 +80,13 @@
     @apply flex w-56 flex-col gap-3 rounded-2xl border border-base-300/50 bg-base-100/95 p-4 text-base-content shadow-2xl shadow-base-300/40 backdrop-blur;
   }
 
+  .wizard-section {
+    @apply rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content;
+  }
+
   /* Wizard summary panels on step three. */
   .wizard-summary__panel {
-    @apply mb-6 rounded-3xl border border-base-300/40 bg-base-200/70 p-6 text-base-content;
+    @apply mb-6;
   }
 
   .wizard-summary__highlight {
