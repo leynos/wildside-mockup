@@ -12,7 +12,7 @@
     "fmt": "bunx biome format --write src tests tools docs package.json biome.jsonc bunfig.toml",
     "lint": "bunx biome ci src tests tools docs",
     "check:types": "tsc --noEmit --skipLibCheck",
-    "test": "bun test --preload ./tests/setup-happy-dom.ts",
+    "test": "bun test --preload ./tests/setup-happy-dom.ts --preload ./tests/setup-snapshot-guard.ts",
     "test:a11y": "vitest --run --config vitest.a11y.config.ts",
     "test:a11y:watch": "vitest --watch --config vitest.a11y.config.ts",
     "test:e2e": "playwright test",
