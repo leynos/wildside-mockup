@@ -47,7 +47,7 @@ function CategoryScroller(): JSX.Element {
 function FeaturedWalkCard(): JSX.Element {
   return (
     <section className="explore-featured__panel">
-      <h2 className="flex items-center gap-2 text-lg font-semibold text-base-content">
+      <h2 className="section-heading text-base-content">
         <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
         Walk of the Week
       </h2>
@@ -217,7 +217,7 @@ function TrendingRoutesList(): JSX.Element {
 function CommunityPickPanel(): JSX.Element {
   return (
     <section className="explore-info__panel">
-      <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-base-content">
+      <h2 className="section-heading mb-4 text-base-content">
         <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
         Community Favourite
       </h2>

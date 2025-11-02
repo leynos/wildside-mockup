@@ -91,7 +91,7 @@ export function WalkCompleteScreen(): JSX.Element {
             </section>
 
             <section className="walk-complete__section">
-              <h2 className="mb-4 flex items-center gap-3 text-lg font-semibold text-base-100">
+              <h2 className="section-heading section-heading--spacious mb-4 text-base-100">
                 <Icon token="{icon.action.like}" className="text-pink-400" aria-hidden />
                 Favourite moments
               </h2>

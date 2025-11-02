@@ -133,7 +133,7 @@ export function WizardStepThree(): JSX.Element {
       </section>
 
       <section className="wizard-summary__panel">
-        <h3 className="flex items-center gap-2 text-lg font-semibold">
+        <h3 className="section-heading text-base-content">
           <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
           {wizardWeatherSummary.title}
         </h3>

@@ -242,6 +242,14 @@
     @apply relative flex flex-1 flex-col overflow-y-auto px-6 pb-10 pt-20;
   }
 
+  .section-heading {
+    @apply flex items-center gap-2 text-lg font-semibold;
+  }
+
+  .section-heading--spacious {
+    @apply gap-3;
+  }
+
   .interest-mix__slider {
     @apply relative flex h-5 w-full items-center;
   }

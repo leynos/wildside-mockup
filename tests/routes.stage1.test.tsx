@@ -152,6 +152,9 @@ describe("Stage 1 routed flows", () => {
       expect(metric.classList.contains("route-metric")).toBe(true);
     });
 
+    const sectionHeadings = container.querySelectorAll(".section-heading");
+    expect(sectionHeadings.length).toBeGreaterThanOrEqual(2);
+
     const appBottomNav = container.querySelector(".bottom-nav");
     expect(appBottomNav).toBeTruthy();
   });
@@ -170,6 +173,9 @@ describe("Stage 1 routed flows", () => {
 
     const surfaceOptions = container.querySelectorAll(".customize-surface__option");
     expect(surfaceOptions.length).toBeGreaterThan(0);
+
+    const sectionHeadings = container.querySelectorAll(".section-heading");
+    expect(sectionHeadings.length).toBeGreaterThan(0);
 
     const interestSliders = container.querySelectorAll(".interest-mix__slider");
     expect(interestSliders.length).toBeGreaterThan(0);
@@ -217,6 +223,9 @@ describe("Stage 2 routed flows", () => {
       node.textContent?.includes("selected"),
     );
     expect(selectionBadge?.textContent).toContain("3 selected");
+
+    const quickHeadings = container.querySelectorAll(".section-heading");
+    expect(quickHeadings.length).toBeGreaterThan(0);
 
     const routesNav = Array.from(container.querySelectorAll("button")).find(
       (btn) => btn.textContent?.trim() === "Routes",
@@ -540,6 +549,9 @@ describe("Stage 4 completion flows", () => {
     sections.forEach((section) => {
       expect(section.classList.contains("walk-complete__section")).toBe(true);
     });
+
+    const completionHeadings = container.querySelectorAll(".section-heading");
+    expect(completionHeadings.length).toBeGreaterThan(0);
 
     const rateButton = Array.from(container.querySelectorAll("button")).find((btn) =>
       btn.textContent?.includes("Rate this walk"),

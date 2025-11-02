@@ -71,7 +71,7 @@ export function WizardStepOne(): JSX.Element {
 
       <section className="rounded-3xl border border-base-300/40 bg-base-200/70 p-6">
         <header className="mb-4 flex items-center justify-between">
-          <h2 className="flex items-center gap-3 text-lg font-semibold text-base-content">
+          <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
             Interests
           </h2>

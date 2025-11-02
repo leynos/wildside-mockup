@@ -36,7 +36,7 @@ function SectionTitle({
   iconClassName?: string;
 }): JSX.Element {
   return (
-    <h2 className="mb-4 flex items-center gap-3 text-lg font-semibold text-base-content">
+    <h2 className="section-heading section-heading--spacious mb-4 text-base-content">
       <Icon token={iconToken} className={iconClassName} aria-hidden />
       {label}
     </h2>
