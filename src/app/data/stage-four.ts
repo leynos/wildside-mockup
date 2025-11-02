@@ -18,6 +18,12 @@ export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
   { id: "starred", label: "Starred", value: "3", iconToken: "{icon.object.star}" },
 ];
 
+const withBasePath = (path: string): string => {
+  const trimmedBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const trimmedPath = path.replace(/^\//, "");
+  return `${trimmedBase}/${trimmedPath}`;
+};
+
 export interface WalkCompletionMoment {
   id: string;
   name: string;
@@ -128,7 +134,7 @@ export const offlineDownloads: OfflineDownload[] = [
     subtitle: "Downloaded 3 days ago",
     size: "847 MB",
     progress: 1,
-    imageUrl: "/images/empire.png",
+    imageUrl: withBasePath("images/empire.png"),
     status: "complete",
   },
   {
@@ -137,7 +143,7 @@ export const offlineDownloads: OfflineDownload[] = [
     subtitle: "Downloaded 1 week ago",
     size: "623 MB",
     progress: 1,
-    imageUrl: "/images/goldengate.png",
+    imageUrl: withBasePath("images/goldengate.png"),
     status: "complete",
   },
   {
@@ -146,7 +152,7 @@ export const offlineDownloads: OfflineDownload[] = [
     subtitle: "Downloading • 1.2 GB",
     size: "1.2 GB",
     progress: 0.65,
-    imageUrl: "/images/londoneye.png",
+    imageUrl: withBasePath("images/londoneye.png"),
     status: "downloading",
   },
 ];
