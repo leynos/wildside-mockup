@@ -440,10 +440,10 @@ describe("Stage 3 wizard flows", () => {
     const summaryPanel = container.querySelector(".saved-summary__panel");
     expect(summaryPanel).toBeTruthy();
 
-    const metrics = container.querySelectorAll(".route-metric");
-    expect(metrics.length).toBeGreaterThanOrEqual(3);
-    metrics.forEach((metric) => {
-      expect(metric.classList.contains("route-metric")).toBe(true);
+    const summaryMeta = container.querySelectorAll(".route-summary__meta");
+    expect(summaryMeta.length).toBeGreaterThanOrEqual(3);
+    summaryMeta.forEach((item) => {
+      expect(item.classList.contains("route-summary__meta")).toBe(true);
     });
   });
 

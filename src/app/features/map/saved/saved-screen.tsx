@@ -106,15 +106,15 @@ export function SavedScreen(): JSX.Element {
                   <div className="mt-auto saved-summary__panel">
                     <h1 className="text-2xl font-semibold">{savedRoute.title}</h1>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
-                      <span className="route-metric">
+                      <span className="route-summary__meta">
                         <Icon token="{icon.object.route}" className="text-accent" aria-hidden />
                         {savedRoute.distance}
                       </span>
-                      <span className="route-metric">
+                      <span className="route-summary__meta">
                         <Icon token="{icon.object.duration}" className="text-accent" aria-hidden />
                         {savedRoute.duration}
                       </span>
-                      <span className="route-metric">
+                      <span className="route-summary__meta">
                         <Icon token="{icon.object.stops}" className="text-accent" aria-hidden />
                         {savedRoute.stopsCount} stops
                       </span>
