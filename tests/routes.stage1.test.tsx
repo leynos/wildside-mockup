@@ -558,6 +558,10 @@ describe("Stage 4 completion flows", () => {
     const dialog = document.querySelector<HTMLElement>("[role='dialog']");
     expect(dialog).toBeTruthy();
     expect(dialog?.classList.contains("dialog-surface")).toBe(true);
+
+    const searchInput = dialog?.querySelector<HTMLInputElement>(".offline-search__input");
+    expect(searchInput).toBeTruthy();
+    expect(searchInput?.classList.contains("offline-search__input")).toBe(true);
   });
 
   it("allows removing a download when managing the offline list", async () => {

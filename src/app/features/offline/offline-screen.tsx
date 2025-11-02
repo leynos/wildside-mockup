@@ -311,7 +311,7 @@ export function OfflineScreen(): JSX.Element {
             <input
               type="search"
               placeholder="Search cities or regions"
-              className="w-full rounded-xl border border-base-300/60 bg-base-200/60 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20 placeholder:text-base-content/50 focus:border-accent focus:outline-none"
+              className="offline-search__input"
             />
             <div className="flex justify-end gap-2">
               <Dialog.Close asChild>

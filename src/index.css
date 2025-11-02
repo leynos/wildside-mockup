@@ -180,6 +180,10 @@
     @apply mt-8;
   }
 
+  .offline-search__input {
+    @apply w-full rounded-xl border border-base-300/60 bg-base-200/60 px-4 py-3 text-sm text-base-content shadow-inner shadow-base-300/20 placeholder:text-base-content/50 focus:border-accent focus:outline-none;
+  }
+
   .map-viewport__tab {
     @apply flex flex-1 min-h-0 flex-col justify-end data-[state=inactive]:hidden;
   }
