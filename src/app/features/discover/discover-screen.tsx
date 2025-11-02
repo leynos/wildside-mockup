@@ -58,7 +58,7 @@ export function DiscoverScreen(): JSX.Element {
         <div className="h-full w-full bg-[radial-gradient(circle_at_top,_rgba(74,240,213,0.08),_transparent_55%),linear-gradient(135deg,_rgba(13,26,38,1)_0%,_rgba(32,52,69,0.85)_100%)]" />
       }
     >
-      <div className="relative flex flex-1 flex-col overflow-y-auto px-6 pb-10 pt-20">
+      <div className="discover-screen__content">
         <button
           type="button"
           onClick={() => navigate({ to: "/explore" })}

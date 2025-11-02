@@ -87,6 +87,8 @@ describe("Stage 1 routed flows", () => {
   it("tracks selected interests on the discover route", async () => {
     ({ mount, root } = await renderRoute("/discover"));
     const container = requireContainer(mount);
+    const contentShell = container.querySelector(".discover-screen__content");
+    expect(contentShell).toBeTruthy();
     const chips = Array.from(container.querySelectorAll("button"));
     const parksChip = chips.find((chip) => chip.textContent?.includes("Parks & Nature"));
     expect(parksChip).toBeTruthy();

@@ -238,6 +238,10 @@
     @apply mt-10 flex flex-1 flex-col;
   }
 
+  .discover-screen__content {
+    @apply relative flex flex-1 flex-col overflow-y-auto px-6 pb-10 pt-20;
+  }
+
   .route-share__trigger {
     @apply flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/70 px-4 py-2 text-sm font-medium text-base-content transition hover:bg-base-200/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
   }
