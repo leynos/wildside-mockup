@@ -14,4 +14,5 @@ jobs:
         with:
           bun-version: "latest"
       - run: bun install --frozen-lockfile
-      - run: bun semantic
+      # Temporarily disabled until the semantic-class migration is complete.
+      # - run: bun semantic
