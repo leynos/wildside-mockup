@@ -220,7 +220,7 @@
     @apply top-0 h-6 bg-gradient-to-b;
     background-image: linear-gradient(
       to bottom,
-      color-mix(in oklch, #0d1a26 70%, transparent) 0%,
+      color-mix(in oklch, var(--color-base-100) 12%, transparent) 0%,
       transparent 100%
     );
   }
@@ -229,7 +229,7 @@
     @apply bottom-0 h-10 bg-gradient-to-t;
     background-image: linear-gradient(
       to top,
-      color-mix(in oklch, #0d1a26 80%, transparent) 0%,
+      color-mix(in oklch, var(--color-base-100) 15%, transparent) 0%,
       transparent 100%
     );
   }
