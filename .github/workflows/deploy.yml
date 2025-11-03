@@ -20,15 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: "20"
-          cache: "npm"
+          bun-version: "latest"
 
-      - run: npm ci
-      - run: npm run tokens:build
+      - run: bun install --frozen-lockfile
+      - run: bun run tokens:build
       - name: Build site
-        run: npm run build
+        run: bun run build
         env:
           APP_BASE_PATH: /wildside-mockup
       - name: Add SPA fallback
