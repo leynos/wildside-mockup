@@ -62,10 +62,14 @@ export interface CommunityPick {
   saves: number;
 }
 
-const exploreImage = (file: string): string => {
-  const url = new URL(`../assets/${file}`, import.meta.url);
-  return url.href;
-};
+import heroAfterDark from "../../assets/explore/after_dark.jpg";
+import heroCoffeeCulture from "../../assets/explore/coffee_culture.jpg";
+import heroCoffeeCultureAlt from "../../assets/explore/coffee_culture2.jpg";
+import heroHarborSunset from "../../assets/explore/harbor_sunset.jpg";
+import heroHiddenGarden from "../../assets/explore/hidden_garden.jpg";
+import heroMapPreview from "../../assets/explore/map_preview.jpg";
+import heroMarket from "../../assets/explore/market.jpg";
+import heroStreetArt from "../../assets/explore/street_art2.jpg";
 
 export const exploreCategories: ExploreCategory[] = [
   {
@@ -103,7 +107,7 @@ export const featuredWalk: FeaturedWalk = {
   title: "Harbour Lights Promenade",
   description:
     "Golden hour stroll weaving past skyline overlooks, coffee pit stops, and art installations.",
-  heroImageUrl: exploreImage("harbor_sunset.jpg"),
+  heroImageUrl: heroHarborSunset,
   distance: "3.6 km",
   duration: "65 min",
   rating: 4.9,
@@ -115,7 +119,7 @@ export const popularThemes: PopularTheme[] = [
     id: "coffee-culture",
     title: "Coffee Culture",
     description: "Best cafés & roasters",
-    imageUrl: exploreImage("coffee_culture.jpg"),
+    imageUrl: heroCoffeeCulture,
     walkCount: 12,
     distanceRange: "1.5–3 km",
     rating: 4.7,
@@ -124,7 +128,7 @@ export const popularThemes: PopularTheme[] = [
     id: "secret-gardens",
     title: "Hidden Gardens",
     description: "Secret green spaces",
-    imageUrl: exploreImage("hidden_garden.jpg"),
+    imageUrl: heroHiddenGarden,
     walkCount: 8,
     distanceRange: "2–4 km",
     rating: 4.8,
@@ -133,7 +137,7 @@ export const popularThemes: PopularTheme[] = [
     id: "street-art",
     title: "Street Art Hunt",
     description: "Murals & installations",
-    imageUrl: exploreImage("street_art2.jpg"),
+    imageUrl: heroStreetArt,
     walkCount: 15,
     distanceRange: "1–5 km",
     rating: 4.6,
@@ -142,7 +146,7 @@ export const popularThemes: PopularTheme[] = [
     id: "market-hop",
     title: "Market Hopping",
     description: "Local food & crafts",
-    imageUrl: exploreImage("market.jpg"),
+    imageUrl: heroMarket,
     walkCount: 9,
     distanceRange: "2–3 km",
     rating: 4.5,
@@ -154,8 +158,8 @@ export const curatedCollections: CuratedCollection[] = [
     id: "coffee-loops",
     title: "Sunday Coffee Loops",
     description: "Perfect lazy morning routes",
-    leadImageUrl: exploreImage("coffee_culture2.jpg"),
-    mapImageUrl: exploreImage("map_preview.jpg"),
+    leadImageUrl: heroCoffeeCultureAlt,
+    mapImageUrl: heroMapPreview,
     distanceRange: "1–2 km",
     durationRange: "30–45 min",
     difficulty: "Easy",
@@ -165,8 +169,8 @@ export const curatedCollections: CuratedCollection[] = [
     id: "after-dark",
     title: "After Dark Adventures",
     description: "Safe, well-lit evening routes",
-    leadImageUrl: exploreImage("after_dark.jpg"),
-    mapImageUrl: exploreImage("map_preview.jpg"),
+    leadImageUrl: heroAfterDark,
+    mapImageUrl: heroMapPreview,
     distanceRange: "2–4 km",
     durationRange: "45–70 min",
     difficulty: "Moderate",
@@ -179,21 +183,21 @@ export const trendingRoutes: TrendingRoute[] = [
     id: "cherry-blossom",
     title: "Cherry Blossom Trail",
     subtitle: "Limited time — Spring only",
-    imageUrl: exploreImage("hidden_garden.jpg"),
+    imageUrl: heroHiddenGarden,
     trendDelta: "+127%",
   },
   {
     id: "food-truck",
     title: "Food Truck Friday",
     subtitle: "Weekly event route",
-    imageUrl: exploreImage("market.jpg"),
+    imageUrl: heroMarket,
     trendDelta: "+89%",
   },
   {
     id: "rooftop-views",
     title: "Rooftop Views Circuit",
     subtitle: "Best skyline spots",
-    imageUrl: exploreImage("harbor_sunset.jpg"),
+    imageUrl: heroHarborSunset,
     trendDelta: "+56%",
   },
 ];
@@ -201,7 +205,7 @@ export const trendingRoutes: TrendingRoute[] = [
 export const communityPick: CommunityPick = {
   id: "bookstore-bistro",
   curator: "Sarah's Pick",
-  curatorAvatarUrl: exploreImage("after_dark.jpg"),
+  curatorAvatarUrl: heroAfterDark,
   rating: 4.9,
   title: "Bookstore & Bistro Crawl",
   description: "A perfect blend of literary gems and cosy eateries through the cultural district.",
