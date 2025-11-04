@@ -89,7 +89,7 @@ export function WizardStepTwo(): JSX.Element {
       </WizardSection>
 
       <WizardSection>
-        <h2 className="mb-4 text-lg font-semibold text-base-content">Accessibility & safety</h2>
+        <h2 className="section-title">Accessibility & safety</h2>
         <div className="space-y-4">
           {accessibilityOptions.map((option) => {
             const checked = accessibility[option.id] ?? false;

@@ -151,6 +151,8 @@ describe("Stage 1 routed flows", () => {
     metrics.forEach((metric) => {
       expect(metric.classList.contains("route-metric")).toBe(true);
     });
+    const sectionTitles = container.querySelectorAll(".section-title");
+    expect(sectionTitles.length).toBeGreaterThanOrEqual(3);
 
     const sectionHeadings = container.querySelectorAll(".section-heading");
     expect(sectionHeadings.length).toBeGreaterThanOrEqual(2);
@@ -434,6 +436,9 @@ describe("Stage 3 wizard flows", () => {
 
     const summary = container.querySelector(".wizard-discovery__summary");
     expect(summary).toBeTruthy();
+
+    const wizardSectionTitles = container.querySelectorAll(".section-title");
+    expect(wizardSectionTitles.length).toBeGreaterThanOrEqual(1);
 
     const wizardSections = container.querySelectorAll(".wizard-section");
     expect(wizardSections.length).toBeGreaterThanOrEqual(2);

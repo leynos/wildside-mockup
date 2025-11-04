@@ -254,6 +254,10 @@
     @apply gap-3;
   }
 
+  .section-title {
+    @apply mb-4 text-lg font-semibold text-base-content;
+  }
+
   .interest-mix__slider {
     @apply relative flex h-5 w-full items-center;
   }

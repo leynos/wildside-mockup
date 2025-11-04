@@ -98,7 +98,7 @@ function FeaturedWalkCard(): JSX.Element {
 function PopularThemesGrid(): JSX.Element {
   return (
     <section>
-      <h2 className="mb-4 text-lg font-semibold text-base-content">Popular Themes</h2>
+      <h2 className="section-title">Popular Themes</h2>
       <div className="grid grid-cols-2 gap-4">
         {popularThemes.map((theme) => (
           <article key={theme.id} className="explore-compact__card">
@@ -134,7 +134,7 @@ function PopularThemesGrid(): JSX.Element {
 function CuratedCollectionsList(): JSX.Element {
   return (
     <section>
-      <h2 className="mb-4 text-lg font-semibold text-base-content">Curated Collections</h2>
+      <h2 className="section-title">Curated Collections</h2>
       <div className="space-y-4">
         {curatedCollections.map((collection) => (
           <article key={collection.id} className="explore-collection__card">
@@ -187,7 +187,7 @@ function CuratedCollectionsList(): JSX.Element {
 function TrendingRoutesList(): JSX.Element {
   return (
     <section>
-      <h2 className="mb-4 text-lg font-semibold text-base-content">Trending Now</h2>
+      <h2 className="section-title">Trending Now</h2>
       <div className="space-y-3">
         {trendingRoutes.map((route) => (
           <article key={route.id} className="explore-compact__card flex items-center gap-4">
