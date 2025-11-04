@@ -63,9 +63,8 @@ export interface CommunityPick {
 }
 
 const exploreImage = (file: string): string => {
-  const base = import.meta.env.BASE_URL ?? "/";
-  const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
-  return `${normalizedBase}/images/${file}`;
+  const url = new URL(`../assets/${file}`, import.meta.url);
+  return url.href;
 };
 
 export const exploreCategories: ExploreCategory[] = [
