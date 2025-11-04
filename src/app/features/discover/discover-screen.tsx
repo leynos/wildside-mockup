@@ -104,12 +104,12 @@ export function DiscoverScreen(): JSX.Element {
             disabled={isGenerating}
           >
             {isGenerating ? (
-              <span className="flex items-center justify-center gap-2">
+              <span className="inline-action-cluster">
                 <Icon token="{icon.action.loading}" className="h-5 w-5 animate-spin" aria-hidden />
                 Creating your experience...
               </span>
             ) : (
-              <span className="flex items-center justify-center gap-2">
+              <span className="inline-action-cluster">
                 Start Exploring
                 <Icon token="{icon.navigation.forward}" aria-hidden className="h-4 w-4" />
               </span>

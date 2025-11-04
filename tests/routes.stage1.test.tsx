@@ -96,6 +96,8 @@ describe("Stage 1 routed flows", () => {
     expect(interestsSection).toBeTruthy();
     const discoverCards = container.querySelectorAll(".discover-interest__card");
     expect(discoverCards.length).toBeGreaterThan(0);
+    const inlineClusters = container.querySelectorAll(".inline-action-cluster");
+    expect(inlineClusters.length).toBeGreaterThan(0);
     act(() => clickElement(parksChip));
 
     const indicator = Array.from(container.querySelectorAll<HTMLParagraphElement>("p")).find((p) =>

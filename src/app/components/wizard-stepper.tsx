@@ -11,7 +11,7 @@ export interface WizardStepperProps {
 export function WizardStepper({ activeStepId, steps }: WizardStepperProps): JSX.Element {
   return (
     <div className="pb-2">
-      <div className="flex items-center justify-center gap-2">
+      <div className="inline-action-cluster">
         {steps.map((step, index) => {
           const isActive = step.id === activeStepId;
           const isCompleted = steps.findIndex((candidate) => candidate.id === activeStepId) > index;
