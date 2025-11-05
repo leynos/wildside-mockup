@@ -602,6 +602,9 @@ describe("Stage 4 completion flows", () => {
     });
     const shareIcons = container.querySelectorAll(".walk-share__icon");
     expect(shareIcons.length).toBe(walkCompletionShareOptions.length);
+
+    const remixPanel = container.querySelector(".walk-complete__remix");
+    expect(remixPanel).toBeTruthy();
   });
 
   it("lists existing downloads on the offline manager route", async () => {

@@ -147,17 +147,20 @@ export function WalkCompleteScreen(): JSX.Element {
             </section>
 
             <section className="walk-complete__section">
-              <div className="rounded-2xl border border-purple-400/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4 text-base-content">
-                <div className="mb-3 flex items-center gap-3">
+              <div className="walk-complete__remix">
+                <div className="inline-action-cluster mb-3 items-start">
                   <Icon token="{icon.object.magic}" className="text-purple-300" aria-hidden />
-                  <h3 className="text-base font-semibold">Try a remix?</h3>
+                  <div>
+                    <h3 className="text-base font-semibold">Try a remix?</h3>
+                    <p className="text-sm text-base-content/70">
+                      Generate a new route keeping your favourite spots but discovering new hidden
+                      gems.
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm text-base-content/70">
-                  Generate a new route keeping your favourite spots but discovering new hidden gems.
-                </p>
                 <button
                   type="button"
-                  className="btn btn-primary btn-sm mt-4"
+                  className="btn btn-primary btn-sm"
                   onClick={() => navigate({ to: "/wizard/step-1" })}
                 >
                   Remix this walk
