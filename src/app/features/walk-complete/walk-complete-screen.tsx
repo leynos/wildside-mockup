@@ -74,7 +74,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="walk-complete__section walk-complete__section--compact">
+            <section className="walk-complete__section walk-complete__section--tight">
               <div className="grid grid-cols-3 gap-3">
                 {walkCompletionSecondaryStats.map((stat) => (
                   <article

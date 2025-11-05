@@ -184,12 +184,12 @@
     @apply mt-6 px-6;
   }
 
-  .walk-complete__section--compact {
-    @apply mt-4;
+  .walk-complete__section--tight {
+    @apply mt-4 px-6;
   }
 
   .walk-complete__section--spacious {
-    @apply mt-8;
+    @apply mt-8 px-6;
   }
 
   .offline-search__input {
