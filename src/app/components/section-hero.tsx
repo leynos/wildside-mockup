@@ -4,14 +4,12 @@ import type { JSX, ReactNode } from "react";
 
 import { Icon } from "./icon";
 
-type SectionHeroTone = "default" | "inverted";
 type SectionHeroBadgeTone = "accent" | "celebration";
 
 interface SectionHeroProps {
   iconToken: string;
   title: string;
   description?: ReactNode;
-  tone?: SectionHeroTone;
   badgeTone?: SectionHeroBadgeTone;
   iconAriaLabel?: string;
   iconClassName?: string;
@@ -21,19 +19,17 @@ export function SectionHero({
   iconToken,
   title,
   description,
-  tone = "default",
   badgeTone = "accent",
   iconAriaLabel,
   iconClassName,
 }: SectionHeroProps): JSX.Element {
-  const toneClass = tone === "inverted" ? "section-hero section-hero--inverted" : "section-hero";
   const badgeClass =
     badgeTone === "celebration"
       ? "section-hero__badge section-hero__badge--celebration"
       : "section-hero__badge section-hero__badge--accent";
 
   return (
-    <header className={toneClass}>
+    <header className="section-hero">
       <div className={badgeClass}>
         <Icon
           token={iconToken}

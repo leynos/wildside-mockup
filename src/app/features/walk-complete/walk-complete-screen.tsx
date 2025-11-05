@@ -33,7 +33,6 @@ export function WalkCompleteScreen(): JSX.Element {
                 iconClassName="animate-pulse"
                 title="Walk complete!"
                 description="Amazing adventure through the city · Hidden Gems Loop"
-                tone="inverted"
                 badgeTone="celebration"
               />
             </div>
