@@ -208,6 +208,10 @@
     @apply rounded-2xl border border-purple-400/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4 text-base-content;
   }
 
+  .map-panel__tablist {
+    @apply grid grid-cols-3 shrink-0 border-t border-base-300/60 bg-base-200/80;
+  }
+
   .poi-highlight {
     @apply flex items-center gap-1 rounded-full bg-base-300/60 px-2 py-0.5 text-base-content/80;
   }

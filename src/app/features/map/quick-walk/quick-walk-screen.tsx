@@ -210,7 +210,7 @@ export function QuickWalkScreen(): JSX.Element {
             </MapViewport>
           </div>
 
-          <Tabs.List className="grid grid-cols-3 shrink-0 border-t border-base-300/60 bg-base-200/80">
+          <Tabs.List className="map-panel__tablist">
             <Tabs.Trigger value="map" className={tabTriggerClass}>
               Explore
             </Tabs.Trigger>

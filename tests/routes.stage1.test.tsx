@@ -268,6 +268,9 @@ describe("Stage 2 routed flows", () => {
 
     const mapHandles = container.querySelectorAll(".map-panel__handle");
     expect(mapHandles.length).toBeGreaterThan(0);
+
+    const tablist = container.querySelector(".map-panel__tablist");
+    expect(tablist).toBeTruthy();
   });
 
   it("launches the wizard from the quick walk magic wand", async () => {
