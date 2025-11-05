@@ -175,7 +175,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     key={option.id}
                     type="button"
                     aria-label={option.label}
-                    className={`flex h-12 w-12 items-center justify-center rounded-full ${option.accentClass} text-white shadow`}
+                    className={`walk-share__icon ${option.accentClass}`}
                   >
                     <Icon token={option.iconToken} aria-hidden />
                   </button>

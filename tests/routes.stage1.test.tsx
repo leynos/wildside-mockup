@@ -600,6 +600,8 @@ describe("Stage 4 completion flows", () => {
     shareOptions.forEach((option) => {
       expect(option.classList.contains("walk-share__option")).toBe(true);
     });
+    const shareIcons = container.querySelectorAll(".walk-share__icon");
+    expect(shareIcons.length).toBe(walkCompletionShareOptions.length);
   });
 
   it("lists existing downloads on the offline manager route", async () => {

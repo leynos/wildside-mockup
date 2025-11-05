@@ -200,6 +200,10 @@
     @apply flex items-center gap-2 rounded-full border border-base-300/60 px-3 py-1 text-sm text-base-content/80;
   }
 
+  .walk-share__icon {
+    @apply flex h-12 w-12 items-center justify-center rounded-full text-white shadow;
+  }
+
   .poi-highlight {
     @apply flex items-center gap-1 rounded-full bg-base-300/60 px-2 py-0.5 text-base-content/80;
   }
