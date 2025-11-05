@@ -64,12 +64,12 @@ export function WalkCompleteScreen(): JSX.Element {
             <section className="walk-complete__section">
               <div className="grid gap-4 sm:grid-cols-2">
                 {walkCompletionPrimaryStats.map((stat) => (
-                  <article key={stat.id} className="walk-complete__stat-card">
-                    <div className="mb-2 flex items-center gap-3 text-base-300">
+                  <article key={stat.id} className="walk-complete__stat-card text-base-content">
+                    <div className="mb-2 flex items-center gap-3 text-base-content/70">
                       <Icon token={stat.iconToken} className="text-accent" aria-hidden />
                       <span className="text-sm font-medium">{stat.label}</span>
                     </div>
-                    <p className="text-2xl font-semibold text-base-100">{stat.value}</p>
+                    <p className="text-2xl font-semibold">{stat.value}</p>
                   </article>
                 ))}
               </div>
@@ -83,15 +83,15 @@ export function WalkCompleteScreen(): JSX.Element {
                     className="rounded-2xl border border-base-300/60 bg-base-200/30 p-4 text-center"
                   >
                     <Icon token={stat.iconToken} className="mb-2 text-lg text-accent" aria-hidden />
-                    <p className="text-lg font-semibold text-base-100">{stat.value}</p>
-                    <p className="text-xs text-base-300">{stat.label}</p>
+                    <p className="text-lg font-semibold text-base-content">{stat.value}</p>
+                    <p className="text-xs text-base-content/70">{stat.label}</p>
                   </article>
                 ))}
               </div>
             </section>
 
             <section className="walk-complete__section">
-              <h2 className="section-heading section-heading--spacious mb-4 text-base-100">
+              <h2 className="section-heading section-heading--spacious mb-4 text-base-content">
                 <Icon token="{icon.action.like}" className="text-pink-400" aria-hidden />
                 Favourite moments
               </h2>
@@ -106,9 +106,9 @@ export function WalkCompleteScreen(): JSX.Element {
                       alt={moment.name}
                       className="h-12 w-12 flex-shrink-0 rounded-lg object-cover"
                     />
-                    <div className="flex-1 text-left">
-                      <p className="font-semibold text-base-100">{moment.name}</p>
-                      <p className="text-sm text-base-300">{moment.description}</p>
+                    <div className="flex-1 text-left text-base-content">
+                      <p className="font-semibold">{moment.name}</p>
+                      <p className="text-sm text-base-content/70">{moment.description}</p>
                     </div>
                     <Icon token="{icon.object.star}" className="text-amber-300" aria-hidden />
                   </article>
@@ -148,12 +148,12 @@ export function WalkCompleteScreen(): JSX.Element {
             </section>
 
             <section className="walk-complete__section">
-              <div className="rounded-2xl border border-purple-400/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4">
+              <div className="rounded-2xl border border-purple-400/30 bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4 text-base-content">
                 <div className="mb-3 flex items-center gap-3">
                   <Icon token="{icon.object.magic}" className="text-purple-300" aria-hidden />
-                  <h3 className="text-base font-semibold text-base-100">Try a remix?</h3>
+                  <h3 className="text-base font-semibold">Try a remix?</h3>
                 </div>
-                <p className="text-sm text-base-300">
+                <p className="text-sm text-base-content/70">
                   Generate a new route keeping your favourite spots but discovering new hidden gems.
                 </p>
                 <button
@@ -167,7 +167,7 @@ export function WalkCompleteScreen(): JSX.Element {
             </section>
 
             <section className="walk-complete__section walk-complete__section--spacious pb-12">
-              <h3 className="mb-4 text-center text-base font-semibold text-base-100">
+              <h3 className="mb-4 text-center text-base font-semibold text-base-content">
                 Share your adventure
               </h3>
               <div className="flex justify-center gap-4">
