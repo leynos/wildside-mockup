@@ -242,6 +242,11 @@
     @apply text-xs text-base-content/70;
   }
 
+  .map-panel__handle {
+    @apply flex justify-center pb-3 pt-3;
+    background-color: color-mix(in oklch, rgba(0, 0, 0, 0.9) 80%, var(--color-base-100));
+  }
+
   .discover-interests__section {
     @apply mt-10 flex flex-1 flex-col;
   }

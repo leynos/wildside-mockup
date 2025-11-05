@@ -151,7 +151,7 @@ export function ItineraryScreen(): JSX.Element {
             <Tabs.Content value="stops" className="map-overlay">
               <div className="pointer-events-none px-6 pb-6">
                 <div className="map-panel map-panel--stacked max-h-[60vh]">
-                  <div className="flex justify-center bg-base-900/70 pb-3 pt-3">
+                  <div className="map-panel__handle">
                     <button
                       type="button"
                       className={stickyHandleClass}

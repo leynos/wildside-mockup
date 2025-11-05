@@ -265,6 +265,9 @@ describe("Stage 2 routed flows", () => {
     expect(notesPanel).toBeTruthy();
     expect(notesPanel?.classList.contains("map-panel")).toBe(true);
     expect(notesPanel?.classList.contains("map-panel--scroll")).toBe(true);
+
+    const mapHandles = container.querySelectorAll(".map-panel__handle");
+    expect(mapHandles.length).toBeGreaterThan(0);
   });
 
   it("launches the wizard from the quick walk magic wand", async () => {
