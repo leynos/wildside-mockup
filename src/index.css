@@ -259,6 +259,10 @@
     background-color: color-mix(in oklch, rgba(0, 0, 0, 0.9) 80%, var(--color-base-100));
   }
 
+  .map-panel__handle.bg-transparent {
+    background-color: transparent;
+  }
+
   .discover-interests__section {
     @apply mt-10 flex flex-1 flex-col;
   }
