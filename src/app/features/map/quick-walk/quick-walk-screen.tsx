@@ -1,5 +1,6 @@
 /** @file Quick map generator flow with interactive MapLibre canvas and tabs. */
 
+import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { type JSX, useEffect, useMemo, useState } from "react";
@@ -25,6 +26,13 @@ const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
 
 const panelHandleClass = "mx-auto mb-4 block h-2 w-12 rounded-full bg-base-300/70";
+
+type MapViewportTabProps = TabsContentProps;
+
+function MapViewportTab({ className, ...props }: MapViewportTabProps): JSX.Element {
+  const composedClassName = className ? `map-viewport__tab ${className}` : "map-viewport__tab";
+  return <Tabs.Content {...props} className={composedClassName} />;
+}
 
 export function QuickWalkScreen(): JSX.Element {
   const [duration, setDuration] = useState<number>(quickWalkConfig.defaultDuration);
@@ -88,7 +96,7 @@ export function QuickWalkScreen(): JSX.Element {
               gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
               containerTestId="quick-walk-map-container"
             >
-              <Tabs.Content value="map" forceMount className="map-viewport__tab">
+              <MapViewportTab value="map" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
                   <div className="quick-walk__panel">
                     <button
@@ -154,9 +162,9 @@ export function QuickWalkScreen(): JSX.Element {
                     </section>
                   </div>
                 </div>
-              </Tabs.Content>
+              </MapViewportTab>
 
-              <Tabs.Content value="stops" forceMount className="map-viewport__tab">
+              <MapViewportTab value="stops" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
                   <div
                     className="map-panel map-panel--stacked max-h-[53vh]"
@@ -180,9 +188,9 @@ export function QuickWalkScreen(): JSX.Element {
                     />
                   </div>
                 </div>
-              </Tabs.Content>
+              </MapViewportTab>
 
-              <Tabs.Content value="notes" forceMount className="map-viewport__tab">
+              <MapViewportTab value="notes" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
                   <div
                     className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm text-base-content"
@@ -206,7 +214,7 @@ export function QuickWalkScreen(): JSX.Element {
                     </ul>
                   </div>
                 </div>
-              </Tabs.Content>
+              </MapViewportTab>
             </MapViewport>
           </div>
 
