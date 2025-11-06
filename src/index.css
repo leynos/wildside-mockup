@@ -364,7 +364,7 @@
   }
 
   .section-hero__icon {
-    @apply text-3xl;
+    @apply text-4xl;
   }
 
   .section-hero__title {
