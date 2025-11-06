@@ -16,6 +16,12 @@ import {
 } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
 
+const secondaryStatIconTone: Record<string, string> = {
+  calories: "text-orange-400 bg-orange-400/15",
+  stops: "text-amber-300 bg-amber-300/15",
+  starred: "text-pink-400 bg-pink-400/15",
+};
+
 type WalkCompleteSectionProps = {
   readonly spacing?: "default" | "tight" | "spacious";
   readonly className?: string;
@@ -105,7 +111,11 @@ export function WalkCompleteScreen(): JSX.Element {
                     key={stat.id}
                     className="rounded-2xl border border-base-300/60 bg-base-200/30 p-4 text-center"
                   >
-                    <Icon token={stat.iconToken} className="mb-2 text-lg text-accent" aria-hidden />
+                    <Icon
+                      token={stat.iconToken}
+                      className={`walk-complete__secondary-icon ${secondaryStatIconTone[stat.id] ?? "text-accent bg-accent/15"}`}
+                      aria-hidden
+                    />
                     <p className="text-lg font-semibold text-base-content">{stat.value}</p>
                     <p className="text-xs text-base-content/70">{stat.label}</p>
                   </article>
