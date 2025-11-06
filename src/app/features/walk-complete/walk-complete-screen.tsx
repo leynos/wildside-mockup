@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Toast from "@radix-ui/react-toast";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, type ReactNode, useState } from "react";
 
 import { Icon } from "../../components/icon";
 import { SectionHero } from "../../components/section-hero";
@@ -15,6 +15,30 @@ import {
   walkCompletionShareOptions,
 } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
+
+type WalkCompleteSectionProps = {
+  readonly spacing?: "default" | "tight" | "spacious";
+  readonly className?: string;
+  readonly children: ReactNode;
+};
+
+function WalkCompleteSection({
+  spacing = "default",
+  className,
+  children,
+}: WalkCompleteSectionProps): JSX.Element {
+  const spacingClasses: Record<NonNullable<WalkCompleteSectionProps["spacing"]>, string> = {
+    default: "walk-complete__section",
+    tight: "walk-complete__section walk-complete__section--tight",
+    spacious: "walk-complete__section walk-complete__section--spacious",
+  };
+
+  const composedClassName = className
+    ? `${spacingClasses[spacing]} ${className}`
+    : spacingClasses[spacing];
+
+  return <section className={composedClassName}>{children}</section>;
+}
 
 export function WalkCompleteScreen(): JSX.Element {
   const navigate = useNavigate();
@@ -60,7 +84,7 @@ export function WalkCompleteScreen(): JSX.Element {
               </div>
             </section>
 
-            <section className="walk-complete__section">
+            <WalkCompleteSection>
               <div className="grid gap-4 sm:grid-cols-2">
                 {walkCompletionPrimaryStats.map((stat) => (
                   <article key={stat.id} className="walk-complete__stat-card text-base-content">
@@ -72,9 +96,9 @@ export function WalkCompleteScreen(): JSX.Element {
                   </article>
                 ))}
               </div>
-            </section>
+            </WalkCompleteSection>
 
-            <section className="walk-complete__section walk-complete__section--tight">
+            <WalkCompleteSection spacing="tight">
               <div className="grid grid-cols-3 gap-3">
                 {walkCompletionSecondaryStats.map((stat) => (
                   <article
@@ -87,9 +111,9 @@ export function WalkCompleteScreen(): JSX.Element {
                   </article>
                 ))}
               </div>
-            </section>
+            </WalkCompleteSection>
 
-            <section className="walk-complete__section">
+            <WalkCompleteSection>
               <h2 className="section-heading section-heading--spacious mb-4 text-base-content">
                 <Icon token="{icon.action.like}" className="text-pink-400" aria-hidden />
                 Favourite moments
@@ -113,9 +137,9 @@ export function WalkCompleteScreen(): JSX.Element {
                   </article>
                 ))}
               </div>
-            </section>
+            </WalkCompleteSection>
 
-            <section className="walk-complete__section">
+            <WalkCompleteSection>
               <div className="space-y-3">
                 <button
                   type="button"
@@ -144,9 +168,9 @@ export function WalkCompleteScreen(): JSX.Element {
                   </button>
                 </div>
               </div>
-            </section>
+            </WalkCompleteSection>
 
-            <section className="walk-complete__section">
+            <WalkCompleteSection>
               <div className="walk-complete__remix">
                 <div className="inline-action-cluster mb-3 items-start">
                   <Icon token="{icon.object.magic}" className="text-purple-300" aria-hidden />
@@ -166,9 +190,9 @@ export function WalkCompleteScreen(): JSX.Element {
                   Remix this walk
                 </button>
               </div>
-            </section>
+            </WalkCompleteSection>
 
-            <section className="walk-complete__section walk-complete__section--spacious pb-12">
+            <WalkCompleteSection spacing="spacious" className="pb-12">
               <h3 className="mb-4 text-center text-base font-semibold text-base-content">
                 Share your adventure
               </h3>
@@ -184,7 +208,7 @@ export function WalkCompleteScreen(): JSX.Element {
                   </button>
                 ))}
               </div>
-            </section>
+            </WalkCompleteSection>
           </main>
         </div>
       </MobileShell>

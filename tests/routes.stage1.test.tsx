@@ -569,6 +569,9 @@ describe("Stage 4 completion flows", () => {
       expect(section.classList.contains("walk-complete__section")).toBe(true);
     });
 
+    expect(container.querySelector(".walk-complete__section--tight")).toBeTruthy();
+    expect(container.querySelector(".walk-complete__section--spacious")).toBeTruthy();
+
     const completionHeadings = container.querySelectorAll(".section-heading");
     expect(completionHeadings.length).toBeGreaterThan(0);
 
