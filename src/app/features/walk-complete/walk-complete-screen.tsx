@@ -17,9 +17,9 @@ import {
 import { MobileShell } from "../../layout/mobile-shell";
 
 const secondaryStatIconTone: Record<string, string> = {
-  calories: "text-orange-400 bg-orange-400/15",
-  stops: "text-amber-300 bg-amber-300/15",
-  starred: "text-pink-400 bg-pink-400/15",
+  calories: "text-orange-400",
+  stops: "text-amber-300",
+  starred: "text-pink-400",
 };
 
 type WalkCompleteSectionProps = {
@@ -113,7 +113,7 @@ export function WalkCompleteScreen(): JSX.Element {
                   >
                     <Icon
                       token={stat.iconToken}
-                      className={`walk-complete__secondary-icon ${secondaryStatIconTone[stat.id] ?? "text-accent bg-accent/15"}`}
+                      className={`walk-complete__secondary-icon ${secondaryStatIconTone[stat.id] ?? "text-accent"}`}
                       aria-hidden
                     />
                     <p className="text-lg font-semibold text-base-content">{stat.value}</p>
