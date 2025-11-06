@@ -34,6 +34,8 @@ export function SectionHero({
         <Icon
           token={iconToken}
           className={iconClassName ? `section-hero__icon ${iconClassName}` : "section-hero__icon"}
+          width={48}
+          height={48}
           aria-hidden={iconAriaLabel == null}
         />
         {iconAriaLabel != null ? <span className="sr-only">{iconAriaLabel}</span> : null}
