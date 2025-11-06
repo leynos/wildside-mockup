@@ -2,7 +2,7 @@
 
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
-import type { JSX } from "react";
+import type { JSX, ReactNode } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
@@ -18,6 +18,20 @@ import {
 } from "../../data/explore";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+
+type RouteMetricProps = {
+  readonly iconToken: string;
+  readonly children: ReactNode;
+};
+
+function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Element {
+  return (
+    <span className="route-metric">
+      <Icon token={iconToken} aria-hidden className="h-4 w-4" />
+      {children}
+    </span>
+  );
+}
 
 function CategoryScroller(): JSX.Element {
   return (
@@ -242,18 +256,9 @@ function CommunityPickPanel(): JSX.Element {
       <h3 className="text-base font-semibold text-base-content">{communityPick.title}</h3>
       <p className="mt-2 text-sm text-base-content/70">{communityPick.description}</p>
       <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-base-content/60">
-        <span className="route-metric">
-          <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
-          {communityPick.distance}
-        </span>
-        <span className="route-metric">
-          <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
-          {communityPick.duration}
-        </span>
-        <span className="route-metric">
-          <Icon token="{icon.action.save}" aria-hidden className="h-4 w-4" />
-          {communityPick.saves} saves
-        </span>
+        <RouteMetric iconToken="{icon.object.route}">{communityPick.distance}</RouteMetric>
+        <RouteMetric iconToken="{icon.object.duration}">{communityPick.duration}</RouteMetric>
+        <RouteMetric iconToken="{icon.action.save}">{communityPick.saves} saves</RouteMetric>
       </div>
     </section>
   );
