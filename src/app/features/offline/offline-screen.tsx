@@ -114,7 +114,7 @@ export function OfflineScreen(): JSX.Element {
               </div>
               <div className="space-y-3">
                 <div>
-                  <div className="mb-1 flex items-center justify-between">
+                  <div className="split-row">
                     <OfflineDownloadMeta as="span">Used</OfflineDownloadMeta>
                     <OfflineDownloadMeta as="span" className="font-semibold text-base-content">
                       2.8 GB of 8 GB
@@ -228,7 +228,7 @@ export function OfflineScreen(): JSX.Element {
                         className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
                       />
                       <div className="flex-1">
-                        <div className="mb-1 flex items-center justify-between">
+                        <div className="split-row">
                           <div>
                             <h3 className="font-semibold text-base-content">
                               {entry.download.title}
