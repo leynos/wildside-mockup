@@ -365,6 +365,11 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const overlayPanels = container.querySelectorAll(".map-overlay");
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
+    const routeMetaChips = container.querySelectorAll(".route-summary__meta");
+    expect(routeMetaChips.length).toBeGreaterThanOrEqual(3);
+    routeMetaChips.forEach((chip) => {
+      expect(chip.classList.contains("route-summary__meta")).toBe(true);
+    });
     const shareTrigger = Array.from(container.querySelectorAll("button")).find(
       (btn) => btn.getAttribute("aria-label") === "Share",
     );

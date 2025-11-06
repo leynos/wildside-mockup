@@ -4,7 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, type ReactNode, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
@@ -19,6 +19,20 @@ const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
 
 const stickyHandleClass = "mx-auto block h-2 w-12 rounded-full bg-base-300/70";
+
+type RouteSummaryMetaProps = {
+  readonly iconToken: string;
+  readonly children: ReactNode;
+};
+
+function RouteSummaryMeta({ iconToken, children }: RouteSummaryMetaProps): JSX.Element {
+  return (
+    <span className="route-summary__meta">
+      <Icon token={iconToken} className="text-accent" aria-hidden />
+      {children}
+    </span>
+  );
+}
 
 type MapOverlayProps = TabsContentProps;
 
@@ -110,18 +124,15 @@ export function SavedScreen(): JSX.Element {
                   <div className="mt-auto saved-summary__panel">
                     <h1 className="text-2xl font-semibold">{savedRoute.title}</h1>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
-                      <span className="route-summary__meta">
-                        <Icon token="{icon.object.route}" className="text-accent" aria-hidden />
+                      <RouteSummaryMeta iconToken="{icon.object.route}">
                         {savedRoute.distance}
-                      </span>
-                      <span className="route-summary__meta">
-                        <Icon token="{icon.object.duration}" className="text-accent" aria-hidden />
+                      </RouteSummaryMeta>
+                      <RouteSummaryMeta iconToken="{icon.object.duration}">
                         {savedRoute.duration}
-                      </span>
-                      <span className="route-summary__meta">
-                        <Icon token="{icon.object.stops}" className="text-accent" aria-hidden />
+                      </RouteSummaryMeta>
+                      <RouteSummaryMeta iconToken="{icon.object.stops}">
                         {savedRoute.stopsCount} stops
-                      </span>
+                      </RouteSummaryMeta>
                     </div>
                   </div>
                 </div>
