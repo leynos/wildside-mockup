@@ -162,7 +162,7 @@ export function QuickWalkScreen(): JSX.Element {
                     className="map-panel map-panel--stacked max-h-[53vh]"
                     data-testid="quick-walk-stops-panel"
                   >
-                    <div className="map-panel__handle">
+                    <div className="map-panel__handle bg-transparent">
                       <button
                         type="button"
                         onClick={handleDismissPanels}
