@@ -283,7 +283,7 @@ export function CustomizeScreen(): JSX.Element {
         <div className="h-full w-full bg-gradient-to-b from-base-300/40 via-transparent to-transparent" />
       }
     >
-      <div className="flex h-full flex-col">
+      <div className="screen-stack">
         <AppHeader
           title="Customise Route"
           subtitle="Fine-tune your walking adventure"

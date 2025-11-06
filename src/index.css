@@ -180,6 +180,10 @@
     @apply flex items-center justify-center gap-2;
   }
 
+  .screen-stack {
+    @apply flex h-full flex-col;
+  }
+
   .walk-complete__section {
     @apply mt-6 px-6;
   }

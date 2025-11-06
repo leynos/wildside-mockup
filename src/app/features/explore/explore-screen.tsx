@@ -269,7 +269,7 @@ export function ExploreScreen(): JSX.Element {
 
   return (
     <MobileShell>
-      <div className="flex h-full flex-col">
+      <div className="screen-stack">
         <AppHeader
           title="Discover"
           subtitle="Explore curated walks & hidden gems"

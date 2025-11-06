@@ -27,7 +27,7 @@ export function WizardLayout({
 }: WizardLayoutProps): JSX.Element {
   return (
     <MobileShell tone="dark">
-      <div className="flex h-full flex-col">
+      <div className="screen-stack">
         <AppHeader
           variant="wizard"
           title="Walk Wizard"

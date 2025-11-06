@@ -80,7 +80,7 @@ export function OfflineScreen(): JSX.Element {
   return (
     <MobileShell>
       <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-        <div className="flex h-full flex-col">
+        <div className="screen-stack">
           <AppHeader
             title="Offline Maps"
             subtitle="Manage downloads and smart updates"

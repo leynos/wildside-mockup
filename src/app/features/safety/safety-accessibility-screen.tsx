@@ -32,7 +32,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
 
   return (
     <MobileShell tone="dark">
-      <div className="flex h-full flex-col">
+      <div className="screen-stack">
         <header className="px-6 pt-16 pb-6 text-base-100">
           <div className="mb-4 flex items-center gap-4">
             <button

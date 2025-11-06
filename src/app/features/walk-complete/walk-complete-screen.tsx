@@ -48,7 +48,7 @@ export function WalkCompleteScreen(): JSX.Element {
   return (
     <Toast.Provider swipeDirection="right">
       <MobileShell tone="dark">
-        <div className="relative flex h-full flex-col">
+        <div className="relative screen-stack">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(74,240,213,0.12),_transparent_55%)]" />
           <main className="relative z-10 flex-1 overflow-y-auto pb-28">
             <div className="px-6 pt-16 pb-8">
