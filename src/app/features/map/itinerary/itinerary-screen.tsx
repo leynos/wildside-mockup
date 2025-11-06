@@ -26,6 +26,20 @@ function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Element {
   return <Tabs.Content {...props} className={composedClassName} />;
 }
 
+type MapRouteStatProps = {
+  readonly label: string;
+  readonly value: string | number;
+};
+
+function MapRouteStat({ label, value }: MapRouteStatProps): JSX.Element {
+  return (
+    <span className="map-route__stat">
+      <p className="map-route__stat-value">{value}</p>
+      {label}
+    </span>
+  );
+}
+
 export function ItineraryScreen(): JSX.Element {
   const navigate = useNavigate();
   const [isFavourite, setIsFavourite] = useState(false);
@@ -54,24 +68,9 @@ export function ItineraryScreen(): JSX.Element {
                     </button>
                     <div className="map-route__meta">
                       <div className="flex items-center gap-4">
-                        <span className="text-center">
-                          <p className="text-lg font-semibold text-accent">
-                            {waterfrontDiscoveryRoute.distance}
-                          </p>
-                          Distance
-                        </span>
-                        <span className="text-center">
-                          <p className="text-lg font-semibold text-accent">
-                            {waterfrontDiscoveryRoute.duration}
-                          </p>
-                          Walking
-                        </span>
-                        <span className="text-center">
-                          <p className="text-lg font-semibold text-accent">
-                            {waterfrontDiscoveryRoute.stopsCount}
-                          </p>
-                          Stops
-                        </span>
+                        <MapRouteStat label="Distance" value={waterfrontDiscoveryRoute.distance} />
+                        <MapRouteStat label="Walking" value={waterfrontDiscoveryRoute.duration} />
+                        <MapRouteStat label="Stops" value={waterfrontDiscoveryRoute.stopsCount} />
                       </div>
                     </div>
                     <button

@@ -325,6 +325,11 @@ describe("Stage 2 routed flows", () => {
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
     const metaPanel = container.querySelector(".map-route__meta");
     expect(metaPanel).toBeTruthy();
+    const routeStats = container.querySelectorAll(".map-route__stat");
+    expect(routeStats.length).toBeGreaterThanOrEqual(3);
+    routeStats.forEach((stat) => {
+      expect(stat.classList.contains("map-route__stat")).toBe(true);
+    });
 
     const favouriteButton = container.querySelector<HTMLButtonElement>(
       "button[aria-pressed='false']",

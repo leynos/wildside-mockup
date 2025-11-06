@@ -433,6 +433,14 @@
     @apply rounded-3xl border border-base-300/60 bg-base-100/90 p-5 text-base-content shadow-2xl backdrop-blur;
   }
 
+  .map-route__stat {
+    @apply text-center text-sm text-base-content/70;
+  }
+
+  .map-route__stat-value {
+    @apply text-lg font-semibold text-accent;
+  }
+
   .dialog-surface {
     @apply fixed inset-0 m-auto flex h-fit w-80 flex-col gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-6 shadow-2xl;
   }
