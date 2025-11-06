@@ -1,6 +1,7 @@
 /** @file Saved walk detail screen with MapLibre map and tabbed layout. */
 
 import * as Dialog from "@radix-ui/react-dialog";
+import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useState } from "react";
@@ -18,6 +19,13 @@ const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
 
 const stickyHandleClass = "mx-auto block h-2 w-12 rounded-full bg-base-300/70";
+
+type MapOverlayProps = TabsContentProps;
+
+function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Element {
+  const composedClassName = className ? `map-overlay ${className}` : "map-overlay";
+  return <Tabs.Content {...props} className={composedClassName} />;
+}
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
@@ -51,7 +59,7 @@ export function SavedScreen(): JSX.Element {
       <main className="map-shell__main">
         <Tabs.Root value={activeTab} onValueChange={setActiveTab} className="map-shell__pane">
           <div className="map-shell__viewport">
-            <Tabs.Content value="map" forceMount className="map-overlay">
+            <MapOverlay value="map" forceMount>
               <MapViewport
                 map={<WildsideMap />}
                 gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
@@ -118,9 +126,9 @@ export function SavedScreen(): JSX.Element {
                   </div>
                 </div>
               </MapViewport>
-            </Tabs.Content>
+            </MapOverlay>
 
-            <Tabs.Content value="stops" className="map-overlay">
+            <MapOverlay value="stops">
               <div className="pointer-events-none px-6 pb-6">
                 <div className="map-panel map-panel--stacked max-h-[60vh]">
                   <div className="map-panel__handle">
@@ -138,9 +146,9 @@ export function SavedScreen(): JSX.Element {
                   <div className="map-overlay__fade map-overlay__fade--bottom" aria-hidden="true" />
                 </div>
               </div>
-            </Tabs.Content>
+            </MapOverlay>
 
-            <Tabs.Content value="notes" className="map-overlay">
+            <MapOverlay value="notes">
               <div className="pointer-events-none px-6 pb-6">
                 <div className="map-panel map-panel--scroll max-h-[60vh] space-y-6 p-5 text-sm text-base-content">
                   <div className="grid grid-cols-4 gap-4 text-base-content">
@@ -164,7 +172,7 @@ export function SavedScreen(): JSX.Element {
                   </ul>
                 </div>
               </div>
-            </Tabs.Content>
+            </MapOverlay>
           </div>
 
           <Tabs.List className="map-panel__tablist">
