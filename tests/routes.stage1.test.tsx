@@ -622,6 +622,9 @@ describe("Stage 4 completion flows", () => {
       node.textContent?.includes("Downloaded areas"),
     );
     expect(header).toBeTruthy();
+
+    const metadata = container.querySelectorAll(".offline-download__meta");
+    expect(metadata.length).toBeGreaterThanOrEqual(5);
   });
 
   it("renders offline storage overview with semantic class", async () => {

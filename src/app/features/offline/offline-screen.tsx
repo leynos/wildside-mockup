@@ -2,7 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, type ReactNode, useState } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
@@ -17,6 +17,25 @@ import {
 } from "../../data/stage-four";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+
+type OfflineDownloadMetaProps = {
+  readonly as?: "p" | "span" | "div";
+  readonly className?: string;
+  readonly children: ReactNode;
+};
+
+function OfflineDownloadMeta({
+  as = "p",
+  className,
+  children,
+}: OfflineDownloadMetaProps): JSX.Element {
+  const Tag = as;
+  const composedClassName = className
+    ? `offline-download__meta ${className}`
+    : "offline-download__meta";
+
+  return <Tag className={composedClassName}>{children}</Tag>;
+}
 
 export function OfflineScreen(): JSX.Element {
   const navigate = useNavigate();
@@ -90,16 +109,16 @@ export function OfflineScreen(): JSX.Element {
                 <Icon token="{icon.action.download}" className="text-accent" aria-hidden />
                 <div>
                   <p className="text-sm font-medium text-base-content">Storage overview</p>
-                  <p className="offline-download__meta">Auto-delete unused maps after 30 days</p>
+                  <OfflineDownloadMeta>Auto-delete unused maps after 30 days</OfflineDownloadMeta>
                 </div>
               </div>
               <div className="space-y-3">
                 <div>
                   <div className="mb-1 flex items-center justify-between">
-                    <span className="offline-download__meta">Used</span>
-                    <span className="offline-download__meta font-semibold text-base-content">
+                    <OfflineDownloadMeta as="span">Used</OfflineDownloadMeta>
+                    <OfflineDownloadMeta as="span" className="font-semibold text-base-content">
                       2.8 GB of 8 GB
-                    </span>
+                    </OfflineDownloadMeta>
                   </div>
                   <div className="h-2 w-full rounded-full bg-base-300/60">
                     <div className="h-2 w-[35%] rounded-full bg-accent" />
@@ -163,7 +182,7 @@ export function OfflineScreen(): JSX.Element {
               <header className="flex items-center justify-between">
                 <div>
                   <h2 className="text-base font-semibold text-base-content">Downloaded areas</h2>
-                  <p className="offline-download__meta">Manage maps for offline navigation</p>
+                  <OfflineDownloadMeta>Manage maps for offline navigation</OfflineDownloadMeta>
                 </div>
                 <Button
                   size="sm"
@@ -214,9 +233,9 @@ export function OfflineScreen(): JSX.Element {
                             <h3 className="font-semibold text-base-content">
                               {entry.download.title}
                             </h3>
-                            <p className="offline-download__meta">
+                            <OfflineDownloadMeta>
                               {entry.download.subtitle} • {entry.download.size}
-                            </p>
+                            </OfflineDownloadMeta>
                           </div>
                           {entry.download.status === "complete" ? (
                             <span className="badge badge-success badge-sm">Complete</span>
@@ -233,9 +252,9 @@ export function OfflineScreen(): JSX.Element {
                               style={{ width: `${Math.round(entry.download.progress * 100)}%` }}
                             />
                           </div>
-                          <span className="offline-download__meta">
+                          <OfflineDownloadMeta as="span">
                             {Math.round(entry.download.progress * 100)}%
-                          </span>
+                          </OfflineDownloadMeta>
                         </div>
                       </div>
                     </article>
@@ -247,7 +266,7 @@ export function OfflineScreen(): JSX.Element {
                     >
                       <div>
                         <p className="font-semibold">{entry.download.title} deleted</p>
-                        <p className="offline-download__meta">Tap undo to restore this map.</p>
+                        <OfflineDownloadMeta>Tap undo to restore this map.</OfflineDownloadMeta>
                       </div>
                       <button
                         type="button"
