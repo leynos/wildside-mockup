@@ -184,6 +184,14 @@
     @apply flex h-full flex-col;
   }
 
+  .header-nav-button {
+    @apply flex h-full w-full items-center justify-center text-base-content;
+  }
+
+  .screen-scroll {
+    @apply flex-1 overflow-y-auto px-6 pb-28;
+  }
+
   .walk-complete__section {
     @apply mt-6 px-6;
   }

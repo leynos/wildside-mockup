@@ -291,7 +291,7 @@ export function CustomizeScreen(): JSX.Element {
             <button
               type="button"
               aria-label="Back to map"
-              className="flex h-full w-full items-center justify-center"
+              className="header-nav-button"
               onClick={() => navigate({ to: "/map/quick" })}
             >
               <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
@@ -303,7 +303,7 @@ export function CustomizeScreen(): JSX.Element {
             </button>
           }
         />
-        <main className="flex-1 overflow-y-auto px-6 pb-6 pt-4">
+        <main className="screen-scroll pb-6 pt-4">
           {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => {
             const currentValue = sliderValues[id] ?? min;
             return (

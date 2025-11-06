@@ -297,7 +297,7 @@ export function ExploreScreen(): JSX.Element {
             />
           </div>
         </AppHeader>
-        <main className="flex-1 overflow-y-auto px-6 pb-28">
+        <main className="screen-scroll">
           <div className="space-y-8">
             <CategoryScroller />
             <FeaturedWalkCard />

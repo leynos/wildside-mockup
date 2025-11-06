@@ -88,7 +88,7 @@ export function OfflineScreen(): JSX.Element {
               <button
                 type="button"
                 aria-label="Back to map"
-                className="flex h-full w-full items-center justify-center"
+                className="header-nav-button"
                 onClick={() => navigate({ to: "/map/quick" })}
               >
                 <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
@@ -103,7 +103,7 @@ export function OfflineScreen(): JSX.Element {
             }
           />
 
-          <main className="flex-1 space-y-6 overflow-y-auto px-6 pb-28 pt-6">
+          <main className="screen-scroll space-y-6 pt-6">
             <section className="offline-overview__panel">
               <div className="mb-4 flex items-center gap-3">
                 <Icon token="{icon.action.download}" className="text-accent" aria-hidden />

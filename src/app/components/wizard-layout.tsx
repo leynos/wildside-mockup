@@ -36,7 +36,7 @@ export function WizardLayout({
               <button
                 type="button"
                 aria-label="Back"
-                className="flex h-full w-full items-center justify-center text-base-content"
+                className="header-nav-button"
                 onClick={onBack}
               >
                 <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
@@ -58,7 +58,7 @@ export function WizardLayout({
         >
           <WizardStepper steps={steps} activeStepId={activeStepId} />
         </AppHeader>
-        <main className="flex-1 overflow-y-auto px-6 pb-28 pt-6">{children}</main>
+        <main className="screen-scroll pt-6">{children}</main>
         {footer ? (
           <footer className="sticky bottom-0 bg-base-900/85 px-6 py-5 backdrop-blur">
             {footer}
