@@ -28,7 +28,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
               onMouseLeave={() => highlightPois?.([])}
               onBlur={() => highlightPois?.([])}
             >
-              <div className="flex items-start justify-between gap-3">
+              <div className="poi-list__summary">
                 <div>
                   <h3 className="text-base font-semibold text-base-content">{poi.name}</h3>
                   <p className="mt-1 text-sm text-base-content/70">{poi.description}</p>
@@ -64,7 +64,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
             <Dialog.Overlay className="fixed inset-0 bg-black/60" />
             <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
               <div className="poi-sheet">
-                <div className="flex items-start justify-between gap-3">
+                <div className="poi-list__summary">
                   <div>
                     <Dialog.Title className="text-lg font-semibold text-base-content">
                       {poi.name}

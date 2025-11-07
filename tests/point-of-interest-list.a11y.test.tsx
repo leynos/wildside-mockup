@@ -20,6 +20,11 @@ describe("PointOfInterestList accessibility", () => {
 
     const trigger = screen.getByRole("button", { name: new RegExp(samplePoi.name, "i") });
     expect(trigger.classList.contains("poi-list__item")).toBe(true);
+    const summaries = container.querySelectorAll(".poi-list__summary");
+    expect(summaries.length).toBeGreaterThanOrEqual(1);
+    summaries.forEach((summary) => {
+      expect(summary.classList.contains("poi-list__summary")).toBe(true);
+    });
     const highlightBadge = trigger.querySelector(".poi-highlight");
     expect(highlightBadge).not.toBeNull();
     const highlightIcon = highlightBadge?.querySelector('[role="img"]');
@@ -34,6 +39,7 @@ describe("PointOfInterestList accessibility", () => {
     const dialog = await screen.findByRole("dialog", { name: samplePoi.name });
     expect(dialog).toBeInTheDocument();
     expect(dialog.querySelector(".poi-sheet")).not.toBeNull();
+    expect(dialog.querySelector(".poi-list__summary")).not.toBeNull();
     expect(await axe(document.body)).toHaveNoViolations();
 
     await userEvent.click(screen.getByRole("button", { name: /close/i }));
