@@ -98,6 +98,9 @@ describe("Stage 1 routed flows", () => {
     expect(discoverCards.length).toBeGreaterThan(0);
     const inlineClusters = container.querySelectorAll(".inline-action-cluster");
     expect(inlineClusters.length).toBeGreaterThan(0);
+    const discoverCta = container.querySelector(".cta-button");
+    expect(discoverCta).toBeTruthy();
+    expect(discoverCta?.classList.contains("cta-button")).toBe(true);
     act(() => clickElement(parksChip));
 
     const indicator = Array.from(container.querySelectorAll<HTMLParagraphElement>("p")).find((p) =>
@@ -476,6 +479,7 @@ describe("Stage 3 wizard flows", () => {
       btn.textContent?.includes("Continue to preferences"),
     );
     expect(continueButton).toBeTruthy();
+    expect(continueButton?.classList.contains("cta-button")).toBe(true);
 
     await act(async () => {
       clickElement(continueButton);

@@ -47,7 +47,7 @@ export function WizardStepOne(): JSX.Element {
       footer={
         <button
           type="button"
-          className="btn btn-accent btn-lg w-full text-base font-semibold"
+          className="cta-button"
           onClick={() => navigate({ to: "/wizard/step-2" })}
         >
           Continue to preferences

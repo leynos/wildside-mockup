@@ -99,7 +99,7 @@ export function DiscoverScreen(): JSX.Element {
         <section className="mt-6">
           <button
             type="button"
-            className="btn btn-accent btn-lg w-full rounded-2xl text-base font-semibold"
+            className="cta-button cta-button--rounded"
             onClick={handleStart}
             disabled={isGenerating}
           >
