@@ -64,12 +64,13 @@ export interface CommunityPick {
 
 import heroAfterDark from "../../assets/explore/after_dark.jpg";
 import heroCoffeeCulture from "../../assets/explore/coffee_culture.jpg";
-import heroCoffeeCultureAlt from "../../assets/explore/coffee_culture2.jpg";
 import heroHarborSunset from "../../assets/explore/harbor_sunset.jpg";
 import heroHiddenGarden from "../../assets/explore/hidden_garden.jpg";
 import heroMapPreview from "../../assets/explore/map_preview.jpg";
 import heroMarket from "../../assets/explore/market.jpg";
 import heroStreetArt from "../../assets/explore/street_art2.jpg";
+import walkRouteMap2 from "../../assets/walks/walk-route-map-2.png";
+import walkRouteMap3 from "../../assets/walks/walk-route-map-3.png";
 
 export const exploreCategories: ExploreCategory[] = [
   {
@@ -158,7 +159,7 @@ export const curatedCollections: CuratedCollection[] = [
     id: "coffee-loops",
     title: "Sunday Coffee Loops",
     description: "Perfect lazy morning routes",
-    leadImageUrl: heroCoffeeCultureAlt,
+    leadImageUrl: walkRouteMap2,
     mapImageUrl: heroMapPreview,
     distanceRange: "1–2 km",
     durationRange: "30–45 min",
@@ -169,7 +170,7 @@ export const curatedCollections: CuratedCollection[] = [
     id: "after-dark",
     title: "After Dark Adventures",
     description: "Safe, well-lit evening routes",
-    leadImageUrl: heroAfterDark,
+    leadImageUrl: walkRouteMap3,
     mapImageUrl: heroMapPreview,
     distanceRange: "2–4 km",
     durationRange: "45–70 min",

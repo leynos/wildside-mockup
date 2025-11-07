@@ -1,5 +1,7 @@
 /** @file Data fixtures supporting Stage 4 routes (completion and safety flows). */
 
+import walkRouteMap1 from "../../assets/walks/walk-route-map-1.png";
+
 export interface WalkCompletionStat {
   id: string;
   label: string;
@@ -83,8 +85,7 @@ export const walkCompletionShareOptions: WalkCompletionShareOption[] = [
   },
 ];
 
-export const walkCompletionMapImage =
-  "https://storage.googleapis.com/uxpilot-auth.appspot.com/06e75c31a1-bce51b16eb8b338859bf.png";
+export const walkCompletionMapImage = walkRouteMap1;
 
 export interface OfflineSuggestion {
   id: string;
