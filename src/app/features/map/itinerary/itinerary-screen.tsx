@@ -133,7 +133,7 @@ export function ItineraryScreen(): JSX.Element {
                               Copy the preview link or send it to friends once real sharing is wired
                               up.
                             </Dialog.Description>
-                            <div className="rounded-xl border border-base-300/60 bg-base-200/80 p-3 text-xs text-base-content/70">
+                            <div className="route-share__preview">
                               https://wildside.app/routes/{waterfrontDiscoveryRoute.id}
                             </div>
                             <div className="flex justify-end gap-2">

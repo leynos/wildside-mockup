@@ -358,6 +358,7 @@ describe("Stage 2 routed flows", () => {
 
     const dialog = document.querySelector("[role='dialog']");
     expect(dialog).toBeTruthy();
+    expect(dialog?.querySelector(".route-share__preview")).toBeTruthy();
     const closeControl = Array.from(dialog?.querySelectorAll("button") ?? []).find((btn) =>
       btn.textContent?.includes("Close"),
     );
@@ -387,6 +388,7 @@ describe("Stage 2 routed flows", () => {
 
     const dialog = document.querySelector("[role='dialog']");
     expect(dialog).toBeTruthy();
+    expect(dialog?.querySelector(".route-share__preview")).toBeTruthy();
     const closeButton = Array.from(dialog?.querySelectorAll("button") ?? []).find((btn) =>
       btn.textContent?.includes("Close"),
     );

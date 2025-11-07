@@ -104,7 +104,7 @@ export function SavedScreen(): JSX.Element {
                             Sharing is not wired up yet, but this is where the integration will
                             live.
                           </Dialog.Description>
-                          <div className="rounded-xl border border-base-300/60 bg-base-200/80 p-3 text-xs text-base-content/70">
+                          <div className="route-share__preview">
                             https://wildside.app/routes/{savedRoute.id}
                           </div>
                           <Dialog.Close asChild>
