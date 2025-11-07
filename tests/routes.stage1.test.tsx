@@ -159,6 +159,12 @@ describe("Stage 1 routed flows", () => {
     const sectionHeadings = container.querySelectorAll(".section-heading");
     expect(sectionHeadings.length).toBeGreaterThanOrEqual(2);
 
+    const ratingIndicators = container.querySelectorAll(".rating-indicator");
+    expect(ratingIndicators.length).toBeGreaterThanOrEqual(2);
+    ratingIndicators.forEach((indicator) => {
+      expect(indicator.classList.contains("rating-indicator")).toBe(true);
+    });
+
     const appBottomNav = container.querySelector(".bottom-nav");
     expect(appBottomNav).toBeTruthy();
   });

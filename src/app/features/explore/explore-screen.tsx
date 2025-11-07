@@ -91,7 +91,7 @@ function FeaturedWalkCard(): JSX.Element {
           </div>
         </div>
         <div className="flex items-center gap-3 text-sm text-base-content/80">
-          <span className="flex items-center gap-1 text-amber-400">
+          <span className="rating-indicator">
             <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
             {formatRating(featuredWalk.rating)}
           </span>
@@ -133,7 +133,7 @@ function PopularThemesGrid(): JSX.Element {
                 <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
                 {theme.distanceRange}
               </span>
-              <span className="flex items-center gap-1 text-amber-400">
+              <span className="rating-indicator">
                 <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
                 {formatRating(theme.rating)}
               </span>
