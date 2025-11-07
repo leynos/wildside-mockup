@@ -83,18 +83,14 @@ export function SavedScreen(): JSX.Element {
                     <button
                       type="button"
                       aria-label="Back"
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-base-900/70"
+                      className="circle-action-button"
                       onClick={() => navigate({ to: "/map/quick" })}
                     >
                       <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
                     </button>
                     <Dialog.Root open={shareOpen} onOpenChange={setShareOpen}>
                       <Dialog.Trigger asChild>
-                        <button
-                          type="button"
-                          aria-label="Share"
-                          className="flex h-10 w-10 items-center justify-center rounded-full bg-base-900/70"
-                        >
+                        <button type="button" aria-label="Share" className="circle-action-button">
                           <Icon token="{icon.action.share}" aria-hidden className="h-5 w-5" />
                         </button>
                       </Dialog.Trigger>

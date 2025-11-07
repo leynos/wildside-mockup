@@ -60,7 +60,7 @@ export function ItineraryScreen(): JSX.Element {
                   <div className="flex items-center justify-between">
                     <button
                       type="button"
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/70 bg-base-200/80 text-base-content"
+                      className="circle-action-button--ghost"
                       aria-label="Back"
                       onClick={() => navigate({ to: "/map/quick" })}
                     >
@@ -75,7 +75,7 @@ export function ItineraryScreen(): JSX.Element {
                     </div>
                     <button
                       type="button"
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/70 bg-base-200/80 text-base-content"
+                      className="circle-action-button--ghost"
                       aria-label="Locate"
                     >
                       <Icon token="{icon.object.locationArrow}" aria-hidden className="h-5 w-5" />
