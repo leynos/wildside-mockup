@@ -6,6 +6,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { type JSX, type ReactNode, useState } from "react";
 
 import { Icon } from "../../components/icon";
+import { SectionHeading } from "../../components/section-heading";
 import { SectionHero } from "../../components/section-hero";
 import {
   walkCompletionMapImage,
@@ -124,10 +125,9 @@ export function WalkCompleteScreen(): JSX.Element {
             </WalkCompleteSection>
 
             <WalkCompleteSection>
-              <h2 className="section-heading section-heading--spacious mb-4 text-base-content">
-                <Icon token="{icon.action.like}" className="text-pink-400" aria-hidden />
+              <SectionHeading iconToken="{icon.action.like}" iconClassName="text-pink-400">
                 Favourite moments
-              </h2>
+              </SectionHeading>
               <div className="space-y-3">
                 {walkCompletionMoments.map((moment) => (
                   <article

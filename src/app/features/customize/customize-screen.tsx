@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
 import { PreferenceToggleCard } from "../../components/preference-toggle-card";
+import { SectionHeading } from "../../components/section-heading";
 import { SliderControl } from "../../components/slider-control";
 import type { SegmentOption } from "../../data/customize";
 import {
@@ -25,23 +26,6 @@ import {
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 import { CustomizeSegmentToggle } from "./segment-toggle-card";
-
-function SectionTitle({
-  iconToken,
-  label,
-  iconClassName = "text-accent",
-}: {
-  iconToken: string;
-  label: string;
-  iconClassName?: string;
-}): JSX.Element {
-  return (
-    <h2 className="section-heading section-heading--spacious mb-4 text-base-content">
-      <Icon token={iconToken} className={iconClassName} aria-hidden />
-      {label}
-    </h2>
-  );
-}
 
 interface SegmentPickerProps {
   id: string;
@@ -62,7 +46,7 @@ function SegmentPicker({
 }: SegmentPickerProps): JSX.Element {
   return (
     <section className="mb-8" data-segment-id={id}>
-      <SectionTitle iconToken={iconToken} label={label} />
+      <SectionHeading iconToken={iconToken}>{label}</SectionHeading>
       <ToggleGroup.Root
         type="single"
         value={value}
@@ -91,7 +75,7 @@ interface SurfacePickerProps {
 function SurfacePicker({ onChange, value }: SurfacePickerProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle iconToken="{icon.category.paved}" label="Surface Type" />
+      <SectionHeading iconToken="{icon.category.paved}">Surface Type</SectionHeading>
       <ToggleGroup.Root
         type="single"
         value={value}
@@ -122,7 +106,7 @@ interface InterestMixProps {
 function InterestMix({ onChange, values }: InterestMixProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle iconToken="{icon.action.like}" label="Interest Mix" />
+      <SectionHeading iconToken="{icon.action.like}">Interest Mix</SectionHeading>
       <div className="space-y-6">
         {interestMix.map((slice) => {
           const value = values[slice.id] ?? slice.allocation;
@@ -167,7 +151,7 @@ interface RoutePreviewProps {
 function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle iconToken="{icon.action.preview}" label="Route Preview" />
+      <SectionHeading iconToken="{icon.action.preview}">Route Preview</SectionHeading>
       <div className="grid grid-cols-3 gap-3">
         {routePreviews.map((route) => {
           const isActive = route.id === selected;
@@ -228,7 +212,7 @@ interface AdvancedOptionsProps {
 function AdvancedOptions({ onToggle, values }: AdvancedOptionsProps): JSX.Element {
   return (
     <section className="mb-8">
-      <SectionTitle iconToken="{icon.action.settings}" label="Advanced Options" />
+      <SectionHeading iconToken="{icon.action.settings}">Advanced Options</SectionHeading>
       <div className="space-y-3">
         {advancedOptions.map((option) => {
           const checked = values[option.id] ?? option.defaultEnabled;
