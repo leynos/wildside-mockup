@@ -192,6 +192,10 @@
     @apply flex-1 overflow-y-auto px-6 pb-28;
   }
 
+  .btn-outline--fill {
+    @apply btn btn-outline w-full justify-center gap-2 text-base-content;
+  }
+
   .walk-complete__section {
     @apply mt-6 px-6;
   }

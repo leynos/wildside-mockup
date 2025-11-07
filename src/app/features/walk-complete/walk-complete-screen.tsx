@@ -162,7 +162,7 @@ export function WalkCompleteScreen(): JSX.Element {
                 <div className="grid gap-3 sm:grid-cols-2">
                   <button
                     type="button"
-                    className="btn btn-outline w-full justify-center gap-2"
+                    className="btn-outline--fill"
                     onClick={() => setShareOpen(true)}
                   >
                     <Icon token="{icon.action.share}" aria-hidden />
@@ -170,7 +170,7 @@ export function WalkCompleteScreen(): JSX.Element {
                   </button>
                   <button
                     type="button"
-                    className="btn btn-outline w-full justify-center gap-2"
+                    className="btn-outline--fill"
                     onClick={() => navigate({ to: "/saved" })}
                   >
                     <Icon token="{icon.action.save}" aria-hidden />
