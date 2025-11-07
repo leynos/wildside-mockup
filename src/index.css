@@ -297,6 +297,10 @@
     background-color: transparent;
   }
 
+  .map-panel__body {
+    @apply flex-1 overflow-y-auto px-5 pb-5;
+  }
+
   .discover-interests__section {
     @apply mt-10 flex flex-1 flex-col;
   }

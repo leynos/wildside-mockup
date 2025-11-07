@@ -323,6 +323,19 @@ describe("Stage 2 routed flows", () => {
     expect(summaryPanel).toBeTruthy();
     const overlayPanels = container.querySelectorAll(".map-overlay");
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
+    const stopsTab = Array.from(container.querySelectorAll('[role="tab"]')).find((tab) =>
+      tab.textContent?.includes("Stops"),
+    );
+    expect(stopsTab).toBeTruthy();
+    await act(async () => {
+      clickElement(stopsTab);
+      await Promise.resolve();
+    });
+    const panelBodies = container.querySelectorAll(".map-panel__body");
+    expect(panelBodies.length).toBeGreaterThanOrEqual(1);
+    panelBodies.forEach((body) => {
+      expect(body.classList.contains("map-panel__body")).toBe(true);
+    });
     const metaPanel = container.querySelector(".map-route__meta");
     expect(metaPanel).toBeTruthy();
     const routeStats = container.querySelectorAll(".map-route__stat");
@@ -371,6 +384,19 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const overlayPanels = container.querySelectorAll(".map-overlay");
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
+    const stopsTab = Array.from(container.querySelectorAll('[role="tab"]')).find((tab) =>
+      tab.textContent?.includes("Stops"),
+    );
+    expect(stopsTab).toBeTruthy();
+    await act(async () => {
+      clickElement(stopsTab);
+      await Promise.resolve();
+    });
+    const panelBodies = container.querySelectorAll(".map-panel__body");
+    expect(panelBodies.length).toBeGreaterThanOrEqual(1);
+    panelBodies.forEach((body) => {
+      expect(body.classList.contains("map-panel__body")).toBe(true);
+    });
     const routeMetaChips = container.querySelectorAll(".route-summary__meta");
     expect(routeMetaChips.length).toBeGreaterThanOrEqual(3);
     routeMetaChips.forEach((chip) => {

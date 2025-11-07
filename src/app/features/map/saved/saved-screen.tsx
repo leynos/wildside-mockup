@@ -135,7 +135,7 @@ export function SavedScreen(): JSX.Element {
               </MapViewport>
             </MapOverlay>
 
-            <MapOverlay value="stops">
+            <MapOverlay value="stops" forceMount>
               <div className="pointer-events-none px-6 pb-6">
                 <div className="map-panel map-panel--stacked max-h-[60vh]">
                   <div className="map-panel__handle">
@@ -146,7 +146,7 @@ export function SavedScreen(): JSX.Element {
                       onClick={() => setActiveTab("map")}
                     />
                   </div>
-                  <div className="flex-1 overflow-y-auto px-5 pb-5">
+                  <div className="map-panel__body">
                     <PointOfInterestList points={savedRoute.pointsOfInterest} />
                   </div>
                   <div className="map-overlay__fade map-overlay__fade--top" aria-hidden="true" />
