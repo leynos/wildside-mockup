@@ -34,7 +34,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
                   <p className="mt-1 text-sm text-base-content/70">{poi.description}</p>
                 </div>
                 {poi.rating ? (
-                  <span className="flex items-center gap-1 text-sm font-semibold text-amber-400">
+                  <span className="rating-indicator rating-indicator--strong">
                     <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
                     {poi.rating.toFixed(1)}
                   </span>

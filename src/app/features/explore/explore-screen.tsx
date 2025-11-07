@@ -248,7 +248,7 @@ function CommunityPickPanel(): JSX.Element {
           <p className="text-sm font-medium text-base-content">{communityPick.curator}</p>
           <p className="text-xs text-base-content/60">Most shared this week</p>
         </div>
-        <span className="flex items-center gap-1 text-sm font-semibold text-amber-400">
+        <span className="rating-indicator rating-indicator--strong">
           <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
           {formatRating(communityPick.rating)}
         </span>
