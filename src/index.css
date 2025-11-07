@@ -489,6 +489,10 @@
     @apply mb-3 flex items-center justify-between text-base-content;
   }
 
+  .section-header-row {
+    @apply mb-3 flex items-center justify-between;
+  }
+
   .slider-control__title {
     @apply flex items-center gap-2 text-lg font-semibold;
   }

@@ -144,7 +144,7 @@ export function QuickWalkScreen(): JSX.Element {
                     />
 
                     <section>
-                      <div className="mb-3 flex items-center justify-between">
+                      <div className="section-header-row">
                         <h2 className="section-heading text-base-content">
                           <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
                           Interests

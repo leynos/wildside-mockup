@@ -45,7 +45,7 @@ export function WizardStepTwo(): JSX.Element {
       }
     >
       <WizardSection className="mb-8">
-        <div className="mb-3 flex items-center justify-between">
+        <div className="section-header-row">
           <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.navigation.explore}" className="text-accent" aria-hidden />
             Discovery style
