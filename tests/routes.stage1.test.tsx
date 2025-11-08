@@ -338,6 +338,8 @@ describe("Stage 2 routed flows", () => {
     expect(summaryPanel).toBeTruthy();
     const overlayPanels = container.querySelectorAll(".map-overlay");
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
+    const notesPanel = container.querySelector(".map-panel__notes");
+    expect(notesPanel).toBeTruthy();
     const stopsTab = Array.from(container.querySelectorAll('[role="tab"]')).find((tab) =>
       tab.textContent?.includes("Stops"),
     );
@@ -412,6 +414,9 @@ describe("Stage 2 routed flows", () => {
     panelBodies.forEach((body) => {
       expect(body.classList.contains("map-panel__body")).toBe(true);
     });
+    const notesPanel = container.querySelector(".map-panel__notes");
+    expect(notesPanel).toBeTruthy();
+    expect(notesPanel?.classList.contains("map-panel__notes--spacious")).toBe(true);
     const routeMetaChips = container.querySelectorAll(".route-summary__meta");
     expect(routeMetaChips.length).toBeGreaterThanOrEqual(3);
     routeMetaChips.forEach((chip) => {

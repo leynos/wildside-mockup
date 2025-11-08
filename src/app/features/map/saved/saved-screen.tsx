@@ -155,9 +155,9 @@ export function SavedScreen(): JSX.Element {
               </div>
             </MapOverlay>
 
-            <MapOverlay value="notes">
+            <MapOverlay value="notes" forceMount>
               <div className="pointer-events-none px-6 pb-6">
-                <div className="map-panel map-panel--scroll max-h-[60vh] space-y-6 p-5 text-sm text-base-content">
+                <div className="map-panel map-panel--scroll map-panel__notes map-panel__notes--spacious">
                   <div className="grid grid-cols-4 gap-4 text-base-content">
                     <Metric label="Rating" value={savedRoute.rating.toFixed(1)} />
                     <Metric label="Saves" value={savedRoute.saves.toString()} />
