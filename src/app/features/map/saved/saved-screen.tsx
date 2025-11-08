@@ -172,7 +172,7 @@ export function SavedScreen(): JSX.Element {
                     ))}
                   </div>
                   <p className="text-base-content/80">{savedRoute.description}</p>
-                  <ul className="list-disc space-y-2 pl-5 text-base-content/70">
+                  <ul className="route-note-list" aria-label="Route notes">
                     {savedRoute.notes.map((note) => (
                       <li key={note}>{note}</li>
                     ))}

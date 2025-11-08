@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
-import { waterfrontDiscoveryRoute } from "../src/app/data/map";
+import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
 import { walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
   accessibilityOptions,
@@ -26,6 +26,12 @@ type TestRoute =
   | "/walk-complete"
   | "/offline"
   | "/safety-accessibility";
+
+const savedRoute = savedRoutes[0];
+
+if (!savedRoute) {
+  throw new Error("Expected at least one saved route for the routed flow tests");
+}
 
 const clickElement = (element: Element | null | undefined): void => {
   if (element instanceof HTMLElement) {
@@ -173,6 +179,13 @@ describe("Stage 1 routed flows", () => {
     strongIndicators.forEach((indicator) => {
       expect(indicator.classList.contains("rating-indicator--strong")).toBe(true);
     });
+
+    const statGroups = container.querySelectorAll(".explore-stat-group");
+    expect(statGroups.length).toBeGreaterThanOrEqual(2);
+    statGroups.forEach((group) => {
+      expect(group.classList.contains("explore-stat-group")).toBe(true);
+    });
+    expect(container.querySelector(".explore-stat-group--right")).toBeTruthy();
 
     const appBottomNav = container.querySelector(".bottom-nav");
     expect(appBottomNav).toBeTruthy();
@@ -340,6 +353,14 @@ describe("Stage 2 routed flows", () => {
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
     const notesPanel = container.querySelector(".map-panel__notes");
     expect(notesPanel).toBeTruthy();
+    const itineraryNotesList = notesPanel?.querySelector<HTMLUListElement>(
+      "ul[aria-label='Route notes']",
+    );
+    expect(itineraryNotesList).toBeTruthy();
+    expect(itineraryNotesList?.classList.contains("route-note-list")).toBe(true);
+    expect(itineraryNotesList?.querySelectorAll("li").length).toBe(
+      waterfrontDiscoveryRoute.notes.length,
+    );
     const stopsTab = Array.from(container.querySelectorAll('[role="tab"]')).find((tab) =>
       tab.textContent?.includes("Stops"),
     );
@@ -401,6 +422,14 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const overlayPanels = container.querySelectorAll(".map-overlay");
     expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
+    const savedNotesPanel = container.querySelector(".map-panel__notes");
+    expect(savedNotesPanel).toBeTruthy();
+    const savedRouteNotesList = savedNotesPanel?.querySelector<HTMLUListElement>(
+      "ul[aria-label='Route notes']",
+    );
+    expect(savedRouteNotesList).toBeTruthy();
+    expect(savedRouteNotesList?.classList.contains("route-note-list")).toBe(true);
+    expect(savedRouteNotesList?.querySelectorAll("li").length).toBe(savedRoute.notes.length);
     const stopsTab = Array.from(container.querySelectorAll('[role="tab"]')).find((tab) =>
       tab.textContent?.includes("Stops"),
     );

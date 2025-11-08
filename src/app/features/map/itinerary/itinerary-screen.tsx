@@ -179,7 +179,7 @@ export function ItineraryScreen(): JSX.Element {
               <div className="pointer-events-none px-6 pb-6">
                 <div className="map-panel map-panel--scroll map-panel__notes">
                   <p className="text-base font-semibold text-base-content">Route notes</p>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-base-content/70">
+                  <ul className="mt-3 route-note-list" aria-label="Route notes">
                     {waterfrontDiscoveryRoute.notes.map((note) => (
                       <li key={note}>{note}</li>
                     ))}
