@@ -231,7 +231,7 @@ export function QuickWalkScreen(): JSX.Element {
           </Tabs.List>
         </Tabs.Root>
 
-        <div className="pointer-events-none absolute bottom-[116px] right-6 z-30">
+        <div className="map-fab-layer">
           <button
             type="button"
             className="pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-base-900 shadow-xl shadow-accent/40 transition hover:scale-105"

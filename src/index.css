@@ -177,6 +177,11 @@
     @apply list-disc space-y-2 pl-5 text-base-content/70;
   }
 
+  /* Floating action buttons that sit above the map bottom navigation. */
+  .map-fab-layer {
+    @apply pointer-events-none absolute bottom-[116px] right-6 z-30;
+  }
+
   .header-icon-button {
     @apply flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/60 text-accent shadow-sm shadow-base-300/30 transition hover:border-accent/60 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60;
   }
@@ -503,6 +508,11 @@
     @apply flex-shrink-0;
   }
 
+  /* Ensure toggled switches reach full accent strength regardless of other mixins. */
+  .preference-card__switch[data-state="checked"] {
+    background-color: var(--color-accent);
+  }
+
   .map-panel--stacked {
     @apply relative flex flex-col overflow-hidden;
   }
@@ -602,7 +612,7 @@
   }
 
   .toggle-switch--accent {
-    @apply data-[state=checked]:bg-accent/80;
+    @apply data-[state=checked]:bg-accent;
   }
 
   .toggle-switch__thumb {

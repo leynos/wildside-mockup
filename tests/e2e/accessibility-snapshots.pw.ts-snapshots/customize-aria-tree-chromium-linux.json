@@ -754,7 +754,7 @@
                                                     "children": [
                                                       {
                                                         "role": "slider",
-                                                        "name": "",
+                                                        "name": "Nature allocation",
                                                         "value": 40
                                                       }
                                                     ]
@@ -835,7 +835,7 @@
                                                     "children": [
                                                       {
                                                         "role": "slider",
-                                                        "name": "",
+                                                        "name": "History allocation",
                                                         "value": 30
                                                       }
                                                     ]
@@ -916,7 +916,7 @@
                                                     "children": [
                                                       {
                                                         "role": "slider",
-                                                        "name": "",
+                                                        "name": "Food & Drink allocation",
                                                         "value": 30
                                                       }
                                                     ]

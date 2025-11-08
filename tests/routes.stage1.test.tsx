@@ -299,6 +299,14 @@ describe("Stage 2 routed flows", () => {
 
     const tablist = container.querySelector(".map-panel__tablist");
     expect(tablist).toBeTruthy();
+
+    const quickFabLayer = container.querySelector(".map-fab-layer");
+    expect(quickFabLayer).toBeTruthy();
+    const quickFabButton = quickFabLayer?.querySelector<HTMLButtonElement>(
+      "button[aria-label='Save quick walk']",
+    );
+    expect(quickFabButton).toBeTruthy();
+    expect(quickFabButton?.classList.contains("pointer-events-auto")).toBe(true);
   });
 
   it("launches the wizard from the quick walk magic wand", async () => {
@@ -455,6 +463,12 @@ describe("Stage 2 routed flows", () => {
       (btn) => btn.getAttribute("aria-label") === "Share",
     );
     expect(shareTrigger).toBeTruthy();
+
+    const savedFabLayer = container.querySelector(".map-fab-layer");
+    expect(savedFabLayer).toBeTruthy();
+    const savedFabButton = savedFabLayer?.querySelector<HTMLButtonElement>("button[aria-pressed]");
+    expect(savedFabButton).toBeTruthy();
+    expect(savedFabButton?.classList.contains("pointer-events-auto")).toBe(true);
 
     await act(async () => {
       clickElement(shareTrigger);

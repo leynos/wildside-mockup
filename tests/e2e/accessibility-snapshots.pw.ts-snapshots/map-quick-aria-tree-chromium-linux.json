@@ -98,73 +98,22 @@
                                                         "name": "",
                                                         "children": [
                                                           {
-                                                            "role": "group",
+                                                            "role": "none",
                                                             "name": "",
                                                             "children": [
                                                               {
                                                                 "role": "none",
-                                                                "name": "",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "DisclosureTriangle",
-                                                                    "name": "Toggle attribution",
-                                                                    "expanded": true
-                                                                  }
-                                                                ]
-                                                              },
+                                                                "name": ""
+                                                              }
+                                                            ]
+                                                          },
+                                                          {
+                                                            "role": "none",
+                                                            "name": "",
+                                                            "children": [
                                                               {
                                                                 "role": "none",
-                                                                "name": "",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "generic",
-                                                                    "name": "",
-                                                                    "children": [
-                                                                      {
-                                                                        "role": "link",
-                                                                        "name": "© OpenMapTiles",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "text",
-                                                                            "name": "© OpenMapTiles",
-                                                                            "children": [
-                                                                              {
-                                                                                "role": "InlineTextBox",
-                                                                                "name": "© OpenMapTiles"
-                                                                              }
-                                                                            ]
-                                                                          }
-                                                                        ]
-                                                                      },
-                                                                      {
-                                                                        "role": "text",
-                                                                        "name": " ",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "InlineTextBox",
-                                                                            "name": " "
-                                                                          }
-                                                                        ]
-                                                                      },
-                                                                      {
-                                                                        "role": "link",
-                                                                        "name": "© OpenStreetMap contributors",
-                                                                        "children": [
-                                                                          {
-                                                                            "role": "text",
-                                                                            "name": "© OpenStreetMap contributors",
-                                                                            "children": [
-                                                                              {
-                                                                                "role": "InlineTextBox",
-                                                                                "name": "© OpenStreetMap contributors"
-                                                                              }
-                                                                            ]
-                                                                          }
-                                                                        ]
-                                                                      }
-                                                                    ]
-                                                                  }
-                                                                ]
+                                                                "name": ""
                                                               }
                                                             ]
                                                           }

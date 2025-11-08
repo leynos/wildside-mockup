@@ -195,10 +195,10 @@ export function SavedScreen(): JSX.Element {
           </Tabs.List>
         </Tabs.Root>
 
-        <div className="absolute bottom-[116px] right-6 z-30">
+        <div className="map-fab-layer">
           <button
             type="button"
-            className={`flex h-16 w-16 items-center justify-center rounded-full border border-base-300/60 text-base-100 shadow-xl transition ${
+            className={`pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full border border-base-300/60 text-base-100 shadow-xl transition ${
               isFavourite ? "bg-accent text-base-900" : "bg-base-900/80"
             }`}
             aria-pressed={isFavourite}
