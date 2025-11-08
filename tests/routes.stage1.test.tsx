@@ -553,6 +553,11 @@ describe("Stage 3 wizard flows", () => {
     const wizardSections = container.querySelectorAll(".wizard-section");
     expect(wizardSections.length).toBeGreaterThanOrEqual(2);
 
+    const stepTwoBadges = container.querySelectorAll(".wizard-badge");
+    expect(stepTwoBadges.length).toBeGreaterThanOrEqual(1);
+    const badgeTexts = Array.from(stepTwoBadges).map((badge) => badge.textContent?.trim());
+    expect(badgeTexts).toContain("New");
+
     const options = container.querySelectorAll(".wizard-accessibility__option");
     expect(options.length).toBe(accessibilityOptions.length);
     options.forEach((option) => {
@@ -612,6 +617,10 @@ describe("Stage 3 wizard flows", () => {
       expect(panel.classList.contains("wizard-summary__panel")).toBe(true);
       expect(panel.classList.contains("wizard-section")).toBe(true);
     });
+
+    const summaryBadge = container.querySelector(".wizard-badge");
+    expect(summaryBadge).toBeTruthy();
+    expect(summaryBadge?.textContent?.trim()).toBe("Custom");
 
     const highlights = container.querySelectorAll(".wizard-summary__highlight");
     expect(highlights.length).toBe(wizardSummaryHighlights.length);

@@ -89,6 +89,10 @@
     @apply mb-6;
   }
 
+  .wizard-badge {
+    @apply rounded-lg bg-accent/20 px-2 py-1 text-xs text-accent;
+  }
+
   .wizard-summary__highlight {
     @apply flex items-start gap-2 rounded-xl bg-base-300/40 px-3 py-2;
   }

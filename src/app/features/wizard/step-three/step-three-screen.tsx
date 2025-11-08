@@ -83,9 +83,7 @@ export function WizardStepThree(): JSX.Element {
       <WizardSummaryPanel>
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Hidden Gems Loop</h2>
-          <span className="rounded-lg bg-accent/20 px-2 py-1 text-xs font-semibold text-accent">
-            Custom
-          </span>
+          <span className="wizard-badge font-semibold">Custom</span>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
           <div>

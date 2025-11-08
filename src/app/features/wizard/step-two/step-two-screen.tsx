@@ -50,9 +50,7 @@ export function WizardStepTwo(): JSX.Element {
             <Icon token="{icon.navigation.explore}" className="text-accent" aria-hidden />
             Discovery style
           </h2>
-          <span className="rounded-lg bg-accent/20 px-2 py-1 text-xs font-medium text-accent">
-            New
-          </span>
+          <span className="wizard-badge font-medium">New</span>
         </div>
         <p className="text-sm text-base-content/70">
           Balance popular hotspots with hidden gems to match today’s mood.
