@@ -187,6 +187,12 @@ describe("Stage 1 routed flows", () => {
     });
     expect(container.querySelector(".explore-stat-group--right")).toBeTruthy();
 
+    const exploreMetaLists = container.querySelectorAll(".explore-meta-list");
+    expect(exploreMetaLists.length).toBeGreaterThanOrEqual(2);
+    exploreMetaLists.forEach((list) => {
+      expect(list.classList.contains("explore-meta-list")).toBe(true);
+    });
+
     const appBottomNav = container.querySelector(".bottom-nav");
     expect(appBottomNav).toBeTruthy();
   });

@@ -79,7 +79,7 @@ function FeaturedWalkCard(): JSX.Element {
             <h3 className="text-lg font-semibold text-base-content">{featuredWalk.title}</h3>
             <p className="text-sm text-base-content/70">{featuredWalk.description}</p>
           </div>
-          <div className="flex flex-col items-end text-sm text-base-content/60">
+          <div className="explore-stat-group">
             <span className="flex items-center gap-1 font-semibold text-base-content">
               <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
               {featuredWalk.distance}
@@ -164,7 +164,7 @@ function CuratedCollectionsList(): JSX.Element {
               <div className="flex-1">
                 <h3 className="text-base font-semibold text-base-content">{collection.title}</h3>
                 <p className="text-sm text-base-content/70">{collection.description}</p>
-                <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-base-content/60">
+                <div className="mt-2 explore-meta-list">
                   <span className="flex items-center gap-1">
                     <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
                     {collection.distanceRange}
@@ -178,7 +178,7 @@ function CuratedCollectionsList(): JSX.Element {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col items-end text-right text-sm text-base-content/60">
+              <div className="explore-stat-group explore-stat-group--right">
                 <span className="text-lg font-bold text-base-content">{collection.routes}</span>
                 <span>routes</span>
               </div>
@@ -255,7 +255,7 @@ function CommunityPickPanel(): JSX.Element {
       </div>
       <h3 className="text-base font-semibold text-base-content">{communityPick.title}</h3>
       <p className="mt-2 text-sm text-base-content/70">{communityPick.description}</p>
-      <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-base-content/60">
+      <div className="mt-3 explore-meta-list">
         <RouteMetric iconToken="{icon.object.route}">{communityPick.distance}</RouteMetric>
         <RouteMetric iconToken="{icon.object.duration}">{communityPick.duration}</RouteMetric>
         <RouteMetric iconToken="{icon.action.save}">{communityPick.saves} saves</RouteMetric>
