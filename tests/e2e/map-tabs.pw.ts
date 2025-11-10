@@ -34,11 +34,11 @@ test.describe("Map tab bar alignment", () => {
     const canvas = page.locator(".maplibregl-canvas");
     await expect(canvas).toBeVisible();
     await expect(page.getByRole("tab", { name: "Stops" })).toHaveAttribute("data-state", "active");
-    await expect(page.getByTestId("quick-walk-stops-panel")).toBeVisible();
+    await expect(page.getByRole("region", { name: "Quick walk stops" })).toBeVisible();
 
     await page.goto("/map/quick#notes");
     await expect(page.getByRole("tab", { name: "Notes" })).toHaveAttribute("data-state", "active");
-    await expect(page.getByTestId("quick-walk-notes-panel")).toBeVisible();
+    await expect(page.getByRole("region", { name: "Planning notes" })).toBeVisible();
   });
 
   test("quick map retains its tab bar across tabs", async ({ page }) => {
@@ -53,13 +53,13 @@ test.describe("Map tab bar alignment", () => {
     await expectTablistReachable(tablist);
     await expect(canvas).toBeVisible();
     await expect(page).toHaveURL(/#stops$/);
-    const stopsPanel = page.getByTestId("quick-walk-stops-panel");
+    const stopsPanel = page.getByRole("region", { name: "Quick walk stops" });
     await expect(stopsPanel).toBeVisible();
 
     await page.getByRole("tab", { name: "Notes" }).click();
     await expectTablistReachable(tablist);
     await expect(canvas).toBeVisible();
-    await expect(page.locator("text=Planning notes")).toBeVisible();
+    await expect(page.getByRole("region", { name: "Planning notes" })).toBeVisible();
     await expect(page).toHaveURL(/#notes$/);
 
     await page.getByRole("tab", { name: "Explore" }).click();

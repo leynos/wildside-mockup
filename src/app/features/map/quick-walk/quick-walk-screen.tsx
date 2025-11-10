@@ -169,7 +169,12 @@ export function QuickWalkScreen(): JSX.Element {
                   <div
                     className="map-panel map-panel--stacked max-h-[53vh]"
                     data-testid="quick-walk-stops-panel"
+                    role="region"
+                    aria-labelledby="quick-walk-stops-heading"
                   >
+                    <h2 id="quick-walk-stops-heading" className="sr-only">
+                      Quick walk stops
+                    </h2>
                     <div className="map-panel__handle bg-transparent">
                       <button
                         type="button"
@@ -195,6 +200,8 @@ export function QuickWalkScreen(): JSX.Element {
                   <div
                     className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm text-base-content"
                     data-testid="quick-walk-notes-panel"
+                    role="region"
+                    aria-labelledby="quick-walk-notes-heading"
                   >
                     <button
                       type="button"
@@ -202,7 +209,12 @@ export function QuickWalkScreen(): JSX.Element {
                       className={panelHandleClass}
                       aria-label="Dismiss panel"
                     />
-                    <p className="text-base font-semibold text-base-content">Planning notes</p>
+                    <h2
+                      id="quick-walk-notes-heading"
+                      className="text-base font-semibold text-base-content"
+                    >
+                      Planning notes
+                    </h2>
                     <ul className="mt-3 list-disc space-y-2 pl-5 text-base-content/80">
                       <li>Sync the plan with your calendar to block out discovery time.</li>
                       <li>
