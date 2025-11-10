@@ -1,0 +1,4 @@
+`cy.get("[data-testid=$id]")` as $node where {
+  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
+  register_diagnostic(span=$node, message="[test/no-testid-selectors] Prefer a11y locators (testing-library/cypress or cy.findByRole). data-testid requires an ACCESSIBILITY justification.")
+}

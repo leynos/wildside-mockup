@@ -2,6 +2,7 @@ node_modules/
 dist/
 .npm-cache/
 .bun/
+tmp/
 
 tokens/node_modules/
 tokens/dist/

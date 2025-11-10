@@ -1,0 +1,5 @@
+`$recv.$method($arg)` as $node where {
+  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
+  $method <: `findByTestId`,
+  register_diagnostic(span=$node, message="[test/no-testid-selectors] Prefer accessible queries. *ByTestId requires an ACCESSIBILITY justification.")
+}

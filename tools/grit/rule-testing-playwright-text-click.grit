@@ -1,0 +1,4 @@
+`$page.getByText($label).click()` as $node where {
+  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
+  register_diagnostic(span=$node, message="[test/prefer-byrole-for-actions] Prefer page.getByRole('button', { name: $label }) for interactions.")
+}

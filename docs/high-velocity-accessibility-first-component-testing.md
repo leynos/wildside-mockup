@@ -206,6 +206,17 @@ Having the right tools is only half the battle. We also enforce **strict convent
 
 *Policy:* The use of `data-testid` (or similar testing-only attributes) is considered a last resort. In code review, any test that uses a test ID must justify why a role or label could not be used instead. Often, the remedy is to improve the component (e.g. add an `aria-label` or proper text) such that a more user-centric query becomes possible. This policy creates a virtuous cycle: it pushes developers to build components with accessibility in mind (so they are easily testable), and it makes the tests more robust by tying them to user-visible strings and roles.
 
+*Automation:* Biome loads the `tools/grit/rule-testing-*.grit` patterns, which emit the
+`test/no-testid-selectors`, `test/no-queryselector`,
+`test/prefer-byrole-for-actions`, and `test/no-raw-dom-lookup` diagnostics for
+test files. These rules error on any `*ByTestId` lookup (or raw
+`querySelector*`), warn when `getByText` is clicked, and therefore keep our
+tests aligned with the role-first guidance from Testing Library and
+Playwright. If a semantic selector is genuinely impossible, add an
+`ACCESSIBILITY:` justification next to a targeted
+`// biome-ignore lint/test/no-testid-selectors` suppression so reviewers can
+see the trade-off.
+
 *Example:* In the `GlobalControls` component test, instead of selecting a toggle button by an ID or class, we query it by its accessible name:
 
 ```

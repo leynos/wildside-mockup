@@ -1,0 +1,5 @@
+`fireEvent.$evt($target.$byText($label))` as $node where {
+  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
+  $byText <: `getByText`,
+  register_diagnostic(span=$node, message="[test/prefer-byrole-for-actions] Prefer ByRole when interacting (e.g. getByRole('button', { name: $label })).")
+}

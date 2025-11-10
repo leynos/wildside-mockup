@@ -1,0 +1,4 @@
+`document.getElementById($id)` as $node where {
+  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
+  register_diagnostic(span=$node, message="[test/no-raw-dom-lookup] Prefer accessible queries over raw DOM lookups in tests.")
+}
