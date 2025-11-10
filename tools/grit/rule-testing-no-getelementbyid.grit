@@ -1,3 +1,5 @@
-`document.$method($id)` as $node where {  $method <: `getElementById`,
+`document.$method($id)` as $node where {
+  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
+  $method <: `getElementById`,
   register_diagnostic($method, message="[test/no-raw-dom-lookup] Prefer accessible queries over raw DOM lookups in tests.")
 }

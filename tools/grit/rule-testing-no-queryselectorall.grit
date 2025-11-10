@@ -1,3 +1,5 @@
-`$recv.$method($sel)` as $node where {  $method <: `querySelectorAll`,
+`$recv.$method($sel)` as $node where {
+  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
+  $method <: `querySelectorAll`,
   register_diagnostic($method, message="[test/no-queryselector] Avoid CSS selectors in tests; prefer a11y queries.")
 }
