@@ -5,6 +5,8 @@
   :root {
     font-family: var(--font-family-sans);
     min-height: 100%;
+    /* DaisyUI encodes --color-accent with transparency, so expose a solid variant for UI affordances. */
+    --semantic-accent-solid: #0EB9CB;
   }
 
   html,
@@ -619,8 +621,12 @@
     @apply border-base-300/40 bg-base-300/30 text-base-content/70;
   }
 
-  .toggle-switch--accent {
-    @apply data-[state=checked]:bg-accent;
+  .toggle-switch--accent[data-state="checked"] {
+    /* Prefer the semantic solid accent, fall back to the default token if it is ever fully opaque. */
+    background-color: var(--semantic-accent-solid, var(--color-accent));
+    background-color: rgb(from var(--semantic-accent-solid, var(--color-accent)) r g b / 0.85);
+    background-image: none;
+    --tw-bg-opacity: 1;
   }
 
   .toggle-switch__thumb {

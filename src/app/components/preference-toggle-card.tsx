@@ -28,6 +28,14 @@ export function PreferenceToggleCard({
 }: PreferenceToggleCardProps): JSX.Element {
   const titleId = `${id}-title`;
   const descriptionId = `${id}-description`;
+  const switchClasses = [
+    "toggle-switch",
+    "toggle-switch--accent",
+    "preference-card__switch",
+    !isChecked ? "toggle-switch--muted" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <article className="preference-card">
@@ -48,7 +56,7 @@ export function PreferenceToggleCard({
         aria-describedby={descriptionId}
         checked={isChecked}
         onCheckedChange={onCheckedChange}
-        className="toggle-switch toggle-switch--muted toggle-switch--accent preference-card__switch"
+        className={switchClasses}
         data-testid={switchTestId}
       >
         <Switch.Thumb className="toggle-switch__thumb" />

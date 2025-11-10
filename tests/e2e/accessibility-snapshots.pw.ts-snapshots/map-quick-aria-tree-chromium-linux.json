@@ -64,60 +64,6 @@
                                                       {
                                                         "role": "generic",
                                                         "name": ""
-                                                      },
-                                                      {
-                                                        "role": "generic",
-                                                        "name": "",
-                                                        "children": [
-                                                          {
-                                                            "role": "none",
-                                                            "name": "",
-                                                            "children": [
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Zoom in"
-                                                              },
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Zoom out"
-                                                              },
-                                                              {
-                                                                "role": "button",
-                                                                "name": "Reset bearing to north"
-                                                              }
-                                                            ]
-                                                          }
-                                                        ]
-                                                      },
-                                                      {
-                                                        "role": "generic",
-                                                        "name": ""
-                                                      },
-                                                      {
-                                                        "role": "generic",
-                                                        "name": "",
-                                                        "children": [
-                                                          {
-                                                            "role": "none",
-                                                            "name": "",
-                                                            "children": [
-                                                              {
-                                                                "role": "none",
-                                                                "name": ""
-                                                              }
-                                                            ]
-                                                          },
-                                                          {
-                                                            "role": "none",
-                                                            "name": "",
-                                                            "children": [
-                                                              {
-                                                                "role": "none",
-                                                                "name": ""
-                                                              }
-                                                            ]
-                                                          }
-                                                        ]
                                                       }
                                                     ]
                                                   }

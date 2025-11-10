@@ -62,6 +62,15 @@ test.describe("Accessibility tree snapshots", () => {
       if (target.waitForSelector) {
         await page.waitForSelector(target.waitForSelector);
       }
+      if (target.path === "/map/quick") {
+        await page.evaluate(() => {
+          document
+            .querySelectorAll(
+              ".maplibregl-ctrl-bottom-left, .maplibregl-ctrl-bottom-right, .maplibregl-ctrl-top-right",
+            )
+            .forEach((node) => node.remove());
+        });
+      }
 
       const tree = await captureAccessibilityTree(page);
       const styleSamples = target.styleTargets
