@@ -1,4 +1,3 @@
-`$recv.querySelector($sel)` as $node where {
-  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
-  register_diagnostic(span=$node, message="[test/no-queryselector] Avoid CSS selectors in tests; prefer a11y queries (ByRole/Label/Placeholder/Alt/Title).")
+`$recv.$method($sel)` as $node where {  $method <: `querySelector`,
+  register_diagnostic($method, message="[test/no-queryselector] Avoid CSS selectors in tests; prefer a11y queries (ByRole/Label/Placeholder/Alt/Title).")
 }

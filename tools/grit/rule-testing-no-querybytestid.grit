@@ -1,5 +1,3 @@
-`$recv.$method($arg)` as $node where {
-  $filename <: r".*(?:/__tests__/|\\__tests__\\|/tests/|\\tests\\|\\.test\\.|\\.spec\\.).*",
-  $method <: `queryByTestId`,
-  register_diagnostic(span=$node, message="[test/no-testid-selectors] Prefer accessible queries. *ByTestId requires an ACCESSIBILITY justification.")
+`$recv.$method($arg)` as $node where {  $method <: `queryByTestId`,
+  register_diagnostic($method, message="[test/no-testid-selectors] Prefer accessible queries. Hint: reach for getByRole('button', { name: 'Save' }) or getByLabelText('Email') before falling back to data-testid. *ByTestId requires an ACCESSIBILITY justification.")
 }

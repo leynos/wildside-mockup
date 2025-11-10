@@ -28,7 +28,6 @@
     "./tools/grit/rule-testing-no-getbytestid.grit",
     "./tools/grit/rule-testing-no-findbytestid.grit",
     "./tools/grit/rule-testing-no-querybytestid.grit",
-    "./tools/grit/rule-testing-no-page-getbytestid.grit",
     "./tools/grit/rule-testing-no-page-locator-double.grit",
     "./tools/grit/rule-testing-no-page-locator-single.grit",
     "./tools/grit/rule-testing-no-cypress-get-double.grit",
