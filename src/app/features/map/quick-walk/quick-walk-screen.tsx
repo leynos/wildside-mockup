@@ -166,10 +166,9 @@ export function QuickWalkScreen(): JSX.Element {
 
               <MapViewportTab value="stops" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
-                  <div
+                  <section
                     className="map-panel map-panel--stacked max-h-[53vh]"
                     data-testid="quick-walk-stops-panel"
-                    role="region"
                     aria-labelledby="quick-walk-stops-heading"
                   >
                     <h2 id="quick-walk-stops-heading" className="sr-only">
@@ -191,16 +190,15 @@ export function QuickWalkScreen(): JSX.Element {
                       className="map-overlay__fade map-overlay__fade--bottom"
                       aria-hidden="true"
                     />
-                  </div>
+                  </section>
                 </div>
               </MapViewportTab>
 
               <MapViewportTab value="notes" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
-                  <div
+                  <section
                     className="map-panel map-panel--scroll max-h-[53vh] p-6 text-sm text-base-content"
                     data-testid="quick-walk-notes-panel"
-                    role="region"
                     aria-labelledby="quick-walk-notes-heading"
                   >
                     <button
@@ -224,7 +222,7 @@ export function QuickWalkScreen(): JSX.Element {
                         Invite friends and keep pace options flexible for an inclusive stroll.
                       </li>
                     </ul>
-                  </div>
+                  </section>
                 </div>
               </MapViewportTab>
             </MapViewport>
