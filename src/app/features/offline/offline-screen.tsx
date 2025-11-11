@@ -178,10 +178,15 @@ export function OfflineScreen(): JSX.Element {
               </section>
             ) : null}
 
-            <section className="space-y-4">
+            <section className="space-y-4" aria-labelledby="downloaded-areas-heading">
               <header className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-base font-semibold text-base-content">Downloaded areas</h2>
+                  <h2
+                    id="downloaded-areas-heading"
+                    className="text-base font-semibold text-base-content"
+                  >
+                    Downloaded areas
+                  </h2>
                   <OfflineDownloadMeta>Manage maps for offline navigation</OfflineDownloadMeta>
                 </div>
                 <Button
@@ -210,6 +215,7 @@ export function OfflineScreen(): JSX.Element {
                       key={entry.download.id}
                       data-testid="offline-download-card"
                       className="offline-download__card"
+                      aria-labelledby={`${entry.download.id}-title`}
                     >
                       {isManaging ? (
                         <button
@@ -230,7 +236,10 @@ export function OfflineScreen(): JSX.Element {
                       <div className="flex-1">
                         <div className="split-row">
                           <div>
-                            <h3 className="font-semibold text-base-content">
+                            <h3
+                              id={`${entry.download.id}-title`}
+                              className="font-semibold text-base-content"
+                            >
                               {entry.download.title}
                             </h3>
                             <OfflineDownloadMeta>
@@ -263,6 +272,7 @@ export function OfflineScreen(): JSX.Element {
                       key={`${entry.download.id}-undo`}
                       data-testid="offline-undo-card"
                       className="offline-download__undo"
+                      aria-label={`${entry.download.title} deleted`}
                     >
                       <div>
                         <p className="font-semibold">{entry.download.title} deleted</p>

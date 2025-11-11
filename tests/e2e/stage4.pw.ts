@@ -35,6 +35,8 @@ test.describe("Stage 4 routes", () => {
     return lightness ?? Number.NaN;
   };
 
+  const escapeRegExp = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
   test("walk complete triggers rating toast", async ({ page }) => {
     await page.goto("/walk-complete");
     await expect(page.getByRole("heading", { name: /walk complete/i })).toBeVisible();
@@ -53,31 +55,37 @@ test.describe("Stage 4 routes", () => {
     await page.goto("/offline");
     await page.getByRole("button", { name: /manage/i }).click();
     const doneToggle = page.getByRole("button", { name: /^done$/i });
-    const cardsBefore = await page.getByTestId("offline-download-card").count();
-    const firstCard = page.getByTestId("offline-download-card").first();
-    const deletedTitle = (await firstCard.locator("h3").textContent()) ?? "";
-    await expect(page.getByTestId("offline-delete-button")).toHaveCount(cardsBefore);
-    await page.getByTestId("offline-delete-button").first().click();
-    await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore - 1);
-    await expect(
-      page.getByTestId("offline-undo-card").filter({ hasText: deletedTitle.trim() }),
-    ).toBeVisible();
-    await page.getByTestId("offline-undo-button").click();
-    await expect(page.getByTestId("offline-undo-card")).toHaveCount(0);
-    await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore);
+    const downloadsRegion = page.getByRole("region", { name: /downloaded areas/i });
+    const downloadCards = downloadsRegion.getByRole("article").filter({ hasNotText: /deleted$/i });
+    const undoCards = downloadsRegion.getByRole("article").filter({ hasText: /deleted$/i });
+    const deleteButtons = downloadsRegion.getByRole("button", { name: /^delete /i });
+
+    const cardsBefore = await downloadCards.count();
+    const firstCard = downloadCards.first();
+    const deletedTitle = (await firstCard.locator("h3").textContent())?.trim() ?? "";
+    await expect(deleteButtons).toHaveCount(cardsBefore);
+    await deleteButtons.first().click();
+    await expect(downloadCards).toHaveCount(cardsBefore - 1);
+    const undoForDeleted = undoCards.filter({
+      hasText: new RegExp(`${escapeRegExp(deletedTitle)} deleted`, "i"),
+    });
+    await expect(undoForDeleted).toBeVisible();
+    await undoForDeleted.getByRole("button", { name: /^undo$/i }).click();
+    await expect(undoCards).toHaveCount(0);
+    await expect(downloadCards).toHaveCount(cardsBefore);
 
     // Delete again and confirm Done clears the undo state permanently
-    await page.getByTestId("offline-delete-button").first().click();
-    await expect(page.getByTestId("offline-undo-card")).toHaveCount(1);
+    await deleteButtons.first().click();
+    await expect(undoCards).toHaveCount(1);
     await doneToggle.click();
     await expect(page.getByRole("button", { name: /manage/i })).toBeVisible();
-    await expect(page.getByTestId("offline-undo-card")).toHaveCount(0);
-    await expect(page.getByTestId("offline-download-card")).toHaveCount(cardsBefore - 1);
+    await expect(undoCards).toHaveCount(0);
+    await expect(downloadCards).toHaveCount(cardsBefore - 1);
   });
 
   test("auto-management switches respond to toggling", async ({ page }) => {
     await page.goto("/offline");
-    const autoSwitch = page.getByTestId("auto-management-switch-auto-update");
+    const autoSwitch = page.getByRole("switch", { name: /auto-update maps/i });
     await expect(autoSwitch).toHaveAttribute("data-state", "unchecked");
     const offBackground = await autoSwitch.evaluate(
       (element) => getComputedStyle(element as HTMLElement).backgroundColor,
