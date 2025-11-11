@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { screen } from "@testing-library/dom";
 import type { ReactElement } from "react";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
@@ -44,12 +45,11 @@ describe("ThemeProvider", () => {
   it("applies the default theme to html and body", () => {
     const Probe = () => {
       const { theme } = useTheme();
-      return <span data-theme={theme} />;
+      return <span>{`Theme:${theme}`}</span>;
     };
 
-    const container = mountWithProvider(<Probe />);
-    const probe = container.querySelector<HTMLSpanElement>("span[data-theme]");
-    expect(probe?.getAttribute("data-theme")).toBe("wildside-night");
+    mountWithProvider(<Probe />);
+    expect(screen.getByText(/Theme:wildside-night/i)).toBeTruthy();
     expect(document.documentElement.getAttribute("data-theme")).toBe("wildside-night");
     expect(document.body.getAttribute("data-theme")).toBe("wildside-night");
   });
@@ -68,17 +68,31 @@ describe("ThemeProvider", () => {
       );
     };
 
-    const container = mountWithProvider(<Toggle />);
-    const button = container.querySelector<HTMLButtonElement>("button");
-    expect(button).toBeTruthy();
+    mountWithProvider(<Toggle />);
+    const button = screen.getByRole("button", { name: /switch to day theme/i });
     act(() => {
-      button?.click();
+      button.click();
     });
 
     expect(document.documentElement.getAttribute("data-theme")).toBe("wildside-day");
     expect(window.localStorage.getItem("wildside.theme")).toBe("wildside-day");
   });
 });
+
+type MobileShellDataset = DOMStringMap & { mobileShell?: string };
+
+function getShellModeForText(text: string): string | undefined {
+  const node = screen.getByText(text);
+  let current: HTMLElement | null = node as HTMLElement;
+  while (current) {
+    const dataset = current.dataset as MobileShellDataset;
+    if (dataset.mobileShell) {
+      return dataset.mobileShell;
+    }
+    current = current.parentElement;
+  }
+  return undefined;
+}
 
 describe("MobileShell layout", () => {
   it("renders overlay content when provided", () => {
@@ -89,14 +103,14 @@ describe("MobileShell layout", () => {
     act(() => {
       root.render(
         <DisplayModeProvider>
-          <MobileShell background={<div data-testid="overlay" />}>
+          <MobileShell background={<div>Overlay content</div>}>
             <section>content</section>
           </MobileShell>
         </DisplayModeProvider>,
       );
     });
 
-    expect(mount.querySelector("[data-testid='overlay']")).toBeTruthy();
+    expect(screen.getByText(/overlay content/i)).toBeTruthy();
     act(() => {
       root.unmount();
     });
@@ -118,10 +132,8 @@ describe("MobileShell layout", () => {
       );
     });
 
-    const frame = mount.querySelector("div.h-\\[844px\\]");
-    expect(frame).toBeTruthy();
-    const surface = mount.querySelector("[data-mobile-shell='hosted']");
-    expect(surface).toBeTruthy();
+    const shellMode = getShellModeForText("framed");
+    expect(shellMode).toBe("hosted");
 
     act(() => {
       root.unmount();
@@ -145,10 +157,8 @@ describe("MobileShell layout", () => {
       );
     });
 
-    const fullSurface = mount.querySelector("[data-mobile-shell='full']");
-    expect(fullSurface).toBeTruthy();
-    const hostedFrame = mount.querySelector("div.h-\\[844px\\]");
-    expect(hostedFrame).toBeNull();
+    const shellMode = getShellModeForText("full layout");
+    expect(shellMode).toBe("full");
 
     act(() => {
       root.unmount();

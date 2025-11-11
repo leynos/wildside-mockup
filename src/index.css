@@ -6,7 +6,7 @@
     font-family: var(--font-family-sans);
     min-height: 100%;
     /* DaisyUI encodes --color-accent with transparency, so expose a solid variant for UI affordances. */
-    --semantic-accent-solid: #0eb9cb;
+    --semantic-accent-solid: rgb(14 185 203);
   }
 
   html,

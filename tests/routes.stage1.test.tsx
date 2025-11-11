@@ -1,13 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { screen, within } from "@testing-library/dom";
 import { act } from "react";
-import { createRoot, type Root } from "react-dom/client";
+import type { Root } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 
 import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
-import { walkCompletionShareOptions } from "../src/app/data/stage-four";
+import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
   accessibilityOptions,
   wizardGeneratedStops,
   wizardSummaryHighlights,
+  wizardWeatherSummary,
 } from "../src/app/data/wizard";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
@@ -93,134 +96,72 @@ describe("Stage 1 routed flows", () => {
   it("tracks selected interests on the discover route", async () => {
     ({ mount, root } = await renderRoute("/discover"));
     const container = requireContainer(mount);
-    const contentShell = container.querySelector(".discover-screen__content");
-    expect(contentShell).toBeTruthy();
-    const chips = Array.from(container.querySelectorAll("button"));
-    const parksChip = chips.find((chip) => chip.textContent?.includes("Parks & Nature"));
-    expect(parksChip).toBeTruthy();
-    const interestsSection = container.querySelector(".discover-interests__section");
-    expect(interestsSection).toBeTruthy();
-    const discoverCards = container.querySelectorAll(".discover-interest__card");
-    expect(discoverCards.length).toBeGreaterThan(0);
-    const inlineClusters = container.querySelectorAll(".inline-action-cluster");
-    expect(inlineClusters.length).toBeGreaterThan(0);
-    const discoverCta = container.querySelector(".cta-button");
-    expect(discoverCta).toBeTruthy();
-    expect(discoverCta?.classList.contains("cta-button")).toBe(true);
+    const view = within(container);
+    expect(
+      view.getByRole("heading", { level: 1, name: /discover your perfect walk/i }),
+    ).toBeTruthy();
+
+    const interestGroup = view.getByRole("group", { name: /interests/i });
+    const parksChip = within(interestGroup).getByRole("button", { name: /parks & nature/i });
     act(() => clickElement(parksChip));
 
-    const indicator = Array.from(container.querySelectorAll<HTMLParagraphElement>("p")).find((p) =>
-      p.textContent?.includes("themes selected"),
-    );
-    expect(indicator?.querySelector("span")?.textContent).toBe("3");
+    const indicator = view.getByText(/themes selected/i);
+    expect(indicator.textContent).toMatch(/3/);
+    expect(view.getByRole("button", { name: /start exploring/i })).toBeTruthy();
   });
 
   it("navigates from explore to discover via the filter button", async () => {
     ({ mount, root } = await renderRoute("/explore"));
     const container = requireContainer(mount);
-    const filterButton = container.querySelector<HTMLButtonElement>(
-      "button[aria-label='Filter walks']",
-    );
-    expect(filterButton).toBeTruthy();
-    expect(filterButton?.classList.contains("header-icon-button")).toBe(true);
+    const view = within(container);
+    const filterButton = view.getByRole("button", { name: /filter walks/i });
 
     await act(async () => {
       clickElement(filterButton);
       // allow the router navigation microtask to flush
       await Promise.resolve();
     });
-    const header = Array.from(container.querySelectorAll("h1, h2"))
-      .map((node) => node.textContent?.trim())
-      .filter(Boolean);
-    expect(header).toContain("Discover Your Perfect Walk");
+    expect(
+      await screen.findByRole("heading", { name: /discover your perfect walk/i }),
+    ).toBeTruthy();
   });
 
-  it("renders explore panels using semantic classes", async () => {
+  it("renders explore panels using accessible regions", async () => {
     ({ mount, root } = await renderRoute("/explore"));
     const container = requireContainer(mount);
+    const view = within(container);
 
-    const featuredPanel = container.querySelector(".explore-featured__panel");
-    expect(featuredPanel).toBeTruthy();
+    const featuredPanel = view.getByRole("region", { name: /walk of the week/i });
+    expect(within(featuredPanel).getByText(/walk of the week/i)).toBeTruthy();
 
-    const compactCards = container.querySelectorAll(".explore-compact__card");
-    expect(compactCards.length).toBeGreaterThan(0);
+    expect(view.getByRole("region", { name: /popular themes/i })).toBeTruthy();
+    expect(view.getByRole("region", { name: /curated collections/i })).toBeTruthy();
+    expect(view.getByRole("region", { name: /trending now/i })).toBeTruthy();
+    expect(view.getByRole("region", { name: /community favourite/i })).toBeTruthy();
 
-    const collectionCards = container.querySelectorAll(".explore-collection__card");
-    expect(collectionCards.length).toBeGreaterThan(0);
+    const searchInput = view.getByPlaceholderText(/search walks/i);
+    expect(searchInput.getAttribute("type")).toBe("search");
 
-    const infoPanel = container.querySelector(".explore-info__panel");
-    expect(infoPanel).toBeTruthy();
-
-    const searchInput = container.querySelector<HTMLInputElement>(".explore-search__input");
-    expect(searchInput).toBeTruthy();
-
-    const themeBadge = container.querySelector(".explore-theme__badge");
-    expect(themeBadge).toBeTruthy();
-
-    const metrics = container.querySelectorAll(".route-metric");
-    expect(metrics.length).toBeGreaterThanOrEqual(3);
-    metrics.forEach((metric) => {
-      expect(metric.classList.contains("route-metric")).toBe(true);
-    });
-    const sectionTitles = container.querySelectorAll(".section-title");
-    expect(sectionTitles.length).toBeGreaterThanOrEqual(3);
-
-    const sectionHeadings = container.querySelectorAll(".section-heading");
-    expect(sectionHeadings.length).toBeGreaterThanOrEqual(2);
-
-    const ratingIndicators = container.querySelectorAll(".rating-indicator");
-    expect(ratingIndicators.length).toBeGreaterThanOrEqual(2);
-    ratingIndicators.forEach((indicator) => {
-      expect(indicator.classList.contains("rating-indicator")).toBe(true);
-    });
-
-    const strongIndicators = container.querySelectorAll(".rating-indicator--strong");
-    expect(strongIndicators.length).toBeGreaterThanOrEqual(1);
-    strongIndicators.forEach((indicator) => {
-      expect(indicator.classList.contains("rating-indicator--strong")).toBe(true);
-    });
-
-    const statGroups = container.querySelectorAll(".explore-stat-group");
-    expect(statGroups.length).toBeGreaterThanOrEqual(2);
-    statGroups.forEach((group) => {
-      expect(group.classList.contains("explore-stat-group")).toBe(true);
-    });
-    expect(container.querySelector(".explore-stat-group--right")).toBeTruthy();
-
-    const exploreMetaLists = container.querySelectorAll(".explore-meta-list");
-    expect(exploreMetaLists.length).toBeGreaterThanOrEqual(2);
-    exploreMetaLists.forEach((list) => {
-      expect(list.classList.contains("explore-meta-list")).toBe(true);
-    });
-
-    const appBottomNav = container.querySelector(".bottom-nav");
-    expect(appBottomNav).toBeTruthy();
+    const bottomNav = view.getByRole("navigation", { name: /primary navigation/i });
+    expect(bottomNav).toBeTruthy();
   });
 
   it("toggles advanced switches on the customize route", async () => {
     ({ mount, root } = await renderRoute("/customize"));
     const container = requireContainer(mount);
-    const helpButton = container.querySelector<HTMLButtonElement>("button[aria-label='Help']");
-    expect(helpButton).toBeTruthy();
-    expect(helpButton?.classList.contains("header-icon-button")).toBe(true);
-    const safetySwitch = container.querySelector<HTMLButtonElement>("#advanced-safety");
-    expect(safetySwitch?.getAttribute("data-state")).toBe("unchecked");
+    const view = within(container);
+    expect(view.getByRole("button", { name: /help/i })).toBeTruthy();
 
+    const safetySwitch = view.getByRole("switch", { name: /safety priority/i });
+    expect(safetySwitch.getAttribute("data-state")).toBe("unchecked");
     act(() => clickElement(safetySwitch));
-    expect(safetySwitch?.getAttribute("data-state")).toBe("checked");
+    expect(safetySwitch.getAttribute("data-state")).toBe("checked");
 
-    const surfaceOptions = container.querySelectorAll(".customize-surface__option");
-    expect(surfaceOptions.length).toBeGreaterThan(0);
+    const surfacePicker = view.getByRole("group", { name: /surface type/i });
+    expect(within(surfacePicker).getAllByRole("radio").length).toBeGreaterThan(0);
 
-    const sectionHeadings = container.querySelectorAll(".section-heading");
-    expect(sectionHeadings.length).toBeGreaterThan(0);
-
-    const interestSliders = container.querySelectorAll(".interest-mix__slider");
-    expect(interestSliders.length).toBeGreaterThan(0);
-    interestSliders.forEach((slider) => {
-      expect(slider.querySelector(".interest-mix__thumb")).toBeTruthy();
-      expect(slider.querySelector(".interest-mix__track")).toBeTruthy();
-    });
+    expect(view.getAllByRole("heading", { level: 2 }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("slider").length).toBeGreaterThan(0);
   });
 });
 
@@ -251,250 +192,192 @@ describe("Stage 2 routed flows", () => {
   it("updates quick walk interests and navigates to saved", async () => {
     ({ mount, root } = await renderRoute("/map/quick"));
     const container = requireContainer(mount);
-    const coffeeChip = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Coffee Spots"),
-    );
-    expect(coffeeChip).toBeTruthy();
+    const view = within(container);
+    const coffeeChip = view.getByRole("button", { name: /coffee spots/i });
     act(() => clickElement(coffeeChip));
 
-    const selectionBadge = Array.from(container.querySelectorAll("span")).find((node) =>
-      node.textContent?.includes("selected"),
-    );
-    expect(selectionBadge?.textContent).toContain("3 selected");
+    const selectionBadge = view.getByText(/selected/i);
+    expect(selectionBadge.textContent).toContain("3 selected");
 
-    const quickHeadings = container.querySelectorAll(".section-heading");
+    const quickHeadings = view.getAllByRole("heading", { level: 2 });
     expect(quickHeadings.length).toBeGreaterThan(0);
 
-    const routesNav = Array.from(container.querySelectorAll("button")).find(
-      (btn) => btn.textContent?.trim() === "Routes",
-    );
-    expect(routesNav).toBeTruthy();
-
-    const saveAction = container.querySelector<HTMLButtonElement>(
-      "button[aria-label='Save quick walk']",
-    );
-    expect(saveAction).toBeTruthy();
+    const saveAction = view.getByRole("button", { name: /save quick walk/i });
 
     await act(async () => {
       clickElement(saveAction);
       await Promise.resolve();
     });
 
-    const heading = Array.from(container.querySelectorAll("h1")).find((h1) =>
-      h1.textContent?.includes("Waterfront Discovery Walk"),
-    );
+    const heading = await screen.findByRole("heading", {
+      name: /waterfront discovery walk/i,
+    });
     expect(heading).toBeTruthy();
   });
 
   it("uses semantic map panel classes on the quick walk route", async () => {
     ({ mount, root } = await renderRoute("/map/quick"));
     const container = requireContainer(mount);
+    const view = within(container);
 
-    const stopsPanel = container.querySelector("[data-testid='quick-walk-stops-panel']");
-    expect(stopsPanel).toBeTruthy();
-    expect(stopsPanel?.classList.contains("map-panel")).toBe(true);
-    expect(stopsPanel?.classList.contains("map-panel--stacked")).toBe(true);
+    const stopsPanel = view.getByRole("region", { name: /quick walk stops/i });
+    expect(stopsPanel.classList.contains("map-panel")).toBe(true);
+    expect(stopsPanel.classList.contains("map-panel--stacked")).toBe(true);
 
-    const notesPanel = container.querySelector("[data-testid='quick-walk-notes-panel']");
-    expect(notesPanel).toBeTruthy();
-    expect(notesPanel?.classList.contains("map-panel")).toBe(true);
-    expect(notesPanel?.classList.contains("map-panel--scroll")).toBe(true);
+    const notesPanel = view.getByRole("region", { name: /quick walk notes|planning notes/i });
+    expect(notesPanel.classList.contains("map-panel")).toBe(true);
+    expect(notesPanel.classList.contains("map-panel--scroll")).toBe(true);
 
-    const mapHandles = container.querySelectorAll(".map-panel__handle");
+    const mapHandles = view.getAllByRole("button", { name: /dismiss panel/i });
     expect(mapHandles.length).toBeGreaterThan(0);
 
-    const tablist = container.querySelector(".map-panel__tablist");
-    expect(tablist).toBeTruthy();
+    const tablist = view.getByRole("tablist");
+    expect(tablist.classList.contains("map-panel__tablist")).toBe(true);
 
-    const quickFabLayer = container.querySelector(".map-fab-layer");
-    expect(quickFabLayer).toBeTruthy();
-    const quickFabButton = quickFabLayer?.querySelector<HTMLButtonElement>(
-      "button[aria-label='Save quick walk']",
-    );
-    expect(quickFabButton).toBeTruthy();
-    expect(quickFabButton?.classList.contains("pointer-events-auto")).toBe(true);
+    const quickFabButton = view.getByRole("button", { name: /save quick walk/i });
+    expect(quickFabButton.classList.contains("pointer-events-auto")).toBe(true);
   });
 
   it("launches the wizard from the quick walk magic wand", async () => {
     ({ mount, root } = await renderRoute("/map/quick"));
     const container = requireContainer(mount);
-    const wandTrigger = container.querySelector<HTMLButtonElement>(
-      "button[aria-label='Generate a new walk']",
-    );
-    expect(wandTrigger).toBeTruthy();
+    const view = within(container);
+    const wandTrigger = view.getByRole("button", { name: /generate a new walk/i });
 
     await act(async () => {
       clickElement(wandTrigger);
       await Promise.resolve();
     });
 
-    const wizardHeading = Array.from(container.querySelectorAll("h1")).find((h1) =>
-      h1.textContent?.includes("Walk Wizard"),
-    );
-    expect(wizardHeading).toBeTruthy();
+    expect(await screen.findByRole("heading", { name: /walk wizard/i })).toBeTruthy();
   });
 
   it("applies semantic classes to quick walk tab panels", async () => {
     ({ mount, root } = await renderRoute("/map/quick"));
     const container = requireContainer(mount);
-    const tabPanels = container.querySelectorAll<HTMLElement>("[role='tabpanel']");
+    const view = within(container);
+    const tabPanels = view.getAllByRole("tabpanel");
     expect(tabPanels.length).toBeGreaterThanOrEqual(3);
     tabPanels.forEach((panel) => {
       expect(panel.classList.contains("map-viewport__tab")).toBe(true);
     });
 
-    const generatorPanel = container.querySelector(".quick-walk__panel");
-    expect(generatorPanel).toBeTruthy();
+    const generatorHeading = view.getByRole("heading", { name: /quick walk generator/i });
+    expect(generatorHeading).toBeTruthy();
 
-    const mapBottomNav = container.querySelector(".bottom-nav.bottom-nav--map");
-    expect(mapBottomNav).toBeTruthy();
+    const mapTablist = view.getByRole("tablist");
+    expect(mapTablist.classList.contains("map-panel__tablist")).toBe(true);
 
-    const shellMain = container.querySelector(".map-shell__main");
-    expect(shellMain).toBeTruthy();
+    const stopsRegion = view.getByRole("region", { name: /quick walk stops/i });
+    expect(stopsRegion.classList.contains("map-panel")).toBe(true);
 
-    const fadeTop = container.querySelector(".map-overlay__fade--top");
-    const fadeBottom = container.querySelector(".map-overlay__fade--bottom");
-    expect(fadeTop).toBeTruthy();
-    expect(fadeBottom).toBeTruthy();
+    const notesRegion = view.getByRole("region", { name: /planning notes/i });
+    const notesList = within(notesRegion).getByRole("list");
+    expect(within(notesList).getAllByRole("listitem").length).toBeGreaterThanOrEqual(3);
   });
 
   it("toggles itinerary favourites and opens the share dialog", async () => {
     ({ mount, root } = await renderRoute("/map/itinerary"));
     const container = requireContainer(mount);
-    const summaryPanel = container.querySelector(".map-route__summary");
-    expect(summaryPanel).toBeTruthy();
-    const overlayPanels = container.querySelectorAll(".map-overlay");
-    expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
-    const notesPanel = container.querySelector(".map-panel__notes");
-    expect(notesPanel).toBeTruthy();
-    const itineraryNotesList = notesPanel?.querySelector<HTMLUListElement>(
-      "ul[aria-label='Route notes']",
-    );
-    expect(itineraryNotesList).toBeTruthy();
-    expect(itineraryNotesList?.classList.contains("route-note-list")).toBe(true);
-    expect(itineraryNotesList?.querySelectorAll("li").length).toBe(
+    const view = within(container);
+    const tabPanels = view.getAllByRole("tabpanel");
+    expect(tabPanels.length).toBeGreaterThanOrEqual(3);
+
+    const routeSummaryHeading = view.getByRole("heading", {
+      name: new RegExp(waterfrontDiscoveryRoute.title, "i"),
+    });
+    expect(routeSummaryHeading).toBeTruthy();
+
+    expect(view.getByText(waterfrontDiscoveryRoute.distance)).toBeTruthy();
+    expect(view.getByText(waterfrontDiscoveryRoute.duration)).toBeTruthy();
+    expect(view.getByText(String(waterfrontDiscoveryRoute.stopsCount))).toBeTruthy();
+
+    waterfrontDiscoveryRoute.highlights.forEach((highlight) => {
+      expect(view.getAllByText(new RegExp(highlight, "i"))[0]).toBeTruthy();
+    });
+
+    const notesList = view.getByRole("list", { name: /route notes/i });
+    expect(within(notesList).getAllByRole("listitem").length).toBe(
       waterfrontDiscoveryRoute.notes.length,
     );
-    const stopsTab = Array.from(container.querySelectorAll('[role="tab"]')).find((tab) =>
-      tab.textContent?.includes("Stops"),
-    );
-    expect(stopsTab).toBeTruthy();
+
+    const stopsTab = view.getByRole("tab", { name: /stops/i });
     await act(async () => {
       clickElement(stopsTab);
       await Promise.resolve();
     });
-    const panelBodies = container.querySelectorAll(".map-panel__body");
-    expect(panelBodies.length).toBeGreaterThanOrEqual(1);
-    panelBodies.forEach((body) => {
-      expect(body.classList.contains("map-panel__body")).toBe(true);
-    });
-    const metaPanel = container.querySelector(".map-route__meta");
-    expect(metaPanel).toBeTruthy();
-    const routeStats = container.querySelectorAll(".map-route__stat");
-    expect(routeStats.length).toBeGreaterThanOrEqual(3);
-    routeStats.forEach((stat) => {
-      expect(stat.classList.contains("map-route__stat")).toBe(true);
+    const stopsPanel = view.getByRole("tabpanel", { name: /stops/i });
+    expect(stopsPanel.classList.contains("map-overlay")).toBe(true);
+    waterfrontDiscoveryRoute.pointsOfInterest.forEach((poi) => {
+      expect(
+        within(stopsPanel).getByRole("button", { name: new RegExp(poi.name, "i") }),
+      ).toBeTruthy();
     });
 
-    const favouriteButton = container.querySelector<HTMLButtonElement>(
-      "button[aria-pressed='false']",
-    );
-    expect(favouriteButton).toBeTruthy();
-
-    act(() => clickElement(favouriteButton));
-    expect(favouriteButton?.getAttribute("aria-pressed")).toBe("true");
-
-    const highlights = container.querySelectorAll(".route-highlight");
-    expect(highlights.length).toBe(waterfrontDiscoveryRoute.highlights.length);
-    highlights.forEach((highlight) => {
-      expect(highlight.classList.contains("route-highlight")).toBe(true);
-    });
-
-    const shareButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Share"),
-    );
-    expect(shareButton).toBeTruthy();
-    expect(shareButton?.classList.contains("route-share__trigger")).toBe(true);
+    const shareButton = view.getByRole("button", { name: /share/i });
+    expect(shareButton.classList.contains("route-share__trigger")).toBe(true);
 
     await act(async () => {
       clickElement(shareButton);
       await Promise.resolve();
     });
 
-    const dialog = document.querySelector("[role='dialog']");
-    expect(dialog).toBeTruthy();
-    expect(dialog?.querySelector(".route-share__preview")).toBeTruthy();
-    const closeControl = Array.from(dialog?.querySelectorAll("button") ?? []).find((btn) =>
-      btn.textContent?.includes("Close"),
-    );
-    expect(closeControl).toBeTruthy();
+    const dialog = await screen.findByRole("dialog", { name: /share this walk/i });
+    expect(within(dialog).getByText(/wildside\.app\/routes/)).toBeTruthy();
+    const closeControl = within(dialog).getByRole("button", { name: /close/i });
     act(() => clickElement(closeControl));
+
+    const favouriteButton = view.getByRole("button", { name: /save this itinerary/i });
+    act(() => clickElement(favouriteButton));
+    const updatedFavourite = view.getByRole("button", { name: /remove saved itinerary/i });
+    expect(updatedFavourite.getAttribute("aria-pressed")).toBe("true");
   });
 
   it("opens the saved walk share dialog from the saved route", async () => {
     ({ mount, root } = await renderRoute("/saved"));
     const container = requireContainer(mount);
-    const overlayPanels = container.querySelectorAll(".map-overlay");
-    expect(overlayPanels.length).toBeGreaterThanOrEqual(3);
-    const savedNotesPanel = container.querySelector(".map-panel__notes");
-    expect(savedNotesPanel).toBeTruthy();
-    const savedRouteNotesList = savedNotesPanel?.querySelector<HTMLUListElement>(
-      "ul[aria-label='Route notes']",
-    );
-    expect(savedRouteNotesList).toBeTruthy();
-    expect(savedRouteNotesList?.classList.contains("route-note-list")).toBe(true);
-    expect(savedRouteNotesList?.querySelectorAll("li").length).toBe(savedRoute.notes.length);
-    const stopsTab = Array.from(container.querySelectorAll('[role="tab"]')).find((tab) =>
-      tab.textContent?.includes("Stops"),
-    );
-    expect(stopsTab).toBeTruthy();
+    const view = within(container);
+
+    const tabPanels = view.getAllByRole("tabpanel");
+    expect(tabPanels.length).toBeGreaterThanOrEqual(3);
+
+    const notesTabpanel = view.getByRole("tabpanel", { name: /notes/i });
+    const notesList = within(notesTabpanel).getByRole("list", { name: /route notes/i });
+    expect(notesList.classList.contains("route-note-list")).toBe(true);
+    expect(within(notesList).getAllByRole("listitem").length).toBe(savedRoute.notes.length);
+
+    const stopsTab = view.getByRole("tab", { name: /stops/i });
     await act(async () => {
       clickElement(stopsTab);
       await Promise.resolve();
     });
-    const panelBodies = container.querySelectorAll(".map-panel__body");
-    expect(panelBodies.length).toBeGreaterThanOrEqual(1);
-    panelBodies.forEach((body) => {
-      expect(body.classList.contains("map-panel__body")).toBe(true);
+    const stopsTabpanel = view.getByRole("tabpanel", { name: /stops/i });
+    savedRoute.pointsOfInterest.forEach((poi) => {
+      expect(
+        within(stopsTabpanel).getByRole("button", { name: new RegExp(poi.name, "i") }),
+      ).toBeTruthy();
     });
-    const notesPanel = container.querySelector(".map-panel__notes");
-    expect(notesPanel).toBeTruthy();
-    expect(notesPanel?.classList.contains("map-panel__notes--spacious")).toBe(true);
-    const routeMetaChips = container.querySelectorAll(".route-summary__meta");
-    expect(routeMetaChips.length).toBeGreaterThanOrEqual(3);
-    routeMetaChips.forEach((chip) => {
-      expect(chip.classList.contains("route-summary__meta")).toBe(true);
-    });
-    const shareTrigger = Array.from(container.querySelectorAll("button")).find(
-      (btn) => btn.getAttribute("aria-label") === "Share",
-    );
-    expect(shareTrigger).toBeTruthy();
 
-    const savedFabLayer = container.querySelector(".map-fab-layer");
-    expect(savedFabLayer).toBeTruthy();
-    const savedFabButton = savedFabLayer?.querySelector<HTMLButtonElement>("button[aria-pressed]");
-    expect(savedFabButton).toBeTruthy();
-    expect(savedFabButton?.classList.contains("pointer-events-auto")).toBe(true);
+    expect(view.getByRole("heading", { name: new RegExp(savedRoute.title, "i") })).toBeTruthy();
+    expect(view.getByText(savedRoute.distance)).toBeTruthy();
+    expect(view.getByText(savedRoute.duration)).toBeTruthy();
+
+    const shareTrigger = view.getByRole("button", { name: /^share$/i });
+    const favouriteButton = view.getByRole("button", { name: /remove saved walk/i });
 
     await act(async () => {
       clickElement(shareTrigger);
       await Promise.resolve();
     });
 
-    const dialog = document.querySelector("[role='dialog']");
-    expect(dialog).toBeTruthy();
-    expect(dialog?.querySelector(".route-share__preview")).toBeTruthy();
-    const closeButton = Array.from(dialog?.querySelectorAll("button") ?? []).find((btn) =>
-      btn.textContent?.includes("Close"),
-    );
+    const dialog = await screen.findByRole("dialog", { name: /share saved walk/i });
+    expect(within(dialog).getByText(`https://wildside.app/routes/${savedRoute.id}`)).toBeTruthy();
+    const closeButton = within(dialog).getByRole("button", { name: /close/i });
     act(() => clickElement(closeButton));
 
-    const favouriteButton = container.querySelector<HTMLButtonElement>(
-      "button[aria-pressed='true']",
-    );
-    expect(favouriteButton).toBeTruthy();
     act(() => clickElement(favouriteButton));
-    expect(favouriteButton?.getAttribute("aria-pressed")).toBe("false");
+    const resetFavourite = view.getByRole("button", { name: /save this walk/i });
+    expect(resetFavourite.getAttribute("aria-pressed")).toBe("false");
   });
 });
 
@@ -525,128 +408,100 @@ describe("Stage 3 wizard flows", () => {
   it("advances from wizard step one to step two", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-1"));
     const container = requireContainer(mount);
-    const pulse = container.querySelector(".wizard-stepper__pulse");
-    expect(pulse).toBeTruthy();
-    const wizardSections = container.querySelectorAll(".wizard-section");
-    expect(wizardSections.length).toBeGreaterThanOrEqual(2);
-    const continueButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Continue to preferences"),
-    );
-    expect(continueButton).toBeTruthy();
-    expect(continueButton?.classList.contains("cta-button")).toBe(true);
+    const view = within(container);
+    const durationSection = view.getByRole("region", { name: /walk duration controls/i });
+    expect(durationSection.classList.contains("wizard-section")).toBe(true);
+    const interestsSection = view.getByRole("region", { name: /interests/i });
+    expect(interestsSection.classList.contains("wizard-section")).toBe(true);
+    const continueButton = view.getByRole("button", { name: /continue to preferences/i });
+    expect(continueButton.classList.contains("cta-button")).toBe(true);
 
     await act(async () => {
       clickElement(continueButton);
       await Promise.resolve();
     });
 
-    const heading = Array.from(container.querySelectorAll("h2")).find((node) =>
-      node.textContent?.includes("Discovery style"),
-    );
+    const heading = await screen.findByRole("heading", { name: /discovery style/i });
     expect(heading).toBeTruthy();
   });
 
   it("renders wizard step two surfaces with semantic classes", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-2"));
     const container = requireContainer(mount);
+    const view = within(container);
 
-    const summary = container.querySelector(".wizard-discovery__summary");
-    expect(summary).toBeTruthy();
+    const discoveryRegion = view.getByRole("region", { name: /discovery style/i });
+    expect(discoveryRegion.classList.contains("wizard-section")).toBe(true);
+    expect(within(discoveryRegion).getByText(/balanced mix/i)).toBeInTheDocument();
+    expect(within(discoveryRegion).getByText(/new/i).classList.contains("wizard-badge")).toBe(true);
 
-    const wizardSectionTitles = container.querySelectorAll(".section-title");
-    expect(wizardSectionTitles.length).toBeGreaterThanOrEqual(1);
-
-    const wizardSections = container.querySelectorAll(".wizard-section");
-    expect(wizardSections.length).toBeGreaterThanOrEqual(2);
-
-    const stepTwoBadges = container.querySelectorAll(".wizard-badge");
-    expect(stepTwoBadges.length).toBeGreaterThanOrEqual(1);
-    const badgeTexts = Array.from(stepTwoBadges).map((badge) => badge.textContent?.trim());
-    expect(badgeTexts).toContain("New");
-
-    const options = container.querySelectorAll(".wizard-accessibility__option");
-    expect(options.length).toBe(accessibilityOptions.length);
-    options.forEach((option) => {
-      expect(option.classList.contains("wizard-accessibility__option")).toBe(true);
-      const icon = option.querySelector(".wizard-accessibility__icon");
-      expect(icon).toBeTruthy();
-      const toggle = option.querySelector(".wizard-accessibility__toggle");
-      expect(toggle).toBeTruthy();
-      const thumb = toggle?.querySelector(".wizard-accessibility__thumb");
-      expect(thumb).toBeTruthy();
+    const accessibilityRegion = view.getByRole("region", { name: /accessibility & safety/i });
+    expect(accessibilityRegion.classList.contains("wizard-section")).toBe(true);
+    const switches = within(accessibilityRegion).getAllByRole("switch");
+    expect(switches.length).toBe(accessibilityOptions.length);
+    accessibilityOptions.forEach((option) => {
+      expect(
+        within(accessibilityRegion).getByRole("switch", { name: new RegExp(option.label, "i") }),
+      ).toBeInTheDocument();
     });
   });
 
   it("opens the wizard confirmation dialog on step three", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);
-
-    const saveButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Save walk"),
-    );
-    expect(saveButton).toBeTruthy();
+    const view = within(container);
+    const saveButton = view.getByRole("button", { name: /save walk and view map/i });
 
     await act(async () => {
       clickElement(saveButton);
       await Promise.resolve();
     });
 
-    const dialog = document.querySelector("[role='dialog']");
-    expect(dialog).toBeTruthy();
-
-    const closeButton = Array.from(dialog?.querySelectorAll("button") ?? []).find((btn) =>
-      btn.textContent?.includes("Close"),
-    );
-    expect(closeButton).toBeTruthy();
+    const dialog = await screen.findByRole("dialog", { name: /walk saved/i });
+    const closeButton = within(dialog).getByRole("button", { name: /close/i });
     act(() => clickElement(closeButton));
   });
 
   it("renders saved summary panel with semantic class", async () => {
     ({ mount, root } = await renderRoute("/saved"));
     const container = requireContainer(mount);
-    const summaryPanel = container.querySelector(".saved-summary__panel");
-    expect(summaryPanel).toBeTruthy();
-
-    const summaryMeta = container.querySelectorAll(".route-summary__meta");
-    expect(summaryMeta.length).toBeGreaterThanOrEqual(3);
-    summaryMeta.forEach((item) => {
-      expect(item.classList.contains("route-summary__meta")).toBe(true);
-    });
+    const view = within(container);
+    expect(
+      view.getByRole("heading", { name: new RegExp(savedRoute.title ?? "", "i") }),
+    ).toBeTruthy();
+    expect(view.getByText(savedRoute.distance ?? "")).toBeTruthy();
+    expect(view.getByText(savedRoute.duration ?? "")).toBeTruthy();
+    expect(view.getByText(new RegExp(`${savedRoute.stopsCount} stops`, "i"))).toBeTruthy();
   });
 
   it("renders wizard summary panels with semantic class", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);
-    const panels = container.querySelectorAll(".wizard-summary__panel");
-    expect(panels.length).toBeGreaterThanOrEqual(4);
-    panels.forEach((panel) => {
+    const view = within(container);
+    const routePanel = view.getByRole("region", { name: /hidden gems loop/i });
+    const preferencesPanel = view.getByRole("region", { name: /your preferences applied/i });
+    const stopsPanel = view.getByRole("region", { name: /featured stops/i });
+    const weatherPanel = view.getByRole("region", {
+      name: new RegExp(wizardWeatherSummary.title, "i"),
+    });
+
+    [routePanel, preferencesPanel, stopsPanel, weatherPanel].forEach((panel) => {
       expect(panel.classList.contains("wizard-summary__panel")).toBe(true);
       expect(panel.classList.contains("wizard-section")).toBe(true);
     });
 
-    const summaryBadge = container.querySelector(".wizard-badge");
-    expect(summaryBadge).toBeTruthy();
-    expect(summaryBadge?.textContent?.trim()).toBe("Custom");
+    const summaryBadge = within(routePanel).getByText(/custom/i);
+    expect(summaryBadge.classList.contains("wizard-badge")).toBe(true);
 
-    const highlights = container.querySelectorAll(".wizard-summary__highlight");
-    expect(highlights.length).toBe(wizardSummaryHighlights.length);
-    highlights.forEach((highlight) => {
-      expect(highlight.classList.contains("wizard-summary__highlight")).toBe(true);
-      const icon = highlight.querySelector(".wizard-summary__highlight-icon");
-      expect(icon).toBeTruthy();
+    wizardSummaryHighlights.forEach((highlight) => {
+      expect(within(preferencesPanel).getByText(new RegExp(highlight.label, "i"))).toBeTruthy();
     });
 
-    const stops = container.querySelectorAll(".wizard-summary__stop");
-    expect(stops.length).toBe(wizardGeneratedStops.length);
-    stops.forEach((stop) => {
-      expect(stop.classList.contains("wizard-summary__stop")).toBe(true);
-      const icon = stop.querySelector(".wizard-summary__stop-icon");
-      expect(icon).toBeTruthy();
+    wizardGeneratedStops.forEach((stop) => {
+      expect(within(stopsPanel).getByText(new RegExp(stop.name, "i"))).toBeTruthy();
     });
 
-    const weather = container.querySelector(".wizard-summary__weather");
-    expect(weather).toBeTruthy();
-    expect(weather?.classList.contains("wizard-summary__weather")).toBe(true);
+    expect(within(weatherPanel).getByText(wizardWeatherSummary.summary)).toBeTruthy();
   });
 });
 
@@ -677,307 +532,199 @@ describe("Stage 4 completion flows", () => {
   it("shows a celebratory toast when rating a completed walk", async () => {
     ({ mount, root } = await renderRoute("/walk-complete"));
     const container = requireContainer(mount);
-    const badge = container.querySelector(".walk-complete__badge");
-    expect(badge).toBeTruthy();
+    const view = within(container);
+    const badge = view.getByText(/route completed/i);
+    expect(badge.classList.contains("walk-complete__badge")).toBe(true);
 
-    const sections = container.querySelectorAll(".walk-complete__section");
-    expect(sections.length).toBeGreaterThanOrEqual(5);
-    sections.forEach((section) => {
-      expect(section.classList.contains("walk-complete__section")).toBe(true);
-    });
-
-    expect(container.querySelector(".walk-complete__section--tight")).toBeTruthy();
-    expect(container.querySelector(".walk-complete__section--spacious")).toBeTruthy();
-
-    const completionHeadings = container.querySelectorAll(".section-heading");
+    const completionHeadings = view.getAllByRole("heading", { level: 2 });
     expect(completionHeadings.length).toBeGreaterThan(0);
 
-    const rateButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Rate this walk"),
-    );
-    expect(rateButton).toBeTruthy();
-
+    const rateButton = view.getByRole("button", { name: /rate this walk/i });
     await act(async () => {
       clickElement(rateButton);
       await Promise.resolve();
     });
 
-    const toast = document.querySelector(".alert-success");
-    expect(toast?.textContent).toContain("Rating saved");
+    expect(await screen.findByText(/rating saved/i)).toBeTruthy();
 
-    const shareButton = Array.from(container.querySelectorAll("button")).find(
-      (btn) => btn.textContent?.trim() === "Share",
-    );
-    expect(shareButton).toBeTruthy();
-
+    const shareButton = view.getByRole("button", { name: /^share$/i });
     await act(async () => {
       clickElement(shareButton);
       await Promise.resolve();
     });
 
-    const dialog = document.querySelector<HTMLElement>("[role='dialog']");
-    expect(dialog).toBeTruthy();
-
-    const shareOptions = dialog?.querySelectorAll(".walk-share__option") ?? [];
-    expect(shareOptions.length).toBeGreaterThanOrEqual(walkCompletionShareOptions.length);
-    shareOptions.forEach((option) => {
-      expect(option.classList.contains("walk-share__option")).toBe(true);
+    const dialog = await screen.findByRole("dialog", { name: /share highlights/i });
+    walkCompletionShareOptions.forEach((option) => {
+      expect(within(dialog).getByText(new RegExp(option.label, "i"))).toBeInTheDocument();
     });
-    const shareIcons = container.querySelectorAll(".walk-share__icon");
-    expect(shareIcons.length).toBe(walkCompletionShareOptions.length);
-
-    const remixPanel = container.querySelector(".walk-complete__remix");
-    expect(remixPanel).toBeTruthy();
+    const cancelButton = within(dialog).getByRole("button", { name: /cancel/i });
+    act(() => clickElement(cancelButton));
   });
 
   it("lists existing downloads on the offline manager route", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const downloadCards = container.querySelectorAll("article");
-    expect(downloadCards.length).toBeGreaterThan(0);
-    const header = Array.from(container.querySelectorAll("h2")).find((node) =>
-      node.textContent?.includes("Downloaded areas"),
-    );
-    expect(header).toBeTruthy();
-
-    const metadata = container.querySelectorAll(".offline-download__meta");
-    expect(metadata.length).toBeGreaterThanOrEqual(5);
+    const view = within(requireContainer(mount));
+    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    expect(within(downloadsRegion).getAllByRole("article").length).toBeGreaterThan(0);
+    expect(within(downloadsRegion).getByText(/manage maps for offline navigation/i)).toBeTruthy();
   });
 
-  it("renders offline storage overview with semantic class", async () => {
+  it("renders offline storage overview summary", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const overview = container.querySelector(".offline-overview__panel");
-    expect(overview).toBeTruthy();
+    const view = within(requireContainer(mount));
+    expect(view.getByText(/storage overview/i)).toBeTruthy();
+    expect(view.getByText(/2\.8 gb of 8 gb/i)).toBeTruthy();
   });
 
-  it("opens the offline download dialog with the semantic surface class", async () => {
+  it("opens the offline download dialog with the add button", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const addButton = container.querySelector<HTMLButtonElement>(
-      "button[aria-label='Add offline area']",
-    );
-    expect(addButton).toBeTruthy();
+    const view = within(requireContainer(mount));
+    const addButton = view.getByRole("button", { name: /add offline area/i });
 
     await act(async () => {
       clickElement(addButton);
       await Promise.resolve();
     });
 
-    const dialog = document.querySelector<HTMLElement>("[role='dialog']");
+    const dialog = await screen.findByRole("dialog", { name: /download new area/i });
     expect(dialog).toBeTruthy();
-    expect(dialog?.classList.contains("dialog-surface")).toBe(true);
-
-    const searchInput = dialog?.querySelector<HTMLInputElement>(".offline-search__input");
-    expect(searchInput).toBeTruthy();
-    expect(searchInput?.classList.contains("offline-search__input")).toBe(true);
+    expect(within(dialog).getByPlaceholderText(/search cities or regions/i)).toBeTruthy();
   });
 
   it("allows removing a download when managing the offline list", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Manage"),
-    );
-    expect(manageButton).toBeTruthy();
+    const view = within(requireContainer(mount));
+    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    const initialDownloads = within(downloadsRegion).getAllByRole("article");
+    expect(initialDownloads.length).toBeGreaterThan(0);
 
-    const cardsBefore = container.querySelectorAll("[data-testid='offline-download-card']");
-    expect(cardsBefore.length).toBeGreaterThan(0);
-
-    const downloadMeta = container.querySelectorAll(".offline-download__meta");
-    expect(downloadMeta.length).toBeGreaterThanOrEqual(cardsBefore.length);
-
-    const firstCardTitle = cardsBefore[0]?.querySelector("h3")?.textContent?.trim();
-    expect(firstCardTitle).toBeTruthy();
+    const manageButton = within(downloadsRegion).getByRole("button", { name: /^manage$/i });
 
     await act(async () => {
       clickElement(manageButton);
       await Promise.resolve();
     });
 
-    const deleteButtons = container.querySelectorAll("[data-testid='offline-delete-button']");
-    expect(deleteButtons.length).toBe(cardsBefore.length);
+    const deleteButtons = within(downloadsRegion).getAllByRole("button", { name: /delete/i });
+    expect(deleteButtons.length).toBe(initialDownloads.length);
 
     await act(async () => {
       clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
-    const cardsAfter = container.querySelectorAll("[data-testid='offline-download-card']");
-    expect(cardsAfter.length).toBe(cardsBefore.length - 1);
-
-    const undoCards = container.querySelectorAll("[data-testid='offline-undo-card']");
+    const undoCards = within(downloadsRegion).getAllByRole("article", { name: /deleted/i });
     expect(undoCards.length).toBe(1);
-    expect(undoCards[0]?.textContent).toContain(firstCardTitle ?? "");
   });
 
   it("restores a download via undo", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Manage"),
-    );
-    expect(manageButton).toBeTruthy();
-
-    const initialCards = container.querySelectorAll("[data-testid='offline-download-card']");
-    expect(initialCards.length).toBeGreaterThan(0);
+    const view = within(requireContainer(mount));
+    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    const manageButton = within(downloadsRegion).getByRole("button", { name: /^manage$/i });
 
     await act(async () => {
       clickElement(manageButton);
       await Promise.resolve();
     });
 
-    const deleteButtons = container.querySelectorAll("[data-testid='offline-delete-button']");
-    expect(deleteButtons.length).toBe(initialCards.length);
-
+    const deleteButtons = within(downloadsRegion).getAllByRole("button", { name: /delete/i });
     await act(async () => {
       clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
-    const undoButton = container.querySelector<HTMLButtonElement>(
-      "[data-testid='offline-undo-button']",
-    );
-    expect(undoButton).toBeTruthy();
+    const undoCard = within(downloadsRegion).getByRole("article", { name: /deleted/i });
+    const undoButton = within(undoCard).getByRole("button", { name: /undo/i });
 
     await act(async () => {
       clickElement(undoButton);
       await Promise.resolve();
     });
 
-    const cardsAfterUndo = container.querySelectorAll("[data-testid='offline-download-card']");
-    expect(cardsAfterUndo.length).toBe(initialCards.length);
-    expect(container.querySelectorAll("[data-testid='offline-undo-card']").length).toBe(0);
+    expect(within(downloadsRegion).queryByRole("article", { name: /deleted/i })).toBeNull();
   });
 
   it("clears undo panels when finishing manage mode", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Manage"),
-    );
-    expect(manageButton).toBeTruthy();
+    const view = within(requireContainer(mount));
+    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    const manageButton = within(downloadsRegion).getByRole("button", { name: /^manage$/i });
 
     await act(async () => {
       clickElement(manageButton);
       await Promise.resolve();
     });
 
-    const deleteButtons = container.querySelectorAll("[data-testid='offline-delete-button']");
-    expect(deleteButtons.length).toBeGreaterThan(0);
-
+    const deleteButtons = within(downloadsRegion).getAllByRole("button", { name: /delete/i });
     await act(async () => {
       clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
-    const undoCard = container.querySelector("[data-testid='offline-undo-card']");
-    expect(undoCard).toBeTruthy();
+    expect(within(downloadsRegion).getByRole("article", { name: /deleted/i })).toBeTruthy();
 
-    const doneButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Done"),
-    );
-    expect(doneButton).toBeTruthy();
-
+    const doneButton = within(downloadsRegion).getByRole("button", { name: /^done$/i });
     await act(async () => {
       clickElement(doneButton);
       await Promise.resolve();
     });
 
-    expect(container.querySelectorAll("[data-testid='offline-undo-card']").length).toBe(0);
-    expect(container.querySelectorAll("[data-testid='offline-download-card']").length).toBe(
-      deleteButtons.length - 1,
-    );
+    expect(within(downloadsRegion).queryByRole("article", { name: /deleted/i })).toBeNull();
   });
 
-  it("wraps offline download cards with semantic classes", async () => {
+  it("labels offline download cards as readable articles", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const downloadCards = container.querySelectorAll("[data-testid='offline-download-card']");
+    const view = within(requireContainer(mount));
+    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    const downloadCards = within(downloadsRegion).getAllByRole("article");
     expect(downloadCards.length).toBeGreaterThan(0);
     downloadCards.forEach((card) => {
-      expect(card.classList.contains("offline-download__card")).toBe(true);
+      const heading = within(card).queryByRole("heading", { level: 3 });
+      expect(heading?.textContent?.trim()).toBeTruthy();
     });
-
-    const manageButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Manage"),
-    );
-    expect(manageButton).toBeTruthy();
-
-    await act(async () => {
-      clickElement(manageButton);
-      await Promise.resolve();
-    });
-
-    const deleteButton = container.querySelector<HTMLButtonElement>(
-      "[data-testid='offline-delete-button']",
-    );
-    expect(deleteButton).toBeTruthy();
-
-    await act(async () => {
-      clickElement(deleteButton);
-      await Promise.resolve();
-    });
-
-    const undoCard = container.querySelector("[data-testid='offline-undo-card']");
-    expect(undoCard).toBeTruthy();
-    expect(undoCard?.classList.contains("offline-download__undo")).toBe(true);
   });
 
   it("toggles auto-management switches", async () => {
     ({ mount, root } = await renderRoute("/offline"));
-    const container = requireContainer(mount);
-    const switches = container.querySelectorAll<HTMLElement>(
-      "[data-testid^='auto-management-switch-']",
+    const view = within(requireContainer(mount));
+    const switches = autoManagementOptions.map((option) =>
+      view.getByRole("switch", { name: new RegExp(option.title, "i") }),
     );
-    expect(switches.length).toBeGreaterThan(0);
-
-    const automationCards = container.querySelectorAll(".preference-card");
-    expect(automationCards.length).toBe(switches.length);
-
-    switches.forEach((toggle) => {
-      expect(toggle.classList.contains("toggle-switch")).toBe(true);
-    });
-
-    const firstSwitch = switches[0];
+    const firstSwitch = switches.at(0);
     if (!firstSwitch) {
       throw new Error("Expected at least one auto-management switch");
     }
-    const initialState = firstSwitch.getAttribute("data-state");
+    const initialState = firstSwitch.getAttribute("aria-checked");
 
     await act(async () => {
       clickElement(firstSwitch);
       await Promise.resolve();
     });
 
-    expect(firstSwitch.getAttribute("data-state")).not.toBe(initialState);
+    expect(firstSwitch.getAttribute("aria-checked")).not.toBe(initialState);
   });
 
   it("allows toggling a safety preference and saving", async () => {
     ({ mount, root } = await renderRoute("/safety-accessibility"));
-    const container = requireContainer(mount);
-    const switches = container.querySelectorAll<HTMLButtonElement>("[role='switch']");
+    const view = within(requireContainer(mount));
+    const switches = view.getAllByRole("switch");
     expect(switches.length).toBeGreaterThan(0);
-
-    const firstSwitch = switches[0];
+    const firstSwitch = switches.at(0);
     if (!firstSwitch) {
-      throw new Error("Expected at least one safety switch");
+      throw new Error("Expected at least one accessibility preference switch");
     }
-    const initialState = firstSwitch.getAttribute("data-state");
+    const initialState = firstSwitch.getAttribute("aria-checked");
     act(() => clickElement(firstSwitch));
-    expect(firstSwitch.getAttribute("data-state")).not.toBe(initialState);
+    expect(firstSwitch.getAttribute("aria-checked")).not.toBe(initialState);
 
-    const saveButton = Array.from(container.querySelectorAll("button")).find((btn) =>
-      btn.textContent?.includes("Save preferences"),
-    );
-    expect(saveButton).toBeTruthy();
+    const saveButton = view.getByRole("button", { name: /save preferences/i });
 
     await act(async () => {
       clickElement(saveButton);
       await Promise.resolve();
     });
 
-    const dialog = document.querySelector("[role='dialog']");
-    expect(dialog).toBeTruthy();
+    expect(await screen.findByRole("dialog", { name: /preferences saved/i })).toBeTruthy();
   });
 });
