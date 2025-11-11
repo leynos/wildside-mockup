@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
-import type { ReactElement } from "react";
-import { act } from "react";
+import { within } from "@testing-library/dom";
+import { act, type ReactElement } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import { DisplayModeProvider, useDisplayMode } from "../src/app/providers/display-mode-provider";
@@ -201,12 +201,12 @@ describe("DisplayModeProvider", () => {
 
     const Probe = () => {
       const { mode } = useDisplayMode();
-      return <span data-mode={mode} />;
+      return <output aria-label="Display mode">{mode}</output>;
     };
 
     const container = mountWithProvider(<Probe />);
-    const indicator = container.querySelector("span[data-mode]");
-    expect(indicator?.getAttribute("data-mode")).toBe("full-browser");
+    const indicator = within(container).getByRole("status", { name: /display mode/i });
+    expect(indicator.textContent).toBe("full-browser");
   });
 
   it("defaults to hosted mode on desktop heuristics", () => {
@@ -217,12 +217,12 @@ describe("DisplayModeProvider", () => {
 
     const Probe = () => {
       const { mode } = useDisplayMode();
-      return <span data-mode={mode} />;
+      return <output aria-label="Display mode">{mode}</output>;
     };
 
     const container = mountWithProvider(<Probe />);
-    const indicator = container.querySelector("span[data-mode]");
-    expect(indicator?.getAttribute("data-mode")).toBe("hosted");
+    const indicator = within(container).getByRole("status", { name: /display mode/i });
+    expect(indicator.textContent).toBe("hosted");
   });
 
   it("honours a stored user preference", () => {
@@ -234,12 +234,12 @@ describe("DisplayModeProvider", () => {
 
     const Probe = () => {
       const { mode } = useDisplayMode();
-      return <span data-mode={mode} />;
+      return <output aria-label="Display mode">{mode}</output>;
     };
 
     const container = mountWithProvider(<Probe />);
-    const indicator = container.querySelector("span[data-mode]");
-    expect(indicator?.getAttribute("data-mode")).toBe("full-browser");
+    const indicator = within(container).getByRole("status", { name: /display mode/i });
+    expect(indicator.textContent).toBe("full-browser");
   });
 
   it("persists manual toggles", () => {
@@ -258,11 +258,11 @@ describe("DisplayModeProvider", () => {
     };
 
     const container = mountWithProvider(<Toggle />);
-    const button = container.querySelector<HTMLButtonElement>("button");
-    expect(button).toBeTruthy();
+    const ui = within(container);
+    const button = ui.getByRole("button", { name: /go-full/i });
 
     act(() => {
-      button?.click();
+      button.click();
     });
 
     expect(window.localStorage.getItem(STORAGE_KEY)).toBe("full-browser");
@@ -279,7 +279,8 @@ describe("DisplayModeProvider", () => {
       const { mode, resetToSystemDefault, hasUserPreference } = useDisplayMode();
       return (
         <>
-          <span data-mode={mode} data-has-user-pref={hasUserPreference ? "yes" : "no"} />
+          <output aria-label="Display mode">{mode}</output>
+          <output aria-label="User preference">{hasUserPreference ? "yes" : "no"}</output>
           <button type="button" onClick={() => resetToSystemDefault()}>
             reset
           </button>
@@ -288,16 +289,17 @@ describe("DisplayModeProvider", () => {
     };
 
     const container = mountWithProvider(<Controls />);
-    const button = container.querySelector<HTMLButtonElement>("button");
-    expect(button).toBeTruthy();
+    const ui = within(container);
+    const button = ui.getByRole("button", { name: /reset/i });
 
     act(() => {
-      button?.click();
+      button.click();
     });
 
-    const indicator = container.querySelector("span[data-mode]");
-    expect(indicator?.getAttribute("data-mode")).toBe("full-browser");
-    expect(indicator?.getAttribute("data-has-user-pref")).toBe("no");
+    const modeStatus = ui.getByRole("status", { name: /display mode/i });
+    expect(modeStatus.textContent).toBe("full-browser");
+    const preferenceStatus = ui.getByRole("status", { name: /user preference/i });
+    expect(preferenceStatus.textContent).toBe("no");
     expect(window.localStorage.getItem(STORAGE_KEY)).toBeNull();
   });
 });
