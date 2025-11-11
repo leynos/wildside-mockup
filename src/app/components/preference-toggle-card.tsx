@@ -13,7 +13,6 @@ export interface PreferenceToggleCardProps {
   description: string;
   isChecked: boolean;
   onCheckedChange: (next: boolean) => void;
-  switchTestId?: string;
 }
 
 export function PreferenceToggleCard({
@@ -24,7 +23,6 @@ export function PreferenceToggleCard({
   description,
   isChecked,
   onCheckedChange,
-  switchTestId,
 }: PreferenceToggleCardProps): JSX.Element {
   const titleId = `${id}-title`;
   const descriptionId = `${id}-description`;
@@ -57,7 +55,6 @@ export function PreferenceToggleCard({
         checked={isChecked}
         onCheckedChange={onCheckedChange}
         className={switchClasses}
-        data-testid={switchTestId}
       >
         <Switch.Thumb className="toggle-switch__thumb" />
       </Switch.Root>

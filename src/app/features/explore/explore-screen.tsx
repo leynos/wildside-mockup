@@ -2,7 +2,7 @@
 
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
-import type { JSX, ReactNode } from "react";
+import { type JSX, type ReactNode, useId } from "react";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
@@ -35,7 +35,7 @@ function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Element {
 
 function CategoryScroller(): JSX.Element {
   return (
-    <ScrollArea.Root className="w-full pt-2" type="scroll">
+    <ScrollArea.Root className="w-full pt-2" type="scroll" aria-label="Popular categories">
       <ScrollArea.Viewport className="w-full">
         <div className="flex gap-3 pb-2 pr-6">
           {exploreCategories.map((category) => (
@@ -59,9 +59,10 @@ function CategoryScroller(): JSX.Element {
 }
 
 function FeaturedWalkCard(): JSX.Element {
+  const headingId = useId();
   return (
-    <section className="explore-featured__panel">
-      <h2 className="section-heading text-base-content">
+    <section className="explore-featured__panel" aria-labelledby={headingId}>
+      <h2 id={headingId} className="section-heading text-base-content">
         <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
         Walk of the Week
       </h2>
@@ -110,9 +111,12 @@ function FeaturedWalkCard(): JSX.Element {
 }
 
 function PopularThemesGrid(): JSX.Element {
+  const headingId = useId();
   return (
-    <section>
-      <h2 className="section-title">Popular Themes</h2>
+    <section aria-labelledby={headingId}>
+      <h2 id={headingId} className="section-title">
+        Popular Themes
+      </h2>
       <div className="grid grid-cols-2 gap-4">
         {popularThemes.map((theme) => (
           <article key={theme.id} className="explore-compact__card">
@@ -146,9 +150,12 @@ function PopularThemesGrid(): JSX.Element {
 }
 
 function CuratedCollectionsList(): JSX.Element {
+  const headingId = useId();
   return (
-    <section>
-      <h2 className="section-title">Curated Collections</h2>
+    <section aria-labelledby={headingId}>
+      <h2 id={headingId} className="section-title">
+        Curated Collections
+      </h2>
       <div className="space-y-4">
         {curatedCollections.map((collection) => (
           <article key={collection.id} className="explore-collection__card">
@@ -199,9 +206,12 @@ function CuratedCollectionsList(): JSX.Element {
 }
 
 function TrendingRoutesList(): JSX.Element {
+  const headingId = useId();
   return (
-    <section>
-      <h2 className="section-title">Trending Now</h2>
+    <section aria-labelledby={headingId}>
+      <h2 id={headingId} className="section-title">
+        Trending Now
+      </h2>
       <div className="space-y-3">
         {trendingRoutes.map((route) => (
           <article key={route.id} className="explore-compact__card flex items-center gap-4">
@@ -229,9 +239,10 @@ function TrendingRoutesList(): JSX.Element {
 }
 
 function CommunityPickPanel(): JSX.Element {
+  const headingId = useId();
   return (
-    <section className="explore-info__panel">
-      <h2 className="section-heading mb-4 text-base-content">
+    <section className="explore-info__panel" aria-labelledby={headingId}>
+      <h2 id={headingId} className="section-heading mb-4 text-base-content">
         <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
         Community Favourite
       </h2>

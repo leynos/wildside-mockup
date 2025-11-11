@@ -15,13 +15,17 @@ export interface AppBottomNavigationItem {
 
 export interface AppBottomNavigationProps {
   items: AppBottomNavigationItem[];
+  "aria-label"?: string;
 }
 
-export function AppBottomNavigation({ items }: AppBottomNavigationProps): JSX.Element {
+export function AppBottomNavigation({
+  items,
+  "aria-label": ariaLabel,
+}: AppBottomNavigationProps): JSX.Element {
   const navigate = useNavigate();
 
   return (
-    <nav className="bottom-nav">
+    <nav className="bottom-nav" aria-label={ariaLabel ?? "Primary navigation"}>
       <div className="bottom-nav__grid">
         {items.map((item) => (
           <button

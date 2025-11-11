@@ -6,7 +6,7 @@ import { type JSX, type ReactNode, useState } from "react";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
-import { WizardSection } from "../../../components/wizard-section";
+import { WizardSection, type WizardSectionProps } from "../../../components/wizard-section";
 import {
   wizardGeneratedStops,
   wizardSteps,
@@ -14,15 +14,23 @@ import {
   wizardWeatherSummary,
 } from "../../../data/wizard";
 
-type WizardSummaryPanelProps = {
+type WizardSummaryPanelProps = WizardSectionProps & {
   readonly className?: string;
   readonly children: ReactNode;
 };
 
-function WizardSummaryPanel({ className, children }: WizardSummaryPanelProps): JSX.Element {
+function WizardSummaryPanel({
+  className,
+  children,
+  ...rest
+}: WizardSummaryPanelProps): JSX.Element {
   const classNames = className ? `wizard-summary__panel ${className}` : "wizard-summary__panel";
 
-  return <WizardSection className={classNames}>{children}</WizardSection>;
+  return (
+    <WizardSection className={classNames} {...rest}>
+      {children}
+    </WizardSection>
+  );
 }
 
 export function WizardStepThree(): JSX.Element {
@@ -80,7 +88,7 @@ export function WizardStepThree(): JSX.Element {
         </div>
       }
     >
-      <WizardSummaryPanel>
+      <WizardSummaryPanel aria-label="Hidden gems loop summary">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Hidden Gems Loop</h2>
           <span className="wizard-badge font-semibold">Custom</span>
@@ -105,7 +113,7 @@ export function WizardStepThree(): JSX.Element {
         </p>
       </WizardSummaryPanel>
 
-      <WizardSummaryPanel>
+      <WizardSummaryPanel aria-label="Your preferences applied">
         <h3 className="text-lg font-semibold">Your preferences applied</h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {wizardSummaryHighlights.map((highlight) => (
@@ -124,7 +132,7 @@ export function WizardStepThree(): JSX.Element {
         </div>
       </WizardSummaryPanel>
 
-      <WizardSummaryPanel>
+      <WizardSummaryPanel aria-label="Featured stops">
         <h3 className="text-lg font-semibold">Featured stops</h3>
         <div className="mt-4 space-y-3">
           {wizardGeneratedStops.map((stop) => (
@@ -142,7 +150,7 @@ export function WizardStepThree(): JSX.Element {
         </div>
       </WizardSummaryPanel>
 
-      <WizardSummaryPanel>
+      <WizardSummaryPanel aria-label={wizardWeatherSummary.title}>
         <h3 className="section-heading text-base-content">
           <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
           {wizardWeatherSummary.title}

@@ -108,6 +108,7 @@ export function ItineraryScreen(): JSX.Element {
                             ? "bg-accent text-base-900"
                             : "bg-base-200/70 text-base-content"
                         }`}
+                        aria-label={isFavourite ? "Remove saved itinerary" : "Save this itinerary"}
                         aria-pressed={isFavourite}
                         onClick={() => setIsFavourite((prev) => !prev)}
                       >

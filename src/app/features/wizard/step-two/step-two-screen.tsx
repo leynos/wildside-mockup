@@ -44,7 +44,7 @@ export function WizardStepTwo(): JSX.Element {
         </div>
       }
     >
-      <WizardSection className="mb-8">
+      <WizardSection className="mb-8" aria-label="Discovery style">
         <div className="section-header-row">
           <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.navigation.explore}" className="text-accent" aria-hidden />
@@ -86,11 +86,13 @@ export function WizardStepTwo(): JSX.Element {
         </div>
       </WizardSection>
 
-      <WizardSection>
+      <WizardSection aria-label="Accessibility & safety">
         <h2 className="section-title">Accessibility & safety</h2>
         <div className="space-y-4">
           {accessibilityOptions.map((option) => {
             const checked = accessibility[option.id] ?? false;
+            const labelId = `${option.id}-label`;
+            const descriptionId = `${option.id}-description`;
             return (
               <div key={option.id} className="wizard-accessibility__option">
                 <div className="flex items-center gap-3">
@@ -98,12 +100,18 @@ export function WizardStepTwo(): JSX.Element {
                     <Icon token={option.iconToken} className="text-accent" aria-hidden />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-base-content">{option.label}</p>
-                    <p className="text-xs text-base-content/60">{option.description}</p>
+                    <p id={labelId} className="text-sm font-semibold text-base-content">
+                      {option.label}
+                    </p>
+                    <p id={descriptionId} className="text-xs text-base-content/60">
+                      {option.description}
+                    </p>
                   </div>
                 </div>
                 <Switch.Root
                   id={option.id}
+                  aria-labelledby={labelId}
+                  aria-describedby={descriptionId}
                   checked={checked}
                   onCheckedChange={(value) =>
                     setAccessibility((prev) => ({

@@ -309,7 +309,6 @@ export function OfflineScreen(): JSX.Element {
                       description={option.description}
                       isChecked={Boolean(checked)}
                       onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
-                      switchTestId={`auto-management-switch-${option.id}`}
                     />
                   );
                 })}

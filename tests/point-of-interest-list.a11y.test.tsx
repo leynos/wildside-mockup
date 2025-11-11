@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
@@ -19,27 +19,18 @@ describe("PointOfInterestList accessibility", () => {
     expect(await axe(container)).toHaveNoViolations();
 
     const trigger = screen.getByRole("button", { name: new RegExp(samplePoi.name, "i") });
-    expect(trigger.classList.contains("poi-list__item")).toBe(true);
-    const summaries = container.querySelectorAll(".poi-list__summary");
-    expect(summaries.length).toBeGreaterThanOrEqual(1);
-    summaries.forEach((summary) => {
-      expect(summary.classList.contains("poi-list__summary")).toBe(true);
-    });
-    const highlightBadge = trigger.querySelector(".poi-highlight");
-    expect(highlightBadge).not.toBeNull();
-    const highlightIcon = highlightBadge?.querySelector('[role="img"]');
-    expect(highlightIcon).not.toBeNull();
-    if (!highlightIcon) {
-      throw new Error("Expected highlight icon to be present");
+    expect(within(trigger).getByText(samplePoi.description)).toBeInTheDocument();
+    if (samplePoi.rating) {
+      expect(within(trigger).getByText(samplePoi.rating.toFixed(1))).toBeInTheDocument();
     }
-    expect(highlightIcon.getAttribute("aria-label")).toBe(samplePoi.categoryLabel);
+    const highlightIcon = within(trigger).getByRole("img", { name: samplePoi.categoryLabel });
+    expect(highlightIcon).toBeInTheDocument();
 
     await userEvent.click(trigger);
 
     const dialog = await screen.findByRole("dialog", { name: samplePoi.name });
     expect(dialog).toBeInTheDocument();
-    expect(dialog.querySelector(".poi-sheet")).not.toBeNull();
-    expect(dialog.querySelector(".poi-list__summary")).not.toBeNull();
+    expect(within(dialog).getByText(samplePoi.description)).toBeInTheDocument();
     expect(await axe(document.body)).toHaveNoViolations();
 
     await userEvent.click(screen.getByRole("button", { name: /close/i }));

@@ -201,6 +201,7 @@ export function SavedScreen(): JSX.Element {
             className={`pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full border border-base-300/60 text-base-100 shadow-xl transition ${
               isFavourite ? "bg-accent text-base-900" : "bg-base-900/80"
             }`}
+            aria-label={isFavourite ? "Remove saved walk" : "Save this walk"}
             aria-pressed={isFavourite}
             onClick={() => setIsFavourite((prev) => !prev)}
           >

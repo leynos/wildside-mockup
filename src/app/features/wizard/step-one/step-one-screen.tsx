@@ -54,7 +54,7 @@ export function WizardStepOne(): JSX.Element {
         </button>
       }
     >
-      <WizardSection className="mb-8">
+      <WizardSection className="mb-8" aria-label="Walk duration controls">
         <SliderControl
           id="wizard-duration"
           label="Walk duration"
@@ -70,7 +70,7 @@ export function WizardStepOne(): JSX.Element {
         />
       </WizardSection>
 
-      <WizardSection>
+      <WizardSection aria-label="Interests">
         <header className="mb-4 flex items-center justify-between">
           <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
