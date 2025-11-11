@@ -19,7 +19,7 @@ test.describe("Map overlay panels", () => {
     await page.goto("/map/quick");
 
     await page.getByRole("tab", { name: /stops/i }).click();
-    const stopsPanel = page.getByTestId("quick-walk-stops-panel");
+    const stopsPanel = page.getByRole("region", { name: /quick walk stops/i });
     await expect(stopsPanel).toBeVisible();
     const stopsStyle = await stopsPanel.evaluate((node) => {
       const style = window.getComputedStyle(node as HTMLElement);
@@ -35,7 +35,7 @@ test.describe("Map overlay panels", () => {
     expect(stopsStyle.backdropFilter?.toLowerCase()).not.toBe("none");
 
     await page.getByRole("tab", { name: /notes/i }).click();
-    const notesPanel = page.getByTestId("quick-walk-notes-panel");
+    const notesPanel = page.getByRole("region", { name: /planning notes/i });
     await expect(notesPanel).toBeVisible();
     const notesStyle = await notesPanel.evaluate((node) => {
       const style = window.getComputedStyle(node as HTMLElement);
