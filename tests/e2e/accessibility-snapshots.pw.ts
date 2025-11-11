@@ -1,5 +1,6 @@
 /** @file Accessibility tree snapshot tests for key Wildside routes. */
 
+import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 
 import type { StyleTarget } from "./utils/accessibility";
@@ -53,6 +54,27 @@ const snapshotTargets: SnapshotTarget[] = [
   },
 ];
 
+async function removeMapLibreControls(page: Page): Promise<void> {
+  const controlLabels = [/zoom in/i, /zoom out/i, /reset bearing/i, /pitch/i];
+  for (const label of controlLabels) {
+    const controlButtons = page.getByRole("button", { name: label });
+    const count = await controlButtons.count();
+    for (let index = 0; index < count; index += 1) {
+      await controlButtons.nth(index).evaluate((button) => {
+        button.closest(".maplibregl-ctrl")?.remove();
+      });
+    }
+  }
+
+  const attributionLinks = page.getByRole("link", { name: /maplibre/i });
+  const linkCount = await attributionLinks.count();
+  for (let index = 0; index < linkCount; index += 1) {
+    await attributionLinks.nth(index).evaluate((link) => {
+      link.closest(".maplibregl-ctrl")?.remove();
+    });
+  }
+}
+
 test.describe("Accessibility tree snapshots", () => {
   for (const target of snapshotTargets) {
     test(`${target.label} matches stored accessibility tree`, async ({ page }) => {
@@ -63,13 +85,7 @@ test.describe("Accessibility tree snapshots", () => {
         await page.waitForSelector(target.waitForSelector);
       }
       if (target.path === "/map/quick") {
-        await page.evaluate(() => {
-          document
-            .querySelectorAll(
-              ".maplibregl-ctrl-bottom-left, .maplibregl-ctrl-bottom-right, .maplibregl-ctrl-top-right",
-            )
-            .forEach((node) => node.remove());
-        });
+        await removeMapLibreControls(page);
       }
 
       const tree = await captureAccessibilityTree(page);
