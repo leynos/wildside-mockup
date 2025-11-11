@@ -6,9 +6,9 @@ import { createRoot } from "react-dom/client";
 import App from "./app/app";
 import "./index.css";
 
-const mount = document.getElementById("root");
+const mount = document.body?.children.namedItem("root");
 
-if (!mount) {
+if (!(mount instanceof HTMLElement)) {
   throw new Error("Mount point '#root' is required to render the SPA.");
 }
 
