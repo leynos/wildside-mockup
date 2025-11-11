@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { within } from "@testing-library/dom";
 import { act, type JSX } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
@@ -8,7 +9,11 @@ import { ThemeProvider } from "../src/app/providers/theme-provider";
 
 function ModeProbe(): JSX.Element {
   const { mode } = useDisplayMode();
-  return <span data-testid="mode-probe" data-mode={mode} />;
+  return (
+    <output aria-label="Display mode" data-mode={mode}>
+      {mode}
+    </output>
+  );
 }
 
 function HostWrapper({ children }: { children: JSX.Element }): JSX.Element {
@@ -52,63 +57,55 @@ describe("GlobalControls", () => {
 
   it("surfaces toggles in hosted mode", () => {
     mount(<GlobalControls />);
-    const modeProbe = document.querySelector("[data-testid='mode-probe']");
-    expect(modeProbe?.getAttribute("data-mode")).toBe("hosted");
+    if (!mountNode) throw new Error("GlobalControls did not mount");
+    const ui = within(mountNode);
 
-    const displayToggle = mountNode?.querySelector<HTMLButtonElement>(
-      "button[aria-label='Switch to Full View']",
-    );
-    expect(displayToggle).toBeTruthy();
-    const stack = mountNode?.querySelector(".global-controls__stack");
-    expect(stack).toBeTruthy();
+    const modeProbe = within(document.body).getByRole("status", { name: /display mode/i });
+    expect(modeProbe.textContent).toBe("hosted");
+
+    const displayToggle = ui.getByRole("button", { name: /switch to full view/i });
+    const toggleButtons = ui.getAllByRole("button", { name: /switch to/i });
+    expect(toggleButtons.length).toBeGreaterThanOrEqual(2);
 
     act(() => {
-      displayToggle?.click();
+      displayToggle.click();
     });
 
-    const updatedProbe = document.querySelector("[data-testid='mode-probe']");
-    expect(updatedProbe?.getAttribute("data-mode")).toBe("full-browser");
+    const updatedProbe = within(document.body).getByRole("status", { name: /display mode/i });
+    expect(updatedProbe.textContent).toBe("full-browser");
   });
 
   it("shows a drawer interface in full-browser mode", () => {
     window.localStorage.setItem(STORAGE_KEY, "full-browser");
     mount(<GlobalControls />);
 
-    const drawerTrigger = mountNode?.querySelector<HTMLButtonElement>(
-      "button[aria-controls='global-controls-drawer']",
-    );
-    expect(drawerTrigger).toBeTruthy();
-    expect(drawerTrigger?.classList.contains("global-controls__trigger")).toBe(true);
-    expect(drawerTrigger?.getAttribute("aria-expanded")).toBe("false");
+    if (!mountNode) throw new Error("GlobalControls did not mount");
+    const ui = within(mountNode);
+
+    const drawerTrigger = ui.getByRole("button", { name: /controls/i });
+    expect(drawerTrigger.classList.contains("global-controls__trigger")).toBe(true);
+    expect(drawerTrigger.getAttribute("aria-expanded")).toBe("false");
 
     act(() => {
-      drawerTrigger?.click();
+      drawerTrigger.click();
     });
 
-    const drawer = mountNode?.querySelector<HTMLDivElement>("#global-controls-drawer");
-    expect(drawer).toBeTruthy();
+    const drawer = ui.getByRole("dialog", { name: /display & theme/i });
+    const drawerToggles = within(drawer).getAllByRole("button", { name: /switch to/i });
+    expect(drawerToggles.length).toBeGreaterThanOrEqual(2);
 
-    const panel = drawer?.querySelector(".global-controls__panel");
-    expect(panel).toBeTruthy();
+    within(drawer).getByRole("button", { name: /close display controls/i });
 
-    const closeButton = Array.from(
-      drawer?.querySelectorAll<HTMLButtonElement>("button") ?? [],
-    ).find((btn) => btn.getAttribute("aria-label") === "Close display controls");
-    expect(closeButton).toBeTruthy();
+    const modeProbe = within(document.body).getByRole("status", { name: /display mode/i });
+    expect(modeProbe.textContent).toBe("full-browser");
 
-    const modeProbe = document.querySelector("[data-testid='mode-probe']");
-    expect(modeProbe?.getAttribute("data-mode")).toBe("full-browser");
-
-    const reset = Array.from(drawer?.querySelectorAll<HTMLButtonElement>("button") ?? []).find(
-      (btn) => btn.textContent?.trim() === "Reset to device default",
-    );
-    expect(reset).toBeTruthy();
+    const reset = within(drawer).getByRole("button", { name: /reset to device default/i });
 
     act(() => {
-      reset?.click();
+      reset.click();
     });
 
-    const updatedProbe = document.querySelector("[data-testid='mode-probe']");
-    expect(updatedProbe?.getAttribute("data-mode")).toBe("hosted");
+    const updatedProbe = within(document.body).getByRole("status", { name: /display mode/i });
+    expect(updatedProbe.textContent).toBe("hosted");
   });
 });
