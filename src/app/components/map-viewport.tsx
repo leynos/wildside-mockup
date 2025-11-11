@@ -17,6 +17,8 @@ export interface MapViewportProps {
   className?: string;
   /** Optional test id applied to the outer container for UI tests. */
   containerTestId?: string;
+  /** Accessible label describing the viewport contents. */
+  ariaLabel?: string;
 }
 
 function joinClassNames(...tokens: Array<string | undefined | null | false>): string {
@@ -34,6 +36,7 @@ function joinClassNames(...tokens: Array<string | undefined | null | false>): st
  * ```
  */
 export function MapViewport({
+  ariaLabel,
   backgroundAlt,
   backgroundImageUrl,
   children,
@@ -46,9 +49,10 @@ export function MapViewport({
     "relative flex flex-1 min-h-0 flex-col justify-end overflow-hidden",
     className,
   );
+  const regionAttributes = ariaLabel ? { role: "region", "aria-label": ariaLabel } : {};
 
   return (
-    <div className={containerClasses} data-testid={containerTestId}>
+    <div className={containerClasses} data-testid={containerTestId} {...regionAttributes}>
       {map ? <div className="absolute inset-0">{map}</div> : null}
       {!map && backgroundImageUrl ? (
         <img

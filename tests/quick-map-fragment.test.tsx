@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { within } from "@testing-library/dom";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
@@ -53,15 +54,14 @@ describe("quick map hash fragments", () => {
     await act(async () => {
       await Promise.resolve();
     });
-    const mapContainer = document.querySelector("[data-testid='quick-walk-map-container']");
-    expect(mapContainer).toBeTruthy();
-    expect(mapContainer?.className.includes("flex")).toBe(true);
+    const view = within(document.body);
+    const mapViewport = view.getByRole("region", { name: /quick walk map viewport/i });
+    expect(mapViewport.className.includes("flex")).toBe(true);
 
-    const stopsPanel = document.querySelector("[data-testid='quick-walk-stops-panel']");
+    const stopsTabpanel = view.getByRole("tabpanel", { name: /stops/i });
+    expect(stopsTabpanel.hasAttribute("hidden")).toBe(false);
+    const stopsPanel = within(stopsTabpanel).getByRole("region", { name: /quick walk stops/i });
     expect(stopsPanel).toBeTruthy();
-    const stopsTabpanel = stopsPanel?.closest("[role='tabpanel']");
-    expect(stopsTabpanel).toBeTruthy();
-    expect(stopsTabpanel?.hasAttribute("hidden")).toBe(false);
   });
 
   it("activates the notes tab with updated max height when loading #notes", async () => {
@@ -69,11 +69,10 @@ describe("quick map hash fragments", () => {
     await act(async () => {
       await Promise.resolve();
     });
-    const notesPanel = document.querySelector("[data-testid='quick-walk-notes-panel']");
-    expect(notesPanel).toBeTruthy();
-    expect(notesPanel?.className.includes("max-h-[53vh]")).toBe(true);
-    const notesTabpanel = notesPanel?.closest("[role='tabpanel']");
-    expect(notesTabpanel).toBeTruthy();
-    expect(notesTabpanel?.hasAttribute("hidden")).toBe(false);
+    const view = within(document.body);
+    const notesTabpanel = view.getByRole("tabpanel", { name: /notes/i });
+    expect(notesTabpanel.hasAttribute("hidden")).toBe(false);
+    const notesPanel = within(notesTabpanel).getByRole("region", { name: /planning notes/i });
+    expect(notesPanel.className.includes("max-h-[53vh]")).toBe(true);
   });
 });

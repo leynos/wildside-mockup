@@ -95,6 +95,7 @@ export function QuickWalkScreen(): JSX.Element {
               map={<WildsideMap />}
               gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
               containerTestId="quick-walk-map-container"
+              ariaLabel="Quick walk map viewport"
             >
               <MapViewportTab value="map" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
