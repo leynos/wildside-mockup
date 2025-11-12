@@ -35,6 +35,9 @@ export const SUPPORTED_LOCALES = [
   { code: "th", label: "Thai", nativeLabel: "ไทย" },
   { code: "cy", label: "Welsh", nativeLabel: "Cymraeg" },
   { code: "gd", label: "Scots Gaelic", nativeLabel: "Gàidhlig" },
+  { code: "it", label: "Italian", nativeLabel: "Italiano" },
+  { code: "el", label: "Greek", nativeLabel: "Ελληνικά" },
+  { code: "tr", label: "Turkish", nativeLabel: "Türkçe" },
 ] as const satisfies Readonly<[SupportedLocale, ...SupportedLocale[]]>;
 
 export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0].code;
