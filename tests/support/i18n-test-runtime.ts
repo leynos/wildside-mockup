@@ -74,7 +74,8 @@ export async function setupI18nTestHarness(target: typeof globalThis = globalThi
     target.window.fetch = patchedFetch;
   }
 
-  await import("../../src/i18n");
+  const { i18nReady } = await import("../../src/i18n");
+  await i18nReady;
 }
 
 /**@example

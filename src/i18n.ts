@@ -66,7 +66,7 @@ const fetchAjax = (
 };
 
 // Initialise immediately so that React components can rely on Suspense to wait for .ftl bundles.
-void i18n
+export const i18nReady = i18n
   .use(FluentBackend)
   .use(LanguageDetector)
   .use(Fluent)
