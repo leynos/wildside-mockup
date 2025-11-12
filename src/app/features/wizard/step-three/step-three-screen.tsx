@@ -160,7 +160,7 @@ export function WizardStepThree(): JSX.Element {
             <p className="font-semibold">{wizardWeatherSummary.summary}</p>
             <p className="text-xs text-base-content/60">Pack light layers just in case.</p>
           </div>
-          <div className="text-right">
+          <div className="text-end">
             <p className="text-lg font-semibold text-accent">{wizardWeatherSummary.temperature}</p>
             <p className="text-xs text-base-content/60">{wizardWeatherSummary.sentiment}</p>
           </div>

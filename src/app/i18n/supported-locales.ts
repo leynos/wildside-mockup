@@ -1,5 +1,7 @@
 /** @file Shared locale metadata consumed by the i18n runtime and UI controls. */
 
+export type TextDirection = "ltr" | "rtl";
+
 export type SupportedLocale = {
   /** BCP-47 code used by i18next and Fluent when loading .ftl bundles. */
   code: string;
@@ -7,6 +9,8 @@ export type SupportedLocale = {
   label: string;
   /** Native spellings improve recognition when the UI is not yet translated. */
   nativeLabel: string;
+  /** Optional text direction override when the language is RTL. */
+  direction?: TextDirection;
 };
 
 export const SUPPORTED_LOCALES = [
@@ -18,7 +22,7 @@ export const SUPPORTED_LOCALES = [
   { code: "pt", label: "Portuguese", nativeLabel: "Português" },
   { code: "pl", label: "Polish", nativeLabel: "Polski" },
   { code: "ru", label: "Russian", nativeLabel: "Русский" },
-  { code: "ar", label: "Arabic", nativeLabel: "العربية" },
+  { code: "ar", label: "Arabic", nativeLabel: "العربية", direction: "rtl" },
   { code: "hi", label: "Hindi", nativeLabel: "हिन्दी" },
   { code: "ta", label: "Tamil", nativeLabel: "தமிழ்" },
   { code: "da", label: "Danish", nativeLabel: "Dansk" },
@@ -27,7 +31,7 @@ export const SUPPORTED_LOCALES = [
   { code: "ja", label: "Japanese", nativeLabel: "日本語" },
   { code: "ko", label: "Korean", nativeLabel: "한국어" },
   { code: "nl", label: "Dutch", nativeLabel: "Nederlands" },
-  { code: "he", label: "Hebrew", nativeLabel: "עברית" },
+  { code: "he", label: "Hebrew", nativeLabel: "עברית", direction: "rtl" },
   { code: "nb", label: "Norwegian", nativeLabel: "Norsk Bokmål" },
   { code: "sv", label: "Swedish", nativeLabel: "Svenska" },
   { code: "fi", label: "Finnish", nativeLabel: "Suomi" },
@@ -41,6 +45,40 @@ export const SUPPORTED_LOCALES = [
 ] as const satisfies Readonly<[SupportedLocale, ...SupportedLocale[]]>;
 
 export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0].code;
+
+const normaliseLocale = (code: string): string => code.toLowerCase();
+
+const extractLanguagePart = (code: string): string => {
+  const [language] = code.split("-");
+  return language ?? code;
+};
+
+const fuzzyMatchLocale = (code: string): SupportedLocale | undefined => {
+  const normalised = normaliseLocale(code);
+  const normalisedLanguage = extractLanguagePart(normalised);
+  return (
+    SUPPORTED_LOCALES.find((locale) => normaliseLocale(locale.code) === normalised) ??
+    SUPPORTED_LOCALES.find(
+      (locale) => normaliseLocale(extractLanguagePart(locale.code)) === normalisedLanguage,
+    )
+  );
+};
+
+export const getLocaleMetadata = (code: string | undefined): SupportedLocale => {
+  if (!code) {
+    return SUPPORTED_LOCALES[0];
+  }
+
+  return fuzzyMatchLocale(code) ?? SUPPORTED_LOCALES[0];
+};
+
+export const getLocaleDirection = (code: string | undefined): TextDirection => {
+  return getLocaleMetadata(code).direction ?? "ltr";
+};
+
+export const isRtlLocale = (code: string | undefined): boolean => {
+  return getLocaleDirection(code) === "rtl";
+};
 
 /**@example
  * ```ts

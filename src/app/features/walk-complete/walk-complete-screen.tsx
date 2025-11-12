@@ -79,7 +79,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     className="h-full w-full object-cover"
                   />
                   <span className="walk-complete__badge">{t("walk-complete-badge-route")}</span>
-                  <div className="absolute bottom-4 right-4 flex -space-x-2">
+                  <div className="walk-complete__avatar-stack">
                     {walkCompletionMoments.slice(0, 3).map((moment) => (
                       <img
                         key={moment.id}
@@ -145,7 +145,7 @@ export function WalkCompleteScreen(): JSX.Element {
                       alt={moment.name}
                       className="h-12 w-12 flex-shrink-0 rounded-lg object-cover"
                     />
-                    <div className="flex-1 text-left text-base-content">
+                    <div className="flex-1 text-start text-base-content">
                       <p className="font-semibold">{moment.name}</p>
                       <p className="text-sm text-base-content/70">{moment.description}</p>
                     </div>

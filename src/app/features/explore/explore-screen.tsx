@@ -37,7 +37,7 @@ function CategoryScroller(): JSX.Element {
   return (
     <ScrollArea.Root className="w-full pt-2" type="scroll" aria-label="Popular categories">
       <ScrollArea.Viewport className="w-full">
-        <div className="flex gap-3 pb-2 pr-6">
+        <div className="flex gap-3 pb-2" style={{ paddingInlineEnd: "1.5rem" }}>
           {exploreCategories.map((category) => (
             <article
               key={category.id}
@@ -296,11 +296,7 @@ export function ExploreScreen(): JSX.Element {
           }
         >
           <div className="relative">
-            <Icon
-              token="{icon.action.search}"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50"
-              aria-hidden
-            />
+            <Icon token="{icon.action.search}" className="explore-search__icon" aria-hidden />
             <input
               type="search"
               placeholder="Search walks, places, themes..."

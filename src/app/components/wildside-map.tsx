@@ -5,6 +5,22 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { mapDefaults, useOptionalMapStore } from "../features/map/map-state";
 
+let hasRegisteredRtlTextPlugin = false;
+type MapLibreNamespace = typeof import("maplibre-gl");
+
+type MapLibreWithRtl = MapLibreNamespace & {
+  setRTLTextPlugin?: (pluginUrl: string, callback?: () => void, deferred?: boolean) => void;
+};
+
+const ensureRtlTextPlugin = (maplibre: MapLibreNamespace): void => {
+  if (hasRegisteredRtlTextPlugin) return;
+  const setPlugin = (maplibre as MapLibreWithRtl).setRTLTextPlugin;
+  if (typeof setPlugin !== "function") return;
+
+  setPlugin("https://unpkg.com/maplibre-gl/dist/maplibre-gl-rtl-text.js", undefined, true);
+  hasRegisteredRtlTextPlugin = true;
+};
+
 export interface WildsideMapProps {
   /** Longitude/latitude pair for the initial view. */
   center?: [number, number];
@@ -63,12 +79,13 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
     let mapInstance: MapLibreMap | null = null;
 
     async function initialiseMap() {
-      const [{ default: maplibre }] = await Promise.all([
+      const [maplibre] = await Promise.all([
         import("maplibre-gl"),
         import("maplibre-gl/dist/maplibre-gl.css"),
       ]);
 
       if (isCancelled) return;
+      ensureRtlTextPlugin(maplibre);
 
       try {
         mapInstance = new maplibre.Map({

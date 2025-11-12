@@ -63,7 +63,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
                 className="rounded-2xl border border-base-300/60 bg-base-200/20"
               >
                 <Accordion.Header>
-                  <Accordion.Trigger className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left">
+                  <Accordion.Trigger className="flex w-full items-center justify-between gap-3 px-5 py-4 text-start">
                     <div className="flex items-center gap-3">
                       <span
                         className={`flex h-12 w-12 items-center justify-center rounded-full ${section.accentClass}`}

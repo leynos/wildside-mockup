@@ -768,6 +768,26 @@ plain messages, attributes, and selectors without touching JSX. When new keys
 are added, remember that Fluent variables (for example, `{$count}`) must match
 the argument names you pass to `t`.
 
+#### Synchronizing Language Metadata and Layout Direction
+
+Locale metadata now travels with the source by way of
+`src/app/i18n/supported-locales.ts`, which exposes helper utilities such as
+`getLocaleDirection` and `isRtlLocale`. After `i18nReady` resolves, the app
+updates `document.documentElement.lang` and `.dir`, mirrors the direction onto
+`body`, and stores it in `data-direction` attributes so CSS can branch without
+extra JavaScript. Language changes propagate through `i18n.on("languageChanged")`
+so Suspense can keep waiting for `.ftl` bundles while the DOM attributes stay in
+sync.
+
+CSS favours logical properties (`padding-inline`, `inset-inline`,
+`border-inline`) and `[dir="rtl"]` attribute hooks for cases where flexbox
+alignment must flip, such as the floating global-controls drawer or toast
+stacks. Components that need overlapping effects (for example, the walk-complete
+avatar cluster) rely on logical margins so the overlap stays pointed toward the
+interior regardless of writing mode. MapLibre also loads the published RTL text
+plugin via `setRTLTextPlugin` during lazy import so Arabic and Hebrew labels
+render with proper glyph shaping.
+
 #### The ,`useTranslation`, Hook and ,`<Trans>`, Component
 
 The `useTranslation` hook still returns the familiar `t` helper; the difference

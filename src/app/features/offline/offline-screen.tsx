@@ -222,7 +222,7 @@ export function OfflineScreen(): JSX.Element {
                           type="button"
                           data-testid="offline-delete-button"
                           aria-label={`Delete ${entry.download.title}`}
-                          className="absolute right-2 top-2 text-base-content/60 transition hover:text-error"
+                          className="offline-download__dismiss"
                           onClick={() => handleDeleteDownload(entry.download.id)}
                         >
                           <Icon token="{icon.action.remove}" className="text-lg" aria-hidden />

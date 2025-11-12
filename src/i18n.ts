@@ -6,7 +6,12 @@ import Fluent from "i18next-fluent";
 import FluentBackend from "i18next-fluent-backend";
 import { initReactI18next } from "react-i18next";
 
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "./app/i18n/supported-locales";
+import {
+  DEFAULT_LOCALE,
+  getLocaleDirection,
+  getLocaleMetadata,
+  SUPPORTED_LOCALES,
+} from "./app/i18n/supported-locales";
 
 const supportedLngs = SUPPORTED_LOCALES.map((locale) => locale.code);
 
@@ -65,6 +70,26 @@ const fetchAjax = (
     });
 };
 
+const applyDocumentLocale = (language: string | undefined): void => {
+  if (typeof document === "undefined") return;
+
+  const metadata = getLocaleMetadata(language ?? DEFAULT_LOCALE);
+  const resolvedLanguage = language ?? metadata.code;
+  const direction = getLocaleDirection(resolvedLanguage);
+
+  const htmlElement = document.documentElement;
+  if (htmlElement) {
+    htmlElement.lang = resolvedLanguage;
+    htmlElement.dir = direction;
+    htmlElement.setAttribute("data-direction", direction);
+  }
+
+  if (document.body) {
+    document.body.dir = direction;
+    document.body.setAttribute("data-direction", direction);
+  }
+};
+
 // Initialise immediately so that React components can rely on Suspense to wait for .ftl bundles.
 export const i18nReady = i18n
   .use(FluentBackend)
@@ -92,6 +117,14 @@ export const i18nReady = i18n
       fluentBundleOptions: { useIsolating: false },
     },
   });
+
+void i18nReady.then(() => {
+  applyDocumentLocale(i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LOCALE);
+});
+
+i18n.on("languageChanged", (nextLanguage) => {
+  applyDocumentLocale(nextLanguage);
+});
 
 export default i18n;
 

@@ -160,7 +160,7 @@ function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
               key={route.id}
               type="button"
               onClick={() => onSelect(route.id)}
-              className={`rounded-lg border px-3 py-3 text-left text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
+              className={`rounded-lg border px-3 py-3 text-start text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
                 isActive
                   ? "border-accent bg-accent/15 text-base-content"
                   : "border-base-300/70 bg-base-200/60 text-base-content/80"
@@ -189,14 +189,14 @@ function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
           type="button"
           className="btn btn-ghost btn-sm flex-1 rounded-xl border border-base-300/70 bg-base-200/60 text-base-content"
         >
-          <Icon token="{icon.action.regenerate}" aria-hidden className="mr-2 h-4 w-4" />
+          <Icon token="{icon.action.regenerate}" aria-hidden className="me-2 h-4 w-4" />
           Regenerate
         </button>
         <button
           type="button"
           className="btn btn-accent btn-sm flex-1 rounded-xl text-base font-semibold"
         >
-          <Icon token="{icon.action.play}" aria-hidden className="mr-2 h-4 w-4" />
+          <Icon token="{icon.action.play}" aria-hidden className="me-2 h-4 w-4" />
           Start Route
         </button>
       </div>

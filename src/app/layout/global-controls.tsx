@@ -153,6 +153,10 @@ function DrawerPanel({
 function Drawer(): JSX.Element {
   const [open, setOpen] = useState(false);
   const headingId = useId();
+  const { i18n } = useTranslation();
+  const resolvedLanguage = i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LOCALE;
+  const direction = i18n.dir(resolvedLanguage);
+  const collapsedTranslateClass = direction === "rtl" ? "-translate-x-full" : "translate-x-full";
 
   return (
     <div className="global-controls__drawer">
@@ -174,7 +178,7 @@ function Drawer(): JSX.Element {
         className={`transition-all duration-200 ${
           open
             ? "pointer-events-auto translate-x-0 opacity-100"
-            : "pointer-events-none translate-x-full opacity-0"
+            : `pointer-events-none ${collapsedTranslateClass} opacity-0`
         }`}
       >
         {open ? <DrawerPanel headingId={headingId} onClose={() => setOpen(false)} /> : null}

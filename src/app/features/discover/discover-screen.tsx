@@ -62,7 +62,7 @@ export function DiscoverScreen(): JSX.Element {
         <button
           type="button"
           onClick={() => navigate({ to: "/explore" })}
-          className="absolute right-6 top-16 rounded-full px-4 py-2 text-sm font-medium text-base-content/70 transition-colors hover:text-base-content"
+          className="discover-screen__skip"
         >
           Skip
         </button>
