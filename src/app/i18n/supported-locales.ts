@@ -10,8 +10,22 @@ export type SupportedLocale = {
 };
 
 export const SUPPORTED_LOCALES = [
-  { code: "en", label: "English (US)", nativeLabel: "English" },
-  { code: "es", label: "Español", nativeLabel: "Español" },
+  { code: "en-GB", label: "English (UK)", nativeLabel: "English (UK)" },
+  { code: "en-US", label: "English (US)", nativeLabel: "English (US)" },
+  { code: "de", label: "German", nativeLabel: "Deutsch" },
+  { code: "fr", label: "French", nativeLabel: "Français" },
+  { code: "es", label: "Spanish", nativeLabel: "Español" },
+  { code: "pt", label: "Portuguese", nativeLabel: "Português" },
+  { code: "pl", label: "Polish", nativeLabel: "Polski" },
+  { code: "ru", label: "Russian", nativeLabel: "Русский" },
+  { code: "ar", label: "Arabic", nativeLabel: "العربية" },
+  { code: "hi", label: "Hindi", nativeLabel: "हिन्दी" },
+  { code: "ta", label: "Tamil", nativeLabel: "தமிழ்" },
+  { code: "da", label: "Danish", nativeLabel: "Dansk" },
+  { code: "zh-CN", label: "Chinese (Simplified)", nativeLabel: "简体中文" },
+  { code: "zh-TW", label: "Chinese (Traditional)", nativeLabel: "繁體中文" },
+  { code: "ja", label: "Japanese", nativeLabel: "日本語" },
+  { code: "ko", label: "Korean", nativeLabel: "한국어" },
 ] as const satisfies Readonly<[SupportedLocale, ...SupportedLocale[]]>;
 
 export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0].code;

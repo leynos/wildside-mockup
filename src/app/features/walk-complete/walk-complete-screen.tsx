@@ -4,6 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import * as Toast from "@radix-ui/react-toast";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, type ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import { SectionHeading } from "../../components/section-heading";
@@ -51,6 +52,7 @@ export function WalkCompleteScreen(): JSX.Element {
   const navigate = useNavigate();
   const [toastOpen, setToastOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <Toast.Provider swipeDirection="right">
@@ -62,8 +64,8 @@ export function WalkCompleteScreen(): JSX.Element {
               <SectionHero
                 iconToken="{icon.object.trophy}"
                 iconClassName="animate-pulse"
-                title="Walk complete!"
-                description="Amazing adventure through the city · Hidden Gems Loop"
+                title={t("walk-complete-hero-title")}
+                description={t("walk-complete-hero-description")}
                 badgeTone="celebration"
               />
             </div>
@@ -73,10 +75,10 @@ export function WalkCompleteScreen(): JSX.Element {
                 <div className="relative h-44 overflow-hidden rounded-2xl border border-base-300/60">
                   <img
                     src={walkCompletionMapImage}
-                    alt="Overview of the completed route"
+                    alt={t("walk-complete-map-alt")}
                     className="h-full w-full object-cover"
                   />
-                  <span className="walk-complete__badge">Route completed</span>
+                  <span className="walk-complete__badge">{t("walk-complete-badge-route")}</span>
                   <div className="absolute bottom-4 right-4 flex -space-x-2">
                     {walkCompletionMoments.slice(0, 3).map((moment) => (
                       <img
@@ -97,7 +99,9 @@ export function WalkCompleteScreen(): JSX.Element {
                   <article key={stat.id} className="walk-complete__stat-card text-base-content">
                     <div className="mb-2 flex items-center gap-3 text-base-content/70">
                       <Icon token={stat.iconToken} className="text-accent" aria-hidden />
-                      <span className="text-sm font-medium">{stat.label}</span>
+                      <span className="text-sm font-medium">
+                        {t(`walk-complete-primary-${stat.id}-label`)}
+                      </span>
                     </div>
                     <p className="text-2xl font-semibold">{stat.value}</p>
                   </article>
@@ -118,7 +122,9 @@ export function WalkCompleteScreen(): JSX.Element {
                       aria-hidden
                     />
                     <p className="text-lg font-semibold text-base-content">{stat.value}</p>
-                    <p className="text-xs text-base-content/70">{stat.label}</p>
+                    <p className="text-xs text-base-content/70">
+                      {t(`walk-complete-secondary-${stat.id}-label`)}
+                    </p>
                   </article>
                 ))}
               </div>
@@ -126,7 +132,7 @@ export function WalkCompleteScreen(): JSX.Element {
 
             <WalkCompleteSection>
               <SectionHeading iconToken="{icon.action.like}" iconClassName="text-pink-400">
-                Favourite moments
+                {t("walk-complete-favourite-heading")}
               </SectionHeading>
               <div className="space-y-3">
                 {walkCompletionMoments.map((moment) => (
@@ -157,7 +163,7 @@ export function WalkCompleteScreen(): JSX.Element {
                   onClick={() => setToastOpen(true)}
                 >
                   <Icon token="{icon.object.star}" aria-hidden />
-                  Rate this walk
+                  {t("walk-complete-actions-rate")}
                 </button>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <button
@@ -166,7 +172,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     onClick={() => setShareOpen(true)}
                   >
                     <Icon token="{icon.action.share}" aria-hidden />
-                    Share
+                    {t("walk-complete-actions-share")}
                   </button>
                   <button
                     type="button"
@@ -174,7 +180,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     onClick={() => navigate({ to: "/saved" })}
                   >
                     <Icon token="{icon.action.save}" aria-hidden />
-                    Save route
+                    {t("walk-complete-actions-save")}
                   </button>
                 </div>
               </div>
@@ -185,10 +191,9 @@ export function WalkCompleteScreen(): JSX.Element {
                 <div className="inline-action-cluster mb-3 items-start">
                   <Icon token="{icon.object.magic}" className="text-purple-300" aria-hidden />
                   <div>
-                    <h3 className="text-base font-semibold">Try a remix?</h3>
+                    <h3 className="text-base font-semibold">{t("walk-complete-remix-title")}</h3>
                     <p className="text-sm text-base-content/70">
-                      Generate a new route keeping your favourite spots but discovering new hidden
-                      gems.
+                      {t("walk-complete-remix-description")}
                     </p>
                   </div>
                 </div>
@@ -197,21 +202,21 @@ export function WalkCompleteScreen(): JSX.Element {
                   className="btn btn-primary btn-sm"
                   onClick={() => navigate({ to: "/wizard/step-1" })}
                 >
-                  Remix this walk
+                  {t("walk-complete-remix-button")}
                 </button>
               </div>
             </WalkCompleteSection>
 
             <WalkCompleteSection spacing="spacious" className="pb-12">
               <h3 className="mb-4 text-center text-base font-semibold text-base-content">
-                Share your adventure
+                {t("walk-complete-share-section")}
               </h3>
               <div className="flex justify-center gap-4">
                 {walkCompletionShareOptions.map((option) => (
                   <button
                     key={option.id}
                     type="button"
-                    aria-label={option.label}
+                    aria-label={t(`walk-complete-share-channel-${option.id}`)}
                     className={`walk-share__icon ${option.accentClass}`}
                   >
                     <Icon token={option.iconToken} aria-hidden />
@@ -228,27 +233,27 @@ export function WalkCompleteScreen(): JSX.Element {
           <Dialog.Overlay className="fixed inset-0 bg-black/60" />
           <Dialog.Content className="dialog-surface">
             <Dialog.Title className="text-lg font-semibold text-base-content">
-              Share highlights
+              {t("walk-complete-share-dialog-title")}
             </Dialog.Title>
             <Dialog.Description className="text-sm text-base-content/70">
-              Export a highlight reel with your favourite stops and stats.
+              {t("walk-complete-share-dialog-description")}
             </Dialog.Description>
             <div className="flex flex-wrap gap-2 text-sm text-base-content/80">
               {walkCompletionShareOptions.map((option) => (
                 <span key={option.id} className="walk-share__option">
                   <Icon token={option.iconToken} aria-hidden />
-                  {option.label}
+                  {t(`walk-complete-share-channel-${option.id}`)}
                 </span>
               ))}
             </div>
             <div className="flex justify-end gap-2">
               <Dialog.Close asChild>
                 <button type="button" className="btn btn-ghost btn-sm">
-                  Cancel
+                  {t("walk-complete-share-dialog-cancel")}
                 </button>
               </Dialog.Close>
               <button type="button" className="btn btn-accent btn-sm">
-                Generate reel
+                {t("walk-complete-share-dialog-generate")}
               </button>
             </div>
           </Dialog.Content>
@@ -263,7 +268,7 @@ export function WalkCompleteScreen(): JSX.Element {
       >
         <div className="alert alert-success shadow-lg">
           <Icon token="{icon.object.star}" aria-hidden />
-          <span className="font-semibold">Thanks! Rating saved for future suggestions.</span>
+          <span className="font-semibold">{t("walk-complete-toast-rating-saved")}</span>
         </div>
       </Toast.Root>
       <Toast.Viewport className="pointer-events-none fixed inset-x-0 bottom-4 flex flex-col gap-3 px-4 sm:items-end" />
