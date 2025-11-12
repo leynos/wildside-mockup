@@ -672,16 +672,16 @@ view.
 
 ### 4.1 Comprehensive Localization with ,`react-i18next`, and ,`i18next-fluent`
 
-To build a truly global application, components must be localisable.
+To build a truly global application, components must be localizable.
 `react-i18next`, built on top of the powerful `i18next` library, remains the
-de-facto standard for React internationalisation because it preserves language
+de-facto standard for React internationalization because it preserves language
 detectives, middleware, and formatting primitives within a single provider
 layer.[^41][^42] Pairing it with `i18next-fluent` keeps that ecosystem intact
 whilst letting translators work in Mozilla's Fluent syntax for richer
 grammatical control and safer defaults.[^52]
 
 An important caveat is that enabling the Fluent plug-in disables i18next's own
-string interpolation and pluralisation. Every variable must therefore be
+string interpolation and pluralization. Every variable must therefore be
 declared using Fluent placeholders such as `{$name}`, and plural logic must be
 expressed with Fluent selectors.[^52] The official `react-i18next` repository
 includes a Fluent-based sample application, which is a helpful reference when
@@ -698,7 +698,7 @@ pnpm add react-i18next i18next i18next-browser-languagedetector \
 
 ```
 
-Next, create `src/i18n.ts` to initialise the shared instance. The Fluent
+Next, create `src/i18n.ts` to initialize the shared instance. The Fluent
 backend streams `.ftl` resources, the language detector keeps user preferences
 in sync, and the Fluent plug-in rewrites formatting so `t` resolves Fluent
 messages.[^52][^53]
@@ -788,7 +788,7 @@ and plural selectors just need a `count` (or similar) argument:
 not use braces for JSX, continue to reach for `<Trans>` when a sentence needs a
 React component (for example, a link) embedded inside it; the component will
 inject the React nodes while the Fluent string keeps the prose, giving you
-truly localisable markup without unsafe HTML.[^45]
+truly localizable markup without unsafe HTML.[^45]
 
 The following table compares leading React i18n libraries, justifying the
 selection of `react-i18next` for its comprehensive feature set and robust
