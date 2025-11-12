@@ -17,6 +17,7 @@ function LanguageSelect(): JSX.Element {
   const [language, setLanguage] = useState(
     () => i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LOCALE,
   );
+  const [isSwitching, setIsSwitching] = useState(false);
 
   useEffect(() => {
     const handleLanguageChanged = (nextLanguage: string): void => {
@@ -31,9 +32,24 @@ function LanguageSelect(): JSX.Element {
 
   const onLanguageChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     const nextLanguage = event.target.value;
-    if (nextLanguage !== language) {
-      void i18n.changeLanguage(nextLanguage);
+    if (nextLanguage === language || isSwitching) {
+      return;
     }
+
+    const previousLanguage = language;
+    setIsSwitching(true);
+    setLanguage(nextLanguage);
+
+    i18n
+      .changeLanguage(nextLanguage)
+      .catch((error: unknown) => {
+        // eslint-disable-next-line no-console
+        console.error("Failed to change language", error);
+        setLanguage(previousLanguage);
+      })
+      .finally(() => {
+        setIsSwitching(false);
+      });
   };
 
   const label = t("controls-language-label", { defaultValue: "Language" });
@@ -45,6 +61,8 @@ function LanguageSelect(): JSX.Element {
         className={selectClass}
         value={language}
         aria-label={label}
+        aria-busy={isSwitching}
+        disabled={isSwitching}
         onChange={onLanguageChange}
       >
         {SUPPORTED_LOCALES.map((locale) => (
