@@ -670,104 +670,125 @@ Localization (i18n) is a prime example of such a concern, and its
 implementation must also adhere to the principle of separating logic from the
 view.
 
-### 4.1 Comprehensive Localization with ,`react-i18next`
+### 4.1 Comprehensive Localisation with ,`react-i18next`, and ,`i18next-fluent`
 
-To build a truly global application, components must be localizable.
-`react-i18next`, built on top of the powerful `i18next` library, is the de
-<!-- markdownlint-disable-next-line MD013 -->
-facto standard for internationalization in the React ecosystem.[^41] It
-provides a complete solution for managing translations, formatting dates and
-numbers, and handling plurals.[^42]
+To build a truly global application, components must be localisable.
+`react-i18next`, built on top of the powerful `i18next` library, remains the
+de-facto standard for React internationalisation because it preserves language
+detectives, middleware, and formatting primitives within a single provider
+layer.[^41][^42] Pairing it with `i18next-fluent` keeps that ecosystem intact
+whilst letting translators work in Mozilla's Fluent syntax for richer
+grammatical control and safer defaults.[^52]
+
+An important caveat is that enabling the Fluent plug-in disables i18next's own
+string interpolation and pluralisation. Every variable must therefore be
+declared using Fluent placeholders such as `{$name}`, and plural logic must be
+expressed with Fluent selectors.[^52] The official `react-i18next` repository
+includes a Fluent-based sample application, which is a helpful reference when
+debugging Suspense loading states or validating translations in tests.[^54]
 
 #### Setup and Configuration
 
-The first step is to install the necessary packages and create a central
-configuration file.
+Begin by installing the Fluent plug-in, its backend, and the usual
+`react-i18next` stack.
 
 ```bash
-pnpm add react-i18next i18next i18next-http-backend i18next-browser-languagedetector
+pnpm add react-i18next i18next i18next-browser-languagedetector \
+  i18next-fluent i18next-fluent-backend @fluent/bundle
 
 ```
 
-Next, an `i18n.js` file is created to initialize and configure the `i18next`
-instance. This configuration specifies the backend for loading translation
-files, the language detection order, the default language, and a fallback
-language.[^41]
+Next, create `src/i18n.ts` to initialise the shared instance. The Fluent
+backend streams `.ftl` resources, the language detector keeps user preferences
+in sync, and the Fluent plug-in rewrites formatting so `t` resolves Fluent
+messages.[^52][^53]
 
 ```typescript
 // src/i18n.ts
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import Fluent from 'i18next-fluent';
+import FluentBackend from 'i18next-fluent-backend';
 
 i18n
- .use(Backend) // Loads translations from a server
- .use(LanguageDetector) // Detects user language
- .use(initReactI18next) // Passes i18n instance to react-i18next
- .init({
+  .use(FluentBackend) // Loads Fluent resources from /public/locales
+  .use(LanguageDetector) // Detects user language
+  .use(Fluent) // Switches formatting to Fluent syntax
+  .use(initReactI18next) // Passes i18n instance to react-i18next
+  .init({
+    backend: {
+      loadPath: '/locales/{{lng}}/{{ns}}.ftl',
+    },
     fallbackLng: 'en',
     debug: true,
-    interpolation: {
-      escapeValue: false, // React already protects from XSS
-    },
-    // Default namespace
     ns: ['common'],
     defaultNS: 'common',
+    interpolation: {
+      escapeValue: false,
+    },
+    i18nFormat: {
+      fluentBundleOptions: { useIsolating: false },
+    },
   });
 
 export default i18n;
 
 ```
 
-This configuration file is then imported into the application's entry point
-(e.g., `main.tsx`), and the app is wrapped in a `Suspense` component to handle
-the asynchronous loading of translation files.[^46]
+Import this module inside `main.tsx` and keep the root wrapped in `Suspense` so
+React can pause rendering until the `.ftl` file for the active locale has been
+streamed.[^46]
 
 #### Structuring Translations
 
-Translation files are typically organized in a `public/locales` directory.
-Within this directory, subdirectories for each language code (e.g., `en`, `es`)
-contain JSON files corresponding to namespaces. Namespaces allow for splitting
-translations into logical chunks (e.g., `common.json`, `userProfile.json`),
-which can be loaded on demand to improve performance in large applications.[^41]
+Store Fluent resources under `public/locales/<language>/<namespace>.ftl`.
+Namespaces still let you split domains (for example, `common.ftl` and
+`userProfile.ftl`), but every file now contains Fluent messages instead of
+JSON.[^53]
 
-```json
-// public/locales/en/userProfile.json
-{
-  "settingsTitle": "User Settings",
-  "nameLabel": "Name",
-  "emailLabel": "Email Address",
-  "submitButton": "Save Changes",
-  "validation": {
-    "nameRequired": "Name is required"
+```ftl
+# public/locales/en/userProfile.ftl
+user-settings-title = User Settings
+user-settings-name-label = Name
+user-settings-email-label = Email Address
+user-settings-submit-button = Save Changes
+user-settings-validation-name-required = Name is required
+user-settings-greeting = Welcome back, {$name}!
+user-settings-unsaved-count =
+  { $count ->
+      [one] You have {$count} unsaved field
+     *[other] You have {$count} unsaved fields
   }
-}
 
 ```
+
+This format keeps translators in a single `.ftl` document where they can mix
+plain messages, attributes, and selectors without touching JSX. When new keys
+are added, remember that Fluent variables (for example, `{$count}`) must match
+the argument names you pass to `t`.
 
 #### The ,`useTranslation`, Hook and ,`<Trans>`, Component
 
-The `useTranslation` hook is the primary tool for accessing translations within
-components. It returns a `t` function, which takes a translation key and
-returns the corresponding string for the active language.[^41]
+The `useTranslation` hook still returns the familiar `t` helper; the difference
+is that it now resolves Fluent messages while honouring namespaces.[^41][^50]
 
 ```typescript
 const { t } = useTranslation('userProfile');
-//...
-<label>{t('nameLabel')}</label>
-<button>{t('submitButton')}</button>
+
+<label>{t('user-settings-name-label')}</label>
+<button>{t('user-settings-submit-button')}</button>
+<p>{t('user-settings-greeting', { name: session.userName })}</p>
 
 ```
 
-The `t` function also supports interpolation for dynamic values and robust
-pluralization rules, which are essential for grammatically correct translations
-across different languages.[^45]
-
-For translations that require embedded HTML elements, such as a link within a
-sentence, hardcoding the markup is not feasible. The `<Trans>` component solves
-this by allowing JSX children to be integrated into the translated string,
-preserving both the translation and the component structure.[^45]
+Interpolated variables must line up with the Fluent placeholders (`{$name}`)
+and plural selectors just need a `count` (or similar) argument:
+`t('user-settings-unsaved-count', { count: dirtyFields })`. Because Fluent does
+not use braces for JSX, continue to reach for `<Trans>` when a sentence needs a
+React component (for example, a link) embedded inside it; the component will
+inject the React nodes while the Fluent string keeps the prose, giving you
+truly localisable markup without unsafe HTML.[^45]
 
 The following table compares leading React i18n libraries, justifying the
 selection of `react-i18next` for its comprehensive feature set and robust
@@ -1113,3 +1134,9 @@ but also adaptable and maintainable for the future.
 51. Complete Guide — React Internationalization (i18n) with i18next - YouTube,
     accessed on 17 August 2025,
     [https://www.youtube.com/watch?v=LFaFPORPmeo](https://www.youtube.com/watch?v=LFaFPORPmeo)
+52. i18next-fluent - README, accessed on 12 November 2025,
+    [https://github.com/i18next/i18next-fluent](https://github.com/i18next/i18next-fluent)
+53. i18next-fluent-backend - README, accessed on 12 November 2025,
+    [https://github.com/i18next/i18next-fluent-backend](https://github.com/i18next/i18next-fluent-backend)
+54. React-i18next Fluent example, accessed on 12 November 2025,
+    [https://github.com/i18next/react-i18next/tree/master/example/react-fluent](https://github.com/i18next/react-i18next/tree/master/example/react-fluent)

@@ -4,6 +4,8 @@ import { cleanup } from "@testing-library/react";
 import { toHaveNoViolations } from "jest-axe";
 import { afterEach, expect } from "vitest";
 
+import { setupI18nTestHarness } from "./support/i18n-test-runtime";
+
 // Ensure Testing Library surfaces hidden elements so aria-* expectations work.
 configure({
   defaultHidden: true,
@@ -141,3 +143,5 @@ if (typeof window !== "undefined" && !window.matchMedia) {
     return mediaQueryList;
   };
 }
+
+await setupI18nTestHarness();

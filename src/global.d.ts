@@ -27,6 +27,13 @@ declare module "jest-axe" {
   };
 }
 
+declare module "i18next-fluent-backend" {
+  import type { BackendModule } from "i18next";
+
+  const FluentBackend: BackendModule;
+  export default FluentBackend;
+}
+
 declare module "bun:test" {
   interface Matchers<T = unknown> {
     toHaveNoViolations(): T;
