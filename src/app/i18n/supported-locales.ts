@@ -26,6 +26,15 @@ export const SUPPORTED_LOCALES = [
   { code: "zh-TW", label: "Chinese (Traditional)", nativeLabel: "繁體中文" },
   { code: "ja", label: "Japanese", nativeLabel: "日本語" },
   { code: "ko", label: "Korean", nativeLabel: "한국어" },
+  { code: "nl", label: "Dutch", nativeLabel: "Nederlands" },
+  { code: "he", label: "Hebrew", nativeLabel: "עברית" },
+  { code: "nb", label: "Norwegian", nativeLabel: "Norsk Bokmål" },
+  { code: "sv", label: "Swedish", nativeLabel: "Svenska" },
+  { code: "fi", label: "Finnish", nativeLabel: "Suomi" },
+  { code: "vi", label: "Vietnamese", nativeLabel: "Tiếng Việt" },
+  { code: "th", label: "Thai", nativeLabel: "ไทย" },
+  { code: "cy", label: "Welsh", nativeLabel: "Cymraeg" },
+  { code: "gd", label: "Scots Gaelic", nativeLabel: "Gàidhlig" },
 ] as const satisfies Readonly<[SupportedLocale, ...SupportedLocale[]]>;
 
 export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0].code;
