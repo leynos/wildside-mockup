@@ -670,7 +670,7 @@ Localization (i18n) is a prime example of such a concern, and its
 implementation must also adhere to the principle of separating logic from the
 view.
 
-### 4.1 Comprehensive Localisation with ,`react-i18next`, and ,`i18next-fluent`
+### 4.1 Comprehensive Localization with ,`react-i18next`, and ,`i18next-fluent`
 
 To build a truly global application, components must be localisable.
 `react-i18next`, built on top of the powerful `i18next` library, remains the
