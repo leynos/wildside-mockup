@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Tack! Betyget sparades för framtida förslag
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Upptäck
+explore-header-subtitle = Utforska kuraterade promenader och dolda pärlor
+explore-filter-aria-label = Filtrera promenader
+explore-search-placeholder = Sök promenader, platser, teman …
+explore-categories-aria-label = Populära kategorier
+explore-featured-heading = Veckans promenad
+explore-popular-heading = Populära teman
+explore-curated-heading = Kuraterade samlingar
+explore-trending-heading = Trendigt just nu
+explore-community-heading = Communityns favorit
+explore-community-subtitle = Mest delad den här veckan
+explore-community-saves =
+    { $count ->
+        [one] {$count} sparning
+       *[other] {$count} sparningar
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] rutt
+       *[other] rutter
+    }

@@ -25,3 +25,28 @@ walk-complete-toast-rating-saved = Dziękujemy! Ocena zapisana na potrzeby przys
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Odkrywaj
+explore-header-subtitle = Odkrywaj wyselekcjonowane spacery i ukryte perełki
+explore-filter-aria-label = Filtruj trasy
+explore-search-placeholder = Szukaj spacerów, miejsc, motywów…
+explore-categories-aria-label = Popularne kategorie
+explore-featured-heading = Spacer tygodnia
+explore-popular-heading = Popularne motywy
+explore-curated-heading = Wyselekcjonowane kolekcje
+explore-trending-heading = Na topie teraz
+explore-community-heading = Ulubieniec społeczności
+explore-community-subtitle = Najczęściej udostępniane w tym tygodniu
+explore-community-saves =
+    { $count ->
+        [one] {$count} zapis
+        [few] {$count} zapisy
+        [many] {$count} zapisów
+       *[other] {$count} zapisów
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] trasa
+        [few] trasy
+        [many] tras
+       *[other] tras
+    }

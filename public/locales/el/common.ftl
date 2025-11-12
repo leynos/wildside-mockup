@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Ευχαριστούμε! Η βαθμολογ
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Ανακάλυψε
+explore-header-subtitle = Εξερεύνησε επιμελημένες διαδρομές και κρυμμένους θησαυρούς
+explore-filter-aria-label = Φίλτραρε διαδρομές
+explore-search-placeholder = Αναζήτησε διαδρομές, τοποθεσίες, θέματα…
+explore-categories-aria-label = Δημοφιλείς κατηγορίες
+explore-featured-heading = Διαδρομή της εβδομάδας
+explore-popular-heading = Δημοφιλή θέματα
+explore-curated-heading = Επιμελημένες συλλογές
+explore-trending-heading = Τώρα στη μόδα
+explore-community-heading = Αγαπημένο της κοινότητας
+explore-community-subtitle = Με τα περισσότερα κοινοποιήματα αυτή την εβδομάδα
+explore-community-saves =
+    { $count ->
+        [one] {$count} αποθήκευση
+       *[other] {$count} αποθηκεύσεις
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] διαδρομή
+       *[other] διαδρομές
+    }

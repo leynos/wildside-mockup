@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Kiitos! Arvio tallennettu tulevia ehdotuksia 
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Löydä
+explore-header-subtitle = Tutki kuratoituja kävelyjä ja kätkettyjä helmiä
+explore-filter-aria-label = Suodata kävelyt
+explore-search-placeholder = Hae kävelyjä, paikkoja, teemoja…
+explore-categories-aria-label = Suositut kategoriat
+explore-featured-heading = Viikon kävely
+explore-popular-heading = Suositut teemat
+explore-curated-heading = Kuratoidut kokoelmat
+explore-trending-heading = Nousussa nyt
+explore-community-heading = Yhteisön suosikki
+explore-community-subtitle = Jaettu eniten tällä viikolla
+explore-community-saves =
+    { $count ->
+        [one] {$count} tallennus
+       *[other] {$count} tallennusta
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] reitti
+       *[other] reittejä
+    }

@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = תודה! הדירוג נשמר להצעות 
 walk-complete-share-channel-facebook = פייסבוק
 walk-complete-share-channel-instagram = אינסטגרם
 walk-complete-share-channel-twitter = X ‏(טוויטר)
+explore-header-title = גלה
+explore-header-subtitle = חקור מסלולים אצורים ואוצרות חבויים
+explore-filter-aria-label = סינון מסלולים
+explore-search-placeholder = חפש מסלולים, מקומות, נושאים…
+explore-categories-aria-label = קטגוריות פופולריות
+explore-featured-heading = מסלול השבוע
+explore-popular-heading = נושאים פופולריים
+explore-curated-heading = אוספים אצורים
+explore-trending-heading = עכשיו במגמת עלייה
+explore-community-heading = מועדף הקהילה
+explore-community-subtitle = הכי שותף השבוע
+explore-community-saves =
+    { $count ->
+        [one] {$count} שמירה
+       *[other] {$count} שמירות
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] מסלול
+       *[other] מסלולים
+    }

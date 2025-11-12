@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Tapadh leat! Chaidh an rangachadh a shàbhala
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Lorg
+explore-header-subtitle = Rannsaich cuairtean air an cur ri chèile agus ulaidhean falaichte
+explore-filter-aria-label = Criathraich cuairtean
+explore-search-placeholder = Lorg cuairtean, àiteachan, cuspairean…
+explore-categories-aria-label = Roinnean-chuspairean mòr-chòrdte
+explore-featured-heading = Cuairt na seachdain
+explore-popular-heading = Cuspairean mòr-chòrdte
+explore-curated-heading = Cruinneachaidhean curaichte
+explore-trending-heading = A' gluasad an-dràsta
+explore-community-heading = Taghadh na coimhearsnachd
+explore-community-subtitle = Air a cho-roinn as motha an t-seachdain seo
+explore-community-saves =
+    { $count ->
+        [one] {$count} sàbhaladh
+       *[other] {$count} sàbhalaidhean
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] slighe
+       *[other] slighean
+    }

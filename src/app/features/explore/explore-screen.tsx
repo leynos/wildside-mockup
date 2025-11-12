@@ -3,6 +3,7 @@
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, type ReactNode, useId } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
@@ -33,38 +34,67 @@ function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Element {
   );
 }
 
-function CategoryScroller(): JSX.Element {
+type CategoryScrollerProps = {
+  ariaLabel: string;
+};
+
+type FeaturedWalkCardProps = {
+  heading: string;
+};
+
+type PopularThemesGridProps = {
+  heading: string;
+};
+
+type CuratedCollectionsListProps = {
+  heading: string;
+  formatRouteCount: (count: number) => string;
+};
+
+type TrendingRoutesListProps = {
+  heading: string;
+};
+
+type CommunityPickPanelProps = {
+  heading: string;
+  subtitle: string;
+  formatSaveCount: (count: number) => string;
+};
+
+function CategoryScroller({ ariaLabel }: CategoryScrollerProps): JSX.Element {
   return (
-    <ScrollArea.Root className="w-full pt-2" type="scroll" aria-label="Popular categories">
-      <ScrollArea.Viewport className="w-full">
-        <div className="flex gap-3 pb-2" style={{ paddingInlineEnd: "1.5rem" }}>
-          {exploreCategories.map((category) => (
-            <article
-              key={category.id}
-              className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}
-            >
-              <Icon token={category.iconToken} className="text-lg" aria-hidden />
-              <p className="text-sm font-semibold">{category.title}</p>
-              <p className="text-xs text-white/70">{category.summary}</p>
-            </article>
-          ))}
-        </div>
-      </ScrollArea.Viewport>
-      <ScrollArea.Scrollbar orientation="horizontal" className="h-1 rounded bg-base-300/60">
-        <ScrollArea.Thumb className="rounded bg-accent/60" />
-      </ScrollArea.Scrollbar>
-      <ScrollArea.Corner className="bg-base-300/40" />
-    </ScrollArea.Root>
+    <section className="w-full pt-2" aria-label={ariaLabel} role="region">
+      <ScrollArea.Root className="w-full" type="scroll">
+        <ScrollArea.Viewport className="w-full">
+          <div className="flex gap-3 pb-2" style={{ paddingInlineEnd: "1.5rem" }}>
+            {exploreCategories.map((category) => (
+              <article
+                key={category.id}
+                className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}
+              >
+                <Icon token={category.iconToken} className="text-lg" aria-hidden />
+                <p className="text-sm font-semibold">{category.title}</p>
+                <p className="text-xs text-white/70">{category.summary}</p>
+              </article>
+            ))}
+          </div>
+        </ScrollArea.Viewport>
+        <ScrollArea.Scrollbar orientation="horizontal" className="h-1 rounded bg-base-300/60">
+          <ScrollArea.Thumb className="rounded bg-accent/60" />
+        </ScrollArea.Scrollbar>
+        <ScrollArea.Corner className="bg-base-300/40" />
+      </ScrollArea.Root>
+    </section>
   );
 }
 
-function FeaturedWalkCard(): JSX.Element {
+function FeaturedWalkCard({ heading }: FeaturedWalkCardProps): JSX.Element {
   const headingId = useId();
   return (
-    <section className="explore-featured__panel" aria-labelledby={headingId}>
+    <section className="explore-featured__panel" aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-heading text-base-content">
         <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
-        Walk of the Week
+        {heading}
       </h2>
       <figure className="overflow-hidden rounded-xl border border-base-300/50">
         <img
@@ -110,12 +140,12 @@ function FeaturedWalkCard(): JSX.Element {
   );
 }
 
-function PopularThemesGrid(): JSX.Element {
+function PopularThemesGrid({ heading }: PopularThemesGridProps): JSX.Element {
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId}>
+    <section aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-title">
-        Popular Themes
+        {heading}
       </h2>
       <div className="grid grid-cols-2 gap-4">
         {popularThemes.map((theme) => (
@@ -149,12 +179,15 @@ function PopularThemesGrid(): JSX.Element {
   );
 }
 
-function CuratedCollectionsList(): JSX.Element {
+function CuratedCollectionsList({
+  heading,
+  formatRouteCount,
+}: CuratedCollectionsListProps): JSX.Element {
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId}>
+    <section aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-title">
-        Curated Collections
+        {heading}
       </h2>
       <div className="space-y-4">
         {curatedCollections.map((collection) => (
@@ -187,7 +220,7 @@ function CuratedCollectionsList(): JSX.Element {
               </div>
               <div className="explore-stat-group explore-stat-group--right">
                 <span className="text-lg font-bold text-base-content">{collection.routes}</span>
-                <span>routes</span>
+                <span>{formatRouteCount(collection.routes)}</span>
               </div>
             </div>
             <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">
@@ -205,12 +238,12 @@ function CuratedCollectionsList(): JSX.Element {
   );
 }
 
-function TrendingRoutesList(): JSX.Element {
+function TrendingRoutesList({ heading }: TrendingRoutesListProps): JSX.Element {
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId}>
+    <section aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-title">
-        Trending Now
+        {heading}
       </h2>
       <div className="space-y-3">
         {trendingRoutes.map((route) => (
@@ -238,13 +271,17 @@ function TrendingRoutesList(): JSX.Element {
   );
 }
 
-function CommunityPickPanel(): JSX.Element {
+function CommunityPickPanel({
+  heading,
+  subtitle,
+  formatSaveCount,
+}: CommunityPickPanelProps): JSX.Element {
   const headingId = useId();
   return (
-    <section className="explore-info__panel" aria-labelledby={headingId}>
+    <section className="explore-info__panel" aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-heading mb-4 text-base-content">
         <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
-        Community Favourite
+        {heading}
       </h2>
       <div className="mb-3 flex items-center gap-3">
         <div className="h-9 w-9 overflow-hidden rounded-full border border-base-300/60">
@@ -257,7 +294,7 @@ function CommunityPickPanel(): JSX.Element {
         </div>
         <div className="flex-1">
           <p className="text-sm font-medium text-base-content">{communityPick.curator}</p>
-          <p className="text-xs text-base-content/60">Most shared this week</p>
+          <p className="text-xs text-base-content/60">{subtitle}</p>
         </div>
         <span className="rating-indicator rating-indicator--strong">
           <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
@@ -269,7 +306,9 @@ function CommunityPickPanel(): JSX.Element {
       <div className="mt-3 explore-meta-list">
         <RouteMetric iconToken="{icon.object.route}">{communityPick.distance}</RouteMetric>
         <RouteMetric iconToken="{icon.object.duration}">{communityPick.duration}</RouteMetric>
-        <RouteMetric iconToken="{icon.action.save}">{communityPick.saves} saves</RouteMetric>
+        <RouteMetric iconToken="{icon.action.save}">
+          {formatSaveCount(communityPick.saves)}
+        </RouteMetric>
       </div>
     </section>
   );
@@ -277,19 +316,52 @@ function CommunityPickPanel(): JSX.Element {
 
 export function ExploreScreen(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const headerTitle = t("explore-header-title", { defaultValue: "Discover" });
+  const headerSubtitle = t("explore-header-subtitle", {
+    defaultValue: "Explore curated walks & hidden gems",
+  });
+  const filterLabel = t("explore-filter-aria-label", { defaultValue: "Filter walks" });
+  const searchPlaceholder = t("explore-search-placeholder", {
+    defaultValue: "Search walks, places, themes...",
+  });
+  const categoriesLabel = t("explore-categories-aria-label", {
+    defaultValue: "Popular categories",
+  });
+  const featuredHeading = t("explore-featured-heading", { defaultValue: "Walk of the Week" });
+  const popularHeading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
+  const curatedHeading = t("explore-curated-heading", { defaultValue: "Curated Collections" });
+  const trendingHeading = t("explore-trending-heading", { defaultValue: "Trending Now" });
+  const communityHeading = t("explore-community-heading", { defaultValue: "Community Favourite" });
+  const communitySubtitle = t("explore-community-subtitle", {
+    defaultValue: "Most shared this week",
+  });
+
+  const formatRouteCount = (count: number): string =>
+    t("explore-curated-route-count", {
+      count,
+      defaultValue: count === 1 ? "route" : "routes",
+    });
+
+  const formatSaveCount = (count: number): string =>
+    t("explore-community-saves", {
+      count,
+      defaultValue: count === 1 ? `${count} save` : `${count} saves`,
+    });
 
   return (
     <MobileShell>
       <div className="screen-stack">
         <AppHeader
-          title="Discover"
-          subtitle="Explore curated walks & hidden gems"
+          title={headerTitle}
+          subtitle={headerSubtitle}
           trailing={
             <button
               type="button"
               onClick={() => navigate({ to: "/discover" })}
               className="header-icon-button"
-              aria-label="Filter walks"
+              aria-label={filterLabel}
             >
               <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />
             </button>
@@ -299,19 +371,24 @@ export function ExploreScreen(): JSX.Element {
             <Icon token="{icon.action.search}" className="explore-search__icon" aria-hidden />
             <input
               type="search"
-              placeholder="Search walks, places, themes..."
+              placeholder={searchPlaceholder}
+              aria-label={searchPlaceholder}
               className="explore-search__input"
             />
           </div>
         </AppHeader>
         <main className="screen-scroll">
           <div className="space-y-8">
-            <CategoryScroller />
-            <FeaturedWalkCard />
-            <PopularThemesGrid />
-            <CuratedCollectionsList />
-            <TrendingRoutesList />
-            <CommunityPickPanel />
+            <CategoryScroller ariaLabel={categoriesLabel} />
+            <FeaturedWalkCard heading={featuredHeading} />
+            <PopularThemesGrid heading={popularHeading} />
+            <CuratedCollectionsList heading={curatedHeading} formatRouteCount={formatRouteCount} />
+            <TrendingRoutesList heading={trendingHeading} />
+            <CommunityPickPanel
+              heading={communityHeading}
+              subtitle={communitySubtitle}
+              formatSaveCount={formatSaveCount}
+            />
           </div>
         </main>
         <AppBottomNavigation

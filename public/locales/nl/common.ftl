@@ -25,3 +25,20 @@ walk-complete-toast-rating-saved = Bedankt! Beoordeling opgeslagen voor toekomst
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Ontdekken
+explore-header-subtitle = Verken gecureerde wandelingen en verborgen parels
+explore-filter-aria-label = Wandelingen filteren
+explore-search-placeholder = Zoek wandelingen, plekken, thema's…
+explore-categories-aria-label = Populaire categorieën
+explore-featured-heading = Wandeling van de week
+explore-popular-heading = Populaire thema's
+explore-curated-heading = Gecureerde collecties
+explore-trending-heading = Nu trending
+explore-community-heading = Favoriet van de community
+explore-community-subtitle = Meest gedeeld deze week
+explore-community-saves = {$count}× opgeslagen
+explore-curated-route-count =
+    { $count ->
+        [one] route
+       *[other] routes
+    }

@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Tak! Vurderingen er gemt til fremtidige forsl
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Opdag
+explore-header-subtitle = Udforsk kuraterede gåture og skjulte perler
+explore-filter-aria-label = Filtrér gåture
+explore-search-placeholder = Søg efter gåture, steder, temaer …
+explore-categories-aria-label = Populære kategorier
+explore-featured-heading = Ugens tur
+explore-popular-heading = Populære temaer
+explore-curated-heading = Kuraterede samlinger
+explore-trending-heading = Trender lige nu
+explore-community-heading = Fællesskabets favorit
+explore-community-subtitle = Mest delt i denne uge
+explore-community-saves =
+    { $count ->
+        [one] {$count} gemt
+       *[other] {$count} gemte
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] rute
+       *[other] ruter
+    }

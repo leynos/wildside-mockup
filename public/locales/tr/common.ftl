@@ -25,3 +25,20 @@ walk-complete-toast-rating-saved = Teşekkürler! Değerlendirmen gelecekteki ö
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Keşfet
+explore-header-subtitle = Özenle seçilmiş yürüyüşleri ve gizli hazineleri keşfet
+explore-filter-aria-label = Yürüyüşleri filtrele
+explore-search-placeholder = Yürüyüş, yer, tema ara…
+explore-categories-aria-label = Popüler kategoriler
+explore-featured-heading = Haftanın rotası
+explore-popular-heading = Popüler temalar
+explore-curated-heading = Küratör seçkileri
+explore-trending-heading = Şu anda trend
+explore-community-heading = Topluluğun favorisi
+explore-community-subtitle = Bu hafta en çok paylaşılan
+explore-community-saves = {$count} kayıt
+explore-curated-route-count =
+    { $count ->
+        [one] rota
+       *[other] rotalar
+    }

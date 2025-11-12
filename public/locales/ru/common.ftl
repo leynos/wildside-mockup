@@ -25,3 +25,28 @@ walk-complete-toast-rating-saved = Спасибо! Оценка сохранен
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Открывайте
+explore-header-subtitle = Исследуйте подобранные маршруты и скрытые жемчужины
+explore-filter-aria-label = Фильтровать маршруты
+explore-search-placeholder = Ищите прогулки, места, темы…
+explore-categories-aria-label = Популярные категории
+explore-featured-heading = Маршрут недели
+explore-popular-heading = Популярные темы
+explore-curated-heading = Подборки
+explore-trending-heading = Сейчас в тренде
+explore-community-heading = Выбор сообщества
+explore-community-subtitle = Чаще всего делились на этой неделе
+explore-community-saves =
+    { $count ->
+        [one] {$count} сохранение
+        [few] {$count} сохранения
+        [many] {$count} сохранений
+       *[other] {$count} сохранения
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] маршрут
+        [few] маршрута
+        [many] маршрутов
+       *[other] маршрута
+    }

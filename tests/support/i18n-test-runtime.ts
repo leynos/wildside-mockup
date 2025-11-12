@@ -3,6 +3,8 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+import { DEFAULT_LOCALE } from "../../src/app/i18n/supported-locales";
+
 type GlobalFetch = typeof globalThis.fetch;
 type FetchInput = Parameters<GlobalFetch>[0];
 
@@ -72,6 +74,19 @@ export async function setupI18nTestHarness(target: typeof globalThis = globalThi
 
   if (typeof target.window !== "undefined" && target.window !== null) {
     target.window.fetch = patchedFetch;
+  }
+
+  if (typeof target.localStorage !== "undefined" && target.localStorage !== null) {
+    target.localStorage.setItem("i18nextLng", DEFAULT_LOCALE);
+  }
+
+  if (
+    typeof target.window !== "undefined" &&
+    target.window !== null &&
+    typeof target.window.localStorage !== "undefined" &&
+    target.window.localStorage !== null
+  ) {
+    target.window.localStorage.setItem("i18nextLng", DEFAULT_LOCALE);
   }
 
   const { i18nReady } = await import("../../src/i18n");

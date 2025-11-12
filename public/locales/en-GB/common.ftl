@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Thanks! Rating saved for future suggestions.
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Discover
+explore-header-subtitle = Explore curated walks & hidden gems
+explore-filter-aria-label = Filter walks
+explore-search-placeholder = Search walks, places, themes...
+explore-categories-aria-label = Popular categories
+explore-featured-heading = Walk of the Week
+explore-popular-heading = Popular Themes
+explore-curated-heading = Curated Collections
+explore-trending-heading = Trending Now
+explore-community-heading = Community Favourite
+explore-community-subtitle = Most shared this week
+explore-community-saves =
+    { $count ->
+        [one] {$count} save
+       *[other] {$count} saves
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] route
+       *[other] routes
+    }

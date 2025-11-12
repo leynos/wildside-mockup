@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = ¡Gracias! Tu valoración se guardó para fut
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Descubrir
+explore-header-subtitle = Explora paseos curados y joyas ocultas
+explore-filter-aria-label = Filtrar paseos
+explore-search-placeholder = Busca paseos, lugares, temas…
+explore-categories-aria-label = Categorías populares
+explore-featured-heading = Paseo de la semana
+explore-popular-heading = Temas populares
+explore-curated-heading = Colecciones seleccionadas
+explore-trending-heading = Tendencias ahora
+explore-community-heading = Favorito de la comunidad
+explore-community-subtitle = Lo más compartido esta semana
+explore-community-saves =
+    { $count ->
+        [one] {$count} guardado
+       *[other] {$count} guardados
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] ruta
+       *[other] rutas
+    }

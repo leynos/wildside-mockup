@@ -670,12 +670,12 @@ Localization (i18n) is a prime example of such a concern, and its
 implementation must also adhere to the principle of separating logic from the
 view.
 
-### 4.1 Comprehensive Localization with ,`react-i18next`, and ,`i18next-fluent`
+### 4.1 Comprehensive Localization with `react-i18next` and `i18next-fluent`
 
 To build a truly global application, components must be localizable.
 `react-i18next`, built on top of the powerful `i18next` library, remains the
 de-facto standard for React internationalization because it preserves language
-detectives, middleware, and formatting primitives within a single provider
+detection, middleware, and formatting primitives within a single provider
 layer.[^41][^42] Pairing it with `i18next-fluent` keeps that ecosystem intact
 whilst letting translators work in Mozilla's Fluent syntax for richer
 grammatical control and safer defaults.[^52]

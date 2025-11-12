@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Takk! Vurderingen er lagret for fremtidige fo
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Oppdag
+explore-header-subtitle = Utforsk kuraterte turer og skjulte perler
+explore-filter-aria-label = Filtrer turer
+explore-search-placeholder = Søk etter turer, steder, temaer …
+explore-categories-aria-label = Populære kategorier
+explore-featured-heading = Ukens tur
+explore-popular-heading = Populære temaer
+explore-curated-heading = Kuraterte samlinger
+explore-trending-heading = Trender nå
+explore-community-heading = Fellesskapets favoritt
+explore-community-subtitle = Mest delt denne uken
+explore-community-saves =
+    { $count ->
+        [one] {$count} lagring
+       *[other] {$count} lagringer
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] rute
+       *[other] ruter
+    }

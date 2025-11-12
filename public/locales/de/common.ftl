@@ -25,3 +25,24 @@ walk-complete-toast-rating-saved = Danke! Bewertung für zukünftige Vorschläge
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+explore-header-title = Entdecken
+explore-header-subtitle = Erkunde kuratierte Spaziergänge und verborgene Highlights
+explore-filter-aria-label = Spaziergänge filtern
+explore-search-placeholder = Nach Spaziergängen, Orten, Themen suchen …
+explore-categories-aria-label = Beliebte Kategorien
+explore-featured-heading = Spaziergang der Woche
+explore-popular-heading = Beliebte Themen
+explore-curated-heading = Kuratierte Sammlungen
+explore-trending-heading = Gerade im Trend
+explore-community-heading = Community-Liebling
+explore-community-subtitle = Am häufigsten geteilt in dieser Woche
+explore-community-saves =
+    { $count ->
+        [one] {$count} Speicherung
+       *[other] {$count} Speicherungen
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] Route
+       *[other] Routen
+    }
