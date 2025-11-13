@@ -676,7 +676,7 @@ To build a truly global application, components must be localizable.
 `react-i18next`, built on top of the powerful `i18next` library, remains the
 de-facto standard for React internationalization because it preserves language
 detection, middleware, and formatting primitives within a single provider
-layer.[^41][^42] Pairing it with `i18next-fluent` keeps that ecosystem intact
+layer.[^41][^51] Pairing it with `i18next-fluent` keeps that ecosystem intact
 whilst letting translators work in Mozilla's Fluent syntax for richer
 grammatical control and safer defaults.[^52]
 
@@ -1148,20 +1148,22 @@ but also adaptable and maintainable for the future.
 49. How to handle internationalization with Hooks in React ? - GeeksforGeeks,
     accessed on 17 August 2025,
     [https://www.geeksforgeeks.org/reactjs/how-to-handle-internationalization-with-hooks-in-react/](https://www.geeksforgeeks.org/reactjs/how-to-handle-internationalization-with-hooks-in-react/)
-50. useTranslation (hook) - react-i18next documentation, accessed on 17 August
+50. useTranslation (hook) — react-i18next documentation, accessed on 17 August
     2025,
     [https://react.i18next.com/latest/usetranslation-hook](https://react.i18next.com/latest/usetranslation-hook)
-[^50]: useTranslation (hook) - react-i18next documentation, accessed on 17
+[^51]: react-i18next — repository and documentation, accessed on 17 August 2025,
+    [https://github.com/i18next/react-i18next](https://github.com/i18next/react-i18next)
+[^50]: useTranslation (hook) — react-i18next documentation, accessed on 17
     August 2025,
     [https://react.i18next.com/latest/usetranslation-hook](https://react.i18next.com/latest/usetranslation-hook)
-51. Complete Guide — React Internationalization (i18n) with i18next - YouTube,
+51. Complete Guide — React Internationalization (i18n) with i18next — YouTube,
     accessed on 17 August 2025,
     [https://www.youtube.com/watch?v=LFaFPORPmeo](https://www.youtube.com/watch?v=LFaFPORPmeo)
-52. i18next-fluent - README, accessed on 12 November 2025,
+52. i18next-fluent — README, accessed on 12 November 2025,
     [https://github.com/i18next/i18next-fluent](https://github.com/i18next/i18next-fluent)
-53. i18next-fluent-backend - README, accessed on 12 November 2025,
+53. i18next-fluent-backend — README, accessed on 12 November 2025,
     [https://github.com/i18next/i18next-fluent-backend](https://github.com/i18next/i18next-fluent-backend)
-54. React-i18next Fluent example, accessed on 12 November 2025,
+54. React-i18next Fluent example — GitHub example application, accessed on 12 November 2025,
     [https://github.com/i18next/react-i18next/tree/master/example/react-fluent](https://github.com/i18next/react-i18next/tree/master/example/react-fluent)
-[^53]: i18next-fluent-backend - README, accessed on 12 November 2025,
+[^53]: i18next-fluent-backend — README, accessed on 12 November 2025,
     [https://github.com/i18next/i18next-fluent-backend](https://github.com/i18next/i18next-fluent-backend)

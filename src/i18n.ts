@@ -6,6 +6,7 @@ import Fluent from "i18next-fluent";
 import FluentBackend from "i18next-fluent-backend";
 import { initReactI18next } from "react-i18next";
 
+import { appLogger, reportError } from "./app/observability/logger";
 import {
   DEFAULT_LOCALE,
   getLocaleDirection,
@@ -64,8 +65,16 @@ const fetchAjax = (
         status = 502;
       }
 
-      // eslint-disable-next-line no-console
-      console.error("i18next fluent backend fetch failed", typedError);
+      const context = {
+        url,
+        method: request.method,
+        withCredentials: Boolean(withCredentials),
+        status,
+        statusText: message,
+      };
+      appLogger.error("i18next Fluent backend fetch failed", context, typedError);
+      reportError(typedError, { ...context, scope: "i18n.fetchAjax" });
+
       callback(typedError, { status, statusText: message });
     });
 };

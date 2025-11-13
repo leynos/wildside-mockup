@@ -4,6 +4,7 @@ import { type ChangeEvent, type JSX, useEffect, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../i18n/supported-locales";
+import { appLogger, reportError } from "../observability/logger";
 import { useDisplayMode } from "../providers/display-mode-provider";
 import { useTheme } from "../providers/theme-provider";
 
@@ -43,8 +44,9 @@ function LanguageSelect(): JSX.Element {
     i18n
       .changeLanguage(nextLanguage)
       .catch((error: unknown) => {
-        // eslint-disable-next-line no-console
-        console.error("Failed to change language", error);
+        const context = { nextLanguage, previousLanguage };
+        appLogger.error("Failed to change language", context, error);
+        reportError(error, { ...context, scope: "global-controls.language-change" });
         setLanguage(previousLanguage);
       })
       .finally(() => {

@@ -37,7 +37,7 @@ explore-trending-heading = Đang thịnh hành
 explore-community-heading = Yêu thích của cộng đồng
 explore-community-subtitle = Được chia sẻ nhiều nhất tuần này
 explore-community-saves = {$count} lượt lưu
-explore-curated-route-count = tuyến
+explore-curated-route-count = {$count} tuyến
 
 offline-header-title = Bản đồ ngoại tuyến
 offline-header-subtitle = Quản lý tải xuống và cập nhật thông minh

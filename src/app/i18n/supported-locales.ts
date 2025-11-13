@@ -44,7 +44,7 @@ export const SUPPORTED_LOCALES = [
   { code: "zh-TW", label: "Chinese (Traditional)", nativeLabel: "繁體中文" },
 ] as const satisfies Readonly<[SupportedLocale, ...SupportedLocale[]]>;
 
-export const DEFAULT_LOCALE = "en-GB";
+export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0]?.code ?? "en-GB";
 
 const defaultLocaleMetadata = (() => {
   const locale = SUPPORTED_LOCALES.find((entry) => entry.code === DEFAULT_LOCALE);
@@ -57,7 +57,7 @@ const defaultLocaleMetadata = (() => {
 const normaliseLocale = (code: string): string => code.toLowerCase();
 
 const extractLanguagePart = (code: string): string => {
-  const language = code.split("-")[0] as string;
+  const language = code.split("-")[0];
   return language;
 };
 

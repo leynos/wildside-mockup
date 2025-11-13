@@ -16,6 +16,7 @@ import {
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
+import i18n, { i18nReady } from "../src/i18n";
 
 type TestRoute =
   | "/discover"
@@ -164,6 +165,20 @@ describe("Stage 1 routed flows", () => {
 
     const categoriesRegion = view.getByRole("region", { name: /popular categories/i });
     expect(within(categoriesRegion).getByText(/23 routes/i)).toBeTruthy();
+  });
+
+  it("formats explore counts with Fluent singular and plural forms", async () => {
+    await i18nReady;
+
+    const singularSave = i18n.t("explore-community-saves", { count: 1 });
+    const pluralSave = i18n.t("explore-community-saves", { count: 3 });
+    expect(singularSave).toMatch(/1 save/i);
+    expect(pluralSave).toMatch(/3 saves/i);
+
+    const singularRoute = i18n.t("explore-curated-route-count", { count: 1 });
+    const pluralRoute = i18n.t("explore-curated-route-count", { count: 3 });
+    expect(singularRoute).toMatch(/1 route/i);
+    expect(pluralRoute).toMatch(/3 routes/i);
   });
 
   it("toggles advanced switches on the customize route", async () => {

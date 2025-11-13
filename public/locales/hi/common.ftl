@@ -36,8 +36,16 @@ explore-curated-heading = क्यूरेटेड संग्रह
 explore-trending-heading = अभी ट्रेंड में
 explore-community-heading = समुदाय की पसंद
 explore-community-subtitle = इस सप्ताह सबसे अधिक साझा
-explore-community-saves = {$count} सेव
-explore-curated-route-count = मार्ग
+explore-community-saves =
+    { $count ->
+        [one] {$count} सेव
+       *[other] {$count} सेवें
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] {$count} मार्ग
+       *[other] {$count} मार्ग
+    }
 
 offline-header-title = ऑफ़लाइन मानचित्र
 offline-header-subtitle = डाउनलोड और स्मार्ट अपडेट प्रबंधित करें

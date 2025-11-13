@@ -116,6 +116,31 @@ export function OfflineScreen(): JSX.Element {
   const dialogCancel = t("offline-dialog-cancel", { defaultValue: "Cancel" });
   const dialogPreview = t("offline-dialog-preview", { defaultValue: "Preview download" });
 
+  type DownloadStatus = OfflineDownload["status"];
+
+  const statusBadgeByStatus: Record<DownloadStatus, { className: string; label: string }> = {
+    complete: {
+      className: "badge badge-success badge-sm",
+      label: statusCompleteLabel,
+    },
+    updating: {
+      className: "badge badge-warning badge-sm",
+      label: statusUpdatingLabel,
+    },
+    downloading: {
+      className: "badge badge-info badge-sm",
+      label: statusDownloadingLabel,
+    },
+  };
+
+  const renderStatusBadge = (status: DownloadStatus): JSX.Element | null => {
+    const config = statusBadgeByStatus[status];
+    if (!config) {
+      return null;
+    }
+    return <span className={config.className}>{config.label}</span>;
+  };
+
   const handleDeleteDownload = (downloadId: string) => {
     if (!isManaging) return;
     setDownloads((current) =>
@@ -319,19 +344,7 @@ export function OfflineScreen(): JSX.Element {
                               {entry.download.subtitle} • {entry.download.size}
                             </OfflineDownloadMeta>
                           </div>
-                          {entry.download.status === "complete" ? (
-                            <span className="badge badge-success badge-sm">
-                              {statusCompleteLabel}
-                            </span>
-                          ) : entry.download.status === "updating" ? (
-                            <span className="badge badge-warning badge-sm">
-                              {statusUpdatingLabel}
-                            </span>
-                          ) : entry.download.status === "downloading" ? (
-                            <span className="badge badge-info badge-sm">
-                              {statusDownloadingLabel}
-                            </span>
-                          ) : null}
+                          {renderStatusBadge(entry.download.status)}
                         </div>
                         <div className="mt-2 flex items-center gap-3">
                           <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
