@@ -36,8 +36,16 @@ explore-curated-heading = 큐레이션 컬렉션
 explore-trending-heading = 지금 인기
 explore-community-heading = 커뮤니티 픽
 explore-community-subtitle = 이번 주 가장 많이 공유됨
-explore-community-saves = {$count}회 저장
-explore-curated-route-count = 루트
+explore-community-saves =
+    { $count ->
+        [one] {$count}회 저장
+       *[other] {$count}회 저장
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] {$count} 루트
+       *[other] {$count} 루트
+    }
 
 offline-header-title = 오프라인 지도
 offline-header-subtitle = 다운로드와 스마트 업데이트 관리
