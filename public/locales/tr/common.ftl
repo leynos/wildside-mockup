@@ -42,3 +42,42 @@ explore-curated-route-count =
         [one] rota
        *[other] rotalar
     }
+
+offline-header-title = Çevrimdışı haritalar
+offline-header-subtitle = İndirmeleri ve akıllı güncellemeleri yönetin
+offline-header-back-label = Haritaya geri dön
+offline-header-add-area-label = Çevrimdışı bölge ekle
+offline-storage-heading = Depolama genel bakış
+offline-storage-subtitle = 30 gün sonra kullanılmayan haritaları otomatik olarak sil
+offline-storage-used-label = Kullanılan
+offline-storage-used-description = 2,8 GB / 8 GB
+offline-storage-legend-maps = Haritalar
+offline-storage-legend-available = Boş alan
+offline-suggestions-heading = Akıllı seyahat ipuçları
+offline-suggestion-reykjavik-title = Yaklaşan seyahat algılandı
+offline-suggestion-reykjavik-description = Gelecek haftaki İzlanda yolculuğundan önce Reykjavik’i ekleyin
+offline-suggestion-reykjavik-cta = Reykjavik’i indir
+offline-suggestion-dismiss = Yoksay
+offline-downloads-heading = İndirilen bölgeler
+offline-downloads-description = Çevrimdışı gezinme için haritaları yönetin
+offline-downloads-manage = Yönet
+offline-downloads-done = Bitti
+offline-downloads-delete-aria = {$title} öğesini sil
+offline-downloads-status-complete = Tamamlandı
+offline-downloads-status-updating = Güncelleme mevcut
+offline-downloads-status-downloading = İndiriliyor
+offline-downloads-undo-title = {$title} silindi
+offline-downloads-undo-description = Bu haritayı geri getirmek için Geri Al’a dokunun.
+offline-downloads-undo-button = Geri al
+offline-auto-heading = Otomatik yönetim
+offline-auto-option-auto-delete-title = Eski haritaları otomatik sil
+offline-auto-option-auto-delete-description = 30 günden eski haritaları otomatik olarak kaldır
+offline-auto-option-wifi-only-title = Yalnızca Wi-Fi indirmeleri
+offline-auto-option-wifi-only-description = Yalnızca Wi-Fi bağlantısı varken harita indir
+offline-auto-option-auto-update-title = Haritaları otomatik güncelle
+offline-auto-option-auto-update-description = Yeni sürüm çıktığında haritaları otomatik güncelle
+offline-dialog-title = Yeni bölge indir
+offline-dialog-description = Haritaları çevrimdışı kullanım için eşitleyin. Bir şehir arayın veya alan seçmek için işaret bırakın.
+offline-dialog-search-placeholder = Şehir veya bölge ara
+offline-dialog-cancel = İptal
+offline-dialog-preview = İndirmeyi önizle

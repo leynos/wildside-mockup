@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] rute
        *[other] ruter
     }
+
+offline-header-title = Offlinekort
+offline-header-subtitle = Administrer downloads og smarte opdateringer
+offline-header-back-label = Tilbage til kortet
+offline-header-add-area-label = Tilføj offlineområde
+offline-storage-heading = Lageroversigt
+offline-storage-subtitle = Slet ubrugte kort automatisk efter 30 dage
+offline-storage-used-label = Brugt
+offline-storage-used-description = 2,8 GB af 8 GB
+offline-storage-legend-maps = Kort
+offline-storage-legend-available = Ledig plads
+offline-suggestions-heading = Smarte rejsetips
+offline-suggestion-reykjavik-title = Kommende rejse registreret
+offline-suggestion-reykjavik-description = Tilføj Reykjavik før din Islandsrejse i næste uge
+offline-suggestion-reykjavik-cta = Download Reykjavik
+offline-suggestion-dismiss = Afvis
+offline-downloads-heading = Downloadede områder
+offline-downloads-description = Administrer kort til offline-navigation
+offline-downloads-manage = Administrer
+offline-downloads-done = Færdig
+offline-downloads-delete-aria = Slet {$title}
+offline-downloads-status-complete = Færdig
+offline-downloads-status-updating = Opdatering tilgængelig
+offline-downloads-status-downloading = Downloader
+offline-downloads-undo-title = {$title} slettet
+offline-downloads-undo-description = Tryk Fortryd for at gendanne dette kort.
+offline-downloads-undo-button = Fortryd
+offline-auto-heading = Automatisk styring
+offline-auto-option-auto-delete-title = Slet gamle kort automatisk
+offline-auto-option-auto-delete-description = Fjern kort, der er over 30 dage gamle, automatisk
+offline-auto-option-wifi-only-title = Downloads kun via Wi-Fi
+offline-auto-option-wifi-only-description = Download kun kort, når du er på Wi-Fi
+offline-auto-option-auto-update-title = Opdater kort automatisk
+offline-auto-option-auto-update-description = Opdater kort automatisk, når nye versioner er klar
+offline-dialog-title = Download nyt område
+offline-dialog-description = Synkroniser kort til offline adgang. Søg efter en by eller sæt en nål for at vælge et område.
+offline-dialog-search-placeholder = Søg efter byer eller regioner
+offline-dialog-cancel = Annuller
+offline-dialog-preview = Vis download

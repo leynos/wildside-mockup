@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] Route
        *[other] Routen
     }
+
+offline-header-title = Offline-Karten
+offline-header-subtitle = Downloads und intelligente Aktualisierungen verwalten
+offline-header-back-label = Zur Karte zurück
+offline-header-add-area-label = Offline-Bereich hinzufügen
+offline-storage-heading = Speicherübersicht
+offline-storage-subtitle = Unbenutzte Karten nach 30 Tagen automatisch löschen
+offline-storage-used-label = Belegt
+offline-storage-used-description = 2,8 GB von 8 GB
+offline-storage-legend-maps = Karten
+offline-storage-legend-available = Freier Speicher
+offline-suggestions-heading = Intelligente Reisetipps
+offline-suggestion-reykjavik-title = Bevorstehende Reise erkannt
+offline-suggestion-reykjavik-description = Füge Reykjavík vor deiner Islandreise nächste Woche hinzu
+offline-suggestion-reykjavik-cta = Reykjavík herunterladen
+offline-suggestion-dismiss = Ignorieren
+offline-downloads-heading = Heruntergeladene Bereiche
+offline-downloads-description = Karten für die Offline-Navigation verwalten
+offline-downloads-manage = Verwalten
+offline-downloads-done = Fertig
+offline-downloads-delete-aria = {$title} löschen
+offline-downloads-status-complete = Abgeschlossen
+offline-downloads-status-updating = Aktualisierung verfügbar
+offline-downloads-status-downloading = Wird heruntergeladen
+offline-downloads-undo-title = {$title} gelöscht
+offline-downloads-undo-description = Tippe auf Rückgängig, um diese Karte wiederherzustellen.
+offline-downloads-undo-button = Rückgängig
+offline-auto-heading = Automatische Verwaltung
+offline-auto-option-auto-delete-title = Alte Karten automatisch löschen
+offline-auto-option-auto-delete-description = Karten, die älter als 30 Tage sind, automatisch entfernen
+offline-auto-option-wifi-only-title = Nur-WLAN-Downloads
+offline-auto-option-wifi-only-description = Karten nur über WLAN herunterladen
+offline-auto-option-auto-update-title = Karten automatisch aktualisieren
+offline-auto-option-auto-update-description = Karten automatisch aktualisieren, sobald neue Versionen verfügbar sind
+offline-dialog-title = Neuen Bereich herunterladen
+offline-dialog-description = Synchronisiere Karten für den Offline-Zugriff. Suche nach einer Stadt oder setze eine Markierung, um einen Bereich auszuwählen.
+offline-dialog-search-placeholder = Städte oder Regionen suchen
+offline-dialog-cancel = Abbrechen
+offline-dialog-preview = Download anzeigen

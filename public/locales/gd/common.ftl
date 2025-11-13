@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] slighe
        *[other] slighean
     }
+
+offline-header-title = Mapaichean far loidhne
+offline-header-subtitle = Stiùirich luchdadh a-nuas agus ùrachaidhean tuigseach
+offline-header-back-label = Air ais dhan mhapa
+offline-header-add-area-label = Cuir raon far loidhne ris
+offline-storage-heading = Sealladh farsaing air an stòras
+offline-storage-subtitle = Sguab às mapaichean nach eil gan cleachdadh às dèidh 30 latha gu fèin-obrachail
+offline-storage-used-label = Air a chleachdadh
+offline-storage-used-description = 2.8 GB à 8 GB
+offline-storage-legend-maps = Mapaichean
+offline-storage-legend-available = Àite ri fhaighinn
+offline-suggestions-heading = Gliocasan siubhail tuigseach
+offline-suggestion-reykjavik-title = Chaidh turas a tha ri thighinn a lorg
+offline-suggestion-reykjavik-description = Cuir Reykjavík ris mus tèid thu gu Innis Tìle an ath sheachdain
+offline-suggestion-reykjavik-cta = Luchdaich sìos Reykjavík
+offline-suggestion-dismiss = Leig seachad
+offline-downloads-heading = Raointean air an luchdadh sìos
+offline-downloads-description = Stiùirich mapaichean airson seòladh far loidhne
+offline-downloads-manage = Stiùirich
+offline-downloads-done = Deiseil
+offline-downloads-delete-aria = Sguab às {$title}
+offline-downloads-status-complete = Deiseil
+offline-downloads-status-updating = Ùrachadh ri fhaighinn
+offline-downloads-status-downloading = A’ luchdadh sìos
+offline-downloads-undo-title = Chaidh {$title} a sguabadh às
+offline-downloads-undo-description = Thoir gnogag air Neo-dhèanadh gus am mapa seo fhaighinn air ais.
+offline-downloads-undo-button = Neo-dhèanadh
+offline-auto-heading = Riaghladh fèin-obrachail
+offline-auto-option-auto-delete-title = Sguab às mapaichean sean gu fèin-obrachail
+offline-auto-option-auto-delete-description = Bheir e air falbh mapaichean nas sine na 30 latha gu fèin-obrachail
+offline-auto-option-wifi-only-title = Luchdaich sìos tro Wi-Fi a-mhàin
+offline-auto-option-wifi-only-description = Luchdaich sìos mapaichean nuair a tha thu air Wi-Fi a-mhàin
+offline-auto-option-auto-update-title = Ùraich mapaichean gu fèin-obrachail
+offline-auto-option-auto-update-description = Ùraich mapaichean gu fèin-obrachail nuair a tha tionndaidhean ùra ann
+offline-dialog-title = Luchdaich sìos raon ùr
+offline-dialog-description = Sioncronaich mapaichean airson cleachdadh far loidhne. Lorg baile no leig sìos prìne gus raon a thaghadh.
+offline-dialog-search-placeholder = Lorg bailtean no roinnean
+offline-dialog-cancel = Sguir dheth
+offline-dialog-preview = Ro-shealladh luchdachaidh sìos

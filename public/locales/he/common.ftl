@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] מסלול
        *[other] מסלולים
     }
+
+offline-header-title = מפות לא מקוונות
+offline-header-subtitle = נהלו הורדות ועדכונים חכמים
+offline-header-back-label = חזרה למפה
+offline-header-add-area-label = הוספת אזור לא מקוון
+offline-storage-heading = סקירת אחסון
+offline-storage-subtitle = מחקו אוטומטית מפות לא בשימוש אחרי 30 יום
+offline-storage-used-label = בשימוש
+offline-storage-used-description = 2.8 ג"ב מתוך 8 ג"ב
+offline-storage-legend-maps = מפות
+offline-storage-legend-available = שטח פנוי
+offline-suggestions-heading = טיפים חכמים למסע
+offline-suggestion-reykjavik-title = זוהתה נסיעה קרובה
+offline-suggestion-reykjavik-description = הוסיפו את רייקיאוויק לפני הנסיעה לאיסלנד בשבוע הבא
+offline-suggestion-reykjavik-cta = הורידו את רייקיאוויק
+offline-suggestion-dismiss = התעלם
+offline-downloads-heading = אזורים שהורדו
+offline-downloads-description = נהלו מפות לניווט ללא חיבור
+offline-downloads-manage = ניהול
+offline-downloads-done = סיום
+offline-downloads-delete-aria = מחקו את {$title}
+offline-downloads-status-complete = הושלם
+offline-downloads-status-updating = עדכון זמין
+offline-downloads-status-downloading = בהורדה
+offline-downloads-undo-title = {$title} נמחק
+offline-downloads-undo-description = הקישו על ביטול כדי לשחזר את המפה.
+offline-downloads-undo-button = ביטול
+offline-auto-heading = ניהול אוטומטי
+offline-auto-option-auto-delete-title = מחיקה אוטומטית של מפות ישנות
+offline-auto-option-auto-delete-description = מסיר אוטומטית מפות בנות יותר מ־30 יום
+offline-auto-option-wifi-only-title = הורדות דרך Wi-Fi בלבד
+offline-auto-option-wifi-only-description = הורידו מפות רק כשמחוברים ל-Wi-Fi
+offline-auto-option-auto-update-title = עדכון אוטומטי של מפות
+offline-auto-option-auto-update-description = מעדכן מפות אוטומטית כשיש גרסאות חדשות
+offline-dialog-title = הורדת אזור חדש
+offline-dialog-description = סנכרנו מפות לשימוש לא מקוון. חפשו עיר או הניחו סיכה כדי לבחור אזור.
+offline-dialog-search-placeholder = חיפוש ערים או אזורים
+offline-dialog-cancel = ביטול
+offline-dialog-preview = תצוגה מקדימה של ההורדה

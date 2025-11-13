@@ -3,6 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, type ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
@@ -39,6 +40,7 @@ function OfflineDownloadMeta({
 
 export function OfflineScreen(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [suggestions, setSuggestions] = useState(offlineSuggestions);
   const [dialogOpen, setDialogOpen] = useState(false);
   type DownloadEntry =
@@ -55,6 +57,57 @@ export function OfflineScreen(): JSX.Element {
       return acc;
     }, {}),
   );
+
+  const headerTitle = t("offline-header-title", { defaultValue: "Offline Maps" });
+  const headerSubtitle = t("offline-header-subtitle", {
+    defaultValue: "Manage downloads and smart updates",
+  });
+  const backLabel = t("offline-header-back-label", { defaultValue: "Back to map" });
+  const addAreaLabel = t("offline-header-add-area-label", { defaultValue: "Add offline area" });
+  const storageHeading = t("offline-storage-heading", { defaultValue: "Storage overview" });
+  const storageSubtitle = t("offline-storage-subtitle", {
+    defaultValue: "Auto-delete unused maps after 30 days",
+  });
+  const storageUsedLabel = t("offline-storage-used-label", { defaultValue: "Used" });
+  const storageUsedDescription = t("offline-storage-used-description", {
+    defaultValue: "2.8 GB of 8 GB",
+  });
+  const storageMapsLabel = t("offline-storage-legend-maps", { defaultValue: "Maps" });
+  const storageAvailableLabel = t("offline-storage-legend-available", {
+    defaultValue: "Available space",
+  });
+  const suggestionsHeading = t("offline-suggestions-heading", {
+    defaultValue: "Smart travel hints",
+  });
+  const suggestionsDismiss = t("offline-suggestion-dismiss", { defaultValue: "Dismiss" });
+  const downloadsHeading = t("offline-downloads-heading", { defaultValue: "Downloaded areas" });
+  const downloadsDescription = t("offline-downloads-description", {
+    defaultValue: "Manage maps for offline navigation",
+  });
+  const manageLabel = t("offline-downloads-manage", { defaultValue: "Manage" });
+  const doneLabel = t("offline-downloads-done", { defaultValue: "Done" });
+  const statusCompleteLabel = t("offline-downloads-status-complete", { defaultValue: "Complete" });
+  const statusUpdatingLabel = t("offline-downloads-status-updating", {
+    defaultValue: "Update available",
+  });
+  const statusDownloadingLabel = t("offline-downloads-status-downloading", {
+    defaultValue: "Downloading",
+  });
+  const undoDescription = t("offline-downloads-undo-description", {
+    defaultValue: "Tap undo to restore this map.",
+  });
+  const undoButtonLabel = t("offline-downloads-undo-button", { defaultValue: "Undo" });
+  const autoHeading = t("offline-auto-heading", { defaultValue: "Auto-Management" });
+  const dialogTitle = t("offline-dialog-title", { defaultValue: "Download new area" });
+  const dialogDescription = t("offline-dialog-description", {
+    defaultValue:
+      "Sync maps for offline access. Search for a city or drop a pin to select a custom region.",
+  });
+  const dialogSearchPlaceholder = t("offline-dialog-search-placeholder", {
+    defaultValue: "Search cities or regions",
+  });
+  const dialogCancel = t("offline-dialog-cancel", { defaultValue: "Cancel" });
+  const dialogPreview = t("offline-dialog-preview", { defaultValue: "Preview download" });
 
   const handleDeleteDownload = (downloadId: string) => {
     if (!isManaging) return;
@@ -82,12 +135,12 @@ export function OfflineScreen(): JSX.Element {
       <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
         <div className="screen-stack">
           <AppHeader
-            title="Offline Maps"
-            subtitle="Manage downloads and smart updates"
+            title={headerTitle}
+            subtitle={headerSubtitle}
             leading={
               <button
                 type="button"
-                aria-label="Back to map"
+                aria-label={backLabel}
                 className="header-nav-button"
                 onClick={() => navigate({ to: "/map/quick" })}
               >
@@ -96,7 +149,7 @@ export function OfflineScreen(): JSX.Element {
             }
             trailing={
               <Dialog.Trigger asChild>
-                <button type="button" aria-label="Add offline area" className="header-icon-button">
+                <button type="button" aria-label={addAreaLabel} className="header-icon-button">
                   <Icon token="{icon.action.add}" aria-hidden className="h-5 w-5" />
                 </button>
               </Dialog.Trigger>
@@ -108,16 +161,16 @@ export function OfflineScreen(): JSX.Element {
               <div className="mb-4 flex items-center gap-3">
                 <Icon token="{icon.action.download}" className="text-accent" aria-hidden />
                 <div>
-                  <p className="text-sm font-medium text-base-content">Storage overview</p>
-                  <OfflineDownloadMeta>Auto-delete unused maps after 30 days</OfflineDownloadMeta>
+                  <p className="text-sm font-medium text-base-content">{storageHeading}</p>
+                  <OfflineDownloadMeta>{storageSubtitle}</OfflineDownloadMeta>
                 </div>
               </div>
               <div className="space-y-3">
                 <div>
                   <div className="split-row">
-                    <OfflineDownloadMeta as="span">Used</OfflineDownloadMeta>
+                    <OfflineDownloadMeta as="span">{storageUsedLabel}</OfflineDownloadMeta>
                     <OfflineDownloadMeta as="span" className="font-semibold text-base-content">
-                      2.8 GB of 8 GB
+                      {storageUsedDescription}
                     </OfflineDownloadMeta>
                   </div>
                   <div className="h-2 w-full rounded-full bg-base-300/60">
@@ -127,11 +180,11 @@ export function OfflineScreen(): JSX.Element {
                 <div className="flex items-center gap-3 text-xs text-base-content/60">
                   <span className="flex items-center gap-1">
                     <span className="block h-2 w-2 rounded-full bg-accent" />
-                    Maps
+                    {storageMapsLabel}
                   </span>
                   <span className="flex items-center gap-1">
                     <span className="block h-2 w-2 rounded-full bg-base-300/80" />
-                    Available space
+                    {storageAvailableLabel}
                   </span>
                 </div>
               </div>
@@ -139,7 +192,7 @@ export function OfflineScreen(): JSX.Element {
 
             {suggestions.length > 0 ? (
               <section className="space-y-3">
-                <h2 className="text-base font-semibold text-base-content">Smart travel hints</h2>
+                <h2 className="text-base font-semibold text-base-content">{suggestionsHeading}</h2>
                 {suggestions.map((suggestion) => (
                   <article
                     key={suggestion.id}
@@ -153,11 +206,21 @@ export function OfflineScreen(): JSX.Element {
                       />
                       <div className="flex-1">
                         <h3 className="text-base font-semibold text-base-100">
-                          {suggestion.title}
+                          {t(`offline-suggestion-${suggestion.id}-title`, {
+                            defaultValue: suggestion.title,
+                          })}
                         </h3>
-                        <p className="mt-1 text-sm text-base-100/80">{suggestion.description}</p>
+                        <p className="mt-1 text-sm text-base-100/80">
+                          {t(`offline-suggestion-${suggestion.id}-description`, {
+                            defaultValue: suggestion.description,
+                          })}
+                        </p>
                         <div className="mt-3 flex flex-wrap gap-2">
-                          <Button size="sm">{suggestion.callToAction}</Button>
+                          <Button size="sm">
+                            {t(`offline-suggestion-${suggestion.id}-cta`, {
+                              defaultValue: suggestion.callToAction,
+                            })}
+                          </Button>
                           <Button
                             size="sm"
                             variant="ghost"
@@ -168,7 +231,7 @@ export function OfflineScreen(): JSX.Element {
                               )
                             }
                           >
-                            Dismiss
+                            {suggestionsDismiss}
                           </Button>
                         </div>
                       </div>
@@ -185,9 +248,9 @@ export function OfflineScreen(): JSX.Element {
                     id="downloaded-areas-heading"
                     className="text-base font-semibold text-base-content"
                   >
-                    Downloaded areas
+                    {downloadsHeading}
                   </h2>
-                  <OfflineDownloadMeta>Manage maps for offline navigation</OfflineDownloadMeta>
+                  <OfflineDownloadMeta>{downloadsDescription}</OfflineDownloadMeta>
                 </div>
                 <Button
                   size="sm"
@@ -204,7 +267,7 @@ export function OfflineScreen(): JSX.Element {
                     })
                   }
                 >
-                  {isManaging ? "Done" : "Manage"}
+                  {isManaging ? doneLabel : manageLabel}
                 </Button>
               </header>
 
@@ -221,7 +284,10 @@ export function OfflineScreen(): JSX.Element {
                         <button
                           type="button"
                           data-testid="offline-delete-button"
-                          aria-label={`Delete ${entry.download.title}`}
+                          aria-label={t("offline-downloads-delete-aria", {
+                            title: entry.download.title,
+                            defaultValue: `Delete ${entry.download.title}`,
+                          })}
                           className="offline-download__dismiss"
                           onClick={() => handleDeleteDownload(entry.download.id)}
                         >
@@ -247,11 +313,17 @@ export function OfflineScreen(): JSX.Element {
                             </OfflineDownloadMeta>
                           </div>
                           {entry.download.status === "complete" ? (
-                            <span className="badge badge-success badge-sm">Complete</span>
+                            <span className="badge badge-success badge-sm">
+                              {statusCompleteLabel}
+                            </span>
                           ) : entry.download.status === "updating" ? (
-                            <span className="badge badge-warning badge-sm">Update available</span>
+                            <span className="badge badge-warning badge-sm">
+                              {statusUpdatingLabel}
+                            </span>
                           ) : entry.download.status === "downloading" ? (
-                            <span className="badge badge-info badge-sm">Downloading</span>
+                            <span className="badge badge-info badge-sm">
+                              {statusDownloadingLabel}
+                            </span>
                           ) : null}
                         </div>
                         <div className="mt-2 flex items-center gap-3">
@@ -272,11 +344,19 @@ export function OfflineScreen(): JSX.Element {
                       key={`${entry.download.id}-undo`}
                       data-testid="offline-undo-card"
                       className="offline-download__undo"
-                      aria-label={`${entry.download.title} deleted`}
+                      aria-label={t("offline-downloads-undo-title", {
+                        title: entry.download.title,
+                        defaultValue: `${entry.download.title} deleted`,
+                      })}
                     >
                       <div>
-                        <p className="font-semibold">{entry.download.title} deleted</p>
-                        <OfflineDownloadMeta>Tap undo to restore this map.</OfflineDownloadMeta>
+                        <p className="font-semibold">
+                          {t("offline-downloads-undo-title", {
+                            title: entry.download.title,
+                            defaultValue: `${entry.download.title} deleted`,
+                          })}
+                        </p>
+                        <OfflineDownloadMeta>{undoDescription}</OfflineDownloadMeta>
                       </div>
                       <button
                         type="button"
@@ -284,7 +364,7 @@ export function OfflineScreen(): JSX.Element {
                         onClick={() => handleUndoDownload(entry.download.id)}
                         data-testid="offline-undo-button"
                       >
-                        Undo
+                        {undoButtonLabel}
                       </button>
                     </article>
                   ),
@@ -294,19 +374,25 @@ export function OfflineScreen(): JSX.Element {
             <section className="space-y-4">
               <header className="flex items-center gap-3">
                 <Icon token="{icon.action.settings}" className="text-accent" aria-hidden />
-                <h2 className="text-base font-semibold text-base-content">Auto-Management</h2>
+                <h2 className="text-base font-semibold text-base-content">{autoHeading}</h2>
               </header>
               <div className="space-y-4">
                 {autoManagementOptions.map((option) => {
                   const checked = autoSettings[option.id] ?? option.defaultEnabled;
+                  const optionTitle = t(`offline-auto-option-${option.id}-title`, {
+                    defaultValue: option.title,
+                  });
+                  const optionDescription = t(`offline-auto-option-${option.id}-description`, {
+                    defaultValue: option.description,
+                  });
                   return (
                     <PreferenceToggleCard
                       key={option.id}
                       id={`auto-management-${option.id}`}
                       iconToken={option.iconToken}
                       iconClassName={option.iconClassName}
-                      title={option.title}
-                      description={option.description}
+                      title={optionTitle}
+                      description={optionDescription}
                       isChecked={Boolean(checked)}
                       onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
                     />
@@ -328,24 +414,23 @@ export function OfflineScreen(): JSX.Element {
           <Dialog.Overlay className="fixed inset-0 bg-black/60" />
           <Dialog.Content className="dialog-surface">
             <Dialog.Title className="text-lg font-semibold text-base-content">
-              Download new area
+              {dialogTitle}
             </Dialog.Title>
             <Dialog.Description className="text-sm text-base-content/70">
-              Sync maps for offline access. Search for a city or drop a pin to select a custom
-              region.
+              {dialogDescription}
             </Dialog.Description>
             <input
               type="search"
-              placeholder="Search cities or regions"
+              placeholder={dialogSearchPlaceholder}
               className="offline-search__input"
             />
             <div className="flex justify-end gap-2">
               <Dialog.Close asChild>
                 <Button size="sm" variant="ghost">
-                  Cancel
+                  {dialogCancel}
                 </Button>
               </Dialog.Close>
-              <Button size="sm">Preview download</Button>
+              <Button size="sm">{dialogPreview}</Button>
             </div>
           </Dialog.Content>
         </Dialog.Portal>

@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] rute
        *[other] ruter
     }
+
+offline-header-title = Frakoblede kart
+offline-header-subtitle = Administrer nedlastinger og smarte oppdateringer
+offline-header-back-label = Tilbake til kartet
+offline-header-add-area-label = Legg til frakoblet område
+offline-storage-heading = Oversikt over lagring
+offline-storage-subtitle = Slett ubrukte kart automatisk etter 30 dager
+offline-storage-used-label = Brukt
+offline-storage-used-description = 2,8 GB av 8 GB
+offline-storage-legend-maps = Kart
+offline-storage-legend-available = Ledig plass
+offline-suggestions-heading = Smarte reisetips
+offline-suggestion-reykjavik-title = Foreslått reise registrert
+offline-suggestion-reykjavik-description = Legg til Reykjavík før Islandsturen din neste uke
+offline-suggestion-reykjavik-cta = Last ned Reykjavík
+offline-suggestion-dismiss = Avvis
+offline-downloads-heading = Nedlastede områder
+offline-downloads-description = Administrer kart for navigasjon uten nett
+offline-downloads-manage = Administrer
+offline-downloads-done = Ferdig
+offline-downloads-delete-aria = Slett {$title}
+offline-downloads-status-complete = Fullført
+offline-downloads-status-updating = Oppdatering tilgjengelig
+offline-downloads-status-downloading = Laster ned
+offline-downloads-undo-title = {$title} er slettet
+offline-downloads-undo-description = Trykk Angre for å gjenopprette kartet.
+offline-downloads-undo-button = Angre
+offline-auto-heading = Automatisk håndtering
+offline-auto-option-auto-delete-title = Slett gamle kart automatisk
+offline-auto-option-auto-delete-description = Fjerner kart som er eldre enn 30 dager automatisk
+offline-auto-option-wifi-only-title = Bare nedlastinger over Wi-Fi
+offline-auto-option-wifi-only-description = Last ned kart kun når du er tilkoblet Wi-Fi
+offline-auto-option-auto-update-title = Oppdater kart automatisk
+offline-auto-option-auto-update-description = Oppdaterer kart automatisk når nye versjoner finnes
+offline-dialog-title = Last ned nytt område
+offline-dialog-description = Synkroniser kart for bruk uten nett. Søk etter en by eller sett en nål for å velge et område.
+offline-dialog-search-placeholder = Søk etter byer eller regioner
+offline-dialog-cancel = Avbryt
+offline-dialog-preview = Forhåndsvis nedlasting

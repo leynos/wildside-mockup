@@ -50,3 +50,42 @@ explore-curated-route-count =
         [many] маршрутов
        *[other] маршрута
     }
+
+offline-header-title = Оффлайн-карты
+offline-header-subtitle = Управляйте загрузками и умными обновлениями
+offline-header-back-label = Назад к карте
+offline-header-add-area-label = Добавить оффлайн-область
+offline-storage-heading = Обзор памяти
+offline-storage-subtitle = Автоматически удаляйте неиспользуемые карты через 30 дней
+offline-storage-used-label = Использовано
+offline-storage-used-description = 2,8 ГБ из 8 ГБ
+offline-storage-legend-maps = Карты
+offline-storage-legend-available = Свободное место
+offline-suggestions-heading = Умные советы для поездки
+offline-suggestion-reykjavik-title = Обнаружено предстоящее путешествие
+offline-suggestion-reykjavik-description = Добавьте Рейкьявик перед поездкой в Исландию на следующей неделе
+offline-suggestion-reykjavik-cta = Скачать Рейкьявик
+offline-suggestion-dismiss = Пропустить
+offline-downloads-heading = Загруженные области
+offline-downloads-description = Управляйте картами для навигации без интернета
+offline-downloads-manage = Управлять
+offline-downloads-done = Готово
+offline-downloads-delete-aria = Удалить {$title}
+offline-downloads-status-complete = Завершено
+offline-downloads-status-updating = Доступно обновление
+offline-downloads-status-downloading = Загрузка
+offline-downloads-undo-title = {$title} удалён
+offline-downloads-undo-description = Нажмите «Отменить», чтобы вернуть эту карту.
+offline-downloads-undo-button = Отменить
+offline-auto-heading = Автоматическое управление
+offline-auto-option-auto-delete-title = Автоматически удалять старые карты
+offline-auto-option-auto-delete-description = Автоматически удаляет карты старше 30 дней
+offline-auto-option-wifi-only-title = Загрузки только по Wi‑Fi
+offline-auto-option-wifi-only-description = Загружайте карты только при подключении к Wi‑Fi
+offline-auto-option-auto-update-title = Автоматически обновлять карты
+offline-auto-option-auto-update-description = Автоматически обновляет карты при появлении новых версий
+offline-dialog-title = Скачать новый регион
+offline-dialog-description = Синхронизируйте карты для работы оффлайн. Найдите город или поставьте метку, чтобы выбрать область.
+offline-dialog-search-placeholder = Поиск городов или регионов
+offline-dialog-cancel = Отмена
+offline-dialog-preview = Просмотр загрузки

@@ -42,3 +42,42 @@ explore-curated-route-count =
         [one] route
        *[other] routes
     }
+
+offline-header-title = Offline kaarten
+offline-header-subtitle = Beheer downloads en slimme updates
+offline-header-back-label = Terug naar de kaart
+offline-header-add-area-label = Offline gebied toevoegen
+offline-storage-heading = Opslagoverzicht
+offline-storage-subtitle = Verwijder ongebruikte kaarten automatisch na 30 dagen
+offline-storage-used-label = Gebruikt
+offline-storage-used-description = 2,8 GB van 8 GB
+offline-storage-legend-maps = Kaarten
+offline-storage-legend-available = Beschikbare ruimte
+offline-suggestions-heading = Slimme reistips
+offline-suggestion-reykjavik-title = Aankomende reis gedetecteerd
+offline-suggestion-reykjavik-description = Voeg Reykjavik toe vóór je reis naar IJsland volgende week
+offline-suggestion-reykjavik-cta = Download Reykjavik
+offline-suggestion-dismiss = Negeren
+offline-downloads-heading = Gedownloade gebieden
+offline-downloads-description = Beheer kaarten voor navigatie zonder verbinding
+offline-downloads-manage = Beheren
+offline-downloads-done = Klaar
+offline-downloads-delete-aria = {$title} verwijderen
+offline-downloads-status-complete = Voltooid
+offline-downloads-status-updating = Update beschikbaar
+offline-downloads-status-downloading = Downloaden
+offline-downloads-undo-title = {$title} verwijderd
+offline-downloads-undo-description = Tik op Ongedaan maken om deze kaart terug te zetten.
+offline-downloads-undo-button = Ongedaan maken
+offline-auto-heading = Automatisch beheer
+offline-auto-option-auto-delete-title = Oude kaarten automatisch verwijderen
+offline-auto-option-auto-delete-description = Verwijder kaarten die ouder zijn dan 30 dagen automatisch
+offline-auto-option-wifi-only-title = Alleen downloaden via wifi
+offline-auto-option-wifi-only-description = Download kaarten alleen wanneer je met wifi verbonden bent
+offline-auto-option-auto-update-title = Kaarten automatisch bijwerken
+offline-auto-option-auto-update-description = Werk kaarten automatisch bij zodra er nieuwe versies zijn
+offline-dialog-title = Nieuw gebied downloaden
+offline-dialog-description = Synchroniseer kaarten voor offline gebruik. Zoek een stad of plaats een pin om een gebied te kiezen.
+offline-dialog-search-placeholder = Zoek naar steden of regio's
+offline-dialog-cancel = Annuleren
+offline-dialog-preview = Download bekijken

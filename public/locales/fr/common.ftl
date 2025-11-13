@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] parcours
        *[other] parcours
     }
+
+offline-header-title = Cartes hors ligne
+offline-header-subtitle = Gérez les téléchargements et les mises à jour intelligentes
+offline-header-back-label = Retour à la carte
+offline-header-add-area-label = Ajouter une zone hors ligne
+offline-storage-heading = Aperçu du stockage
+offline-storage-subtitle = Supprimer automatiquement les cartes inutilisées après 30 jours
+offline-storage-used-label = Utilisé
+offline-storage-used-description = 2,8 Go sur 8 Go
+offline-storage-legend-maps = Cartes
+offline-storage-legend-available = Espace disponible
+offline-suggestions-heading = Conseils de voyage intelligents
+offline-suggestion-reykjavik-title = Voyage à venir détecté
+offline-suggestion-reykjavik-description = Ajoutez Reykjavik avant votre voyage en Islande la semaine prochaine
+offline-suggestion-reykjavik-cta = Télécharger Reykjavik
+offline-suggestion-dismiss = Ignorer
+offline-downloads-heading = Zones téléchargées
+offline-downloads-description = Gérez les cartes pour la navigation hors ligne
+offline-downloads-manage = Gérer
+offline-downloads-done = Terminé
+offline-downloads-delete-aria = Supprimer {$title}
+offline-downloads-status-complete = Terminé
+offline-downloads-status-updating = Mise à jour disponible
+offline-downloads-status-downloading = Téléchargement en cours
+offline-downloads-undo-title = {$title} supprimée
+offline-downloads-undo-description = Touchez Rétablir pour restaurer cette carte.
+offline-downloads-undo-button = Rétablir
+offline-auto-heading = Gestion automatique
+offline-auto-option-auto-delete-title = Supprimer automatiquement les anciennes cartes
+offline-auto-option-auto-delete-description = Supprime automatiquement les cartes de plus de 30 jours
+offline-auto-option-wifi-only-title = Téléchargements Wi-Fi uniquement
+offline-auto-option-wifi-only-description = Ne télécharger les cartes qu’en Wi-Fi
+offline-auto-option-auto-update-title = Mettre les cartes à jour automatiquement
+offline-auto-option-auto-update-description = Mettre à jour automatiquement les cartes dès qu’une nouvelle version est disponible
+offline-dialog-title = Télécharger une nouvelle zone
+offline-dialog-description = Synchronisez les cartes pour un accès hors ligne. Recherchez une ville ou placez un repère pour choisir une zone.
+offline-dialog-search-placeholder = Rechercher des villes ou des régions
+offline-dialog-cancel = Annuler
+offline-dialog-preview = Prévisualiser le téléchargement

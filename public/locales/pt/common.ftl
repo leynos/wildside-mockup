@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] rota
        *[other] rotas
     }
+
+offline-header-title = Mapas offline
+offline-header-subtitle = Gere transferências e atualizações inteligentes
+offline-header-back-label = Voltar ao mapa
+offline-header-add-area-label = Adicionar zona offline
+offline-storage-heading = Visão geral do armazenamento
+offline-storage-subtitle = Elimine automaticamente mapas sem uso após 30 dias
+offline-storage-used-label = Utilizado
+offline-storage-used-description = 2,8 GB de 8 GB
+offline-storage-legend-maps = Mapas
+offline-storage-legend-available = Espaço disponível
+offline-suggestions-heading = Sugestões de viagem inteligentes
+offline-suggestion-reykjavik-title = Próxima viagem detetada
+offline-suggestion-reykjavik-description = Adicione Reiquiavique antes da sua viagem à Islândia na próxima semana
+offline-suggestion-reykjavik-cta = Transferir Reiquiavique
+offline-suggestion-dismiss = Ignorar
+offline-downloads-heading = Zonas transferidas
+offline-downloads-description = Gere mapas para navegação offline
+offline-downloads-manage = Gerir
+offline-downloads-done = Concluído
+offline-downloads-delete-aria = Eliminar {$title}
+offline-downloads-status-complete = Concluído
+offline-downloads-status-updating = Atualização disponível
+offline-downloads-status-downloading = A transferir
+offline-downloads-undo-title = {$title} eliminada
+offline-downloads-undo-description = Toque em Anular para restaurar este mapa.
+offline-downloads-undo-button = Anular
+offline-auto-heading = Gestão automática
+offline-auto-option-auto-delete-title = Eliminar automaticamente mapas antigos
+offline-auto-option-auto-delete-description = Remove automaticamente mapas com mais de 30 dias
+offline-auto-option-wifi-only-title = Transferências apenas por Wi-Fi
+offline-auto-option-wifi-only-description = Só transferir mapas quando estiver ligado a Wi-Fi
+offline-auto-option-auto-update-title = Atualizar mapas automaticamente
+offline-auto-option-auto-update-description = Atualiza mapas automaticamente quando existirem novas versões
+offline-dialog-title = Transferir nova zona
+offline-dialog-description = Sincronize mapas para acesso offline. Procure uma cidade ou coloque um alfinete para selecionar uma região.
+offline-dialog-search-placeholder = Procurar cidades ou regiões
+offline-dialog-cancel = Cancelar
+offline-dialog-preview = Pré-visualizar transferência

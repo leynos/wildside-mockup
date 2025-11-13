@@ -50,3 +50,42 @@ explore-curated-route-count =
         [many] tras
        *[other] tras
     }
+
+offline-header-title = Mapy offline
+offline-header-subtitle = Zarządzaj pobraniami i inteligentnymi aktualizacjami
+offline-header-back-label = Wróć do mapy
+offline-header-add-area-label = Dodaj obszar offline
+offline-storage-heading = Podgląd pamięci
+offline-storage-subtitle = Automatycznie usuwaj nieużywane mapy po 30 dniach
+offline-storage-used-label = Wykorzystano
+offline-storage-used-description = 2,8 GB z 8 GB
+offline-storage-legend-maps = Mapy
+offline-storage-legend-available = Wolne miejsce
+offline-suggestions-heading = Inteligentne wskazówki podróżne
+offline-suggestion-reykjavik-title = Wykryto nadchodzącą podróż
+offline-suggestion-reykjavik-description = Dodaj Reykjavik przed przyszłotygodniową podróżą na Islandię
+offline-suggestion-reykjavik-cta = Pobierz Reykjavik
+offline-suggestion-dismiss = Odrzuć
+offline-downloads-heading = Pobrane obszary
+offline-downloads-description = Zarządzaj mapami do nawigacji offline
+offline-downloads-manage = Zarządzaj
+offline-downloads-done = Gotowe
+offline-downloads-delete-aria = Usuń {$title}
+offline-downloads-status-complete = Zakończono
+offline-downloads-status-updating = Dostępna aktualizacja
+offline-downloads-status-downloading = Pobieranie
+offline-downloads-undo-title = {$title} usunięto
+offline-downloads-undo-description = Kliknij Cofnij, aby przywrócić tę mapę.
+offline-downloads-undo-button = Cofnij
+offline-auto-heading = Automatyczne zarządzanie
+offline-auto-option-auto-delete-title = Automatycznie usuwaj stare mapy
+offline-auto-option-auto-delete-description = Automatycznie usuwa mapy starsze niż 30 dni
+offline-auto-option-wifi-only-title = Pobieranie tylko przez Wi-Fi
+offline-auto-option-wifi-only-description = Pobieraj mapy tylko przy połączeniu z Wi-Fi
+offline-auto-option-auto-update-title = Automatyczne aktualizacje map
+offline-auto-option-auto-update-description = Automatycznie aktualizuje mapy, gdy pojawią się nowe wersje
+offline-dialog-title = Pobierz nowy obszar
+offline-dialog-description = Synchronizuj mapy do użytku offline. Wyszukaj miasto lub upuść pinezkę, by wybrać obszar.
+offline-dialog-search-placeholder = Wyszukaj miasta lub regiony
+offline-dialog-cancel = Anuluj
+offline-dialog-preview = Podgląd pobierania

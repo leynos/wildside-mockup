@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] διαδρομή
        *[other] διαδρομές
     }
+
+offline-header-title = Χάρτες εκτός σύνδεσης
+offline-header-subtitle = Διαχειριστείτε λήψεις και έξυπνες ενημερώσεις
+offline-header-back-label = Επιστροφή στον χάρτη
+offline-header-add-area-label = Προσθήκη περιοχής εκτός σύνδεσης
+offline-storage-heading = Επισκόπηση αποθήκευσης
+offline-storage-subtitle = Διαγράψτε αυτόματα τις αχρησιμοποίητες διαδρομές μετά από 30 ημέρες
+offline-storage-used-label = Σε χρήση
+offline-storage-used-description = 2,8 GB από 8 GB
+offline-storage-legend-maps = Χάρτες
+offline-storage-legend-available = Διαθέσιμος χώρος
+offline-suggestions-heading = Έξυπνες ταξιδιωτικές προτάσεις
+offline-suggestion-reykjavik-title = Εντοπίστηκε επερχόμενο ταξίδι
+offline-suggestion-reykjavik-description = Προσθέστε το Ρέικιαβικ πριν από το ταξίδι σας στην Ισλανδία την επόμενη εβδομάδα
+offline-suggestion-reykjavik-cta = Λήψη Ρέικιαβικ
+offline-suggestion-dismiss = Απόρριψη
+offline-downloads-heading = Ληφθείσες περιοχές
+offline-downloads-description = Διαχειριστείτε χάρτες για πλοήγηση χωρίς σύνδεση
+offline-downloads-manage = Διαχείριση
+offline-downloads-done = Τέλος
+offline-downloads-delete-aria = Διαγραφή {$title}
+offline-downloads-status-complete = Ολοκληρώθηκε
+offline-downloads-status-updating = Διαθέσιμη ενημέρωση
+offline-downloads-status-downloading = Γίνεται λήψη
+offline-downloads-undo-title = Διαγράφηκε το {$title}
+offline-downloads-undo-description = Πατήστε Αναίρεση για να επαναφέρετε αυτόν τον χάρτη.
+offline-downloads-undo-button = Αναίρεση
+offline-auto-heading = Αυτόματη διαχείριση
+offline-auto-option-auto-delete-title = Αυτόματη διαγραφή παλιών χαρτών
+offline-auto-option-auto-delete-description = Αφαιρέστε αυτόματα χάρτες παλαιότερους των 30 ημερών
+offline-auto-option-wifi-only-title = Λήψεις μόνο μέσω Wi-Fi
+offline-auto-option-wifi-only-description = Λήψη χαρτών μόνο όταν υπάρχει Wi-Fi
+offline-auto-option-auto-update-title = Αυτόματη ενημέρωση χαρτών
+offline-auto-option-auto-update-description = Αυτόματες ενημερώσεις όταν είναι διαθέσιμες νέες εκδόσεις
+offline-dialog-title = Λήψη νέας περιοχής
+offline-dialog-description = Συγχρονίστε χάρτες για χρήση εκτός σύνδεσης. Αναζητήστε πόλη ή τοποθετήστε πινέζα για να επιλέξετε περιοχή.
+offline-dialog-search-placeholder = Αναζήτηση πόλεων ή περιοχών
+offline-dialog-cancel = Ακύρωση
+offline-dialog-preview = Προεπισκόπηση λήψης

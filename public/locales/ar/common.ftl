@@ -54,3 +54,42 @@ explore-curated-route-count =
         [many] مسار
        *[other] مسارات
     }
+
+offline-header-title = الخرائط دون اتصال
+offline-header-subtitle = إدارة التنزيلات والتحديثات الذكية
+offline-header-back-label = العودة إلى الخريطة
+offline-header-add-area-label = إضافة منطقة للاستخدام دون اتصال
+offline-storage-heading = نظرة عامة على السعة
+offline-storage-subtitle = احذف الخرائط غير المستخدمة تلقائياً بعد 30 يوماً
+offline-storage-used-label = مستخدم
+offline-storage-used-description = 2.8 جيجابايت من 8 جيجابايت
+offline-storage-legend-maps = خرائط
+offline-storage-legend-available = مساحة متاحة
+offline-suggestions-heading = نصائح سفر ذكية
+offline-suggestion-reykjavik-title = تم اكتشاف رحلة قادمة
+offline-suggestion-reykjavik-description = أضف ريكيافيك قبل رحلتك إلى آيسلندا الأسبوع المقبل
+offline-suggestion-reykjavik-cta = تنزيل ريكيافيك
+offline-suggestion-dismiss = تجاهل
+offline-downloads-heading = المناطق المحمَّلة
+offline-downloads-description = أدِر الخرائط للملاحة دون اتصال
+offline-downloads-manage = إدارة
+offline-downloads-done = تم
+offline-downloads-delete-aria = حذف {$title}
+offline-downloads-status-complete = مكتمل
+offline-downloads-status-updating = تحديث متاح
+offline-downloads-status-downloading = جاري التنزيل
+offline-downloads-undo-title = تم حذف {$title}
+offline-downloads-undo-description = اضغط «تراجع» لاستعادة هذه الخريطة.
+offline-downloads-undo-button = تراجع
+offline-auto-heading = إدارة تلقائية
+offline-auto-option-auto-delete-title = حذف الخرائط القديمة تلقائياً
+offline-auto-option-auto-delete-description = إزالة الخرائط الأقدم من 30 يوماً تلقائياً
+offline-auto-option-wifi-only-title = تنزيلات عبر Wi-Fi فقط
+offline-auto-option-wifi-only-description = تنزيل الخرائط فقط عند الاتصال بشبكة Wi-Fi
+offline-auto-option-auto-update-title = تحديث الخرائط تلقائياً
+offline-auto-option-auto-update-description = تحديث الخرائط تلقائياً عند توفر إصدارات جديدة
+offline-dialog-title = تنزيل منطقة جديدة
+offline-dialog-description = قم بمزامنة الخرائط للاستخدام دون اتصال. ابحث عن مدينة أو ضع دبوساً لاختيار منطقة.
+offline-dialog-search-placeholder = ابحث عن مدن أو مناطق
+offline-dialog-cancel = إلغاء
+offline-dialog-preview = معاينة التنزيل

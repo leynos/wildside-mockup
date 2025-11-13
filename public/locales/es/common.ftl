@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] ruta
        *[other] rutas
     }
+
+offline-header-title = Mapas sin conexión
+offline-header-subtitle = Gestiona descargas y actualizaciones inteligentes
+offline-header-back-label = Volver al mapa
+offline-header-add-area-label = Añadir zona sin conexión
+offline-storage-heading = Resumen de almacenamiento
+offline-storage-subtitle = Elimina automáticamente los mapas sin uso tras 30 días
+offline-storage-used-label = Usado
+offline-storage-used-description = 2,8 GB de 8 GB
+offline-storage-legend-maps = Mapas
+offline-storage-legend-available = Espacio disponible
+offline-suggestions-heading = Sugerencias de viaje inteligentes
+offline-suggestion-reykjavik-title = Viaje próximo detectado
+offline-suggestion-reykjavik-description = Añade Reikiavik antes de tu viaje a Islandia la próxima semana
+offline-suggestion-reykjavik-cta = Descargar Reikiavik
+offline-suggestion-dismiss = Descartar
+offline-downloads-heading = Áreas descargadas
+offline-downloads-description = Gestiona los mapas para la navegación sin conexión
+offline-downloads-manage = Gestionar
+offline-downloads-done = Listo
+offline-downloads-delete-aria = Eliminar {$title}
+offline-downloads-status-complete = Completado
+offline-downloads-status-updating = Actualización disponible
+offline-downloads-status-downloading = Descargando
+offline-downloads-undo-title = {$title} eliminada
+offline-downloads-undo-description = Toca Deshacer para restaurar este mapa.
+offline-downloads-undo-button = Deshacer
+offline-auto-heading = Gestión automática
+offline-auto-option-auto-delete-title = Eliminar automáticamente los mapas antiguos
+offline-auto-option-auto-delete-description = Elimina automáticamente los mapas con más de 30 días
+offline-auto-option-wifi-only-title = Descargas solo por Wi-Fi
+offline-auto-option-wifi-only-description = Descarga mapas solo cuando haya Wi-Fi
+offline-auto-option-auto-update-title = Actualizar mapas automáticamente
+offline-auto-option-auto-update-description = Actualiza automáticamente los mapas cuando haya versiones nuevas
+offline-dialog-title = Descargar nueva zona
+offline-dialog-description = Sincroniza mapas para acceder sin conexión. Busca una ciudad o coloca un pin para seleccionar una región.
+offline-dialog-search-placeholder = Buscar ciudades o regiones
+offline-dialog-cancel = Cancelar
+offline-dialog-preview = Previsualizar descarga

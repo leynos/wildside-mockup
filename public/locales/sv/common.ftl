@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] rutt
        *[other] rutter
     }
+
+offline-header-title = Offline-kartor
+offline-header-subtitle = Hantera nedladdningar och smarta uppdateringar
+offline-header-back-label = Tillbaka till kartan
+offline-header-add-area-label = Lägg till offline-område
+offline-storage-heading = Översikt över lagring
+offline-storage-subtitle = Ta automatiskt bort oanvända kartor efter 30 dagar
+offline-storage-used-label = Använt
+offline-storage-used-description = 2,8 GB av 8 GB
+offline-storage-legend-maps = Kartor
+offline-storage-legend-available = Ledigt utrymme
+offline-suggestions-heading = Smarta resetips
+offline-suggestion-reykjavik-title = Kommande resa identifierad
+offline-suggestion-reykjavik-description = Lägg till Reykjavik innan din Islandsresa nästa vecka
+offline-suggestion-reykjavik-cta = Ladda ner Reykjavik
+offline-suggestion-dismiss = Avfärda
+offline-downloads-heading = Nedladdade områden
+offline-downloads-description = Hantera kartor för navigering offline
+offline-downloads-manage = Hantera
+offline-downloads-done = Klar
+offline-downloads-delete-aria = Ta bort {$title}
+offline-downloads-status-complete = Slutförd
+offline-downloads-status-updating = Uppdatering tillgänglig
+offline-downloads-status-downloading = Laddar ner
+offline-downloads-undo-title = {$title} borttagen
+offline-downloads-undo-description = Tryck på Ångra för att återställa kartan.
+offline-downloads-undo-button = Ångra
+offline-auto-heading = Automatisk hantering
+offline-auto-option-auto-delete-title = Ta bort gamla kartor automatiskt
+offline-auto-option-auto-delete-description = Tar bort kartor som är äldre än 30 dagar automatiskt
+offline-auto-option-wifi-only-title = Nedladdningar endast via Wi-Fi
+offline-auto-option-wifi-only-description = Ladda ner kartor bara när du är ansluten till Wi-Fi
+offline-auto-option-auto-update-title = Uppdatera kartor automatiskt
+offline-auto-option-auto-update-description = Uppdaterar kartor automatiskt när det finns nya versioner
+offline-dialog-title = Ladda ner nytt område
+offline-dialog-description = Synka kartor för offline-läge. Sök efter en stad eller placera en nål för att välja område.
+offline-dialog-search-placeholder = Sök efter städer eller regioner
+offline-dialog-cancel = Avbryt
+offline-dialog-preview = Förhandsgranska nedladdning

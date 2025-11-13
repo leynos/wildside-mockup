@@ -46,3 +46,42 @@ explore-curated-route-count =
         [one] route
        *[other] routes
     }
+
+offline-header-title = Offline Maps
+offline-header-subtitle = Manage downloads and smart updates
+offline-header-back-label = Back to map
+offline-header-add-area-label = Add offline area
+offline-storage-heading = Storage overview
+offline-storage-subtitle = Auto-delete unused maps after 30 days
+offline-storage-used-label = Used
+offline-storage-used-description = 2.8 GB of 8 GB
+offline-storage-legend-maps = Maps
+offline-storage-legend-available = Available space
+offline-suggestions-heading = Smart travel hints
+offline-suggestion-reykjavik-title = Upcoming trip detected
+offline-suggestion-reykjavik-description = Add Reykjavik before your Iceland trip next week
+offline-suggestion-reykjavik-cta = Download Reykjavik
+offline-suggestion-dismiss = Dismiss
+offline-downloads-heading = Downloaded areas
+offline-downloads-description = Manage maps for offline navigation
+offline-downloads-manage = Manage
+offline-downloads-done = Done
+offline-downloads-delete-aria = Delete {$title}
+offline-downloads-status-complete = Complete
+offline-downloads-status-updating = Update available
+offline-downloads-status-downloading = Downloading
+offline-downloads-undo-title = {$title} deleted
+offline-downloads-undo-description = Tap undo to restore this map.
+offline-downloads-undo-button = Undo
+offline-auto-heading = Auto-management
+offline-auto-option-auto-delete-title = Auto-delete old maps
+offline-auto-option-auto-delete-description = Remove maps older than 30 days automatically
+offline-auto-option-wifi-only-title = WiFi-only downloads
+offline-auto-option-wifi-only-description = Only download maps when connected to WiFi
+offline-auto-option-auto-update-title = Auto-update maps
+offline-auto-option-auto-update-description = Automatically update maps when new versions are available
+offline-dialog-title = Download new area
+offline-dialog-description = Sync maps for offline access. Search for a city or drop a pin to select a custom region.
+offline-dialog-search-placeholder = Search cities or regions
+offline-dialog-cancel = Cancel
+offline-dialog-preview = Preview download

@@ -42,3 +42,42 @@ explore-curated-route-count =
         [one] taith
        *[other] teithiau
     }
+
+offline-header-title = Mapiau all-lein
+offline-header-subtitle = Rheoli lawrlwythiadau a diweddariadau deallus
+offline-header-back-label = Nôl i’r map
+offline-header-add-area-label = Ychwanegu ardal all-lein
+offline-storage-heading = Trosolwg storfa
+offline-storage-subtitle = Dileu mapiau heb eu defnyddio ar ôl 30 diwrnod yn awtomatig
+offline-storage-used-label = Defnyddiwyd
+offline-storage-used-description = 2.8 GB o 8 GB
+offline-storage-legend-maps = Mapiau
+offline-storage-legend-available = Gofod ar gael
+offline-suggestions-heading = Awgrymiadau teithio doeth
+offline-suggestion-reykjavik-title = Canfuwyd taith sydd ar ddod
+offline-suggestion-reykjavik-description = Ychwanegwch Reykjavík cyn eich taith i Wlad yr Iâ yr wythnos nesaf
+offline-suggestion-reykjavik-cta = Lawrlwytho Reykjavík
+offline-suggestion-dismiss = Anwybyddu
+offline-downloads-heading = Ardaloedd wedi’u lawrlwytho
+offline-downloads-description = Rheoli mapiau ar gyfer llywio all-lein
+offline-downloads-manage = Rheoli
+offline-downloads-done = Gorffen
+offline-downloads-delete-aria = Dileu {$title}
+offline-downloads-status-complete = Wedi’i gwblhau
+offline-downloads-status-updating = Diweddariad ar gael
+offline-downloads-status-downloading = Yn lawrlwytho
+offline-downloads-undo-title = Dileuwyd {$title}
+offline-downloads-undo-description = Tapiwch Dadwneud i adfer y map hwn.
+offline-downloads-undo-button = Dadwneud
+offline-auto-heading = Rheoli awtomatig
+offline-auto-option-auto-delete-title = Dileu mapiau hen yn awtomatig
+offline-auto-option-auto-delete-description = Tynnu’n awtomatig mapiau sy’n hŷn na 30 diwrnod
+offline-auto-option-wifi-only-title = Lawrlwytho dim ond dros Wi-Fi
+offline-auto-option-wifi-only-description = Lawrlwythwch fapiau pan fyddwch ar Wi-Fi yn unig
+offline-auto-option-auto-update-title = Diweddaru mapiau’n awtomatig
+offline-auto-option-auto-update-description = Diweddaru mapiau’n awtomatig pan fydd fersiynau newydd ar gael
+offline-dialog-title = Lawrlwytho ardal newydd
+offline-dialog-description = Cydamserwch fapiau ar gyfer defnydd all-lein. Chwiliwch am ddinas neu gosodwch binn i ddewis ardal.
+offline-dialog-search-placeholder = Chwilio dinasoedd neu ranbarthau
+offline-dialog-cancel = Canslo
+offline-dialog-preview = Rhagolwg lawrlwytho
