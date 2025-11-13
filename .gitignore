@@ -2,6 +2,8 @@ node_modules/
 dist/
 .npm-cache/
 .bun/
+.bun-install/
+.bun-cache/
 tmp/
 
 tokens/node_modules/

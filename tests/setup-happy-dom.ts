@@ -1,5 +1,7 @@
 import { Window } from "happy-dom";
 
+import { setupI18nTestHarness } from "./support/i18n-test-runtime";
+
 const happyWindow = new Window();
 
 const extendedGlobal = globalThis as typeof globalThis & {
@@ -74,5 +76,7 @@ if (!globalThis.ResizeObserver) {
   }
   globalThis.ResizeObserver = ResizeObserverStub as unknown as typeof ResizeObserver;
 }
+
+await setupI18nTestHarness(extendedGlobal);
 
 await import("./setup-vitest-a11y");

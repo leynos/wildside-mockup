@@ -147,6 +147,17 @@
         "indentWidth": 2,
         "lineWidth": 80
       }
+    },
+    {
+      "includes": ["src/app/features/explore/explore-screen.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useSemanticElements": "off",
+            "noRedundantRoles": "off"
+          }
+        }
+      }
     }
   ]
 }

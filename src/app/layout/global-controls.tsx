@@ -1,12 +1,81 @@
-/** @file Floating global controls for theme and display mode toggles. */
+/** @file Floating global controls for theme, display mode, and language toggles. */
 
-import { type JSX, useId, useState } from "react";
+import { type ChangeEvent, type JSX, useEffect, useId, useState } from "react";
+import { useTranslation } from "react-i18next";
 
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../i18n/supported-locales";
+import { appLogger, reportError } from "../observability/logger";
 import { useDisplayMode } from "../providers/display-mode-provider";
 import { useTheme } from "../providers/theme-provider";
 
 const baseButtonClass =
   "btn btn-xs md:btn-sm btn-ghost bg-base-100/90 text-xs font-semibold shadow-lg shadow-base-300/40 backdrop-blur";
+const selectClass =
+  "select select-xs md:select-sm select-bordered bg-base-100/90 text-xs font-semibold shadow-lg shadow-base-300/40 backdrop-blur w-full";
+
+function LanguageSelect(): JSX.Element {
+  const { i18n, t } = useTranslation();
+  const [language, setLanguage] = useState(
+    () => i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LOCALE,
+  );
+  const [isSwitching, setIsSwitching] = useState(false);
+
+  useEffect(() => {
+    const handleLanguageChanged = (nextLanguage: string): void => {
+      setLanguage(nextLanguage);
+    };
+
+    i18n.on("languageChanged", handleLanguageChanged);
+    return () => {
+      i18n.off("languageChanged", handleLanguageChanged);
+    };
+  }, [i18n]);
+
+  const onLanguageChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    const nextLanguage = event.target.value;
+    if (nextLanguage === language || isSwitching) {
+      return;
+    }
+
+    const previousLanguage = language;
+    setIsSwitching(true);
+    setLanguage(nextLanguage);
+
+    i18n
+      .changeLanguage(nextLanguage)
+      .catch((error: unknown) => {
+        const context = { nextLanguage, previousLanguage };
+        appLogger.error("Failed to change language", context, error);
+        reportError(error, { ...context, scope: "global-controls.language-change" });
+        setLanguage(previousLanguage);
+      })
+      .finally(() => {
+        setIsSwitching(false);
+      });
+  };
+
+  const label = t("controls-language-label", { defaultValue: "Language" });
+
+  return (
+    <label className="flex flex-col gap-1 text-[10px] font-semibold uppercase tracking-wide text-base-content/60">
+      <span>{label}</span>
+      <select
+        className={selectClass}
+        value={language}
+        aria-label={label}
+        aria-busy={isSwitching}
+        disabled={isSwitching}
+        onChange={onLanguageChange}
+      >
+        {SUPPORTED_LOCALES.map((locale) => (
+          <option key={locale.code} value={locale.code}>
+            {locale.nativeLabel}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
 
 function ThemeToggleButton(): JSX.Element {
   const { theme, themes, setTheme } = useTheme();
@@ -67,6 +136,7 @@ function DrawerPanel({
       </div>
       <DisplayModeToggleButton />
       <ThemeToggleButton />
+      <LanguageSelect />
       <button
         type="button"
         className="btn btn-xs btn-ghost text-xs text-base-content/70 hover:text-base-content"
@@ -85,6 +155,10 @@ function DrawerPanel({
 function Drawer(): JSX.Element {
   const [open, setOpen] = useState(false);
   const headingId = useId();
+  const { i18n } = useTranslation();
+  const resolvedLanguage = i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LOCALE;
+  const direction = i18n.dir(resolvedLanguage);
+  const collapsedTranslateClass = direction === "rtl" ? "-translate-x-full" : "translate-x-full";
 
   return (
     <div className="global-controls__drawer">
@@ -106,7 +180,7 @@ function Drawer(): JSX.Element {
         className={`transition-all duration-200 ${
           open
             ? "pointer-events-auto translate-x-0 opacity-100"
-            : "pointer-events-none translate-x-full opacity-0"
+            : `pointer-events-none ${collapsedTranslateClass} opacity-0`
         }`}
       >
         {open ? <DrawerPanel headingId={headingId} onClose={() => setOpen(false)} /> : null}
@@ -120,6 +194,7 @@ function FloatingStack(): JSX.Element {
     <div className="global-controls__stack">
       <DisplayModeToggleButton />
       <ThemeToggleButton />
+      <LanguageSelect />
     </div>
   );
 }

@@ -169,8 +169,8 @@ export const autoManagementOptions: AutoManagementOption[] = [
   },
   {
     id: "wifi-only",
-    title: "WiFi-only downloads",
-    description: "Only download maps when connected to WiFi",
+    title: "Wi-Fi-only downloads",
+    description: "Only download maps when connected to Wi-Fi",
     iconToken: "{icon.offline.connectivity}",
     iconClassName: "text-accent",
     defaultEnabled: true,

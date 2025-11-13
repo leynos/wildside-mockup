@@ -1,0 +1,87 @@
+app-shell-title = वाइल्डसाइड मॉकअप
+controls-language-label = भाषा
+walk-complete-hero-title = वॉक पूर्ण हुई!
+walk-complete-hero-description = शहर में शानदार रोमांच · हिडन जेम्स लूप
+walk-complete-map-alt = पूर्ण हुए रूट का अवलोकन
+walk-complete-badge-route = रूट पूरा हुआ
+walk-complete-primary-distance-label = दूरी
+walk-complete-primary-duration-label = अवधि
+walk-complete-secondary-calories-label = कैलोरी
+walk-complete-secondary-stops-label = स्टॉप
+walk-complete-secondary-starred-label = पसंदीदा
+walk-complete-favourite-heading = पसंदीदा पल
+walk-complete-actions-rate = इस वॉक को रेट करें
+walk-complete-actions-share = शेयर करें
+walk-complete-actions-save = रूट सहेजें
+walk-complete-remix-title = रिमिक्स आज़माएँ?
+walk-complete-remix-description = अपने पसंदीदा स्थानों को रखते हुए और नई जगहें खोजते हुए नई रूट बनाएं।
+walk-complete-remix-button = इस वॉक का रिमिक्स करें
+walk-complete-share-section = अपना एडवेंचर साझा करें
+walk-complete-share-dialog-title = हाइलाइट साझा करें
+walk-complete-share-dialog-description = अपने पसंदीदा स्टॉप और आँकड़ों का हाइलाइट रील एक्सपोर्ट करें।
+walk-complete-share-dialog-cancel = रद्द करें
+walk-complete-share-dialog-generate = रील बनाएँ
+walk-complete-toast-rating-saved = धन्यवाद! रेटिंग भविष्य के सुझावों के लिए सहेजी गई है।
+walk-complete-share-channel-facebook = फ़ेसबुक
+walk-complete-share-channel-instagram = इंस्टाग्राम
+walk-complete-share-channel-twitter = X (ट्विटर)
+explore-header-title = खोजें
+explore-header-subtitle = चयनित वॉक और छिपे गहने खोजें
+explore-filter-aria-label = वॉक फ़िल्टर करें
+explore-search-placeholder = वॉक, स्थान, विषय खोजें…
+explore-categories-aria-label = लोकप्रिय श्रेणियाँ
+explore-featured-heading = सप्ताह की वॉक
+explore-popular-heading = लोकप्रिय विषय
+explore-curated-heading = क्यूरेटेड संग्रह
+explore-trending-heading = अभी ट्रेंड में
+explore-community-heading = समुदाय की पसंद
+explore-community-subtitle = इस सप्ताह सबसे अधिक साझा
+explore-community-saves =
+    { $count ->
+        [one] {$count} सेव
+       *[other] {$count} सेवें
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] {$count} मार्ग
+       *[other] {$count} मार्ग
+    }
+
+offline-header-title = ऑफ़लाइन मानचित्र
+offline-header-subtitle = डाउनलोड और स्मार्ट अपडेट प्रबंधित करें
+offline-header-back-label = मानचित्र पर वापस जाएँ
+offline-header-add-area-label = ऑफ़लाइन क्षेत्र जोड़ें
+offline-storage-heading = स्टोरेज का अवलोकन
+offline-storage-subtitle = {$days} दिनों बाद अप्रयुक्त मानचित्र अपने आप हटाएँ
+offline-storage-used-label = उपयोग हुआ
+offline-storage-used-description = {$used} में से {$total}
+offline-storage-legend-maps = मानचित्र
+offline-storage-legend-available = उपलब्ध स्थान
+offline-suggestions-heading = स्मार्ट यात्रा सुझाव
+offline-suggestion-reykjavik-title = आगामी यात्रा मिली
+offline-suggestion-reykjavik-description = अगले हफ़्ते की आइसलैंड यात्रा से पहले रेकजाविक जोड़ें
+offline-suggestion-reykjavik-cta = रेकजाविक डाउनलोड करें
+offline-suggestion-dismiss = छोड़ें
+offline-downloads-heading = डाउनलोड किए गए क्षेत्र
+offline-downloads-description = ऑफ़लाइन नेविगेशन के लिए मानचित्र प्रबंधित करें
+offline-downloads-manage = प्रबंधित करें
+offline-downloads-done = पूरा
+offline-downloads-delete-aria = {$title} हटाएँ
+offline-downloads-status-complete = पूरा हुआ
+offline-downloads-status-updating = अपडेट उपलब्ध
+offline-downloads-status-downloading = डाउनलोड हो रहा है
+offline-downloads-undo-title = {$title} हटाया गया
+offline-downloads-undo-description = इस मानचित्र को वापस लाने के लिए पूर्ववत दबाएँ।
+offline-downloads-undo-button = पूर्ववत
+offline-auto-heading = स्वचालित प्रबंधन
+offline-auto-option-auto-delete-title = पुराने मानचित्र स्वतः हटाएँ
+offline-auto-option-auto-delete-description = {$days} दिनों से पुराने मानचित्र अपने आप हटाएँ
+offline-auto-option-wifi-only-title = केवल Wi-Fi डाउनलोड
+offline-auto-option-wifi-only-description = केवल Wi-Fi से जुड़े होने पर मानचित्र डाउनलोड करें
+offline-auto-option-auto-update-title = मानचित्र अपने आप अपडेट करें
+offline-auto-option-auto-update-description = नई संस्करण मिलते ही मानचित्र स्वतः अपडेट करें
+offline-dialog-title = नया क्षेत्र डाउनलोड करें
+offline-dialog-description = ऑफ़लाइन उपयोग के लिए मानचित्र सिंक करें। शहर खोजें या क्षेत्र चुनने के लिए पिन छोड़ें।
+offline-dialog-search-placeholder = शहर या क्षेत्र खोजें
+offline-dialog-cancel = रद्द करें
+offline-dialog-preview = डाउनलोड पूर्वावलोकन

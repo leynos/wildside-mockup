@@ -3,7 +3,7 @@
 export interface ExploreCategory {
   id: string;
   title: string;
-  summary: string;
+  routes: number;
   iconToken: string;
   /** Tailwind gradient utilities applied to the chip background. */
   gradientClass: string;
@@ -76,28 +76,28 @@ export const exploreCategories: ExploreCategory[] = [
   {
     id: "nature",
     title: "Nature Walks",
-    summary: "23 routes",
+    routes: 23,
     iconToken: "{icon.category.nature}",
     gradientClass: "bg-gradient-to-r from-emerald-500 to-teal-500",
   },
   {
     id: "street-art",
     title: "Street Art",
-    summary: "18 routes",
+    routes: 18,
     iconToken: "{icon.category.art}",
     gradientClass: "bg-gradient-to-r from-orange-500 to-rose-500",
   },
   {
     id: "historic",
     title: "Historic",
-    summary: "15 routes",
+    routes: 15,
     iconToken: "{icon.category.landmarks}",
     gradientClass: "bg-gradient-to-r from-sky-500 to-indigo-500",
   },
   {
     id: "family",
     title: "Family Friendly",
-    summary: "12 routes",
+    routes: 12,
     iconToken: "{icon.category.wildlife}",
     gradientClass: "bg-gradient-to-r from-fuchsia-500 to-purple-500",
   },

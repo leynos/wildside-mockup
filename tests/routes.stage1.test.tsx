@@ -4,6 +4,7 @@ import { act } from "react";
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
 
+import { OFFLINE_STORAGE_DEFAULTS } from "../src/app/config/offline-metrics";
 import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
 import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
@@ -15,6 +16,7 @@ import {
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
+import i18n, { i18nReady } from "../src/i18n";
 
 type TestRoute =
   | "/discover"
@@ -29,6 +31,10 @@ type TestRoute =
   | "/walk-complete"
   | "/offline"
   | "/safety-accessibility";
+
+function escapeRegExp(raw: string): string {
+  return raw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 const savedRoute = savedRoutes[0];
 
@@ -144,6 +150,35 @@ describe("Stage 1 routed flows", () => {
 
     const bottomNav = view.getByRole("navigation", { name: /primary navigation/i });
     expect(bottomNav).toBeTruthy();
+  });
+
+  it("renders explore stats using Fluent pluralisation", async () => {
+    ({ mount, root } = await renderRoute("/explore"));
+    const container = requireContainer(mount);
+    const view = within(container);
+
+    const communityRegion = view.getByRole("region", { name: /community favourite/i });
+    expect(within(communityRegion).getByText(/428 saves/i)).toBeTruthy();
+
+    const curatedRegion = view.getByRole("region", { name: /curated collections/i });
+    expect(within(curatedRegion).getByText(/6 routes/i)).toBeTruthy();
+
+    const categoriesRegion = view.getByRole("region", { name: /popular categories/i });
+    expect(within(categoriesRegion).getByText(/23 routes/i)).toBeTruthy();
+  });
+
+  it("formats explore counts with Fluent singular and plural forms", async () => {
+    await i18nReady;
+
+    const singularSave = i18n.t("explore-community-saves", { count: 1 });
+    const pluralSave = i18n.t("explore-community-saves", { count: 3 });
+    expect(singularSave).toMatch(/1 save/i);
+    expect(pluralSave).toMatch(/3 saves/i);
+
+    const singularRoute = i18n.t("explore-curated-route-count", { count: 1 });
+    const pluralRoute = i18n.t("explore-curated-route-count", { count: 3 });
+    expect(singularRoute).toMatch(/1 route/i);
+    expect(pluralRoute).toMatch(/3 routes/i);
   });
 
   it("toggles advanced switches on the customize route", async () => {
@@ -573,7 +608,11 @@ describe("Stage 4 completion flows", () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
     expect(view.getByText(/storage overview/i)).toBeTruthy();
-    expect(view.getByText(/2\.8 gb of 8 gb/i)).toBeTruthy();
+
+    const { usedLabel, totalLabel } = OFFLINE_STORAGE_DEFAULTS;
+    const pattern = new RegExp(`${escapeRegExp(usedLabel)}.*${escapeRegExp(totalLabel)}`, "i");
+
+    expect(view.getByText(pattern)).toBeTruthy();
   });
 
   it("opens the offline download dialog with the add button", async () => {
