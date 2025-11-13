@@ -155,7 +155,7 @@ describe("Stage 1 routed flows", () => {
     expect(within(communityRegion).getByText(/428 saves/i)).toBeTruthy();
 
     const curatedRegion = view.getByRole("region", { name: /curated collections/i });
-    expect(within(curatedRegion).getAllByText(/routes/i).length).toBeGreaterThan(0);
+    expect(within(curatedRegion).getByText(/6 routes/i)).toBeTruthy();
   });
 
   it("toggles advanced switches on the customize route", async () => {

@@ -219,8 +219,9 @@ function CuratedCollectionsList({
                 </div>
               </div>
               <div className="explore-stat-group explore-stat-group--right">
-                <span className="text-lg font-bold text-base-content">{collection.routes}</span>
-                <span>{formatRouteCount(collection.routes)}</span>
+                <span className="text-sm font-semibold text-base-content">
+                  {formatRouteCount(collection.routes)}
+                </span>
               </div>
             </div>
             <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">

@@ -47,12 +47,12 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [zero] مسارات
-        [one] مسار
-        [two] مساران
-        [few] مسارات
-        [many] مسار
-       *[other] مسارات
+        [zero] {$count} مسارات
+        [one] {$count} مسار
+        [two] {$count} مساران
+        [few] {$count} مسارات
+        [many] {$count} مسار
+       *[other] {$count} مسارات
     }
 
 offline-header-title = الخرائط دون اتصال

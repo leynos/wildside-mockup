@@ -43,8 +43,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] taith
-       *[other] teithiau
+        [one] {$count} taith
+       *[other] {$count} teithiau
     }
 
 offline-header-title = Mapiau all-lein
