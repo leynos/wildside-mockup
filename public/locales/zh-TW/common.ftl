@@ -37,7 +37,7 @@ explore-trending-heading = 現在正夯
 explore-community-heading = 社群最愛
 explore-community-subtitle = 本週分享最多
 explore-community-saves = {$count} 次收藏
-explore-curated-route-count = 條路線
+explore-curated-route-count = {$count} 條路線
 
 offline-header-title = 離線地圖
 offline-header-subtitle = 管理下載與智慧更新
