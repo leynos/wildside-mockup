@@ -36,6 +36,7 @@ function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Element {
 
 type CategoryScrollerProps = {
   ariaLabel: string;
+  formatRouteCount: (count: number) => string;
 };
 
 type FeaturedWalkCardProps = {
@@ -61,7 +62,7 @@ type CommunityPickPanelProps = {
   formatSaveCount: (count: number) => string;
 };
 
-function CategoryScroller({ ariaLabel }: CategoryScrollerProps): JSX.Element {
+function CategoryScroller({ ariaLabel, formatRouteCount }: CategoryScrollerProps): JSX.Element {
   return (
     <section className="w-full pt-2" aria-label={ariaLabel} role="region">
       <ScrollArea.Root className="w-full" type="scroll">
@@ -74,7 +75,7 @@ function CategoryScroller({ ariaLabel }: CategoryScrollerProps): JSX.Element {
               >
                 <Icon token={category.iconToken} className="text-lg" aria-hidden />
                 <p className="text-sm font-semibold">{category.title}</p>
-                <p className="text-xs text-white/70">{category.summary}</p>
+                <p className="text-xs text-white/70">{formatRouteCount(category.routes)}</p>
               </article>
             ))}
           </div>
@@ -371,7 +372,7 @@ export function ExploreScreen(): JSX.Element {
         </AppHeader>
         <main className="screen-scroll">
           <div className="space-y-8">
-            <CategoryScroller ariaLabel={categoriesLabel} />
+            <CategoryScroller ariaLabel={categoriesLabel} formatRouteCount={formatRouteCount} />
             <FeaturedWalkCard heading={featuredHeading} />
             <PopularThemesGrid heading={popularHeading} />
             <CuratedCollectionsList heading={curatedHeading} formatRouteCount={formatRouteCount} />
