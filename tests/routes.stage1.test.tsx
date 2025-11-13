@@ -4,6 +4,7 @@ import { act } from "react";
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
 
+import { OFFLINE_STORAGE_DEFAULTS } from "../src/app/config/offline-metrics";
 import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
 import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
@@ -29,6 +30,10 @@ type TestRoute =
   | "/walk-complete"
   | "/offline"
   | "/safety-accessibility";
+
+function escapeRegExp(raw: string): string {
+  return raw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 const savedRoute = savedRoutes[0];
 
@@ -588,7 +593,11 @@ describe("Stage 4 completion flows", () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
     expect(view.getByText(/storage overview/i)).toBeTruthy();
-    expect(view.getByText(/2\.8 gb of 8 gb/i)).toBeTruthy();
+
+    const { usedLabel, totalLabel } = OFFLINE_STORAGE_DEFAULTS;
+    const pattern = new RegExp(`${escapeRegExp(usedLabel)}.*${escapeRegExp(totalLabel)}`, "i");
+
+    expect(view.getByText(pattern)).toBeTruthy();
   });
 
   it("opens the offline download dialog with the add button", async () => {

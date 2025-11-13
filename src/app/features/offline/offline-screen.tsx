@@ -9,6 +9,7 @@ import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
 import { Icon } from "../../components/icon";
 import { PreferenceToggleCard } from "../../components/preference-toggle-card";
+import { OFFLINE_STORAGE_DEFAULTS } from "../../config/offline-metrics";
 import { bottomNavigation } from "../../data/customize";
 import {
   autoManagementOptions,
@@ -57,8 +58,9 @@ export function OfflineScreen(): JSX.Element {
       return acc;
     }, {}),
   );
-  const storageUsedFormatted = "2.8 GB";
-  const storageTotalFormatted = "8 GB";
+  const storageUsedFormatted = OFFLINE_STORAGE_DEFAULTS.usedLabel;
+  const storageTotalFormatted = OFFLINE_STORAGE_DEFAULTS.totalLabel;
+  const storageAutoDeleteDays = OFFLINE_STORAGE_DEFAULTS.autoDeleteDays;
 
   const headerTitle = t("offline-header-title", { defaultValue: "Offline Maps" });
   const headerSubtitle = t("offline-header-subtitle", {
@@ -68,7 +70,8 @@ export function OfflineScreen(): JSX.Element {
   const addAreaLabel = t("offline-header-add-area-label", { defaultValue: "Add offline area" });
   const storageHeading = t("offline-storage-heading", { defaultValue: "Storage overview" });
   const storageSubtitle = t("offline-storage-subtitle", {
-    defaultValue: "Auto-delete unused maps after 30 days",
+    days: storageAutoDeleteDays,
+    defaultValue: `Auto-delete unused maps after ${storageAutoDeleteDays} days`,
   });
   const storageUsedLabel = t("offline-storage-used-label", { defaultValue: "Used" });
   const storageUsedDescription = t("offline-storage-used-description", {
@@ -383,10 +386,13 @@ export function OfflineScreen(): JSX.Element {
               <div className="space-y-4">
                 {autoManagementOptions.map((option) => {
                   const checked = autoSettings[option.id] ?? option.defaultEnabled;
+                  const optionParams =
+                    option.id === "auto-delete" ? { days: storageAutoDeleteDays } : {};
                   const optionTitle = t(`offline-auto-option-${option.id}-title`, {
                     defaultValue: option.title,
                   });
                   const optionDescription = t(`offline-auto-option-${option.id}-description`, {
+                    ...optionParams,
                     defaultValue: option.description,
                   });
                   return (
