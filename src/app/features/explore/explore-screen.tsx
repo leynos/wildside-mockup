@@ -372,7 +372,6 @@ export function ExploreScreen(): JSX.Element {
             <input
               type="search"
               placeholder={searchPlaceholder}
-              aria-label={searchPlaceholder}
               className="explore-search__input"
             />
           </div>

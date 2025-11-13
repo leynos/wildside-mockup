@@ -39,11 +39,13 @@ explore-community-subtitle = הכי שותף השבוע
 explore-community-saves =
     { $count ->
         [one] {$count} שמירה
+        [two] {$count} שמירות
        *[other] {$count} שמירות
     }
 explore-curated-route-count =
     { $count ->
         [one] מסלול
+        [two] מסלולים
        *[other] מסלולים
     }
 

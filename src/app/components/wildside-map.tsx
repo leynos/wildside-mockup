@@ -5,6 +5,9 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { mapDefaults, useOptionalMapStore } from "../features/map/map-state";
 
+const MAPLIBRE_RTL_PLUGIN_URL =
+  "https://unpkg.com/maplibre-gl-rtl-text@0.2.3/dist/maplibre-gl-rtl-text.js";
+
 let hasRegisteredRtlTextPlugin = false;
 type MapLibreNamespace = typeof import("maplibre-gl");
 
@@ -17,7 +20,7 @@ const ensureRtlTextPlugin = (maplibre: MapLibreNamespace): void => {
   const setPlugin = (maplibre as MapLibreWithRtl).setRTLTextPlugin;
   if (typeof setPlugin !== "function") return;
 
-  setPlugin("https://unpkg.com/maplibre-gl/dist/maplibre-gl-rtl-text.js", undefined, true);
+  setPlugin(MAPLIBRE_RTL_PLUGIN_URL, undefined, true);
   hasRegisteredRtlTextPlugin = true;
 };
 

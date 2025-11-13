@@ -57,6 +57,8 @@ export function OfflineScreen(): JSX.Element {
       return acc;
     }, {}),
   );
+  const storageUsedFormatted = "2.8 GB";
+  const storageTotalFormatted = "8 GB";
 
   const headerTitle = t("offline-header-title", { defaultValue: "Offline Maps" });
   const headerSubtitle = t("offline-header-subtitle", {
@@ -70,7 +72,9 @@ export function OfflineScreen(): JSX.Element {
   });
   const storageUsedLabel = t("offline-storage-used-label", { defaultValue: "Used" });
   const storageUsedDescription = t("offline-storage-used-description", {
-    defaultValue: "2.8 GB of 8 GB",
+    used: storageUsedFormatted,
+    total: storageTotalFormatted,
+    defaultValue: `${storageUsedFormatted} of ${storageTotalFormatted}`,
   });
   const storageMapsLabel = t("offline-storage-legend-maps", { defaultValue: "Maps" });
   const storageAvailableLabel = t("offline-storage-legend-available", {

@@ -39,11 +39,17 @@ explore-community-subtitle = Air a cho-roinn as motha an t-seachdain seo
 explore-community-saves =
     { $count ->
         [one] {$count} sàbhaladh
+        [two] {$count} sàbhalaidhean
+        [few] {$count} sàbhalaidhean
+        [many] {$count} sàbhalaidhean
        *[other] {$count} sàbhalaidhean
     }
 explore-curated-route-count =
     { $count ->
         [one] slighe
+        [two] slighean
+        [few] slighean
+        [many] slighean
        *[other] slighean
     }
 

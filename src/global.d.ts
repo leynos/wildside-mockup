@@ -28,9 +28,20 @@ declare module "jest-axe" {
 }
 
 declare module "i18next-fluent-backend" {
-  import type { BackendModule } from "i18next";
+  import type { BackendModule, Services } from "i18next";
 
-  const FluentBackend: BackendModule;
+  interface FluentBackendOptions {
+    loadPath?: string;
+  }
+
+  class FluentBackend implements BackendModule<FluentBackendOptions> {
+    static type: "backend";
+    // i18next treats backend modules as classes with an optional constructor signature.
+    // Including the constructor here makes `use(FluentBackend)` type-safe.
+    // eslint-disable-next-line @typescript-eslint/no-misused-new
+    constructor(services?: Services | null, options?: FluentBackendOptions);
+  }
+
   export default FluentBackend;
 }
 

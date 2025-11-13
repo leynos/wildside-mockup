@@ -64,7 +64,6 @@ const createFetchProxy = (target: typeof globalThis): GlobalFetch => {
     throw new Error(`Unhandled fetch URL during tests: ${url}`);
   }) as GlobalFetch;
 
-  proxy.preconnect = fallbackFetch?.preconnect?.bind(target) ?? (() => Promise.resolve(undefined));
   return proxy;
 };
 
@@ -76,18 +75,18 @@ export async function setupI18nTestHarness(target: typeof globalThis = globalThi
     target.window.fetch = patchedFetch;
   }
 
-  if (typeof target.localStorage !== "undefined" && target.localStorage !== null) {
-    target.localStorage.setItem("i18nextLng", DEFAULT_LOCALE);
-  }
+  const initialiseLocalStorage = (storageTarget: typeof globalThis | Window | undefined | null) => {
+    if (
+      storageTarget &&
+      typeof storageTarget.localStorage !== "undefined" &&
+      storageTarget.localStorage !== null
+    ) {
+      storageTarget.localStorage.setItem("i18nextLng", DEFAULT_LOCALE);
+    }
+  };
 
-  if (
-    typeof target.window !== "undefined" &&
-    target.window !== null &&
-    typeof target.window.localStorage !== "undefined" &&
-    target.window.localStorage !== null
-  ) {
-    target.window.localStorage.setItem("i18nextLng", DEFAULT_LOCALE);
-  }
+  initialiseLocalStorage(target);
+  initialiseLocalStorage(target.window);
 
   const { i18nReady } = await import("../../src/i18n");
   await i18nReady;

@@ -43,7 +43,7 @@ const fetchAjax = (
     request.headers = headers;
   }
 
-  if (body !== undefined) {
+  if (body != null) {
     request.body = body;
   }
 

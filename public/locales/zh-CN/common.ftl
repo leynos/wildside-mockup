@@ -37,7 +37,7 @@ explore-trending-heading = 当前热潮
 explore-community-heading = 社区最爱
 explore-community-subtitle = 本周分享最多
 explore-community-saves = {$count} 次收藏
-explore-curated-route-count = 条路线
+explore-curated-route-count = {$count} 条路线
 
 offline-header-title = 离线地图
 offline-header-subtitle = 管理下载与智能更新
@@ -46,7 +46,7 @@ offline-header-add-area-label = 添加离线区域
 offline-storage-heading = 存储概览
 offline-storage-subtitle = 30 天后自动删除未使用的地图
 offline-storage-used-label = 已用
-offline-storage-used-description = 2.8 GB / 8 GB
+offline-storage-used-description = {$used} / {$total}
 offline-storage-legend-maps = 地图
 offline-storage-legend-available = 可用空间
 offline-suggestions-heading = 智能旅行提醒
