@@ -1151,6 +1151,9 @@ but also adaptable and maintainable for the future.
 50. useTranslation (hook) - react-i18next documentation, accessed on 17 August
     2025,
     [https://react.i18next.com/latest/usetranslation-hook](https://react.i18next.com/latest/usetranslation-hook)
+[^50]: useTranslation (hook) - react-i18next documentation, accessed on 17
+    August 2025,
+    [https://react.i18next.com/latest/usetranslation-hook](https://react.i18next.com/latest/usetranslation-hook)
 51. Complete Guide — React Internationalization (i18n) with i18next - YouTube,
     accessed on 17 August 2025,
     [https://www.youtube.com/watch?v=LFaFPORPmeo](https://www.youtube.com/watch?v=LFaFPORPmeo)
@@ -1160,3 +1163,5 @@ but also adaptable and maintainable for the future.
     [https://github.com/i18next/i18next-fluent-backend](https://github.com/i18next/i18next-fluent-backend)
 54. React-i18next Fluent example, accessed on 12 November 2025,
     [https://github.com/i18next/react-i18next/tree/master/example/react-fluent](https://github.com/i18next/react-i18next/tree/master/example/react-fluent)
+[^53]: i18next-fluent-backend - README, accessed on 12 November 2025,
+    [https://github.com/i18next/i18next-fluent-backend](https://github.com/i18next/i18next-fluent-backend)

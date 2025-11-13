@@ -146,6 +146,18 @@ describe("Stage 1 routed flows", () => {
     expect(bottomNav).toBeTruthy();
   });
 
+  it("renders explore stats using Fluent pluralisation", async () => {
+    ({ mount, root } = await renderRoute("/explore"));
+    const container = requireContainer(mount);
+    const view = within(container);
+
+    const communityRegion = view.getByRole("region", { name: /community favourite/i });
+    expect(within(communityRegion).getByText(/428 saves/i)).toBeTruthy();
+
+    const curatedRegion = view.getByRole("region", { name: /curated collections/i });
+    expect(within(curatedRegion).getAllByText(/routes/i).length).toBeGreaterThan(0);
+  });
+
   it("toggles advanced switches on the customize route", async () => {
     ({ mount, root } = await renderRoute("/customize"));
     const container = requireContainer(mount);

@@ -338,17 +338,9 @@ export function ExploreScreen(): JSX.Element {
     defaultValue: "Most shared this week",
   });
 
-  const formatRouteCount = (count: number): string =>
-    t("explore-curated-route-count", {
-      count,
-      defaultValue: count === 1 ? "route" : "routes",
-    });
+  const formatRouteCount = (count: number): string => t("explore-curated-route-count", { count });
 
-  const formatSaveCount = (count: number): string =>
-    t("explore-community-saves", {
-      count,
-      defaultValue: count === 1 ? `${count} save` : `${count} saves`,
-    });
+  const formatSaveCount = (count: number): string => t("explore-community-saves", { count });
 
   return (
     <MobileShell>

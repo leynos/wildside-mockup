@@ -36,7 +36,11 @@ explore-curated-heading = Casgliadau wedi’u curadu
 explore-trending-heading = Ar bryd y foment
 explore-community-heading = Ffefryn y gymuned
 explore-community-subtitle = Wedi’i rannu fwyaf yr wythnos hon
-explore-community-saves = {$count} cadw
+explore-community-saves =
+    { $count ->
+        [one] {$count} cadw
+       *[other] {$count} cadw
+    }
 explore-curated-route-count =
     { $count ->
         [one] taith
