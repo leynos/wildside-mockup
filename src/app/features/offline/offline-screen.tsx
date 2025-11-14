@@ -118,7 +118,7 @@ export function OfflineScreen(): JSX.Element {
 
   type DownloadStatus = NonNullable<OfflineDownload["status"]>;
 
-  const statusBadgeByStatus: Record<DownloadStatus, { className: string; label: string }> = {
+  const statusBadgeByStatus = {
     complete: {
       className: "badge badge-success badge-sm",
       label: statusCompleteLabel,
@@ -131,17 +131,18 @@ export function OfflineScreen(): JSX.Element {
       className: "badge badge-info badge-sm",
       label: statusDownloadingLabel,
     },
+  } satisfies Record<DownloadStatus, { className: string; label: string }>;
+
+  const isDownloadStatus = (status: OfflineDownload["status"]): status is DownloadStatus => {
+    return typeof status === "string" && status in statusBadgeByStatus;
   };
 
   const renderStatusBadge = (status: OfflineDownload["status"]): JSX.Element | null => {
-    if (!status) {
+    if (!isDownloadStatus(status)) {
       return null;
     }
 
     const config = statusBadgeByStatus[status];
-    if (!config) {
-      return null;
-    }
     return <span className={config.className}>{config.label}</span>;
   };
 

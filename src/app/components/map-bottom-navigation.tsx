@@ -4,9 +4,8 @@ import { useNavigate } from "@tanstack/react-router";
 import type { JSX, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
+import { type BottomNavigationItem, bottomNavigation } from "../data/customize";
 import { Icon } from "./icon";
-import type { BottomNavigationItem } from "../data/customize";
-import { bottomNavigation } from "../data/customize";
 
 export interface MapBottomNavigationProps {
   /** Route identifier that should render in an active state. */
