@@ -61,6 +61,7 @@ interest-street-art-label = Street Art
 interest-historic-label = Historische Orte
 interest-waterfront-label = Uferpromenade
 interest-markets-label = Märkte
+poi-highlight-label = Highlight
 
 quick-walk-map-aria-label = Kartenausschnitt der Schnellroute
 quick-walk-dismiss-aria = Panel schließen

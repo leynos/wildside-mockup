@@ -61,6 +61,7 @@ interest-street-art-label = Τέχνη δρόμου
 interest-historic-label = Ιστορικοί χώροι
 interest-waterfront-label = Παραθαλάσσια ζώνη
 interest-markets-label = Αγορές
+poi-highlight-label = Κορυφαίο σημείο
 
 quick-walk-map-aria-label = Περιοχή χάρτη για τη γρήγορη διαδρομή
 quick-walk-dismiss-aria = Κλείσιμο πάνελ

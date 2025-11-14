@@ -61,6 +61,7 @@ interest-street-art-label = Street art
 interest-historic-label = Siti storici
 interest-waterfront-label = Lungomare
 interest-markets-label = Mercati
+poi-highlight-label = In evidenza
 
 quick-walk-map-aria-label = Vista mappa della passeggiata rapida
 quick-walk-dismiss-aria = Chiudi pannello

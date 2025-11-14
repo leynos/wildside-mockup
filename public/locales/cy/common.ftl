@@ -61,6 +61,7 @@ interest-street-art-label = Celf stryd
 interest-historic-label = Safleoedd hanesyddol
 interest-waterfront-label = Arfordir
 interest-markets-label = Marchnadoedd
+poi-highlight-label = Uchafbwynt
 
 quick-walk-map-aria-label = Golygfa map cerdded cyflym
 quick-walk-dismiss-aria = Cau’r panel

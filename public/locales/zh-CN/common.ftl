@@ -61,6 +61,7 @@ interest-street-art-label = 街头艺术
 interest-historic-label = 历史景点
 interest-waterfront-label = 滨水区
 interest-markets-label = 市集
+poi-highlight-label = 亮点
 
 quick-walk-map-aria-label = 快速步行地图视图
 quick-walk-dismiss-aria = 关闭面板

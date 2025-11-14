@@ -61,6 +61,7 @@ interest-street-art-label = 路上アート
 interest-historic-label = 歴史スポット
 interest-waterfront-label = ウォーターフロント
 interest-markets-label = マーケット
+poi-highlight-label = ハイライト
 
 quick-walk-map-aria-label = クイック散歩マップビュー
 quick-walk-dismiss-aria = パネルを閉じる

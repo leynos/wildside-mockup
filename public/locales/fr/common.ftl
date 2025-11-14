@@ -61,6 +61,7 @@ interest-street-art-label = Art urbain
 interest-historic-label = Sites historiques
 interest-waterfront-label = Bord de l'eau
 interest-markets-label = Marchés
+poi-highlight-label = Immanquable
 
 quick-walk-map-aria-label = Vue de la carte de balade express
 quick-walk-dismiss-aria = Fermer le panneau

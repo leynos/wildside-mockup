@@ -62,6 +62,7 @@ interest-street-art-label = Street Art
 interest-historic-label = Historic Sites
 interest-waterfront-label = Waterfront
 interest-markets-label = Markets
+poi-highlight-label = Highlight
 
 quick-walk-map-aria-label = Quick walk map viewport
 quick-walk-dismiss-aria = Dismiss panel

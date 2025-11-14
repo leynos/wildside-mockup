@@ -61,6 +61,7 @@ interest-street-art-label = Katutaide
 interest-historic-label = Historialliset kohteet
 interest-waterfront-label = Rantaviiva
 interest-markets-label = Markkinat
+poi-highlight-label = Kohokohta
 
 quick-walk-map-aria-label = Pikakävelykartan näkymä
 quick-walk-dismiss-aria = Sulje paneeli

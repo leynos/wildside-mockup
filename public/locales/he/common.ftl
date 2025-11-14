@@ -61,6 +61,7 @@ interest-street-art-label = אמנות רחוב
 interest-historic-label = אתרים היסטוריים
 interest-waterfront-label = טיילת חוף
 interest-markets-label = שווקים
+poi-highlight-label = נקודת שיא
 
 quick-walk-map-aria-label = אזור מפה למסלול המהיר
 quick-walk-dismiss-aria = סגירת הלוח

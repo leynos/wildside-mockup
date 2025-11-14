@@ -62,6 +62,7 @@ interest-street-art-label = Arte urbano
 interest-historic-label = Sitios históricos
 interest-waterfront-label = Frente marítimo
 interest-markets-label = Mercados
+poi-highlight-label = Destacado
 
 quick-walk-map-aria-label = Vista del mapa de caminata rápida
 quick-walk-dismiss-aria = Cerrar panel

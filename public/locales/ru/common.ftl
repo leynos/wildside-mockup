@@ -61,6 +61,7 @@ interest-street-art-label = Стрит-арт
 interest-historic-label = Исторические места
 interest-waterfront-label = Набережная
 interest-markets-label = Рынки
+poi-highlight-label = Особое место
 
 quick-walk-map-aria-label = Область карты быстрого маршрута
 quick-walk-dismiss-aria = Закрыть панель

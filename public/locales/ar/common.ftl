@@ -61,6 +61,7 @@ interest-street-art-label = فن الشارع
 interest-historic-label = مواقع تاريخية
 interest-waterfront-label = الواجهة البحرية
 interest-markets-label = الأسواق
+poi-highlight-label = مميز
 
 quick-walk-map-aria-label = منطقة عرض خريطة السير السريع
 quick-walk-dismiss-aria = إغلاق اللوحة

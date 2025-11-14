@@ -61,6 +61,7 @@ interest-street-art-label = Street art
 interest-historic-label = Historiske steder
 interest-waterfront-label = Havnefront
 interest-markets-label = Markeder
+poi-highlight-label = Højdepunkt
 
 quick-walk-map-aria-label = Visning af kortet til hurtig gåtur
 quick-walk-dismiss-aria = Luk panel

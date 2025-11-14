@@ -61,6 +61,7 @@ interest-street-art-label = Arte urbana
 interest-historic-label = Sítios históricos
 interest-waterfront-label = Orla
 interest-markets-label = Mercados
+poi-highlight-label = Destaque
 
 quick-walk-map-aria-label = Visão do mapa da caminhada rápida
 quick-walk-dismiss-aria = Fechar painel

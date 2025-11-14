@@ -61,6 +61,7 @@ interest-street-art-label = Ealain sràide
 interest-historic-label = Làraichean eachdraidheil
 interest-waterfront-label = Oirthir-uisge
 interest-markets-label = Margaidhean
+poi-highlight-label = Prìomh rud
 
 quick-walk-map-aria-label = Sealladh mapa na cuairte luath
 quick-walk-dismiss-aria = Dùin am pannal

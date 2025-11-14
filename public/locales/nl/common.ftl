@@ -61,6 +61,7 @@ interest-street-art-label = Street art
 interest-historic-label = Historische plekken
 interest-waterfront-label = Waterfront
 interest-markets-label = Markten
+poi-highlight-label = Blikvanger
 
 quick-walk-map-aria-label = Kaartweergave voor snelle wandeling
 quick-walk-dismiss-aria = Paneel sluiten

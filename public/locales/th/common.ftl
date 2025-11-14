@@ -61,6 +61,7 @@ interest-street-art-label = ศิลปะสตรีท
 interest-historic-label = สถานที่ประวัติศาสตร์
 interest-waterfront-label = ริมน้ำ
 interest-markets-label = ตลาด
+poi-highlight-label = จุดเด่น
 
 quick-walk-map-aria-label = มุมมองแผนที่เดินเร็ว
 quick-walk-dismiss-aria = ปิดแผง

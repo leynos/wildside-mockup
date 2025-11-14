@@ -61,6 +61,7 @@ interest-street-art-label = Sokak sanatı
 interest-historic-label = Tarihi mekânlar
 interest-waterfront-label = Sahil şeridi
 interest-markets-label = Pazarlar
+poi-highlight-label = Öne çıkan
 
 quick-walk-map-aria-label = Hızlı yürüyüş harita görünümü
 quick-walk-dismiss-aria = Paneli kapat
