@@ -1,3 +1,16 @@
+customize-header-title = Rotayı özelleştir
+customize-header-subtitle = Yürüyüş maceranı ince ayarla
+customize-header-back-label = Haritaya geri dön
+customize-header-help-label = Yardım
+customize-surface-heading = Yüzey türü
+customize-surface-aria-label = Yüzey türü
+customize-interest-heading = İlgi karışımı
+customize-interest-thumb-aria = {$label} için dağılım
+customize-route-preview-heading = Rota önizlemesi
+customize-route-preview-regenerate = Yeniden oluştur
+customize-route-preview-start = Rotayı başlat
+customize-advanced-heading = Gelişmiş ayarlar
+
 app-shell-title = Wildside Mockup
 controls-language-label = Dil
 walk-complete-hero-title = Yürüyüş tamamlandı!

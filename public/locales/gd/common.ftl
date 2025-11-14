@@ -1,3 +1,16 @@
+customize-header-title = Gnàthaich an t-slighe
+customize-header-subtitle = Grinnich do thuras coise
+customize-header-back-label = Air ais dhan mhapa
+customize-header-help-label = Cobhair
+customize-surface-heading = Seòrsa uachdair
+customize-surface-aria-label = Seòrsa uachdair
+customize-interest-heading = Measgachadh ùidhean
+customize-interest-thumb-aria = Riarachadh airson {$label}
+customize-route-preview-heading = Ro-shealladh na slighe
+customize-route-preview-regenerate = Ath-ghin
+customize-route-preview-start = Tòisich air an t-slighe
+customize-advanced-heading = Roghainnean adhartach
+
 app-shell-title = Wildside Mockup
 controls-language-label = Cànan
 walk-complete-hero-title = Cuairt choise crìochnaichte!

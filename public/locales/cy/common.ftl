@@ -1,3 +1,16 @@
+customize-header-title = Addasu taith
+customize-header-subtitle = Manylu ar eich antur gerdded
+customize-header-back-label = Nôl i’r map
+customize-header-help-label = Cymorth
+customize-surface-heading = Math o arwyneb
+customize-surface-aria-label = Math o arwyneb
+customize-interest-heading = Cymysgedd diddordebau
+customize-interest-thumb-aria = Dyraniad ar gyfer {$label}
+customize-route-preview-heading = Rhagolwg taith
+customize-route-preview-regenerate = Ailgynhyrchu
+customize-route-preview-start = Cychwyn taith
+customize-advanced-heading = Opsiynau uwch
+
 app-shell-title = Wildside Mockup
 controls-language-label = Iaith
 walk-complete-hero-title = Taith gerdded wedi’i chwblhau!

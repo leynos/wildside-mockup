@@ -57,7 +57,10 @@ const defaultLocaleMetadata = (() => {
 const normaliseLocale = (code: string): string => code.toLowerCase();
 
 const extractLanguagePart = (code: string): string => {
-  const language = code.split("-")[0];
+  const [language] = code.split("-");
+  if (!language) {
+    return code;
+  }
   return language;
 };
 

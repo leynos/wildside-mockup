@@ -1,3 +1,16 @@
+customize-header-title = 自訂路線
+customize-header-subtitle = 細緻調整你的步行冒險
+customize-header-back-label = 返回地圖
+customize-header-help-label = 說明
+customize-surface-heading = 路面類型
+customize-surface-aria-label = 路面類型
+customize-interest-heading = 興趣組合
+customize-interest-thumb-aria = {$label} 的分配
+customize-route-preview-heading = 路線預覽
+customize-route-preview-regenerate = 重新產生
+customize-route-preview-start = 開始路線
+customize-advanced-heading = 進階選項
+
 app-shell-title = Wildside Mockup
 controls-language-label = 語言
 walk-complete-hero-title = 步行完成！

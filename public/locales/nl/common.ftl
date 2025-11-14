@@ -1,3 +1,16 @@
+customize-header-title = Route aanpassen
+customize-header-subtitle = Fijnstel je wandelavontuur
+customize-header-back-label = Terug naar kaart
+customize-header-help-label = Help
+customize-surface-heading = Type ondergrond
+customize-surface-aria-label = Type ondergrond
+customize-interest-heading = Interesse­mix
+customize-interest-thumb-aria = Verdeling voor {$label}
+customize-route-preview-heading = Routevoorbeeld
+customize-route-preview-regenerate = Opnieuw genereren
+customize-route-preview-start = Route starten
+customize-advanced-heading = Geavanceerde opties
+
 app-shell-title = Wildside Mockup
 controls-language-label = Taal
 walk-complete-hero-title = Wandeling voltooid!

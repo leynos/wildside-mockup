@@ -1,3 +1,16 @@
+customize-header-title = பாதையை தனிப்பயனாக்கவும்
+customize-header-subtitle = உங்கள் நடைபயணத்தை நுட்பமாக அமைக்கவும்
+customize-header-back-label = வரைபடத்திற்குத் திரும்பு
+customize-header-help-label = உதவி
+customize-surface-heading = தரை வகை
+customize-surface-aria-label = தரை வகை
+customize-interest-heading = ஆர்வக் கலப்பு
+customize-interest-thumb-aria = {$label} கான ஒதுக்கீடு
+customize-route-preview-heading = பாதை முன்னோட்டம்
+customize-route-preview-regenerate = மீண்டும் உருவாக்கு
+customize-route-preview-start = பாதையை தொடங்கு
+customize-advanced-heading = மேம்பட்ட விருப்பங்கள்
+
 app-shell-title = வில்ட்சைட் மாக்அப்
 controls-language-label = மொழி
 walk-complete-hero-title = நடை முடிந்தது!

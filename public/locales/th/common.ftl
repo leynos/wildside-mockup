@@ -1,3 +1,16 @@
+customize-header-title = ปรับแต่งเส้นทาง
+customize-header-subtitle = ปรับจูนการผจญภัยการเดินของคุณอย่างละเอียด
+customize-header-back-label = กลับไปที่แผนที่
+customize-header-help-label = วิธีใช้
+customize-surface-heading = ประเภทพื้นผิว
+customize-surface-aria-label = ประเภทพื้นผิว
+customize-interest-heading = ผสมผสานความสนใจ
+customize-interest-thumb-aria = การจัดสรรสำหรับ {$label}
+customize-route-preview-heading = ดูตัวอย่างเส้นทาง
+customize-route-preview-regenerate = สร้างใหม่
+customize-route-preview-start = เริ่มเส้นทาง
+customize-advanced-heading = ตัวเลือกขั้นสูง
+
 app-shell-title = Wildside Mockup
 controls-language-label = ภาษา
 walk-complete-hero-title = เดินจบเรียบร้อย!

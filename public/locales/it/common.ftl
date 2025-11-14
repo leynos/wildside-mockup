@@ -1,3 +1,16 @@
+customize-header-title = Personalizza percorso
+customize-header-subtitle = Affina la tua avventura a piedi
+customize-header-back-label = Torna alla mappa
+customize-header-help-label = Guida
+customize-surface-heading = Tipo di superficie
+customize-surface-aria-label = Tipo di superficie
+customize-interest-heading = Mix di interessi
+customize-interest-thumb-aria = Assegnazione per {$label}
+customize-route-preview-heading = Anteprima percorso
+customize-route-preview-regenerate = Rigenera
+customize-route-preview-start = Avvia percorso
+customize-advanced-heading = Opzioni avanzate
+
 app-shell-title = Wildside Mockup
 controls-language-label = Lingua
 walk-complete-hero-title = Passeggiata completata!

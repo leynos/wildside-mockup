@@ -1,3 +1,16 @@
+customize-header-title = Customize Route
+customize-header-subtitle = Fine-tune your walking adventure
+customize-header-back-label = Back to map
+customize-header-help-label = Help
+customize-surface-heading = Surface Type
+customize-surface-aria-label = Surface type
+customize-interest-heading = Interest Mix
+customize-interest-thumb-aria = {$label} allocation
+customize-route-preview-heading = Route Preview
+customize-route-preview-regenerate = Regenerate
+customize-route-preview-start = Start Route
+customize-advanced-heading = Advanced Options
+
 app-shell-title = Wildside Mockup
 controls-language-label = Language
 walk-complete-hero-title = Walk complete!

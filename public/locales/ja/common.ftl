@@ -1,3 +1,16 @@
+customize-header-title = ルートをカスタマイズ
+customize-header-subtitle = ウォーキングの冒険を細かく調整しましょう
+customize-header-back-label = マップに戻る
+customize-header-help-label = ヘルプ
+customize-surface-heading = 路面タイプ
+customize-surface-aria-label = 路面タイプ
+customize-interest-heading = 関心のバランス
+customize-interest-thumb-aria = {$label} の配分
+customize-route-preview-heading = ルートプレビュー
+customize-route-preview-regenerate = 再生成
+customize-route-preview-start = ルートを開始
+customize-advanced-heading = 詳細オプション
+
 app-shell-title = Wildside Mockup
 controls-language-label = 言語
 walk-complete-hero-title = ウォーク完了！

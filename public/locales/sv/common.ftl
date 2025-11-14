@@ -1,3 +1,16 @@
+customize-header-title = Anpassa rutt
+customize-header-subtitle = Finjustera ditt vandringsäventyr
+customize-header-back-label = Tillbaka till karta
+customize-header-help-label = Hjälp
+customize-surface-heading = Yttyp
+customize-surface-aria-label = Yttyp
+customize-interest-heading = Intresse­mix
+customize-interest-thumb-aria = Fördelning för {$label}
+customize-route-preview-heading = Ruttförhandsvisning
+customize-route-preview-regenerate = Generera igen
+customize-route-preview-start = Starta rutt
+customize-advanced-heading = Avancerade alternativ
+
 app-shell-title = Wildside Mockup
 controls-language-label = Språk
 walk-complete-hero-title = Promenaden är klar!

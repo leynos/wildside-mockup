@@ -1,3 +1,16 @@
+customize-header-title = Mukauta reittiä
+customize-header-subtitle = Hio kävelyseikkailuasi
+customize-header-back-label = Takaisin kartalle
+customize-header-help-label = Ohje
+customize-surface-heading = Pinnan tyyppi
+customize-surface-aria-label = Pinnan tyyppi
+customize-interest-heading = Kiinnostusten jako
+customize-interest-thumb-aria = Jakelu kohteelle {$label}
+customize-route-preview-heading = Reitin esikatselu
+customize-route-preview-regenerate = Luo uudelleen
+customize-route-preview-start = Käynnistä reitti
+customize-advanced-heading = Lisäasetukset
+
 app-shell-title = Wildside Mockup
 controls-language-label = Kieli
 walk-complete-hero-title = Kävely valmis!

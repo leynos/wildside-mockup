@@ -1,3 +1,16 @@
+customize-header-title = 경로 사용자 지정
+customize-header-subtitle = 걷기 모험을 세밀하게 조정하세요
+customize-header-back-label = 지도으로 돌아가기
+customize-header-help-label = 도움말
+customize-surface-heading = 노면 유형
+customize-surface-aria-label = 노면 유형
+customize-interest-heading = 관심사 구성
+customize-interest-thumb-aria = {$label} 배분
+customize-route-preview-heading = 경로 미리보기
+customize-route-preview-regenerate = 다시 생성
+customize-route-preview-start = 경로 시작
+customize-advanced-heading = 고급 옵션
+
 app-shell-title = Wildside Mockup
 controls-language-label = 언어
 walk-complete-hero-title = 걷기가 완료되었습니다!

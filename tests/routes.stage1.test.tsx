@@ -198,6 +198,29 @@ describe("Stage 1 routed flows", () => {
     expect(view.getAllByRole("heading", { level: 2 }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("slider").length).toBeGreaterThan(0);
   });
+
+  it("localises customize copy for alternate locales", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/customize"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      expect(view.getByRole("heading", { level: 2, name: /distancia/i })).toBeTruthy();
+      expect(view.getByRole("group", { name: /tipo de superficie/i })).toBeTruthy();
+      expect(view.getByRole("switch", { name: /prioridad de seguridad/i })).toBeTruthy();
+      expect(view.getByRole("button", { name: /regenerar/i })).toBeTruthy();
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
 });
 
 describe("Stage 2 routed flows", () => {

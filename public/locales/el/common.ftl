@@ -1,3 +1,16 @@
+customize-header-title = Προσαρμογή διαδρομής
+customize-header-subtitle = Ρυθμίστε με ακρίβεια την πεζοπορική σας εμπειρία
+customize-header-back-label = Επιστροφή στον χάρτη
+customize-header-help-label = Βοήθεια
+customize-surface-heading = Τύπος επιφάνειας
+customize-surface-aria-label = Τύπος επιφάνειας
+customize-interest-heading = Μείγμα ενδιαφερόντων
+customize-interest-thumb-aria = Κατανομή για {$label}
+customize-route-preview-heading = Προεπισκόπηση διαδρομής
+customize-route-preview-regenerate = Επαναδημιουργία
+customize-route-preview-start = Έναρξη διαδρομής
+customize-advanced-heading = Προχωρημένες επιλογές
+
 app-shell-title = Wildside Mockup
 controls-language-label = Γλώσσα
 walk-complete-hero-title = Η διαδρομή ολοκληρώθηκε!

@@ -5,14 +5,13 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import Fluent from "i18next-fluent";
 import FluentBackend from "i18next-fluent-backend";
 import { initReactI18next } from "react-i18next";
-
-import { appLogger, reportError } from "./app/observability/logger";
 import {
   DEFAULT_LOCALE,
   getLocaleDirection,
   getLocaleMetadata,
   SUPPORTED_LOCALES,
 } from "./app/i18n/supported-locales";
+import { appLogger, reportError } from "./app/observability/logger";
 
 const supportedLngs = SUPPORTED_LOCALES.map((locale) => locale.code);
 

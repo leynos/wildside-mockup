@@ -1,3 +1,16 @@
+customize-header-title = تخصيص المسار
+customize-header-subtitle = اضبط مغامرتك سيراً على الأقدام بدقة
+customize-header-back-label = العودة إلى الخريطة
+customize-header-help-label = مساعدة
+customize-surface-heading = نوع السطح
+customize-surface-aria-label = نوع السطح
+customize-interest-heading = مزيج الاهتمامات
+customize-interest-thumb-aria = توزيع {$label}
+customize-route-preview-heading = معاينة المسار
+customize-route-preview-regenerate = إعادة التوليد
+customize-route-preview-start = بدء المسار
+customize-advanced-heading = خيارات متقدمة
+
 app-shell-title = وايلدسايد موك آب
 controls-language-label = اللغة
 walk-complete-hero-title = تم إنهاء المسار!

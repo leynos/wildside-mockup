@@ -1,3 +1,16 @@
+customize-header-title = मार्ग अनुकूलित करें
+customize-header-subtitle = अपनी पैदल यात्रा को बारीकी से समायोजित करें
+customize-header-back-label = मानचित्र पर वापस जाएं
+customize-header-help-label = सहायता
+customize-surface-heading = सतह का प्रकार
+customize-surface-aria-label = सतह का प्रकार
+customize-interest-heading = रुचियों का मिश्रण
+customize-interest-thumb-aria = {$label} के लिए आवंटन
+customize-route-preview-heading = मार्ग पूर्वावलोकन
+customize-route-preview-regenerate = दोबारा जनरेट करें
+customize-route-preview-start = मार्ग शुरू करें
+customize-advanced-heading = उन्नत विकल्प
+
 app-shell-title = वाइल्डसाइड मॉकअप
 controls-language-label = भाषा
 walk-complete-hero-title = वॉक पूर्ण हुई!

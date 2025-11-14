@@ -1,3 +1,16 @@
+customize-header-title = Dostosuj trasę
+customize-header-subtitle = Dopracuj swoją pieszą przygodę
+customize-header-back-label = Wróć do mapy
+customize-header-help-label = Pomoc
+customize-surface-heading = Rodzaj nawierzchni
+customize-surface-aria-label = Rodzaj nawierzchni
+customize-interest-heading = Miks zainteresowań
+customize-interest-thumb-aria = Przydział dla {$label}
+customize-route-preview-heading = Podgląd trasy
+customize-route-preview-regenerate = Wygeneruj ponownie
+customize-route-preview-start = Rozpocznij trasę
+customize-advanced-heading = Opcje zaawansowane
+
 app-shell-title = Wildside Mockup
 controls-language-label = Język
 walk-complete-hero-title = Spacer zakończony!

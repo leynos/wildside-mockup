@@ -1,3 +1,16 @@
+customize-header-title = התאמת המסלול
+customize-header-subtitle = כווננו בעדינות את חוויית ההליכה שלכם
+customize-header-back-label = חזרה למפה
+customize-header-help-label = עזרה
+customize-surface-heading = סוג משטח
+customize-surface-aria-label = סוג משטח
+customize-interest-heading = שילוב תחומי עניין
+customize-interest-thumb-aria = הקצאה עבור {$label}
+customize-route-preview-heading = תצוגה מקדימה של המסלול
+customize-route-preview-regenerate = צור מחדש
+customize-route-preview-start = התחל מסלול
+customize-advanced-heading = אפשרויות מתקדמות
+
 app-shell-title = ‏הדמיית Wildside
 controls-language-label = שפה
 walk-complete-hero-title = ההליכה הושלמה!

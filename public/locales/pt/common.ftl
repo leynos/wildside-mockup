@@ -1,3 +1,16 @@
+customize-header-title = Personalizar rota
+customize-header-subtitle = Ajuste a sua aventura a pé
+customize-header-back-label = Voltar ao mapa
+customize-header-help-label = Ajuda
+customize-surface-heading = Tipo de superfície
+customize-surface-aria-label = Tipo de superfície
+customize-interest-heading = Mistura de interesses
+customize-interest-thumb-aria = Distribuição para {$label}
+customize-route-preview-heading = Pré-visualização da rota
+customize-route-preview-regenerate = Gerar novamente
+customize-route-preview-start = Iniciar rota
+customize-advanced-heading = Opções avançadas
+
 app-shell-title = Wildside Mockup
 controls-language-label = Idioma
 walk-complete-hero-title = Caminhada concluída!

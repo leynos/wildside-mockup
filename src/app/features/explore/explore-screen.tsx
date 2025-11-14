@@ -387,6 +387,7 @@ export function ExploreScreen(): JSX.Element {
         <AppBottomNavigation
           items={bottomNavigation.map((item) => ({
             ...item,
+            label: t(`nav-${item.id}-label`, { defaultValue: item.label }),
             isActive: item.id === "discover",
             ...(item.id === "discover" ? {} : { href: item.href }),
           }))}

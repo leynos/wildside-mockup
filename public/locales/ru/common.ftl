@@ -1,3 +1,16 @@
+customize-header-title = Настроить маршрут
+customize-header-subtitle = Точно настройте своё пешее путешествие
+customize-header-back-label = Назад к карте
+customize-header-help-label = Справка
+customize-surface-heading = Тип покрытия
+customize-surface-aria-label = Тип покрытия
+customize-interest-heading = Баланс интересов
+customize-interest-thumb-aria = Распределение для {$label}
+customize-route-preview-heading = Предпросмотр маршрута
+customize-route-preview-regenerate = Пересоздать
+customize-route-preview-start = Начать маршрут
+customize-advanced-heading = Расширенные настройки
+
 app-shell-title = Wildside Mockup
 controls-language-label = Язык
 walk-complete-hero-title = Прогулка завершена!

@@ -116,7 +116,7 @@ export function OfflineScreen(): JSX.Element {
   const dialogCancel = t("offline-dialog-cancel", { defaultValue: "Cancel" });
   const dialogPreview = t("offline-dialog-preview", { defaultValue: "Preview download" });
 
-  type DownloadStatus = OfflineDownload["status"];
+  type DownloadStatus = NonNullable<OfflineDownload["status"]>;
 
   const statusBadgeByStatus: Record<DownloadStatus, { className: string; label: string }> = {
     complete: {
@@ -133,7 +133,11 @@ export function OfflineScreen(): JSX.Element {
     },
   };
 
-  const renderStatusBadge = (status: DownloadStatus): JSX.Element | null => {
+  const renderStatusBadge = (status: OfflineDownload["status"]): JSX.Element | null => {
+    if (!status) {
+      return null;
+    }
+
     const config = statusBadgeByStatus[status];
     if (!config) {
       return null;
@@ -428,6 +432,7 @@ export function OfflineScreen(): JSX.Element {
           <AppBottomNavigation
             items={bottomNavigation.map((item) => ({
               ...item,
+              label: t(`nav-${item.id}-label`, { defaultValue: item.label }),
               isActive: item.id === "profile",
             }))}
           />

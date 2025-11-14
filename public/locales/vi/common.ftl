@@ -1,3 +1,16 @@
+customize-header-title = Tùy chỉnh lộ trình
+customize-header-subtitle = Tinh chỉnh cuộc phiêu lưu đi bộ của bạn
+customize-header-back-label = Quay lại bản đồ
+customize-header-help-label = Trợ giúp
+customize-surface-heading = Loại bề mặt
+customize-surface-aria-label = Loại bề mặt
+customize-interest-heading = Phối hợp sở thích
+customize-interest-thumb-aria = Phân bổ cho {$label}
+customize-route-preview-heading = Xem trước lộ trình
+customize-route-preview-regenerate = Tạo lại
+customize-route-preview-start = Bắt đầu lộ trình
+customize-advanced-heading = Tùy chọn nâng cao
+
 app-shell-title = Wildside Mockup
 controls-language-label = Ngôn ngữ
 walk-complete-hero-title = Hoàn thành chuyến đi!

@@ -1,3 +1,16 @@
+customize-header-title = Tilpas rute
+customize-header-subtitle = Finjuster din gåtur
+customize-header-back-label = Tilbage til kort
+customize-header-help-label = Hjælp
+customize-surface-heading = Overfladetype
+customize-surface-aria-label = Overfladetype
+customize-interest-heading = Interesse­mix
+customize-interest-thumb-aria = Fordeling for {$label}
+customize-route-preview-heading = Rutevisning
+customize-route-preview-regenerate = Generér igen
+customize-route-preview-start = Start rute
+customize-advanced-heading = Avancerede indstillinger
+
 app-shell-title = Wildside Mockup
 controls-language-label = Sprog
 walk-complete-hero-title = Gåturen er gennemført!
