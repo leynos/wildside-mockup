@@ -197,6 +197,38 @@ Mapping guidance:
 - `Toast`: feedback when saving walks or completing actions.
 - `Popover`/`Tooltip`: inline help icons, map annotations.
 
+## Localised descriptor registries
+
+- Add a shared `LocalizedDescriptor` type in `src/app/i18n/descriptors.ts`
+  capturing the minimal metadata needed to render any label via Fluent:
+  `id`, `labelKey`, optional `descriptionKey`, and presentational fields such
+  as `iconToken` or `emoji`. Keep the module text-free so it can be imported on
+  both client and server without loading the translation runtime.
+- Build three registries under `src/app/data/registries/` that reuse the
+  descriptor type:
+  - `interestsRegistry` powers `/discover`, `/map/quick`, and `/wizard/step-1`.
+    Each entry includes the Fluent keys plus any behavioural metadata (for
+    example, filter tags or slider weights).
+  - `difficultyRegistry` models “Easy”, “Moderate”, and “Challenging” chips.
+    Store gradient tokens, recommended pace ranges, or walking duration bands
+    alongside the Fluent keys so every flow derives consistent visuals and
+    heuristics from the same source.
+  - `collectionsRegistry` describes the interest-led walk groupings shown on
+    `/discover` (for example, “Street Art”, “Historic”). Extend entries with
+    hero image URLs, CTA routes, and route counts so cards stay data-driven.
+- Define the actual copy inside `public/locales/<locale>/common.ftl` using
+  predictable IDs such as `interest-foodie-label` or `difficulty-easy-label`.
+  Include `defaultValue` fallbacks when calling `t()` so existing English-only
+  tests keep passing whilst translations load.
+- Consumers load the registry, map over each descriptor, and call
+  `useTranslation()` to resolve `labelKey`/`descriptionKey`. This keeps React
+  components free of hard-coded strings and ensures every surface shows the
+  user’s language without duplicating logic.
+- Add at least one localisation test per registry (for example, render the
+  `/customize` or `/discover` route in Spanish) to confirm Fluent keys map to
+  the expected locale output. This mirrors the current `/customize` Spanish
+  test and guarantees regressions surface before release.
+
 ## High-velocity accessibility-first testing plan
 
 - Roll out a dual-harness test stack that keeps Bun + Happy DOM for fast unit

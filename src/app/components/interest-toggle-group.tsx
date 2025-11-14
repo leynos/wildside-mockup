@@ -2,11 +2,10 @@
 
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import type { JSX } from "react";
-
-import { discoverInterests } from "../data/discover";
+import { useTranslation } from "react-i18next";
+import { interestDescriptors, type ResolvedInterestDescriptor } from "../data/registries/interests";
+import { resolveDescriptor } from "../i18n/descriptors";
 import { Icon } from "./icon";
-
-const interestLookup = new Map(discoverInterests.map((interest) => [interest.id, interest]));
 
 const CHIP_BASE_CLASSES =
   "interest-chip inline-flex items-center gap-2 rounded-full border border-base-300/60 bg-base-200/60 px-4 py-2 text-sm font-medium text-base-content/70 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60";
@@ -26,6 +25,11 @@ export function InterestToggleGroup({
   ariaLabel,
   className,
 }: InterestToggleGroupProps): JSX.Element {
+  const { t } = useTranslation();
+  const interestLookup = new Map<string, ResolvedInterestDescriptor>(
+    interestDescriptors.map((descriptor) => [descriptor.id, resolveDescriptor(descriptor, t)]),
+  );
+
   return (
     <ToggleGroup.Root
       type="multiple"

@@ -8,7 +8,7 @@ import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { SliderControl } from "../../../components/slider-control";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { WizardSection } from "../../../components/wizard-section";
-import { defaultSelectedInterests, discoverInterests } from "../../../data/discover";
+import { defaultSelectedInterests, discoverInterestDescriptors } from "../../../data/discover";
 import { wizardSteps } from "../../../data/wizard";
 
 function formatDuration(value: number) {
@@ -22,16 +22,7 @@ export function WizardStepOne(): JSX.Element {
     ...defaultSelectedInterests,
   ]);
 
-  const interestIds = useMemo(
-    () =>
-      Array.from(
-        new Set<string>([
-          ...defaultSelectedInterests,
-          ...discoverInterests.map((option) => option.id),
-        ]),
-      ),
-    [],
-  );
+  const interestIds = useMemo(() => discoverInterestDescriptors.map((option) => option.id), []);
 
   const selectedLabel = useMemo(
     () => `${selectedInterests.length} selected`,

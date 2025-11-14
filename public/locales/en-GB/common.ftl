@@ -56,6 +56,14 @@ nav-discover-label = Discover
 nav-routes-label = Routes
 nav-profile-label = Profile
 
+interest-parks-label = Parks & Nature
+interest-coffee-label = Coffee Spots
+interest-street-art-label = Street Art
+interest-historic-label = Historic Sites
+interest-waterfront-label = Waterfront
+interest-markets-label = Markets
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Language
 walk-complete-hero-title = Walk complete!
