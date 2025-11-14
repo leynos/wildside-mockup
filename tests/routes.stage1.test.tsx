@@ -181,6 +181,29 @@ describe("Stage 1 routed flows", () => {
     expect(pluralRoute).toMatch(/3 routes/i);
   });
 
+  it("localises curated difficulty labels for alternate locales", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/explore"));
+      const container = requireContainer(mount);
+      const view = within(container);
+      const easyLabel = i18n.t("difficulty-easy-label");
+      const moderateLabel = i18n.t("difficulty-moderate-label");
+
+      expect(view.getByText(new RegExp(escapeRegExp(easyLabel ?? ""), "i"))).toBeTruthy();
+      expect(view.getByText(new RegExp(escapeRegExp(moderateLabel ?? ""), "i"))).toBeTruthy();
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
+
   it("toggles advanced switches on the customize route", async () => {
     ({ mount, root } = await renderRoute("/customize"));
     const container = requireContainer(mount);

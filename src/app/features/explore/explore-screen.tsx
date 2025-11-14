@@ -2,7 +2,7 @@
 
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, type ReactNode, useId } from "react";
+import { type JSX, type ReactNode, useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
@@ -17,6 +17,11 @@ import {
   popularThemes,
   trendingRoutes,
 } from "../../data/explore";
+import {
+  buildDifficultyLookup,
+  type DifficultyId,
+  type ResolvedDifficultyDescriptor,
+} from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 
@@ -50,6 +55,7 @@ type PopularThemesGridProps = {
 type CuratedCollectionsListProps = {
   heading: string;
   formatRouteCount: (count: number) => string;
+  difficultyLookup: Map<DifficultyId, ResolvedDifficultyDescriptor>;
 };
 
 type TrendingRoutesListProps = {
@@ -183,6 +189,7 @@ function PopularThemesGrid({ heading }: PopularThemesGridProps): JSX.Element {
 function CuratedCollectionsList({
   heading,
   formatRouteCount,
+  difficultyLookup,
 }: CuratedCollectionsListProps): JSX.Element {
   const headingId = useId();
   return (
@@ -214,9 +221,18 @@ function CuratedCollectionsList({
                     <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
                     {collection.durationRange}
                   </span>
-                  <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-emerald-300">
-                    {collection.difficulty}
-                  </span>
+                  {(() => {
+                    const difficulty = difficultyLookup.get(collection.difficultyId);
+                    const badgeToneClass =
+                      difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
+                    return (
+                      <span
+                        className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeToneClass}`}
+                      >
+                        {difficulty?.label ?? collection.difficultyId}
+                      </span>
+                    );
+                  })()}
                 </div>
               </div>
               <div className="explore-stat-group explore-stat-group--right">
@@ -339,6 +355,7 @@ export function ExploreScreen(): JSX.Element {
   const communitySubtitle = t("explore-community-subtitle", {
     defaultValue: "Most shared this week",
   });
+  const difficultyLookup = useMemo(() => buildDifficultyLookup(t), [t]);
 
   const formatRouteCount = (count: number): string => t("explore-curated-route-count", { count });
 
@@ -375,7 +392,11 @@ export function ExploreScreen(): JSX.Element {
             <CategoryScroller ariaLabel={categoriesLabel} formatRouteCount={formatRouteCount} />
             <FeaturedWalkCard heading={featuredHeading} />
             <PopularThemesGrid heading={popularHeading} />
-            <CuratedCollectionsList heading={curatedHeading} formatRouteCount={formatRouteCount} />
+            <CuratedCollectionsList
+              heading={curatedHeading}
+              formatRouteCount={formatRouteCount}
+              difficultyLookup={difficultyLookup}
+            />
             <TrendingRoutesList heading={trendingHeading} />
             <CommunityPickPanel
               heading={communityHeading}

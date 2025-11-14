@@ -61,6 +61,9 @@ interest-street-art-label = Celf stryd
 interest-historic-label = Safleoedd hanesyddol
 interest-waterfront-label = Arfordir
 interest-markets-label = Marchnadoedd
+difficulty-easy-label = Hawdd
+difficulty-moderate-label = Cymedrol
+difficulty-challenging-label = Heriol
 poi-highlight-label = Uchafbwynt
 
 quick-walk-map-aria-label = Golygfa map cerdded cyflym

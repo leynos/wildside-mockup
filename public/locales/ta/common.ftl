@@ -61,6 +61,9 @@ interest-street-art-label = தெருக்கலை
 interest-historic-label = வரலாற்றுச் சின்னங்கள்
 interest-waterfront-label = நீர்த்தீரம்
 interest-markets-label = சந்தைகள்
+difficulty-easy-label = எளிது
+difficulty-moderate-label = நடுத்தரம்
+difficulty-challenging-label = சவாலான
 poi-highlight-label = முக்கிய அம்சம்
 
 quick-walk-map-aria-label = விரைவு நடை வரைபட காட்சி

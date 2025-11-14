@@ -61,6 +61,9 @@ interest-street-art-label = Arte urbana
 interest-historic-label = Sítios históricos
 interest-waterfront-label = Orla
 interest-markets-label = Mercados
+difficulty-easy-label = Fácil
+difficulty-moderate-label = Moderada
+difficulty-challenging-label = Desafiante
 poi-highlight-label = Destaque
 
 quick-walk-map-aria-label = Visão do mapa da caminhada rápida

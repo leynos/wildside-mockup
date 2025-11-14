@@ -61,6 +61,9 @@ interest-street-art-label = स्ट्रीट आर्ट
 interest-historic-label = ऐतिहासिक स्थल
 interest-waterfront-label = वाटरफ्रंट
 interest-markets-label = बाज़ार
+difficulty-easy-label = आसान
+difficulty-moderate-label = मध्यम
+difficulty-challenging-label = चुनौतीपूर्ण
 poi-highlight-label = मुख्य आकर्षण
 
 quick-walk-map-aria-label = क्विक वॉक नक्शे का दृश्य

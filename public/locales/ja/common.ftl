@@ -61,6 +61,9 @@ interest-street-art-label = 路上アート
 interest-historic-label = 歴史スポット
 interest-waterfront-label = ウォーターフロント
 interest-markets-label = マーケット
+difficulty-easy-label = やさしい
+difficulty-moderate-label = 中くらい
+difficulty-challenging-label = チャレンジ
 poi-highlight-label = ハイライト
 
 quick-walk-map-aria-label = クイック散歩マップビュー

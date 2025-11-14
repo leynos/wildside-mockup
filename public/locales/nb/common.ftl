@@ -61,6 +61,9 @@ interest-street-art-label = Gatekunst
 interest-historic-label = Historiske steder
 interest-waterfront-label = Vannkanten
 interest-markets-label = Markeder
+difficulty-easy-label = Lett
+difficulty-moderate-label = Middels
+difficulty-challenging-label = Utfordrende
 poi-highlight-label = Høydepunkt
 
 quick-walk-map-aria-label = Kartvisning for hurtiggåtur

@@ -61,6 +61,9 @@ interest-street-art-label = Street art
 interest-historic-label = Historische plekken
 interest-waterfront-label = Waterfront
 interest-markets-label = Markten
+difficulty-easy-label = Makkelijk
+difficulty-moderate-label = Gemiddeld
+difficulty-challenging-label = Uitdagend
 poi-highlight-label = Blikvanger
 
 quick-walk-map-aria-label = Kaartweergave voor snelle wandeling

@@ -61,6 +61,9 @@ interest-street-art-label = Стрит-арт
 interest-historic-label = Исторические места
 interest-waterfront-label = Набережная
 interest-markets-label = Рынки
+difficulty-easy-label = Лёгкий
+difficulty-moderate-label = Средний
+difficulty-challenging-label = Сложный
 poi-highlight-label = Особое место
 
 quick-walk-map-aria-label = Область карты быстрого маршрута

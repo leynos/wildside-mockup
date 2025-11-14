@@ -61,6 +61,9 @@ interest-street-art-label = Street art
 interest-historic-label = Siti storici
 interest-waterfront-label = Lungomare
 interest-markets-label = Mercati
+difficulty-easy-label = Facile
+difficulty-moderate-label = Moderata
+difficulty-challenging-label = Impegnativa
 poi-highlight-label = In evidenza
 
 quick-walk-map-aria-label = Vista mappa della passeggiata rapida

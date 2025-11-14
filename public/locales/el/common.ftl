@@ -61,6 +61,9 @@ interest-street-art-label = Τέχνη δρόμου
 interest-historic-label = Ιστορικοί χώροι
 interest-waterfront-label = Παραθαλάσσια ζώνη
 interest-markets-label = Αγορές
+difficulty-easy-label = Εύκολη
+difficulty-moderate-label = Μέτρια
+difficulty-challenging-label = Προκλητική
 poi-highlight-label = Κορυφαίο σημείο
 
 quick-walk-map-aria-label = Περιοχή χάρτη για τη γρήγορη διαδρομή

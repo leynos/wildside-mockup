@@ -61,6 +61,9 @@ interest-street-art-label = Sztuka uliczna
 interest-historic-label = Miejsca historyczne
 interest-waterfront-label = Nadbrzeże
 interest-markets-label = Bazary
+difficulty-easy-label = Łatwa
+difficulty-moderate-label = Średnia
+difficulty-challenging-label = Wymagająca
 poi-highlight-label = Atrakcja
 
 quick-walk-map-aria-label = Widok mapy szybkiego spaceru

@@ -61,6 +61,9 @@ interest-street-art-label = Art urbain
 interest-historic-label = Sites historiques
 interest-waterfront-label = Bord de l'eau
 interest-markets-label = Marchés
+difficulty-easy-label = Facile
+difficulty-moderate-label = Modérée
+difficulty-challenging-label = Exigeante
 poi-highlight-label = Immanquable
 
 quick-walk-map-aria-label = Vue de la carte de balade express

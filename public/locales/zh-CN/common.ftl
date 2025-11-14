@@ -61,6 +61,9 @@ interest-street-art-label = 街头艺术
 interest-historic-label = 历史景点
 interest-waterfront-label = 滨水区
 interest-markets-label = 市集
+difficulty-easy-label = 轻松
+difficulty-moderate-label = 适中
+difficulty-challenging-label = 挑战
 poi-highlight-label = 亮点
 
 quick-walk-map-aria-label = 快速步行地图视图

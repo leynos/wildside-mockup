@@ -61,6 +61,9 @@ interest-street-art-label = Sokak sanatı
 interest-historic-label = Tarihi mekânlar
 interest-waterfront-label = Sahil şeridi
 interest-markets-label = Pazarlar
+difficulty-easy-label = Kolay
+difficulty-moderate-label = Orta
+difficulty-challenging-label = Zorlu
 poi-highlight-label = Öne çıkan
 
 quick-walk-map-aria-label = Hızlı yürüyüş harita görünümü

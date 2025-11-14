@@ -61,6 +61,9 @@ interest-street-art-label = Nghệ thuật đường phố
 interest-historic-label = Địa điểm lịch sử
 interest-waterfront-label = Bờ sông biển
 interest-markets-label = Chợ
+difficulty-easy-label = Dễ
+difficulty-moderate-label = Trung bình
+difficulty-challenging-label = Thử thách
 poi-highlight-label = Nổi bật
 
 quick-walk-map-aria-label = Khung nhìn bản đồ đi bộ nhanh

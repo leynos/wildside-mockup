@@ -61,6 +61,9 @@ interest-street-art-label = ศิลปะสตรีท
 interest-historic-label = สถานที่ประวัติศาสตร์
 interest-waterfront-label = ริมน้ำ
 interest-markets-label = ตลาด
+difficulty-easy-label = ง่าย
+difficulty-moderate-label = ปานกลาง
+difficulty-challenging-label = ท้าทาย
 poi-highlight-label = จุดเด่น
 
 quick-walk-map-aria-label = มุมมองแผนที่เดินเร็ว

@@ -61,6 +61,9 @@ interest-street-art-label = Street art
 interest-historic-label = Historiska platser
 interest-waterfront-label = Vattenfront
 interest-markets-label = Marknader
+difficulty-easy-label = Lätt
+difficulty-moderate-label = Medel
+difficulty-challenging-label = Utmanande
 poi-highlight-label = Höjdpunkt
 
 quick-walk-map-aria-label = Snabbvandringskartans vy

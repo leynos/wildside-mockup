@@ -38,7 +38,7 @@ export interface CuratedCollection {
   mapImageUrl: string;
   distanceRange: string;
   durationRange: string;
-  difficulty: "Easy" | "Moderate" | "Challenging";
+  difficultyId: DifficultyId;
   routes: number;
 }
 
@@ -71,6 +71,7 @@ import heroMarket from "../../assets/explore/market.jpg";
 import heroStreetArt from "../../assets/explore/street_art2.jpg";
 import walkRouteMap2 from "../../assets/walks/walk-route-map-2.png";
 import walkRouteMap3 from "../../assets/walks/walk-route-map-3.png";
+import type { DifficultyId } from "./registries/difficulties";
 
 export const exploreCategories: ExploreCategory[] = [
   {
@@ -163,7 +164,7 @@ export const curatedCollections: CuratedCollection[] = [
     mapImageUrl: walkRouteMap2,
     distanceRange: "1–2 km",
     durationRange: "30–45 min",
-    difficulty: "Easy",
+    difficultyId: "easy",
     routes: 6,
   },
   {
@@ -174,7 +175,7 @@ export const curatedCollections: CuratedCollection[] = [
     mapImageUrl: walkRouteMap3,
     distanceRange: "2–4 km",
     durationRange: "45–70 min",
-    difficulty: "Moderate",
+    difficultyId: "moderate",
     routes: 4,
   },
 ];

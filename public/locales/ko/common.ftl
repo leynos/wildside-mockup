@@ -61,6 +61,9 @@ interest-street-art-label = 스트리트 아트
 interest-historic-label = 역사 명소
 interest-waterfront-label = 워터프런트
 interest-markets-label = 시장
+difficulty-easy-label = 쉬움
+difficulty-moderate-label = 보통
+difficulty-challenging-label = 도전적
 poi-highlight-label = 하이라이트
 
 quick-walk-map-aria-label = 빠른 걷기 지도 뷰포트

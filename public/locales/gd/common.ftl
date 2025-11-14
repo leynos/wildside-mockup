@@ -61,6 +61,9 @@ interest-street-art-label = Ealain sràide
 interest-historic-label = Làraichean eachdraidheil
 interest-waterfront-label = Oirthir-uisge
 interest-markets-label = Margaidhean
+difficulty-easy-label = Furasta
+difficulty-moderate-label = Meadhanach
+difficulty-challenging-label = Dùbhlanach
 poi-highlight-label = Prìomh rud
 
 quick-walk-map-aria-label = Sealladh mapa na cuairte luath
