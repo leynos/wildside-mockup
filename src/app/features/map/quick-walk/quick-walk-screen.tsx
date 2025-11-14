@@ -3,7 +3,8 @@
 import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useLocation, useNavigate } from "@tanstack/react-router";
-import { type JSX, useEffect, useMemo, useState } from "react";
+import { type JSX, useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
@@ -15,10 +16,6 @@ import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
-
-function formatDuration(value: number) {
-  return `${value} min`;
-}
 
 type TabKey = "map" | "stops" | "notes";
 
@@ -47,16 +44,84 @@ export function QuickWalkScreen(): JSX.Element {
     return getHashTab(window.location.hash) ?? "map";
   });
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const formatDuration = useCallback(
+    (value: number) =>
+      t("quick-walk-duration-format", { minutes: value, defaultValue: `${value} min` }),
+    [t],
+  );
+
+  const mapViewportAria = t("quick-walk-map-aria-label", {
+    defaultValue: "Quick walk map viewport",
+  });
+  const dismissPanelLabel = t("quick-walk-dismiss-aria", { defaultValue: "Dismiss panel" });
+  const headerTitle = t("quick-walk-header-title", { defaultValue: "Quick Walk Generator" });
+  const headerDescription = t("quick-walk-header-description", {
+    defaultValue: "Dial in duration and interests to refresh suggestions.",
+  });
+  const generateWalkLabel = t("quick-walk-generate-aria", {
+    defaultValue: "Generate a new walk",
+  });
+  const durationLabel = t("quick-walk-duration-label", { defaultValue: "Duration" });
+  const durationAria = t("quick-walk-duration-aria", { defaultValue: "Walk duration" });
+  const durationMarkers = useMemo(
+    () => [
+      t("quick-walk-duration-marker-start", {
+        minutes: quickWalkConfig.durationRange.min,
+        defaultValue: `${quickWalkConfig.durationRange.min}m`,
+      }),
+      t("quick-walk-duration-marker-mid", {
+        minutes: 90,
+        defaultValue: "90m",
+      }),
+      t("quick-walk-duration-marker-end", {
+        minutes: quickWalkConfig.durationRange.max,
+        defaultValue: `${quickWalkConfig.durationRange.max}m`,
+      }),
+    ],
+    [t],
+  );
+  const interestsHeading = t("quick-walk-interests-heading", { defaultValue: "Interests" });
+  const interestsAria = t("quick-walk-interests-aria", {
+    defaultValue: "Select quick walk interests",
+  });
+  const selectedLabel = t("quick-walk-interests-selected", {
+    count: selectedInterests.length,
+    defaultValue:
+      selectedInterests.length === 1 ? "1 selected" : `${selectedInterests.length} selected`,
+  });
+  const stopsHeading = t("quick-walk-stops-heading", { defaultValue: "Quick walk stops" });
+  const notesHeading = t("quick-walk-notes-heading", { defaultValue: "Planning notes" });
+  const notesItems = useMemo(
+    () => [
+      t("quick-walk-notes-item-1", {
+        defaultValue: "Sync the plan with your calendar to block out discovery time.",
+      }),
+      t("quick-walk-notes-item-2", {
+        defaultValue:
+          "Pack a reusable bottle – refill points are highlighted along the waterfront.",
+      }),
+      t("quick-walk-notes-item-3", {
+        defaultValue: "Invite friends and keep pace options flexible for an inclusive stroll.",
+      }),
+    ],
+    [t],
+  );
+  const tabLabels = useMemo(
+    () => ({
+      map: t("quick-walk-tab-map", { defaultValue: "Explore" }),
+      stops: t("quick-walk-tab-stops", { defaultValue: "Stops" }),
+      notes: t("quick-walk-tab-notes", { defaultValue: "Notes" }),
+    }),
+    [t],
+  );
+  const saveWalkLabel = t("quick-walk-save-aria", { defaultValue: "Save quick walk" });
 
   const handleDismissPanels = () => {
     setActiveTab("map");
     navigate({ to: "." });
   };
-
-  const selectedLabel = useMemo(
-    () => `${selectedInterests.length} selected`,
-    [selectedInterests.length],
-  );
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -95,7 +160,7 @@ export function QuickWalkScreen(): JSX.Element {
               map={<WildsideMap />}
               gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
               containerTestId="quick-walk-map-container"
-              ariaLabel="Quick walk map viewport"
+              ariaLabel={mapViewportAria}
             >
               <MapViewportTab value="map" forceMount>
                 <div className="pointer-events-none px-6 pb-6">
@@ -104,21 +169,17 @@ export function QuickWalkScreen(): JSX.Element {
                       type="button"
                       onClick={handleDismissPanels}
                       className={panelHandleClass}
-                      aria-label="Dismiss panel"
+                      aria-label={dismissPanelLabel}
                     />
                     <header className="mb-6 flex items-center justify-between">
                       <div>
-                        <h1 className="text-xl font-semibold text-base-content">
-                          Quick Walk Generator
-                        </h1>
-                        <p className="text-sm text-base-content/70">
-                          Dial in duration and interests to refresh suggestions.
-                        </p>
+                        <h1 className="text-xl font-semibold text-base-content">{headerTitle}</h1>
+                        <p className="text-sm text-base-content/70">{headerDescription}</p>
                       </div>
                       <button
                         type="button"
                         className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-base-900 shadow-lg shadow-accent/40 transition hover:scale-105"
-                        aria-label="Generate a new walk"
+                        aria-label={generateWalkLabel}
                         onClick={() => navigate({ to: "/wizard/step-1" })}
                       >
                         <Icon token="{icon.object.magic}" aria-hidden className="h-6 w-6" />
@@ -127,19 +188,15 @@ export function QuickWalkScreen(): JSX.Element {
 
                     <SliderControl
                       id="quick-walk-duration"
-                      label="Duration"
+                      label={durationLabel}
                       iconToken="{icon.object.duration}"
                       value={duration}
                       min={quickWalkConfig.durationRange.min}
                       max={quickWalkConfig.durationRange.max}
                       step={quickWalkConfig.durationRange.step}
                       valueFormatter={formatDuration}
-                      markers={[
-                        `${quickWalkConfig.durationRange.min}m`,
-                        "90m",
-                        `${quickWalkConfig.durationRange.max}m`,
-                      ]}
-                      ariaLabel="Walk duration"
+                      markers={durationMarkers}
+                      ariaLabel={durationAria}
                       onValueChange={setDuration}
                       className="mb-6"
                     />
@@ -148,7 +205,7 @@ export function QuickWalkScreen(): JSX.Element {
                       <div className="section-header-row">
                         <h2 className="section-heading text-base-content">
                           <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
-                          Interests
+                          {interestsHeading}
                         </h2>
                         <span className="text-xs font-medium text-base-content/60">
                           {selectedLabel}
@@ -158,7 +215,7 @@ export function QuickWalkScreen(): JSX.Element {
                         interestIds={quickWalkConfig.interestIds}
                         selected={selectedInterests}
                         onChange={setSelectedInterests}
-                        ariaLabel="Select quick walk interests"
+                        ariaLabel={interestsAria}
                       />
                     </section>
                   </div>
@@ -173,14 +230,14 @@ export function QuickWalkScreen(): JSX.Element {
                     aria-labelledby="quick-walk-stops-heading"
                   >
                     <h2 id="quick-walk-stops-heading" className="sr-only">
-                      Quick walk stops
+                      {stopsHeading}
                     </h2>
                     <div className="map-panel__handle bg-transparent">
                       <button
                         type="button"
                         onClick={handleDismissPanels}
                         className={panelHandleClass}
-                        aria-label="Dismiss panel"
+                        aria-label={dismissPanelLabel}
                       />
                     </div>
                     <div className="flex-1 overflow-y-auto px-4 pb-5">
@@ -206,22 +263,18 @@ export function QuickWalkScreen(): JSX.Element {
                       type="button"
                       onClick={handleDismissPanels}
                       className={panelHandleClass}
-                      aria-label="Dismiss panel"
+                      aria-label={dismissPanelLabel}
                     />
                     <h2
                       id="quick-walk-notes-heading"
                       className="text-base font-semibold text-base-content"
                     >
-                      Planning notes
+                      {notesHeading}
                     </h2>
                     <ul className="mt-3 list-disc space-y-2 pl-5 text-base-content/80">
-                      <li>Sync the plan with your calendar to block out discovery time.</li>
-                      <li>
-                        Pack a reusable bottle – refill points are highlighted along the waterfront.
-                      </li>
-                      <li>
-                        Invite friends and keep pace options flexible for an inclusive stroll.
-                      </li>
+                      {notesItems.map((note) => (
+                        <li key={note}>{note}</li>
+                      ))}
                     </ul>
                   </section>
                 </div>
@@ -231,13 +284,13 @@ export function QuickWalkScreen(): JSX.Element {
 
           <Tabs.List className="map-panel__tablist">
             <Tabs.Trigger value="map" className={tabTriggerClass}>
-              Explore
+              {tabLabels.map}
             </Tabs.Trigger>
             <Tabs.Trigger value="stops" className={tabTriggerClass}>
-              Stops
+              {tabLabels.stops}
             </Tabs.Trigger>
             <Tabs.Trigger value="notes" className={tabTriggerClass}>
-              Notes
+              {tabLabels.notes}
             </Tabs.Trigger>
           </Tabs.List>
         </Tabs.Root>
@@ -246,7 +299,7 @@ export function QuickWalkScreen(): JSX.Element {
           <button
             type="button"
             className="pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-base-900 shadow-xl shadow-accent/40 transition hover:scale-105"
-            aria-label="Save quick walk"
+            aria-label={saveWalkLabel}
             onClick={() => navigate({ to: "/saved" })}
           >
             <Icon token="{icon.action.save}" aria-hidden />
