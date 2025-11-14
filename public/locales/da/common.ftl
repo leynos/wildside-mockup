@@ -62,33 +62,33 @@ interest-historic-label = Historiske steder
 interest-waterfront-label = Havnefront
 interest-markets-label = Markeder
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
+quick-walk-map-aria-label = Visning af kortet til hurtig gåtur
+quick-walk-dismiss-aria = Luk panel
+quick-walk-header-title = Generator til hurtige gåture
+quick-walk-header-description = Juster varighed og interesser for at få nye forslag.
+quick-walk-generate-aria = Opret en ny tur
+quick-walk-duration-label = Varighed
 quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-duration-aria = Varighed for gåturen
+quick-walk-duration-marker-start = {$minutes} min
+quick-walk-duration-marker-mid = {$minutes} min
+quick-walk-duration-marker-end = {$minutes} min
+quick-walk-interests-heading = Interesser
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} valgt
+       *[other] {$count} valgte
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Vælg interesser til den hurtige gåtur
+quick-walk-stops-heading = Stop på den hurtige gåtur
+quick-walk-notes-heading = Planlægningsnoter
+quick-walk-notes-item-1 = Synkroniser planen med din kalender for at afsætte tid til opdagelse.
+quick-walk-notes-item-2 = Pak en genopfyldelig flaske – påfyldningssteder er markeret langs havnefronten.
+quick-walk-notes-item-3 = Invitér venner, og hold tempoet fleksibelt for en inkluderende tur.
+quick-walk-tab-map = Udforsk
+quick-walk-tab-stops = Stop
+quick-walk-tab-notes = Noter
+quick-walk-save-aria = Gem hurtig gåtur
 
 
 

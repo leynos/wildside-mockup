@@ -62,33 +62,36 @@ interest-historic-label = Làraichean eachdraidheil
 interest-waterfront-label = Oirthir-uisge
 interest-markets-label = Margaidhean
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = Sealladh mapa na cuairte luath
+quick-walk-dismiss-aria = Dùin am pannal
+quick-walk-header-title = Gineadair cuairte luaithe
+quick-walk-header-description = Cuir air dòigh an ùine agus na h-ùidhean gus molaidhean ùrachadh.
+quick-walk-generate-aria = Cruthaich cuairt ùr
+quick-walk-duration-label = Ùine
+quick-walk-duration-format = {$minutes} mion
+quick-walk-duration-aria = Ùine na cuairte-coise
+quick-walk-duration-marker-start = {$minutes} mion
+quick-walk-duration-marker-mid = {$minutes} mion
+quick-walk-duration-marker-end = {$minutes} mion
+quick-walk-interests-heading = Ùidhean
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} air a thaghadh
+        [two] {$count} air an taghadh
+        [few] {$count} air an taghadh
+        [many] {$count} air an taghadh
+       *[other] {$count} air an taghadh
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Tagh ùidhean airson a’ chuairt luath
+quick-walk-stops-heading = Stadan na cuairte luaithe
+quick-walk-notes-heading = Nòtaichean planaidh
+quick-walk-notes-item-1 = Sioncronaich am plana ris a’ mhìosachan agad gus àm lorg a ghlèidheadh.
+quick-walk-notes-item-2 = Pacaidh botal ath-lìonaidh – tha na puingean lìonadh air an oirthir air an soilleireachadh.
+quick-walk-notes-item-3 = Thoir cuireadh do charaidean agus cùm an ruitheam sùbailte airson cuairt in-ghabhalach.
+quick-walk-tab-map = Rannsaich
+quick-walk-tab-stops = Stadan
+quick-walk-tab-notes = Nòtaichean
+quick-walk-save-aria = Sàbhail a’ chuairt luath
 
 
 

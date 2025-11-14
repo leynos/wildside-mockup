@@ -62,33 +62,33 @@ interest-historic-label = Tarihi mekânlar
 interest-waterfront-label = Sahil şeridi
 interest-markets-label = Pazarlar
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = Hızlı yürüyüş harita görünümü
+quick-walk-dismiss-aria = Paneli kapat
+quick-walk-header-title = Hızlı yürüyüş oluşturucu
+quick-walk-header-description = Önerileri yenilemek için süre ve ilgi alanlarını ayarla.
+quick-walk-generate-aria = Yeni bir yürüyüş oluştur
+quick-walk-duration-label = Süre
+quick-walk-duration-format = {$minutes} dk
+quick-walk-duration-aria = Yürüyüş süresi
+quick-walk-duration-marker-start = {$minutes} dk
+quick-walk-duration-marker-mid = {$minutes} dk
+quick-walk-duration-marker-end = {$minutes} dk
+quick-walk-interests-heading = İlgi alanları
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} seçim
+       *[other] {$count} seçim
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Hızlı yürüyüş için ilgi alanlarını seç
+quick-walk-stops-heading = Hızlı yürüyüş durakları
+quick-walk-notes-heading = Planlama notları
+quick-walk-notes-item-1 = Keşif zamanı ayırmak için planı takviminle senkronize et.
+quick-walk-notes-item-2 = Doldurulabilir bir matarayı yanına al – sahil boyunca dolum noktaları vurgulanır.
+quick-walk-notes-item-3 = Arkadaşlarını davet et ve kapsayıcı bir yürüyüş için tempoyu esnek tut.
+quick-walk-tab-map = Keşfet
+quick-walk-tab-stops = Duraklar
+quick-walk-tab-notes = Notlar
+quick-walk-save-aria = Hızlı yürüyüşü kaydet
 
 
 

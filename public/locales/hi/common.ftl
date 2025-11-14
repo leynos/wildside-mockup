@@ -62,33 +62,33 @@ interest-historic-label = ऐतिहासिक स्थल
 interest-waterfront-label = वाटरफ्रंट
 interest-markets-label = बाज़ार
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = क्विक वॉक नक्शे का दृश्य
+quick-walk-dismiss-aria = पैनल बंद करें
+quick-walk-header-title = क्विक वॉक जनरेटर
+quick-walk-header-description = सुझावों को ताज़ा करने के लिए अवधि और रुचियाँ समायोजित करें।
+quick-walk-generate-aria = नई सैर बनाएँ
+quick-walk-duration-label = अवधि
+quick-walk-duration-format = {$minutes} मिनट
+quick-walk-duration-aria = वॉक की अवधि
+quick-walk-duration-marker-start = {$minutes} मि
+quick-walk-duration-marker-mid = {$minutes} मि
+quick-walk-duration-marker-end = {$minutes} मि
+quick-walk-interests-heading = रुचियाँ
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} चयनित
+       *[other] {$count} चयनित
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = क्विक वॉक के लिए रुचियाँ चुनें
+quick-walk-stops-heading = क्विक वॉक स्टॉप
+quick-walk-notes-heading = योजना नोट्स
+quick-walk-notes-item-1 = खोज का समय निकालने के लिए योजना को अपने कैलेंडर से सिंक करें।
+quick-walk-notes-item-2 = दोबारा भरने वाली बोतल साथ लें – जलकिनारे पर भरने के बिंदु हाइलाइट किए गए हैं।
+quick-walk-notes-item-3 = दोस्तों को आमंत्रित करें और सभी के लिए लचीली चाल बनाए रखें।
+quick-walk-tab-map = खोजें
+quick-walk-tab-stops = स्टॉप
+quick-walk-tab-notes = नोट्स
+quick-walk-save-aria = क्विक वॉक सहेजें
 
 
 

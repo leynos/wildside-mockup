@@ -62,33 +62,33 @@ interest-historic-label = Historialliset kohteet
 interest-waterfront-label = Rantaviiva
 interest-markets-label = Markkinat
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
+quick-walk-map-aria-label = Pikakävelykartan näkymä
+quick-walk-dismiss-aria = Sulje paneeli
+quick-walk-header-title = Pikakävelyn generaattori
+quick-walk-header-description = Säädä kestoa ja kiinnostuksia päivittääksesi suositukset.
+quick-walk-generate-aria = Luo uusi kävely
+quick-walk-duration-label = Kesto
 quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-duration-aria = Kävelyn kesto
+quick-walk-duration-marker-start = {$minutes} min
+quick-walk-duration-marker-mid = {$minutes} min
+quick-walk-duration-marker-end = {$minutes} min
+quick-walk-interests-heading = Kiinnostukset
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} valittu
+       *[other] {$count} valittua
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Valitse pikakävelyn kiinnostukset
+quick-walk-stops-heading = Pikakävelyn pysähdykset
+quick-walk-notes-heading = Suunnittelumuistiinpanot
+quick-walk-notes-item-1 = Synkronoi suunnitelma kalenterisi kanssa, jotta varaat aikaa löytöretkelle.
+quick-walk-notes-item-2 = Pakkaa uudelleentäytettävä pullo – täyttöpisteet on merkitty rannan varrella.
+quick-walk-notes-item-3 = Kutsu ystäviä ja pidä tahtia joustavana, jotta kävely sopii kaikille.
+quick-walk-tab-map = Tutki
+quick-walk-tab-stops = Pysähdykset
+quick-walk-tab-notes = Muistiinpanot
+quick-walk-save-aria = Tallenna pikakävely
 
 
 

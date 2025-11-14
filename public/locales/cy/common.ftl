@@ -62,33 +62,33 @@ interest-historic-label = Safleoedd hanesyddol
 interest-waterfront-label = Arfordir
 interest-markets-label = Marchnadoedd
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = Golygfa map cerdded cyflym
+quick-walk-dismiss-aria = Cau’r panel
+quick-walk-header-title = Cynhyrchydd taith gyflym
+quick-walk-header-description = Addaswch yr hyd a’r diddordebau i adnewyddu’r awgrymiadau.
+quick-walk-generate-aria = Creu taith newydd
+quick-walk-duration-label = Hyd
+quick-walk-duration-format = {$minutes} mun
+quick-walk-duration-aria = Hyd y daith gerdded
+quick-walk-duration-marker-start = {$minutes} mun
+quick-walk-duration-marker-mid = {$minutes} mun
+quick-walk-duration-marker-end = {$minutes} mun
+quick-walk-interests-heading = Diddordebau
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} wedi’i ddewis
+       *[other] {$count} wedi’u dewis
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Dewiswch ddiddordebau ar gyfer y daith gyflym
+quick-walk-stops-heading = Safleoedd y daith gyflym
+quick-walk-notes-heading = Nodiadau cynllunio
+quick-walk-notes-item-1 = Cydamserwch y cynllun â’ch calendr i gadw amser darganfod.
+quick-walk-notes-item-2 = Pecynnwch botel ailddefnyddiadwy; mae mannau ail-lenwi wedi’u hamlygu ar hyd y lan.
+quick-walk-notes-item-3 = Gwahoddwch ffrindiau a chadwch y cyflymder yn hyblyg ar gyfer taith gynhwysol.
+quick-walk-tab-map = Archwilio
+quick-walk-tab-stops = Safleoedd
+quick-walk-tab-notes = Nodiadau
+quick-walk-save-aria = Cadw’r daith gyflym
 
 
 

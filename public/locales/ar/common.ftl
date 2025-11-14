@@ -62,33 +62,37 @@ interest-historic-label = مواقع تاريخية
 interest-waterfront-label = الواجهة البحرية
 interest-markets-label = الأسواق
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = منطقة عرض خريطة السير السريع
+quick-walk-dismiss-aria = إغلاق اللوحة
+quick-walk-header-title = مولِّد السير السريع
+quick-walk-header-description = اضبط المدة والاهتمامات لتحديث التوصيات.
+quick-walk-generate-aria = إنشاء جولة جديدة
+quick-walk-duration-label = المدة
+quick-walk-duration-format = {$minutes} د
+quick-walk-duration-aria = مدة الجولة
+quick-walk-duration-marker-start = {$minutes} د
+quick-walk-duration-marker-mid = {$minutes} د
+quick-walk-duration-marker-end = {$minutes} د
+quick-walk-interests-heading = الاهتمامات
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [zero] لم يتم اختيار أي اهتمام
+        [one] تم اختيار اهتمام واحد
+        [two] تم اختيار اهتمامين
+        [few] تم اختيار {$count} اهتمامات
+        [many] تم اختيار {$count} اهتماماً
+       *[other] تم اختيار {$count} اهتماماً
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = اختر اهتمامات السير السريع
+quick-walk-stops-heading = محطات السير السريع
+quick-walk-notes-heading = ملاحظات التخطيط
+quick-walk-notes-item-1 = زامن الخطة مع التقويم لتحجز وقت الاستكشاف.
+quick-walk-notes-item-2 = احمل زجاجة قابلة لإعادة الاستخدام؛ تم إبراز نقاط التعبئة على الواجهة البحرية.
+quick-walk-notes-item-3 = ادعُ الأصدقاء وابقَ على وتيرة مرنة لمسيرة شاملة.
+quick-walk-tab-map = استكشاف
+quick-walk-tab-stops = محطات
+quick-walk-tab-notes = ملاحظات
+quick-walk-save-aria = احفظ السير السريع
 
 
 

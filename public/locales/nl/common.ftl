@@ -62,33 +62,33 @@ interest-historic-label = Historische plekken
 interest-waterfront-label = Waterfront
 interest-markets-label = Markten
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
+quick-walk-map-aria-label = Kaartweergave voor snelle wandeling
+quick-walk-dismiss-aria = Paneel sluiten
+quick-walk-header-title = Generator voor snelle wandelingen
+quick-walk-header-description = Stel duur en interesses af om de suggesties te vernieuwen.
+quick-walk-generate-aria = Nieuwe wandeling maken
+quick-walk-duration-label = Duur
 quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-duration-aria = Duur van de wandeling
+quick-walk-duration-marker-start = {$minutes} min
+quick-walk-duration-marker-mid = {$minutes} min
+quick-walk-duration-marker-end = {$minutes} min
+quick-walk-interests-heading = Interesses
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} geselecteerd
+       *[other] {$count} geselecteerd
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Kies interesses voor de snelle wandeling
+quick-walk-stops-heading = Haltes van de snelle wandeling
+quick-walk-notes-heading = Plannotities
+quick-walk-notes-item-1 = Synchroniseer het plan met je agenda om tijd voor ontdekking vrij te maken.
+quick-walk-notes-item-2 = Neem een herbruikbare fles mee – vulpunten langs de kade zijn gemarkeerd.
+quick-walk-notes-item-3 = Nodig vrienden uit en houd het tempo flexibel voor een inclusieve wandeling.
+quick-walk-tab-map = Verkennen
+quick-walk-tab-stops = Haltes
+quick-walk-tab-notes = Notities
+quick-walk-save-aria = Snelle wandeling opslaan
 
 
 

@@ -62,33 +62,34 @@ interest-historic-label = אתרים היסטוריים
 interest-waterfront-label = טיילת חוף
 interest-markets-label = שווקים
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = אזור מפה למסלול המהיר
+quick-walk-dismiss-aria = סגירת הלוח
+quick-walk-header-title = מחולל מסלול מהיר
+quick-walk-header-description = כיילו משך ותחומי עניין כדי לרענן את ההמלצות.
+quick-walk-generate-aria = יצירת מסלול חדש
+quick-walk-duration-label = משך
+quick-walk-duration-format = {$minutes} דק׳
+quick-walk-duration-aria = משך ההליכה
+quick-walk-duration-marker-start = {$minutes} דק׳
+quick-walk-duration-marker-mid = {$minutes} דק׳
+quick-walk-duration-marker-end = {$minutes} דק׳
+quick-walk-interests-heading = תחומי עניין
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} בחירה
+        [two] {$count} בחירות
+       *[other] {$count} בחירות
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = בחרו תחומי עניין למסלול המהיר
+quick-walk-stops-heading = עצירות המסלול המהיר
+quick-walk-notes-heading = הערות תכנון
+quick-walk-notes-item-1 = סנכרנו את התכנית עם היומן כדי לפנות זמן לגילוי.
+quick-walk-notes-item-2 = ארזו בקבוק רב־פעמי – נקודות המילוי מסומנות לאורך קו המים.
+quick-walk-notes-item-3 = הזמינו חברים ושמרו על קצב גמיש לטיול מכליל.
+quick-walk-tab-map = לחקור
+quick-walk-tab-stops = עצירות
+quick-walk-tab-notes = הערות
+quick-walk-save-aria = שמרו מסלול מהיר
 
 
 

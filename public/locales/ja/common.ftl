@@ -62,33 +62,33 @@ interest-historic-label = 歴史スポット
 interest-waterfront-label = ウォーターフロント
 interest-markets-label = マーケット
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = クイック散歩マップビュー
+quick-walk-dismiss-aria = パネルを閉じる
+quick-walk-header-title = クイック散歩ジェネレーター
+quick-walk-header-description = 所要時間と興味を調整しておすすめを更新します。
+quick-walk-generate-aria = 新しい散歩を作成
+quick-walk-duration-label = 所要時間
+quick-walk-duration-format = {$minutes} 分
+quick-walk-duration-aria = 散歩の所要時間
+quick-walk-duration-marker-start = {$minutes} 分
+quick-walk-duration-marker-mid = {$minutes} 分
+quick-walk-duration-marker-end = {$minutes} 分
+quick-walk-interests-heading = 興味
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} 件選択
+       *[other] {$count} 件選択
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = クイック散歩の興味を選択
+quick-walk-stops-heading = クイック散歩の立ち寄り先
+quick-walk-notes-heading = 計画メモ
+quick-walk-notes-item-1 = 発見の時間を確保できるよう予定をカレンダーと同期しましょう。
+quick-walk-notes-item-2 = 再利用ボトルを持参しましょう。海沿いの給水ポイントがハイライトされています。
+quick-walk-notes-item-3 = 友達を誘い、誰もが楽しめるよう歩くペースを柔軟にしましょう。
+quick-walk-tab-map = 探す
+quick-walk-tab-stops = 立ち寄り
+quick-walk-tab-notes = メモ
+quick-walk-save-aria = クイック散歩を保存
 
 
 

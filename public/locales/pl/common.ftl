@@ -62,33 +62,35 @@ interest-historic-label = Miejsca historyczne
 interest-waterfront-label = Nadbrzeże
 interest-markets-label = Bazary
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
+quick-walk-map-aria-label = Widok mapy szybkiego spaceru
+quick-walk-dismiss-aria = Zamknij panel
+quick-walk-header-title = Generator szybkiego spaceru
+quick-walk-header-description = Dostosuj czas trwania i zainteresowania, aby odświeżyć propozycje.
+quick-walk-generate-aria = Utwórz nowy spacer
+quick-walk-duration-label = Czas trwania
 quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-duration-aria = Czas trwania spaceru
+quick-walk-duration-marker-start = {$minutes} min
+quick-walk-duration-marker-mid = {$minutes} min
+quick-walk-duration-marker-end = {$minutes} min
+quick-walk-interests-heading = Zainteresowania
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} wybrany
+        [few] {$count} wybrane
+        [many] {$count} wybranych
+       *[other] {$count} wybranych
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Wybierz zainteresowania dla szybkiego spaceru
+quick-walk-stops-heading = Przystanki szybkiego spaceru
+quick-walk-notes-heading = Notatki planistyczne
+quick-walk-notes-item-1 = Zsynchronizuj plan z kalendarzem, by zarezerwować czas na odkrywanie.
+quick-walk-notes-item-2 = Zabierz butelkę wielokrotnego użytku – punkty uzupełnień są oznaczone wzdłuż nabrzeża.
+quick-walk-notes-item-3 = Zaproś znajomych i utrzymuj elastyczne tempo, by spacer był inkluzywny.
+quick-walk-tab-map = Odkrywaj
+quick-walk-tab-stops = Przystanki
+quick-walk-tab-notes = Notatki
+quick-walk-save-aria = Zapisz szybki spacer
 
 
 

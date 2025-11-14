@@ -62,33 +62,33 @@ interest-historic-label = สถานที่ประวัติศาสต
 interest-waterfront-label = ริมน้ำ
 interest-markets-label = ตลาด
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = มุมมองแผนที่เดินเร็ว
+quick-walk-dismiss-aria = ปิดแผง
+quick-walk-header-title = ตัวสร้างเส้นทางเดินเร็ว
+quick-walk-header-description = ปรับระยะเวลาและความสนใจเพื่ออัปเดตคำแนะนำ
+quick-walk-generate-aria = สร้างเส้นทางใหม่
+quick-walk-duration-label = ระยะเวลา
+quick-walk-duration-format = {$minutes} นาที
+quick-walk-duration-aria = ระยะเวลาในการเดิน
+quick-walk-duration-marker-start = {$minutes} นาที
+quick-walk-duration-marker-mid = {$minutes} นาที
+quick-walk-duration-marker-end = {$minutes} นาที
+quick-walk-interests-heading = ความสนใจ
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} รายการที่เลือก
+       *[other] {$count} รายการที่เลือก
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = เลือกความสนใจสำหรับการเดินเร็ว
+quick-walk-stops-heading = จุดแวะระหว่างการเดินเร็ว
+quick-walk-notes-heading = บันทึกการวางแผน
+quick-walk-notes-item-1 = ซิงก์แผนกับปฏิทินเพื่อกันเวลาไว้สำหรับการค้นพบ
+quick-walk-notes-item-2 = พกขวดน้ำรีฟิลได้ – ไฮไลต์จุดเติมไว้ตามแนวริมน้ำ
+quick-walk-notes-item-3 = ชวนเพื่อนและรักษาจังหวะให้ยืดหยุ่นเพื่อการเดินที่ครอบคลุมทุกคน
+quick-walk-tab-map = สำรวจ
+quick-walk-tab-stops = จุดแวะ
+quick-walk-tab-notes = บันทึก
+quick-walk-save-aria = บันทึกการเดินเร็ว
 
 
 

@@ -62,33 +62,35 @@ interest-historic-label = Исторические места
 interest-waterfront-label = Набережная
 interest-markets-label = Рынки
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = Область карты быстрого маршрута
+quick-walk-dismiss-aria = Закрыть панель
+quick-walk-header-title = Генератор быстрого маршрута
+quick-walk-header-description = Подберите длительность и интересы, чтобы обновить рекомендации.
+quick-walk-generate-aria = Создать новый маршрут
+quick-walk-duration-label = Длительность
+quick-walk-duration-format = {$minutes} мин
+quick-walk-duration-aria = Длительность прогулки
+quick-walk-duration-marker-start = {$minutes} мин
+quick-walk-duration-marker-mid = {$minutes} мин
+quick-walk-duration-marker-end = {$minutes} мин
+quick-walk-interests-heading = Интересы
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} выбран
+        [few] {$count} выбраны
+        [many] {$count} выбрано
+       *[other] {$count} выбрано
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = Выберите интересы для быстрого маршрута
+quick-walk-stops-heading = Остановки быстрого маршрута
+quick-walk-notes-heading = Заметки по планированию
+quick-walk-notes-item-1 = Синхронизируйте план с календарём, чтобы выделить время на открытия.
+quick-walk-notes-item-2 = Возьмите многоразовую бутылку – точки пополнения выделены вдоль набережной.
+quick-walk-notes-item-3 = Пригласите друзей и держите темп гибким для инклюзивной прогулки.
+quick-walk-tab-map = Исследовать
+quick-walk-tab-stops = Остановки
+quick-walk-tab-notes = Заметки
+quick-walk-save-aria = Сохранить быстрый маршрут
 
 
 

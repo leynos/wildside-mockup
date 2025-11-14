@@ -334,6 +334,31 @@ describe("Stage 2 routed flows", () => {
     expect(within(notesList).getAllByRole("listitem").length).toBeGreaterThanOrEqual(3);
   });
 
+  it("localises quick walk copy for alternate locales", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/map/quick"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      expect(
+        view.getByRole("heading", { level: 1, name: /generador de caminatas rápidas/i }),
+      ).toBeTruthy();
+      expect(view.getByRole("heading", { level: 2, name: /intereses/i })).toBeTruthy();
+      expect(view.getByRole("region", { name: /paradas de la caminata rápida/i })).toBeTruthy();
+      expect(view.getByRole("button", { name: /guardar caminata rápida/i })).toBeTruthy();
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
+
   it("toggles itinerary favourites and opens the share dialog", async () => {
     ({ mount, root } = await renderRoute("/map/itinerary"));
     const container = requireContainer(mount);

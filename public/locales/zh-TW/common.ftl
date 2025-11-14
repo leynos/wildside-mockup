@@ -62,33 +62,33 @@ interest-historic-label = 歷史景點
 interest-waterfront-label = 濱水地帶
 interest-markets-label = 市集
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = 快速步行地圖檢視
+quick-walk-dismiss-aria = 關閉面板
+quick-walk-header-title = 快速步行產生器
+quick-walk-header-description = 調整時長與興趣以更新推薦。
+quick-walk-generate-aria = 建立新的步行路線
+quick-walk-duration-label = 時長
+quick-walk-duration-format = {$minutes} 分鐘
+quick-walk-duration-aria = 步行時長
+quick-walk-duration-marker-start = {$minutes} 分
+quick-walk-duration-marker-mid = {$minutes} 分
+quick-walk-duration-marker-end = {$minutes} 分
+quick-walk-interests-heading = 興趣
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] 已選 {$count} 項
+       *[other] 已選 {$count} 項
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = 選擇快速步行的興趣
+quick-walk-stops-heading = 快速步行停靠點
+quick-walk-notes-heading = 規劃備註
+quick-walk-notes-item-1 = 將計畫與行事曆同步，為探索保留時間。
+quick-walk-notes-item-2 = 攜帶可重複使用的水瓶——沿著水岸的補給點已標示出來。
+quick-walk-notes-item-3 = 邀請朋友同行並保持彈性步調，讓行程更具包容性。
+quick-walk-tab-map = 探索
+quick-walk-tab-stops = 停靠
+quick-walk-tab-notes = 筆記
+quick-walk-save-aria = 儲存快速步行
 
 
 

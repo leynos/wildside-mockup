@@ -62,33 +62,33 @@ interest-historic-label = 역사 명소
 interest-waterfront-label = 워터프런트
 interest-markets-label = 시장
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = 빠른 걷기 지도 뷰포트
+quick-walk-dismiss-aria = 패널 닫기
+quick-walk-header-title = 빠른 걷기 생성기
+quick-walk-header-description = 지속 시간과 관심사를 조정해 추천을 새로고침하세요.
+quick-walk-generate-aria = 새로운 걷기 만들기
+quick-walk-duration-label = 소요 시간
+quick-walk-duration-format = {$minutes}분
+quick-walk-duration-aria = 걷기 소요 시간
+quick-walk-duration-marker-start = {$minutes}분
+quick-walk-duration-marker-mid = {$minutes}분
+quick-walk-duration-marker-end = {$minutes}분
+quick-walk-interests-heading = 관심사
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count}개 선택됨
+       *[other] {$count}개 선택됨
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = 빠른 걷기 관심사를 선택하세요
+quick-walk-stops-heading = 빠른 걷기 정차 지점
+quick-walk-notes-heading = 계획 메모
+quick-walk-notes-item-1 = 탐험 시간을 확보하려면 계획을 캘린더와 동기화하세요.
+quick-walk-notes-item-2 = 재사용 물병을 챙기세요 – 해안가를 따라 급수 지점이 표시됩니다.
+quick-walk-notes-item-3 = 친구를 초대하고 모두가 함께할 수 있도록 보행 속도를 유연하게 유지하세요.
+quick-walk-tab-map = 탐색
+quick-walk-tab-stops = 정차
+quick-walk-tab-notes = 메모
+quick-walk-save-aria = 빠른 걷기 저장
 
 
 

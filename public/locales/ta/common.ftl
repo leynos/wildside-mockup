@@ -62,33 +62,33 @@ interest-historic-label = வரலாற்றுச் சின்னங்�
 interest-waterfront-label = நீர்த்தீரம்
 interest-markets-label = சந்தைகள்
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-map-aria-label = விரைவு நடை வரைபட காட்சி
+quick-walk-dismiss-aria = பலகையை மூடு
+quick-walk-header-title = விரைவு நடை உருவாக்கி
+quick-walk-header-description = பரிந்துரைகளைப் புதுப்பிக்க காலஅளவும் விருப்பங்களையும் சரிசெய்க.
+quick-walk-generate-aria = புதிய நடையை உருவாக்கு
+quick-walk-duration-label = காலஅளவு
+quick-walk-duration-format = {$minutes} நிமி
+quick-walk-duration-aria = நடை காலஅளவு
+quick-walk-duration-marker-start = {$minutes} நிமி
+quick-walk-duration-marker-mid = {$minutes} நிமி
+quick-walk-duration-marker-end = {$minutes} நிமி
+quick-walk-interests-heading = ஆர்வங்கள்
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} தேர்வு
+       *[other] {$count} தேர்வுகள்
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
-quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-interests-aria = விரைவு நடைக்கான ஆர்வங்களைத் தேர்வு செய்யவும்
+quick-walk-stops-heading = விரைவு நடை நிறுத்தங்கள்
+quick-walk-notes-heading = திட்டமிடும் குறிப்புகள்
+quick-walk-notes-item-1 = கண்டுபிடிக்கும் நேரத்தை ஒதுக்கத் திட்டத்தை உங்கள் காலெண்டருடன் ஒத்திசைக்கவும்.
+quick-walk-notes-item-2 = மீண்டும் நிரப்பக்கூடிய பாட்டிலை எடுத்துச் செல்லுங்கள் – நீர்த்தீரம் முழுவதும் நிரப்பு இடங்கள் சிறப்பிக்கப்படுகின்றன.
+quick-walk-notes-item-3 = நண்பர்களை அழைத்து, அனைவரும் இணைவதற்காக நடை வேகத்தை நெகிழ்வாக வைத்திருங்கள்.
+quick-walk-tab-map = ஆராய்க
+quick-walk-tab-stops = நிறுத்தங்கள்
+quick-walk-tab-notes = குறிப்புகள்
+quick-walk-save-aria = விரைவு நடையைச் சேமிக்கவும்
 
 
 

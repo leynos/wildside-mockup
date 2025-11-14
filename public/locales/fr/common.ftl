@@ -62,33 +62,33 @@ interest-historic-label = Sites historiques
 interest-waterfront-label = Bord de l'eau
 interest-markets-label = Marchés
 
-quick-walk-map-aria-label = Quick walk map viewport
-quick-walk-dismiss-aria = Dismiss panel
-quick-walk-header-title = Quick Walk Generator
-quick-walk-header-description = Dial in duration and interests to refresh suggestions.
-quick-walk-generate-aria = Generate a new walk
-quick-walk-duration-label = Duration
+quick-walk-map-aria-label = Vue de la carte de balade express
+quick-walk-dismiss-aria = Fermer le panneau
+quick-walk-header-title = Générateur de balade express
+quick-walk-header-description = Ajustez durée et centres d’intérêt pour actualiser les suggestions.
+quick-walk-generate-aria = Créer une nouvelle balade
+quick-walk-duration-label = Durée
 quick-walk-duration-format = {$minutes} min
-quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes}m
-quick-walk-duration-marker-mid = {$minutes}m
-quick-walk-duration-marker-end = {$minutes}m
-quick-walk-interests-heading = Interests
+quick-walk-duration-aria = Durée de la balade
+quick-walk-duration-marker-start = {$minutes} min
+quick-walk-duration-marker-mid = {$minutes} min
+quick-walk-duration-marker-end = {$minutes} min
+quick-walk-interests-heading = Centres d’intérêt
 quick-walk-interests-selected =
     { $count ->
-        [one] {$count} selected
-       *[other] {$count} selected
+        [one] {$count} sélectionné
+       *[other] {$count} sélectionnés
     }
-quick-walk-interests-aria = Select quick walk interests
-quick-walk-stops-heading = Quick walk stops
-quick-walk-notes-heading = Planning notes
-quick-walk-notes-item-1 = Sync the plan with your calendar to block out discovery time.
-quick-walk-notes-item-2 = Pack a reusable bottle – refill points are highlighted along the waterfront.
-quick-walk-notes-item-3 = Invite friends and keep pace options flexible for an inclusive stroll.
-quick-walk-tab-map = Explore
-quick-walk-tab-stops = Stops
+quick-walk-interests-aria = Sélectionnez des centres d’intérêt pour la balade express
+quick-walk-stops-heading = Arrêts de la balade express
+quick-walk-notes-heading = Notes de planification
+quick-walk-notes-item-1 = Synchronisez le plan avec votre agenda pour réserver un temps d’exploration.
+quick-walk-notes-item-2 = Emportez une gourde réutilisable ; les points de remplissage sont indiqués le long du front de mer.
+quick-walk-notes-item-3 = Invitez vos amis et gardez un rythme flexible pour une balade inclusive.
+quick-walk-tab-map = Explorer
+quick-walk-tab-stops = Arrêts
 quick-walk-tab-notes = Notes
-quick-walk-save-aria = Save quick walk
+quick-walk-save-aria = Enregistrer la balade express
 
 
 
