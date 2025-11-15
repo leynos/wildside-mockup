@@ -141,8 +141,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] rutt
-       *[other] rutter
+        [one] {$count} rutt
+       *[other] {$count} rutter
     }
 
 offline-header-title = Offline-kartor

@@ -141,8 +141,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] percorso
-       *[other] percorsi
+        [one] {$count} percorso
+       *[other] {$count} percorsi
     }
 
 offline-header-title = Mappe offline

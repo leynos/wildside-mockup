@@ -142,8 +142,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] ruta
-       *[other] rutas
+        [one] {$count} ruta
+       *[other] {$count} rutas
     }
 
 offline-header-title = Mapas sin conexión

@@ -141,8 +141,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] reitti
-       *[other] reittejä
+        [one] {$count} reitti
+       *[other] {$count} reittejä
     }
 
 offline-header-title = Offline-kartat

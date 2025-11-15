@@ -141,8 +141,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] Route
-       *[other] Routen
+        [one] {$count} Route
+       *[other] {$count} Routen
     }
 
 offline-header-title = Offline-Karten

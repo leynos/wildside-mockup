@@ -145,10 +145,10 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] маршрут
-        [few] маршрута
-        [many] маршрутов
-       *[other] маршрута
+        [one] {$count} маршрут
+        [few] {$count} маршрута
+        [many] {$count} маршрутов
+       *[other] {$count} маршрута
     }
 
 offline-header-title = Оффлайн-карты

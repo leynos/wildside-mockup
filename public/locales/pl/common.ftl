@@ -145,10 +145,10 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] trasa
-        [few] trasy
-        [many] tras
-       *[other] tras
+        [one] {$count} trasa
+        [few] {$count} trasy
+        [many] {$count} tras
+       *[other] {$count} tras
     }
 
 offline-header-title = Mapy offline

@@ -141,8 +141,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] rute
-       *[other] ruter
+        [one] {$count} rute
+       *[other] {$count} ruter
     }
 
 offline-header-title = Frakoblede kart

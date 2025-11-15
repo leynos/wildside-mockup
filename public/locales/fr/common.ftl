@@ -141,8 +141,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] parcours
-       *[other] parcours
+        [one] {$count} parcours
+       *[other] {$count} parcours
     }
 
 offline-header-title = Cartes hors ligne

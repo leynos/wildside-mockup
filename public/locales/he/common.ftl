@@ -143,9 +143,9 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] מסלול
-        [two] מסלולים
-       *[other] מסלולים
+        [one] {$count} מסלול
+        [two] {$count} מסלולים
+       *[other] {$count} מסלולים
     }
 
 offline-header-title = מפות לא מקוונות

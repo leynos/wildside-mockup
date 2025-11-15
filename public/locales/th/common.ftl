@@ -135,7 +135,7 @@ explore-trending-heading = มาแรงตอนนี้
 explore-community-heading = ขวัญใจชุมชน
 explore-community-subtitle = มีการแชร์มากที่สุดในสัปดาห์นี้
 explore-community-saves = บันทึก {$count} ครั้ง
-explore-curated-route-count = เส้นทาง
+explore-curated-route-count = {$count} เส้นทาง
 
 offline-header-title = แผนที่ออฟไลน์
 offline-header-subtitle = จัดการการดาวน์โหลดและอัปเดตอัจฉริยะ

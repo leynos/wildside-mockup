@@ -141,8 +141,8 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] διαδρομή
-       *[other] διαδρομές
+        [one] {$count} διαδρομή
+       *[other] {$count} διαδρομές
     }
 
 offline-header-title = Χάρτες εκτός σύνδεσης

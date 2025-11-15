@@ -147,11 +147,11 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] slighe
-        [two] slighean
-        [few] slighean
-        [many] slighean
-       *[other] slighean
+        [one] {$count} slighe
+        [two] {$count} slighean
+        [few] {$count} slighean
+        [many] {$count} slighean
+       *[other] {$count} slighean
     }
 
 offline-header-title = Mapaichean far loidhne

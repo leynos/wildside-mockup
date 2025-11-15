@@ -135,7 +135,7 @@ explore-trending-heading = 今話題
 explore-community-heading = コミュニティのお気に入り
 explore-community-subtitle = 今週もっとも共有されたルート
 explore-community-saves = {$count} 件の保存
-explore-curated-route-count = ルート
+explore-curated-route-count = {$count} 件のルート
 
 offline-header-title = オフラインマップ
 offline-header-subtitle = ダウンロードとスマート更新を管理

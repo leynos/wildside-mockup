@@ -137,8 +137,8 @@ explore-community-subtitle = Meest gedeeld deze week
 explore-community-saves = {$count}× opgeslagen
 explore-curated-route-count =
     { $count ->
-        [one] route
-       *[other] routes
+        [one] {$count} route
+       *[other] {$count} routes
     }
 
 offline-header-title = Offline kaarten

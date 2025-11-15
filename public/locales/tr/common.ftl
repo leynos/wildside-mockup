@@ -137,8 +137,8 @@ explore-community-subtitle = Bu hafta en çok paylaşılan
 explore-community-saves = {$count} kayıt
 explore-curated-route-count =
     { $count ->
-        [one] rota
-       *[other] rotalar
+        [one] {$count} rota
+       *[other] {$count} rotalar
     }
 
 offline-header-title = Çevrimdışı haritalar
