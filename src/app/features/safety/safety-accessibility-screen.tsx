@@ -5,15 +5,42 @@ import * as Dialog from "@radix-ui/react-dialog";
 import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
-import { type SafetyToggle, safetyAccordionSections, safetyPresets } from "../../data/stage-four";
+import {
+  type SafetyAccordionSection,
+  type SafetyPreset,
+  type SafetyToggle,
+  safetyAccordionSections,
+  safetyPresets,
+} from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
 
 type ToggleState = Record<string, boolean>;
 
+type ResolvedSafetyToggle = Omit<
+  SafetyToggle,
+  "labelKey" | "defaultLabel" | "descriptionKey" | "defaultDescription"
+> & {
+  readonly label: string;
+  readonly description: string;
+};
+
+type ResolvedSafetySection = Omit<SafetyAccordionSection, "toggles"> & {
+  readonly title: string;
+  readonly description: string;
+  readonly toggles: ResolvedSafetyToggle[];
+};
+
+type ResolvedSafetyPreset = SafetyPreset & {
+  readonly title: string;
+  readonly description: string;
+};
+
 export function SafetyAccessibilityScreen(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const initialState = useMemo<ToggleState>(() => {
     const accumulator: ToggleState = {};
@@ -26,9 +53,55 @@ export function SafetyAccessibilityScreen(): JSX.Element {
   }, []);
   const [toggleState, setToggleState] = useState<ToggleState>(initialState);
 
-  const handleToggle = (toggle: SafetyToggle, value: boolean) => {
-    setToggleState((prev) => ({ ...prev, [toggle.id]: value }));
+  const handleToggle = (toggleId: string, value: boolean) => {
+    setToggleState((prev) => ({ ...prev, [toggleId]: value }));
   };
+
+  const resolvedSections = useMemo<ResolvedSafetySection[]>(() => {
+    return safetyAccordionSections.map((section) => {
+      const title = t(section.titleKey, { defaultValue: section.defaultTitle });
+      const description = t(section.descriptionKey, { defaultValue: section.defaultDescription });
+      const toggles = section.toggles.map((toggle) => ({
+        ...toggle,
+        label: t(toggle.labelKey, { defaultValue: toggle.defaultLabel }),
+        description: t(toggle.descriptionKey, { defaultValue: toggle.defaultDescription }),
+      }));
+      return { ...section, title, description, toggles } as ResolvedSafetySection;
+    });
+  }, [t]);
+
+  const toggleLabelLookup = useMemo(() => {
+    const entries = new Map<string, string>();
+    resolvedSections.forEach((section) => {
+      section.toggles.forEach((toggle) => {
+        entries.set(toggle.id, toggle.label);
+      });
+    });
+    return entries;
+  }, [resolvedSections]);
+
+  const resolvedPresets = useMemo<ResolvedSafetyPreset[]>(
+    () =>
+      safetyPresets.map((preset) => ({
+        ...preset,
+        title: t(preset.titleKey, { defaultValue: preset.defaultTitle }),
+        description: t(preset.descriptionKey, { defaultValue: preset.defaultDescription }),
+      })) as ResolvedSafetyPreset[],
+    [t],
+  );
+
+  const backLabel = t("wizard-header-back-label", { defaultValue: "Back" });
+  const headerTitle = t("safety-header-title", { defaultValue: "Safety & Accessibility" });
+  const headerDescription = t("safety-header-description", {
+    defaultValue: "Customise your walking routes for comfort and safety",
+  });
+  const presetsHeading = t("safety-presets-heading", { defaultValue: "Preset profiles" });
+  const saveButtonLabel = t("safety-save-button", { defaultValue: "Save preferences" });
+  const dialogTitle = t("safety-dialog-title", { defaultValue: "Preferences saved" });
+  const dialogDescription = t("safety-dialog-description", {
+    defaultValue: "Your safety and accessibility settings are now part of future walk planning.",
+  });
+  const dialogContinue = t("safety-dialog-continue", { defaultValue: "Continue" });
 
   return (
     <MobileShell tone="dark">
@@ -37,17 +110,15 @@ export function SafetyAccessibilityScreen(): JSX.Element {
           <div className="mb-4 flex items-center gap-4">
             <button
               type="button"
-              aria-label="Back"
+              aria-label={backLabel}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 bg-base-200/30"
               onClick={() => navigate({ to: "/explore" })}
             >
               <Icon token="{icon.navigation.back}" className="text-accent" aria-hidden />
             </button>
-            <h1 className="text-2xl font-semibold">Safety &amp; Accessibility</h1>
+            <h1 className="text-2xl font-semibold">{headerTitle}</h1>
           </div>
-          <p className="text-sm text-base-300">
-            Customise your walking routes for comfort and safety
-          </p>
+          <p className="text-sm text-base-300">{headerDescription}</p>
         </header>
 
         <main className="shell-scroll space-y-6">
@@ -56,7 +127,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
             defaultValue={safetyAccordionSections.map((section) => section.id)}
             className="space-y-4"
           >
-            {safetyAccordionSections.map((section) => (
+            {resolvedSections.map((section) => (
               <Accordion.Item
                 key={section.id}
                 value={section.id}
@@ -109,7 +180,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
                           checked={isEnabled}
                           aria-labelledby={labelId}
                           aria-describedby={descriptionId}
-                          onCheckedChange={(checked) => handleToggle(toggle, checked)}
+                          onCheckedChange={(checked) => handleToggle(toggle.id, checked)}
                         >
                           <Switch.Thumb className="toggle-switch__thumb" />
                         </Switch.Root>
@@ -122,15 +193,20 @@ export function SafetyAccessibilityScreen(): JSX.Element {
           </Accordion.Root>
 
           <section className="space-y-3">
-            <h2 className="text-base font-semibold text-base-100">Preset profiles</h2>
+            <h2 className="text-base font-semibold text-base-100">{presetsHeading}</h2>
             <div className="grid gap-3">
-              {safetyPresets.map((preset) => (
+              {resolvedPresets.map((preset) => (
                 <button
                   key={preset.id}
                   type="button"
                   className="safety__preset"
                   onClick={() =>
-                    window.alert(`Preset "${preset.title}" will be applied in a future build.`)
+                    window.alert(
+                      t("safety-preset-alert", {
+                        title: preset.title,
+                        defaultValue: `Preset "${preset.title}" will be applied in a future build.`,
+                      }),
+                    )
                   }
                 >
                   <span
@@ -154,7 +230,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
               onClick={() => setDialogOpen(true)}
             >
               <Icon token="{icon.action.savePrefs}" aria-hidden />
-              Save preferences
+              {saveButtonLabel}
             </button>
           </section>
         </main>
@@ -165,24 +241,28 @@ export function SafetyAccessibilityScreen(): JSX.Element {
           <Dialog.Overlay className="fixed inset-0 bg-black/60" />
           <Dialog.Content className="modal-panel">
             <Dialog.Title className="text-lg font-semibold text-base-content">
-              Preferences saved
+              {dialogTitle}
             </Dialog.Title>
             <Dialog.Description className="text-sm text-base-content/70">
-              Your safety and accessibility settings are now part of future walk planning.
+              {dialogDescription}
             </Dialog.Description>
             <div className="chip-row text-sm text-base-content/80">
               {Object.entries(toggleState)
                 .filter(([, value]) => value)
                 .map(([id]) => (
                   <span key={id} className="rounded-full border border-base-300/60 px-3 py-1">
-                    {id.replace(/-/g, " ")}
+                    {toggleLabelLookup.get(id) ??
+                      t("safety-dialog-chip-fallback", {
+                        id,
+                        defaultValue: id.replace(/-/g, " "),
+                      })}
                   </span>
                 ))}
             </div>
             <div className="flex justify-end">
               <Dialog.Close asChild>
                 <button type="button" className="btn btn-accent btn-sm">
-                  Continue
+                  {dialogContinue}
                 </button>
               </Dialog.Close>
             </div>

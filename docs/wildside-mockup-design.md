@@ -448,6 +448,13 @@ Mapping guidance:
   languages.
 - Stage 3 route tests now include a Spanish locale run to guarantee the
   translated panels, dialog copy, and footer CTAs render as expected.
+- `/safety-accessibility` promotes the same localisation contract: accordion
+  sections, toggles, presets, CTA copy, and the confirmation dialog all pull
+  from Fluent IDs (`safety-section-*`, `safety-toggle-*`, `safety-preset-*`).
+  Toggle labels reuse existing wizard keys when wording matches (for example,
+  the well-lit preference), keeping translations deduplicated. The dialog chips
+  now resolve from the same toggle descriptors to avoid ad hoc string
+  formatting.
 
 #### Progress (26 October 2025)
 

@@ -187,50 +187,62 @@ export const autoManagementOptions: AutoManagementOption[] = [
 
 export interface SafetyToggle {
   id: string;
-  label: string;
-  description: string;
   iconToken: string;
   accentClass: string;
   defaultChecked: boolean;
+  labelKey: string;
+  defaultLabel: string;
+  descriptionKey: string;
+  defaultDescription: string;
 }
 
 export interface SafetyAccordionSection {
   id: string;
-  title: string;
   iconToken: string;
   accentClass: string;
-  description: string;
+  titleKey: string;
+  defaultTitle: string;
+  descriptionKey: string;
+  defaultDescription: string;
   toggles: SafetyToggle[];
 }
 
 export const safetyAccordionSections: SafetyAccordionSection[] = [
   {
     id: "mobility",
-    title: "Mobility Support",
+    titleKey: "safety-section-mobility-title",
+    defaultTitle: "Mobility Support",
     iconToken: "{icon.accessibility.stepFree}",
     accentClass: "bg-sky-500/20 text-sky-400",
-    description: "Route adjustments for easier navigation",
+    descriptionKey: "safety-section-mobility-description",
+    defaultDescription: "Route adjustments for easier navigation",
     toggles: [
       {
         id: "step-free",
-        label: "Step-free routes",
-        description: "Avoid stairs and steps",
+        labelKey: "safety-toggle-step-free-label",
+        defaultLabel: "Step-free routes",
+        descriptionKey: "safety-toggle-step-free-description",
+        defaultDescription: "Avoid stairs and steps",
         iconToken: "{icon.accessibility.stepFree}",
         accentClass: "bg-green-500/20 text-green-400",
         defaultChecked: true,
       },
       {
         id: "avoid-hills",
-        label: "Avoid steep hills",
-        description: "Limit inclines above 5%",
+        labelKey: "safety-toggle-avoid-hills-label",
+        defaultLabel: "Avoid steep hills",
+        descriptionKey: "safety-toggle-avoid-hills-description",
+        defaultDescription: "Limit inclines above 5%",
         iconToken: "{icon.accessibility.elevation}",
         accentClass: "bg-orange-500/20 text-orange-400",
         defaultChecked: false,
       },
       {
         id: "wider-paths",
-        label: "Prefer wider paths",
-        description: "Optimised for chairs, buggies, or group walking",
+        labelKey: "safety-toggle-wider-paths-label",
+        defaultLabel: "Prefer wider paths",
+        descriptionKey: "safety-toggle-wider-paths-description",
+        defaultDescription: "Optimised for chairs, buggies, or group walking",
         iconToken: "{icon.category.paved}",
         accentClass: "bg-purple-500/20 text-purple-400",
         defaultChecked: true,
@@ -239,39 +251,49 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
   },
   {
     id: "safety",
-    title: "Safety Features",
+    titleKey: "safety-section-safety-title",
+    defaultTitle: "Safety Features",
     iconToken: "{icon.safety.priority}",
     accentClass: "bg-yellow-500/20 text-yellow-400",
-    description: "Enhanced security for your walks",
+    descriptionKey: "safety-section-safety-description",
+    defaultDescription: "Enhanced security for your walks",
     toggles: [
       {
         id: "well-lit",
-        label: "Well-lit routes",
-        description: "Prioritise illuminated paths",
+        labelKey: "wizard-step-two-accessibility-well-lit-label",
+        defaultLabel: "Well-lit paths",
+        descriptionKey: "wizard-step-two-accessibility-well-lit-description",
+        defaultDescription: "Prioritise brightly lit evening routes",
         iconToken: "{icon.object.guidance}",
         accentClass: "bg-amber-500/20 text-amber-400",
         defaultChecked: true,
       },
       {
         id: "busy-areas",
-        label: "Prefer busy areas",
-        description: "Stay in populated zones",
+        labelKey: "safety-toggle-busy-areas-label",
+        defaultLabel: "Prefer busy areas",
+        descriptionKey: "safety-toggle-busy-areas-description",
+        defaultDescription: "Stay in populated zones",
         iconToken: "{icon.safety.group}",
         accentClass: "bg-pink-500/20 text-pink-400",
         defaultChecked: false,
       },
       {
         id: "emergency-sharing",
-        label: "Emergency sharing",
-        description: "Share location with contacts",
+        labelKey: "safety-toggle-emergency-sharing-label",
+        defaultLabel: "Emergency sharing",
+        descriptionKey: "safety-toggle-emergency-sharing-description",
+        defaultDescription: "Share location with contacts",
         iconToken: "{icon.safety.emergencyPhone}",
         accentClass: "bg-red-500/20 text-red-400",
         defaultChecked: false,
       },
       {
         id: "avoid-isolated",
-        label: "Avoid isolated areas",
-        description: "Skip secluded locations",
+        labelKey: "safety-toggle-avoid-isolated-label",
+        defaultLabel: "Avoid isolated areas",
+        descriptionKey: "safety-toggle-avoid-isolated-description",
+        defaultDescription: "Skip secluded locations",
         iconToken: "{icon.safety.hide}",
         accentClass: "bg-slate-500/20 text-slate-300",
         defaultChecked: true,
@@ -280,67 +302,83 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
   },
   {
     id: "comfort",
-    title: "Comfort Settings",
+    titleKey: "safety-section-comfort-title",
+    defaultTitle: "Comfort Settings",
     iconToken: "{icon.environment.toggle}",
     accentClass: "bg-emerald-500/20 text-emerald-400",
-    description: "Personalise your walking experience",
+    descriptionKey: "safety-section-comfort-description",
+    defaultDescription: "Personalise your walking experience",
     toggles: [
       {
         id: "shade",
-        label: "Prioritise shade",
-        description: "Choose tree-lined paths",
+        labelKey: "safety-toggle-shade-label",
+        defaultLabel: "Prioritise shade",
+        descriptionKey: "safety-toggle-shade-description",
+        defaultDescription: "Choose tree-lined paths",
         iconToken: "{icon.category.trails}",
         accentClass: "bg-emerald-500/20 text-emerald-400",
         defaultChecked: false,
       },
       {
         id: "weather-adaptive",
-        label: "Weather-adaptive",
-        description: "Adjust routes for weather",
+        labelKey: "safety-toggle-weather-label",
+        defaultLabel: "Weather-adaptive",
+        descriptionKey: "safety-toggle-weather-description",
+        defaultDescription: "Adjust routes for weather",
         iconToken: "{icon.object.weatherSunny}",
         accentClass: "bg-blue-500/20 text-blue-400",
         defaultChecked: true,
       },
       {
         id: "quiet-routes",
-        label: "Prefer quiet routes",
-        description: "Minimise traffic noise",
+        labelKey: "safety-toggle-quiet-label",
+        defaultLabel: "Prefer quiet routes",
+        descriptionKey: "safety-toggle-quiet-description",
+        defaultDescription: "Minimise traffic noise",
         iconToken: "{icon.object.audio}",
         accentClass: "bg-teal-500/20 text-teal-400",
         defaultChecked: false,
       },
     ],
   },
-];
+] as const;
 
 export interface SafetyPreset {
   id: string;
-  title: string;
-  description: string;
   iconToken: string;
   accentClass: string;
+  titleKey: string;
+  defaultTitle: string;
+  descriptionKey: string;
+  defaultDescription: string;
 }
 
 export const safetyPresets: SafetyPreset[] = [
   {
     id: "family",
-    title: "Family Friendly",
-    description: "Gentle pace, playground stops, shade",
+    titleKey: "safety-preset-family-title",
+    defaultTitle: "Family Friendly",
+    descriptionKey: "safety-preset-family-description",
+    defaultDescription: "Gentle pace, playground stops, shade",
     iconToken: "{icon.object.family}",
     accentClass: "bg-amber-500/20 text-amber-400",
   },
   {
     id: "senior",
-    title: "Senior Friendly",
-    description: "Gentle slopes, resting points, well-lit",
+    titleKey: "safety-preset-senior-title",
+    defaultTitle: "Senior Friendly",
+    descriptionKey: "safety-preset-senior-description",
+    defaultDescription: "Gentle slopes, resting points, well-lit",
     iconToken: "{icon.accessibility.mobilityAid}",
     accentClass: "bg-green-500/20 text-green-400",
   },
   {
     id: "night",
-    title: "Night Walker",
-    description: "Well-lit, busy areas, emergency sharing",
+    titleKey: "safety-preset-night-title",
+    defaultTitle: "Night Walker",
+    descriptionKey: "safety-preset-night-description",
+    defaultDescription: "Well-lit, busy areas, emergency sharing",
     iconToken: "{icon.object.weatherNight}",
     accentClass: "bg-indigo-500/20 text-indigo-300",
   },
-];
+] as const;

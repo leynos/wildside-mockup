@@ -964,4 +964,41 @@ describe("Stage 4 completion flows", () => {
 
     expect(await screen.findByRole("dialog", { name: /preferences saved/i })).toBeTruthy();
   });
+
+  it("localises the safety & accessibility screen for Spanish", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      const view = within(requireContainer(mount));
+
+      expect(view.getByRole("heading", { name: /seguridad y accesibilidad/i })).toBeTruthy();
+      expect(view.getByText(/personaliza tus recorridos/i)).toBeTruthy();
+      expect(view.getByRole("button", { name: /guardar preferencias/i })).toBeTruthy();
+
+      const accordionItem = view.getByRole("button", { name: /soporte de movilidad/i });
+      expect(accordionItem).toBeTruthy();
+
+      const toggle = view.getByRole("switch", { name: /rutas sin escalones/i });
+      act(() => clickElement(toggle));
+
+      const saveButton = view.getByRole("button", { name: /guardar preferencias/i });
+      await act(async () => {
+        clickElement(saveButton);
+        await Promise.resolve();
+      });
+
+      const dialog = await screen.findByRole("dialog", { name: /preferencias guardadas/i });
+      expect(within(dialog).getByText(/tus ajustes de seguridad/i)).toBeTruthy();
+      expect(within(dialog).getByRole("button", { name: /^continuar$/i })).toBeTruthy();
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
 });
