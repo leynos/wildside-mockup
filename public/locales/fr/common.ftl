@@ -96,6 +96,34 @@ quick-walk-save-aria = Enregistrer la balade express
 
 
 
+wizard-header-title = Assistant d’itinéraire
+wizard-header-back-label = Retour
+wizard-header-help-label = Aide
+wizard-help-placeholder = L’aide contextuelle arrive bientôt
+wizard-step-1-title = Durée et centres d’intérêt
+wizard-step-1-description = Définissez la longueur et les thèmes de la balade
+wizard-step-2-title = Préférences de découverte
+wizard-step-2-description = Équilibrez lieux populaires et pépites cachées
+wizard-step-3-title = Vérifier et confirmer
+wizard-step-3-description = Générez l’itinéraire personnalisé
+wizard-step-one-duration-section-aria = Commandes de durée de la balade
+wizard-step-one-duration-label = Durée de la balade
+wizard-step-one-duration-aria = Curseur de durée de la balade
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Centres d’intérêt
+wizard-step-one-interests-heading = Centres d’intérêt
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} sélectionné
+       *[other] {$count} sélectionnés
+    }
+wizard-step-one-interests-picker-aria = Sélectionnez des centres d’intérêt pour la balade
+wizard-step-one-continue = Continuer vers les préférences
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Langue
 walk-complete-hero-title = Balade terminée !

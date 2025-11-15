@@ -96,6 +96,34 @@ quick-walk-save-aria = 儲存快速步行
 
 
 
+wizard-header-title = 路線精靈
+wizard-header-back-label = 返回
+wizard-header-help-label = 說明
+wizard-help-placeholder = 即將提供情境式說明
+wizard-step-1-title = 時長與興趣
+wizard-step-1-description = 設定步行長度與主題
+wizard-step-2-title = 探索偏好
+wizard-step-2-description = 平衡熱門景點與隱藏亮點
+wizard-step-3-title = 檢視並確認
+wizard-step-3-description = 產生客製化路線
+wizard-step-one-duration-section-aria = 步行時長控制
+wizard-step-one-duration-label = 步行時長
+wizard-step-one-duration-aria = 步行時長滑桿
+wizard-step-one-duration-marker-start = 15 分
+wizard-step-one-duration-marker-mid = 90 分
+wizard-step-one-duration-marker-end = 180 分
+wizard-step-one-duration-format = {$minutes} 分
+wizard-step-one-interests-section-aria = 興趣
+wizard-step-one-interests-heading = 興趣
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] 已選 {$count}
+       *[other] 已選 {$count}
+    }
+wizard-step-one-interests-picker-aria = 選擇本次步行的興趣
+wizard-step-one-continue = 前往偏好設定
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = 語言
 walk-complete-hero-title = 步行完成！

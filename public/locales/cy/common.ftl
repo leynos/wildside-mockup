@@ -96,6 +96,34 @@ quick-walk-save-aria = Cadw’r daith gyflym
 
 
 
+wizard-header-title = Dewin taith
+wizard-header-back-label = Nôl
+wizard-header-help-label = Cymorth
+wizard-help-placeholder = Bydd cymorth cyd-destunol ar gael yn fuan
+wizard-step-1-title = Hyd a diddordebau
+wizard-step-1-description = Gosod hyd y daith a’r themâu
+wizard-step-2-title = Dewisiadau darganfod
+wizard-step-2-description = Cydbwyso mannau poblogaidd a thrysorau cudd
+wizard-step-3-title = Adolygu a chadarnhau
+wizard-step-3-description = Cynhyrchu’r daith wedi’i phersonoli
+wizard-step-one-duration-section-aria = Rheolaethau hyd y daith
+wizard-step-one-duration-label = Hyd y daith
+wizard-step-one-duration-aria = Llithrydd hyd y daith
+wizard-step-one-duration-marker-start = 15m
+wizard-step-one-duration-marker-mid = 90m
+wizard-step-one-duration-marker-end = 180m
+wizard-step-one-duration-format = {$minutes} mun
+wizard-step-one-interests-section-aria = Diddordebau
+wizard-step-one-interests-heading = Diddordebau
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} wedi’i ddewis
+       *[other] {$count} wedi’u dewis
+    }
+wizard-step-one-interests-picker-aria = Dewiswch ddiddordebau ar gyfer y daith
+wizard-step-one-continue = Parhau i’r dewisiadau
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Iaith
 walk-complete-hero-title = Taith gerdded wedi’i chwblhau!

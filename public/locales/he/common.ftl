@@ -97,6 +97,35 @@ quick-walk-save-aria = שמרו מסלול מהיר
 
 
 
+wizard-header-title = אשף המסלול
+wizard-header-back-label = חזרה
+wizard-header-help-label = עזרה
+wizard-help-placeholder = עזרה בהקשר תגיע בקרוב
+wizard-step-1-title = משך ותחומי עניין
+wizard-step-1-description = הגדירו את אורך ההליכה והנושאים
+wizard-step-2-title = העדפות גילוי
+wizard-step-2-description = איזנו בין נקודות חמות לאוצרות נסתרים
+wizard-step-3-title = בדיקה ואישור
+wizard-step-3-description = צרו את המסלול המותאם
+wizard-step-one-duration-section-aria = בקרות משך ההליכה
+wizard-step-one-duration-label = משך ההליכה
+wizard-step-one-duration-aria = מחוון משך ההליכה
+wizard-step-one-duration-marker-start = 15 דק׳
+wizard-step-one-duration-marker-mid = 90 דק׳
+wizard-step-one-duration-marker-end = 180 דק׳
+wizard-step-one-duration-format = {$minutes} דק׳
+wizard-step-one-interests-section-aria = תחומי עניין
+wizard-step-one-interests-heading = תחומי עניין
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} בחירה
+        [two] {$count} בחירות
+       *[other] {$count} בחירות
+    }
+wizard-step-one-interests-picker-aria = בחרו תחומי עניין להליכה
+wizard-step-one-continue = המשך להעדפות
+
+
 app-shell-title = ‏הדמיית Wildside
 controls-language-label = שפה
 walk-complete-hero-title = ההליכה הושלמה!

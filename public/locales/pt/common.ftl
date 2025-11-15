@@ -96,6 +96,34 @@ quick-walk-save-aria = Salvar caminhada rápida
 
 
 
+wizard-header-title = Assistente de percurso
+wizard-header-back-label = Voltar
+wizard-header-help-label = Ajuda
+wizard-help-placeholder = A ajuda contextual chegará em breve
+wizard-step-1-title = Duração e interesses
+wizard-step-1-description = Defina o comprimento e os temas da caminhada
+wizard-step-2-title = Preferências de descoberta
+wizard-step-2-description = Equilibre pontos populares e joias escondidas
+wizard-step-3-title = Rever e confirmar
+wizard-step-3-description = Gere o percurso personalizado
+wizard-step-one-duration-section-aria = Controlo da duração da caminhada
+wizard-step-one-duration-label = Duração da caminhada
+wizard-step-one-duration-aria = Cursor de duração da caminhada
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Interesses
+wizard-step-one-interests-heading = Interesses
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} selecionado
+       *[other] {$count} selecionados
+    }
+wizard-step-one-interests-picker-aria = Escolha os interesses da caminhada
+wizard-step-one-continue = Continuar para as preferências
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Idioma
 walk-complete-hero-title = Caminhada concluída!

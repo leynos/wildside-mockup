@@ -96,6 +96,34 @@ quick-walk-save-aria = Hızlı yürüyüşü kaydet
 
 
 
+wizard-header-title = Rota sihirbazı
+wizard-header-back-label = Geri
+wizard-header-help-label = Yardım
+wizard-help-placeholder = Bağlamsal yardım yakında eklenecek
+wizard-step-1-title = Süre ve ilgi alanları
+wizard-step-1-description = Yürüyüşün uzunluğunu ve temalarını ayarlayın
+wizard-step-2-title = Keşif tercihleri
+wizard-step-2-description = Popüler noktalarla gizli hazineleri dengeleyin
+wizard-step-3-title = Gözden geçir ve onayla
+wizard-step-3-description = Kişiselleştirilmiş rotayı oluşturun
+wizard-step-one-duration-section-aria = Yürüyüş süresi denetimleri
+wizard-step-one-duration-label = Yürüyüş süresi
+wizard-step-one-duration-aria = Yürüyüş süresi kaydırıcısı
+wizard-step-one-duration-marker-start = 15 dk
+wizard-step-one-duration-marker-mid = 90 dk
+wizard-step-one-duration-marker-end = 180 dk
+wizard-step-one-duration-format = {$minutes} dk
+wizard-step-one-interests-section-aria = İlgi alanları
+wizard-step-one-interests-heading = İlgi alanları
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} seçim
+       *[other] {$count} seçim
+    }
+wizard-step-one-interests-picker-aria = Yürüyüş ilgi alanlarını seçin
+wizard-step-one-continue = Tercihlere devam et
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Dil
 walk-complete-hero-title = Yürüyüş tamamlandı!

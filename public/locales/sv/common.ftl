@@ -96,6 +96,34 @@ quick-walk-save-aria = Spara snabbvandring
 
 
 
+wizard-header-title = Ruttguide
+wizard-header-back-label = Tillbaka
+wizard-header-help-label = Hjälp
+wizard-help-placeholder = Kontextuell hjälp kommer snart
+wizard-step-1-title = Varaktighet och intressen
+wizard-step-1-description = Ställ in promenadens längd och teman
+wizard-step-2-title = Upptäcktsinställningar
+wizard-step-2-description = Balansera populära platser med dolda pärlor
+wizard-step-3-title = Granska och bekräfta
+wizard-step-3-description = Skapa den anpassade rutten
+wizard-step-one-duration-section-aria = Reglering av promenadtid
+wizard-step-one-duration-label = Promenadens längd
+wizard-step-one-duration-aria = Skjutreglage för promenadtid
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Intressen
+wizard-step-one-interests-heading = Intressen
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} vald
+       *[other] {$count} valda
+    }
+wizard-step-one-interests-picker-aria = Välj promenadens intressen
+wizard-step-one-continue = Fortsätt till inställningar
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Språk
 walk-complete-hero-title = Promenaden är klar!

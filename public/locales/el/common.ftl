@@ -96,6 +96,34 @@ quick-walk-save-aria = Αποθήκευση γρήγορης διαδρομής
 
 
 
+wizard-header-title = Βοηθός διαδρομής
+wizard-header-back-label = Πίσω
+wizard-header-help-label = Βοήθεια
+wizard-help-placeholder = Η σχετική βοήθεια θα είναι σύντομα διαθέσιμη
+wizard-step-1-title = Διάρκεια & ενδιαφέροντα
+wizard-step-1-description = Ρύθμισε το μήκος και τα θέματα της βόλτας
+wizard-step-2-title = Προτιμήσεις ανακάλυψης
+wizard-step-2-description = Ισορρόπησε τα δημοφιλή σημεία με τα κρυμμένα διαμάντια
+wizard-step-3-title = Έλεγχος & επιβεβαίωση
+wizard-step-3-description = Δημιούργησε την προσαρμοσμένη διαδρομή
+wizard-step-one-duration-section-aria = Χειριστήρια διάρκειας διαδρομής
+wizard-step-one-duration-label = Διάρκεια διαδρομής
+wizard-step-one-duration-aria = Ρυθμιστικό διάρκειας διαδρομής
+wizard-step-one-duration-marker-start = 15 λεπτά
+wizard-step-one-duration-marker-mid = 90 λεπτά
+wizard-step-one-duration-marker-end = 180 λεπτά
+wizard-step-one-duration-format = {$minutes} λ
+wizard-step-one-interests-section-aria = Ενδιαφέροντα
+wizard-step-one-interests-heading = Ενδιαφέροντα
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} επιλογή
+       *[other] {$count} επιλογές
+    }
+wizard-step-one-interests-picker-aria = Επίλεξε ενδιαφέροντα για τη διαδρομή
+wizard-step-one-continue = Συνέχισε στις προτιμήσεις
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Γλώσσα
 walk-complete-hero-title = Η διαδρομή ολοκληρώθηκε!

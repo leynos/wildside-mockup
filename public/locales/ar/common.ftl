@@ -100,6 +100,38 @@ quick-walk-save-aria = احفظ السير السريع
 
 
 
+wizard-header-title = معالج الجولات
+wizard-header-back-label = رجوع
+wizard-header-help-label = مساعدة
+wizard-help-placeholder = ستتوفر المساعدة السياقية قريبًا
+wizard-step-1-title = المدة والاهتمامات
+wizard-step-1-description = اضبط طول الجولة وموضوعاتها
+wizard-step-2-title = تفضيلات الاكتشاف
+wizard-step-2-description = وازن بين النقاط الشهيرة والجواهر المخفية
+wizard-step-3-title = راجع وأكِّد
+wizard-step-3-description = أنشئ الجولة المخصّصة
+wizard-step-one-duration-section-aria = عناصر التحكم في مدة الجولة
+wizard-step-one-duration-label = مدة الجولة
+wizard-step-one-duration-aria = شريط تمرير مدة الجولة
+wizard-step-one-duration-marker-start = 15 دقيقة
+wizard-step-one-duration-marker-mid = 90 دقيقة
+wizard-step-one-duration-marker-end = 180 دقيقة
+wizard-step-one-duration-format = {$minutes} دقيقة
+wizard-step-one-interests-section-aria = الاهتمامات
+wizard-step-one-interests-heading = الاهتمامات
+wizard-step-one-interests-selected =
+    { $count ->
+        [zero] لم يتم اختيار أي اهتمامات
+        [one] تم اختيار اهتمام واحد
+        [two] تم اختيار اهتمامين
+        [few] تم اختيار {$count} اهتمامات
+        [many] تم اختيار {$count} اهتماماً
+       *[other] تم اختيار {$count} اهتماماً
+    }
+wizard-step-one-interests-picker-aria = اختر اهتمامات الجولة
+wizard-step-one-continue = المتابعة إلى التفضيلات
+
+
 app-shell-title = وايلدسايد موك آب
 controls-language-label = اللغة
 walk-complete-hero-title = تم إنهاء المسار!

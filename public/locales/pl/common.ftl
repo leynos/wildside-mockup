@@ -98,6 +98,36 @@ quick-walk-save-aria = Zapisz szybki spacer
 
 
 
+wizard-header-title = Kreator trasy
+wizard-header-back-label = Wstecz
+wizard-header-help-label = Pomoc
+wizard-help-placeholder = Wkrótce pojawi się pomoc kontekstowa
+wizard-step-1-title = Czas trwania i zainteresowania
+wizard-step-1-description = Ustal długość spaceru i motywy
+wizard-step-2-title = Preferencje odkrywania
+wizard-step-2-description = Zrównoważ modne miejsca i ukryte perełki
+wizard-step-3-title = Sprawdź i potwierdź
+wizard-step-3-description = Wygeneruj spersonalizowaną trasę
+wizard-step-one-duration-section-aria = Sterowanie czasem spaceru
+wizard-step-one-duration-label = Czas trwania spaceru
+wizard-step-one-duration-aria = Suwak czasu spaceru
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Zainteresowania
+wizard-step-one-interests-heading = Zainteresowania
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} wybrany
+        [few] {$count} wybrane
+        [many] {$count} wybranych
+       *[other] {$count} wybranych
+    }
+wizard-step-one-interests-picker-aria = Wybierz zainteresowania spaceru
+wizard-step-one-continue = Przejdź do preferencji
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Język
 walk-complete-hero-title = Spacer zakończony!

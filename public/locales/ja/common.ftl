@@ -96,6 +96,34 @@ quick-walk-save-aria = クイック散歩を保存
 
 
 
+wizard-header-title = ルートウィザード
+wizard-header-back-label = 戻る
+wizard-header-help-label = ヘルプ
+wizard-help-placeholder = まもなくコンテキストヘルプが表示されます
+wizard-step-1-title = 所要時間と興味
+wizard-step-1-description = ウォークの長さとテーマを設定します
+wizard-step-2-title = 発見の優先度
+wizard-step-2-description = 人気スポットと隠れた名所のバランスを取ります
+wizard-step-3-title = 確認と確定
+wizard-step-3-description = カスタムルートを生成します
+wizard-step-one-duration-section-aria = 所要時間コントロール
+wizard-step-one-duration-label = ウォークの所要時間
+wizard-step-one-duration-aria = 所要時間スライダー
+wizard-step-one-duration-marker-start = 15分
+wizard-step-one-duration-marker-mid = 90分
+wizard-step-one-duration-marker-end = 180分
+wizard-step-one-duration-format = {$minutes}分
+wizard-step-one-interests-section-aria = 興味
+wizard-step-one-interests-heading = 興味
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} 件を選択
+       *[other] {$count} 件を選択
+    }
+wizard-step-one-interests-picker-aria = ウォークの興味を選択
+wizard-step-one-continue = 優先設定へ進む
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = 言語
 walk-complete-hero-title = ウォーク完了！

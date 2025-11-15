@@ -99,6 +99,37 @@ quick-walk-save-aria = Sàbhail a’ chuairt luath
 
 
 
+wizard-header-title = Draoidh slighe
+wizard-header-back-label = Air ais
+wizard-header-help-label = Cobhair
+wizard-help-placeholder = Thig cobhair shuidheachail a dh’aithghearr
+wizard-step-1-title = Ùine is ùidhean
+wizard-step-1-description = Suidhich fad agus cuspairean na cuairte
+wizard-step-2-title = Roghainnean lorg
+wizard-step-2-description = Cothromaich prìomh-àiteachan is ulaidhean falaichte
+wizard-step-3-title = Dèan lèirmheas is dearbhaich
+wizard-step-3-description = Cruthaich an t-slighe phearsanta
+wizard-step-one-duration-section-aria = Smachd air ùine na cuairte
+wizard-step-one-duration-label = Ùine na cuairte
+wizard-step-one-duration-aria = Sleamhnag ùine na cuairte
+wizard-step-one-duration-marker-start = 15 mion
+wizard-step-one-duration-marker-mid = 90 mion
+wizard-step-one-duration-marker-end = 180 mion
+wizard-step-one-duration-format = {$minutes} mion
+wizard-step-one-interests-section-aria = Ùidhean
+wizard-step-one-interests-heading = Ùidhean
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} air a thaghadh
+        [two] {$count} air an taghadh
+        [few] {$count} air an taghadh
+        [many] {$count} air an taghadh
+       *[other] {$count} air an taghadh
+    }
+wizard-step-one-interests-picker-aria = Tagh ùidhean na cuairte
+wizard-step-one-continue = Lean air adhart gu roghainnean
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Cànan
 walk-complete-hero-title = Cuairt choise crìochnaichte!

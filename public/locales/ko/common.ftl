@@ -96,6 +96,34 @@ quick-walk-save-aria = 빠른 걷기 저장
 
 
 
+wizard-header-title = 경로 마법사
+wizard-header-back-label = 뒤로
+wizard-header-help-label = 도움말
+wizard-help-placeholder = 곧 상황별 도움말이 제공됩니다
+wizard-step-1-title = 소요 시간과 관심사
+wizard-step-1-description = 걷기 길이와 테마를 설정하세요
+wizard-step-2-title = 탐색 선호도
+wizard-step-2-description = 인기 명소와 숨은 명소의 균형을 맞춥니다
+wizard-step-3-title = 검토 및 확인
+wizard-step-3-description = 맞춤형 경로를 생성합니다
+wizard-step-one-duration-section-aria = 걷기 시간 제어
+wizard-step-one-duration-label = 걷기 소요 시간
+wizard-step-one-duration-aria = 걷기 시간 슬라이더
+wizard-step-one-duration-marker-start = 15분
+wizard-step-one-duration-marker-mid = 90분
+wizard-step-one-duration-marker-end = 180분
+wizard-step-one-duration-format = {$minutes}분
+wizard-step-one-interests-section-aria = 관심사
+wizard-step-one-interests-heading = 관심사
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count}개 선택됨
+       *[other] {$count}개 선택됨
+    }
+wizard-step-one-interests-picker-aria = 걷기 관심사를 선택하세요
+wizard-step-one-continue = 선호 설정으로 이동
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = 언어
 walk-complete-hero-title = 걷기가 완료되었습니다!

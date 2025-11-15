@@ -96,6 +96,33 @@ quick-walk-save-aria = บันทึกการเดินเร็ว
 
 
 
+wizard-header-title = ตัวช่วยจัดเส้นทาง
+wizard-header-back-label = กลับ
+wizard-header-help-label = ความช่วยเหลือ
+wizard-help-placeholder = ความช่วยเหลือเชิงบริบทจะพร้อมใช้งานเร็วๆ นี้
+wizard-step-1-title = ระยะเวลาและความสนใจ
+wizard-step-1-description = ตั้งความยาวและธีมของการเดิน
+wizard-step-2-title = ตัวเลือกการค้นพบ
+wizard-step-2-description = สร้างสมดุลระหว่างจุดฮิตกับจุดลับ
+wizard-step-3-title = ตรวจสอบและยืนยัน
+wizard-step-3-description = สร้างเส้นทางที่ปรับแต่งเอง
+wizard-step-one-duration-section-aria = การควบคุมระยะเวลาเดิน
+wizard-step-one-duration-label = ระยะเวลาเดิน
+wizard-step-one-duration-aria = แถบเลื่อนระยะเวลาเดิน
+wizard-step-one-duration-marker-start = 15 นาที
+wizard-step-one-duration-marker-mid = 90 นาที
+wizard-step-one-duration-marker-end = 180 นาที
+wizard-step-one-duration-format = {$minutes} นาที
+wizard-step-one-interests-section-aria = ความสนใจ
+wizard-step-one-interests-heading = ความสนใจ
+wizard-step-one-interests-selected =
+    { $count ->
+       *[other] เลือก {$count}
+    }
+wizard-step-one-interests-picker-aria = เลือกความสนใจสำหรับการเดิน
+wizard-step-one-continue = ดำเนินการต่อไปยังการตั้งค่า
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = ภาษา
 walk-complete-hero-title = เดินจบเรียบร้อย!

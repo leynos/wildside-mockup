@@ -98,6 +98,36 @@ quick-walk-save-aria = Сохранить быстрый маршрут
 
 
 
+wizard-header-title = Мастер маршрута
+wizard-header-back-label = Назад
+wizard-header-help-label = Справка
+wizard-help-placeholder = Контекстная помощь скоро появится
+wizard-step-1-title = Длительность и интересы
+wizard-step-1-description = Задайте длину прогулки и темы
+wizard-step-2-title = Предпочтения открытия
+wizard-step-2-description = Сбалансируйте популярные места и скрытые жемчужины
+wizard-step-3-title = Проверка и подтверждение
+wizard-step-3-description = Сгенерируйте персональный маршрут
+wizard-step-one-duration-section-aria = Управление длительностью прогулки
+wizard-step-one-duration-label = Длительность прогулки
+wizard-step-one-duration-aria = Ползунок длительности прогулки
+wizard-step-one-duration-marker-start = 15 мин
+wizard-step-one-duration-marker-mid = 90 мин
+wizard-step-one-duration-marker-end = 180 мин
+wizard-step-one-duration-format = {$minutes} мин
+wizard-step-one-interests-section-aria = Интересы
+wizard-step-one-interests-heading = Интересы
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] Выбрана {$count}
+        [few] Выбрано {$count}
+        [many] Выбрано {$count}
+       *[other] Выбрано {$count}
+    }
+wizard-step-one-interests-picker-aria = Выберите интересы для прогулки
+wizard-step-one-continue = Перейти к предпочтениям
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Язык
 walk-complete-hero-title = Прогулка завершена!

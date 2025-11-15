@@ -96,6 +96,34 @@ quick-walk-save-aria = क्विक वॉक सहेजें
 
 
 
+wizard-header-title = मार्ग सहायक
+wizard-header-back-label = वापस
+wizard-header-help-label = सहायता
+wizard-help-placeholder = संदर्भित सहायता जल्द उपलब्ध होगी
+wizard-step-1-title = अवधि और रुचियाँ
+wizard-step-1-description = वॉक की लंबाई और विषय सेट करें
+wizard-step-2-title = खोज प्राथमिकताएँ
+wizard-step-2-description = लोकप्रिय स्थानों और छिपे रत्नों में संतुलन रखें
+wizard-step-3-title = समीक्षा और पुष्टि
+wizard-step-3-description = अनुकूलित मार्ग तैयार करें
+wizard-step-one-duration-section-aria = वॉक अवधि नियंत्रण
+wizard-step-one-duration-label = वॉक की अवधि
+wizard-step-one-duration-aria = वॉक अवधि स्लाइडर
+wizard-step-one-duration-marker-start = 15 मिनट
+wizard-step-one-duration-marker-mid = 90 मिनट
+wizard-step-one-duration-marker-end = 180 मिनट
+wizard-step-one-duration-format = {$minutes} मिनट
+wizard-step-one-interests-section-aria = रुचियाँ
+wizard-step-one-interests-heading = रुचियाँ
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} चयनित
+       *[other] {$count} चयनित
+    }
+wizard-step-one-interests-picker-aria = वॉक के लिए रुचियाँ चुनें
+wizard-step-one-continue = प्राथमिकताओं पर आगे बढ़ें
+
+
 app-shell-title = वाइल्डसाइड मॉकअप
 controls-language-label = भाषा
 walk-complete-hero-title = वॉक पूर्ण हुई!

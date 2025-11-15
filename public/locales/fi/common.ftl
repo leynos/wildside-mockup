@@ -96,6 +96,34 @@ quick-walk-save-aria = Tallenna pikakävely
 
 
 
+wizard-header-title = Reittiavustaja
+wizard-header-back-label = Takaisin
+wizard-header-help-label = Ohje
+wizard-help-placeholder = Kontekstuaalinen ohje on pian saatavilla
+wizard-step-1-title = Kesto ja kiinnostukset
+wizard-step-1-description = Määritä kävelyn pituus ja teemat
+wizard-step-2-title = Löytämisen mieltymykset
+wizard-step-2-description = Tasapainota suosikkikohteet ja kätketyt helmet
+wizard-step-3-title = Tarkista ja vahvista
+wizard-step-3-description = Luo räätälöity reitti
+wizard-step-one-duration-section-aria = Kävelyn keston hallinta
+wizard-step-one-duration-label = Kävelyn kesto
+wizard-step-one-duration-aria = Kävelyn keston liukusäädin
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Kiinnostukset
+wizard-step-one-interests-heading = Kiinnostukset
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} valittu
+       *[other] {$count} valittua
+    }
+wizard-step-one-interests-picker-aria = Valitse kävelyn kiinnostukset
+wizard-step-one-continue = Jatka mieltymyksiin
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Kieli
 walk-complete-hero-title = Kävely valmis!

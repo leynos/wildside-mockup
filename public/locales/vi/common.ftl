@@ -96,6 +96,34 @@ quick-walk-save-aria = Lưu chuyến đi bộ nhanh
 
 
 
+wizard-header-title = Trợ lý tuyến đường
+wizard-header-back-label = Quay lại
+wizard-header-help-label = Trợ giúp
+wizard-help-placeholder = Trợ giúp theo ngữ cảnh sẽ sớm xuất hiện
+wizard-step-1-title = Thời lượng và sở thích
+wizard-step-1-description = Thiết lập độ dài và chủ đề chuyến đi bộ
+wizard-step-2-title = Tùy chọn khám phá
+wizard-step-2-description = Cân bằng điểm nổi bật và viên ngọc ẩn
+wizard-step-3-title = Xem lại và xác nhận
+wizard-step-3-description = Tạo tuyến đường được cá nhân hóa
+wizard-step-one-duration-section-aria = Điều khiển thời lượng chuyến đi bộ
+wizard-step-one-duration-label = Thời lượng chuyến đi bộ
+wizard-step-one-duration-aria = Thanh trượt thời lượng chuyến đi bộ
+wizard-step-one-duration-marker-start = 15 phút
+wizard-step-one-duration-marker-mid = 90 phút
+wizard-step-one-duration-marker-end = 180 phút
+wizard-step-one-duration-format = {$minutes} phút
+wizard-step-one-interests-section-aria = Sở thích
+wizard-step-one-interests-heading = Sở thích
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] Đã chọn {$count}
+       *[other] Đã chọn {$count}
+    }
+wizard-step-one-interests-picker-aria = Chọn sở thích cho chuyến đi bộ
+wizard-step-one-continue = Tiếp tục đến tùy chọn
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Ngôn ngữ
 walk-complete-hero-title = Hoàn thành chuyến đi!

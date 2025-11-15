@@ -96,6 +96,34 @@ quick-walk-save-aria = Gem hurtig gåtur
 
 
 
+wizard-header-title = Ruteassistent
+wizard-header-back-label = Tilbage
+wizard-header-help-label = Hjælp
+wizard-help-placeholder = Kontekstuel hjælp kommer snart
+wizard-step-1-title = Varighed og interesser
+wizard-step-1-description = Indstil gåturens længde og temaer
+wizard-step-2-title = Opdagelsespræferencer
+wizard-step-2-description = Balancér hotspots og skjulte perler
+wizard-step-3-title = Gennemgå og bekræft
+wizard-step-3-description = Generér den skræddersyede tur
+wizard-step-one-duration-section-aria = Kontroller for gåturens varighed
+wizard-step-one-duration-label = Gåturens varighed
+wizard-step-one-duration-aria = Skyder til gåturens varighed
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Interesser
+wizard-step-one-interests-heading = Interesser
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} valgt
+       *[other] {$count} valgte
+    }
+wizard-step-one-interests-picker-aria = Vælg interesser til gåturen
+wizard-step-one-continue = Fortsæt til præferencer
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Sprog
 walk-complete-hero-title = Gåturen er gennemført!

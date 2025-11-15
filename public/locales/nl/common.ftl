@@ -96,6 +96,34 @@ quick-walk-save-aria = Snelle wandeling opslaan
 
 
 
+wizard-header-title = Route-assistent
+wizard-header-back-label = Terug
+wizard-header-help-label = Help
+wizard-help-placeholder = Contextuele hulp verschijnt binnenkort
+wizard-step-1-title = Duur en interesses
+wizard-step-1-description = Stel de lengte en thema’s van de wandeling in
+wizard-step-2-title = Ontdekkingsvoorkeuren
+wizard-step-2-description = Balanceer hotspots en verborgen parels
+wizard-step-3-title = Controleren en bevestigen
+wizard-step-3-description = Genereer de maatwerkroute
+wizard-step-one-duration-section-aria = Bediening voor duur van de wandeling
+wizard-step-one-duration-label = Duur van de wandeling
+wizard-step-one-duration-aria = Schuifregelaar voor de duur van de wandeling
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Interesses
+wizard-step-one-interests-heading = Interesses
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} geselecteerd
+       *[other] {$count} geselecteerd
+    }
+wizard-step-one-interests-picker-aria = Kies interesses voor de wandeling
+wizard-step-one-continue = Ga door naar voorkeuren
+
+
 app-shell-title = Wildside Mockup
 controls-language-label = Taal
 walk-complete-hero-title = Wandeling voltooid!
