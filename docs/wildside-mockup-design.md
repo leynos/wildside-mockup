@@ -399,7 +399,27 @@ Mapping guidance:
   - English copy remains the default via `defaultValue`, so existing tests
     and snapshots continue to pass.
   - All translations live under `public/locales/<locale>/common.ftl`, pass
-    `moz-fluent-lint`, and can evolve independently of the data schema.
+  `moz-fluent-lint`, and can evolve independently of the data schema.
+
+#### `/wizard` localisation strategy (step scaffolding + Fluent)
+
+- `WizardLayout` now maps wizard IDs (`step-1`, `step-2`, `step-3`) to
+  Fluent keys of the form `wizard-step-{id}-title` and
+  `wizard-step-{id}-description` before rendering the stepper. This keeps the
+  TanStack Router and tests focused on IDs while Fluent controls visible copy.
+- Shared chrome strings (`wizard-header-*`, `wizard-help-placeholder`) live in
+  Fluent so the back/help controls and placeholder alerts stay consistent
+  across all wizard steps.
+- Step-specific controls follow the same prefix strategy as `/customize`. For
+  example, `/wizard/step-1` exposes slider copy through
+  `wizard-step-one-duration-*` keys and reuses
+  `wizard-step-one-interests-*` for chip headings, aria labels, and plural
+  counters. The React components pass English `defaultValue` strings to
+  `t(...)`, keeping Vitest snapshots deterministic until translators provide
+  locale-specific copy.
+- Future wizard steps should continue deriving Fluent keys from control IDs to
+  ensure accessibility labels, headings, and summary strings remain localisable
+  without reshaping fixtures.
 
 #### Progress (26 October 2025)
 

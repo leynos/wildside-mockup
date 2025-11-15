@@ -96,6 +96,33 @@ quick-walk-tab-notes = Notes
 quick-walk-save-aria = Save quick walk
 
 
+wizard-header-title = Walk Wizard
+wizard-header-back-label = Back
+wizard-header-help-label = Help
+wizard-help-placeholder = Contextual help coming soon
+wizard-step-1-title = Duration & interests
+wizard-step-1-description = Set walk length and themes
+wizard-step-2-title = Discovery preferences
+wizard-step-2-description = Balance hotspots vs. hidden gems
+wizard-step-3-title = Review & confirm
+wizard-step-3-description = Generate the tailored walk
+wizard-step-one-duration-section-aria = Walk duration controls
+wizard-step-one-duration-label = Walk duration
+wizard-step-one-duration-aria = Walk duration slider
+wizard-step-one-duration-marker-start = 15 min
+wizard-step-one-duration-marker-mid = 90 min
+wizard-step-one-duration-marker-end = 180 min
+wizard-step-one-duration-format = {$minutes} min
+wizard-step-one-interests-section-aria = Interests
+wizard-step-one-interests-heading = Interests
+wizard-step-one-interests-selected =
+    { $count ->
+        [one] {$count} selected
+       *[other] {$count} selected
+    }
+wizard-step-one-interests-picker-aria = Select walk interests
+wizard-step-one-continue = Continue to preferences
+
 
 app-shell-title = Wildside Mockup
 controls-language-label = Language

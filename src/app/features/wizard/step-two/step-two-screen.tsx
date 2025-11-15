@@ -4,6 +4,7 @@ import * as Slider from "@radix-ui/react-slider";
 import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
@@ -12,11 +13,15 @@ import { accessibilityOptions, wizardSteps } from "../../../data/wizard";
 
 export function WizardStepTwo(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [discoveryMix, setDiscoveryMix] = useState(60);
   const [accessibility, setAccessibility] = useState<Record<string, boolean>>({
     "well-lit": true,
     wheelchair: false,
     paved: true,
+  });
+  const helpMessage = t("wizard-help-placeholder", {
+    defaultValue: "Contextual help coming soon",
   });
 
   return (
@@ -24,7 +29,7 @@ export function WizardStepTwo(): JSX.Element {
       steps={wizardSteps}
       activeStepId="step-2"
       onBack={() => navigate({ to: "/wizard/step-1" })}
-      onHelp={() => window.alert("Contextual help coming soon")}
+      onHelp={() => window.alert(helpMessage)}
       footer={
         <div className="flex gap-3">
           <button

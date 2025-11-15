@@ -3,6 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, type ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
@@ -35,14 +36,18 @@ function WizardSummaryPanel({
 
 export function WizardStepThree(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
+  const helpMessage = t("wizard-help-placeholder", {
+    defaultValue: "Contextual help coming soon",
+  });
 
   return (
     <WizardLayout
       steps={wizardSteps}
       activeStepId="step-3"
       onBack={() => navigate({ to: "/wizard/step-2" })}
-      onHelp={() => window.alert("Contextual help coming soon")}
+      onHelp={() => window.alert(helpMessage)}
       footer={
         <div className="flex flex-col gap-3">
           <button

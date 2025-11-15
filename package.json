@@ -16,7 +16,8 @@
     "test:a11y": "vitest --run --config vitest.a11y.config.ts",
     "test:a11y:watch": "vitest --watch --config vitest.a11y.config.ts",
     "test:e2e": "playwright test",
-    "test:all": "bun lint && bun check:types && bun test && bun run test:a11y && bun semantic && bun test:e2e",
+    "lint:ftl-vars": "bun run scripts/check-fluent-vars.ts",
+    "test:all": "bun lint && bun check:types && bun test && bun run test:a11y && bun run lint:ftl-vars && bun semantic && bun test:e2e",
     "ff": "bunx --bun @tailwindcss/cli --input src/index.css --output tmp/tailwind.css --verbose && rm -f tmp/tailwind.css && bun run test:all && uvx --from moz-fluent-linter moz-fluent-lint public/locales/",
     "semantic:lint": "bunx biome ci src tests tools docs && bun run lint:classlist && bun run lint:class-duplicates && uvx semgrep --config tools/semgrep-semantic.yml --include src/**/*.tsx --include tests/**/*.tsx && bunx stylelint 'src/**/*.css' --config tools/stylelint.config.cjs",
     "semantic": "bun run semantic:lint",
@@ -57,6 +58,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",
+    "@fluent/syntax": "^0.19.0",
     "@biomejs/biome": "^2.3.1",
     "@getgrit/cli": "^0.1.0-alpha.1743007075",
     "@playwright/test": "^1.48.2",

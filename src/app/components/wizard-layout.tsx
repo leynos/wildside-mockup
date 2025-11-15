@@ -1,6 +1,8 @@
 /** @file Shared layout for wizard steps providing header, stepper, and footer actions. */
 
 import type { JSX, ReactNode } from "react";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { WizardStep } from "../data/wizard";
 import { AppHeader } from "../layout/app-header";
@@ -25,17 +27,34 @@ export function WizardLayout({
   onHelp,
   steps,
 }: WizardLayoutProps): JSX.Element {
+  const { t } = useTranslation();
+  const wizardTitle = t("wizard-header-title", { defaultValue: "Walk Wizard" });
+  const backLabel = t("wizard-header-back-label", { defaultValue: "Back" });
+  const helpLabel = t("wizard-header-help-label", { defaultValue: "Help" });
+
+  const localizedSteps = useMemo(
+    () =>
+      steps.map((step) => ({
+        ...step,
+        title: t(`wizard-${step.id}-title`, { defaultValue: step.title }),
+        description: t(`wizard-${step.id}-description`, {
+          defaultValue: step.description,
+        }),
+      })),
+    [steps, t],
+  );
+
   return (
     <MobileShell tone="dark">
       <div className="screen-stack">
         <AppHeader
           variant="wizard"
-          title="Walk Wizard"
+          title={wizardTitle}
           leading={
             onBack ? (
               <button
                 type="button"
-                aria-label="Back"
+                aria-label={backLabel}
                 className="header-nav-button"
                 onClick={onBack}
               >
@@ -47,7 +66,7 @@ export function WizardLayout({
             onHelp ? (
               <button
                 type="button"
-                aria-label="Help"
+                aria-label={helpLabel}
                 className="header-icon-button"
                 onClick={onHelp}
               >
@@ -56,7 +75,7 @@ export function WizardLayout({
             ) : undefined
           }
         >
-          <WizardStepper steps={steps} activeStepId={activeStepId} />
+          <WizardStepper steps={localizedSteps} activeStepId={activeStepId} />
         </AppHeader>
         <main className="screen-scroll pt-6">{children}</main>
         {footer ? (

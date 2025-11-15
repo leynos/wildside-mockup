@@ -531,6 +531,41 @@ describe("Stage 3 wizard flows", () => {
     expect(heading).toBeTruthy();
   });
 
+  it("localises wizard step one copy and interpolations for Spanish", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/wizard/step-1"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      expect(
+        view.getByRole("region", { name: /controles de duración de la caminata/i }),
+      ).toBeTruthy();
+      expect(view.getByRole("button", { name: /continuar con preferencias/i })).toBeTruthy();
+
+      const selectionSummary = view.getByText(/seleccionados$/i);
+      expect(selectionSummary.textContent?.trim()).toBe("2 seleccionados");
+
+      const streetArtLabel = i18n.t("interest-street-art-label") ?? "";
+      const streetArtChip = view.getByRole("button", {
+        name: new RegExp(escapeRegExp(streetArtLabel), "i"),
+      });
+      act(() => clickElement(streetArtChip));
+
+      const updatedSummary = view.getByText(/seleccionado$/i);
+      expect(updatedSummary.textContent?.trim()).toBe("1 seleccionado");
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
+
   it("renders wizard step two surfaces with semantic classes", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-2"));
     const container = requireContainer(mount);
