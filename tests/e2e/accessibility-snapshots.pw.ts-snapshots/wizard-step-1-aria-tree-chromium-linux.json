@@ -187,8 +187,8 @@
                                 "name": "",
                                 "children": [
                                   {
-                                    "role": "generic",
-                                    "name": "",
+                                    "role": "region",
+                                    "name": "Walk duration controls",
                                     "children": [
                                       {
                                         "role": "generic",
@@ -265,8 +265,8 @@
                                     ]
                                   },
                                   {
-                                    "role": "generic",
-                                    "name": "",
+                                    "role": "region",
+                                    "name": "Interests",
                                     "children": [
                                       {
                                         "role": "sectionheader",
@@ -313,40 +313,6 @@
                                         "children": [
                                           {
                                             "role": "button",
-                                            "name": "Street Art",
-                                            "pressed": true,
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "Street Art",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "Street Art"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "button",
-                                            "name": "Waterfront",
-                                            "pressed": true,
-                                            "children": [
-                                              {
-                                                "role": "text",
-                                                "name": "Waterfront",
-                                                "children": [
-                                                  {
-                                                    "role": "InlineTextBox",
-                                                    "name": "Waterfront"
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "role": "button",
                                             "name": "Parks & Nature",
                                             "pressed": false,
                                             "children": [
@@ -381,6 +347,23 @@
                                           },
                                           {
                                             "role": "button",
+                                            "name": "Street Art",
+                                            "pressed": true,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Street Art",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Street Art"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "button",
                                             "name": "Historic Sites",
                                             "pressed": false,
                                             "children": [
@@ -391,6 +374,23 @@
                                                   {
                                                     "role": "InlineTextBox",
                                                     "name": "Historic Sites"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "role": "button",
+                                            "name": "Waterfront",
+                                            "pressed": true,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Waterfront",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Waterfront"
                                                   }
                                                 ]
                                               }

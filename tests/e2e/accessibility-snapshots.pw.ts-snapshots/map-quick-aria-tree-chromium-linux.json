@@ -36,8 +36,8 @@
                                     "name": "",
                                     "children": [
                                       {
-                                        "role": "generic",
-                                        "name": "",
+                                        "role": "region",
+                                        "name": "Quick walk map viewport",
                                         "children": [
                                           {
                                             "role": "generic",
@@ -64,6 +64,91 @@
                                                       {
                                                         "role": "generic",
                                                         "name": ""
+                                                      },
+                                                      {
+                                                        "role": "generic",
+                                                        "name": ""
+                                                      },
+                                                      {
+                                                        "role": "generic",
+                                                        "name": ""
+                                                      },
+                                                      {
+                                                        "role": "generic",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "group",
+                                                            "name": "",
+                                                            "children": [
+                                                              {
+                                                                "role": "none",
+                                                                "name": "",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "DisclosureTriangle",
+                                                                    "name": "Toggle attribution",
+                                                                    "expanded": true
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "role": "none",
+                                                                "name": "",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "generic",
+                                                                    "name": "",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "link",
+                                                                        "name": "© OpenMapTiles",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "text",
+                                                                            "name": "© OpenMapTiles",
+                                                                            "children": [
+                                                                              {
+                                                                                "role": "InlineTextBox",
+                                                                                "name": "© OpenMapTiles"
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        ]
+                                                                      },
+                                                                      {
+                                                                        "role": "text",
+                                                                        "name": " ",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "InlineTextBox",
+                                                                            "name": " "
+                                                                          }
+                                                                        ]
+                                                                      },
+                                                                      {
+                                                                        "role": "link",
+                                                                        "name": "© OpenStreetMap contributors",
+                                                                        "children": [
+                                                                          {
+                                                                            "role": "text",
+                                                                            "name": "© OpenStreetMap contributors",
+                                                                            "children": [
+                                                                              {
+                                                                                "role": "InlineTextBox",
+                                                                                "name": "© OpenStreetMap contributors"
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        ]
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
                                                       }
                                                     ]
                                                   }
@@ -372,6 +457,26 @@
                                                         ]
                                                       }
                                                     ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
                                                   }
                                                 ]
                                               }

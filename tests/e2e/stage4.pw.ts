@@ -56,8 +56,8 @@ test.describe("Stage 4 routes", () => {
     await page.getByRole("button", { name: /manage/i }).click();
     const doneToggle = page.getByRole("button", { name: /^done$/i });
     const downloadsRegion = page.getByRole("region", { name: /downloaded areas/i });
-    const downloadCards = downloadsRegion.getByRole("article").filter({ hasNotText: /deleted$/i });
-    const undoCards = downloadsRegion.getByRole("article").filter({ hasText: /deleted$/i });
+    const downloadCards = downloadsRegion.getByRole("article").filter({ hasNotText: /deleted/i });
+    const undoCards = downloadsRegion.getByRole("article").filter({ hasText: /deleted/i });
     const deleteButtons = downloadsRegion.getByRole("button", { name: /^delete /i });
 
     const cardsBefore = await downloadCards.count();
@@ -67,7 +67,7 @@ test.describe("Stage 4 routes", () => {
     await deleteButtons.first().click();
     await expect(downloadCards).toHaveCount(cardsBefore - 1);
     const undoForDeleted = undoCards.filter({
-      hasText: new RegExp(`${escapeRegExp(deletedTitle)} deleted`, "i"),
+      hasText: new RegExp(`${escapeRegExp(deletedTitle)}.+deleted`, "i"),
     });
     await expect(undoForDeleted).toBeVisible();
     await undoForDeleted.getByRole("button", { name: /^undo$/i }).click();
