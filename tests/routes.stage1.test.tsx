@@ -587,6 +587,49 @@ describe("Stage 3 wizard flows", () => {
     });
   });
 
+  it("localises wizard step two discovery and accessibility copy for Spanish", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/wizard/step-2"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      const discoveryRegion = view.getByRole("region", { name: /estilo de descubrimiento/i });
+      expect(
+        within(discoveryRegion).getByText(/equilibra sitios populares con joyas ocultas/i),
+      ).toBeTruthy();
+      expect(within(discoveryRegion).getByText(/nuevo/i)).toBeTruthy();
+      expect(within(discoveryRegion).getByText(/mezcla equilibrada/i)).toBeTruthy();
+
+      const accessibilityRegion = view.getByRole("region", { name: /accesibilidad y seguridad/i });
+      const wellLitLabel = /caminos bien iluminados/i;
+      const wheelchairLabel = /sillas de ruedas/i;
+      const pavedLabel = /superficies pavimentadas/i;
+
+      expect(within(accessibilityRegion).getByText(wellLitLabel)).toBeTruthy();
+      expect(within(accessibilityRegion).getByRole("switch", { name: wellLitLabel })).toBeTruthy();
+      expect(within(accessibilityRegion).getByText(wheelchairLabel)).toBeTruthy();
+      expect(
+        within(accessibilityRegion).getByRole("switch", { name: wheelchairLabel }),
+      ).toBeTruthy();
+      expect(within(accessibilityRegion).getByText(pavedLabel)).toBeTruthy();
+      expect(within(accessibilityRegion).getByRole("switch", { name: pavedLabel })).toBeTruthy();
+
+      const footer = view.getByRole("contentinfo");
+      expect(within(footer).getByRole("button", { name: /revisar caminata/i })).toBeTruthy();
+      expect(within(footer).getByRole("button", { name: /atrás/i })).toBeTruthy();
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
+
   it("opens the wizard confirmation dialog on step three", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);

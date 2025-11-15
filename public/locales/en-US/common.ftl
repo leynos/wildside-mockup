@@ -121,6 +121,27 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Select walk interests
 wizard-step-one-continue = Continue to preferences
+wizard-step-two-discovery-heading = Discovery style
+wizard-step-two-discovery-aria = Discovery style
+wizard-step-two-discovery-description = Balance popular hotspots with hidden gems to match today’s mood.
+wizard-step-two-discovery-badge = New
+wizard-step-two-discovery-scale-left = Crowded
+wizard-step-two-discovery-scale-mid = Balanced
+wizard-step-two-discovery-scale-right = Secluded
+wizard-step-two-discovery-slider-aria = Discovery slider
+wizard-step-two-discovery-thumb-aria = Adjust discovery style balance
+wizard-step-two-discovery-summary-hidden = Hidden gems heavy
+wizard-step-two-discovery-summary-hotspots = Hotspot focused
+wizard-step-two-discovery-summary-balanced = Balanced mix
+wizard-step-two-accessibility-section-aria = Accessibility & safety
+wizard-step-two-accessibility-heading = Accessibility & safety
+wizard-step-two-accessibility-well-lit-label = Well-lit paths
+wizard-step-two-accessibility-well-lit-description = Prioritise brightly lit evening routes
+wizard-step-two-accessibility-wheelchair-label = Wheelchair friendly
+wizard-step-two-accessibility-wheelchair-description = Smooth, wide pathways
+wizard-step-two-accessibility-paved-label = Paved surfaces
+wizard-step-two-accessibility-paved-description = Avoid dirt trails and grass
+wizard-step-two-review = Review walk
 
 
 

@@ -420,6 +420,20 @@ Mapping guidance:
 - Future wizard steps should continue deriving Fluent keys from control IDs to
   ensure accessibility labels, headings, and summary strings remain localisable
   without reshaping fixtures.
+- `/wizard/step-2` now follows the same Fluent prefix strategy: discovery slider
+  headings, summary chips, and CTA strings resolve via `wizard-step-two-*`
+  keys, while `accessibilityOptions` IDs map to
+  `wizard-step-two-accessibility-{id}-{label|description}` so copy stays
+  localisable without reshaping fixtures.
+- Slider summary states have dedicated keys (`hidden`, `hotspots`, `balanced`)
+  which keeps translator tone independent of the numeric thresholds and gives
+  future locales freedom to adjust phrasing without changing TypeScript.
+- Footer CTAs reuse `wizard-header-back-label` for the back action and add a
+  single `wizard-step-two-review` key for “Review walk”, keeping repeated copy
+  deduplicated for translators.
+- A Spanish Vitest now renders `/wizard/step-2` to guard the new keys and prove
+  the route survives when `i18n` switches language, mirroring the
+  `/customize` precedent for regression coverage.
 
 #### Progress (26 October 2025)
 
