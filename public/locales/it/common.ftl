@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Seleziona gli interessi della passeggiata
 wizard-step-one-continue = Continua alle preferenze
+wizard-step-two-discovery-heading = Stile di scoperta
+wizard-step-two-discovery-aria = Stile di scoperta
+wizard-step-two-discovery-description = Bilancia hotspot popolari e gemme nascoste per seguire l’umore di oggi.
+wizard-step-two-discovery-badge = Nuovo
+wizard-step-two-discovery-scale-left = Affollato
+wizard-step-two-discovery-scale-mid = Bilanciato
+wizard-step-two-discovery-scale-right = Isolato
+wizard-step-two-discovery-slider-aria = Cursore stile di scoperta
+wizard-step-two-discovery-thumb-aria = Regola l’equilibrio dello stile di scoperta
+wizard-step-two-discovery-summary-hidden = Focus sulle gemme nascoste
+wizard-step-two-discovery-summary-hotspots = Focus sugli hotspot
+wizard-step-two-discovery-summary-balanced = Mix equilibrato
+wizard-step-two-accessibility-section-aria = Accessibilità e sicurezza
+wizard-step-two-accessibility-heading = Accessibilità e sicurezza
+wizard-step-two-accessibility-well-lit-label = Percorsi ben illuminati
+wizard-step-two-accessibility-well-lit-description = Dai priorità ai percorsi serali con ottima illuminazione.
+wizard-step-two-accessibility-wheelchair-label = Adatto alle sedie a rotelle
+wizard-step-two-accessibility-wheelchair-description = Percorsi larghi e scorrevoli
+wizard-step-two-accessibility-paved-label = Superfici pavimentate
+wizard-step-two-accessibility-paved-description = Evita sterrati e prati
+wizard-step-two-review = Rivedi la camminata
+
 
 
 app-shell-title = Wildside Mockup

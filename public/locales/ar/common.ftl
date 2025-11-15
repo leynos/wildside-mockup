@@ -130,6 +130,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = اختر اهتمامات الجولة
 wizard-step-one-continue = المتابعة إلى التفضيلات
+wizard-step-two-discovery-heading = نمط الاكتشاف
+wizard-step-two-discovery-aria = نمط الاكتشاف
+wizard-step-two-discovery-description = وازن بين المواقع الشهيرة والجواهر المخفية بما يناسب مزاج اليوم.
+wizard-step-two-discovery-badge = جديد
+wizard-step-two-discovery-scale-left = مزدحم
+wizard-step-two-discovery-scale-mid = متوازن
+wizard-step-two-discovery-scale-right = معزول
+wizard-step-two-discovery-slider-aria = شريط نمط الاكتشاف
+wizard-step-two-discovery-thumb-aria = اضبط توازن نمط الاكتشاف
+wizard-step-two-discovery-summary-hidden = تركيز على الجواهر المخفية
+wizard-step-two-discovery-summary-hotspots = تركيز على المواقع الشهيرة
+wizard-step-two-discovery-summary-balanced = مزيج متوازن
+wizard-step-two-accessibility-section-aria = إمكانية الوصول والسلامة
+wizard-step-two-accessibility-heading = إمكانية الوصول والسلامة
+wizard-step-two-accessibility-well-lit-label = مسارات مضاءة جيدًا
+wizard-step-two-accessibility-well-lit-description = أعطِ الأولوية للمسارات المسائية ذات الإضاءة الجيدة.
+wizard-step-two-accessibility-wheelchair-label = مناسب للكراسي المتحركة
+wizard-step-two-accessibility-wheelchair-description = ممرات عريضة وناعمة
+wizard-step-two-accessibility-paved-label = أسطح ممهدة
+wizard-step-two-accessibility-paved-description = تجنب الطرق الترابية والعشب
+wizard-step-two-review = مراجعة المسار
+
 
 
 app-shell-title = وايلدسايد موك آب

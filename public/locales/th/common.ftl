@@ -121,6 +121,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = เลือกความสนใจสำหรับการเดิน
 wizard-step-one-continue = ดำเนินการต่อไปยังการตั้งค่า
+wizard-step-two-discovery-heading = สไตล์การค้นหา
+wizard-step-two-discovery-aria = สไตล์การค้นหา
+wizard-step-two-discovery-description = ปรับสมดุลระหว่างฮอตสปอตยอดนิยมและอัญมณีที่ซ่อนอยู่ให้เข้ากับอารมณ์วันนี้
+wizard-step-two-discovery-badge = ใหม่
+wizard-step-two-discovery-scale-left = คึกคัก
+wizard-step-two-discovery-scale-mid = สมดุล
+wizard-step-two-discovery-scale-right = เงียบสงบ
+wizard-step-two-discovery-slider-aria = แถบเลื่อนสไตล์การค้นหา
+wizard-step-two-discovery-thumb-aria = ปรับสมดุลของสไตล์การค้นหา
+wizard-step-two-discovery-summary-hidden = เน้นอัญมณีที่ซ่อนอยู่
+wizard-step-two-discovery-summary-hotspots = เน้นฮอตสปอต
+wizard-step-two-discovery-summary-balanced = ผสมผสานอย่างสมดุล
+wizard-step-two-accessibility-section-aria = การเข้าถึงและความปลอดภัย
+wizard-step-two-accessibility-heading = การเข้าถึงและความปลอดภัย
+wizard-step-two-accessibility-well-lit-label = เส้นทางที่มีไฟส่องสว่างดี
+wizard-step-two-accessibility-well-lit-description = ให้ความสำคัญกับเส้นทางยามค่ำที่มีแสงสว่างสว่างจ้า
+wizard-step-two-accessibility-wheelchair-label = รองรับวีลแชร์
+wizard-step-two-accessibility-wheelchair-description = ทางเดินเรียบและกว้าง
+wizard-step-two-accessibility-paved-label = พื้นผิวลาดยาง
+wizard-step-two-accessibility-paved-description = หลีกเลี่ยงทางดินและสนามหญ้า
+wizard-step-two-review = ตรวจทานเส้นทางเดิน
+
 
 
 app-shell-title = Wildside Mockup

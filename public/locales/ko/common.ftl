@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = 걷기 관심사를 선택하세요
 wizard-step-one-continue = 선호 설정으로 이동
+wizard-step-two-discovery-heading = 발견 스타일
+wizard-step-two-discovery-aria = 발견 스타일
+wizard-step-two-discovery-description = 오늘의 기분에 맞게 인기 명소와 숨은 보석의 비율을 조절하세요.
+wizard-step-two-discovery-badge = 신규
+wizard-step-two-discovery-scale-left = 붐빔
+wizard-step-two-discovery-scale-mid = 균형
+wizard-step-two-discovery-scale-right = 한적함
+wizard-step-two-discovery-slider-aria = 발견 스타일 슬라이더
+wizard-step-two-discovery-thumb-aria = 발견 스타일 균형 조정
+wizard-step-two-discovery-summary-hidden = 숨은 보석 중심
+wizard-step-two-discovery-summary-hotspots = 핫스폿 중심
+wizard-step-two-discovery-summary-balanced = 균형 잡힌 조합
+wizard-step-two-accessibility-section-aria = 접근성과 안전
+wizard-step-two-accessibility-heading = 접근성과 안전
+wizard-step-two-accessibility-well-lit-label = 조명이 좋은 경로
+wizard-step-two-accessibility-well-lit-description = 밝게 비춰지는 야간 코스를 우선하세요.
+wizard-step-two-accessibility-wheelchair-label = 휠체어 친화적
+wizard-step-two-accessibility-wheelchair-description = 매끄럽고 넓은 보행로
+wizard-step-two-accessibility-paved-label = 포장된 노면
+wizard-step-two-accessibility-paved-description = 비포장 길과 잔디를 피하세요
+wizard-step-two-review = 코스 검토
+
 
 
 app-shell-title = Wildside Mockup

@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = 選擇本次步行的興趣
 wizard-step-one-continue = 前往偏好設定
+wizard-step-two-discovery-heading = 探索風格
+wizard-step-two-discovery-aria = 探索風格
+wizard-step-two-discovery-description = 在熱門景點與隱藏景點之間取得平衡，符合今日心情。
+wizard-step-two-discovery-badge = 新
+wizard-step-two-discovery-scale-left = 熱鬧
+wizard-step-two-discovery-scale-mid = 平衡
+wizard-step-two-discovery-scale-right = 幽靜
+wizard-step-two-discovery-slider-aria = 探索風格滑桿
+wizard-step-two-discovery-thumb-aria = 調整探索風格的平衡
+wizard-step-two-discovery-summary-hidden = 著重隱藏亮點
+wizard-step-two-discovery-summary-hotspots = 著重熱門地標
+wizard-step-two-discovery-summary-balanced = 平衡混合
+wizard-step-two-accessibility-section-aria = 無障礙與安全
+wizard-step-two-accessibility-heading = 無障礙與安全
+wizard-step-two-accessibility-well-lit-label = 燈光充足的路線
+wizard-step-two-accessibility-well-lit-description = 優先選擇夜間照明良好的路線。
+wizard-step-two-accessibility-wheelchair-label = 友善輪椅
+wizard-step-two-accessibility-wheelchair-description = 平滑且寬敞的通道
+wizard-step-two-accessibility-paved-label = 鋪面路段
+wizard-step-two-accessibility-paved-description = 避免土路與草地
+wizard-step-two-review = 檢視步行
+
 
 
 app-shell-title = Wildside Mockup

@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Kies interesses voor de wandeling
 wizard-step-one-continue = Ga door naar voorkeuren
+wizard-step-two-discovery-heading = Ontdekkingsstijl
+wizard-step-two-discovery-aria = Ontdekkingsstijl
+wizard-step-two-discovery-description = Balanceer populaire hotspots met verborgen parels die bij de stemming van vandaag passen.
+wizard-step-two-discovery-badge = Nieuw
+wizard-step-two-discovery-scale-left = Druk
+wizard-step-two-discovery-scale-mid = Gebalanceerd
+wizard-step-two-discovery-scale-right = Afgezonderd
+wizard-step-two-discovery-slider-aria = Ontdekkingsschuifregelaar
+wizard-step-two-discovery-thumb-aria = Pas de balans van de ontdekkingsstijl aan
+wizard-step-two-discovery-summary-hidden = Focus op verborgen parels
+wizard-step-two-discovery-summary-hotspots = Focus op hotspots
+wizard-step-two-discovery-summary-balanced = Gebalanceerde mix
+wizard-step-two-accessibility-section-aria = Toegankelijkheid en veiligheid
+wizard-step-two-accessibility-heading = Toegankelijkheid en veiligheid
+wizard-step-two-accessibility-well-lit-label = Goed verlichte paden
+wizard-step-two-accessibility-well-lit-description = Geef voorrang aan avondroutes met sterke verlichting.
+wizard-step-two-accessibility-wheelchair-label = Rolstoelvriendelijk
+wizard-step-two-accessibility-wheelchair-description = Brede, vlakke paden
+wizard-step-two-accessibility-paved-label = Verharde oppervlakken
+wizard-step-two-accessibility-paved-description = Vermijd onverharde paden en gras
+wizard-step-two-review = Route beoordelen
+
 
 
 app-shell-title = Wildside Mockup

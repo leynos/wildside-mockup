@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = वॉक के लिए रुचियाँ चुनें
 wizard-step-one-continue = प्राथमिकताओं पर आगे बढ़ें
+wizard-step-two-discovery-heading = खोज शैली
+wizard-step-two-discovery-aria = खोज शैली
+wizard-step-two-discovery-description = आज के मूड के अनुसार लोकप्रिय हॉटस्पॉट और छुपे रत्नों के बीच संतुलन बनाएं।
+wizard-step-two-discovery-badge = नया
+wizard-step-two-discovery-scale-left = भीड़भाड़
+wizard-step-two-discovery-scale-mid = संतुलित
+wizard-step-two-discovery-scale-right = एकांत
+wizard-step-two-discovery-slider-aria = खोज शैली स्लाइडर
+wizard-step-two-discovery-thumb-aria = खोज शैली का संतुलन समायोजित करें
+wizard-step-two-discovery-summary-hidden = छुपे रत्नों पर जोर
+wizard-step-two-discovery-summary-hotspots = हॉटस्पॉट पर ध्यान
+wizard-step-two-discovery-summary-balanced = संतुलित मिश्रण
+wizard-step-two-accessibility-section-aria = सुलभता और सुरक्षा
+wizard-step-two-accessibility-heading = सुलभता और सुरक्षा
+wizard-step-two-accessibility-well-lit-label = अच्छी रोशनी वाले रास्ते
+wizard-step-two-accessibility-well-lit-description = तेज़ रोशनी वाले शाम के मार्गों को प्राथमिकता दें।
+wizard-step-two-accessibility-wheelchair-label = व्हीलचेयर अनुकूल
+wizard-step-two-accessibility-wheelchair-description = चिकने और चौड़े रास्ते
+wizard-step-two-accessibility-paved-label = पक्की सतहें
+wizard-step-two-accessibility-paved-description = कच्चे रास्तों और घास से बचें
+wizard-step-two-review = वॉक की समीक्षा करें
+
 
 
 app-shell-title = वाइल्डसाइड मॉकअप

@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Wähle Interessen für den Spaziergang
 wizard-step-one-continue = Weiter zu den Präferenzen
+wizard-step-two-discovery-heading = Entdeckerstil
+wizard-step-two-discovery-aria = Entdeckerstil
+wizard-step-two-discovery-description = Balanciere beliebte Hotspots mit verborgenen Perlen passend zu deiner Stimmung.
+wizard-step-two-discovery-badge = Neu
+wizard-step-two-discovery-scale-left = Belebt
+wizard-step-two-discovery-scale-mid = Ausgewogen
+wizard-step-two-discovery-scale-right = Abgelegen
+wizard-step-two-discovery-slider-aria = Entdeckerregler
+wizard-step-two-discovery-thumb-aria = Passe die Balance des Entdeckerstils an
+wizard-step-two-discovery-summary-hidden = Fokus auf verborgene Perlen
+wizard-step-two-discovery-summary-hotspots = Fokus auf Hotspots
+wizard-step-two-discovery-summary-balanced = Ausgewogene Mischung
+wizard-step-two-accessibility-section-aria = Barrierefreiheit & Sicherheit
+wizard-step-two-accessibility-heading = Barrierefreiheit & Sicherheit
+wizard-step-two-accessibility-well-lit-label = Gut beleuchtete Wege
+wizard-step-two-accessibility-well-lit-description = Bevorzuge abendliche Routen mit starker Beleuchtung.
+wizard-step-two-accessibility-wheelchair-label = Rollstuhlgerecht
+wizard-step-two-accessibility-wheelchair-description = Breite, glatte Wege
+wizard-step-two-accessibility-paved-label = Befestigte Flächen
+wizard-step-two-accessibility-paved-description = Vermeide Schotterpfade und Rasen
+wizard-step-two-review = Route prüfen
+
 
 
 app-shell-title = Wildside Mockup

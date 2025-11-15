@@ -121,6 +121,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = நடைபயண விருப்பங்களை தேர்வு செய்யவும்
 wizard-step-one-continue = விருப்பங்களுக்கு தொடரவும்
+wizard-step-two-discovery-heading = கண்டறியும் பாணி
+wizard-step-two-discovery-aria = கண்டறியும் பாணி
+wizard-step-two-discovery-description = இன்றைய மனநிலைக்கு ஏற்ப பிரபல இடங்களையும் மறைந்த மாணிக்கங்களையும் சமநிலை செய்யுங்கள்.
+wizard-step-two-discovery-badge = புதியது
+wizard-step-two-discovery-scale-left = நெரிசல்
+wizard-step-two-discovery-scale-mid = சமநிலை
+wizard-step-two-discovery-scale-right = தனிமையான
+wizard-step-two-discovery-slider-aria = கண்டறியும் பாணி ஸ்லைடர்
+wizard-step-two-discovery-thumb-aria = கண்டறியும் பாணி சமநிலையை மாற்றவும்
+wizard-step-two-discovery-summary-hidden = மறைந்த மாணிக்கங்கள் மீது கவனம்
+wizard-step-two-discovery-summary-hotspots = பிரபல இடங்கள் மீது கவனம்
+wizard-step-two-discovery-summary-balanced = சமநிலையான கலவை
+wizard-step-two-accessibility-section-aria = அணுகல் & பாதுகாப்பு
+wizard-step-two-accessibility-heading = அணுகல் & பாதுகாப்பு
+wizard-step-two-accessibility-well-lit-label = நன்றாக வெளிச்சமுள்ள பாதைகள்
+wizard-step-two-accessibility-well-lit-description = நல்ல விளக்குள்ள மாலை வழித்தடங்களுக்கு முன்னுரிமை கொடுங்கள்.
+wizard-step-two-accessibility-wheelchair-label = சக்கர நாற்காலிக்கு ஏற்றது
+wizard-step-two-accessibility-wheelchair-description = மென்மையான, விசாலமான நடைபாதைகள்
+wizard-step-two-accessibility-paved-label = பேவ் செய்யப்பட்ட மேற்பரப்புகள்
+wizard-step-two-accessibility-paved-description = மண் பாதைகளையும் புல்வெளிகளையும் தவிர்க்கவும்
+wizard-step-two-review = நடையை மதிப்பாய்வு செய்
+
 
 
 app-shell-title = வில்ட்சைட் மாக்அப்

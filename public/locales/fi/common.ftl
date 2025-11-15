@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Valitse kävelyn kiinnostukset
 wizard-step-one-continue = Jatka mieltymyksiin
+wizard-step-two-discovery-heading = Tutkimistyyli
+wizard-step-two-discovery-aria = Tutkimistyyli
+wizard-step-two-discovery-description = Tasapainota suositut hotspotit ja piilotetut helmet tämänhetkisen fiiliksen mukaan.
+wizard-step-two-discovery-badge = Uusi
+wizard-step-two-discovery-scale-left = Vilkas
+wizard-step-two-discovery-scale-mid = Tasapainoinen
+wizard-step-two-discovery-scale-right = Rauhallinen
+wizard-step-two-discovery-slider-aria = Tutkimistyyli-liukusäädin
+wizard-step-two-discovery-thumb-aria = Säädä tutkimistyylin tasapainoa
+wizard-step-two-discovery-summary-hidden = Painotus piilotettuihin helmiin
+wizard-step-two-discovery-summary-hotspots = Painotus hotspoteihin
+wizard-step-two-discovery-summary-balanced = Tasapainoinen yhdistelmä
+wizard-step-two-accessibility-section-aria = Esteettömyys ja turvallisuus
+wizard-step-two-accessibility-heading = Esteettömyys ja turvallisuus
+wizard-step-two-accessibility-well-lit-label = Hyvin valaistut reitit
+wizard-step-two-accessibility-well-lit-description = Suosi iltareittejä, joilla on kunnon valaistus.
+wizard-step-two-accessibility-wheelchair-label = Pyörätuoliystävällinen
+wizard-step-two-accessibility-wheelchair-description = Tasaiset, leveät kulkuväylät
+wizard-step-two-accessibility-paved-label = Päällystetyt pinnat
+wizard-step-two-accessibility-paved-description = Vältä sorapolkuja ja nurmialueita
+wizard-step-two-review = Tarkista kävely
+
 
 
 app-shell-title = Wildside Mockup

@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Dewiswch ddiddordebau ar gyfer y daith
 wizard-step-one-continue = Parhau i’r dewisiadau
+wizard-step-two-discovery-heading = Arddull darganfod
+wizard-step-two-discovery-aria = Arddull darganfod
+wizard-step-two-discovery-description = Cytbwyswch hoff hotspots â thrysorau cudd i weddu i hwyliau heddiw.
+wizard-step-two-discovery-badge = Newydd
+wizard-step-two-discovery-scale-left = Prysur
+wizard-step-two-discovery-scale-mid = Cytbwys
+wizard-step-two-discovery-scale-right = Cudd
+wizard-step-two-discovery-slider-aria = Llithrydd darganfod
+wizard-step-two-discovery-thumb-aria = Addaswch gydbwysedd yr arddull darganfod
+wizard-step-two-discovery-summary-hidden = Ffocws ar drysorau cudd
+wizard-step-two-discovery-summary-hotspots = Ffocws ar hotspots
+wizard-step-two-discovery-summary-balanced = Cymysgedd cytbwys
+wizard-step-two-accessibility-section-aria = Hygyrchedd a diogelwch
+wizard-step-two-accessibility-heading = Hygyrchedd a diogelwch
+wizard-step-two-accessibility-well-lit-label = Llwybrau goleuol
+wizard-step-two-accessibility-well-lit-description = Rhowch flaenoriaeth i lwybrau gyda goleuo da gyda'r hwyr.
+wizard-step-two-accessibility-wheelchair-label = Addas i gadeiriau olwyn
+wizard-step-two-accessibility-wheelchair-description = Llwybrau llyfn a llydan
+wizard-step-two-accessibility-paved-label = Wynebau palmantog
+wizard-step-two-accessibility-paved-description = Osgoi llwybrau pridd a glaswellt
+wizard-step-two-review = Adolygu'r daith
+
 
 
 app-shell-title = Wildside Mockup

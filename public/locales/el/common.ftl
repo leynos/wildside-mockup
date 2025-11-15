@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Επίλεξε ενδιαφέροντα για τη διαδρομή
 wizard-step-one-continue = Συνέχισε στις προτιμήσεις
+wizard-step-two-discovery-heading = Στυλ εξερεύνησης
+wizard-step-two-discovery-aria = Στυλ εξερεύνησης
+wizard-step-two-discovery-description = Ισορροπήστε δημοφιλή hotspots με κρυμμένα διαμάντια σύμφωνα με τη διάθεση της ημέρας.
+wizard-step-two-discovery-badge = Νέο
+wizard-step-two-discovery-scale-left = Πολύβουο
+wizard-step-two-discovery-scale-mid = Ισορροπημένο
+wizard-step-two-discovery-scale-right = Απομονωμένο
+wizard-step-two-discovery-slider-aria = Ρυθμιστικό στυλ εξερεύνησης
+wizard-step-two-discovery-thumb-aria = Ρυθμίστε την ισορροπία του στυλ εξερεύνησης
+wizard-step-two-discovery-summary-hidden = Έμφαση στα κρυμμένα διαμάντια
+wizard-step-two-discovery-summary-hotspots = Έμφαση στα hotspots
+wizard-step-two-discovery-summary-balanced = Ισορροπημένο μείγμα
+wizard-step-two-accessibility-section-aria = Προσβασιμότητα & ασφάλεια
+wizard-step-two-accessibility-heading = Προσβασιμότητα & ασφάλεια
+wizard-step-two-accessibility-well-lit-label = Καλά φωτισμένα μονοπάτια
+wizard-step-two-accessibility-well-lit-description = Δώστε προτεραιότητα σε βραδινές διαδρομές με έντονο φωτισμό.
+wizard-step-two-accessibility-wheelchair-label = Φιλικό για αμαξίδια
+wizard-step-two-accessibility-wheelchair-description = Ομαλά, φαρδιά μονοπάτια
+wizard-step-two-accessibility-paved-label = Στρωμένες επιφάνειες
+wizard-step-two-accessibility-paved-description = Αποφύγετε χωμάτινα μονοπάτια και γρασίδι
+wizard-step-two-review = Έλεγχος διαδρομής
+
 
 
 app-shell-title = Wildside Mockup

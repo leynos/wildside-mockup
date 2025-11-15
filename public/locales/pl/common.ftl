@@ -126,6 +126,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Wybierz zainteresowania spaceru
 wizard-step-one-continue = Przejdź do preferencji
+wizard-step-two-discovery-heading = Styl odkrywania
+wizard-step-two-discovery-aria = Styl odkrywania
+wizard-step-two-discovery-description = Zrównoważ popularne miejsca i ukryte perełki, aby pasowały do dzisiejszego nastroju.
+wizard-step-two-discovery-badge = Nowość
+wizard-step-two-discovery-scale-left = Tłoczno
+wizard-step-two-discovery-scale-mid = Zrównoważony
+wizard-step-two-discovery-scale-right = Ustronny
+wizard-step-two-discovery-slider-aria = Suwak stylu odkrywania
+wizard-step-two-discovery-thumb-aria = Dostosuj balans stylu odkrywania
+wizard-step-two-discovery-summary-hidden = Nacisk na ukryte perełki
+wizard-step-two-discovery-summary-hotspots = Nacisk na popularne miejsca
+wizard-step-two-discovery-summary-balanced = Zrównoważona mieszanka
+wizard-step-two-accessibility-section-aria = Dostępność i bezpieczeństwo
+wizard-step-two-accessibility-heading = Dostępność i bezpieczeństwo
+wizard-step-two-accessibility-well-lit-label = Dobrze oświetlone ścieżki
+wizard-step-two-accessibility-well-lit-description = Priorytet dla wieczornych tras z mocnym oświetleniem.
+wizard-step-two-accessibility-wheelchair-label = Przyjazne dla wózków
+wizard-step-two-accessibility-wheelchair-description = Gładkie, szerokie przejścia
+wizard-step-two-accessibility-paved-label = Utwardzone nawierzchnie
+wizard-step-two-accessibility-paved-description = Unikaj piaszczystych ścieżek i trawy
+wizard-step-two-review = Przegląd trasy
+
 
 
 app-shell-title = Wildside Mockup

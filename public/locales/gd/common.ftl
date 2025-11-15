@@ -128,6 +128,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Tagh ùidhean na cuairte
 wizard-step-one-continue = Lean air adhart gu roghainnean
+wizard-step-two-discovery-heading = Stoidhle rannsachaidh
+wizard-step-two-discovery-aria = Stoidhle rannsachaidh
+wizard-step-two-discovery-description = Cothromaich prìomh hotspots le ulaidhean falaichte a rèir faireachdainn an-diugh.
+wizard-step-two-discovery-badge = Ùr
+wizard-step-two-discovery-scale-left = Làn trang
+wizard-step-two-discovery-scale-mid = Cothromach
+wizard-step-two-discovery-scale-right = Faisgte
+wizard-step-two-discovery-slider-aria = Sleamhnag stoidhle rannsachaidh
+wizard-step-two-discovery-thumb-aria = Cuir air gleus cothrom stoidhle rannsachaidh
+wizard-step-two-discovery-summary-hidden = Fòcas air ulaidhean falaichte
+wizard-step-two-discovery-summary-hotspots = Fòcas air prìomh àiteachan
+wizard-step-two-discovery-summary-balanced = Measgachadh cothromach
+wizard-step-two-accessibility-section-aria = So-ruigsinneachd & sàbhailteachd
+wizard-step-two-accessibility-heading = So-ruigsinneachd & sàbhailteachd
+wizard-step-two-accessibility-well-lit-label = Slighean le deagh sholas
+wizard-step-two-accessibility-well-lit-description = Thoir prìomhachas do shlighean feasgair le solas soilleir.
+wizard-step-two-accessibility-wheelchair-label = Freagarrach do chathraichean-cuibhle
+wizard-step-two-accessibility-wheelchair-description = Slighean rèidh is leathann
+wizard-step-two-accessibility-paved-label = Uachdaran pavaichte
+wizard-step-two-accessibility-paved-description = Seachain slighean ùir is feòir
+wizard-step-two-review = Ath-sgrùd an cuairt
+
 
 
 app-shell-title = Wildside Mockup

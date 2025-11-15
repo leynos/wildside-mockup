@@ -124,6 +124,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = בחרו תחומי עניין להליכה
 wizard-step-one-continue = המשך להעדפות
+wizard-step-two-discovery-heading = סגנון גילוי
+wizard-step-two-discovery-aria = סגנון גילוי
+wizard-step-two-discovery-description = איזנו בין נקודות חמות פופולריות לבין פנינים נסתרות לפי מצב הרוח של היום.
+wizard-step-two-discovery-badge = חדש
+wizard-step-two-discovery-scale-left = עמוס
+wizard-step-two-discovery-scale-mid = מאוזן
+wizard-step-two-discovery-scale-right = מבודד
+wizard-step-two-discovery-slider-aria = מחוון סגנון גילוי
+wizard-step-two-discovery-thumb-aria = כיילו את האיזון של סגנון הגילוי
+wizard-step-two-discovery-summary-hidden = התמקדות בפנינים נסתרות
+wizard-step-two-discovery-summary-hotspots = התמקדות בנקודות חמות
+wizard-step-two-discovery-summary-balanced = תערובת מאוזנת
+wizard-step-two-accessibility-section-aria = נגישות ובטיחות
+wizard-step-two-accessibility-heading = נגישות ובטיחות
+wizard-step-two-accessibility-well-lit-label = שבילים מוארים היטב
+wizard-step-two-accessibility-well-lit-description = תנו עדיפות למסלולי ערב עם תאורה חזקה.
+wizard-step-two-accessibility-wheelchair-label = נגיש לכיסאות גלגלים
+wizard-step-two-accessibility-wheelchair-description = שבילים רחבים וחלקים
+wizard-step-two-accessibility-paved-label = משטחים מרוצפים
+wizard-step-two-accessibility-paved-description = הימנעו משבילים עפר ומדשא
+wizard-step-two-review = סקירת מסלול
+
 
 
 app-shell-title = ‏הדמיית Wildside

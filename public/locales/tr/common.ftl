@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Yürüyüş ilgi alanlarını seçin
 wizard-step-one-continue = Tercihlere devam et
+wizard-step-two-discovery-heading = Keşif stili
+wizard-step-two-discovery-aria = Keşif stili
+wizard-step-two-discovery-description = Bugünkü ruh haline uyacak şekilde popüler noktalarla gizli cevherleri dengele.
+wizard-step-two-discovery-badge = Yeni
+wizard-step-two-discovery-scale-left = Kalabalık
+wizard-step-two-discovery-scale-mid = Dengeli
+wizard-step-two-discovery-scale-right = Sakin
+wizard-step-two-discovery-slider-aria = Keşif stili kaydırıcısı
+wizard-step-two-discovery-thumb-aria = Keşif stilinin dengesini ayarla
+wizard-step-two-discovery-summary-hidden = Gizli cevher odaklı
+wizard-step-two-discovery-summary-hotspots = Popüler nokta odaklı
+wizard-step-two-discovery-summary-balanced = Dengeli karışım
+wizard-step-two-accessibility-section-aria = Erişilebilirlik ve güvenlik
+wizard-step-two-accessibility-heading = Erişilebilirlik ve güvenlik
+wizard-step-two-accessibility-well-lit-label = İyi aydınlatılmış yollar
+wizard-step-two-accessibility-well-lit-description = Işığı güçlü akşam rotalarına öncelik ver.
+wizard-step-two-accessibility-wheelchair-label = Tekerlekli sandalyeye uygun
+wizard-step-two-accessibility-wheelchair-description = Geniş ve pürüzsüz yürüyüş yolları
+wizard-step-two-accessibility-paved-label = Kaplamalı zeminler
+wizard-step-two-accessibility-paved-description = Toprak patika ve çimden kaçın
+wizard-step-two-review = Yürüyüşü gözden geçir
+
 
 
 app-shell-title = Wildside Mockup

@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Escolha os interesses da caminhada
 wizard-step-one-continue = Continuar para as preferências
+wizard-step-two-discovery-heading = Estilo de descoberta
+wizard-step-two-discovery-aria = Estilo de descoberta
+wizard-step-two-discovery-description = Equilibre hotspots populares e joias escondidas para combinar com o humor de hoje.
+wizard-step-two-discovery-badge = Novo
+wizard-step-two-discovery-scale-left = Movimentado
+wizard-step-two-discovery-scale-mid = Equilibrado
+wizard-step-two-discovery-scale-right = Reservado
+wizard-step-two-discovery-slider-aria = Controle de estilo de descoberta
+wizard-step-two-discovery-thumb-aria = Ajuste o equilíbrio do estilo de descoberta
+wizard-step-two-discovery-summary-hidden = Foco em joias escondidas
+wizard-step-two-discovery-summary-hotspots = Foco em hotspots
+wizard-step-two-discovery-summary-balanced = Mistura equilibrada
+wizard-step-two-accessibility-section-aria = Acessibilidade e segurança
+wizard-step-two-accessibility-heading = Acessibilidade e segurança
+wizard-step-two-accessibility-well-lit-label = Percursos bem iluminados
+wizard-step-two-accessibility-well-lit-description = Priorize rotas noturnas com boa iluminação.
+wizard-step-two-accessibility-wheelchair-label = Acessível a cadeira de rodas
+wizard-step-two-accessibility-wheelchair-description = Caminhos largos e suaves
+wizard-step-two-accessibility-paved-label = Superfícies pavimentadas
+wizard-step-two-accessibility-paved-description = Evite trilhas de terra e gramados
+wizard-step-two-review = Rever caminhada
+
 
 
 app-shell-title = Wildside Mockup

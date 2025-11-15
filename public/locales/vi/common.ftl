@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Chọn sở thích cho chuyến đi bộ
 wizard-step-one-continue = Tiếp tục đến tùy chọn
+wizard-step-two-discovery-heading = Phong cách khám phá
+wizard-step-two-discovery-aria = Phong cách khám phá
+wizard-step-two-discovery-description = Cân bằng giữa điểm đến nổi bật và viên ngọc ẩn để hợp với tâm trạng hôm nay.
+wizard-step-two-discovery-badge = Mới
+wizard-step-two-discovery-scale-left = Đông đúc
+wizard-step-two-discovery-scale-mid = Cân bằng
+wizard-step-two-discovery-scale-right = Yên tĩnh
+wizard-step-two-discovery-slider-aria = Thanh trượt phong cách khám phá
+wizard-step-two-discovery-thumb-aria = Điều chỉnh cân bằng phong cách khám phá
+wizard-step-two-discovery-summary-hidden = Tập trung vào viên ngọc ẩn
+wizard-step-two-discovery-summary-hotspots = Tập trung vào điểm nóng
+wizard-step-two-discovery-summary-balanced = Phối hợp cân bằng
+wizard-step-two-accessibility-section-aria = Tiếp cận & an toàn
+wizard-step-two-accessibility-heading = Tiếp cận & an toàn
+wizard-step-two-accessibility-well-lit-label = Lối đi đủ ánh sáng
+wizard-step-two-accessibility-well-lit-description = Ưu tiên tuyến đường buổi tối có ánh sáng mạnh.
+wizard-step-two-accessibility-wheelchair-label = Thân thiện với xe lăn
+wizard-step-two-accessibility-wheelchair-description = Lối đi rộng và phẳng
+wizard-step-two-accessibility-paved-label = Bề mặt lát
+wizard-step-two-accessibility-paved-description = Tránh đường đất và bãi cỏ
+wizard-step-two-review = Xem lại hành trình
+
 
 
 app-shell-title = Wildside Mockup

@@ -126,6 +126,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Выберите интересы для прогулки
 wizard-step-one-continue = Перейти к предпочтениям
+wizard-step-two-discovery-heading = Стиль открытия
+wizard-step-two-discovery-aria = Стиль открытия
+wizard-step-two-discovery-description = Сбалансируйте популярные места и скрытые жемчужины под настроение сегодняшнего дня.
+wizard-step-two-discovery-badge = Новое
+wizard-step-two-discovery-scale-left = Оживлённо
+wizard-step-two-discovery-scale-mid = Сбалансировано
+wizard-step-two-discovery-scale-right = Уединённо
+wizard-step-two-discovery-slider-aria = Ползунок стиля открытия
+wizard-step-two-discovery-thumb-aria = Настройте баланс стиля открытия
+wizard-step-two-discovery-summary-hidden = Акцент на скрытых жемчужинах
+wizard-step-two-discovery-summary-hotspots = Акцент на популярных местах
+wizard-step-two-discovery-summary-balanced = Сбалансированная смесь
+wizard-step-two-accessibility-section-aria = Доступность и безопасность
+wizard-step-two-accessibility-heading = Доступность и безопасность
+wizard-step-two-accessibility-well-lit-label = Хорошо освещённые маршруты
+wizard-step-two-accessibility-well-lit-description = Отдавайте приоритет вечерним маршрутам с ярким освещением.
+wizard-step-two-accessibility-wheelchair-label = Доступно для инвалидных колясок
+wizard-step-two-accessibility-wheelchair-description = Широкие, гладкие дорожки
+wizard-step-two-accessibility-paved-label = Твёрдое покрытие
+wizard-step-two-accessibility-paved-description = Избегайте грунтовых троп и травы
+wizard-step-two-review = Проверить маршрут
+
 
 
 app-shell-title = Wildside Mockup

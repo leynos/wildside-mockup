@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = ウォークの興味を選択
 wizard-step-one-continue = 優先設定へ進む
+wizard-step-two-discovery-heading = ディスカバリースタイル
+wizard-step-two-discovery-aria = ディスカバリースタイル
+wizard-step-two-discovery-description = 人気スポットと隠れた名所のバランスを取り、今日の気分に合わせましょう。
+wizard-step-two-discovery-badge = 新着
+wizard-step-two-discovery-scale-left = にぎやか
+wizard-step-two-discovery-scale-mid = バランス
+wizard-step-two-discovery-scale-right = 静か
+wizard-step-two-discovery-slider-aria = ディスカバリースライダー
+wizard-step-two-discovery-thumb-aria = ディスカバリースタイルのバランスを調整
+wizard-step-two-discovery-summary-hidden = 隠れた名所を重視
+wizard-step-two-discovery-summary-hotspots = 人気スポットを重視
+wizard-step-two-discovery-summary-balanced = バランスの取れたミックス
+wizard-step-two-accessibility-section-aria = アクセシビリティと安全
+wizard-step-two-accessibility-heading = アクセシビリティと安全
+wizard-step-two-accessibility-well-lit-label = 照明の整ったルート
+wizard-step-two-accessibility-well-lit-description = 夜間は明るいルートを優先してください。
+wizard-step-two-accessibility-wheelchair-label = 車椅子に優しい
+wizard-step-two-accessibility-wheelchair-description = 滑らかで幅の広い通路
+wizard-step-two-accessibility-paved-label = 舗装された路面
+wizard-step-two-accessibility-paved-description = 未舗装路や芝生は避ける
+wizard-step-two-review = ルートを確認
+
 
 
 app-shell-title = Wildside Mockup

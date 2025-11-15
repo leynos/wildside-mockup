@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Välj promenadens intressen
 wizard-step-one-continue = Fortsätt till inställningar
+wizard-step-two-discovery-heading = Upptäckarstil
+wizard-step-two-discovery-aria = Upptäckarstil
+wizard-step-two-discovery-description = Balansera populära hotspots med dolda pärlor som matchar dagens humör.
+wizard-step-two-discovery-badge = Ny
+wizard-step-two-discovery-scale-left = Livlig
+wizard-step-two-discovery-scale-mid = Balanserad
+wizard-step-two-discovery-scale-right = Avskild
+wizard-step-two-discovery-slider-aria = Upptäckarreglage
+wizard-step-two-discovery-thumb-aria = Justera balansen för upptäckarstilen
+wizard-step-two-discovery-summary-hidden = Fokus på dolda pärlor
+wizard-step-two-discovery-summary-hotspots = Fokus på hotspots
+wizard-step-two-discovery-summary-balanced = Balanserad mix
+wizard-step-two-accessibility-section-aria = Tillgänglighet och säkerhet
+wizard-step-two-accessibility-heading = Tillgänglighet och säkerhet
+wizard-step-two-accessibility-well-lit-label = Väl upplysta stigar
+wizard-step-two-accessibility-well-lit-description = Prioritera kvällsrutter med stark belysning.
+wizard-step-two-accessibility-wheelchair-label = Rullstolsanpassat
+wizard-step-two-accessibility-wheelchair-description = Breda, släta gångvägar
+wizard-step-two-accessibility-paved-label = Hårda ytor
+wizard-step-two-accessibility-paved-description = Undvik grusleder och gräs
+wizard-step-two-review = Granska promenaden
+
 
 
 app-shell-title = Wildside Mockup

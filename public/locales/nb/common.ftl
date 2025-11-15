@@ -122,6 +122,28 @@ wizard-step-one-interests-selected =
     }
 wizard-step-one-interests-picker-aria = Velg interesser for turen
 wizard-step-one-continue = Fortsett til preferanser
+wizard-step-two-discovery-heading = Utforskerstil
+wizard-step-two-discovery-aria = Utforskerstil
+wizard-step-two-discovery-description = Balanser populære hotspots med skjulte perler som passer dagens humør.
+wizard-step-two-discovery-badge = Ny
+wizard-step-two-discovery-scale-left = Folksom
+wizard-step-two-discovery-scale-mid = Balansert
+wizard-step-two-discovery-scale-right = Avskjermet
+wizard-step-two-discovery-slider-aria = Utforsker-skyver
+wizard-step-two-discovery-thumb-aria = Juster balansen for utforskerstilen
+wizard-step-two-discovery-summary-hidden = Fokus på skjulte perler
+wizard-step-two-discovery-summary-hotspots = Fokus på hotspots
+wizard-step-two-discovery-summary-balanced = Balansert miks
+wizard-step-two-accessibility-section-aria = Tilgjengelighet og sikkerhet
+wizard-step-two-accessibility-heading = Tilgjengelighet og sikkerhet
+wizard-step-two-accessibility-well-lit-label = Godt opplyste stier
+wizard-step-two-accessibility-well-lit-description = Prioriter kveldsruter med sterk belysning.
+wizard-step-two-accessibility-wheelchair-label = Rullestolvennlig
+wizard-step-two-accessibility-wheelchair-description = Brede og jevne gangveier
+wizard-step-two-accessibility-paved-label = Belagte flater
+wizard-step-two-accessibility-paved-description = Unngå grus- og gressstier
+wizard-step-two-review = Gå gjennom turen
+
 
 
 app-shell-title = Wildside Mockup
