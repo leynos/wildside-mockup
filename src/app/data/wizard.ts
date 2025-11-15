@@ -41,78 +41,156 @@ export const accessibilityOptions: DiscoveryPreferenceOption[] = [
 ];
 
 export interface WizardSummaryHighlight {
-  id: string;
-  iconToken: string;
-  label: string;
-  detail: string;
+  readonly id: string;
+  readonly iconToken: string;
+  readonly labelKey: string;
+  readonly defaultLabel: string;
+  readonly detailKey: string;
+  readonly defaultDetail: string;
 }
 
 export const wizardSummaryHighlights: WizardSummaryHighlight[] = [
   {
     id: "lighting",
     iconToken: "{icon.object.guidance}",
-    label: "Well-lit paths",
-    detail: "Safe evening sections with smart lighting",
+    labelKey: "wizard-step-two-accessibility-well-lit-label",
+    defaultLabel: "Well-lit paths",
+    detailKey: "wizard-step-three-highlight-lighting-detail",
+    defaultDetail: "Safe evening sections with smart lighting",
   },
   {
     id: "hidden-gems",
     iconToken: "{icon.safety.hide}",
-    label: "Hidden gems focus",
-    detail: "Expect quiet street art laneways and indie cafés",
+    labelKey: "wizard-step-three-highlight-hidden-gems-label",
+    defaultLabel: "Hidden gems focus",
+    detailKey: "wizard-step-three-highlight-hidden-gems-detail",
+    defaultDetail: "Expect quiet street art laneways and indie cafés",
   },
   {
     id: "loop",
     iconToken: "{icon.object.route}",
-    label: "Loop route",
-    detail: "Starts and ends near your current location",
+    labelKey: "wizard-step-three-highlight-loop-label",
+    defaultLabel: "Loop route",
+    detailKey: "wizard-step-three-highlight-loop-detail",
+    defaultDetail: "Starts and ends near your current location",
   },
   {
     id: "easy",
     iconToken: "{icon.customizer.gauge}",
-    label: "Easy difficulty",
-    detail: "Gradual inclines suitable for relaxed pacing",
+    labelKey: "wizard-step-three-highlight-easy-label",
+    defaultLabel: "Easy difficulty",
+    detailKey: "wizard-step-three-highlight-easy-detail",
+    defaultDetail: "Gradual inclines suitable for relaxed pacing",
   },
-];
+] as const;
 
 export const wizardWeatherSummary = {
-  title: "Perfect walking weather",
-  summary: "72°F, light breeze, clear skies",
+  titleKey: "wizard-step-three-weather-title",
+  defaultTitle: "Perfect walking weather",
+  summaryKey: "wizard-step-three-weather-summary",
+  defaultSummary: "72°F, light breeze, clear skies",
+  reminderKey: "wizard-step-three-weather-reminder",
+  defaultReminder: "Pack light layers just in case.",
   temperature: "72°",
-  sentiment: "Ideal",
-};
+  sentimentKey: "wizard-step-three-weather-sentiment",
+  defaultSentiment: "Ideal",
+} as const;
 
 export interface WizardGeneratedStop {
-  id: string;
-  name: string;
-  description: string;
-  iconToken: string;
-  accentClass: string;
-  note: string;
+  readonly id: string;
+  readonly nameKey: string;
+  readonly defaultName: string;
+  readonly descriptionKey: string;
+  readonly defaultDescription: string;
+  readonly iconToken: string;
+  readonly accentClass: string;
+  readonly noteKey: string;
+  readonly defaultNote: string;
 }
 
 export const wizardGeneratedStops: WizardGeneratedStop[] = [
   {
     id: "café",
-    name: "Midtown Roastery",
-    description: "Small-batch espresso with window seating",
+    nameKey: "wizard-step-three-stop-cafe-name",
+    defaultName: "Midtown Roastery",
+    descriptionKey: "wizard-step-three-stop-cafe-description",
+    defaultDescription: "Small-batch espresso with window seating",
     iconToken: "{icon.customizer.warmBeverage}",
     accentClass: "text-amber-400",
-    note: "Friendly baristas, ideal for takeaway",
+    noteKey: "wizard-step-three-stop-cafe-note",
+    defaultNote: "Friendly baristas, ideal for takeaway",
   },
   {
     id: "art",
-    name: "Graffiti Passage",
-    description: "Open-air gallery of rotating murals",
+    nameKey: "wizard-step-three-stop-art-name",
+    defaultName: "Graffiti Passage",
+    descriptionKey: "wizard-step-three-stop-art-description",
+    defaultDescription: "Open-air gallery of rotating murals",
     iconToken: "{icon.customizer.decoration}",
     accentClass: "text-purple-400",
-    note: "Photo spot • 1.1 miles in",
+    noteKey: "wizard-step-three-stop-art-note",
+    defaultNote: "Photo spot • 1.1 miles in",
   },
   {
     id: "garden",
-    name: "Whispering Oak Garden",
-    description: "Peaceful pocket park with shaded benches",
+    nameKey: "wizard-step-three-stop-garden-name",
+    defaultName: "Whispering Oak Garden",
+    descriptionKey: "wizard-step-three-stop-garden-description",
+    defaultDescription: "Peaceful pocket park with shaded benches",
     iconToken: "{icon.category.trails}",
     accentClass: "text-emerald-400",
-    note: "Rest area • 1.8 miles in",
+    noteKey: "wizard-step-three-stop-garden-note",
+    defaultNote: "Rest area • 1.8 miles in",
   },
-];
+] as const;
+
+export interface WizardRouteStat {
+  readonly id: string;
+  readonly value: string;
+  readonly unitKey: string;
+  readonly defaultUnit: string;
+}
+
+export interface WizardRouteSummary {
+  readonly ariaLabelKey: string;
+  readonly defaultAriaLabel: string;
+  readonly titleKey: string;
+  readonly defaultTitle: string;
+  readonly badgeKey: string;
+  readonly defaultBadge: string;
+  readonly descriptionKey: string;
+  readonly defaultDescription: string;
+  readonly stats: WizardRouteStat[];
+}
+
+export const wizardRouteSummary: WizardRouteSummary = {
+  ariaLabelKey: "wizard-step-three-route-panel-aria",
+  defaultAriaLabel: "Hidden gems loop summary",
+  titleKey: "wizard-step-three-route-title",
+  defaultTitle: "Hidden Gems Loop",
+  badgeKey: "wizard-step-three-route-badge",
+  defaultBadge: "Custom",
+  descriptionKey: "wizard-step-three-route-description",
+  defaultDescription:
+    "A personalised walk blending street art laneways, independent cafés, and quiet waterfront viewpoints.",
+  stats: [
+    {
+      id: "distance",
+      value: "2.3",
+      unitKey: "wizard-step-three-route-distance-unit",
+      defaultUnit: "miles",
+    },
+    {
+      id: "duration",
+      value: "45",
+      unitKey: "wizard-step-three-route-duration-unit",
+      defaultUnit: "minutes",
+    },
+    {
+      id: "stops",
+      value: "7",
+      unitKey: "wizard-step-three-route-stops-unit",
+      defaultUnit: "stops",
+    },
+  ],
+} as const;

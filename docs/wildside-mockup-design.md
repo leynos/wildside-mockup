@@ -434,6 +434,20 @@ Mapping guidance:
 - A Spanish Vitest now renders `/wizard/step-2` to guard the new keys and prove
   the route survives when `i18n` switches language, mirroring the
   `/customize` precedent for regression coverage.
+- `/wizard/step-3` lifts route stats, highlight fixtures, generated stops, and
+  weather copy into data structures with Fluent key metadata. Components
+  resolve `wizard-step-three-*` keys at render time so panel headings, aria
+  labels, dialog copy, stats units, and stop notes all follow the same fallback
+  pattern as earlier steps.
+- Highlight descriptors reuse existing keys where possible (for example,
+  `wizard-step-two-accessibility-well-lit-label`) and introduce `*-detail`
+  keys for supporting text so translators can keep tone consistent without
+  touching TypeScript.
+- The review CTA dialog translates via shared keys and mirrors the reusable
+  pattern from Step 2, ensuring wizard footer actions stay consistent across
+  languages.
+- Stage 3 route tests now include a Spanish locale run to guarantee the
+  translated panels, dialog copy, and footer CTAs render as expected.
 
 #### Progress (26 October 2025)
 

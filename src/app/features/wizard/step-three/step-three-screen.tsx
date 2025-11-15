@@ -10,6 +10,7 @@ import { WizardLayout } from "../../../components/wizard-layout";
 import { WizardSection, type WizardSectionProps } from "../../../components/wizard-section";
 import {
   wizardGeneratedStops,
+  wizardRouteSummary,
   wizardSteps,
   wizardSummaryHighlights,
   wizardWeatherSummary,
@@ -55,28 +56,32 @@ export function WizardStepThree(): JSX.Element {
             className="btn btn-ghost"
             onClick={() => navigate({ to: "/wizard/step-1" })}
           >
-            Start over
+            {t("wizard-step-three-start-over", { defaultValue: "Start over" })}
           </button>
           <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
             <Dialog.Trigger asChild>
               <button type="button" className="btn btn-accent btn-lg w-full">
-                Save walk and view map
+                {t("wizard-step-three-save-button", {
+                  defaultValue: "Save walk and view map",
+                })}
               </button>
             </Dialog.Trigger>
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 bg-black/60" />
               <Dialog.Content className="dialog-surface">
                 <Dialog.Title className="text-lg font-semibold text-base-content">
-                  Walk saved!
+                  {t("wizard-step-three-dialog-title", { defaultValue: "Walk saved!" })}
                 </Dialog.Title>
                 <Dialog.Description className="text-sm text-base-content/70">
-                  The Hidden Gems Loop is ready under your saved walks. Start the route now or
-                  continue exploring other wizard options.
+                  {t("wizard-step-three-dialog-description", {
+                    defaultValue:
+                      "The Hidden Gems Loop is ready under your saved walks. Start the route now or continue exploring other wizard options.",
+                  })}
                 </Dialog.Description>
                 <div className="flex justify-end gap-2">
                   <Dialog.Close asChild>
                     <button type="button" className="btn btn-ghost btn-sm">
-                      Close
+                      {t("wizard-step-three-dialog-close", { defaultValue: "Close" })}
                     </button>
                   </Dialog.Close>
                   <button
@@ -84,7 +89,7 @@ export function WizardStepThree(): JSX.Element {
                     className="btn btn-accent btn-sm"
                     onClick={() => navigate({ to: "/map/quick" })}
                   >
-                    View on map
+                    {t("wizard-step-three-dialog-view-map", { defaultValue: "View on map" })}
                   </button>
                 </div>
               </Dialog.Content>
@@ -93,81 +98,119 @@ export function WizardStepThree(): JSX.Element {
         </div>
       }
     >
-      <WizardSummaryPanel aria-label="Hidden gems loop summary">
+      <WizardSummaryPanel
+        aria-label={t(wizardRouteSummary.ariaLabelKey, {
+          defaultValue: wizardRouteSummary.defaultAriaLabel,
+        })}
+      >
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Hidden Gems Loop</h2>
-          <span className="wizard-badge font-semibold">Custom</span>
+          <h2 className="text-xl font-semibold">
+            {t(wizardRouteSummary.titleKey, { defaultValue: wizardRouteSummary.defaultTitle })}
+          </h2>
+          <span className="wizard-badge font-semibold">
+            {t(wizardRouteSummary.badgeKey, { defaultValue: wizardRouteSummary.defaultBadge })}
+          </span>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
-          <div>
-            <p className="text-lg font-semibold text-accent">2.3</p>
-            <p>miles</p>
-          </div>
-          <div>
-            <p className="text-lg font-semibold text-accent">45</p>
-            <p>minutes</p>
-          </div>
-          <div>
-            <p className="text-lg font-semibold text-accent">7</p>
-            <p>stops</p>
-          </div>
+          {wizardRouteSummary.stats.map((stat) => (
+            <div key={stat.id}>
+              <p className="text-lg font-semibold text-accent">{stat.value}</p>
+              <p>{t(stat.unitKey, { defaultValue: stat.defaultUnit })}</p>
+            </div>
+          ))}
         </div>
         <p className="mt-4 text-sm text-base-content/70">
-          A personalised walk blending street art laneways, independent cafés, and quiet waterfront
-          viewpoints.
+          {t(wizardRouteSummary.descriptionKey, {
+            defaultValue: wizardRouteSummary.defaultDescription,
+          })}
         </p>
       </WizardSummaryPanel>
 
-      <WizardSummaryPanel aria-label="Your preferences applied">
-        <h3 className="text-lg font-semibold">Your preferences applied</h3>
+      <WizardSummaryPanel
+        aria-label={t("wizard-step-three-preferences-panel-aria", {
+          defaultValue: "Your preferences applied",
+        })}
+      >
+        <h3 className="text-lg font-semibold">
+          {t("wizard-step-three-preferences-heading", { defaultValue: "Your preferences applied" })}
+        </h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-          {wizardSummaryHighlights.map((highlight) => (
-            <div key={highlight.id} className="wizard-summary__highlight">
-              <Icon
-                token={highlight.iconToken}
-                className="wizard-summary__highlight-icon"
-                aria-hidden
-              />
-              <div>
-                <p className="font-semibold">{highlight.label}</p>
-                <p className="text-xs text-base-content/60">{highlight.detail}</p>
+          {wizardSummaryHighlights.map((highlight) => {
+            const label = t(highlight.labelKey, { defaultValue: highlight.defaultLabel });
+            const detail = t(highlight.detailKey, { defaultValue: highlight.defaultDetail });
+            return (
+              <div key={highlight.id} className="wizard-summary__highlight">
+                <Icon
+                  token={highlight.iconToken}
+                  className="wizard-summary__highlight-icon"
+                  aria-hidden
+                />
+                <div>
+                  <p className="font-semibold">{label}</p>
+                  <p className="text-xs text-base-content/60">{detail}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </WizardSummaryPanel>
 
-      <WizardSummaryPanel aria-label="Featured stops">
-        <h3 className="text-lg font-semibold">Featured stops</h3>
+      <WizardSummaryPanel
+        aria-label={t("wizard-step-three-stops-panel-aria", { defaultValue: "Featured stops" })}
+      >
+        <h3 className="text-lg font-semibold">
+          {t("wizard-step-three-stops-heading", { defaultValue: "Featured stops" })}
+        </h3>
         <div className="mt-4 space-y-3">
-          {wizardGeneratedStops.map((stop) => (
-            <div key={stop.id} className="wizard-summary__stop">
-              <span className="wizard-summary__stop-icon">
-                <Icon token={stop.iconToken} className={stop.accentClass} aria-hidden />
-              </span>
-              <div>
-                <p className="text-base font-semibold">{stop.name}</p>
-                <p className="text-sm text-base-content/70">{stop.description}</p>
-                <p className="mt-1 text-xs text-base-content/60">{stop.note}</p>
+          {wizardGeneratedStops.map((stop) => {
+            const name = t(stop.nameKey, { defaultValue: stop.defaultName });
+            const description = t(stop.descriptionKey, { defaultValue: stop.defaultDescription });
+            const note = t(stop.noteKey, { defaultValue: stop.defaultNote });
+            return (
+              <div key={stop.id} className="wizard-summary__stop">
+                <span className="wizard-summary__stop-icon">
+                  <Icon token={stop.iconToken} className={stop.accentClass} aria-hidden />
+                </span>
+                <div>
+                  <p className="text-base font-semibold">{name}</p>
+                  <p className="text-sm text-base-content/70">{description}</p>
+                  <p className="mt-1 text-xs text-base-content/60">{note}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </WizardSummaryPanel>
 
-      <WizardSummaryPanel aria-label={wizardWeatherSummary.title}>
+      <WizardSummaryPanel
+        aria-label={t(wizardWeatherSummary.titleKey, {
+          defaultValue: wizardWeatherSummary.defaultTitle,
+        })}
+      >
         <h3 className="section-heading text-base-content">
           <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
-          {wizardWeatherSummary.title}
+          {t(wizardWeatherSummary.titleKey, { defaultValue: wizardWeatherSummary.defaultTitle })}
         </h3>
         <div className="wizard-summary__weather">
           <div>
-            <p className="font-semibold">{wizardWeatherSummary.summary}</p>
-            <p className="text-xs text-base-content/60">Pack light layers just in case.</p>
+            <p className="font-semibold">
+              {t(wizardWeatherSummary.summaryKey, {
+                defaultValue: wizardWeatherSummary.defaultSummary,
+              })}
+            </p>
+            <p className="text-xs text-base-content/60">
+              {t(wizardWeatherSummary.reminderKey, {
+                defaultValue: wizardWeatherSummary.defaultReminder,
+              })}
+            </p>
           </div>
           <div className="text-end">
             <p className="text-lg font-semibold text-accent">{wizardWeatherSummary.temperature}</p>
-            <p className="text-xs text-base-content/60">{wizardWeatherSummary.sentiment}</p>
+            <p className="text-xs text-base-content/60">
+              {t(wizardWeatherSummary.sentimentKey, {
+                defaultValue: wizardWeatherSummary.defaultSentiment,
+              })}
+            </p>
           </div>
         </div>
       </WizardSummaryPanel>

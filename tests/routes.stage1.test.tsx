@@ -10,6 +10,7 @@ import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/da
 import {
   accessibilityOptions,
   wizardGeneratedStops,
+  wizardRouteSummary,
   wizardSummaryHighlights,
   wizardWeatherSummary,
 } from "../src/app/data/wizard";
@@ -630,6 +631,48 @@ describe("Stage 3 wizard flows", () => {
     }
   });
 
+  it("localises wizard step three summary and dialog copy for Spanish", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/wizard/step-3"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      expect(view.getByRole("heading", { name: /circuito de joyas ocultas/i })).toBeTruthy();
+      expect(view.getByRole("button", { name: /empezar de nuevo/i })).toBeTruthy();
+
+      const saveButton = view.getByRole("button", {
+        name: /guardar caminata y ver mapa/i,
+      });
+      expect(saveButton).toBeTruthy();
+
+      expect(view.getByRole("heading", { name: /tus preferencias aplicadas/i })).toBeTruthy();
+      expect(view.getByRole("heading", { name: /paradas destacadas/i })).toBeTruthy();
+      expect(view.getByRole("heading", { name: /clima perfecto para caminar/i })).toBeTruthy();
+      expect(view.getByText(/millas/i)).toBeTruthy();
+      expect(view.getByText(/minutos/i)).toBeTruthy();
+
+      await act(async () => {
+        clickElement(saveButton);
+        await Promise.resolve();
+      });
+
+      const dialog = await screen.findByRole("dialog", { name: /caminata guardada/i });
+      expect(within(dialog).getByText(/tus caminatas guardadas/i)).toBeTruthy();
+      expect(within(dialog).getByRole("button", { name: /^cerrar$/i })).toBeTruthy();
+      expect(within(dialog).getByRole("button", { name: /ver en el mapa/i })).toBeTruthy();
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
+
   it("opens the wizard confirmation dialog on step three", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);
@@ -662,11 +705,13 @@ describe("Stage 3 wizard flows", () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);
     const view = within(container);
-    const routePanel = view.getByRole("region", { name: /hidden gems loop/i });
+    const routePanel = view.getByRole("region", {
+      name: new RegExp(wizardRouteSummary.defaultAriaLabel, "i"),
+    });
     const preferencesPanel = view.getByRole("region", { name: /your preferences applied/i });
     const stopsPanel = view.getByRole("region", { name: /featured stops/i });
     const weatherPanel = view.getByRole("region", {
-      name: new RegExp(wizardWeatherSummary.title, "i"),
+      name: new RegExp(wizardWeatherSummary.defaultTitle, "i"),
     });
 
     [routePanel, preferencesPanel, stopsPanel, weatherPanel].forEach((panel) => {
@@ -678,14 +723,18 @@ describe("Stage 3 wizard flows", () => {
     expect(summaryBadge.classList.contains("wizard-badge")).toBe(true);
 
     wizardSummaryHighlights.forEach((highlight) => {
-      expect(within(preferencesPanel).getByText(new RegExp(highlight.label, "i"))).toBeTruthy();
+      expect(
+        within(preferencesPanel).getByText(new RegExp(highlight.defaultLabel, "i")),
+      ).toBeTruthy();
     });
 
     wizardGeneratedStops.forEach((stop) => {
-      expect(within(stopsPanel).getByText(new RegExp(stop.name, "i"))).toBeTruthy();
+      expect(within(stopsPanel).getByText(new RegExp(stop.defaultName, "i"))).toBeTruthy();
     });
 
-    expect(within(weatherPanel).getByText(wizardWeatherSummary.summary)).toBeTruthy();
+    expect(
+      within(weatherPanel).getByText(wizardWeatherSummary.defaultSummary, { exact: false }),
+    ).toBeTruthy();
   });
 });
 
