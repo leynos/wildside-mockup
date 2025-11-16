@@ -264,7 +264,11 @@ explore-community-heading = Ffefryn y gymuned
 explore-community-subtitle = Wedi’i rannu fwyaf yr wythnos hon
 explore-community-saves =
     { $count ->
+        [zero] {$count} cadw
         [one] {$count} cadw
+        [two] {$count} gadw
+        [few] {$count} cadw
+        [many] {$count} chadw
        *[other] {$count} cadw
     }
 explore-curated-route-count =
