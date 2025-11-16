@@ -823,7 +823,7 @@ ecosystem.
 | **TypeScript Support**     | Excellent                                | Excellent                | Excellent               |
 | **Ecosystem & Plugins**    | Extensive (Language detection, backends) | Focused on ICU standards | Good, growing community |
 
-Sources: 42
+Based on a review of 42 published sources.
 
 ### 4.2 A Practical Synthesis: Building a Localized "User Settings" Form
 
