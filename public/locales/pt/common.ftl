@@ -55,6 +55,7 @@ nav-map-label = Mapa
 nav-discover-label = Descobrir
 nav-routes-label = Rotas
 nav-profile-label = Perfil
+nav-primary-aria-label = Navegação principal
 
 interest-parks-label = Parques e natureza
 interest-coffee-label = Cafés
@@ -189,7 +190,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

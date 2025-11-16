@@ -55,6 +55,7 @@ nav-map-label = Mapa
 nav-discover-label = Lorg
 nav-routes-label = Slighean
 nav-profile-label = Pròifil
+nav-primary-aria-label = Prìomh sheòladh
 
 interest-parks-label = Pàircean is nàdar
 interest-coffee-label = Cafaidhean cofaidh
@@ -195,7 +196,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

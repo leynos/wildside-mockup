@@ -55,6 +55,7 @@ nav-map-label = Χάρτης
 nav-discover-label = Ανακάλυψη
 nav-routes-label = Διαδρομές
 nav-profile-label = Προφίλ
+nav-primary-aria-label = Κύρια πλοήγηση
 
 interest-parks-label = Πάρκα & φύση
 interest-coffee-label = Σημεία για καφέ
@@ -189,7 +190,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

@@ -55,6 +55,7 @@ nav-map-label = வரைபடம்
 nav-discover-label = கண்டறி
 nav-routes-label = பாதைகள்
 nav-profile-label = சுயவிவரம்
+nav-primary-aria-label = முதன்மை வழிசெலுத்தல்
 
 interest-parks-label = பூங்கா & இயற்கை
 interest-coffee-label = காபி இடங்கள்
@@ -188,7 +189,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

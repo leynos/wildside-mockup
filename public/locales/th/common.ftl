@@ -55,6 +55,7 @@ nav-map-label = แผนที่
 nav-discover-label = สำรวจ
 nav-routes-label = เส้นทาง
 nav-profile-label = โปรไฟล์
+nav-primary-aria-label = การนำทางหลัก
 
 interest-parks-label = สวนและธรรมชาติ
 interest-coffee-label = ร้านกาแฟ
@@ -188,7 +189,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

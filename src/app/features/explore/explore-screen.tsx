@@ -360,6 +360,7 @@ export function ExploreScreen(): JSX.Element {
   const formatRouteCount = (count: number): string => t("explore-curated-route-count", { count });
 
   const formatSaveCount = (count: number): string => t("explore-community-saves", { count });
+  const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
 
   return (
     <MobileShell>
@@ -406,6 +407,7 @@ export function ExploreScreen(): JSX.Element {
           </div>
         </main>
         <AppBottomNavigation
+          aria-label={bottomNavAriaLabel}
           items={bottomNavigation.map((item) => ({
             ...item,
             label: t(`nav-${item.id}-label`, { defaultValue: item.label }),

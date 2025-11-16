@@ -6,6 +6,8 @@ import {
   resetRtlTextPluginRegistrationForTests,
 } from "../src/app/components/wildside-map";
 
+type MapLibreNamespace = typeof import("maplibre-gl")["default"];
+
 describe("Wildside map RTL helpers", () => {
   it("registers the RTL text plugin only once when MapLibre exposes the hook", () => {
     resetRtlTextPluginRegistrationForTests();
@@ -14,7 +16,7 @@ describe("Wildside map RTL helpers", () => {
       setRTLTextPlugin: (...args: [string, unknown, unknown]) => {
         pluginCalls.push(args);
       },
-    } as unknown as typeof import("maplibre-gl");
+    } as unknown as MapLibreNamespace;
 
     ensureRtlTextPlugin(mockNamespace);
     ensureRtlTextPlugin(mockNamespace);
@@ -23,7 +25,7 @@ describe("Wildside map RTL helpers", () => {
     expect(pluginCalls[0]?.[0]).toMatch(/maplibre-gl-rtl-text/u);
 
     resetRtlTextPluginRegistrationForTests();
-    ensureRtlTextPlugin({} as typeof import("maplibre-gl"));
+    ensureRtlTextPlugin({} as MapLibreNamespace);
     expect(pluginCalls).toHaveLength(1);
   });
 

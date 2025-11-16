@@ -8,7 +8,7 @@ import { mapDefaults, useOptionalMapStore } from "../features/map/map-state";
 const MAPLIBRE_RTL_PLUGIN_URL = "/maplibre-gl-rtl-text.js";
 
 let hasRegisteredRtlTextPlugin = false;
-type MapLibreNamespace = typeof import("maplibre-gl");
+type MapLibreNamespace = typeof import("maplibre-gl")["default"];
 
 type MapLibreWithRtl = MapLibreNamespace & {
   setRTLTextPlugin?: (pluginUrl: string, callback?: () => void, deferred?: boolean) => void;
@@ -85,16 +85,20 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
     let mapInstance: MapLibreMap | null = null;
 
     const initialiseMap = async () => {
-      const [{ default: maplibre }] = await Promise.all([
+      const [maplibreModule] = await Promise.all([
         import("maplibre-gl"),
         import("maplibre-gl/dist/maplibre-gl.css"),
       ]);
 
+      const maplibreNamespace =
+        (maplibreModule as { default?: MapLibreNamespace }).default ??
+        (maplibreModule as unknown as MapLibreNamespace);
+
       if (isCancelled) return;
-      ensureRtlTextPlugin(maplibre as unknown as MapLibreNamespace);
+      ensureRtlTextPlugin(maplibreNamespace);
 
       try {
-        mapInstance = new maplibre.Map({
+        mapInstance = new maplibreNamespace.Map({
           container: containerElement,
           style: "https://demotiles.maplibre.org/styles/osm-bright-gl-style/style.json",
           center: [...centerRef.current] as MutableLngLat,
@@ -105,10 +109,10 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
         });
         mapRef.current = mapInstance;
         mapInstance.addControl(
-          new maplibre.NavigationControl({ visualizePitch: true }),
+          new maplibreNamespace.NavigationControl({ visualizePitch: true }),
           "top-right",
         );
-        mapInstance.addControl(new maplibre.AttributionControl({ compact: true }));
+        mapInstance.addControl(new maplibreNamespace.AttributionControl({ compact: true }));
 
         mapInstance.on("load", () => {
           if (!mapInstance) return;

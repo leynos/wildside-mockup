@@ -73,6 +73,12 @@ async function removeMapLibreControls(page: Page): Promise<void> {
       link.closest(".maplibregl-ctrl")?.remove();
     });
   }
+
+  await page.locator(".maplibregl-ctrl-attrib").evaluateAll((controls) => {
+    controls.forEach((control) => {
+      control.remove();
+    });
+  });
 }
 
 test.describe("Accessibility tree snapshots", () => {

@@ -1,9 +1,10 @@
-import { afterEach, describe, expect, it } from "bun:test";
+import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 
 import { cleanup, render, screen } from "@testing-library/react";
 
 import React, { act } from "react";
 
+import i18n from "../src/i18n";
 import { AppRoot, LoadingBackdrop, renderApp } from "../src/main";
 
 type DeferredComponent = {
@@ -25,6 +26,10 @@ function createDeferredComponent(label: string): DeferredComponent {
 }
 
 describe("main entry Suspense flow", () => {
+  beforeEach(async () => {
+    await i18n.changeLanguage("en-GB");
+  });
+
   afterEach(() => {
     cleanup();
     document.body.innerHTML = "";
@@ -43,16 +48,21 @@ describe("main entry Suspense flow", () => {
     expect(await screen.findByText("App ready")).toBeTruthy();
   });
 
-  it("mounts the SPA via renderApp for imperative hosts", () => {
+  it("mounts the SPA via renderApp for imperative hosts", async () => {
     const mount = document.createElement("div");
     document.body.append(mount);
 
-    const root = renderApp(mount, {
-      AppComponent: () => <p>Mounted</p>,
+    let dispose: (() => void) | undefined;
+    await act(async () => {
+      const mountedRoot = renderApp(mount, {
+        AppComponent: () => <p>Mounted</p>,
+      }) as unknown as { unmount: () => void };
+      dispose = () => mountedRoot.unmount();
+      await Promise.resolve();
     });
 
     expect(mount.textContent).toContain("Mounted");
-    root.unmount();
+    dispose?.();
   });
 
   it("exposes polite semantics on the loading backdrop", () => {

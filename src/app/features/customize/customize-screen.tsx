@@ -310,6 +310,7 @@ export function CustomizeScreen(): JSX.Element {
     useState<Record<string, number>>(interestInitialValues);
   const [selectedRoute, setSelectedRoute] = useState(routePreviews[0]?.id ?? "route-a");
   const [advancedValues, setAdvancedValues] = useState<Record<string, boolean>>(advancedInitial);
+  const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
 
   const navigate = useNavigate();
 
@@ -418,6 +419,7 @@ export function CustomizeScreen(): JSX.Element {
           />
         </main>
         <AppBottomNavigation
+          aria-label={bottomNavAriaLabel}
           items={bottomNavigation.map((item) => ({
             ...item,
             label: t(`nav-${item.id}-label`, { defaultValue: item.label }),

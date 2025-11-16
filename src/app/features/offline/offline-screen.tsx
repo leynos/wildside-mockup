@@ -61,6 +61,7 @@ export function OfflineScreen(): JSX.Element {
   const storageUsedFormatted = OFFLINE_STORAGE_DEFAULTS.usedLabel;
   const storageTotalFormatted = OFFLINE_STORAGE_DEFAULTS.totalLabel;
   const storageAutoDeleteDays = OFFLINE_STORAGE_DEFAULTS.autoDeleteDays;
+  const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
 
   const headerTitle = t("offline-header-title", { defaultValue: "Offline Maps" });
   const headerSubtitle = t("offline-header-subtitle", {
@@ -431,6 +432,7 @@ export function OfflineScreen(): JSX.Element {
           </main>
 
           <AppBottomNavigation
+            aria-label={bottomNavAriaLabel}
             items={bottomNavigation.map((item) => ({
               ...item,
               label: t(`nav-${item.id}-label`, { defaultValue: item.label }),

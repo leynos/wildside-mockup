@@ -55,6 +55,7 @@ nav-map-label = 지도
 nav-discover-label = 탐색
 nav-routes-label = 루트
 nav-profile-label = 프로필
+nav-primary-aria-label = 주요 탐색
 
 interest-parks-label = 공원과 자연
 interest-coffee-label = 커피 스폿
@@ -189,7 +190,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

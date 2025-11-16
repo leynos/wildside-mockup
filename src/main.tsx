@@ -8,10 +8,11 @@ import i18n from "./i18n";
 import "./index.css";
 
 export function LoadingBackdrop(): JSX.Element {
-  const label = i18n.t("loading");
+  const label = i18n.t("loading", { defaultValue: "Loading…" });
   return (
     <output
       aria-live="polite"
+      aria-label={label}
       className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-base-content/70"
     >
       {label}

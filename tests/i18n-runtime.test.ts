@@ -1,4 +1,4 @@
-import { afterEach, beforeAll, describe, expect, it } from "bun:test";
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from "bun:test";
 
 import i18n, { applyDocumentLocale, i18nReady } from "../src/i18n";
 
@@ -8,6 +8,10 @@ const readBodyDirection = () =>
 describe("i18n runtime configuration", () => {
   beforeAll(async () => {
     await i18nReady;
+  });
+
+  beforeEach(async () => {
+    await i18n.changeLanguage("en-GB");
   });
 
   afterEach(async () => {

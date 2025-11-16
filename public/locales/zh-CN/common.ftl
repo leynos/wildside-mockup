@@ -55,6 +55,7 @@ nav-map-label = 地图
 nav-discover-label = 发现
 nav-routes-label = 路线
 nav-profile-label = 个人资料
+nav-primary-aria-label = 主导航
 
 interest-parks-label = 公园与自然
 interest-coffee-label = 咖啡好去处
@@ -189,7 +190,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

@@ -1026,8 +1026,10 @@ describe("Stage 4 completion flows", () => {
       const ltrContainer = requireContainer(mount);
       const ltrView = within(ltrContainer);
       const skipButton = ltrView.getByRole("button", { name: /skip/i });
-      const ltrStyle = window.getComputedStyle(skipButton);
-      expect(ltrStyle.right).toBe("1.5rem");
+      const readInset = (element: HTMLElement, property: string) =>
+        window.getComputedStyle(element).getPropertyValue(property);
+
+      expect(readInset(skipButton, "inset-inline-end")).toBe("1.5rem");
 
       cleanup();
       await i18n.changeLanguage("ar");
@@ -1036,8 +1038,7 @@ describe("Stage 4 completion flows", () => {
       const rtlContainer = requireContainer(mount);
       const rtlView = within(rtlContainer);
       const rtlSkipButton = rtlView.getByRole("button", { name: /skip/i });
-      const rtlStyle = window.getComputedStyle(rtlSkipButton);
-      expect(rtlStyle.left).toBe("1.5rem");
+      expect(readInset(rtlSkipButton, "inset-inline-end")).toBe("1.5rem");
     });
 
     it("aligns customize route previews using text-start semantics", async () => {
@@ -1045,7 +1046,18 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/customize"));
       let container = requireContainer(mount);
       let view = within(container);
-      const preview = view.getByRole("button", { name: /route a/i });
+      const findRouteButton = () => {
+        const buttons = view.getAllByRole("button");
+        const label = i18n.t("customize-route-preview-route-a-title", {
+          defaultValue: "Route A",
+        });
+        const pattern = new RegExp(escapeRegExp(label), "i");
+        return buttons.find((button) => pattern.test(button.textContent ?? ""));
+      };
+      const preview = findRouteButton();
+      if (!preview) {
+        throw new Error("Route A preview not rendered");
+      }
       expect(window.getComputedStyle(preview).textAlign).toBe("left");
 
       cleanup();
@@ -1054,7 +1066,10 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/customize"));
       container = requireContainer(mount);
       view = within(container);
-      const rtlPreview = view.getByRole("button", { name: /route a/i });
+      const rtlPreview = findRouteButton();
+      if (!rtlPreview) {
+        throw new Error("Route A preview not rendered for RTL");
+      }
       expect(window.getComputedStyle(rtlPreview).textAlign).toBe("right");
     });
 

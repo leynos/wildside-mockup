@@ -55,6 +55,7 @@ nav-map-label = Harita
 nav-discover-label = Keşfet
 nav-routes-label = Rotalar
 nav-profile-label = Profil
+nav-primary-aria-label = Ana gezinme
 
 interest-parks-label = Parklar ve doğa
 interest-coffee-label = Kahve durakları
@@ -189,7 +190,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes

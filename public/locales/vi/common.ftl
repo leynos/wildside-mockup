@@ -55,6 +55,7 @@ nav-map-label = Bản đồ
 nav-discover-label = Khám phá
 nav-routes-label = Lộ trình
 nav-profile-label = Hồ sơ
+nav-primary-aria-label = Điều hướng chính
 
 interest-parks-label = Công viên & thiên nhiên
 interest-coffee-label = Quán cà phê
@@ -189,7 +190,7 @@ safety-dialog-title = Preferences saved
 safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
 safety-dialog-continue = Continue
 safety-dialog-chip-fallback = {$id}
-safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-preset-alert = Preset “{$title}” will be applied in a future build.
 safety-section-mobility-title = Mobility Support
 safety-section-mobility-description = Route adjustments for easier navigation
 safety-toggle-step-free-label = Step-free routes
@@ -265,13 +266,13 @@ explore-community-heading = Yêu thích của cộng đồng
 explore-community-subtitle = Được chia sẻ nhiều nhất tuần này
 explore-community-saves =
     { $count ->
-        [=0] {$count} lượt lưu
+        [zero] {$count} lượt lưu
         [one] {$count} lượt lưu
        *[other] {$count} lượt lưu
     }
 explore-curated-route-count =
     { $count ->
-        [=0] {$count} tuyến
+        [zero] {$count} tuyến
         [one] {$count} tuyến
        *[other] {$count} tuyến
     }
