@@ -143,6 +143,44 @@ wizard-step-two-accessibility-wheelchair-description = Percorsi larghi e scorrev
 wizard-step-two-accessibility-paved-label = Superfici pavimentate
 wizard-step-two-accessibility-paved-description = Evita sterrati e prati
 wizard-step-two-review = Rivedi la camminata
+wizard-step-three-start-over = Start over
+wizard-step-three-save-button = Save walk and view map
+wizard-step-three-dialog-title = Walk saved!
+wizard-step-three-dialog-description = The Hidden Gems Loop is ready under your saved walks. Start the route now or continue exploring other wizard options.
+wizard-step-three-dialog-close = Close
+wizard-step-three-dialog-view-map = View on map
+wizard-step-three-route-panel-aria = Hidden gems loop summary
+wizard-step-three-route-title = Hidden Gems Loop
+wizard-step-three-route-badge = Custom
+wizard-step-three-route-distance-unit = miles
+wizard-step-three-route-duration-unit = minutes
+wizard-step-three-route-stops-unit = stops
+wizard-step-three-route-description = A personalised walk blending street art laneways, independent cafés, and quiet waterfront viewpoints.
+wizard-step-three-preferences-panel-aria = Your preferences applied
+wizard-step-three-preferences-heading = Your preferences applied
+wizard-step-three-stops-panel-aria = Featured stops
+wizard-step-three-stops-heading = Featured stops
+wizard-step-three-highlight-lighting-detail = Safe evening sections with smart lighting
+wizard-step-three-highlight-hidden-gems-label = Hidden gems focus
+wizard-step-three-highlight-hidden-gems-detail = Expect quiet street art laneways and indie cafés
+wizard-step-three-highlight-loop-label = Loop route
+wizard-step-three-highlight-loop-detail = Starts and ends near your current location
+wizard-step-three-highlight-easy-label = Easy difficulty
+wizard-step-three-highlight-easy-detail = Gradual inclines suitable for relaxed pacing
+wizard-step-three-stop-cafe-name = Midtown Roastery
+wizard-step-three-stop-cafe-description = Small-batch espresso with window seating
+wizard-step-three-stop-cafe-note = Friendly baristas, ideal for takeaway
+wizard-step-three-stop-art-name = Graffiti Passage
+wizard-step-three-stop-art-description = Open-air gallery of rotating murals
+wizard-step-three-stop-art-note = Photo spot • 1.1 miles in
+wizard-step-three-stop-garden-name = Whispering Oak Garden
+wizard-step-three-stop-garden-description = Peaceful pocket park with shaded benches
+wizard-step-three-stop-garden-note = Rest area • 1.8 miles in
+wizard-step-three-weather-title = Perfect walking weather
+wizard-step-three-weather-summary = 72°F, light breeze, clear skies
+wizard-step-three-weather-reminder = Pack light layers just in case.
+wizard-step-three-weather-sentiment = Ideal
+
 
 
 
