@@ -1,7 +1,7 @@
 /** @file Shared multi-select interest chip group. */
 
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
-import type { JSX } from "react";
+import { type JSX, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { interestDescriptors, type ResolvedInterestDescriptor } from "../data/registries/interests";
 import { resolveDescriptor } from "../i18n/descriptors";
@@ -26,8 +26,12 @@ export function InterestToggleGroup({
   className,
 }: InterestToggleGroupProps): JSX.Element {
   const { t } = useTranslation();
-  const interestLookup = new Map<string, ResolvedInterestDescriptor>(
-    interestDescriptors.map((descriptor) => [descriptor.id, resolveDescriptor(descriptor, t)]),
+  const interestLookup = useMemo(
+    () =>
+      new Map<string, ResolvedInterestDescriptor>(
+        interestDescriptors.map((descriptor) => [descriptor.id, resolveDescriptor(descriptor, t)]),
+      ),
+    [t],
   );
 
   return (

@@ -82,9 +82,9 @@ quick-walk-duration-marker-end = {$minutes} د
 quick-walk-interests-heading = الاهتمامات
 quick-walk-interests-selected =
     { $count ->
-        [zero] لم يتم اختيار أي اهتمام
-        [one] تم اختيار اهتمام واحد
-        [two] تم اختيار اهتمامين
+        [zero] تم اختيار {$count} من الاهتمامات
+        [one] تم اختيار {$count} اهتمام واحد
+        [two] تم اختيار {$count} اهتمامين
         [few] تم اختيار {$count} اهتمامات
         [many] تم اختيار {$count} اهتماماً
        *[other] تم اختيار {$count} اهتماماً
@@ -123,9 +123,9 @@ wizard-step-one-interests-section-aria = الاهتمامات
 wizard-step-one-interests-heading = الاهتمامات
 wizard-step-one-interests-selected =
     { $count ->
-        [zero] لم يتم اختيار أي اهتمامات
-        [one] تم اختيار اهتمام واحد
-        [two] تم اختيار اهتمامين
+        [zero] تم اختيار {$count} اهتمامات
+        [one] {$count} اهتمام واحد
+        [two] {$count} اهتمامين
         [few] تم اختيار {$count} اهتمامات
         [many] تم اختيار {$count} اهتماماً
        *[other] تم اختيار {$count} اهتماماً
@@ -274,9 +274,9 @@ explore-community-heading = المفضل لدى المجتمع
 explore-community-subtitle = الأكثر مشاركة هذا الأسبوع
 explore-community-saves =
     { $count ->
-        [zero] لم يتم الحفظ بعد
-        [one] تم الحفظ مرة واحدة
-        [two] تم الحفظ مرتين
+        [zero] تم الحفظ {$count} مرة
+        [one] تم الحفظ {$count} مرة واحدة
+        [two] تم الحفظ {$count} مرتين
         [few] تم الحفظ {$count} مرات
         [many] تم الحفظ {$count} مرة
        *[other] تم الحفظ {$count} مرة

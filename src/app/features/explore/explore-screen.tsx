@@ -69,8 +69,12 @@ type CommunityPickPanelProps = {
 };
 
 function CategoryScroller({ ariaLabel, formatRouteCount }: CategoryScrollerProps): JSX.Element {
+  const headingId = useId();
   return (
-    <section className="w-full pt-2" aria-label={ariaLabel} role="region">
+    <section className="w-full pt-2" aria-labelledby={headingId} role="region">
+      <h2 id={headingId} className="sr-only">
+        {ariaLabel}
+      </h2>
       <ScrollArea.Root className="w-full" type="scroll">
         <ScrollArea.Viewport className="w-full">
           <div className="flex gap-3 pb-2" style={{ paddingInlineEnd: "1.5rem" }}>

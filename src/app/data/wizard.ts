@@ -49,7 +49,7 @@ export interface WizardSummaryHighlight {
   readonly defaultDetail: string;
 }
 
-export const wizardSummaryHighlights: WizardSummaryHighlight[] = [
+export const wizardSummaryHighlights: ReadonlyArray<WizardSummaryHighlight> = [
   {
     id: "lighting",
     iconToken: "{icon.object.guidance}",
@@ -108,7 +108,7 @@ export interface WizardGeneratedStop {
   readonly defaultNote: string;
 }
 
-export const wizardGeneratedStops: WizardGeneratedStop[] = [
+export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
   {
     id: "café",
     nameKey: "wizard-step-three-stop-cafe-name",
@@ -160,7 +160,7 @@ export interface WizardRouteSummary {
   readonly defaultBadge: string;
   readonly descriptionKey: string;
   readonly defaultDescription: string;
-  readonly stats: WizardRouteStat[];
+  readonly stats: ReadonlyArray<WizardRouteStat>;
 }
 
 export const wizardRouteSummary: WizardRouteSummary = {

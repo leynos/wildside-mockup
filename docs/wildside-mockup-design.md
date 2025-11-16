@@ -197,7 +197,7 @@ Mapping guidance:
 - `Toast`: feedback when saving walks or completing actions.
 - `Popover`/`Tooltip`: inline help icons, map annotations.
 
-## Localised descriptor registries
+## Localized descriptor registries
 
 - Add a shared `LocalizedDescriptor` type in `src/app/i18n/descriptors.ts`
   capturing the minimal metadata needed to render any label via Fluent:
