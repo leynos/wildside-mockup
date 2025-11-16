@@ -262,7 +262,11 @@ explore-curated-heading = Gecureerde collecties
 explore-trending-heading = Nu trending
 explore-community-heading = Favoriet van de community
 explore-community-subtitle = Meest gedeeld deze week
-explore-community-saves = {$count}× opgeslagen
+explore-community-saves =
+    { $count ->
+        [one] {$count}× opgeslagen
+       *[other] {$count}× opgeslagen
+    }
 explore-curated-route-count =
     { $count ->
         [one] {$count} route
