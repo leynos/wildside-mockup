@@ -262,8 +262,16 @@ explore-curated-heading = คอลเล็กชันที่คัดสร
 explore-trending-heading = มาแรงตอนนี้
 explore-community-heading = ขวัญใจชุมชน
 explore-community-subtitle = มีการแชร์มากที่สุดในสัปดาห์นี้
-explore-community-saves = บันทึก {$count} ครั้ง
-explore-curated-route-count = {$count} เส้นทาง
+explore-community-saves =
+    { $count ->
+        [one] บันทึก {$count} ครั้ง
+       *[other] บันทึก {$count} ครั้ง
+    }
+explore-curated-route-count =
+    { $count ->
+        [one] {$count} เส้นทาง
+       *[other] {$count} เส้นทาง
+    }
 
 offline-header-title = แผนที่ออฟไลน์
 offline-header-subtitle = จัดการการดาวน์โหลดและอัปเดตอัจฉริยะ
