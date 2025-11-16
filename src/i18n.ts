@@ -49,8 +49,14 @@ const fetchAjax = (
 
   void fetch(url, request)
     .then(async (response) => {
+      const { status, statusText } = response;
+      if (!response.ok) {
+        const errorMessage = statusText || `Request failed with status ${status}`;
+        callback(new Error(errorMessage), { status, statusText: errorMessage });
+        return;
+      }
       const text = await response.text();
-      callback(text, { status: response.status, statusText: response.statusText });
+      callback(text, { status, statusText });
     })
     .catch((error) => {
       const typedError = error as Error;
