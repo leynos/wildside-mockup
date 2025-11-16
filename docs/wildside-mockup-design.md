@@ -456,6 +456,20 @@ Mapping guidance:
   now resolve from the same toggle descriptors to avoid ad hoc string
   formatting.
 
+#### RTL direction + logical layout decisions
+
+- The i18n runtime calls `applyDocumentLocale` whenever a language change
+  resolves. This helper looks up metadata in `SUPPORTED_LOCALES`, updates
+  `lang`, `dir`, and `data-direction` on both `html` and `body`, and becomes the
+  single source of truth for layout direction.
+- UI components switched from `text-left`/`text-right` to logical utilities:
+  `.text-start`, `.text-end`, and logical inset properties (for example,
+  `.discover-screen__skip` uses `inset-inline-end`). These rules deliver LTR and
+  RTL parity without duplicating markup.
+- `WildsideMap` now registers the MapLibre RTL text plugin via
+  `ensureRtlTextPlugin` so glyphs render correctly for Arabic/Hebrew locales and
+  fallback symbol layers always expose `text-field` definitions.
+
 #### Progress (26 October 2025)
 
 - `discover`, `explore`, and `customize` screens now render via Radix feature

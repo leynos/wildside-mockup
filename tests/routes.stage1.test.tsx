@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { afterAll, afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { screen, within } from "@testing-library/dom";
 import { act } from "react";
 import type { Root } from "react-dom/client";
@@ -18,6 +18,7 @@ import { DisplayModeProvider } from "../src/app/providers/display-mode-provider"
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
 import i18n, { i18nReady } from "../src/i18n";
+import { installLogicalStyleStub } from "./support/logical-style-stub";
 
 type TestRoute =
   | "/discover"
@@ -76,6 +77,19 @@ function requireContainer(target: HTMLDivElement | null): HTMLDivElement {
   return target;
 }
 
+const setDocumentDirection = (direction: "ltr" | "rtl") => {
+  document.documentElement.dir = direction;
+  document.documentElement.setAttribute("data-direction", direction);
+  document.body.dir = direction;
+  document.body.setAttribute("data-direction", direction);
+};
+
+const removeLogicalStyleStub = installLogicalStyleStub();
+
+afterAll(() => {
+  removeLogicalStyleStub();
+});
+
 describe("Stage 1 routed flows", () => {
   let root: Root | null = null;
   let mount: HTMLDivElement | null = null;
@@ -94,10 +108,13 @@ describe("Stage 1 routed flows", () => {
 
   beforeEach(() => {
     cleanup();
+    setDocumentDirection("ltr");
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
+    setDocumentDirection("ltr");
+    await i18n.changeLanguage("en-GB");
   });
 
   it("tracks selected interests on the discover route", async () => {
@@ -1000,5 +1017,87 @@ describe("Stage 4 completion flows", () => {
         await i18n.changeLanguage(previousLanguage ?? "en-GB");
       });
     }
+  });
+
+  describe("Logical layout behaviour", () => {
+    it("positions the discover skip action via logical offsets", async () => {
+      await i18n.changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/discover"));
+      const ltrContainer = requireContainer(mount);
+      const ltrView = within(ltrContainer);
+      const skipButton = ltrView.getByRole("button", { name: /skip/i });
+      const ltrStyle = window.getComputedStyle(skipButton);
+      expect(ltrStyle.right).toBe("1.5rem");
+
+      cleanup();
+      await i18n.changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/discover"));
+      const rtlContainer = requireContainer(mount);
+      const rtlView = within(rtlContainer);
+      const rtlSkipButton = rtlView.getByRole("button", { name: /skip/i });
+      const rtlStyle = window.getComputedStyle(rtlSkipButton);
+      expect(rtlStyle.left).toBe("1.5rem");
+    });
+
+    it("aligns customize route previews using text-start semantics", async () => {
+      await i18n.changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/customize"));
+      let container = requireContainer(mount);
+      let view = within(container);
+      const preview = view.getByRole("button", { name: /route a/i });
+      expect(window.getComputedStyle(preview).textAlign).toBe("left");
+
+      cleanup();
+      await i18n.changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/customize"));
+      container = requireContainer(mount);
+      view = within(container);
+      const rtlPreview = view.getByRole("button", { name: /route a/i });
+      expect(window.getComputedStyle(rtlPreview).textAlign).toBe("right");
+    });
+
+    it("keeps safety accordion triggers aligned for both directions", async () => {
+      await i18n.changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      let container = requireContainer(mount);
+      let view = within(container);
+      const ltrHeading = view.getByText(/mobility support/i);
+      const ltrTrigger = ltrHeading.closest("button");
+      expect(ltrTrigger).toBeTruthy();
+      expect(window.getComputedStyle(ltrTrigger as Element).textAlign).toBe("left");
+
+      cleanup();
+      await i18n.changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      container = requireContainer(mount);
+      view = within(container);
+      const rtlHeading = view.getByText(/mobility support/i);
+      const rtlTrigger = rtlHeading.closest("button");
+      expect(rtlTrigger).toBeTruthy();
+      expect(window.getComputedStyle(rtlTrigger as Element).textAlign).toBe("right");
+    });
+
+    it("mirrors wizard weather summaries with text-end alignment", async () => {
+      await i18n.changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/wizard/step-3"));
+      let container = requireContainer(mount);
+      let view = within(container);
+      const temperature = view.getByText(wizardWeatherSummary.temperature);
+      const summaryBlock = temperature.parentElement as HTMLElement;
+      expect(window.getComputedStyle(summaryBlock).textAlign).toBe("right");
+
+      cleanup();
+      await i18n.changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/wizard/step-3"));
+      container = requireContainer(mount);
+      view = within(container);
+      const rtlTemperature = view.getByText(wizardWeatherSummary.temperature);
+      const rtlSummaryBlock = rtlTemperature.parentElement as HTMLElement;
+      expect(window.getComputedStyle(rtlSummaryBlock).textAlign).toBe("left");
+    });
   });
 });

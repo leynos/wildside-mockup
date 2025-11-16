@@ -15,13 +15,17 @@ type MapLibreWithRtl = MapLibreNamespace & {
   setRTLTextPlugin?: (pluginUrl: string, callback?: () => void, deferred?: boolean) => void;
 };
 
-const ensureRtlTextPlugin = (maplibre: MapLibreNamespace): void => {
+export const ensureRtlTextPlugin = (maplibre: MapLibreNamespace): void => {
   if (hasRegisteredRtlTextPlugin) return;
   const setPlugin = (maplibre as MapLibreWithRtl).setRTLTextPlugin;
   if (typeof setPlugin !== "function") return;
 
   setPlugin(MAPLIBRE_RTL_PLUGIN_URL, undefined, true);
   hasRegisteredRtlTextPlugin = true;
+};
+
+export const resetRtlTextPluginRegistrationForTests = (): void => {
+  hasRegisteredRtlTextPlugin = false;
 };
 
 export interface WildsideMapProps {
@@ -81,7 +85,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
     let isCancelled = false;
     let mapInstance: MapLibreMap | null = null;
 
-    async function initialiseMap() {
+    const initialiseMap = async () => {
       const [maplibre] = await Promise.all([
         import("maplibre-gl"),
         import("maplibre-gl/dist/maplibre-gl.css"),
@@ -118,7 +122,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
       } catch (error) {
         console.warn("Wildside map failed to initialise", error);
       }
-    }
+    };
 
     initialiseMap().catch((error) => {
       console.warn("Wildside map encountered an error", error);
@@ -157,7 +161,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
   return <div ref={containerRef} className="h-full w-full" />;
 }
 
-function ensureFallbackLayers(mapInstance: MapLibreMap) {
+export function ensureFallbackLayers(mapInstance: MapLibreMap) {
   if (!mapInstance.getSource("wildside-pois")) {
     mapInstance.addSource("wildside-pois", {
       type: "geojson",

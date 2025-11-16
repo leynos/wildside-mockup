@@ -1,13 +1,13 @@
 /** @file Bootstraps the Radix × DaisyUI playground SPA for Bun's HTML entry point. */
 
-import React, { type JSX } from "react";
-import { createRoot } from "react-dom/client";
+import React, { type ComponentType, type JSX, type ReactNode } from "react";
+import { createRoot, type Root } from "react-dom/client";
 
 import App from "./app/app";
 import "./i18n";
 import "./index.css";
 
-function LoadingBackdrop(): JSX.Element {
+export function LoadingBackdrop(): JSX.Element {
   return (
     <output
       aria-live="polite"
@@ -18,16 +18,35 @@ function LoadingBackdrop(): JSX.Element {
   );
 }
 
-const mount = document.body?.children.namedItem("root");
-
-if (!(mount instanceof HTMLElement)) {
-  throw new Error("Mount point '#root' is required to render the SPA.");
+export interface AppRootProps {
+  readonly AppComponent?: ComponentType;
+  readonly fallback?: ReactNode;
 }
 
-createRoot(mount).render(
-  <React.StrictMode>
-    <React.Suspense fallback={<LoadingBackdrop />}>
-      <App />
-    </React.Suspense>
-  </React.StrictMode>,
-);
+export function AppRoot({ AppComponent = App, fallback }: AppRootProps = {}): JSX.Element {
+  return (
+    <React.StrictMode>
+      <React.Suspense fallback={fallback ?? <LoadingBackdrop />}>
+        <AppComponent />
+      </React.Suspense>
+    </React.StrictMode>
+  );
+}
+
+export function renderApp(target: HTMLElement, props?: AppRootProps): Root {
+  const root = createRoot(target);
+  root.render(<AppRoot {...props} />);
+  return root;
+}
+
+const isTestEnvironment = typeof process !== "undefined" && process.env?.NODE_ENV === "test";
+
+if (!isTestEnvironment) {
+  const mount = document.body?.children.namedItem("root");
+
+  if (!(mount instanceof HTMLElement)) {
+    throw new Error("Mount point '#root' is required to render the SPA.");
+  }
+
+  renderApp(mount);
+}

@@ -78,7 +78,7 @@ const fetchAjax = (
     });
 };
 
-const applyDocumentLocale = (language: string | undefined): void => {
+export const applyDocumentLocale = (language: string | undefined): void => {
   if (typeof document === "undefined") return;
 
   const metadata = getLocaleMetadata(language ?? DEFAULT_LOCALE);
