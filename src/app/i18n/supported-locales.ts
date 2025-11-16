@@ -46,38 +46,35 @@ export const SUPPORTED_LOCALES = [
 
 export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0]?.code ?? "en-GB";
 
+const LOCALE_MAP: Record<string, SupportedLocale> = SUPPORTED_LOCALES.reduce(
+  (map, locale) => {
+    const fullCode = locale.code.toLowerCase();
+    map[fullCode] = locale;
+    const [languagePart] = fullCode.split("-");
+    const languageKey = languagePart ?? fullCode;
+    if (!map[languageKey]) {
+      map[languageKey] = locale;
+    }
+    return map;
+  },
+  {} as Record<string, SupportedLocale>,
+);
+
 const defaultLocaleMetadata = (() => {
-  const locale = SUPPORTED_LOCALES.find((entry) => entry.code === DEFAULT_LOCALE);
+  const locale = LOCALE_MAP[DEFAULT_LOCALE.toLowerCase()];
   if (!locale) {
     throw new Error(`DEFAULT_LOCALE '${DEFAULT_LOCALE}' is not present in SUPPORTED_LOCALES`);
   }
   return locale;
 })();
 
-const normaliseLocale = (code: string): string => code.toLowerCase();
-
-const extractLanguagePart = (code: string): string => {
-  const [language = code] = code.split("-");
-  return language;
-};
-
-const fuzzyMatchLocale = (code: string): SupportedLocale | undefined => {
-  const normalised = normaliseLocale(code);
-  const normalisedLanguage = extractLanguagePart(normalised);
-  return (
-    SUPPORTED_LOCALES.find((locale) => normaliseLocale(locale.code) === normalised) ??
-    SUPPORTED_LOCALES.find(
-      (locale) => normaliseLocale(extractLanguagePart(locale.code)) === normalisedLanguage,
-    )
-  );
-};
-
 export const getLocaleMetadata = (code: string | undefined): SupportedLocale => {
   if (!code) {
     return defaultLocaleMetadata;
   }
 
-  return fuzzyMatchLocale(code) ?? defaultLocaleMetadata;
+  const lookupKey = code.toLowerCase();
+  return LOCALE_MAP[lookupKey] ?? defaultLocaleMetadata;
 };
 
 export const getLocaleDirection = (code: string | undefined): TextDirection => {
