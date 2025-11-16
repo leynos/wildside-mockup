@@ -263,7 +263,11 @@ explore-curated-heading = Küratör seçkileri
 explore-trending-heading = Şu anda trend
 explore-community-heading = Topluluğun favorisi
 explore-community-subtitle = Bu hafta en çok paylaşılan
-explore-community-saves = {$count} kayıt
+explore-community-saves =
+    { $count ->
+        [one] {$count} kayıt
+       *[other] {$count} kayıt
+    }
 explore-curated-route-count =
     { $count ->
         [one] {$count} rota
