@@ -265,8 +265,8 @@ explore-community-heading = Favoriet van de community
 explore-community-subtitle = Meest gedeeld deze week
 explore-community-saves =
     { $count ->
-        [one] {$count}× opgeslagen
-       *[other] {$count}× opgeslagen
+        [one] {$count} keer opgeslagen
+       *[other] {$count} keer opgeslagen
     }
 explore-curated-route-count =
     { $count ->
