@@ -180,6 +180,46 @@ wizard-step-three-weather-title = Perfect walking weather
 wizard-step-three-weather-summary = 72°F, light breeze, clear skies
 wizard-step-three-weather-reminder = Pack light layers just in case.
 wizard-step-three-weather-sentiment = Ideal
+safety-header-title = Safety & Accessibility
+safety-header-description = Customise your walking routes for comfort and safety
+safety-presets-heading = Preset profiles
+safety-save-button = Save preferences
+safety-dialog-title = Preferences saved
+safety-dialog-description = Your safety and accessibility settings are now part of future walk planning.
+safety-dialog-continue = Continue
+safety-dialog-chip-fallback = {$id}
+safety-preset-alert = Preset "{$title}" will be applied in a future build.
+safety-section-mobility-title = Mobility Support
+safety-section-mobility-description = Route adjustments for easier navigation
+safety-toggle-step-free-label = Step-free routes
+safety-toggle-step-free-description = Avoid stairs and steps
+safety-toggle-avoid-hills-label = Avoid steep hills
+safety-toggle-avoid-hills-description = Limit inclines above 5%
+safety-toggle-wider-paths-label = Prefer wider paths
+safety-toggle-wider-paths-description = Optimised for chairs, buggies, or group walking
+safety-section-safety-title = Safety Features
+safety-section-safety-description = Enhanced security for your walks
+safety-toggle-busy-areas-label = Prefer busy areas
+safety-toggle-busy-areas-description = Stay in populated zones
+safety-toggle-emergency-sharing-label = Emergency sharing
+safety-toggle-emergency-sharing-description = Share location with contacts
+safety-toggle-avoid-isolated-label = Avoid isolated areas
+safety-toggle-avoid-isolated-description = Skip secluded locations
+safety-section-comfort-title = Comfort Settings
+safety-section-comfort-description = Personalise your walking experience
+safety-toggle-shade-label = Prioritise shade
+safety-toggle-shade-description = Choose tree-lined paths
+safety-toggle-weather-label = Weather-adaptive
+safety-toggle-weather-description = Adjust routes for weather
+safety-toggle-quiet-label = Prefer quiet routes
+safety-toggle-quiet-description = Minimise traffic noise
+safety-preset-family-title = Family Friendly
+safety-preset-family-description = Gentle pace, playground stops, shade
+safety-preset-senior-title = Senior Friendly
+safety-preset-senior-description = Gentle slopes, resting points, well-lit
+safety-preset-night-title = Night Walker
+safety-preset-night-description = Well-lit, busy areas, emergency sharing
+
 
 
 
