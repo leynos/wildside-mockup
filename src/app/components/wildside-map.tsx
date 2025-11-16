@@ -86,14 +86,13 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
     let mapInstance: MapLibreMap | null = null;
 
     const initialiseMap = async () => {
-      const [{ default: maplibreModule }] = await Promise.all([
+      const [{ default: maplibre }] = await Promise.all([
         import("maplibre-gl"),
         import("maplibre-gl/dist/maplibre-gl.css"),
       ]);
-      const maplibre = maplibreModule as unknown as MapLibreNamespace;
 
       if (isCancelled) return;
-      ensureRtlTextPlugin(maplibre);
+      ensureRtlTextPlugin(maplibre as unknown as MapLibreNamespace);
 
       try {
         mapInstance = new maplibre.Map({
