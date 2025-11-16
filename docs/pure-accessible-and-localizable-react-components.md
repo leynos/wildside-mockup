@@ -736,6 +736,15 @@ export default i18n;
 
 ```
 
+> ℹ️ **Why `useIsolating: false`?** Fluent inserts invisible FSI/PDI markers
+> around every placeable when isolation is enabled. Those markers break some of
+> our React typography helpers (for example the icon-leading badges and the map
+> callouts that already wrap user-provided strings in `<bdi>`). Because every
+> user-controlled interpolation is explicitly wrapped in `<bdi>` (or rendered
+> in its own element with `dir` attributes) and layout relies on logical CSS
+> properties, disabling Fluent’s automatic isolation still preserves RTL
+> rendering while keeping the markup predictable.
+
 Import this module inside `main.tsx` and keep the root wrapped in `Suspense` so
 React can pause rendering until the `.ftl` file for the active locale has been
 streamed.[^46]
