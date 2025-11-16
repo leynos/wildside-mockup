@@ -33,6 +33,12 @@ const logToConsole = (
 };
 
 export const appLogger = {
+  info(message: string, context?: LogContext): void {
+    logToConsole("info", message, context);
+  },
+  warn(message: string, context?: LogContext, error?: unknown): void {
+    logToConsole("warn", message, context, error);
+  },
   error(message: string, context?: LogContext, error?: unknown): void {
     logToConsole("error", message, context, error);
   },
