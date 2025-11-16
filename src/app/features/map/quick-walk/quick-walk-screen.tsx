@@ -95,16 +95,25 @@ export function QuickWalkScreen(): JSX.Element {
   const notesHeading = t("quick-walk-notes-heading", { defaultValue: "Planning notes" });
   const notesItems = useMemo(
     () => [
-      t("quick-walk-notes-item-1", {
-        defaultValue: "Sync the plan with your calendar to block out discovery time.",
-      }),
-      t("quick-walk-notes-item-2", {
-        defaultValue:
-          "Pack a reusable bottle – refill points are highlighted along the waterfront.",
-      }),
-      t("quick-walk-notes-item-3", {
-        defaultValue: "Invite friends and keep pace options flexible for an inclusive stroll.",
-      }),
+      {
+        id: "calendar",
+        text: t("quick-walk-notes-item-1", {
+          defaultValue: "Sync the plan with your calendar to block out discovery time.",
+        }),
+      },
+      {
+        id: "bottle",
+        text: t("quick-walk-notes-item-2", {
+          defaultValue:
+            "Pack a reusable bottle – refill points are highlighted along the waterfront.",
+        }),
+      },
+      {
+        id: "friends",
+        text: t("quick-walk-notes-item-3", {
+          defaultValue: "Invite friends and keep pace options flexible for an inclusive stroll.",
+        }),
+      },
     ],
     [t],
   );
@@ -273,7 +282,7 @@ export function QuickWalkScreen(): JSX.Element {
                     </h2>
                     <ul className="mt-3 list-disc space-y-2 pl-5 text-base-content/80">
                       {notesItems.map((note) => (
-                        <li key={note}>{note}</li>
+                        <li key={note.id}>{note.text}</li>
                       ))}
                     </ul>
                   </section>

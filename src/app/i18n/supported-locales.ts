@@ -44,7 +44,7 @@ export const SUPPORTED_LOCALES = [
   { code: "zh-TW", label: "Chinese (Traditional)", nativeLabel: "繁體中文" },
 ] as const satisfies Readonly<[SupportedLocale, ...SupportedLocale[]]>;
 
-export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0]?.code ?? "en-GB";
+export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0].code;
 
 const LOCALE_MAP: Record<string, SupportedLocale> = SUPPORTED_LOCALES.reduce(
   (map, locale) => {

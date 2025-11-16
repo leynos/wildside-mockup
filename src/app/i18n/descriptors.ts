@@ -50,7 +50,14 @@ export const buildDescriptorLookup = <
   descriptors: ReadonlyArray<LocalizedDescriptor<Extra>>,
   t: TFunction,
 ): Map<string, ResolvedDescriptor<Extra>> => {
-  return new Map(
-    resolveDescriptors(descriptors, t).map((descriptor) => [descriptor.id, descriptor]),
-  );
+  const entries: Array<readonly [string, ResolvedDescriptor<Extra>]> = [];
+  const seen = new Set<string>();
+  resolveDescriptors(descriptors, t).forEach((descriptor) => {
+    if (seen.has(descriptor.id)) {
+      throw new Error(`Duplicate descriptor id detected: ${descriptor.id}`);
+    }
+    seen.add(descriptor.id);
+    entries.push([descriptor.id, descriptor]);
+  });
+  return new Map(entries);
 };

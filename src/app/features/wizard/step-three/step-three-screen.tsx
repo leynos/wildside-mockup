@@ -69,15 +69,24 @@ export function WizardStepThree(): JSX.Element {
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 bg-black/60" />
               <Dialog.Content className="dialog-surface">
-                <Dialog.Title className="text-lg font-semibold text-base-content">
-                  {t("wizard-step-three-dialog-title", { defaultValue: "Walk saved!" })}
-                </Dialog.Title>
-                <Dialog.Description className="text-sm text-base-content/70">
-                  {t("wizard-step-three-dialog-description", {
-                    defaultValue:
-                      "The Hidden Gems Loop is ready under your saved walks. Start the route now or continue exploring other wizard options.",
-                  })}
-                </Dialog.Description>
+                {(() => {
+                  const routeTitle = t(wizardRouteSummary.titleKey, {
+                    defaultValue: wizardRouteSummary.defaultTitle,
+                  });
+                  return (
+                    <>
+                      <Dialog.Title className="text-lg font-semibold text-base-content">
+                        {t("wizard-step-three-dialog-title", { defaultValue: "Walk saved!" })}
+                      </Dialog.Title>
+                      <Dialog.Description className="text-sm text-base-content/70">
+                        {t("wizard-step-three-dialog-description", {
+                          routeTitle,
+                          defaultValue: `${routeTitle} is ready under your saved walks. Start the route now or continue exploring other wizard options.`,
+                        })}
+                      </Dialog.Description>
+                    </>
+                  );
+                })()}
                 <div className="flex justify-end gap-2">
                   <Dialog.Close asChild>
                     <button type="button" className="btn btn-ghost btn-sm">

@@ -361,9 +361,17 @@ export function ExploreScreen(): JSX.Element {
   });
   const difficultyLookup = useMemo(() => buildDifficultyLookup(t), [t]);
 
-  const formatRouteCount = (count: number): string => t("explore-curated-route-count", { count });
+  const formatRouteCount = (count: number): string =>
+    t("explore-curated-route-count", {
+      count,
+      defaultValue: "{{count}} routes",
+    });
 
-  const formatSaveCount = (count: number): string => t("explore-community-saves", { count });
+  const formatSaveCount = (count: number): string =>
+    t("explore-community-saves", {
+      count,
+      defaultValue: "{{count}} saves",
+    });
   const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
 
   return (

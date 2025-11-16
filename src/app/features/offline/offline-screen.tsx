@@ -370,7 +370,7 @@ export function OfflineScreen(): JSX.Element {
                       key={`${entry.download.id}-undo`}
                       data-testid="offline-undo-card"
                       className="offline-download__undo"
-                      aria-label={t("offline-downloads-undo-title", {
+                      aria-label={t("offline-downloads-undo-aria", {
                         title: entry.download.title,
                         defaultValue: `${entry.download.title} deleted`,
                       })}
