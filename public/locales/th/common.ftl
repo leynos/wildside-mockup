@@ -1,3 +1,4 @@
+loading = กำลังโหลด…
 customize-header-title = ปรับแต่งเส้นทาง
 customize-header-subtitle = ปรับจูนการผจญภัยการเดินของคุณอย่างละเอียด
 customize-header-back-label = กลับไปที่แผนที่

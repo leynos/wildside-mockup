@@ -1,3 +1,4 @@
+loading = ஏற்றுகிறது…
 customize-header-title = பாதையை தனிப்பயனாக்கவும்
 customize-header-subtitle = உங்கள் நடைபயணத்தை நுட்பமாக அமைக்கவும்
 customize-header-back-label = வரைபடத்திற்குத் திரும்பு

@@ -1,3 +1,4 @@
+loading = Φόρτωση…
 customize-header-title = Προσαρμογή διαδρομής
 customize-header-subtitle = Ρυθμίστε με ακρίβεια την πεζοπορική σας εμπειρία
 customize-header-back-label = Επιστροφή στον χάρτη

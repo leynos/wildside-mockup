@@ -1,3 +1,4 @@
+loading = Läser in…
 customize-header-title = Anpassa rutt
 customize-header-subtitle = Finjustera ditt vandringsäventyr
 customize-header-back-label = Tillbaka till karta

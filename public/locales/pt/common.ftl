@@ -1,3 +1,4 @@
+loading = Carregando…
 customize-header-title = Personalizar rota
 customize-header-subtitle = Ajuste a sua aventura a pé
 customize-header-back-label = Voltar ao mapa

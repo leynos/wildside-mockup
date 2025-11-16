@@ -1,3 +1,4 @@
+loading = 로딩 중…
 customize-header-title = 경로 사용자 지정
 customize-header-subtitle = 걷기 모험을 세밀하게 조정하세요
 customize-header-back-label = 지도으로 돌아가기

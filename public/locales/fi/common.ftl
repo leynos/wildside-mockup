@@ -1,3 +1,4 @@
+loading = Ladataan…
 customize-header-title = Mukauta reittiä
 customize-header-subtitle = Hio kävelyseikkailuasi
 customize-header-back-label = Takaisin kartalle

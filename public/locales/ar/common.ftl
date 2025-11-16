@@ -1,3 +1,4 @@
+loading = جارٍ التحميل…
 customize-header-title = تخصيص المسار
 customize-header-subtitle = اضبط مغامرتك سيراً على الأقدام بدقة
 customize-header-back-label = العودة إلى الخريطة

@@ -1,3 +1,4 @@
+loading = 読み込み中…
 customize-header-title = ルートをカスタマイズ
 customize-header-subtitle = ウォーキングの冒険を細かく調整しましょう
 customize-header-back-label = マップに戻る

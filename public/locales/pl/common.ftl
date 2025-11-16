@@ -1,3 +1,4 @@
+loading = Ładowanie…
 customize-header-title = Dostosuj trasę
 customize-header-subtitle = Dopracuj swoją pieszą przygodę
 customize-header-back-label = Wróć do mapy

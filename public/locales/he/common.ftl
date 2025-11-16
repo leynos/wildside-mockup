@@ -1,3 +1,4 @@
+loading = טוען…
 customize-header-title = התאמת המסלול
 customize-header-subtitle = כווננו בעדינות את חוויית ההליכה שלכם
 customize-header-back-label = חזרה למפה

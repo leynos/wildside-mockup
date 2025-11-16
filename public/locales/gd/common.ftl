@@ -1,3 +1,4 @@
+loading = A’ luchdadh…
 customize-header-title = Gnàthaich an t-slighe
 customize-header-subtitle = Grinnich do thuras coise
 customize-header-back-label = Air ais dhan mhapa

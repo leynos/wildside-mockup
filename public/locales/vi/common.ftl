@@ -1,3 +1,4 @@
+loading = Đang tải…
 customize-header-title = Tùy chỉnh lộ trình
 customize-header-subtitle = Tinh chỉnh cuộc phiêu lưu đi bộ của bạn
 customize-header-back-label = Quay lại bản đồ

@@ -1,3 +1,4 @@
+loading = Llwytho…
 customize-header-title = Addasu taith
 customize-header-subtitle = Manylu ar eich antur gerdded
 customize-header-back-label = Nôl i’r map

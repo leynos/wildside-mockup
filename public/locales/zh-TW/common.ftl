@@ -1,3 +1,4 @@
+loading = 正在載入…
 customize-header-title = 自訂路線
 customize-header-subtitle = 細緻調整你的步行冒險
 customize-header-back-label = 返回地圖

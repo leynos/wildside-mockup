@@ -1,3 +1,4 @@
+loading = Загрузка…
 customize-header-title = Настроить маршрут
 customize-header-subtitle = Точно настройте своё пешее путешествие
 customize-header-back-label = Назад к карте

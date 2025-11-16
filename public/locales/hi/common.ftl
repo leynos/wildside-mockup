@@ -1,3 +1,4 @@
+loading = लोड हो रहा है…
 customize-header-title = मार्ग अनुकूलित करें
 customize-header-subtitle = अपनी पैदल यात्रा को बारीकी से समायोजित करें
 customize-header-back-label = मानचित्र पर वापस जाएं

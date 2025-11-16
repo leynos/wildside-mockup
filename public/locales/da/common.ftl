@@ -1,3 +1,4 @@
+loading = Indlæser…
 customize-header-title = Tilpas rute
 customize-header-subtitle = Finjuster din gåtur
 customize-header-back-label = Tilbage til kort

@@ -1,3 +1,4 @@
+loading = Yükleniyor…
 customize-header-title = Rotayı özelleştir
 customize-header-subtitle = Yürüyüş maceranı ince ayarla
 customize-header-back-label = Haritaya geri dön

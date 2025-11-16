@@ -1,3 +1,4 @@
+loading = Loading…
 customize-header-title = Customize Route
 customize-header-subtitle = Fine-tune your walking adventure
 customize-header-back-label = Back to map

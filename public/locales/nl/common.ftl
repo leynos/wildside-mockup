@@ -1,3 +1,4 @@
+loading = Bezig met laden…
 customize-header-title = Route aanpassen
 customize-header-subtitle = Fijnstel je wandelavontuur
 customize-header-back-label = Terug naar kaart

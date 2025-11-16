@@ -4,16 +4,17 @@ import React, { type ComponentType, type JSX, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import App from "./app/app";
-import "./i18n";
+import i18n from "./i18n";
 import "./index.css";
 
 export function LoadingBackdrop(): JSX.Element {
+  const label = i18n.t("loading");
   return (
     <output
       aria-live="polite"
       className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-base-content/70"
     >
-      Loading…
+      {label}
     </output>
   );
 }

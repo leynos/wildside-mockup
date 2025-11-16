@@ -1,3 +1,4 @@
+loading = Laster…
 customize-header-title = Tilpass rute
 customize-header-subtitle = Finjuster gåeventyret ditt
 customize-header-back-label = Tilbake til kart

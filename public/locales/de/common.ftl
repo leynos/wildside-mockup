@@ -1,3 +1,4 @@
+loading = Wird geladen…
 customize-header-title = Route anpassen
 customize-header-subtitle = Passe dein Spazierabenteuer fein an
 customize-header-back-label = Zur Karte zurück
