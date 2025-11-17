@@ -120,7 +120,7 @@ wizard-step-one-interests-heading = விருப்பங்கள்
 wizard-step-one-interests-selected =
     { $count ->
         [one] {$count} தேர்வு செய்யப்பட்டது
-       *[other] {$count} தேர்வு செய்யப்பட்டது
+       *[other] {$count} தேர்வுகள் செய்யப்பட்டது
     }
 wizard-step-one-interests-picker-aria = நடைபயண விருப்பங்களை தேர்வு செய்யவும்
 wizard-step-one-continue = விருப்பங்களுக்கு தொடரவும்
