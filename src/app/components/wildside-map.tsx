@@ -84,7 +84,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
     let isCancelled = false;
     let mapInstance: MapLibreMap | null = null;
 
-    const initialiseMap = async () => {
+    const initialiseMap = async (): Promise<void> => {
       const [maplibreModule] = await Promise.all([
         import("maplibre-gl"),
         import("maplibre-gl/dist/maplibre-gl.css"),
