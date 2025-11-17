@@ -4,7 +4,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useMemo, useState } from "react";
+import { type JSX, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
@@ -42,7 +42,7 @@ export function SafetyAccessibilityScreen(): JSX.Element {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const initialState = useMemo<ToggleState>(() => {
+  const [toggleState, setToggleState] = useState<ToggleState>(() => {
     const accumulator: ToggleState = {};
     for (const section of safetyAccordionSections) {
       for (const toggle of section.toggles) {
@@ -50,27 +50,24 @@ export function SafetyAccessibilityScreen(): JSX.Element {
       }
     }
     return accumulator;
-  }, []);
-  const [toggleState, setToggleState] = useState<ToggleState>(initialState);
+  });
 
   const handleToggle = (toggleId: string, value: boolean) => {
     setToggleState((prev) => ({ ...prev, [toggleId]: value }));
   };
 
-  const resolvedSections = useMemo<ResolvedSafetySection[]>(() => {
-    return safetyAccordionSections.map((section) => {
-      const title = t(section.titleKey, { defaultValue: section.defaultTitle });
-      const description = t(section.descriptionKey, { defaultValue: section.defaultDescription });
-      const toggles = section.toggles.map((toggle) => ({
-        ...toggle,
-        label: t(toggle.labelKey, { defaultValue: toggle.defaultLabel }),
-        description: t(toggle.descriptionKey, { defaultValue: toggle.defaultDescription }),
-      }));
-      return { ...section, title, description, toggles } as ResolvedSafetySection;
-    });
-  }, [t]);
+  const resolvedSections: ResolvedSafetySection[] = safetyAccordionSections.map((section) => {
+    const title = t(section.titleKey, { defaultValue: section.defaultTitle });
+    const description = t(section.descriptionKey, { defaultValue: section.defaultDescription });
+    const toggles = section.toggles.map((toggle) => ({
+      ...toggle,
+      label: t(toggle.labelKey, { defaultValue: toggle.defaultLabel }),
+      description: t(toggle.descriptionKey, { defaultValue: toggle.defaultDescription }),
+    }));
+    return { ...section, title, description, toggles } as ResolvedSafetySection;
+  });
 
-  const toggleLabelLookup = useMemo(() => {
+  const toggleLabelLookup = (() => {
     const entries = new Map<string, string>();
     resolvedSections.forEach((section) => {
       section.toggles.forEach((toggle) => {
@@ -78,17 +75,13 @@ export function SafetyAccessibilityScreen(): JSX.Element {
       });
     });
     return entries;
-  }, [resolvedSections]);
+  })();
 
-  const resolvedPresets = useMemo<ResolvedSafetyPreset[]>(
-    () =>
-      safetyPresets.map((preset) => ({
-        ...preset,
-        title: t(preset.titleKey, { defaultValue: preset.defaultTitle }),
-        description: t(preset.descriptionKey, { defaultValue: preset.defaultDescription }),
-      })) as ResolvedSafetyPreset[],
-    [t],
-  );
+  const resolvedPresets: ResolvedSafetyPreset[] = safetyPresets.map((preset) => ({
+    ...preset,
+    title: t(preset.titleKey, { defaultValue: preset.defaultTitle }),
+    description: t(preset.descriptionKey, { defaultValue: preset.defaultDescription }),
+  }));
 
   const backLabel = t("wizard-header-back-label", { defaultValue: "Back" });
   const headerTitle = t("safety-header-title", { defaultValue: "Safety & Accessibility" });
