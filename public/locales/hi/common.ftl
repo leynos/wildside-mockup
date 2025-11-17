@@ -272,7 +272,7 @@ explore-community-saves =
 explore-curated-route-count =
     { $count ->
         [one] {$count} मार्ग
-       *[other] {$count} मार्ग
+       *[other] {$count} मार्गों
     }
 
 offline-header-title = ऑफ़लाइन मानचित्र
