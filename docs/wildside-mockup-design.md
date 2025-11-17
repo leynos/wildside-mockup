@@ -211,14 +211,14 @@ Mapping guidance:
     example, filter tags or slider weights).
   - `difficultyRegistry` models “Easy”, “Moderate”, and “Challenging” chips.
     Store gradient tokens, recommended pace ranges, or walking duration bands
-    alongside the Fluent keys so every flow derives consistent visuals and
+    alongside the Fluent keys, so every flow derives consistent visuals and
     heuristics from the same source.
   - `collectionsRegistry` describes the interest-led walk groupings shown on
     `/discover` (for example, “Street Art”, “Historic”). Extend entries with
-    hero image URLs, CTA routes, and route counts so cards stay data-driven.
+    hero image URLs, CTA routes, and route counts, so cards stay data-driven.
 - Define the actual copy inside `public/locales/<locale>/common.ftl` using
   predictable IDs such as `interest-foodie-label` or `difficulty-easy-label`.
-  Include `defaultValue` fallbacks when calling `t()` so existing English-only
+  Include `defaultValue` fallbacks when calling `t()`, so existing English-only
   tests keep passing whilst translations load.
 - Consumers load the registry, map over each descriptor, and call
   `useTranslation()` to resolve `labelKey`/`descriptionKey`. This keeps React
@@ -227,7 +227,7 @@ Mapping guidance:
 - Add at least one localization test per registry (for example, render the
   `/customize` or `/discover` route in Spanish) to confirm Fluent keys map to
   the expected locale output. This mirrors the current `/customize` Spanish
-  test and guarantees regressions surface before release.
+  test and guarantees that regressions surface before release.
 
 ## High-velocity accessibility-first testing plan
 
@@ -359,7 +359,7 @@ Mapping guidance:
     - `SegmentPicker` uses keys of the form
       `customize-{segmentId}-option-{optionId}-label` and
       `customize-{segmentId}-option-{optionId}-description`, again with
-      `defaultValue` drawn from the fixture so new options only require a
+      `defaultValue` drawn from the fixture, so new options only require a
       matching Fluent message to become localizable.
   - Surface and interest chips:
     - `surfaceOptions` and `interestMix` keep their IDs and icon metadata
@@ -404,9 +404,9 @@ Mapping guidance:
 - `WizardLayout` now maps wizard IDs (`step-1`, `step-2`, `step-3`) to
   Fluent keys of the form `wizard-step-{id}-title` and
   `wizard-step-{id}-description` before rendering the stepper. This keeps the
-  TanStack Router and tests focused on IDs while Fluent controls visible copy.
+  TanStack Router and tests focused on IDs, while Fluent controls visible copy.
 - Shared chrome strings (`wizard-header-*`, `wizard-help-placeholder`) live in
-  Fluent so the back/help controls and placeholder alerts stay consistent
+  Fluent, so the back/help controls and placeholder alerts stay consistent
   across all wizard steps.
 - Step-specific controls follow the same prefix strategy as `/customize`. For
   example, `/wizard/step-1` exposes slider copy through
@@ -421,7 +421,7 @@ Mapping guidance:
 - `/wizard/step-2` now follows the same Fluent prefix strategy: discovery slider
   headings, summary chips, and CTA strings resolve via `wizard-step-two-*`
   keys, while `accessibilityOptions` IDs map to
-  `wizard-step-two-accessibility-{id}-{label|description}` so copy stays
+  `wizard-step-two-accessibility-{id}-{label|description}`, so copy stays
   localizable without reshaping fixtures.
 - Slider summary states have dedicated keys (`hidden`, `hotspots`, `balanced`)
   which keeps translator tone independent of the numeric thresholds and gives
@@ -434,12 +434,12 @@ Mapping guidance:
   `/customize` precedent for regression coverage.
 - `/wizard/step-3` lifts route stats, highlight fixtures, generated stops, and
   weather copy into data structures with Fluent key metadata. Components
-  resolve `wizard-step-three-*` keys at render time so panel headings, aria
+  resolve `wizard-step-three-*` keys at render time, so panel headings, aria
   labels, dialog copy, stats units, and stop notes all follow the same fallback
   pattern as earlier steps.
 - Highlight descriptors reuse existing keys where possible (for example,
   `wizard-step-two-accessibility-well-lit-label`) and introduce `*-detail`
-  keys for supporting text so translators can keep tone consistent without
+  keys for supporting text, so translators can keep tone consistent without
   touching TypeScript.
 - The review CTA dialog translates via shared keys and mirrors the reusable
   pattern from Step 2, ensuring wizard footer actions stay consistent across
@@ -465,8 +465,8 @@ Mapping guidance:
   `.discover-screen__skip` uses `inset-inline-end`). These rules deliver LTR and
   RTL parity without duplicating markup.
 - `WildsideMap` now registers the MapLibre RTL text plugin via
-  `ensureRtlTextPlugin` so glyphs render correctly for Arabic/Hebrew locales and
-  fallback symbol layers always expose `text-field` definitions.
+  `ensureRtlTextPlugin`, so glyphs render correctly for Arabic/Hebrew locales
+  and fallback symbol layers always expose `text-field` definitions.
 
 #### Progress (26 October 2025)
 
@@ -487,21 +487,21 @@ Mapping guidance:
 
 - Replace static map placeholders with a reusable `WildsideMap` component that
   lazily initialises MapLibre against the OpenMapTiles Bright demo style. The
-  loader guards against non-WebGL environments so unit tests continue to run.
+  loader guards against non-WebGL environments, so unit tests continue to run.
 - Update `MapViewport` to accept either a live map or fallback imagery while
   keeping overlay positioning consistent across flows.
 - Wrap the quick generator, itinerary, and saved screens in Radix `Tabs`
-  (`Map`, `Stops`, `Notes`) so content is discoverable without scrolling.
+  (`Map`, `Stops`, `Notes`), so content is discoverable without scrolling.
   Persist tab content with `forceMount` for accessibility and easier test
   targeting.
 - Surface point-of-interest (POI) details via a shared
   `PointOfInterestList` component backed by Radix `Dialog`, giving us mobile
   sheet behaviour for both the itinerary and saved flows.
-- Keep quick adjustments (sliders, interest chips) on the map tab while
+- Keep quick adjustments (sliders, interest chips) on the map tab, while
   exposing the POI list and planning notes in adjacent tabs to mirror the
   mockup’s emphasis on lightweight switching between contexts.
 - Extend router coverage to verify map-tab interactions (chip toggles and
-  navigation), share dialogs, and favourite toggles so future changes to the
+  navigation), share dialogs, and favourite toggles, so future changes to the
   MapLibre integration remain tested.
 
 #### Progress (27 October 2025)
@@ -514,15 +514,15 @@ Mapping guidance:
   `AppBottomNavigation`) to eliminate duplicated markup between map flows and
   the explore/customise screens.
 - Tests exercise the new tabbed experiences and share modals; the Happy DOM
-  harness now polyfills `NodeFilter`/`HTMLInputElement` so Radix focus scopes
+  harness now polyfills `NodeFilter`/`HTMLInputElement`, so Radix focus scopes
   operate without runtime errors even when MapLibre short-circuits.
 - The quick map "magic wand" routes directly into the walk wizard to keep the
   exploratory and guided flows connected; coverage ensures the navigation
   remains intact.
-- Tab bar layout now uses a non-shrinking tab list so the Map/Stops/Notes
+- Tab bar layout now uses a non-shrinking tab list, so the Map/Stops/Notes
   triggers remain pinned; Playwright regression coverage protects the layout
   across tab switches.
-- Quick map Stops/Notes panels now render on their own blurred surfaces so the
+- Quick map Stops/Notes panels now render on their own blurred surfaces, so the
   generator card no longer overlaps when switching tabs.
 - Bottom navigation styling is now shared between explore and map flows,
   with end-to-end coverage confirming the handset baseline stays consistent.
