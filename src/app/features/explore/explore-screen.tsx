@@ -2,6 +2,7 @@
 
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
+import type { TFunction } from "i18next";
 import { type JSX, type ReactNode, useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -67,6 +68,54 @@ type CommunityPickPanelProps = {
   subtitle: string;
   formatSaveCount: (count: number) => string;
 };
+
+type ExploreCopy = {
+  headerTitle: string;
+  headerSubtitle: string;
+  filterLabel: string;
+  searchPlaceholder: string;
+  categoriesLabel: string;
+  featuredHeading: string;
+  popularHeading: string;
+  curatedHeading: string;
+  trendingHeading: string;
+  communityHeading: string;
+  communitySubtitle: string;
+  bottomNavAriaLabel: string;
+  formatRouteCount: (count: number) => string;
+  formatSaveCount: (count: number) => string;
+};
+
+export const buildExploreCopy = (t: TFunction): ExploreCopy => ({
+  headerTitle: t("explore-header-title", { defaultValue: "Discover" }),
+  headerSubtitle: t("explore-header-subtitle", {
+    defaultValue: "Explore curated walks & hidden gems",
+  }),
+  filterLabel: t("explore-filter-aria-label", { defaultValue: "Filter walks" }),
+  searchPlaceholder: t("explore-search-placeholder", {
+    defaultValue: "Search walks, places, themes...",
+  }),
+  categoriesLabel: t("explore-categories-aria-label", {
+    defaultValue: "Popular categories",
+  }),
+  featuredHeading: t("explore-featured-heading", { defaultValue: "Walk of the Week" }),
+  popularHeading: t("explore-popular-heading", { defaultValue: "Popular Themes" }),
+  curatedHeading: t("explore-curated-heading", { defaultValue: "Curated Collections" }),
+  trendingHeading: t("explore-trending-heading", { defaultValue: "Trending Now" }),
+  communityHeading: t("explore-community-heading", { defaultValue: "Community Favourite" }),
+  communitySubtitle: t("explore-community-subtitle", { defaultValue: "Most shared this week" }),
+  bottomNavAriaLabel: t("nav-primary-aria-label", { defaultValue: "Primary navigation" }),
+  formatRouteCount: (count: number) =>
+    t("explore-curated-route-count", {
+      count,
+      defaultValue: "{{count}} routes",
+    }),
+  formatSaveCount: (count: number) =>
+    t("explore-community-saves", {
+      count,
+      defaultValue: "{{count}} saves",
+    }),
+});
 
 function CategoryScroller({ ariaLabel, formatRouteCount }: CategoryScrollerProps): JSX.Element {
   const headingId = useId();
@@ -340,52 +389,21 @@ export function ExploreScreen(): JSX.Element {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const headerTitle = t("explore-header-title", { defaultValue: "Discover" });
-  const headerSubtitle = t("explore-header-subtitle", {
-    defaultValue: "Explore curated walks & hidden gems",
-  });
-  const filterLabel = t("explore-filter-aria-label", { defaultValue: "Filter walks" });
-  const searchPlaceholder = t("explore-search-placeholder", {
-    defaultValue: "Search walks, places, themes...",
-  });
-  const categoriesLabel = t("explore-categories-aria-label", {
-    defaultValue: "Popular categories",
-  });
-  const featuredHeading = t("explore-featured-heading", { defaultValue: "Walk of the Week" });
-  const popularHeading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
-  const curatedHeading = t("explore-curated-heading", { defaultValue: "Curated Collections" });
-  const trendingHeading = t("explore-trending-heading", { defaultValue: "Trending Now" });
-  const communityHeading = t("explore-community-heading", { defaultValue: "Community Favourite" });
-  const communitySubtitle = t("explore-community-subtitle", {
-    defaultValue: "Most shared this week",
-  });
+  const copy = useMemo(() => buildExploreCopy(t), [t]);
   const difficultyLookup = useMemo(() => buildDifficultyLookup(t), [t]);
-
-  const formatRouteCount = (count: number): string =>
-    t("explore-curated-route-count", {
-      count,
-      defaultValue: "{{count}} routes",
-    });
-
-  const formatSaveCount = (count: number): string =>
-    t("explore-community-saves", {
-      count,
-      defaultValue: "{{count}} saves",
-    });
-  const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
 
   return (
     <MobileShell>
       <div className="screen-stack">
         <AppHeader
-          title={headerTitle}
-          subtitle={headerSubtitle}
+          title={copy.headerTitle}
+          subtitle={copy.headerSubtitle}
           trailing={
             <button
               type="button"
               onClick={() => navigate({ to: "/discover" })}
               className="header-icon-button"
-              aria-label={filterLabel}
+              aria-label={copy.filterLabel}
             >
               <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />
             </button>
@@ -395,31 +413,34 @@ export function ExploreScreen(): JSX.Element {
             <Icon token="{icon.action.search}" className="explore-search__icon" aria-hidden />
             <input
               type="search"
-              placeholder={searchPlaceholder}
+              placeholder={copy.searchPlaceholder}
               className="explore-search__input"
             />
           </div>
         </AppHeader>
         <main className="screen-scroll">
           <div className="space-y-8">
-            <CategoryScroller ariaLabel={categoriesLabel} formatRouteCount={formatRouteCount} />
-            <FeaturedWalkCard heading={featuredHeading} />
-            <PopularThemesGrid heading={popularHeading} />
+            <CategoryScroller
+              ariaLabel={copy.categoriesLabel}
+              formatRouteCount={copy.formatRouteCount}
+            />
+            <FeaturedWalkCard heading={copy.featuredHeading} />
+            <PopularThemesGrid heading={copy.popularHeading} />
             <CuratedCollectionsList
-              heading={curatedHeading}
-              formatRouteCount={formatRouteCount}
+              heading={copy.curatedHeading}
+              formatRouteCount={copy.formatRouteCount}
               difficultyLookup={difficultyLookup}
             />
-            <TrendingRoutesList heading={trendingHeading} />
+            <TrendingRoutesList heading={copy.trendingHeading} />
             <CommunityPickPanel
-              heading={communityHeading}
-              subtitle={communitySubtitle}
-              formatSaveCount={formatSaveCount}
+              heading={copy.communityHeading}
+              subtitle={copy.communitySubtitle}
+              formatSaveCount={copy.formatSaveCount}
             />
           </div>
         </main>
         <AppBottomNavigation
-          aria-label={bottomNavAriaLabel}
+          aria-label={copy.bottomNavAriaLabel}
           items={bottomNavigation.map((item) => ({
             ...item,
             label: t(`nav-${item.id}-label`, { defaultValue: item.label }),

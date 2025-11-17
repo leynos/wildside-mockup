@@ -170,6 +170,58 @@ describe("Stage 1 routed flows", () => {
     expect(bottomNav).toBeTruthy();
   });
 
+  it("updates explore headings and labels when the locale changes", async () => {
+    await i18nReady;
+    ({ mount, root } = await renderRoute("/explore"));
+    const container = requireContainer(mount);
+    const view = within(container);
+
+    const initialHeading = view.getByRole("heading", { level: 1, name: /discover/i });
+    expect(initialHeading).toBeTruthy();
+
+    await act(async () => {
+      await i18n.changeLanguage("es");
+    });
+
+    const translatedTitle = i18n.t("explore-header-title");
+    expect(
+      view.getByRole("heading", {
+        level: 1,
+        name: new RegExp(escapeRegExp(translatedTitle ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+
+    expect(view.queryByRole("heading", { level: 1, name: /discover/i })).toBeNull();
+
+    const searchPlaceholder = i18n.t("explore-search-placeholder");
+    expect(searchPlaceholder).toBeTruthy();
+    expect(view.getByPlaceholderText(searchPlaceholder)).toBeTruthy();
+
+    const categoriesLabel = i18n.t("explore-categories-aria-label");
+    expect(categoriesLabel).toBeTruthy();
+    expect(
+      view.getByRole("region", {
+        name: new RegExp(escapeRegExp(categoriesLabel ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+
+    const featuredHeading = i18n.t("explore-featured-heading");
+    expect(featuredHeading).toBeTruthy();
+    expect(
+      view.getByRole("region", {
+        name: new RegExp(escapeRegExp(featuredHeading ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+
+    const navLabel = i18n.t("nav-primary-aria-label");
+    expect(navLabel).toBeTruthy();
+    expect(
+      view.getByRole("navigation", {
+        name: new RegExp(escapeRegExp(navLabel ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+  });
+
   it("renders explore stats using Fluent pluralisation", async () => {
     ({ mount, root } = await renderRoute("/explore"));
     const container = requireContainer(mount);
