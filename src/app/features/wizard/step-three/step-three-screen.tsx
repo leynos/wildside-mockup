@@ -13,9 +13,9 @@ import {
   wizardRouteSummary,
   wizardSteps,
   wizardSummaryHighlights,
-  wizardWeatherSummary,
 } from "../../../data/wizard";
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
+import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
 
 type WizardSummaryPanelProps = WizardSectionProps & {
   readonly className?: string;
@@ -44,6 +44,7 @@ export function WizardStepThree(): JSX.Element {
     defaultValue: "Contextual help coming soon",
   });
   const routeStats = useMemo(() => buildWizardRouteStats(t), [t]);
+  const weatherCopy = useMemo(() => buildWizardWeatherCopy(t), [t]);
 
   return (
     <WizardLayout
@@ -193,35 +194,19 @@ export function WizardStepThree(): JSX.Element {
         </div>
       </WizardSummaryPanel>
 
-      <WizardSummaryPanel
-        aria-label={t(wizardWeatherSummary.titleKey, {
-          defaultValue: wizardWeatherSummary.defaultTitle,
-        })}
-      >
+      <WizardSummaryPanel aria-label={weatherCopy.title}>
         <h3 className="section-heading text-base-content">
           <Icon token="{icon.object.weatherSunny}" className="text-amber-400" aria-hidden />
-          {t(wizardWeatherSummary.titleKey, { defaultValue: wizardWeatherSummary.defaultTitle })}
+          {weatherCopy.title}
         </h3>
         <div className="wizard-summary__weather">
           <div>
-            <p className="font-semibold">
-              {t(wizardWeatherSummary.summaryKey, {
-                defaultValue: wizardWeatherSummary.defaultSummary,
-              })}
-            </p>
-            <p className="text-xs text-base-content/60">
-              {t(wizardWeatherSummary.reminderKey, {
-                defaultValue: wizardWeatherSummary.defaultReminder,
-              })}
-            </p>
+            <p className="font-semibold">{weatherCopy.summary}</p>
+            <p className="text-xs text-base-content/60">{weatherCopy.reminder}</p>
           </div>
           <div className="text-end">
-            <p className="text-lg font-semibold text-accent">{wizardWeatherSummary.temperature}</p>
-            <p className="text-xs text-base-content/60">
-              {t(wizardWeatherSummary.sentimentKey, {
-                defaultValue: wizardWeatherSummary.defaultSentiment,
-              })}
-            </p>
+            <p className="text-lg font-semibold text-accent">{weatherCopy.temperatureLabel}</p>
+            <p className="text-xs text-base-content/60">{weatherCopy.sentiment}</p>
           </div>
         </div>
       </WizardSummaryPanel>

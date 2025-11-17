@@ -181,9 +181,11 @@ wizard-step-three-stop-garden-name = Whispering Oak Garden
 wizard-step-three-stop-garden-description = Ruhiger Taschenpark mit schattigen Bänken
 wizard-step-three-stop-garden-note = Ruhebereich • 1.8 miles in
 wizard-step-three-weather-title = Perfektes Spazierwetter
-wizard-step-three-weather-summary = 72°F, leichte Brise, klarer Himmel
+wizard-step-three-weather-summary = { $temperature }, { $wind }, { $sky }
 wizard-step-three-weather-reminder = Nimm zur Sicherheit leichte Schichten mit.
 wizard-step-three-weather-sentiment = Ideal
+wizard-step-three-weather-wind = leichte Brise
+wizard-step-three-weather-sky = klarer Himmel
 
 safety-header-title = Sicherheit & Barrierefreiheit
 safety-header-description = Passe deine Gehstrecken für Komfort und Sicherheit an

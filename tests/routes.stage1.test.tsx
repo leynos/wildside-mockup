@@ -1,5 +1,6 @@
 import { afterAll, afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { screen, within } from "@testing-library/dom";
+import type { TFunction } from "i18next";
 import { act } from "react";
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
@@ -14,6 +15,7 @@ import {
   wizardSummaryHighlights,
   wizardWeatherSummary,
 } from "../src/app/data/wizard";
+import { buildWizardWeatherCopy } from "../src/app/features/wizard/step-three/build-wizard-weather-copy";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
@@ -46,6 +48,11 @@ const savedRoute = savedRoutes[0];
 if (!savedRoute) {
   throw new Error("Expected at least one saved route for the routed flow tests");
 }
+
+const defaultTranslator = ((key: string, options?: { defaultValue?: string }) =>
+  options?.defaultValue ?? key) as TFunction;
+
+const defaultWeatherCopy = buildWizardWeatherCopy(defaultTranslator);
 
 const clickElement = (element: Element | null | undefined): void => {
   if (element instanceof HTMLElement) {
@@ -681,6 +688,8 @@ describe("Stage 3 wizard flows", () => {
       });
       expect(within(summaryRegion).getByText(/km/i)).toBeTruthy();
       expect(within(summaryRegion).getByText(/minutos/i)).toBeTruthy();
+      const spanishWeatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+      expect(within(summaryRegion).getByText(spanishWeatherCopy.summary)).toBeTruthy();
 
       await act(async () => {
         clickElement(saveButton);
@@ -754,7 +763,7 @@ describe("Stage 3 wizard flows", () => {
     });
 
     expect(
-      within(weatherPanel).getByText(wizardWeatherSummary.defaultSummary, { exact: false }),
+      within(weatherPanel).getByText(defaultWeatherCopy.summary, { exact: false }),
     ).toBeTruthy();
   });
 });
@@ -1129,7 +1138,7 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       let container = requireContainer(mount);
       let view = within(container);
-      const temperature = view.getByText(wizardWeatherSummary.temperature);
+      const temperature = view.getByText(defaultWeatherCopy.temperatureLabel);
       const summaryBlock = temperature.parentElement as HTMLElement;
       expect(window.getComputedStyle(summaryBlock).textAlign).toBe("right");
 
@@ -1139,7 +1148,7 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       container = requireContainer(mount);
       view = within(container);
-      const rtlTemperature = view.getByText(wizardWeatherSummary.temperature);
+      const rtlTemperature = view.getByText(defaultWeatherCopy.temperatureLabel);
       const rtlSummaryBlock = rtlTemperature.parentElement as HTMLElement;
       expect(window.getComputedStyle(rtlSummaryBlock).textAlign).toBe("left");
     });
