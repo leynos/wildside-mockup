@@ -74,20 +74,7 @@ export const getLocaleMetadata = (code: string | undefined): SupportedLocale => 
   }
 
   const lookupKey = code.toLowerCase();
-  const directMatch = LOCALE_MAP[lookupKey];
-  if (directMatch) {
-    return directMatch;
-  }
-
-  const [languagePart] = lookupKey.split("-");
-  if (languagePart) {
-    const languageMatch = LOCALE_MAP[languagePart];
-    if (languageMatch) {
-      return languageMatch;
-    }
-  }
-
-  return defaultLocaleMetadata;
+  return LOCALE_MAP[lookupKey] ?? defaultLocaleMetadata;
 };
 
 export const getLocaleDirection = (code: string | undefined): TextDirection => {
