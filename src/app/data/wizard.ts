@@ -176,9 +176,9 @@ export const wizardRouteSummary: WizardRouteSummary = {
   stats: [
     {
       id: "distance",
-      value: "2.3",
+      value: "3.7",
       unitKey: "wizard-step-three-route-distance-unit",
-      defaultUnit: "miles",
+      defaultUnit: "km",
     },
     {
       id: "duration",

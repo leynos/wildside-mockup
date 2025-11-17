@@ -2,7 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, type ReactNode, useState } from "react";
+import { type JSX, type ReactNode, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
@@ -15,6 +15,7 @@ import {
   wizardSummaryHighlights,
   wizardWeatherSummary,
 } from "../../../data/wizard";
+import { buildWizardRouteStats } from "./build-wizard-route-stats";
 
 type WizardSummaryPanelProps = WizardSectionProps & {
   readonly className?: string;
@@ -42,6 +43,7 @@ export function WizardStepThree(): JSX.Element {
   const helpMessage = t("wizard-help-placeholder", {
     defaultValue: "Contextual help coming soon",
   });
+  const routeStats = useMemo(() => buildWizardRouteStats(t), [t]);
 
   return (
     <WizardLayout
@@ -121,10 +123,10 @@ export function WizardStepThree(): JSX.Element {
           </span>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
-          {wizardRouteSummary.stats.map((stat) => (
+          {routeStats.map((stat) => (
             <div key={stat.id}>
               <p className="text-lg font-semibold text-accent">{stat.value}</p>
-              <p>{t(stat.unitKey, { defaultValue: stat.defaultUnit })}</p>
+              <p>{stat.unitLabel}</p>
             </div>
           ))}
         </div>
