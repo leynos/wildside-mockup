@@ -1098,7 +1098,10 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/safety-accessibility"));
       let container = requireContainer(mount);
       let view = within(container);
-      const ltrHeading = view.getByText(/mobility support/i);
+      const ltrLabel = i18n.t("safety-section-mobility-title", {
+        defaultValue: "Mobility Support",
+      });
+      const ltrHeading = view.getByText(new RegExp(escapeRegExp(ltrLabel ?? ""), "i"));
       const ltrTrigger = ltrHeading.closest("button");
       expect(ltrTrigger).toBeTruthy();
       expect(window.getComputedStyle(ltrTrigger as Element).textAlign).toBe("left");
@@ -1109,7 +1112,10 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/safety-accessibility"));
       container = requireContainer(mount);
       view = within(container);
-      const rtlHeading = view.getByText(/mobility support/i);
+      const rtlLabel = i18n.t("safety-section-mobility-title", {
+        defaultValue: "Mobility Support",
+      });
+      const rtlHeading = view.getByText(new RegExp(escapeRegExp(rtlLabel ?? ""), "i"));
       const rtlTrigger = rtlHeading.closest("button");
       expect(rtlTrigger).toBeTruthy();
       expect(window.getComputedStyle(rtlTrigger as Element).textAlign).toBe("right");

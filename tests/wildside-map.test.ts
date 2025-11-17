@@ -22,7 +22,7 @@ describe("Wildside map RTL helpers", () => {
     ensureRtlTextPlugin(mockNamespace);
 
     expect(pluginCalls).toHaveLength(1);
-    expect(pluginCalls[0]?.[0]).toMatch(/maplibre-gl-rtl-text/u);
+    expect(pluginCalls[0]?.[0]).toContain("@mapbox/mapbox-gl-rtl-text@0.3.0");
 
     resetRtlTextPluginRegistrationForTests();
     ensureRtlTextPlugin({} as MapLibreNamespace);
