@@ -5,7 +5,8 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { mapDefaults, useOptionalMapStore } from "../features/map/map-state";
 
-const MAPLIBRE_RTL_PLUGIN_URL = "/maplibre-gl-rtl-text.js";
+const MAPLIBRE_RTL_PLUGIN_URL =
+  "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.3.0/dist/mapbox-gl-rtl-text.js";
 
 let hasRegisteredRtlTextPlugin = false;
 type MapLibreNamespace = typeof import("maplibre-gl")["default"];

@@ -176,7 +176,6 @@ wizard-step-three-stop-art-name = Graffiti Passage
 wizard-step-three-stop-art-description = 露天画廊轮换展出多彩壁画
 wizard-step-three-stop-art-note = 拍照打卡点 • 行进 1.1 miles
 wizard-step-three-stop-garden-name = Whispering Oak Garden
-safety-step-three-stop-garden-description =
 wizard-step-three-stop-garden-description = 静谧口袋公园，设有树荫长椅
 wizard-step-three-stop-garden-note = 休憩区 • 行进 1.8 miles
 wizard-step-three-weather-title = 适合漫步的天气
