@@ -676,8 +676,11 @@ describe("Stage 3 wizard flows", () => {
       expect(view.getByRole("heading", { name: /tus preferencias aplicadas/i })).toBeTruthy();
       expect(view.getByRole("heading", { name: /paradas destacadas/i })).toBeTruthy();
       expect(view.getByRole("heading", { name: /clima perfecto para caminar/i })).toBeTruthy();
-      expect(view.getByText(/km/i)).toBeTruthy();
-      expect(view.getByText(/minutos/i)).toBeTruthy();
+      const summaryRegion = view.getByRole("region", {
+        name: /resumen del circuito de joyas ocultas/i,
+      });
+      expect(within(summaryRegion).getByText(/km/i)).toBeTruthy();
+      expect(within(summaryRegion).getByText(/minutos/i)).toBeTruthy();
 
       await act(async () => {
         clickElement(saveButton);
