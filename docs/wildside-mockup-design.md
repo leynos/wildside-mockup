@@ -224,7 +224,7 @@ Mapping guidance:
   `useTranslation()` to resolve `labelKey`/`descriptionKey`. This keeps React
   components free of hard-coded strings and ensures every surface shows the
   user’s language without duplicating logic.
-- Add at least one localisation test per registry (for example, render the
+- Add at least one localization test per registry (for example, render the
   `/customize` or `/discover` route in Spanish) to confirm Fluent keys map to
   the expected locale output. This mirrors the current `/customize` Spanish
   test and guarantees regressions surface before release.
@@ -336,62 +336,60 @@ Mapping guidance:
   parity with the mockups. Evaluate Tabler/Remix in a later spike once flows
   are ported.
 
-#### `/customize` localisation strategy (Fluent + data fixtures)
+#### `/customize` localization strategy (Fluent + data fixtures)
 
 - The `/customize` screen combines relatively static, data-driven copy
   (slider labels, segment options, advanced toggles) with header and control
-  chrome. To keep this maintainable, we treat `src/app/data/customize.ts` as
-  a source of *IDs and English defaults* and localise at render time rather
-  than embedding translations into the data layer.
+  chrome. Treat `src/app/data/customize.ts` as a source of *IDs and English
+  defaults* and localize at render time rather than embedding translations
+  into the data layer.
 - Each cluster of strings on the screen maps to a small family of Fluent
   messages keyed by the same identifiers as the fixtures:
   - Sliders:
     - `sliders` entries keep `id`, `unit`, and marker defaults.
-    - At render time we call `t("customize-slider-{id}-label")`,
+    - Call `t("customize-slider-{id}-label")`,
       `t("customize-slider-{id}-aria")`, and
-      `t("customize-slider-{id}-marker-{index}")`, passing the English
-      values as `defaultValue`. This lets Fluent handle translated labels,
-      aria text, and marker captions whilst tests continue to see the
-      original copy in the default locale.
+      `t("customize-slider-{id}-marker-{index}")` at render time, passing
+      the English values as `defaultValue`. This lets Fluent handle
+      translated labels, aria text, and marker captions whilst tests
+      continue to see the original copy in the default locale.
   - Segmented options:
     - `crowdLevelOptions` and `elevationOptions` retain `id`, `label`, and
       `description` as English fixtures.
     - `SegmentPicker` uses keys of the form
       `customize-{segmentId}-option-{optionId}-label` and
       `customize-{segmentId}-option-{optionId}-description`, again with
-      `defaultValue` drawn from the fixture. This pattern ensures that new
-      options only require a matching Fluent message to become localisable.
+      `defaultValue` drawn from the fixture so new options only require a
+      matching Fluent message to become localizable.
   - Surface and interest chips:
     - `surfaceOptions` and `interestMix` keep their IDs and icon metadata
       in TypeScript.
     - Labels are resolved via keys such as
       `customize-surface-option-{id}-label` and
-      `customize-interest-{id}-label`. The same translated label is reused
-      for both visible text and thumb `aria-label` composition so that
-      screen reader output matches what users see.
+      `customize-interest-{id}-label`. Reuse the same translated label for
+      both visible text and thumb `aria-label` composition so that screen
+      reader output matches what users see.
   - Route previews:
     - `routePreviews` expose `id`, `distance`, `duration`, and icon styling.
-    - Titles are localised by key
+    - Titles are localized by key
       `customize-route-preview-{id}-title`, with the English fixture as the
-      default. Distances and durations remain literal for now; they can be
-      lifted into Fluent in a later pass once we decide on number and unit
-      formatting rules per locale.
+      default. Leave distances and durations literal for now; lift them into
+      Fluent later once number and unit formatting rules per locale are set.
   - Advanced options:
     - `advancedOptions` describes toggles such as “Safety Priority”,
       “Accessibility”, and “Offline download”.
     - `AdvancedOptions` resolves the user-facing text from keys like
       `customize-advanced-{id}-title` and
-      `customize-advanced-{id}-description`, ensuring toggle names and
-      helper copy participate in localisation without changing the fixture
-      shape.
+      `customize-advanced-{id}-description`, ensuring toggle names and helper
+      copy participate in localization without changing the fixture shape.
   - Bottom navigation:
     - `bottomNavigation` continues to model the four primary tabs:
       `map`, `discover`, `routes`, and `profile`.
-    - When building `AppBottomNavigation` props, we map each item’s `id` to
-      a Fluent key (`nav-{id}-label`) and fall back to the English `label`
+    - When building `AppBottomNavigation` props, map each item’s `id` to a
+      Fluent key (`nav-{id}-label`) and fall back to the English `label`
       from the fixture. This keeps the existing e2e snapshots (which assert
-      on “Map Map”, “Routes Routes”, etc.) stable in the default locale
-      whilst allowing per-locale labelling.
+      on “Map Map”, “Routes Routes”, etc.) stable in the default locale whilst
+      allowing per-locale labelling.
 - This strategy keeps `customize.ts` small and declarative whilst pushing all
   user-visible text through Fluent and `react-i18next`. The key design
   invariants are:
@@ -399,9 +397,9 @@ Mapping guidance:
   - English copy remains the default via `defaultValue`, so existing tests
     and snapshots continue to pass.
   - All translations live under `public/locales/<locale>/common.ftl`, pass
-  `moz-fluent-lint`, and can evolve independently of the data schema.
+    `moz-fluent-lint`, and can evolve independently of the data schema.
 
-#### `/wizard` localisation strategy (step scaffolding + Fluent)
+#### `/wizard` localization strategy (step scaffolding + Fluent)
 
 - `WizardLayout` now maps wizard IDs (`step-1`, `step-2`, `step-3`) to
   Fluent keys of the form `wizard-step-{id}-title` and
@@ -418,13 +416,13 @@ Mapping guidance:
   `t(...)`, keeping Vitest snapshots deterministic until translators provide
   locale-specific copy.
 - Future wizard steps should continue deriving Fluent keys from control IDs to
-  ensure accessibility labels, headings, and summary strings remain localisable
+  ensure accessibility labels, headings, and summary strings remain localizable
   without reshaping fixtures.
 - `/wizard/step-2` now follows the same Fluent prefix strategy: discovery slider
   headings, summary chips, and CTA strings resolve via `wizard-step-two-*`
   keys, while `accessibilityOptions` IDs map to
   `wizard-step-two-accessibility-{id}-{label|description}` so copy stays
-  localisable without reshaping fixtures.
+  localizable without reshaping fixtures.
 - Slider summary states have dedicated keys (`hidden`, `hotspots`, `balanced`)
   which keeps translator tone independent of the numeric thresholds and gives
   future locales freedom to adjust phrasing without changing TypeScript.
@@ -448,7 +446,7 @@ Mapping guidance:
   languages.
 - Stage 3 route tests now include a Spanish locale run to guarantee the
   translated panels, dialog copy, and footer CTAs render as expected.
-- `/safety-accessibility` promotes the same localisation contract: accordion
+- `/safety-accessibility` promotes the same localization contract: accordion
   sections, toggles, presets, CTA copy, and the confirmation dialog all pull
   from Fluent IDs (`safety-section-*`, `safety-toggle-*`, `safety-preset-*`).
   Toggle labels reuse existing wizard keys when wording matches (for example,
