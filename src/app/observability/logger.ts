@@ -9,7 +9,7 @@ export type LogContext = Record<string, unknown>;
 
 type LogLevel = "info" | "warn" | "error";
 
-const isTestEnvironment = typeof process !== "undefined" && process.env.NODE_ENV === "test";
+const isTestEnvironment = typeof process !== "undefined" && process?.env?.NODE_ENV === "test";
 
 const logToConsole = (
   level: LogLevel,

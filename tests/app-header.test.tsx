@@ -29,7 +29,6 @@ describe("AppHeader logical alignment", () => {
   });
 
   it("aligns the title container with text-start semantics in both directions", () => {
-    resetDirection();
     renderWithProviders(
       <AppHeader
         title="Discover"
