@@ -1071,6 +1071,43 @@ describe("Stage 4 completion flows", () => {
     }
   });
 
+  it("localises the safety & accessibility screen for Portuguese", async () => {
+    await i18nReady;
+    const previousLanguage = i18n.language;
+    await act(async () => {
+      await i18n.changeLanguage("pt");
+    });
+
+    try {
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      const view = within(requireContainer(mount));
+
+      expect(view.getByRole("heading", { name: /segurança e acessibilidade/i })).toBeTruthy();
+      expect(view.getByText(/ajuste as suas rotas/i)).toBeTruthy();
+      expect(view.getByRole("button", { name: /guardar preferências/i })).toBeTruthy();
+
+      const accordionItem = view.getByRole("button", { name: /suporte à mobilidade/i });
+      expect(accordionItem).toBeTruthy();
+
+      const toggle = view.getByRole("switch", { name: /rotas sem degraus/i });
+      act(() => clickElement(toggle));
+
+      const saveButton = view.getByRole("button", { name: /guardar preferências/i });
+      await act(async () => {
+        clickElement(saveButton);
+        await Promise.resolve();
+      });
+
+      const dialog = await screen.findByRole("dialog", { name: /preferências guardadas/i });
+      expect(within(dialog).getByText(/as suas definições de segurança/i)).toBeTruthy();
+      expect(within(dialog).getByRole("button", { name: /^continuar$/i })).toBeTruthy();
+    } finally {
+      await act(async () => {
+        await i18n.changeLanguage(previousLanguage ?? "en-GB");
+      });
+    }
+  });
+
   describe("Logical layout behaviour", () => {
     it("positions the discover skip action via logical offsets", async () => {
       await i18n.changeLanguage("en-GB");
