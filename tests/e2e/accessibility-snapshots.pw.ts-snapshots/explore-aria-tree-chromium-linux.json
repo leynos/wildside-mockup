@@ -139,6 +139,23 @@
                                         "name": "Popular categories",
                                         "children": [
                                           {
+                                            "role": "heading",
+                                            "name": "Popular categories",
+                                            "level": 2,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Popular categories",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Popular categories"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
                                             "role": "generic",
                                             "name": "",
                                             "children": [
