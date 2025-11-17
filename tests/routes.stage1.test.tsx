@@ -17,7 +17,14 @@ import {
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
-import i18n, { i18nReady } from "../src/i18n";
+import {
+  changeLanguage,
+  escapeRegExp,
+  i18n,
+  i18nReady,
+  resetLanguage,
+  withI18nLanguage,
+} from "./helpers/i18nTestHelpers";
 import { installLogicalStyleStub } from "./support/logical-style-stub";
 
 type TestRoute =
@@ -33,10 +40,6 @@ type TestRoute =
   | "/walk-complete"
   | "/offline"
   | "/safety-accessibility";
-
-function escapeRegExp(raw: string): string {
-  return raw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
 
 const savedRoute = savedRoutes[0];
 
@@ -114,7 +117,7 @@ describe("Stage 1 routed flows", () => {
   afterEach(async () => {
     cleanup();
     setDocumentDirection("ltr");
-    await i18n.changeLanguage("en-GB");
+    await resetLanguage();
   });
 
   it("tracks selected interests on the discover route", async () => {
@@ -179,9 +182,7 @@ describe("Stage 1 routed flows", () => {
     const initialHeading = view.getByRole("heading", { level: 1, name: /discover/i });
     expect(initialHeading).toBeTruthy();
 
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
+    await changeLanguage("es");
 
     const translatedTitle = i18n.t("explore-header-title");
     expect(
@@ -253,12 +254,7 @@ describe("Stage 1 routed flows", () => {
 
   it("localises curated difficulty labels for alternate locales", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
-
-    try {
+    await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/explore"));
       const container = requireContainer(mount);
       const view = within(container);
@@ -267,11 +263,7 @@ describe("Stage 1 routed flows", () => {
 
       expect(view.getByText(new RegExp(escapeRegExp(easyLabel ?? ""), "i"))).toBeTruthy();
       expect(view.getByText(new RegExp(escapeRegExp(moderateLabel ?? ""), "i"))).toBeTruthy();
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 
   it("toggles advanced switches on the customize route", async () => {
@@ -294,12 +286,7 @@ describe("Stage 1 routed flows", () => {
 
   it("localises customize copy for alternate locales", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
-
-    try {
+    await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/customize"));
       const container = requireContainer(mount);
       const view = within(container);
@@ -308,11 +295,7 @@ describe("Stage 1 routed flows", () => {
       expect(view.getByRole("group", { name: /tipo de superficie/i })).toBeTruthy();
       expect(view.getByRole("switch", { name: /prioridad de seguridad/i })).toBeTruthy();
       expect(view.getByRole("button", { name: /regenerar/i })).toBeTruthy();
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 });
 
@@ -336,8 +319,10 @@ describe("Stage 2 routed flows", () => {
     cleanup();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
+    setDocumentDirection("ltr");
+    await resetLanguage();
   });
 
   it("updates quick walk interests and navigates to saved", async () => {
@@ -429,12 +414,7 @@ describe("Stage 2 routed flows", () => {
 
   it("localises quick walk copy for alternate locales", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
-
-    try {
+    await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/map/quick"));
       const container = requireContainer(mount);
       const view = within(container);
@@ -445,11 +425,7 @@ describe("Stage 2 routed flows", () => {
       expect(view.getByRole("heading", { level: 2, name: /intereses/i })).toBeTruthy();
       expect(view.getByRole("region", { name: /paradas de la caminata rápida/i })).toBeTruthy();
       expect(view.getByRole("button", { name: /guardar caminata rápida/i })).toBeTruthy();
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 
   it("toggles itinerary favourites and opens the share dialog", async () => {
@@ -603,12 +579,7 @@ describe("Stage 3 wizard flows", () => {
 
   it("localises wizard step one copy and interpolations for Spanish", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
-
-    try {
+    await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/wizard/step-1"));
       const container = requireContainer(mount);
       const view = within(container);
@@ -629,11 +600,7 @@ describe("Stage 3 wizard flows", () => {
 
       const updatedSummary = view.getByText(/seleccionado$/i);
       expect(updatedSummary.textContent?.trim()).toBe("1 seleccionado");
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 
   it("renders wizard step two surfaces with semantic classes", async () => {
@@ -659,12 +626,7 @@ describe("Stage 3 wizard flows", () => {
 
   it("localises wizard step two discovery and accessibility copy for Spanish", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
-
-    try {
+    await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/wizard/step-2"));
       const container = requireContainer(mount);
       const view = within(container);
@@ -693,21 +655,12 @@ describe("Stage 3 wizard flows", () => {
       const footer = view.getByRole("contentinfo");
       expect(within(footer).getByRole("button", { name: /revisar caminata/i })).toBeTruthy();
       expect(within(footer).getByRole("button", { name: /atrás/i })).toBeTruthy();
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 
   it("localises wizard step three summary and dialog copy for Spanish", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
-
-    try {
+    await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       const container = requireContainer(mount);
       const view = within(container);
@@ -735,11 +688,7 @@ describe("Stage 3 wizard flows", () => {
       expect(within(dialog).getByText(/tus caminatas guardadas/i)).toBeTruthy();
       expect(within(dialog).getByRole("button", { name: /^cerrar$/i })).toBeTruthy();
       expect(within(dialog).getByRole("button", { name: /ver en el mapa/i })).toBeTruthy();
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 
   it("opens the wizard confirmation dialog on step three", async () => {
@@ -1036,12 +985,7 @@ describe("Stage 4 completion flows", () => {
 
   it("localises the safety & accessibility screen for Spanish", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("es");
-    });
-
-    try {
+    await withI18nLanguage("es", async () => {
       ({ mount, root } = await renderRoute("/safety-accessibility"));
       const view = within(requireContainer(mount));
 
@@ -1064,21 +1008,12 @@ describe("Stage 4 completion flows", () => {
       const dialog = await screen.findByRole("dialog", { name: /preferencias guardadas/i });
       expect(within(dialog).getByText(/tus ajustes de seguridad/i)).toBeTruthy();
       expect(within(dialog).getByRole("button", { name: /^continuar$/i })).toBeTruthy();
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 
   it("localises the safety & accessibility screen for Portuguese", async () => {
     await i18nReady;
-    const previousLanguage = i18n.language;
-    await act(async () => {
-      await i18n.changeLanguage("pt");
-    });
-
-    try {
+    await withI18nLanguage("pt", async () => {
       ({ mount, root } = await renderRoute("/safety-accessibility"));
       const view = within(requireContainer(mount));
 
@@ -1101,16 +1036,12 @@ describe("Stage 4 completion flows", () => {
       const dialog = await screen.findByRole("dialog", { name: /preferências guardadas/i });
       expect(within(dialog).getByText(/as suas definições de segurança/i)).toBeTruthy();
       expect(within(dialog).getByRole("button", { name: /^continuar$/i })).toBeTruthy();
-    } finally {
-      await act(async () => {
-        await i18n.changeLanguage(previousLanguage ?? "en-GB");
-      });
-    }
+    });
   });
 
   describe("Logical layout behaviour", () => {
     it("positions the discover skip action via logical offsets", async () => {
-      await i18n.changeLanguage("en-GB");
+      await changeLanguage("en-GB");
       ({ mount, root } = await renderRoute("/discover"));
       const ltrContainer = requireContainer(mount);
       const ltrView = within(ltrContainer);
@@ -1121,7 +1052,7 @@ describe("Stage 4 completion flows", () => {
       expect(readInset(skipButton, "inset-inline-end")).toBe("1.5rem");
 
       cleanup();
-      await i18n.changeLanguage("ar");
+      await changeLanguage("ar");
       setDocumentDirection("rtl");
       ({ mount, root } = await renderRoute("/discover"));
       const rtlContainer = requireContainer(mount);
@@ -1131,7 +1062,7 @@ describe("Stage 4 completion flows", () => {
     });
 
     it("aligns customize route previews using text-start semantics", async () => {
-      await i18n.changeLanguage("en-GB");
+      await changeLanguage("en-GB");
       ({ mount, root } = await renderRoute("/customize"));
       let container = requireContainer(mount);
       let view = within(container);
@@ -1150,7 +1081,7 @@ describe("Stage 4 completion flows", () => {
       expect(window.getComputedStyle(preview).textAlign).toBe("left");
 
       cleanup();
-      await i18n.changeLanguage("ar");
+      await changeLanguage("ar");
       setDocumentDirection("rtl");
       ({ mount, root } = await renderRoute("/customize"));
       container = requireContainer(mount);
@@ -1163,7 +1094,7 @@ describe("Stage 4 completion flows", () => {
     });
 
     it("keeps safety accordion triggers aligned for both directions", async () => {
-      await i18n.changeLanguage("en-GB");
+      await changeLanguage("en-GB");
       ({ mount, root } = await renderRoute("/safety-accessibility"));
       let container = requireContainer(mount);
       let view = within(container);
@@ -1173,7 +1104,7 @@ describe("Stage 4 completion flows", () => {
       expect(window.getComputedStyle(ltrTrigger as Element).textAlign).toBe("left");
 
       cleanup();
-      await i18n.changeLanguage("ar");
+      await changeLanguage("ar");
       setDocumentDirection("rtl");
       ({ mount, root } = await renderRoute("/safety-accessibility"));
       container = requireContainer(mount);
@@ -1185,7 +1116,7 @@ describe("Stage 4 completion flows", () => {
     });
 
     it("mirrors wizard weather summaries with text-end alignment", async () => {
-      await i18n.changeLanguage("en-GB");
+      await changeLanguage("en-GB");
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       let container = requireContainer(mount);
       let view = within(container);
@@ -1194,7 +1125,7 @@ describe("Stage 4 completion flows", () => {
       expect(window.getComputedStyle(summaryBlock).textAlign).toBe("right");
 
       cleanup();
-      await i18n.changeLanguage("ar");
+      await changeLanguage("ar");
       setDocumentDirection("rtl");
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       container = requireContainer(mount);
