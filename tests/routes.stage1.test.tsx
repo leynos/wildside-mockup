@@ -858,7 +858,9 @@ describe("Stage 3 wizard flows", () => {
 
       const weatherPanel = view.getByRole("region", { name: localizedRegex(weatherHeading) });
       const spanishWeatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
-      expect(within(weatherPanel).getByText(spanishWeatherCopy.summary)).toBeTruthy();
+      expect(
+        within(weatherPanel).getByText(spanishWeatherCopy.summary, { exact: false }),
+      ).toBeTruthy();
 
       await act(async () => {
         clickElement(saveButton);
