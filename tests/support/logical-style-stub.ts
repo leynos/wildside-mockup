@@ -11,9 +11,9 @@ export function installLogicalStyleStub(): () => void {
   }
 
   const styleElement = document.createElement("style");
-  (styleElement.dataset as DOMStringMap & { testid?: string }).testid = `logical-style-stub-${
-    installedHandles + 1
-  }`;
+  installedHandles += 1;
+  (styleElement.dataset as DOMStringMap & { testid?: string }).testid =
+    `logical-style-stub-${installedHandles}`;
   styleElement.textContent = `
 [dir="ltr"] .text-start,
 [data-direction="ltr"] .text-start,
@@ -77,10 +77,12 @@ export function installLogicalStyleStub(): () => void {
 `;
 
   document.head.append(styleElement);
-  installedHandles += 1;
-
   return () => {
     styleElement.remove();
+    // Keep the counter bounded so future testids remain compact.
+    if (installedHandles > 0) {
+      installedHandles -= 1;
+    }
   };
 }
 
