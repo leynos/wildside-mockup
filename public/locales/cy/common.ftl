@@ -82,7 +82,11 @@ quick-walk-duration-marker-end = {$minutes} mun
 quick-walk-interests-heading = Diddordebau
 quick-walk-interests-selected =
     { $count ->
+        [zero] {$count} wedi’u dewis
         [one] {$count} wedi’i ddewis
+        [two] {$count} wedi’u dewis
+        [few] {$count} wedi’u dewis
+        [many] {$count} wedi’u dewis
        *[other] {$count} wedi’u dewis
     }
 quick-walk-interests-aria = Dewiswch ddiddordebau ar gyfer y daith gyflym
@@ -119,7 +123,11 @@ wizard-step-one-interests-section-aria = Diddordebau
 wizard-step-one-interests-heading = Diddordebau
 wizard-step-one-interests-selected =
     { $count ->
+        [zero] {$count} wedi’u dewis
         [one] {$count} wedi’i ddewis
+        [two] {$count} wedi’u dewis
+        [few] {$count} wedi’u dewis
+        [many] {$count} wedi’u dewis
        *[other] {$count} wedi’u dewis
     }
 wizard-step-one-interests-picker-aria = Dewiswch ddiddordebau ar gyfer y daith
@@ -279,8 +287,12 @@ explore-community-saves =
     }
 explore-curated-route-count =
     { $count ->
-        [one] {$count} taith
-       *[other] {$count} teithiau
+        [zero] {$count} o deithiau wedi’u curadu
+        [one] {$count} taith wedi’i churadu
+        [two] {$count} daith wedi’u curadu
+        [few] {$count} thaith wedi’u curadu
+        [many] {$count} o deithiau wedi’u curadu
+       *[other] {$count} o deithiau wedi’u curadu
     }
 
 offline-header-title = Mapiau all-lein
