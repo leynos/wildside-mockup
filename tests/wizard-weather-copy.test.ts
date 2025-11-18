@@ -25,12 +25,16 @@ describe("buildWizardWeatherCopy", () => {
       } else {
         calls.push({ key });
       }
-      if (!options?.defaultValue) return key;
 
-      return options.defaultValue
-        .replaceAll("{{temperature}}", options.temperature ?? "")
-        .replaceAll("{{wind}}", options.wind ?? "")
-        .replaceAll("{{sky}}", options.sky ?? "");
+      const base = String(options?.defaultValue ?? key);
+      const temperature = options?.temperature ?? "";
+      const wind = options?.wind ?? "";
+      const sky = options?.sky ?? "";
+
+      return base
+        .replaceAll("{{temperature}}", temperature)
+        .replaceAll("{{wind}}", wind)
+        .replaceAll("{{sky}}", sky);
     }) as TFunction;
 
     const weatherCopy = buildWizardWeatherCopy(stubT);
