@@ -38,13 +38,21 @@ function WizardSummaryPanel({
 
 export function WizardStepThree(): JSX.Element {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [dialogOpen, setDialogOpen] = useState(false);
   const helpMessage = t("wizard-help-placeholder", {
     defaultValue: "Contextual help coming soon",
   });
   const routeStats = useMemo(() => buildWizardRouteStats(t), [t]);
   const weatherCopy = useMemo(() => buildWizardWeatherCopy(t), [t]);
+  const distanceFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat(i18n.language, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }),
+    [i18n.language],
+  );
 
   return (
     <WizardLayout
@@ -177,7 +185,21 @@ export function WizardStepThree(): JSX.Element {
           {wizardGeneratedStops.map((stop) => {
             const name = t(stop.nameKey, { defaultValue: stop.defaultName });
             const description = t(stop.descriptionKey, { defaultValue: stop.defaultDescription });
-            const note = t(stop.noteKey, { defaultValue: stop.defaultNote });
+            const unitLabel =
+              stop.noteDistanceMiles !== undefined
+                ? t(stop.noteDistanceUnitKey ?? "wizard-step-three-stop-distance-unit", {
+                    defaultValue: stop.defaultNoteDistanceUnit ?? "miles",
+                  })
+                : undefined;
+            const note = t(stop.noteKey, {
+              defaultValue: stop.defaultNote,
+              ...(stop.noteDistanceMiles !== undefined && unitLabel
+                ? {
+                    distance: distanceFormatter.format(stop.noteDistanceMiles),
+                    unit: unitLabel,
+                  }
+                : {}),
+            });
             return (
               <div key={stop.id} className="wizard-summary__stop">
                 <span className="wizard-summary__stop-icon">

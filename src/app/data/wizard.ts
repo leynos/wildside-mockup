@@ -110,6 +110,9 @@ export interface WizardGeneratedStop {
   readonly accentClass: string;
   readonly noteKey: string;
   readonly defaultNote: string;
+  readonly noteDistanceMiles?: number;
+  readonly noteDistanceUnitKey?: string;
+  readonly defaultNoteDistanceUnit?: string;
 }
 
 export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
@@ -133,7 +136,10 @@ export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
     iconToken: "{icon.customizer.decoration}",
     accentClass: "text-purple-400",
     noteKey: "wizard-step-three-stop-art-note",
-    defaultNote: "Photo spot • 1.1 miles in",
+    defaultNote: "Photo spot • {{distance}} {{unit}} in",
+    noteDistanceMiles: 1.1,
+    noteDistanceUnitKey: "wizard-step-three-stop-distance-unit",
+    defaultNoteDistanceUnit: "miles",
   },
   {
     id: "garden",
@@ -144,7 +150,10 @@ export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
     iconToken: "{icon.category.trails}",
     accentClass: "text-emerald-400",
     noteKey: "wizard-step-three-stop-garden-note",
-    defaultNote: "Rest area • 1.8 miles in",
+    defaultNote: "Rest area • {{distance}} {{unit}} in",
+    noteDistanceMiles: 1.8,
+    noteDistanceUnitKey: "wizard-step-three-stop-distance-unit",
+    defaultNoteDistanceUnit: "miles",
   },
 ] as const;
 
