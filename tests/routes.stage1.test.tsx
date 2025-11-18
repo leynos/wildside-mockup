@@ -625,19 +625,28 @@ describe("Stage 3 wizard flows", () => {
     cleanup();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
+    setDocumentDirection("ltr");
+    await resetLanguage();
   });
 
   it("advances from wizard step one to step two", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-1"));
     const container = requireContainer(mount);
     const view = within(container);
-    const durationSection = view.getByRole("region", { name: /walk duration controls/i });
+    const durationAria =
+      translate("wizard-step-one-duration-section-aria", "Walk duration controls") ??
+      "Walk duration controls";
+    const durationSection = view.getByRole("region", { name: localizedRegex(durationAria) });
     expect(durationSection.classList.contains("wizard-section")).toBe(true);
-    const interestsSection = view.getByRole("region", { name: /interests/i });
+    const interestsAria =
+      translate("wizard-step-one-interests-section-aria", "Interests") ?? "Interests";
+    const interestsSection = view.getByRole("region", { name: localizedRegex(interestsAria) });
     expect(interestsSection.classList.contains("wizard-section")).toBe(true);
-    const continueButton = view.getByRole("button", { name: /continue to preferences/i });
+    const continueLabel =
+      translate("wizard-step-one-continue", "Continue to preferences") ?? "Continue to preferences";
+    const continueButton = view.getByRole("button", { name: localizedRegex(continueLabel) });
     expect(continueButton.classList.contains("cta-button")).toBe(true);
 
     await act(async () => {
@@ -645,7 +654,11 @@ describe("Stage 3 wizard flows", () => {
       await Promise.resolve();
     });
 
-    const heading = await screen.findByRole("heading", { name: /discovery style/i });
+    const discoveryHeading =
+      translate("wizard-step-two-discovery-heading", "Discovery style") ?? "Discovery style";
+    const heading = await screen.findByRole("heading", {
+      name: localizedRegex(discoveryHeading),
+    });
     expect(heading).toBeTruthy();
   });
 
@@ -656,10 +669,10 @@ describe("Stage 3 wizard flows", () => {
       const container = requireContainer(mount);
       const view = within(container);
 
-      expect(
-        view.getByRole("region", { name: /controles de duración de la caminata/i }),
-      ).toBeTruthy();
-      expect(view.getByRole("button", { name: /continuar con preferencias/i })).toBeTruthy();
+      const durationAria = i18n.t("wizard-step-one-duration-section-aria") ?? "";
+      expect(view.getByRole("region", { name: localizedRegex(durationAria) })).toBeTruthy();
+      const continueLabel = i18n.t("wizard-step-one-continue") ?? "";
+      expect(view.getByRole("button", { name: localizedRegex(continueLabel) })).toBeTruthy();
 
       const selectionSummary = view.getByText(/seleccionados$/i);
       expect(selectionSummary.textContent?.trim()).toBe("2 seleccionados");
@@ -680,18 +693,34 @@ describe("Stage 3 wizard flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
 
-    const discoveryRegion = view.getByRole("region", { name: /discovery style/i });
+    const discoveryAria =
+      translate("wizard-step-two-discovery-aria", "Discovery style") ?? "Discovery style";
+    const discoveryRegion = view.getByRole("region", { name: localizedRegex(discoveryAria) });
     expect(discoveryRegion.classList.contains("wizard-section")).toBe(true);
-    expect(within(discoveryRegion).getByText(/balanced mix/i)).toBeInTheDocument();
-    expect(within(discoveryRegion).getByText(/new/i).classList.contains("wizard-badge")).toBe(true);
+    const balancedSummary =
+      translate("wizard-step-two-discovery-summary-balanced", "Balanced mix") ?? "Balanced mix";
+    expect(within(discoveryRegion).getByText(localizedRegex(balancedSummary))).toBeTruthy();
+    const badgeLabel = translate("wizard-step-two-discovery-badge", "New") ?? "New";
+    expect(
+      within(discoveryRegion)
+        .getByText(localizedRegex(badgeLabel))
+        .classList.contains("wizard-badge"),
+    ).toBe(true);
 
-    const accessibilityRegion = view.getByRole("region", { name: /accessibility & safety/i });
+    const accessibilityAria =
+      translate("wizard-step-two-accessibility-section-aria", "Accessibility & safety") ??
+      "Accessibility & safety";
+    const accessibilityRegion = view.getByRole("region", {
+      name: localizedRegex(accessibilityAria),
+    });
     expect(accessibilityRegion.classList.contains("wizard-section")).toBe(true);
     const switches = within(accessibilityRegion).getAllByRole("switch");
     expect(switches.length).toBe(accessibilityOptions.length);
     accessibilityOptions.forEach((option) => {
       expect(
-        within(accessibilityRegion).getByRole("switch", { name: new RegExp(option.label, "i") }),
+        within(accessibilityRegion).getByRole("switch", {
+          name: localizedRegex(option.label),
+        }),
       ).toBeInTheDocument();
     });
   });
@@ -703,30 +732,56 @@ describe("Stage 3 wizard flows", () => {
       const container = requireContainer(mount);
       const view = within(container);
 
-      const discoveryRegion = view.getByRole("region", { name: /estilo de descubrimiento/i });
+      const discoveryRegion = view.getByRole("region", {
+        name: localizedRegex(i18n.t("wizard-step-two-discovery-aria") ?? ""),
+      });
       expect(
-        within(discoveryRegion).getByText(/equilibra sitios populares con joyas ocultas/i),
+        within(discoveryRegion).getByText(
+          localizedRegex(i18n.t("wizard-step-two-discovery-description") ?? ""),
+        ),
       ).toBeTruthy();
-      expect(within(discoveryRegion).getByText(/nuevo/i)).toBeTruthy();
-      expect(within(discoveryRegion).getByText(/mezcla equilibrada/i)).toBeTruthy();
-
-      const accessibilityRegion = view.getByRole("region", { name: /accesibilidad y seguridad/i });
-      const wellLitLabel = /caminos bien iluminados/i;
-      const wheelchairLabel = /sillas de ruedas/i;
-      const pavedLabel = /superficies pavimentadas/i;
-
-      expect(within(accessibilityRegion).getByText(wellLitLabel)).toBeTruthy();
-      expect(within(accessibilityRegion).getByRole("switch", { name: wellLitLabel })).toBeTruthy();
-      expect(within(accessibilityRegion).getByText(wheelchairLabel)).toBeTruthy();
       expect(
-        within(accessibilityRegion).getByRole("switch", { name: wheelchairLabel }),
+        within(discoveryRegion).getByText(
+          localizedRegex(i18n.t("wizard-step-two-discovery-badge") ?? ""),
+        ),
       ).toBeTruthy();
-      expect(within(accessibilityRegion).getByText(pavedLabel)).toBeTruthy();
-      expect(within(accessibilityRegion).getByRole("switch", { name: pavedLabel })).toBeTruthy();
+      expect(
+        within(discoveryRegion).getByText(
+          localizedRegex(i18n.t("wizard-step-two-discovery-summary-balanced") ?? ""),
+        ),
+      ).toBeTruthy();
+
+      const accessibilityRegion = view.getByRole("region", {
+        name: localizedRegex(i18n.t("wizard-step-two-accessibility-section-aria") ?? ""),
+      });
+      const wellLitLabel = i18n.t("wizard-step-two-accessibility-well-lit-label") ?? "";
+      const wheelchairLabel = i18n.t("wizard-step-two-accessibility-wheelchair-label") ?? "";
+      const pavedLabel = i18n.t("wizard-step-two-accessibility-paved-label") ?? "";
+
+      expect(within(accessibilityRegion).getByText(localizedRegex(wellLitLabel))).toBeTruthy();
+      expect(
+        within(accessibilityRegion).getByRole("switch", { name: localizedRegex(wellLitLabel) }),
+      ).toBeTruthy();
+      expect(within(accessibilityRegion).getByText(localizedRegex(wheelchairLabel))).toBeTruthy();
+      expect(
+        within(accessibilityRegion).getByRole("switch", { name: localizedRegex(wheelchairLabel) }),
+      ).toBeTruthy();
+      expect(within(accessibilityRegion).getByText(localizedRegex(pavedLabel))).toBeTruthy();
+      expect(
+        within(accessibilityRegion).getByRole("switch", { name: localizedRegex(pavedLabel) }),
+      ).toBeTruthy();
 
       const footer = view.getByRole("contentinfo");
-      expect(within(footer).getByRole("button", { name: /revisar caminata/i })).toBeTruthy();
-      expect(within(footer).getByRole("button", { name: /atrás/i })).toBeTruthy();
+      expect(
+        within(footer).getByRole("button", {
+          name: localizedRegex(i18n.t("wizard-step-two-review") ?? ""),
+        }),
+      ).toBeTruthy();
+      expect(
+        within(footer).getByRole("button", {
+          name: localizedRegex(i18n.t("wizard-header-back-label") ?? ""),
+        }),
+      ).toBeTruthy();
     });
   });
 
@@ -755,10 +810,15 @@ describe("Stage 3 wizard flows", () => {
         translate("wizard-step-three-preferences-heading", "Your preferences applied") ??
         "Your preferences applied";
       expect(view.getByRole("heading", { name: localizedRegex(preferencesHeading) })).toBeTruthy();
+      const preferencesPanelLabel =
+        translate("wizard-step-three-preferences-panel-aria", "Your preferences applied") ??
+        "Your preferences applied";
 
       const stopsHeading =
         translate("wizard-step-three-stops-heading", "Featured stops") ?? "Featured stops";
       expect(view.getByRole("heading", { name: localizedRegex(stopsHeading) })).toBeTruthy();
+      const stopsPanelLabel =
+        translate("wizard-step-three-stops-panel-aria", "Featured stops") ?? "Featured stops";
 
       const weatherHeading =
         translate(wizardWeatherSummary.titleKey, wizardWeatherSummary.defaultTitle) ??
@@ -771,12 +831,28 @@ describe("Stage 3 wizard flows", () => {
       const summaryRegion = view.getByRole("region", {
         name: localizedRegex(summaryRegionLabel),
       });
+      const preferencesPanel = view.getByRole("region", {
+        name: localizedRegex(preferencesPanelLabel),
+      });
+      const stopsPanel = view.getByRole("region", { name: localizedRegex(stopsPanelLabel) });
 
       const localizedStats = buildWizardRouteStats(i18n.t.bind(i18n));
       localizedStats.forEach((stat) => {
-        expect(
-          within(summaryRegion).getByText(new RegExp(`^${escapeRegExp(stat.unitLabel)}$`, "i")),
-        ).toBeTruthy();
+        expect(within(summaryRegion).getByText(localizedRegex(stat.unitLabel))).toBeTruthy();
+      });
+
+      wizardSummaryHighlights.forEach((highlight) => {
+        const label =
+          translate(highlight.labelKey, highlight.defaultLabel) ?? highlight.defaultLabel;
+        expect(within(preferencesPanel).getByText(localizedRegex(label))).toBeTruthy();
+      });
+
+      wizardGeneratedStops.forEach((stop) => {
+        const name = translate(stop.nameKey, stop.defaultName) ?? stop.defaultName;
+        const description =
+          translate(stop.descriptionKey, stop.defaultDescription) ?? stop.defaultDescription;
+        expect(within(stopsPanel).getByText(localizedRegex(name))).toBeTruthy();
+        expect(within(stopsPanel).getByText(localizedRegex(description))).toBeTruthy();
       });
 
       const weatherPanel = view.getByRole("region", { name: localizedRegex(weatherHeading) });

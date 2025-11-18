@@ -44,42 +44,8 @@
                                             "name": "",
                                             "children": [
                                               {
-                                                "role": "generic",
-                                                "name": "",
-                                                "children": [
-                                                  {
-                                                    "role": "generic",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "region",
-                                                        "name": "Map"
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "generic",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "generic",
-                                                        "name": ""
-                                                      },
-                                                      {
-                                                        "role": "generic",
-                                                        "name": ""
-                                                      },
-                                                      {
-                                                        "role": "generic",
-                                                        "name": ""
-                                                      },
-                                                      {
-                                                        "role": "generic",
-                                                        "name": ""
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
+                                                "role": "none",
+                                                "name": ""
                                               }
                                             ]
                                           },

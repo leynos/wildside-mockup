@@ -8,6 +8,7 @@ import {
   captureAccessibilityTree,
   captureComputedStyles,
   slugifyPath,
+  waitForPrimaryContent,
 } from "./utils/accessibility";
 
 interface SnapshotTarget {
@@ -93,6 +94,7 @@ test.describe("Accessibility tree snapshots", () => {
       if (target.path === "/map/quick") {
         await removeMapLibreControls(page);
       }
+      await waitForPrimaryContent(page);
 
       const tree = await captureAccessibilityTree(page);
       const styleSamples = target.styleTargets
