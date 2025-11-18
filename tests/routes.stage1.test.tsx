@@ -212,6 +212,7 @@ describe("Stage 1 routed flows", () => {
     await changeLanguage("es");
 
     const translatedTitle = i18n.t("explore-header-title");
+    expect(translatedTitle).toBeTruthy();
     expect(
       view.getByRole("heading", {
         level: 1,
