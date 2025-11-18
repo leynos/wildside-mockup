@@ -1,6 +1,12 @@
 /** @file Localised interest descriptor registry consumed across flows. */
 
-import type { LocalizedDescriptor, ResolvedDescriptor } from "../../i18n/descriptors";
+import type { TFunction } from "i18next";
+
+import {
+  buildDescriptorLookup,
+  type LocalizedDescriptor,
+  type ResolvedDescriptor,
+} from "../../i18n/descriptors";
 
 type InterestVisualMetadata = {
   readonly iconToken: string;
@@ -61,3 +67,8 @@ export const interestDescriptors = [
     iconColorClass: "text-orange-400",
   },
 ] as const satisfies ReadonlyArray<InterestDescriptor>;
+
+export type InterestId = (typeof interestDescriptors)[number]["id"];
+
+export const buildInterestLookup = (t: TFunction): Map<InterestId, ResolvedInterestDescriptor> =>
+  buildDescriptorLookup<InterestVisualMetadata, typeof interestDescriptors>(interestDescriptors, t);

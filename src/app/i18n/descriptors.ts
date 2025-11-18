@@ -46,11 +46,12 @@ export const resolveDescriptors = <Extra extends Record<string, unknown> = Recor
 
 export const buildDescriptorLookup = <
   Extra extends Record<string, unknown> = Record<string, never>,
+  T extends ReadonlyArray<LocalizedDescriptor<Extra>> = ReadonlyArray<LocalizedDescriptor<Extra>>,
 >(
-  descriptors: ReadonlyArray<LocalizedDescriptor<Extra>>,
+  descriptors: T,
   t: TFunction,
-): Map<string, ResolvedDescriptor<Extra>> => {
-  const entries: Array<readonly [string, ResolvedDescriptor<Extra>]> = [];
+): Map<T[number]["id"], ResolvedDescriptor<Extra>> => {
+  const entries: Array<readonly [T[number]["id"], ResolvedDescriptor<Extra>]> = [];
   const seen = new Set<string>();
   resolveDescriptors(descriptors, t).forEach((descriptor) => {
     if (seen.has(descriptor.id)) {

@@ -41,7 +41,7 @@ export type DifficultyId = (typeof difficultyDescriptors)[number]["id"];
 export const buildDifficultyLookup = (
   t: TFunction,
 ): Map<DifficultyId, ResolvedDifficultyDescriptor> =>
-  buildDescriptorLookup(difficultyDescriptors, t) as Map<
-    DifficultyId,
-    ResolvedDifficultyDescriptor
-  >;
+  buildDescriptorLookup<DifficultyVisualMetadata, typeof difficultyDescriptors>(
+    difficultyDescriptors,
+    t,
+  );
