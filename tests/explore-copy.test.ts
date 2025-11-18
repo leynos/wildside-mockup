@@ -1,33 +1,10 @@
 import { describe, expect, it } from "bun:test";
-import type { TFunction } from "i18next";
-
 import { buildExploreCopy } from "../src/app/features/explore/explore-screen";
-
-type TranslationOptions = {
-  count?: number;
-  defaultValue?: string;
-};
-
-type TranslationCall = {
-  key: string;
-  options?: TranslationOptions;
-};
+import { createStubT } from "./i18n-stub";
 
 describe("buildExploreCopy", () => {
   it("surfaces translated headings and formatters with defaults", () => {
-    const calls: TranslationCall[] = [];
-    const stubT = ((key: string, options?: TranslationOptions) => {
-      if (options) {
-        calls.push({ key, options });
-      } else {
-        calls.push({ key });
-      }
-      const count = options?.count;
-      if (typeof count === "number") {
-        return `${key}:${count}`;
-      }
-      return `translated:${key}`;
-    }) as TFunction;
+    const { t: stubT, calls } = createStubT();
 
     const copy = buildExploreCopy(stubT);
 
