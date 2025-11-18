@@ -1,28 +1,10 @@
 import { describe, expect, it } from "bun:test";
-import type { TFunction } from "i18next";
-
 import { buildWizardRouteStats } from "../src/app/features/wizard/step-three/build-wizard-route-stats";
-
-type TranslationOptions = {
-  defaultValue?: string;
-};
-
-type TranslationCall = {
-  key: string;
-  options?: TranslationOptions;
-};
+import { createStubT } from "./i18n-stub";
 
 describe("buildWizardRouteStats", () => {
   it("localises wizard route stat units", () => {
-    const calls: TranslationCall[] = [];
-    const stubT = ((key: string, options?: TranslationOptions) => {
-      if (options) {
-        calls.push({ key, options });
-      } else {
-        calls.push({ key });
-      }
-      return `translated:${key}`;
-    }) as TFunction;
+    const { t: stubT, calls } = createStubT();
 
     const stats = buildWizardRouteStats(stubT);
 
@@ -40,5 +22,11 @@ describe("buildWizardRouteStats", () => {
 
     const distanceCall = calls.find((call) => call.key === "wizard-step-three-route-distance-unit");
     expect(distanceCall?.options?.defaultValue).toBe("km");
+
+    const durationCall = calls.find((call) => call.key === "wizard-step-three-route-duration-unit");
+    expect(durationCall?.options?.defaultValue).toBe("minutes");
+
+    const stopsCall = calls.find((call) => call.key === "wizard-step-three-route-stops-unit");
+    expect(stopsCall?.options?.defaultValue).toBe("stops");
   });
 });
