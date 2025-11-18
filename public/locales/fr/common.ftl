@@ -303,6 +303,7 @@ offline-downloads-status-downloading = Téléchargement en cours
 offline-downloads-undo-title = {$title} supprimée
 offline-downloads-undo-description = Touchez Rétablir pour restaurer cette carte.
 offline-downloads-undo-button = Rétablir
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Gestion automatique
 offline-auto-option-auto-delete-title = Supprimer automatiquement les anciennes cartes
 offline-auto-option-auto-delete-description = Supprime automatiquement les cartes de plus de {$days} jours

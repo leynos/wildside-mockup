@@ -295,6 +295,7 @@ offline-downloads-status-downloading = ダウンロード中
 offline-downloads-undo-title = {$title} を削除しました
 offline-downloads-undo-description = 「元に戻す」を押してこのマップを復元します。
 offline-downloads-undo-button = 元に戻す
+offline-downloads-undo-aria = { offline-downloads-undo-title }。 { offline-downloads-undo-description }
 offline-auto-heading = 自動管理
 offline-auto-option-auto-delete-title = 古いマップを自動削除
 offline-auto-option-auto-delete-description = {$days}日以上経過したマップを自動的に削除します

@@ -302,6 +302,7 @@ offline-downloads-status-downloading = Descargando
 offline-downloads-undo-title = {$title} eliminada
 offline-downloads-undo-description = Toca Deshacer para restaurar este mapa.
 offline-downloads-undo-button = Deshacer
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Gestión automática
 offline-auto-option-auto-delete-title = Eliminar automáticamente los mapas antiguos
 offline-auto-option-auto-delete-description = Elimina automáticamente los mapas con más de {$days} días

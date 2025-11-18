@@ -305,6 +305,7 @@ offline-downloads-status-downloading = Đang tải xuống
 offline-downloads-undo-title = Đã xóa {$title}
 offline-downloads-undo-description = Nhấn Hoàn tác để khôi phục bản đồ này.
 offline-downloads-undo-button = Hoàn tác
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Quản lý tự động
 offline-auto-option-auto-delete-title = Tự động xóa bản đồ cũ
 offline-auto-option-auto-delete-description = Tự động loại bỏ bản đồ cũ hơn {$days} ngày

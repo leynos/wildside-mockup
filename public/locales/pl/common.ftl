@@ -311,6 +311,7 @@ offline-downloads-status-downloading = Pobieranie
 offline-downloads-undo-title = {$title} usunięto
 offline-downloads-undo-description = Kliknij Cofnij, aby przywrócić tę mapę.
 offline-downloads-undo-button = Cofnij
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Automatyczne zarządzanie
 offline-auto-option-auto-delete-title = Automatycznie usuwaj stare mapy
 offline-auto-option-auto-delete-description = Automatycznie usuwa mapy starsze niż {$days} dni

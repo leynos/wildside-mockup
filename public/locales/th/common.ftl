@@ -302,6 +302,7 @@ offline-downloads-status-downloading = กำลังดาวน์โหล�
 offline-downloads-undo-title = ลบ {$title} แล้ว
 offline-downloads-undo-description = แตะ “เลิกทำ” เพื่อกู้คืนแผนที่นี้
 offline-downloads-undo-button = เลิกทำ
+offline-downloads-undo-aria = { offline-downloads-undo-title } { offline-downloads-undo-description }
 offline-auto-heading = การจัดการอัตโนมัติ
 offline-auto-option-auto-delete-title = ลบแผนที่เก่าอัตโนมัติ
 offline-auto-option-auto-delete-description = ลบแผนที่ที่เก่ากว่า {$days} วันโดยอัตโนมัติ

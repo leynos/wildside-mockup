@@ -303,6 +303,7 @@ offline-downloads-status-downloading = डाउनलोड हो रहा �
 offline-downloads-undo-title = {$title} हटाया गया
 offline-downloads-undo-description = इस मानचित्र को वापस लाने के लिए पूर्ववत दबाएँ।
 offline-downloads-undo-button = पूर्ववत
+offline-downloads-undo-aria = { offline-downloads-undo-title }। { offline-downloads-undo-description }
 offline-auto-heading = स्वचालित प्रबंधन
 offline-auto-option-auto-delete-title = पुराने मानचित्र स्वतः हटाएँ
 offline-auto-option-auto-delete-description = {$days} दिनों से पुराने मानचित्र अपने आप हटाएँ

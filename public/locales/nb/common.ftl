@@ -303,6 +303,7 @@ offline-downloads-status-downloading = Laster ned
 offline-downloads-undo-title = {$title} er slettet
 offline-downloads-undo-description = Trykk Angre for å gjenopprette kartet.
 offline-downloads-undo-button = Angre
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Automatisk håndtering
 offline-auto-option-auto-delete-title = Slett gamle kart automatisk
 offline-auto-option-auto-delete-description = Fjerner kart som er eldre enn {$days} dager automatisk

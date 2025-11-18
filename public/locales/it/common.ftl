@@ -303,6 +303,7 @@ offline-downloads-status-downloading = Download in corso
 offline-downloads-undo-title = {$title} eliminata
 offline-downloads-undo-description = Tocca Annulla per ripristinare questa mappa.
 offline-downloads-undo-button = Annulla
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Gestione automatica
 offline-auto-option-auto-delete-title = Elimina automaticamente le mappe vecchie
 offline-auto-option-auto-delete-description = Rimuove automaticamente le mappe con più di {$days} giorni

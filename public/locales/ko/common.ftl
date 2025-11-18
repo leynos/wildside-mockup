@@ -303,6 +303,7 @@ offline-downloads-status-downloading = 다운로드 중
 offline-downloads-undo-title = {$title} 삭제됨
 offline-downloads-undo-description = 이 지도를 복원하려면 ‘실행 취소’를 누르세요.
 offline-downloads-undo-button = 실행 취소
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = 자동 관리
 offline-auto-option-auto-delete-title = 오래된 지도를 자동 삭제
 offline-auto-option-auto-delete-description = {$days}일이 지난 지도를 자동으로 제거합니다

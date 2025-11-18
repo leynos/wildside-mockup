@@ -307,6 +307,7 @@ offline-downloads-status-downloading = בהורדה
 offline-downloads-undo-title = {$title} נמחק
 offline-downloads-undo-description = הקישו על ביטול כדי לשחזר את המפה.
 offline-downloads-undo-button = ביטול
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = ניהול אוטומטי
 offline-auto-option-auto-delete-title = מחיקה אוטומטית של מפות ישנות
 offline-auto-option-auto-delete-description = מסיר אוטומטית מפות בנות יותר מ־{$days} יום

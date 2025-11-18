@@ -307,6 +307,7 @@ offline-downloads-status-downloading = Yn lawrlwytho
 offline-downloads-undo-title = Dileuwyd {$title}
 offline-downloads-undo-description = Tapiwch Dadwneud i adfer y map hwn.
 offline-downloads-undo-button = Dadwneud
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Rheoli awtomatig
 offline-auto-option-auto-delete-title = Dileu mapiau hen yn awtomatig
 offline-auto-option-auto-delete-description = Tynnu’n awtomatig mapiau sy’n hŷn na {$days} diwrnod

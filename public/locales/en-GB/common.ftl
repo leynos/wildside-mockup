@@ -303,6 +303,7 @@ offline-downloads-status-downloading = Downloading
 offline-downloads-undo-title = {$title} deleted
 offline-downloads-undo-description = Tap undo to restore this map.
 offline-downloads-undo-button = Undo
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Auto-management
 offline-auto-option-auto-delete-title = Auto-delete old maps
 offline-auto-option-auto-delete-description = Remove maps older than {$days} days automatically

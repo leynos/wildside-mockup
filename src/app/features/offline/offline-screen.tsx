@@ -372,7 +372,7 @@ export function OfflineScreen(): JSX.Element {
                       className="offline-download__undo"
                       aria-label={t("offline-downloads-undo-aria", {
                         title: entry.download.title,
-                        defaultValue: `${entry.download.title} deleted`,
+                        defaultValue: `${entry.download.title} deleted. ${undoDescription}`,
                       })}
                     >
                       <div>

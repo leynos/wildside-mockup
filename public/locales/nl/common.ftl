@@ -303,6 +303,7 @@ offline-downloads-status-downloading = Downloaden
 offline-downloads-undo-title = {$title} verwijderd
 offline-downloads-undo-description = Tik op Ongedaan maken om deze kaart terug te zetten.
 offline-downloads-undo-button = Ongedaan maken
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Automatisch beheer
 offline-auto-option-auto-delete-title = Oude kaarten automatisch verwijderen
 offline-auto-option-auto-delete-description = Verwijder kaarten die ouder zijn dan {$days} dagen automatisch

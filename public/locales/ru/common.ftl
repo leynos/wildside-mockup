@@ -311,6 +311,7 @@ offline-downloads-status-downloading = Загрузка
 offline-downloads-undo-title = {$title} удалён
 offline-downloads-undo-description = Нажмите «Отменить», чтобы вернуть эту карту.
 offline-downloads-undo-button = Отменить
+offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = Автоматическое управление
 offline-auto-option-auto-delete-title = Автоматически удалять старые карты
 offline-auto-option-auto-delete-description = Автоматически удаляет карты старше {$days} дней
