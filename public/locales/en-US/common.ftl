@@ -154,6 +154,7 @@ wizard-step-three-route-panel-aria = Hidden gems loop summary
 wizard-step-three-route-title = Hidden Gems Loop
 wizard-step-three-route-badge = Custom
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

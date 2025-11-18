@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = மறைக்கப்பட்ட நக
 wizard-step-three-route-title = மறைக்கப்பட்ட நகைகள் வளையம்
 wizard-step-three-route-badge = தனிப்பயன்
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = நிமிடங்கள்
 wizard-step-three-route-stops-unit = நிறுத்தங்கள்
 wizard-step-three-stop-distance-unit = மைல்கள்

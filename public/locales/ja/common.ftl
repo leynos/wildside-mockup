@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = 隠れた名所ループの概要
 wizard-step-three-route-title = 隠れた名所ループ
 wizard-step-three-route-badge = カスタム
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Sammendrag av Skjulte perler-sløyfen
 wizard-step-three-route-title = Skjulte perler-sløyfen
 wizard-step-three-route-badge = Tilpasset
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutter
 wizard-step-three-route-stops-unit = stopp
 wizard-step-three-stop-distance-unit = miles

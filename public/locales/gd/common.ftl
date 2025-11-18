@@ -161,6 +161,7 @@ wizard-step-three-route-panel-aria = Geàrr-chunntas chuairt nan ulaidhean falai
 wizard-step-three-route-title = Cuairt nan Ulaidhean Falaichte
 wizard-step-three-route-badge = Gnàthaichte
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

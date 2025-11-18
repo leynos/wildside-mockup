@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Sammanfattning av slingan med dolda pärlor
 wizard-step-three-route-title = Slingan Dolda Pärlor
 wizard-step-three-route-badge = Anpassad
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minuter
 wizard-step-three-route-stops-unit = stopp
 wizard-step-three-stop-distance-unit = miles

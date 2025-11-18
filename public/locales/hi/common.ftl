@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = छिपे रत्नों की ल�
 wizard-step-three-route-title = छिपे रत्नों की लूप
 wizard-step-three-route-badge = व्यक्तिगत
 wizard-step-three-route-distance-unit = किमी
+wizard-step-three-stop-distance-unit-km = किमी
 wizard-step-three-route-duration-unit = मिनट
 wizard-step-three-route-stops-unit = स्टॉप
 wizard-step-three-stop-distance-unit = मील

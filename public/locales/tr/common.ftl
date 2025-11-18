@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Gizli mücevherler rotası özeti
 wizard-step-three-route-title = Gizli Mücevherler Döngüsü
 wizard-step-three-route-badge = Özel
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = dakika
 wizard-step-three-route-stops-unit = durak
 wizard-step-three-stop-distance-unit = mil

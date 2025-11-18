@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Σύνοψη της διαδρομής κρ
 wizard-step-three-route-title = Κύκλος Κρυμμένων Θησαυρών
 wizard-step-three-route-badge = Προσαρμοσμένη
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = λεπτά
 wizard-step-three-route-stops-unit = στάσεις
 wizard-step-three-stop-distance-unit = miles

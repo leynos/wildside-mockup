@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Samenvatting van de verborgen-parels-lus
 wizard-step-three-route-title = Verborgen Parels-lus
 wizard-step-three-route-badge = Aangepast
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minuten
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

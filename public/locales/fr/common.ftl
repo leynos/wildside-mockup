@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Résumé de la boucle des trésors cachés
 wizard-step-three-route-title = Boucle des Trésors Cachés
 wizard-step-three-route-badge = Personnalisée
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = arrêts
 wizard-step-three-stop-distance-unit = mile

@@ -17,6 +17,8 @@ import {
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
 
+const MILES_TO_KILOMETRES = 1.60934;
+
 type WizardSummaryPanelProps = WizardSectionProps & {
   readonly className?: string;
   readonly children: ReactNode;
@@ -191,12 +193,33 @@ export function WizardStepThree(): JSX.Element {
                     defaultValue: stop.defaultNoteDistanceUnit ?? "miles",
                   })
                 : undefined;
+            const kilometreUnitLabel =
+              stop.noteDistanceMiles !== undefined
+                ? t("wizard-step-three-stop-distance-unit-km", {
+                    defaultValue: t("wizard-step-three-route-distance-unit", {
+                      defaultValue: "km",
+                    }),
+                  })
+                : undefined;
+            const prefersKilometres =
+              stop.noteDistanceMiles !== undefined && unitLabel && kilometreUnitLabel
+                ? unitLabel === kilometreUnitLabel
+                : false;
+            const formattedDistance =
+              stop.noteDistanceMiles !== undefined
+                ? distanceFormatter.format(
+                    prefersKilometres
+                      ? stop.noteDistanceMiles * MILES_TO_KILOMETRES
+                      : stop.noteDistanceMiles,
+                  )
+                : undefined;
+            const effectiveUnit = prefersKilometres ? kilometreUnitLabel : unitLabel;
             const note = t(stop.noteKey, {
               defaultValue: stop.defaultNote,
-              ...(stop.noteDistanceMiles !== undefined && unitLabel
+              ...(stop.noteDistanceMiles !== undefined && effectiveUnit
                 ? {
-                    distance: distanceFormatter.format(stop.noteDistanceMiles),
-                    unit: unitLabel,
+                    distance: formattedDistance,
+                    unit: effectiveUnit,
                   }
                 : {}),
             });

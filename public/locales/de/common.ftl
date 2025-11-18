@@ -157,6 +157,7 @@ wizard-step-three-route-panel-aria = Zusammenfassung der Schleife der verborgene
 wizard-step-three-route-title = Schleife der verborgenen Schätze
 wizard-step-three-route-badge = Individuell
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Resumo da rota joias escondidas
 wizard-step-three-route-title = Rota Joias Escondidas
 wizard-step-three-route-badge = Personalizada
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutos
 wizard-step-three-route-stops-unit = paragens
 wizard-step-three-stop-distance-unit = miles

@@ -159,6 +159,7 @@ wizard-step-three-route-panel-aria = Podsumowanie pętli ukrytych pereł
 wizard-step-three-route-title = Pętla Ukrytych Pereł
 wizard-step-three-route-badge = Indywidualny
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minut
 wizard-step-three-route-stops-unit = przystanków
 wizard-step-three-stop-distance-unit = miles

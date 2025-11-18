@@ -157,6 +157,7 @@ wizard-step-three-route-panel-aria = תקציר לולאת האוצרות הנס
 wizard-step-three-route-title = לולאת האוצרות הנסתרים
 wizard-step-three-route-badge = מותאם אישית
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = דקות
 wizard-step-three-route-stops-unit = עצירות
 wizard-step-three-stop-distance-unit = מייל

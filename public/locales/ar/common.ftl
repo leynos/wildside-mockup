@@ -163,6 +163,7 @@ wizard-step-three-route-panel-aria = ملخص جولة الجواهر المخف
 wizard-step-three-route-title = حلقة الجواهر المخفية
 wizard-step-three-route-badge = مخصص
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = دقائق
 wizard-step-three-route-stops-unit = محطات
 wizard-step-three-stop-distance-unit = ميل

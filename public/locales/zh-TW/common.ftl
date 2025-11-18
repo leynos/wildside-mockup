@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = 隱藏寶藏環線摘要
 wizard-step-three-route-title = 隱藏寶藏環線
 wizard-step-three-route-badge = 自訂
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

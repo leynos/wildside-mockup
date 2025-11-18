@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = 숨겨진 보석 루프 요약
 wizard-step-three-route-title = 숨겨진 보석 루프
 wizard-step-three-route-badge = 맞춤형
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

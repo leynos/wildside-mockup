@@ -156,6 +156,7 @@ wizard-step-three-route-panel-aria = Resumen del circuito de joyas ocultas
 wizard-step-three-route-title = Circuito de Joyas Ocultas
 wizard-step-three-route-badge = Personalizada
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutos
 wizard-step-three-route-stops-unit = paradas
 wizard-step-three-stop-distance-unit = mi

@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Tóm tắt vòng viên ngọc ẩn
 wizard-step-three-route-title = Vòng Viên Ngọc Ẩn
 wizard-step-three-route-badge = Tùy chỉnh
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles

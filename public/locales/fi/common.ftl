@@ -155,6 +155,7 @@ wizard-step-three-route-panel-aria = Kätkettyjen helmien kierroksen yhteenveto
 wizard-step-three-route-title = Kätkettyjen helmien kierros
 wizard-step-three-route-badge = Mukautettu
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minuuttia
 wizard-step-three-route-stops-unit = pysähdystä
 wizard-step-three-stop-distance-unit = mailin

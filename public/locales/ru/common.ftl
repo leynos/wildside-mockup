@@ -159,6 +159,7 @@ wizard-step-three-route-panel-aria = Сводка по циклу скрытых
 wizard-step-three-route-title = Цикл Скрытых Жемчужин
 wizard-step-three-route-badge = Индивидуальный
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = остановок
 wizard-step-three-stop-distance-unit = miles

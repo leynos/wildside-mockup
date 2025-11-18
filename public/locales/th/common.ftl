@@ -154,6 +154,7 @@ wizard-step-three-route-panel-aria = สรุปลูปอัญมณีท�
 wizard-step-three-route-title = ลูปอัญมณีที่ซ่อนอยู่
 wizard-step-three-route-badge = ปรับแต่ง
 wizard-step-three-route-distance-unit = km
+wizard-step-three-stop-distance-unit-km = km
 wizard-step-three-route-duration-unit = minutes
 wizard-step-three-route-stops-unit = stops
 wizard-step-three-stop-distance-unit = miles
