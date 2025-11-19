@@ -8,25 +8,25 @@ describe("buildExploreCopy", () => {
 
     const copy = buildExploreCopy(stubT);
 
-    expect(copy.headerTitle).toBe("translated:explore-header-title");
-    expect(copy.headerSubtitle).toBe("translated:explore-header-subtitle");
-    expect(copy.filterLabel).toBe("translated:explore-filter-aria-label");
-    expect(copy.searchPlaceholder).toBe("translated:explore-search-placeholder");
-    expect(copy.categoriesLabel).toBe("translated:explore-categories-aria-label");
-    expect(copy.featuredHeading).toBe("translated:explore-featured-heading");
-    expect(copy.popularHeading).toBe("translated:explore-popular-heading");
-    expect(copy.curatedHeading).toBe("translated:explore-curated-heading");
-    expect(copy.trendingHeading).toBe("translated:explore-trending-heading");
-    expect(copy.communityHeading).toBe("translated:explore-community-heading");
-    expect(copy.communitySubtitle).toBe("translated:explore-community-subtitle");
-    expect(copy.bottomNavAriaLabel).toBe("translated:nav-primary-aria-label");
+    expect(copy.headerTitle).toBe("Discover");
+    expect(copy.headerSubtitle).toBe("Explore curated walks & hidden gems");
+    expect(copy.filterLabel).toBe("Filter walks");
+    expect(copy.searchPlaceholder).toBe("Search walks, places, themes…");
+    expect(copy.categoriesLabel).toBe("Popular categories");
+    expect(copy.featuredHeading).toBe("Walk of the Week");
+    expect(copy.popularHeading).toBe("Popular Themes");
+    expect(copy.curatedHeading).toBe("Curated Collections");
+    expect(copy.trendingHeading).toBe("Trending Now");
+    expect(copy.communityHeading).toBe("Community Favourite");
+    expect(copy.communitySubtitle).toBe("Most shared this week");
+    expect(copy.bottomNavAriaLabel).toBe("Primary navigation");
 
-    expect(copy.formatRouteCount(5)).toBe("explore-curated-route-count:5");
+    expect(copy.formatRouteCount(5)).toBe("5 routes");
     const routeCall = calls.find((call) => call.key === "explore-curated-route-count");
-    expect(routeCall?.options?.defaultValue).toBe("{{count}} routes");
+    expect(routeCall?.options?.defaultValue).toBe("5 routes");
 
-    expect(copy.formatSaveCount(1)).toBe("explore-community-saves:1");
+    expect(copy.formatSaveCount(1)).toBe("1 save");
     const saveCall = calls.find((call) => call.key === "explore-community-saves");
-    expect(saveCall?.options?.defaultValue).toBe("{{count}} saves");
+    expect(saveCall?.options?.defaultValue).toBe("1 save");
   });
 });

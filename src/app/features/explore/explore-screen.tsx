@@ -86,6 +86,12 @@ type ExploreCopy = {
   formatSaveCount: (count: number) => string;
 };
 
+const defaultRouteCountLabel = (count: number): string =>
+  `${count} ${count === 1 ? "route" : "routes"}`;
+
+const defaultSaveCountLabel = (count: number): string =>
+  `${count} ${count === 1 ? "save" : "saves"}`;
+
 export const buildExploreCopy = (t: TFunction): ExploreCopy => ({
   headerTitle: t("explore-header-title", { defaultValue: "Discover" }),
   headerSubtitle: t("explore-header-subtitle", {
@@ -93,7 +99,7 @@ export const buildExploreCopy = (t: TFunction): ExploreCopy => ({
   }),
   filterLabel: t("explore-filter-aria-label", { defaultValue: "Filter walks" }),
   searchPlaceholder: t("explore-search-placeholder", {
-    defaultValue: "Search walks, places, themes...",
+    defaultValue: "Search walks, places, themes…",
   }),
   categoriesLabel: t("explore-categories-aria-label", {
     defaultValue: "Popular categories",
@@ -108,12 +114,12 @@ export const buildExploreCopy = (t: TFunction): ExploreCopy => ({
   formatRouteCount: (count: number) =>
     t("explore-curated-route-count", {
       count,
-      defaultValue: "{{count}} routes",
+      defaultValue: defaultRouteCountLabel(count),
     }),
   formatSaveCount: (count: number) =>
     t("explore-community-saves", {
       count,
-      defaultValue: "{{count}} saves",
+      defaultValue: defaultSaveCountLabel(count),
     }),
 });
 

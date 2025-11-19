@@ -1575,11 +1575,11 @@
                                       },
                                       {
                                         "role": "region",
-                                        "name": "Community Favorite",
+                                        "name": "Community Favourite",
                                         "children": [
                                           {
                                             "role": "heading",
-                                            "name": "Community Favorite",
+                                            "name": "Community Favourite",
                                             "level": 2,
                                             "children": [
                                               {
@@ -1614,11 +1614,11 @@
                                               },
                                               {
                                                 "role": "text",
-                                                "name": "Community Favorite",
+                                                "name": "Community Favourite",
                                                 "children": [
                                                   {
                                                     "role": "InlineTextBox",
-                                                    "name": "Community Favorite"
+                                                    "name": "Community Favourite"
                                                   }
                                                 ]
                                               }
