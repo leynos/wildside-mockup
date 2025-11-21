@@ -26,6 +26,8 @@ type LogLevel = "info" | "warn" | "error";
 const REPLACEMENT = "[REDACTED]";
 const sensitiveKeyPattern =
   /(email|e[-_]?mail|user[-_]?id|auth[-_]?token|token|password|secret|ssn|nino|ssnlike|gps(?:[-_]?lat|[-_]?lon)?|lat|lon|location(?:[-_]?id|[-_]?lat|[-_]?lon)?)/i;
+const emailLikePattern = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
+const tokenLikePattern = /\b[A-Z0-9]{24,}\b/gi;
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" &&
@@ -72,6 +74,25 @@ const sanitiseContext = (context?: LogContext): LogContext | undefined => {
   return cloneAndSanitise(context) as LogContext;
 };
 
+const redactText = (text: string): string =>
+  text.replace(emailLikePattern, REPLACEMENT).replace(tokenLikePattern, REPLACEMENT);
+
+const normaliseError = (err: unknown): unknown => {
+  if (err instanceof Error) {
+    return {
+      name: err.name,
+      message: redactText(err.message),
+      stack: err.stack ? redactText(err.stack) : undefined,
+    };
+  }
+
+  if (typeof err === "string") {
+    return redactText(err);
+  }
+
+  return err;
+};
+
 const isTestEnvironment = typeof process !== "undefined" && process?.env?.NODE_ENV === "test";
 
 const logToConsole = (
@@ -89,7 +110,7 @@ const logToConsole = (
   const sanitisedContext = hasContext ? sanitiseContext(context) : undefined;
   const payload =
     sanitisedContext || hasError
-      ? { ...(sanitisedContext ?? {}), ...(hasError ? { error } : {}) }
+      ? { ...(sanitisedContext ?? {}), ...(hasError ? { error: normaliseError(error) } : {}) }
       : undefined;
 
   // Centralise console usage so lint rules remain quiet in UI components.
