@@ -4,6 +4,8 @@ import React, { type ComponentType, type JSX, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { useTranslation } from "react-i18next";
 
+import "./i18n";
+
 import App from "./app/app";
 import "./index.css";
 
