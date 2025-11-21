@@ -119,6 +119,7 @@ wizard-step-one-interests-section-aria = ความสนใจ
 wizard-step-one-interests-heading = ความสนใจ
 wizard-step-one-interests-selected =
     { $count ->
+        [one] เลือก {$count}
        *[other] เลือก {$count}
     }
 wizard-step-one-interests-picker-aria = เลือกความสนใจสำหรับการเดิน
