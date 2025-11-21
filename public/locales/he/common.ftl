@@ -317,7 +317,12 @@ offline-downloads-undo-button = ביטול
 offline-downloads-undo-aria = { offline-downloads-undo-title }. { offline-downloads-undo-description }
 offline-auto-heading = ניהול אוטומטי
 offline-auto-option-auto-delete-title = מחיקה אוטומטית של מפות ישנות
-offline-auto-option-auto-delete-description = מסיר אוטומטית מפות בנות יותר מ־{$days} יום
+offline-auto-option-auto-delete-description =
+    מסיר אוטומטית מפות בנות יותר מ־{ $days ->
+        [one] {$days} יום
+        [two] {$days} ימים
+       *[other] {$days} ימים
+    }
 offline-auto-option-wifi-only-title = הורדות דרך Wi-Fi בלבד
 offline-auto-option-wifi-only-description = הורידו מפות רק כשמחוברים ל-Wi-Fi
 offline-auto-option-auto-update-title = עדכון אוטומטי של מפות
