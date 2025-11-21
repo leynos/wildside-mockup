@@ -814,10 +814,10 @@ const { t } = useTranslation('userProfile');
 Interpolated variables must line up with the Fluent placeholders (`{$name}`)
 and plural selectors just need a `count` (or similar) argument:
 `t('user-settings-unsaved-count', { count: dirtyFields })`. Because Fluent does
-not use braces for JSX, continue to reach for `<Trans>` when a sentence needs a
-React component (for example, a link) embedded inside it; the component will
-inject the React nodes while the Fluent string keeps the prose, giving you
-truly localizable markup without unsafe HTML.[^45]
+not use braces for JSX, developers should continue to reach for `<Trans>` when a
+sentence needs a React component (for example, a link) embedded inside it; the
+component injects the React nodes while the Fluent string keeps the prose,
+yielding truly localisable markup without unsafe HTML.[^45]
 
 The following table compares leading React i18n libraries, justifying the
 selection of `react-i18next` for its comprehensive feature set and robust
