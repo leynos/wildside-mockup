@@ -2,6 +2,7 @@
 
 import { spawnSync } from "node:child_process";
 import { URL } from "node:url";
+import { type AddressInfo, createServer } from "node:net";
 
 import { defineConfig, devices } from "@playwright/test";
 
@@ -39,7 +40,52 @@ setTimeout(() => { socket.destroy(); process.exit(1); }, 500);
   }
 }
 
+function findAvailablePort(preferred: number): number {
+  const attempt = createServer();
+  let resolvedPort = preferred;
+
+  try {
+    attempt.listen(preferred);
+    const address = attempt.address() as AddressInfo;
+    resolvedPort = address.port;
+  } catch {
+    attempt.close();
+    const fallback = spawnSync(process.execPath, [
+      "-e",
+      `
+const net = require("node:net");
+const preferred = Number(process.argv[1] || 0);
+const server = net.createServer();
+server.once("error", () => {
+  const alt = net.createServer();
+  alt.listen(0, () => {
+    const { port } = alt.address();
+    console.log(port);
+    alt.close(() => process.exit(0));
+  });
+});
+server.listen(preferred, () => {
+  const { port } = server.address();
+  console.log(port);
+  server.close(() => process.exit(0));
+});
+      `,
+      String(preferred),
+    ]);
+    const parsed = Number.parseInt((fallback.stdout ?? "").toString().trim(), 10);
+    if (Number.isFinite(parsed)) {
+      resolvedPort = parsed;
+    }
+  } finally {
+    attempt.close();
+  }
+
+  return resolvedPort;
+}
+
 const shouldLaunchWebServer = !serverIsReachable(baseURL);
+const resolvedPort = shouldLaunchWebServer ? findAvailablePort(basePort) : basePort;
+const resolvedBaseURL = `${parsedBaseURL.protocol}//${parsedBaseURL.hostname}:${resolvedPort}`;
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -49,7 +95,7 @@ export default defineConfig({
     timeout: 10_000,
   },
   use: {
-    baseURL,
+    baseURL: resolvedBaseURL,
     trace: "retain-on-failure",
   },
   projects: [
@@ -63,8 +109,8 @@ export default defineConfig({
   ],
   webServer: shouldLaunchWebServer
     ? {
-        command: `bun run dev -- --host --port ${basePort} --strictPort`,
-        url: baseURL,
+        command: `bun run dev -- --host --port ${resolvedPort}`,
+        url: resolvedBaseURL,
         reuseExistingServer: true,
         stdout: "pipe",
         stderr: "pipe",
