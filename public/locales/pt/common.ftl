@@ -86,13 +86,13 @@ quick-walk-interests-selected =
        *[other] {$count} selecionados
     }
 quick-walk-interests-aria = Selecione interesses para a caminhada rápida
-quick-walk-stops-heading = Paradas da caminhada rápida
+quick-walk-stops-heading = Paragens da caminhada rápida
 quick-walk-notes-heading = Notas de planejamento
 quick-walk-notes-item-1 = Sincronize o plano com o calendário para reservar tempo de descoberta.
 quick-walk-notes-item-2 = Leve uma garrafa reutilizável – os pontos de reabastecimento estão destacados na orla.
 quick-walk-notes-item-3 = Convide amigos e mantenha o ritmo flexível para uma caminhada inclusiva.
 quick-walk-tab-map = Explorar
-quick-walk-tab-stops = Paradas
+quick-walk-tab-stops = Paragens
 quick-walk-tab-notes = Notas
 quick-walk-save-aria = Salvar caminhada rápida
 
@@ -239,7 +239,7 @@ walk-complete-badge-route = Rota concluída
 walk-complete-primary-distance-label = Distância
 walk-complete-primary-duration-label = Duração
 walk-complete-secondary-calories-label = Calorias
-walk-complete-secondary-stops-label = Paradas
+walk-complete-secondary-stops-label = Paragens
 walk-complete-secondary-starred-label = Favoritos
 walk-complete-favourite-heading = Momentos favoritos
 walk-complete-actions-rate = Avaliar esta caminhada
