@@ -90,7 +90,11 @@ async function findAvailablePort(preferred: number): Promise<number> {
 const resolvedPortPromise = shouldLaunchWebServer ? findAvailablePort(basePort) : Promise.resolve(basePort);
 
 const resolvedConfig = resolvedPortPromise.then((resolvedPort) => {
-  const resolvedBaseURL = `${parsedBaseURL.protocol}//${parsedBaseURL.hostname}:${resolvedPort}`;
+  const resolvedBase = new URL(baseURL);
+  if (resolvedPort) {
+    resolvedBase.port = String(resolvedPort);
+  }
+  const resolvedBaseURL = resolvedBase.toString();
 
   return defineConfig({
     testDir: "./tests/e2e",
