@@ -1349,7 +1349,7 @@ describe("Stage 4 completion flows", () => {
 
     const deletedTitle = downloadTitles[0] ?? "Download";
     const undoCards = within(downloadsRegion).getAllByRole("article", {
-      name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineUndoDescriptionDefault)),
+      name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
     });
     expect(undoCards.length).toBe(1);
   });
@@ -1387,7 +1387,7 @@ describe("Stage 4 completion flows", () => {
 
     const deletedTitle = downloadTitles[0] ?? "Download";
     const undoCard = within(downloadsRegion).getByRole("article", {
-      name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineUndoDescriptionDefault)),
+      name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
     });
     const undoButton = within(undoCard).getByRole("button", {
       name: localizedRegex(offlineCopy.undoButtonLabel),
@@ -1400,9 +1400,7 @@ describe("Stage 4 completion flows", () => {
 
     expect(
       within(downloadsRegion).queryByRole("article", {
-        name: localizedRegex(
-          offlineCopy.undoAriaLabel(deletedTitle, offlineUndoDescriptionDefault),
-        ),
+        name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
       }),
     ).toBeNull();
   });
@@ -1441,9 +1439,7 @@ describe("Stage 4 completion flows", () => {
     const deletedTitle = downloadTitles[0] ?? "Download";
     expect(
       within(downloadsRegion).getByRole("article", {
-        name: localizedRegex(
-          offlineCopy.undoAriaLabel(deletedTitle, offlineUndoDescriptionDefault),
-        ),
+        name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
       }),
     ).toBeTruthy();
 
@@ -1457,9 +1453,7 @@ describe("Stage 4 completion flows", () => {
 
     expect(
       within(downloadsRegion).queryByRole("article", {
-        name: localizedRegex(
-          offlineCopy.undoAriaLabel(deletedTitle, offlineUndoDescriptionDefault),
-        ),
+        name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
       }),
     ).toBeNull();
   });
