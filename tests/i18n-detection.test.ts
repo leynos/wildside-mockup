@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeEach, expect, test } from "bun:test";
+import { afterEach, beforeEach, expect, test } from "bun:test";
 import i18next, { type InitOptions } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
@@ -53,15 +53,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  if (originalLocationDescriptor?.configurable) {
-    Object.defineProperty(window, "location", originalLocationDescriptor);
-  }
-  if (originalNavigatorLanguageDescriptor?.configurable) {
-    Object.defineProperty(window.navigator, "language", originalNavigatorLanguageDescriptor);
-  }
-});
-
-afterAll(() => {
   if (originalLocationDescriptor?.configurable) {
     Object.defineProperty(window, "location", originalLocationDescriptor);
   }
