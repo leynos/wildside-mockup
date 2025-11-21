@@ -84,7 +84,7 @@ test("falls back to localStorage when querystring missing", async () => {
   expect(instance.language).toBe("fr");
 });
 
-test("defaults to app locale when neither query nor storage set", async () => {
+test("defaults to app locale when navigator is ignored", async () => {
   replaceNavigatorLanguage("es-ES");
   const instance = await buildInstance();
   expect(instance.language).toBe(DEFAULT_LOCALE);
