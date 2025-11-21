@@ -143,14 +143,17 @@ describe("Stage 1 routed flows", () => {
     ({ mount, root } = await renderRoute("/discover"));
     const container = requireContainer(mount);
     const view = within(container);
+    const discoverHeading = translate("discover-hero-title", "Discover Your Perfect Walk");
+    const interestsLabel = translate("wizard-step-one-interests-section-aria", "Interests");
+
     expect(
       view.getByRole("heading", {
         level: 1,
-        name: /discover your perfect walk/i,
+        name: localizedRegex(discoverHeading),
       }),
     ).toBeTruthy();
 
-    const interestGroup = view.getByRole("group", { name: /interests/i });
+    const interestGroup = view.getByRole("group", { name: localizedRegex(interestsLabel) });
     const parksChip = within(interestGroup).getByRole("button", {
       name: /parks & nature/i,
     });
@@ -165,7 +168,11 @@ describe("Stage 1 routed flows", () => {
     ({ mount, root } = await renderRoute("/explore"));
     const container = requireContainer(mount);
     const view = within(container);
-    const filterButton = view.getByRole("button", { name: /filter walks/i });
+    const filterButtonLabel = translate("explore-filter-aria-label", "Filter walks");
+    const discoverHeading = translate("discover-hero-title", "Discover Your Perfect Walk");
+    const filterButton = view.getByRole("button", {
+      name: localizedRegex(filterButtonLabel),
+    });
 
     await act(async () => {
       clickElement(filterButton);
@@ -174,7 +181,7 @@ describe("Stage 1 routed flows", () => {
     });
     expect(
       await screen.findByRole("heading", {
-        name: /discover your perfect walk/i,
+        name: localizedRegex(discoverHeading),
       }),
     ).toBeTruthy();
   });
