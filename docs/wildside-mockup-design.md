@@ -390,7 +390,7 @@ Mapping guidance:
       from the fixture. This keeps the existing e2e snapshots (which assert
       on “Map Map”, “Routes Routes”, etc.) stable in the default locale whilst
       allowing per-locale labelling.
-- This strategy keeps `customize.ts` small and declarative whilst pushing all
+- This strategy keeps `customize.ts` small and declarative, whilst pushing all
   user-visible text through Fluent and `react-i18next`. The key design
   invariants are:
   - IDs in fixtures are the single source of truth for message keys.

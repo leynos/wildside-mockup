@@ -18,6 +18,17 @@ import { buildWizardRouteStats } from "./build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
 
 const MILES_TO_KILOMETRES = 1.60934;
+const IMPERIAL_DISTANCE_LOCALES = ["en-us"] as const;
+
+const getPreferredDistanceUnit = (locale?: string): "km" | "miles" => {
+  if (!locale) {
+    return "km";
+  }
+  const normalized = locale.toLowerCase();
+  return IMPERIAL_DISTANCE_LOCALES.some((imperialLocale) => normalized.startsWith(imperialLocale))
+    ? "miles"
+    : "km";
+};
 
 type WizardSummaryPanelProps = WizardSectionProps & {
   readonly className?: string;
@@ -47,6 +58,10 @@ export function WizardStepThree(): JSX.Element {
   });
   const routeStats = useMemo(() => buildWizardRouteStats(t), [t]);
   const weatherCopy = useMemo(() => buildWizardWeatherCopy(t), [t]);
+  const preferredDistanceUnit = useMemo(
+    () => getPreferredDistanceUnit(i18n.language),
+    [i18n.language],
+  );
   const distanceFormatter = useMemo(
     () =>
       new Intl.NumberFormat(i18n.language, {
@@ -82,28 +97,34 @@ export function WizardStepThree(): JSX.Element {
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 bg-black/60" />
               <Dialog.Content className="dialog-surface">
-                {(() => {
-                  const routeTitle = t(wizardRouteSummary.titleKey, {
-                    defaultValue: wizardRouteSummary.defaultTitle,
-                  });
-                  return (
-                    <>
-                      <Dialog.Title className="text-lg font-semibold text-base-content">
-                        {t("wizard-step-three-dialog-title", { defaultValue: "Walk saved!" })}
-                      </Dialog.Title>
-                      <Dialog.Description className="text-sm text-base-content/70">
-                        {t("wizard-step-three-dialog-description", {
-                          routeTitle,
-                          defaultValue: `${routeTitle} is ready under your saved walks. Start the route now or continue exploring other wizard options.`,
-                        })}
-                      </Dialog.Description>
-                    </>
-                  );
-                })()}
+                {dialogOpen
+                  ? (() => {
+                      const routeTitle = t(wizardRouteSummary.titleKey, {
+                        defaultValue: wizardRouteSummary.defaultTitle,
+                      });
+                      return (
+                        <>
+                          <Dialog.Title className="text-lg font-semibold text-base-content">
+                            {t("wizard-step-three-dialog-title", {
+                              defaultValue: "Walk saved!",
+                            })}
+                          </Dialog.Title>
+                          <Dialog.Description className="text-sm text-base-content/70">
+                            {t("wizard-step-three-dialog-description", {
+                              routeTitle,
+                              defaultValue: `${routeTitle} is ready under your saved walks. Start the route now or continue exploring other wizard options.`,
+                            })}
+                          </Dialog.Description>
+                        </>
+                      );
+                    })()
+                  : null}
                 <div className="flex justify-end gap-2">
                   <Dialog.Close asChild>
                     <button type="button" className="btn btn-ghost btn-sm">
-                      {t("wizard-step-three-dialog-close", { defaultValue: "Close" })}
+                      {t("wizard-step-three-dialog-close", {
+                        defaultValue: "Close",
+                      })}
                     </button>
                   </Dialog.Close>
                   <button
@@ -111,7 +132,9 @@ export function WizardStepThree(): JSX.Element {
                     className="btn btn-accent btn-sm"
                     onClick={() => navigate({ to: "/map/quick" })}
                   >
-                    {t("wizard-step-three-dialog-view-map", { defaultValue: "View on map" })}
+                    {t("wizard-step-three-dialog-view-map", {
+                      defaultValue: "View on map",
+                    })}
                   </button>
                 </div>
               </Dialog.Content>
@@ -127,10 +150,14 @@ export function WizardStepThree(): JSX.Element {
       >
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">
-            {t(wizardRouteSummary.titleKey, { defaultValue: wizardRouteSummary.defaultTitle })}
+            {t(wizardRouteSummary.titleKey, {
+              defaultValue: wizardRouteSummary.defaultTitle,
+            })}
           </h2>
           <span className="wizard-badge font-semibold">
-            {t(wizardRouteSummary.badgeKey, { defaultValue: wizardRouteSummary.defaultBadge })}
+            {t(wizardRouteSummary.badgeKey, {
+              defaultValue: wizardRouteSummary.defaultBadge,
+            })}
           </span>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
@@ -154,12 +181,18 @@ export function WizardStepThree(): JSX.Element {
         })}
       >
         <h3 className="text-lg font-semibold">
-          {t("wizard-step-three-preferences-heading", { defaultValue: "Your preferences applied" })}
+          {t("wizard-step-three-preferences-heading", {
+            defaultValue: "Your preferences applied",
+          })}
         </h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {wizardSummaryHighlights.map((highlight) => {
-            const label = t(highlight.labelKey, { defaultValue: highlight.defaultLabel });
-            const detail = t(highlight.detailKey, { defaultValue: highlight.defaultDetail });
+            const label = t(highlight.labelKey, {
+              defaultValue: highlight.defaultLabel,
+            });
+            const detail = t(highlight.detailKey, {
+              defaultValue: highlight.defaultDetail,
+            });
             return (
               <div key={highlight.id} className="wizard-summary__highlight">
                 <Icon
@@ -178,33 +211,43 @@ export function WizardStepThree(): JSX.Element {
       </WizardSummaryPanel>
 
       <WizardSummaryPanel
-        aria-label={t("wizard-step-three-stops-panel-aria", { defaultValue: "Featured stops" })}
+        aria-label={t("wizard-step-three-stops-panel-aria", {
+          defaultValue: "Featured stops",
+        })}
       >
         <h3 className="text-lg font-semibold">
-          {t("wizard-step-three-stops-heading", { defaultValue: "Featured stops" })}
+          {t("wizard-step-three-stops-heading", {
+            defaultValue: "Featured stops",
+          })}
         </h3>
         <div className="mt-4 space-y-3">
           {wizardGeneratedStops.map((stop) => {
             const name = t(stop.nameKey, { defaultValue: stop.defaultName });
-            const description = t(stop.descriptionKey, { defaultValue: stop.defaultDescription });
+            const description = t(stop.descriptionKey, {
+              defaultValue: stop.defaultDescription,
+            });
             const unitLabel =
               stop.noteDistanceMiles !== undefined
                 ? t(stop.noteDistanceUnitKey ?? "wizard-step-three-stop-distance-unit", {
                     defaultValue: stop.defaultNoteDistanceUnit ?? "miles",
                   })
                 : undefined;
-            const kilometreUnitLabel =
-              stop.noteDistanceMiles !== undefined
-                ? t("wizard-step-three-stop-distance-unit-km", {
-                    defaultValue: t("wizard-step-three-route-distance-unit", {
-                      defaultValue: "km",
-                    }),
-                  })
-                : undefined;
+            const kilometreUnitLabel = (() => {
+              if (stop.noteDistanceMiles === undefined) {
+                return undefined;
+              }
+              const kmUnit = t("wizard-step-three-stop-distance-unit-km", {
+                defaultValue: "",
+              });
+              const fallbackUnit =
+                kmUnit ||
+                t("wizard-step-three-route-distance-unit", {
+                  defaultValue: "km",
+                });
+              return fallbackUnit;
+            })();
             const prefersKilometres =
-              stop.noteDistanceMiles !== undefined && unitLabel && kilometreUnitLabel
-                ? unitLabel === kilometreUnitLabel
-                : false;
+              stop.noteDistanceMiles !== undefined && preferredDistanceUnit === "km";
             const formattedDistance =
               stop.noteDistanceMiles !== undefined
                 ? distanceFormatter.format(

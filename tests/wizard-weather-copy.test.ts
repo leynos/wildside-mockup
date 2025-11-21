@@ -39,8 +39,10 @@ describe("buildWizardWeatherCopy", () => {
 
     const weatherCopy = buildWizardWeatherCopy(stubT);
 
-    expect(weatherCopy.temperatureLabel).toBe(`${wizardWeatherSummary.temperatureCelsius}\u00B0C`);
-    const expectedSummary = `${wizardWeatherSummary.temperatureCelsius}\u00B0C, ${wizardWeatherSummary.defaultWindDescriptor}, ${wizardWeatherSummary.defaultSkyDescriptor}`;
+    expect(weatherCopy.temperatureLabel).toBe(
+      `${wizardWeatherSummary.temperatureCelsius.toFixed(1)}\u00B0C`,
+    );
+    const expectedSummary = `${wizardWeatherSummary.temperatureCelsius.toFixed(1)}\u00B0C, ${wizardWeatherSummary.defaultWindDescriptor}, ${wizardWeatherSummary.defaultSkyDescriptor}`;
     expect(weatherCopy.summary).toBe(expectedSummary);
 
     const summaryCall = calls.find((call) => call.key === wizardWeatherSummary.summaryKey);

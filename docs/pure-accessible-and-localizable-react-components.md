@@ -738,7 +738,7 @@ export default i18n;
 
 > ℹ️ **Why `useIsolating: false`?** Fluent inserts invisible FSI/PDI markers
 > around every placeable when isolation is enabled. Those markers break some of
-> our React typography helpers (for example the icon-leading badges and the map
+> the React typography helpers (for example the icon-leading badges and the map
 > callouts that already wrap user-provided strings in `<bdi>`). Because every
 > user-controlled interpolation is explicitly wrapped in `<bdi>` (or rendered
 > in its own element with `dir` attributes) and layout relies on logical CSS

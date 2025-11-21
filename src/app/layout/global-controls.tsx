@@ -157,7 +157,10 @@ function Drawer(): JSX.Element {
   const headingId = useId();
   const { i18n } = useTranslation();
   const resolvedLanguage = i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LOCALE;
-  const direction = i18n.dir(resolvedLanguage);
+  const direction =
+    typeof i18n.dir === "function"
+      ? i18n.dir(resolvedLanguage)
+      : (document.documentElement?.dir ?? "ltr");
   const collapsedTranslateClass = direction === "rtl" ? "-translate-x-full" : "translate-x-full";
 
   return (

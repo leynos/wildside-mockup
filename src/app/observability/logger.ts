@@ -23,6 +23,47 @@ export type LogContext = Record<string, unknown>;
 
 type LogLevel = "info" | "warn" | "error";
 
+const REPLACEMENT = "[REDACTED]";
+const sensitiveKeyPattern =
+  /^(email|e[-_]?mail|user?id|auth[-_]?token|token|password|secret|ssn|nino|ssnlike|gps|lat|lon|location)$/i;
+
+const isPlainObject = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" &&
+  value !== null &&
+  (Object.getPrototypeOf(value) === Object.prototype || Object.getPrototypeOf(value) === null);
+
+const sanitiseContext = (context?: LogContext): LogContext | undefined => {
+  if (!context) return context;
+
+  const seen = new WeakMap<object, object>();
+
+  const cloneAndSanitise = (value: unknown, key?: string): unknown => {
+    if (typeof key === "string" && sensitiveKeyPattern.test(key)) {
+      return REPLACEMENT;
+    }
+
+    if (Array.isArray(value)) {
+      return value.map((item) => cloneAndSanitise(item));
+    }
+
+    if (isPlainObject(value)) {
+      if (seen.has(value)) {
+        return seen.get(value) as object;
+      }
+      const result: Record<string, unknown> = {};
+      seen.set(value, result);
+      Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+        result[nestedKey] = cloneAndSanitise(nestedValue, nestedKey);
+      });
+      return result;
+    }
+
+    return value;
+  };
+
+  return cloneAndSanitise(context) as LogContext;
+};
+
 const isTestEnvironment = typeof process !== "undefined" && process?.env?.NODE_ENV === "test";
 
 const logToConsole = (
@@ -37,8 +78,11 @@ const logToConsole = (
 
   const hasContext = context && Object.keys(context).length > 0;
   const hasError = typeof error !== "undefined";
+  const sanitisedContext = hasContext ? sanitiseContext(context) : undefined;
   const payload =
-    hasContext || hasError ? { ...(context ?? {}), ...(hasError ? { error } : {}) } : undefined;
+    sanitisedContext || hasError
+      ? { ...(sanitisedContext ?? {}), ...(hasError ? { error } : {}) }
+      : undefined;
 
   // Centralise console usage so lint rules remain quiet in UI components.
   // eslint-disable-next-line no-console

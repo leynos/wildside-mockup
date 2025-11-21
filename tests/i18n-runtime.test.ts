@@ -35,6 +35,8 @@ describe("i18n runtime configuration", () => {
     document.documentElement.lang = "zz";
     document.documentElement.dir = "rtl";
     document.body.dir = "rtl";
+    const bodyDataset = document.body.dataset as DOMStringMap & { direction?: string };
+    bodyDataset.direction = "rtl";
     applyDocumentLocale(undefined);
 
     expect(document.documentElement.lang).toBe("en-GB");

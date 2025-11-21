@@ -12,13 +12,13 @@ describe("buildWizardRouteStats", () => {
 
     const distanceStat = stats.find((stat) => stat.id === "distance");
     expect(distanceStat?.value).toBe("3.7");
-    expect(distanceStat?.unitLabel).toBe("translated:wizard-step-three-route-distance-unit");
+    expect(distanceStat?.unitLabel).toBe("km");
 
     const durationStat = stats.find((stat) => stat.id === "duration");
-    expect(durationStat?.unitLabel).toBe("translated:wizard-step-three-route-duration-unit");
+    expect(durationStat?.unitLabel).toBe("minutes");
 
     const stopsStat = stats.find((stat) => stat.id === "stops");
-    expect(stopsStat?.unitLabel).toBe("translated:wizard-step-three-route-stops-unit");
+    expect(stopsStat?.unitLabel).toBe("stops");
 
     const distanceCall = calls.find((call) => call.key === "wizard-step-three-route-distance-unit");
     expect(distanceCall?.options?.defaultValue).toBe("km");

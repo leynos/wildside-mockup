@@ -2,13 +2,14 @@
 
 import React, { type ComponentType, type JSX, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
+import { useTranslation } from "react-i18next";
 
 import App from "./app/app";
-import i18n from "./i18n";
 import "./index.css";
 
 export function LoadingBackdrop(): JSX.Element {
-  const label = i18n.t("loading", { defaultValue: "Loading…" });
+  const { t } = useTranslation();
+  const label = t("loading", { defaultValue: "Loading…" });
   return (
     <output
       aria-live="polite"

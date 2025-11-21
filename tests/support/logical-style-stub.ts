@@ -39,10 +39,6 @@ export function installLogicalStyleStub(): () => void {
   text-align: left !important;
 }
 
-.customize-segment {
-  text-align: start;
-}
-
 [dir="ltr"] .customize-segment,
 [data-direction="ltr"] .customize-segment,
 .customize-segment:dir(ltr) {
@@ -79,10 +75,6 @@ export function installLogicalStyleStub(): () => void {
   document.head.append(styleElement);
   return () => {
     styleElement.remove();
-    // Keep the counter bounded so future testids remain compact.
-    if (installedHandles > 0) {
-      installedHandles -= 1;
-    }
   };
 }
 

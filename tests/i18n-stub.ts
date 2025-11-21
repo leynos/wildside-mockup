@@ -25,6 +25,9 @@ export const createStubT = (): StubT => {
     } else {
       calls.push({ key });
     }
+    if (typeof options?.defaultValue === "string") {
+      return options.defaultValue;
+    }
     const count = options?.count;
     if (typeof count === "number") {
       return `${key}:${count}`;

@@ -12,7 +12,7 @@ export type WizardWeatherCopy = {
   readonly sentiment: string;
 };
 
-const formatTemperatureLabel = (celsius: number): string => `${celsius}\u00B0C`;
+const formatTemperatureLabel = (celsius: number): string => `${celsius.toFixed(1)}\u00B0C`;
 
 export const buildWizardWeatherCopy = (t: TFunction): WizardWeatherCopy => {
   const title = t(wizardWeatherSummary.titleKey, {
