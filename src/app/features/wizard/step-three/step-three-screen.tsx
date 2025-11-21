@@ -56,8 +56,10 @@ export function WizardStepThree(): JSX.Element {
   const helpMessage = t("wizard-help-placeholder", {
     defaultValue: "Contextual help coming soon",
   });
-  const routeStats = useMemo(() => buildWizardRouteStats(t), [t]);
-  const weatherCopy = useMemo(() => buildWizardWeatherCopy(t), [t]);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: recompute when the active locale changes even if t is memoised
+  const routeStats = useMemo(() => buildWizardRouteStats(t), [t, i18n.language]);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: ensure weather copy follows locale changes
+  const weatherCopy = useMemo(() => buildWizardWeatherCopy(t), [t, i18n.language]);
   const preferredDistanceUnit = useMemo(
     () => getPreferredDistanceUnit(i18n.language),
     [i18n.language],

@@ -5,7 +5,7 @@ import type { TFunction } from "i18next";
 export type TranslationOptions = {
   count?: number;
   defaultValue?: string;
-};
+} & Record<string, unknown>;
 
 export type TranslationCall = {
   key: string;

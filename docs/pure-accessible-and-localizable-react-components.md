@@ -832,9 +832,6 @@ ecosystem.
 | **TypeScript Support**     | Excellent                                | Excellent                | Excellent               |
 | **Ecosystem & Plugins**    | Extensive (Language detection, backends) | Focused on ICU standards | Good, growing community |
 
-Based on a review of 42 published sources (see Works cited entries
-1–42).
-
 ### 4.2 A Practical Synthesis: Building a Localized "User Settings" Form
 
 This section synthesizes all the architectural principles into a step-by-step

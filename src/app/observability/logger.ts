@@ -25,7 +25,7 @@ type LogLevel = "info" | "warn" | "error";
 
 const REPLACEMENT = "[REDACTED]";
 const sensitiveKeyPattern =
-  /^(email|e[-_]?mail|user?id|auth[-_]?token|token|password|secret|ssn|nino|ssnlike|gps|lat|lon|location)$/i;
+  /^(email|e[-_]?mail|user[-_]?id|auth[-_]?token|token|password|secret|ssn|nino|ssnlike|gps|lat|lon|location)$/i;
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" &&
@@ -43,7 +43,15 @@ const sanitiseContext = (context?: LogContext): LogContext | undefined => {
     }
 
     if (Array.isArray(value)) {
-      return value.map((item) => cloneAndSanitise(item));
+      if (seen.has(value)) {
+        return seen.get(value) as unknown[];
+      }
+      const result: unknown[] = [];
+      seen.set(value, result);
+      value.forEach((item, index) => {
+        result[index] = cloneAndSanitise(item);
+      });
+      return result;
     }
 
     if (isPlainObject(value)) {

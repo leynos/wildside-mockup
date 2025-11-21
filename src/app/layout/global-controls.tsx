@@ -79,8 +79,12 @@ function LanguageSelect(): JSX.Element {
 
 function ThemeToggleButton(): JSX.Element {
   const { theme, themes, setTheme } = useTheme();
+  const { t } = useTranslation();
   const nextTheme = themes.find((entry) => entry !== theme) ?? theme;
-  const label = nextTheme === "wildside-day" ? "Switch to Day" : "Switch to Night";
+  const label =
+    nextTheme === "wildside-day"
+      ? t("controls-theme-toggle-day-label", { defaultValue: "Switch to Day" })
+      : t("controls-theme-toggle-night-label", { defaultValue: "Switch to Night" });
 
   return (
     <button
@@ -96,7 +100,10 @@ function ThemeToggleButton(): JSX.Element {
 
 function DisplayModeToggleButton(): JSX.Element {
   const { isHosted, setHosted, setFullBrowser } = useDisplayMode();
-  const label = isHosted ? "Switch to Full View" : "Switch to Hosted Frame";
+  const { t } = useTranslation();
+  const label = isHosted
+    ? t("controls-display-toggle-full-label", { defaultValue: "Switch to Full View" })
+    : t("controls-display-toggle-hosted-label", { defaultValue: "Switch to Hosted Frame" });
 
   return (
     <button
@@ -118,20 +125,27 @@ function DrawerPanel({
   onClose: () => void;
 }): JSX.Element {
   const { hasUserPreference, resetToSystemDefault } = useDisplayMode();
+  const { t } = useTranslation();
+  const heading = t("controls-drawer-heading", { defaultValue: "Display & theme" });
+  const closeLabel = t("controls-drawer-close-label", { defaultValue: "Close display controls" });
+  const closeButton = t("controls-drawer-close-button", { defaultValue: "Close" });
+  const resetLabel = t("controls-reset-to-device-default-label", {
+    defaultValue: "Reset to device default",
+  });
 
   return (
     <div className="global-controls__panel">
       <div className="flex items-center justify-between">
         <h2 id={headingId} className="text-sm font-semibold text-base-content">
-          Display & theme
+          {heading}
         </h2>
         <button
           type="button"
           className="btn btn-ghost btn-xs text-xs"
           onClick={onClose}
-          aria-label="Close display controls"
+          aria-label={closeLabel}
         >
-          Close
+          {closeButton}
         </button>
       </div>
       <DisplayModeToggleButton />
@@ -146,7 +160,7 @@ function DrawerPanel({
         }}
         disabled={!hasUserPreference}
       >
-        Reset to device default
+        {resetLabel}
       </button>
     </div>
   );
@@ -155,13 +169,16 @@ function DrawerPanel({
 function Drawer(): JSX.Element {
   const [open, setOpen] = useState(false);
   const headingId = useId();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const resolvedLanguage = i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LOCALE;
   const direction =
     typeof i18n.dir === "function"
       ? i18n.dir(resolvedLanguage)
-      : (document.documentElement?.dir ?? "ltr");
+      : typeof document !== "undefined"
+        ? (document.documentElement?.dir ?? "ltr")
+        : "ltr";
   const collapsedTranslateClass = direction === "rtl" ? "-translate-x-full" : "translate-x-full";
+  const triggerLabel = t("controls-trigger-label", { defaultValue: "Controls" });
 
   return (
     <div className="global-controls__drawer">
@@ -172,7 +189,7 @@ function Drawer(): JSX.Element {
         className="global-controls__trigger"
         onClick={() => setOpen((prev) => !prev)}
       >
-        Controls
+        {triggerLabel}
       </button>
       <div
         id="global-controls-drawer"
