@@ -7,6 +7,7 @@ import FluentBackend from "i18next-fluent-backend";
 import { initReactI18next } from "react-i18next";
 import {
   DEFAULT_LOCALE,
+  DETECTION_ORDER,
   getLocaleDirection,
   getLocaleMetadata,
   SUPPORTED_LOCALES,
@@ -123,7 +124,10 @@ export const i18nReady = i18n
       escapeValue: false,
     },
     detection: {
-      order: ["querystring", "localStorage"],
+      // Navigator is intentionally excluded to keep server renders and first visits
+      // deterministic; we favour explicit query/localStorage picks plus the default locale.
+      order: [...DETECTION_ORDER],
+      lookupQuerystring: "lng",
       caches: ["localStorage"],
     },
     returnNull: false,

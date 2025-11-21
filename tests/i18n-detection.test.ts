@@ -1,0 +1,64 @@
+import { afterAll, beforeEach, expect, test } from "bun:test";
+import i18next, { type InitOptions } from "i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+
+import { DEFAULT_LOCALE, DETECTION_ORDER } from "../src/app/i18n/supported-locales";
+
+const originalLocation = window.location;
+
+const buildInstance = async (overrides: Partial<InitOptions> = {}) => {
+  const instance = i18next.createInstance();
+  await instance.use(LanguageDetector).init({
+    detection: { order: [...DETECTION_ORDER], lookupQuerystring: "lng", caches: ["localStorage"] },
+    fallbackLng: DEFAULT_LOCALE,
+    supportedLngs: [DEFAULT_LOCALE, "es", "fr"],
+    defaultNS: "common",
+    resources: {
+      [DEFAULT_LOCALE]: { common: {} },
+      es: { common: {} },
+      fr: { common: {} },
+    },
+    ...overrides,
+  });
+  return instance;
+};
+
+beforeEach(() => {
+  Object.defineProperty(window, "location", {
+    value: new URL("http://localhost/"),
+    configurable: true,
+  });
+  window.localStorage.clear();
+});
+
+afterAll(() => {
+  Object.defineProperty(window, "location", {
+    value: originalLocation,
+    configurable: true,
+  });
+});
+
+test("uses the configured detection order", () => {
+  expect(DETECTION_ORDER).toEqual(["querystring", "localStorage"]);
+});
+
+test("prefers querystring language when present", async () => {
+  window.location.search = "?lng=es";
+  const instance = await buildInstance();
+  expect(instance.language).toBe("es");
+});
+
+test("falls back to localStorage when querystring missing", async () => {
+  window.localStorage.setItem("i18nextLng", "fr");
+  const instance = await buildInstance();
+  expect(instance.language).toBe("fr");
+});
+
+test("defaults to app locale when neither query nor storage set", async () => {
+  Object.defineProperty(window.navigator, "language", {
+    value: "es-ES",
+    configurable: true,
+  });
+  const instance = await buildInstance();
+  expect(instance.language).toBe(DEFAULT_LOCALE);
+});
