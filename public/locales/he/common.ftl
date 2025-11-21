@@ -288,7 +288,12 @@ offline-header-subtitle = נהלו הורדות ועדכונים חכמים
 offline-header-back-label = חזרה למפה
 offline-header-add-area-label = הוספת אזור לא מקוון
 offline-storage-heading = סקירת אחסון
-offline-storage-subtitle = מחקו אוטומטית מפות לא בשימוש אחרי {$days} יום
+offline-storage-subtitle =
+    מחקו אוטומטית מפות לא בשימוש אחרי { $days ->
+        [one] {$days} יום
+        [two] {$days} ימים
+       *[other] {$days} ימים
+    }
 offline-storage-used-label = בשימוש
 offline-storage-used-description = {$used} מתוך {$total}
 offline-storage-legend-maps = מפות
