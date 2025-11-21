@@ -25,7 +25,7 @@ type LogLevel = "info" | "warn" | "error";
 
 const REPLACEMENT = "[REDACTED]";
 const sensitiveKeyPattern =
-  /^(email|e[-_]?mail|user[-_]?id|auth[-_]?token|token|password|secret|ssn|nino|ssnlike|gps|lat|lon|location)$/i;
+  /(email|e[-_]?mail|user[-_]?id|auth[-_]?token|token|password|secret|ssn|nino|ssnlike|gps(?:[-_]?lat|[-_]?lon)?|lat|lon|location(?:[-_]?id|[-_]?lat|[-_]?lon)?)/i;
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" &&
