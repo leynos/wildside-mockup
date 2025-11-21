@@ -1179,6 +1179,11 @@ describe("Stage 4 completion flows", () => {
   let root: Root | null = null;
   let mount: HTMLDivElement | null = null;
 
+  const extractDownloadTitles = (cards: readonly HTMLElement[]): string[] =>
+    cards.map((card) => {
+      return within(card).getByRole("heading", { level: 3 }).textContent?.trim() ?? "Download";
+    });
+
   function cleanup() {
     if (root && mount) {
       act(() => {
@@ -1320,9 +1325,7 @@ describe("Stage 4 completion flows", () => {
       name: localizedRegex(offlineCopy.downloadsHeading),
     });
     const initialDownloads = within(downloadsRegion).getAllByRole("article");
-    const downloadTitles: string[] = initialDownloads.map((card) => {
-      return within(card).getByRole("heading", { level: 3 }).textContent?.trim() ?? "Download";
-    });
+    const downloadTitles = extractDownloadTitles(initialDownloads);
     expect(initialDownloads.length).toBeGreaterThan(0);
 
     const manageButton = within(downloadsRegion).getByRole("button", {
@@ -1371,9 +1374,7 @@ describe("Stage 4 completion flows", () => {
     });
 
     const downloadCards = within(downloadsRegion).getAllByRole("article");
-    const downloadTitles: string[] = downloadCards.map((card) => {
-      return within(card).getByRole("heading", { level: 3 }).textContent?.trim() ?? "Download";
-    });
+    const downloadTitles = extractDownloadTitles(downloadCards);
     const deleteButtons = downloadCards.map((card, index) => {
       const title = downloadTitles[index] ?? "Download";
       return within(card).getByRole("button", {
@@ -1422,9 +1423,7 @@ describe("Stage 4 completion flows", () => {
     });
 
     const downloadCards = within(downloadsRegion).getAllByRole("article");
-    const downloadTitles: string[] = downloadCards.map((card) => {
-      return within(card).getByRole("heading", { level: 3 }).textContent?.trim() ?? "Download";
-    });
+    const downloadTitles = extractDownloadTitles(downloadCards);
     const deleteButtons = downloadCards.map((card, index) => {
       const title = downloadTitles[index] ?? "Download";
       return within(card).getByRole("button", {
