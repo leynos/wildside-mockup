@@ -276,7 +276,7 @@ explore-community-saves =
 explore-curated-route-count =
     { $count ->
         [one] {$count} rota
-       *[other] {$count} rotalar
+       *[other] {$count} rota
     }
 
 offline-header-title = Çevrimdışı haritalar
