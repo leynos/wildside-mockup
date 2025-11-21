@@ -3,13 +3,14 @@
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
 import { type JSX, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import { SectionHero } from "../../components/section-hero";
 import {
   type DiscoverInterest,
   defaultSelectedInterests,
-  discoverInterests,
+  resolveDiscoverInterests,
 } from "../../data/discover";
 import { MobileShell } from "../../layout/mobile-shell";
 
@@ -40,6 +41,9 @@ export function DiscoverScreen(): JSX.Element {
   const [selected, setSelected] = useState<string[]>([...defaultSelectedInterests]);
   const [isGenerating, setIsGenerating] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const interests = useMemo(() => resolveDiscoverInterests(t), [t]);
 
   const selectedCount = useMemo(() => selected.length, [selected]);
 
@@ -62,7 +66,7 @@ export function DiscoverScreen(): JSX.Element {
         <button
           type="button"
           onClick={() => navigate({ to: "/explore" })}
-          className="absolute right-6 top-16 rounded-full px-4 py-2 text-sm font-medium text-base-content/70 transition-colors hover:text-base-content"
+          className="discover-screen__skip"
         >
           Skip
         </button>
@@ -87,7 +91,7 @@ export function DiscoverScreen(): JSX.Element {
             value={selected}
             onValueChange={(values) => setSelected(values)}
           >
-            {discoverInterests.map((interest) => (
+            {interests.map((interest) => (
               <InterestChip key={interest.id} interest={interest} />
             ))}
           </ToggleGroup.Root>

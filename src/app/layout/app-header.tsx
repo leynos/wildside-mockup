@@ -54,7 +54,7 @@ export function AppHeader({
     isWizard ? "bg-base-800/60 text-base-content" : "bg-base-200/70 text-base-content/80",
   ].join(" ");
 
-  const titleContainerClassName = ["flex-1", isWizard ? "text-center" : "text-left"].join(" ");
+  const titleContainerClassName = ["flex-1", isWizard ? "text-center" : "text-start"].join(" ");
 
   const trailingContainerClassName = [
     "flex items-center gap-2",

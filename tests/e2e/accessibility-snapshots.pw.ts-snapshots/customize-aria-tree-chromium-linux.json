@@ -1413,7 +1413,7 @@
                               },
                               {
                                 "role": "navigation",
-                                "name": "",
+                                "name": "Primary navigation",
                                 "children": [
                                   {
                                     "role": "none",

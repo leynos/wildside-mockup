@@ -102,7 +102,7 @@
                                         "children": [
                                           {
                                             "role": "searchbox",
-                                            "name": "Search walks, places, themes...",
+                                            "name": "Search walks, places, themes…",
                                             "children": [
                                               {
                                                 "role": "none",
@@ -135,166 +135,189 @@
                                     "name": "",
                                     "children": [
                                       {
-                                        "role": "generic",
-                                        "name": "",
+                                        "role": "region",
+                                        "name": "Popular categories",
                                         "children": [
+                                          {
+                                            "role": "heading",
+                                            "name": "Popular categories",
+                                            "level": 2,
+                                            "children": [
+                                              {
+                                                "role": "text",
+                                                "name": "Popular categories",
+                                                "children": [
+                                                  {
+                                                    "role": "InlineTextBox",
+                                                    "name": "Popular categories"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
                                           {
                                             "role": "generic",
                                             "name": "",
                                             "children": [
                                               {
-                                                "role": "LayoutTable",
+                                                "role": "generic",
                                                 "name": "",
                                                 "children": [
                                                   {
-                                                    "role": "none",
+                                                    "role": "LayoutTable",
                                                     "name": "",
                                                     "children": [
                                                       {
-                                                        "role": "article",
+                                                        "role": "none",
                                                         "name": "",
                                                         "children": [
                                                           {
-                                                            "role": "paragraph",
+                                                            "role": "article",
                                                             "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "text",
-                                                                "name": "Nature Walks",
+                                                                "role": "paragraph",
+                                                                "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "Nature Walks"
+                                                                    "role": "text",
+                                                                    "name": "Nature Walks",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "Nature Walks"
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "role": "paragraph",
+                                                                "name": "",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "text",
+                                                                    "name": "23 routes",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "23 routes"
+                                                                      }
+                                                                    ]
                                                                   }
                                                                 ]
                                                               }
                                                             ]
                                                           },
                                                           {
-                                                            "role": "paragraph",
+                                                            "role": "article",
                                                             "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "text",
-                                                                "name": "23 routes",
+                                                                "role": "paragraph",
+                                                                "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "23 routes"
+                                                                    "role": "text",
+                                                                    "name": "Street Art",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "Street Art"
+                                                                      }
+                                                                    ]
                                                                   }
                                                                 ]
-                                                              }
-                                                            ]
-                                                          }
-                                                        ]
-                                                      },
-                                                      {
-                                                        "role": "article",
-                                                        "name": "",
-                                                        "children": [
-                                                          {
-                                                            "role": "paragraph",
-                                                            "name": "",
-                                                            "children": [
+                                                              },
                                                               {
-                                                                "role": "text",
-                                                                "name": "Street Art",
+                                                                "role": "paragraph",
+                                                                "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "Street Art"
-                                                                  }
-                                                                ]
-                                                              }
-                                                            ]
-                                                          },
-                                                          {
-                                                            "role": "paragraph",
-                                                            "name": "",
-                                                            "children": [
-                                                              {
-                                                                "role": "text",
-                                                                "name": "18 routes",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "18 routes"
-                                                                  }
-                                                                ]
-                                                              }
-                                                            ]
-                                                          }
-                                                        ]
-                                                      },
-                                                      {
-                                                        "role": "article",
-                                                        "name": "",
-                                                        "children": [
-                                                          {
-                                                            "role": "paragraph",
-                                                            "name": "",
-                                                            "children": [
-                                                              {
-                                                                "role": "text",
-                                                                "name": "Historic",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "Historic"
+                                                                    "role": "text",
+                                                                    "name": "18 routes",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "18 routes"
+                                                                      }
+                                                                    ]
                                                                   }
                                                                 ]
                                                               }
                                                             ]
                                                           },
                                                           {
-                                                            "role": "paragraph",
+                                                            "role": "article",
                                                             "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "text",
-                                                                "name": "15 routes",
+                                                                "role": "paragraph",
+                                                                "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "15 routes"
+                                                                    "role": "text",
+                                                                    "name": "Historic",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "Historic"
+                                                                      }
+                                                                    ]
                                                                   }
                                                                 ]
-                                                              }
-                                                            ]
-                                                          }
-                                                        ]
-                                                      },
-                                                      {
-                                                        "role": "article",
-                                                        "name": "",
-                                                        "children": [
-                                                          {
-                                                            "role": "paragraph",
-                                                            "name": "",
-                                                            "children": [
+                                                              },
                                                               {
-                                                                "role": "text",
-                                                                "name": "Family Friendly",
+                                                                "role": "paragraph",
+                                                                "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "Family Friendly"
+                                                                    "role": "text",
+                                                                    "name": "15 routes",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "15 routes"
+                                                                      }
+                                                                    ]
                                                                   }
                                                                 ]
                                                               }
                                                             ]
                                                           },
                                                           {
-                                                            "role": "paragraph",
+                                                            "role": "article",
                                                             "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "text",
-                                                                "name": "12 routes",
+                                                                "role": "paragraph",
+                                                                "name": "",
                                                                 "children": [
                                                                   {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "12 routes"
+                                                                    "role": "text",
+                                                                    "name": "Family Friendly",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "Family Friendly"
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                ]
+                                                              },
+                                                              {
+                                                                "role": "paragraph",
+                                                                "name": "",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "text",
+                                                                    "name": "12 routes",
+                                                                    "children": [
+                                                                      {
+                                                                        "role": "InlineTextBox",
+                                                                        "name": "12 routes"
+                                                                      }
+                                                                    ]
                                                                   }
                                                                 ]
                                                               }
@@ -311,14 +334,24 @@
                                         ]
                                       },
                                       {
-                                        "role": "generic",
-                                        "name": "",
+                                        "role": "region",
+                                        "name": "Walk of the Week",
                                         "children": [
                                           {
                                             "role": "heading",
                                             "name": "Walk of the Week",
                                             "level": 2,
                                             "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  }
+                                                ]
+                                              },
                                               {
                                                 "role": "text",
                                                 "name": "Walk of the Week",
@@ -503,8 +536,8 @@
                                         ]
                                       },
                                       {
-                                        "role": "generic",
-                                        "name": "",
+                                        "role": "region",
+                                        "name": "Popular Themes",
                                         "children": [
                                           {
                                             "role": "heading",
@@ -960,8 +993,8 @@
                                         ]
                                       },
                                       {
-                                        "role": "generic",
-                                        "name": "",
+                                        "role": "region",
+                                        "name": "Curated Collections",
                                         "children": [
                                           {
                                             "role": "heading",
@@ -1017,7 +1050,11 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "InlineTextBox",
-                                                                    "name": "Sunday Coffee Loops"
+                                                                    "name": "Sunday Coffee "
+                                                                  },
+                                                                  {
+                                                                    "role": "InlineTextBox",
+                                                                    "name": "Loops"
                                                                   }
                                                                 ]
                                                               }
@@ -1109,27 +1146,11 @@
                                                             "children": [
                                                               {
                                                                 "role": "text",
-                                                                "name": "6",
+                                                                "name": "6 routes",
                                                                 "children": [
                                                                   {
                                                                     "role": "InlineTextBox",
-                                                                    "name": "6"
-                                                                  }
-                                                                ]
-                                                              }
-                                                            ]
-                                                          },
-                                                          {
-                                                            "role": "none",
-                                                            "name": "",
-                                                            "children": [
-                                                              {
-                                                                "role": "text",
-                                                                "name": "routes",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "routes"
+                                                                    "name": "6 routes"
                                                                   }
                                                                 ]
                                                               }
@@ -1280,27 +1301,11 @@
                                                             "children": [
                                                               {
                                                                 "role": "text",
-                                                                "name": "4",
+                                                                "name": "4 routes",
                                                                 "children": [
                                                                   {
                                                                     "role": "InlineTextBox",
-                                                                    "name": "4"
-                                                                  }
-                                                                ]
-                                                              }
-                                                            ]
-                                                          },
-                                                          {
-                                                            "role": "none",
-                                                            "name": "",
-                                                            "children": [
-                                                              {
-                                                                "role": "text",
-                                                                "name": "routes",
-                                                                "children": [
-                                                                  {
-                                                                    "role": "InlineTextBox",
-                                                                    "name": "routes"
+                                                                    "name": "4 routes"
                                                                   }
                                                                 ]
                                                               }
@@ -1327,8 +1332,8 @@
                                         ]
                                       },
                                       {
-                                        "role": "generic",
-                                        "name": "",
+                                        "role": "region",
+                                        "name": "Trending Now",
                                         "children": [
                                           {
                                             "role": "heading",
@@ -1569,14 +1574,44 @@
                                         ]
                                       },
                                       {
-                                        "role": "generic",
-                                        "name": "",
+                                        "role": "region",
+                                        "name": "Community Favourite",
                                         "children": [
                                           {
                                             "role": "heading",
                                             "name": "Community Favourite",
                                             "level": 2,
                                             "children": [
+                                              {
+                                                "role": "none",
+                                                "name": "",
+                                                "children": [
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  },
+                                                  {
+                                                    "role": "none",
+                                                    "name": ""
+                                                  }
+                                                ]
+                                              },
                                               {
                                                 "role": "text",
                                                 "name": "Community Favourite",
@@ -1738,21 +1773,11 @@
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "428",
+                                                    "name": "428 saves",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "428"
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "text",
-                                                    "name": " saves",
-                                                    "children": [
-                                                      {
-                                                        "role": "InlineTextBox",
-                                                        "name": " saves"
+                                                        "name": "428 saves"
                                                       }
                                                     ]
                                                   }
@@ -1768,7 +1793,7 @@
                               },
                               {
                                 "role": "navigation",
-                                "name": "",
+                                "name": "Primary navigation",
                                 "children": [
                                   {
                                     "role": "none",

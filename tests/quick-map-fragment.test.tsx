@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { within } from "@testing-library/dom";
-import { act } from "react";
+import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
@@ -21,11 +21,13 @@ async function renderRoute(path: string) {
   const root = createRoot(host);
   await act(async () => {
     root.render(
-      <DisplayModeProvider>
-        <ThemeProvider>
-          <AppRoutes routerInstance={router} />
-        </ThemeProvider>
-      </DisplayModeProvider>,
+      <React.Suspense fallback={null}>
+        <DisplayModeProvider>
+          <ThemeProvider>
+            <AppRoutes routerInstance={router} />
+          </ThemeProvider>
+        </DisplayModeProvider>
+      </React.Suspense>,
     );
     await Promise.resolve();
   });

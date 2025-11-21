@@ -86,6 +86,16 @@ export async function captureAccessibilityTree(
   return normaliseNode(rawTree);
 }
 
+/**
+ * Ensures the shell has rendered its main landmark and primary heading before
+ * running accessibility assertions. Without this, Axe and tree snapshots can
+ * race ahead of React hydration and report false negatives.
+ */
+export async function waitForPrimaryContent(page: Page): Promise<void> {
+  await page.getByRole("main").first().waitFor();
+  await page.getByRole("heading", { level: 1 }).first().waitFor();
+}
+
 export function slugifyPath(path: string): string {
   return (
     path

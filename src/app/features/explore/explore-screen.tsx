@@ -2,7 +2,9 @@
 
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, type ReactNode, useId } from "react";
+import type { TFunction } from "i18next";
+import { type JSX, type ReactNode, useId, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
@@ -16,6 +18,11 @@ import {
   popularThemes,
   trendingRoutes,
 } from "../../data/explore";
+import {
+  buildDifficultyLookup,
+  type DifficultyId,
+  type ResolvedDifficultyDescriptor,
+} from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 
@@ -33,38 +40,83 @@ function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Element {
   );
 }
 
+type CuratedCollectionsListProps = {
+  difficultyLookup: Map<DifficultyId, ResolvedDifficultyDescriptor>;
+};
+
+type ExploreCopy = {
+  headerTitle: string;
+  headerSubtitle: string;
+  filterLabel: string;
+  searchPlaceholder: string;
+  bottomNavAriaLabel: string;
+};
+
+const defaultRouteCountLabel = (count: number): string =>
+  `${count} ${count === 1 ? "route" : "routes"}`;
+
+const defaultSaveCountLabel = (count: number): string =>
+  `${count} ${count === 1 ? "save" : "saves"}`;
+
+export const buildExploreCopy = (t: TFunction): ExploreCopy => ({
+  headerTitle: t("explore-header-title", { defaultValue: "Discover" }),
+  headerSubtitle: t("explore-header-subtitle", {
+    defaultValue: "Explore curated walks & hidden gems",
+  }),
+  filterLabel: t("explore-filter-aria-label", { defaultValue: "Filter walks" }),
+  searchPlaceholder: t("explore-search-placeholder", {
+    defaultValue: "Search walks, places, themes…",
+  }),
+  bottomNavAriaLabel: t("nav-primary-aria-label", { defaultValue: "Primary navigation" }),
+});
+
 function CategoryScroller(): JSX.Element {
+  const { t } = useTranslation();
+  const ariaLabel = t("explore-categories-aria-label", { defaultValue: "Popular categories" });
+  const formatRouteCount = (count: number) =>
+    t("explore-curated-route-count", {
+      count,
+      defaultValue: defaultRouteCountLabel(count),
+    });
+  const headingId = useId();
   return (
-    <ScrollArea.Root className="w-full pt-2" type="scroll" aria-label="Popular categories">
-      <ScrollArea.Viewport className="w-full">
-        <div className="flex gap-3 pb-2 pr-6">
-          {exploreCategories.map((category) => (
-            <article
-              key={category.id}
-              className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}
-            >
-              <Icon token={category.iconToken} className="text-lg" aria-hidden />
-              <p className="text-sm font-semibold">{category.title}</p>
-              <p className="text-xs text-white/70">{category.summary}</p>
-            </article>
-          ))}
-        </div>
-      </ScrollArea.Viewport>
-      <ScrollArea.Scrollbar orientation="horizontal" className="h-1 rounded bg-base-300/60">
-        <ScrollArea.Thumb className="rounded bg-accent/60" />
-      </ScrollArea.Scrollbar>
-      <ScrollArea.Corner className="bg-base-300/40" />
-    </ScrollArea.Root>
+    <section className="w-full pt-2" aria-labelledby={headingId} role="region">
+      <h2 id={headingId} className="sr-only">
+        {ariaLabel}
+      </h2>
+      <ScrollArea.Root className="w-full" type="scroll">
+        <ScrollArea.Viewport className="w-full">
+          <div className="flex gap-3 pb-2" style={{ paddingInlineEnd: "1.5rem" }}>
+            {exploreCategories.map((category) => (
+              <article
+                key={category.id}
+                className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}
+              >
+                <Icon token={category.iconToken} className="text-lg" aria-hidden />
+                <p className="text-sm font-semibold">{category.title}</p>
+                <p className="text-xs text-white/70">{formatRouteCount(category.routes)}</p>
+              </article>
+            ))}
+          </div>
+        </ScrollArea.Viewport>
+        <ScrollArea.Scrollbar orientation="horizontal" className="h-1 rounded bg-base-300/60">
+          <ScrollArea.Thumb className="rounded bg-accent/60" />
+        </ScrollArea.Scrollbar>
+        <ScrollArea.Corner className="bg-base-300/40" />
+      </ScrollArea.Root>
+    </section>
   );
 }
 
 function FeaturedWalkCard(): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("explore-featured-heading", { defaultValue: "Walk of the Week" });
   const headingId = useId();
   return (
-    <section className="explore-featured__panel" aria-labelledby={headingId}>
+    <section className="explore-featured__panel" aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-heading text-base-content">
         <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
-        Walk of the Week
+        {heading}
       </h2>
       <figure className="overflow-hidden rounded-xl border border-base-300/50">
         <img
@@ -111,11 +163,13 @@ function FeaturedWalkCard(): JSX.Element {
 }
 
 function PopularThemesGrid(): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId}>
+    <section aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-title">
-        Popular Themes
+        {heading}
       </h2>
       <div className="grid grid-cols-2 gap-4">
         {popularThemes.map((theme) => (
@@ -149,12 +203,19 @@ function PopularThemesGrid(): JSX.Element {
   );
 }
 
-function CuratedCollectionsList(): JSX.Element {
+function CuratedCollectionsList({ difficultyLookup }: CuratedCollectionsListProps): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("explore-curated-heading", { defaultValue: "Curated Collections" });
+  const formatRouteCount = (count: number) =>
+    t("explore-curated-route-count", {
+      count,
+      defaultValue: defaultRouteCountLabel(count),
+    });
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId}>
+    <section aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-title">
-        Curated Collections
+        {heading}
       </h2>
       <div className="space-y-4">
         {curatedCollections.map((collection) => (
@@ -180,14 +241,24 @@ function CuratedCollectionsList(): JSX.Element {
                     <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
                     {collection.durationRange}
                   </span>
-                  <span className="rounded-full bg-emerald-500/15 px-2 py-1 text-emerald-300">
-                    {collection.difficulty}
-                  </span>
+                  {(() => {
+                    const difficulty = difficultyLookup.get(collection.difficultyId);
+                    const badgeToneClass =
+                      difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
+                    return (
+                      <span
+                        className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeToneClass}`}
+                      >
+                        {difficulty?.label ?? collection.difficultyId}
+                      </span>
+                    );
+                  })()}
                 </div>
               </div>
               <div className="explore-stat-group explore-stat-group--right">
-                <span className="text-lg font-bold text-base-content">{collection.routes}</span>
-                <span>routes</span>
+                <span className="text-sm font-semibold text-base-content">
+                  {formatRouteCount(collection.routes)}
+                </span>
               </div>
             </div>
             <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">
@@ -206,11 +277,13 @@ function CuratedCollectionsList(): JSX.Element {
 }
 
 function TrendingRoutesList(): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId}>
+    <section aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-title">
-        Trending Now
+        {heading}
       </h2>
       <div className="space-y-3">
         {trendingRoutes.map((route) => (
@@ -239,12 +312,20 @@ function TrendingRoutesList(): JSX.Element {
 }
 
 function CommunityPickPanel(): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("explore-community-heading", { defaultValue: "Community Favourite" });
+  const subtitle = t("explore-community-subtitle", { defaultValue: "Most shared this week" });
+  const formatSaveCount = (count: number) =>
+    t("explore-community-saves", {
+      count,
+      defaultValue: defaultSaveCountLabel(count),
+    });
   const headingId = useId();
   return (
-    <section className="explore-info__panel" aria-labelledby={headingId}>
+    <section className="explore-info__panel" aria-labelledby={headingId} role="region">
       <h2 id={headingId} className="section-heading mb-4 text-base-content">
         <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
-        Community Favourite
+        {heading}
       </h2>
       <div className="mb-3 flex items-center gap-3">
         <div className="h-9 w-9 overflow-hidden rounded-full border border-base-300/60">
@@ -257,7 +338,7 @@ function CommunityPickPanel(): JSX.Element {
         </div>
         <div className="flex-1">
           <p className="text-sm font-medium text-base-content">{communityPick.curator}</p>
-          <p className="text-xs text-base-content/60">Most shared this week</p>
+          <p className="text-xs text-base-content/60">{subtitle}</p>
         </div>
         <span className="rating-indicator rating-indicator--strong">
           <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
@@ -269,7 +350,9 @@ function CommunityPickPanel(): JSX.Element {
       <div className="mt-3 explore-meta-list">
         <RouteMetric iconToken="{icon.object.route}">{communityPick.distance}</RouteMetric>
         <RouteMetric iconToken="{icon.object.duration}">{communityPick.duration}</RouteMetric>
-        <RouteMetric iconToken="{icon.action.save}">{communityPick.saves} saves</RouteMetric>
+        <RouteMetric iconToken="{icon.action.save}">
+          {formatSaveCount(communityPick.saves)}
+        </RouteMetric>
       </div>
     </section>
   );
@@ -277,33 +360,33 @@ function CommunityPickPanel(): JSX.Element {
 
 export function ExploreScreen(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const copy = useMemo(() => buildExploreCopy(t), [t]);
+  const difficultyLookup = useMemo(() => buildDifficultyLookup(t), [t]);
 
   return (
     <MobileShell>
       <div className="screen-stack">
         <AppHeader
-          title="Discover"
-          subtitle="Explore curated walks & hidden gems"
+          title={copy.headerTitle}
+          subtitle={copy.headerSubtitle}
           trailing={
             <button
               type="button"
               onClick={() => navigate({ to: "/discover" })}
               className="header-icon-button"
-              aria-label="Filter walks"
+              aria-label={copy.filterLabel}
             >
               <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />
             </button>
           }
         >
           <div className="relative">
-            <Icon
-              token="{icon.action.search}"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50"
-              aria-hidden
-            />
+            <Icon token="{icon.action.search}" className="explore-search__icon" aria-hidden />
             <input
               type="search"
-              placeholder="Search walks, places, themes..."
+              placeholder={copy.searchPlaceholder}
               className="explore-search__input"
             />
           </div>
@@ -313,14 +396,16 @@ export function ExploreScreen(): JSX.Element {
             <CategoryScroller />
             <FeaturedWalkCard />
             <PopularThemesGrid />
-            <CuratedCollectionsList />
+            <CuratedCollectionsList difficultyLookup={difficultyLookup} />
             <TrendingRoutesList />
             <CommunityPickPanel />
           </div>
         </main>
         <AppBottomNavigation
+          aria-label={copy.bottomNavAriaLabel}
           items={bottomNavigation.map((item) => ({
             ...item,
+            label: t(`nav-${item.id}-label`, { defaultValue: item.label }),
             isActive: item.id === "discover",
             ...(item.id === "discover" ? {} : { href: item.href }),
           }))}

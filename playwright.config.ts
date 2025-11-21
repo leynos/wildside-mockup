@@ -8,6 +8,13 @@ import { defineConfig, devices } from "@playwright/test";
 process.env.PLAYWRIGHT_BROWSERS_PATH ??= "0";
 
 const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:5173";
+const parsedBaseURL = new URL(baseURL);
+const basePort =
+  parsedBaseURL.port !== ""
+    ? Number.parseInt(parsedBaseURL.port, 10)
+    : parsedBaseURL.protocol === "https:"
+      ? 443
+      : 80;
 
 function serverIsReachable(target: string): boolean {
   if (process.env.PLAYWRIGHT_SKIP_WEBSERVER === "1") {
@@ -56,7 +63,7 @@ export default defineConfig({
   ],
   webServer: shouldLaunchWebServer
     ? {
-        command: "bun run dev -- --host --port 5173 --strictPort",
+        command: `bun run dev -- --host --port ${basePort} --strictPort`,
         url: baseURL,
         reuseExistingServer: true,
         stdout: "pipe",

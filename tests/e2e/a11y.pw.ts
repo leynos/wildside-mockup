@@ -3,6 +3,8 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+import { waitForPrimaryContent } from "./utils/accessibility";
+
 const accessibilityTargets = [
   { path: "/explore", label: "Explore catalogue" },
   { path: "/map/quick", label: "Quick map generator" },
@@ -15,6 +17,7 @@ test.describe("Route accessibility", () => {
       await page.goto(target.path);
       await page.waitForLoadState("domcontentloaded");
       await page.waitForTimeout(500);
+      await waitForPrimaryContent(page);
 
       const results = await new AxeBuilder({ page })
         .disableRules(["color-contrast", "scrollable-region-focusable"])

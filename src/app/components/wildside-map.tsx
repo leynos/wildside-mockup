@@ -5,6 +5,29 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { mapDefaults, useOptionalMapStore } from "../features/map/map-state";
 
+const MAPLIBRE_RTL_PLUGIN_URL =
+  "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.3.0/dist/mapbox-gl-rtl-text.js";
+
+let hasRegisteredRtlTextPlugin = false;
+type MapLibreNamespace = typeof import("maplibre-gl")["default"];
+
+type MapLibreWithRtl = MapLibreNamespace & {
+  setRTLTextPlugin?: (pluginUrl: string, callback?: () => void, deferred?: boolean) => void;
+};
+
+export const ensureRtlTextPlugin = (maplibre: MapLibreNamespace): void => {
+  if (hasRegisteredRtlTextPlugin) return;
+  const setPlugin = (maplibre as MapLibreWithRtl).setRTLTextPlugin;
+  if (typeof setPlugin !== "function") return;
+
+  setPlugin(MAPLIBRE_RTL_PLUGIN_URL, undefined, true);
+  hasRegisteredRtlTextPlugin = true;
+};
+
+export const resetRtlTextPluginRegistrationForTests = (): void => {
+  hasRegisteredRtlTextPlugin = false;
+};
+
 export interface WildsideMapProps {
   /** Longitude/latitude pair for the initial view. */
   center?: [number, number];
@@ -62,16 +85,21 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
     let isCancelled = false;
     let mapInstance: MapLibreMap | null = null;
 
-    async function initialiseMap() {
-      const [{ default: maplibre }] = await Promise.all([
+    const initialiseMap = async (): Promise<void> => {
+      const [maplibreModule] = await Promise.all([
         import("maplibre-gl"),
         import("maplibre-gl/dist/maplibre-gl.css"),
       ]);
 
+      const maplibreNamespace =
+        (maplibreModule as { default?: MapLibreNamespace }).default ??
+        (maplibreModule as unknown as MapLibreNamespace);
+
       if (isCancelled) return;
+      ensureRtlTextPlugin(maplibreNamespace);
 
       try {
-        mapInstance = new maplibre.Map({
+        mapInstance = new maplibreNamespace.Map({
           container: containerElement,
           style: "https://demotiles.maplibre.org/styles/osm-bright-gl-style/style.json",
           center: [...centerRef.current] as MutableLngLat,
@@ -82,10 +110,10 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
         });
         mapRef.current = mapInstance;
         mapInstance.addControl(
-          new maplibre.NavigationControl({ visualizePitch: true }),
+          new maplibreNamespace.NavigationControl({ visualizePitch: true }),
           "top-right",
         );
-        mapInstance.addControl(new maplibre.AttributionControl({ compact: true }));
+        mapInstance.addControl(new maplibreNamespace.AttributionControl({ compact: true }));
 
         mapInstance.on("load", () => {
           if (!mapInstance) return;
@@ -98,7 +126,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
       } catch (error) {
         console.warn("Wildside map failed to initialise", error);
       }
-    }
+    };
 
     initialiseMap().catch((error) => {
       console.warn("Wildside map encountered an error", error);
@@ -137,7 +165,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
   return <div ref={containerRef} className="h-full w-full" />;
 }
 
-function ensureFallbackLayers(mapInstance: MapLibreMap) {
+export function ensureFallbackLayers(mapInstance: MapLibreMap) {
   if (!mapInstance.getSource("wildside-pois")) {
     mapInstance.addSource("wildside-pois", {
       type: "geojson",

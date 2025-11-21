@@ -2,6 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import type { JSX } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { WalkPointOfInterest } from "../data/map";
 import { useOptionalMapStore } from "../features/map/map-state";
@@ -14,6 +15,8 @@ export interface PointOfInterestListProps {
 export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.Element {
   const mapStore = useOptionalMapStore();
   const highlightPois = mapStore?.actions.highlightPois;
+  const { t } = useTranslation();
+  const highlightBadgeLabel = t("poi-highlight-label", { defaultValue: "Highlight" });
 
   return (
     <div className="space-y-3">
@@ -47,7 +50,7 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
                     className={`h-4 w-4 ${poi.categoryColorClass}`}
                     label={poi.categoryLabel}
                   />
-                  <span aria-hidden>Highlight</span>
+                  <span aria-hidden>{highlightBadgeLabel}</span>
                 </span>
                 {poi.tags.map((tag) => (
                   <span

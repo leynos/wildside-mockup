@@ -3,7 +3,7 @@
 export interface ExploreCategory {
   id: string;
   title: string;
-  summary: string;
+  routes: number;
   iconToken: string;
   /** Tailwind gradient utilities applied to the chip background. */
   gradientClass: string;
@@ -38,7 +38,7 @@ export interface CuratedCollection {
   mapImageUrl: string;
   distanceRange: string;
   durationRange: string;
-  difficulty: "Easy" | "Moderate" | "Challenging";
+  difficultyId: DifficultyId;
   routes: number;
 }
 
@@ -71,33 +71,34 @@ import heroMarket from "../../assets/explore/market.jpg";
 import heroStreetArt from "../../assets/explore/street_art2.jpg";
 import walkRouteMap2 from "../../assets/walks/walk-route-map-2.png";
 import walkRouteMap3 from "../../assets/walks/walk-route-map-3.png";
+import type { DifficultyId } from "./registries/difficulties";
 
 export const exploreCategories: ExploreCategory[] = [
   {
     id: "nature",
     title: "Nature Walks",
-    summary: "23 routes",
+    routes: 23,
     iconToken: "{icon.category.nature}",
     gradientClass: "bg-gradient-to-r from-emerald-500 to-teal-500",
   },
   {
     id: "street-art",
     title: "Street Art",
-    summary: "18 routes",
+    routes: 18,
     iconToken: "{icon.category.art}",
     gradientClass: "bg-gradient-to-r from-orange-500 to-rose-500",
   },
   {
     id: "historic",
     title: "Historic",
-    summary: "15 routes",
+    routes: 15,
     iconToken: "{icon.category.landmarks}",
     gradientClass: "bg-gradient-to-r from-sky-500 to-indigo-500",
   },
   {
     id: "family",
     title: "Family Friendly",
-    summary: "12 routes",
+    routes: 12,
     iconToken: "{icon.category.wildlife}",
     gradientClass: "bg-gradient-to-r from-fuchsia-500 to-purple-500",
   },
@@ -163,7 +164,7 @@ export const curatedCollections: CuratedCollection[] = [
     mapImageUrl: walkRouteMap2,
     distanceRange: "1–2 km",
     durationRange: "30–45 min",
-    difficulty: "Easy",
+    difficultyId: "easy",
     routes: 6,
   },
   {
@@ -174,7 +175,7 @@ export const curatedCollections: CuratedCollection[] = [
     mapImageUrl: walkRouteMap3,
     distanceRange: "2–4 km",
     durationRange: "45–70 min",
-    difficulty: "Moderate",
+    difficultyId: "moderate",
     routes: 4,
   },
 ];

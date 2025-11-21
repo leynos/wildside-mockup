@@ -53,7 +53,11 @@ export function MapViewport({
 
   return (
     <div className={containerClasses} data-testid={containerTestId} {...regionAttributes}>
-      {map ? <div className="absolute inset-0">{map}</div> : null}
+      {map ? (
+        <div className="absolute inset-0" role="presentation">
+          {map}
+        </div>
+      ) : null}
       {!map && backgroundImageUrl ? (
         <img
           src={backgroundImageUrl}
@@ -67,7 +71,9 @@ export function MapViewport({
           aria-hidden="true"
         />
       ) : null}
-      <div className="relative z-[1] flex h-full flex-col justify-end">{children}</div>
+      <div className="relative z-[1] flex h-full flex-col justify-end" role="presentation">
+        {children}
+      </div>
     </div>
   );
 }

@@ -2,12 +2,14 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, type ReactNode, useState } from "react";
+import { type JSX, type ReactNode, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Button } from "../../components/button";
 import { Icon } from "../../components/icon";
 import { PreferenceToggleCard } from "../../components/preference-toggle-card";
+import { OFFLINE_STORAGE_PLACEHOLDERS } from "../../config/offline-metrics";
 import { bottomNavigation } from "../../data/customize";
 import {
   autoManagementOptions,
@@ -17,6 +19,47 @@ import {
 } from "../../data/stage-four";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+
+type DownloadStatus = NonNullable<OfflineDownload["status"]>;
+
+type DownloadStatusLabels = {
+  statusCompleteLabel: string;
+  statusUpdatingLabel: string;
+  statusDownloadingLabel: string;
+};
+
+type StatusBadgeConfig = { className: string; labelKey: keyof DownloadStatusLabels };
+
+const statusBadgeByStatus = {
+  complete: {
+    className: "badge badge-success badge-sm",
+    labelKey: "statusCompleteLabel",
+  },
+  updating: {
+    className: "badge badge-warning badge-sm",
+    labelKey: "statusUpdatingLabel",
+  },
+  downloading: {
+    className: "badge badge-info badge-sm",
+    labelKey: "statusDownloadingLabel",
+  },
+} satisfies Record<DownloadStatus, StatusBadgeConfig>;
+
+const isDownloadStatus = (status: OfflineDownload["status"]): status is DownloadStatus => {
+  return typeof status === "string" && status in statusBadgeByStatus;
+};
+
+const renderStatusBadge = (
+  status: OfflineDownload["status"],
+  labels: DownloadStatusLabels,
+): JSX.Element | null => {
+  if (!isDownloadStatus(status)) {
+    return null;
+  }
+
+  const config = statusBadgeByStatus[status];
+  return <span className={config.className}>{labels[config.labelKey]}</span>;
+};
 
 type OfflineDownloadMetaProps = {
   readonly as?: "p" | "span" | "div";
@@ -39,6 +82,7 @@ function OfflineDownloadMeta({
 
 export function OfflineScreen(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [suggestions, setSuggestions] = useState(offlineSuggestions);
   const [dialogOpen, setDialogOpen] = useState(false);
   type DownloadEntry =
@@ -55,6 +99,148 @@ export function OfflineScreen(): JSX.Element {
       return acc;
     }, {}),
   );
+  const storageUsedFormatted = OFFLINE_STORAGE_PLACEHOLDERS.usedLabel;
+  const storageTotalFormatted = OFFLINE_STORAGE_PLACEHOLDERS.totalLabel;
+  const storageAutoDeleteDays = OFFLINE_STORAGE_PLACEHOLDERS.autoDeleteDays;
+
+  const navigationCopy = useMemo(
+    () => ({
+      bottomNavAriaLabel: t("nav-primary-aria-label", {
+        defaultValue: "Primary navigation",
+      }),
+      headerTitle: t("offline-header-title", { defaultValue: "Offline Maps" }),
+      headerSubtitle: t("offline-header-subtitle", {
+        defaultValue: "Manage downloads and smart updates",
+      }),
+      backLabel: t("offline-header-back-label", {
+        defaultValue: "Back to map",
+      }),
+      addAreaLabel: t("offline-header-add-area-label", {
+        defaultValue: "Add offline area",
+      }),
+    }),
+    [t],
+  );
+
+  const storageCopy = useMemo(
+    () => ({
+      heading: t("offline-storage-heading", {
+        defaultValue: "Storage overview",
+      }),
+      subtitle: t("offline-storage-subtitle", {
+        days: storageAutoDeleteDays,
+        defaultValue: `Auto-delete unused maps after ${storageAutoDeleteDays} days`,
+      }),
+      usedLabel: t("offline-storage-used-label", { defaultValue: "Used" }),
+      usedDescription: t("offline-storage-used-description", {
+        used: storageUsedFormatted,
+        total: storageTotalFormatted,
+        defaultValue: `${storageUsedFormatted} of ${storageTotalFormatted}`,
+      }),
+      mapsLabel: t("offline-storage-legend-maps", { defaultValue: "Maps" }),
+      availableLabel: t("offline-storage-legend-available", {
+        defaultValue: "Available space",
+      }),
+    }),
+    [storageAutoDeleteDays, storageTotalFormatted, storageUsedFormatted, t],
+  );
+
+  const undoDescriptionDefault = "Tap undo to restore this map.";
+
+  const downloadsCopy = useMemo(
+    () => ({
+      downloadsHeading: t("offline-downloads-heading", {
+        defaultValue: "Downloaded areas",
+      }),
+      downloadsDescription: t("offline-downloads-description", {
+        defaultValue: "Manage maps for offline navigation",
+      }),
+      manageLabel: t("offline-downloads-manage", { defaultValue: "Manage" }),
+      doneLabel: t("offline-downloads-done", { defaultValue: "Done" }),
+      statusCompleteLabel: t("offline-downloads-status-complete", {
+        defaultValue: "Complete",
+      }),
+      statusUpdatingLabel: t("offline-downloads-status-updating", {
+        defaultValue: "Update available",
+      }),
+      statusDownloadingLabel: t("offline-downloads-status-downloading", {
+        defaultValue: "Downloading",
+      }),
+      undoDescription: t("offline-downloads-undo-description", {
+        defaultValue: undoDescriptionDefault,
+      }),
+      undoButtonLabel: t("offline-downloads-undo-button", {
+        defaultValue: "Undo",
+      }),
+      autoHeading: t("offline-auto-heading", {
+        defaultValue: "Auto-Management",
+      }),
+    }),
+    [t],
+  );
+
+  const suggestionsCopy = useMemo(() => {
+    if (suggestions.length === 0) {
+      return null;
+    }
+    return {
+      heading: t("offline-suggestions-heading", {
+        defaultValue: "Smart travel hints",
+      }),
+      dismissLabel: t("offline-suggestion-dismiss", {
+        defaultValue: "Dismiss",
+      }),
+    } as const;
+  }, [suggestions.length, t]);
+
+  const dialogCopy = useMemo(() => {
+    if (!dialogOpen) {
+      return null;
+    }
+    return {
+      title: t("offline-dialog-title", { defaultValue: "Download new area" }),
+      description: t("offline-dialog-description", {
+        defaultValue:
+          "Sync maps for offline access. Search for a city or drop a pin to select a custom region.",
+      }),
+      searchPlaceholder: t("offline-dialog-search-placeholder", {
+        defaultValue: "Search cities or regions",
+      }),
+      cancelLabel: t("offline-dialog-cancel", { defaultValue: "Cancel" }),
+      previewLabel: t("offline-dialog-preview", {
+        defaultValue: "Preview download",
+      }),
+    } as const;
+  }, [dialogOpen, t]);
+
+  const { bottomNavAriaLabel, headerTitle, headerSubtitle, backLabel, addAreaLabel } =
+    navigationCopy;
+  const {
+    heading: storageHeading,
+    subtitle: storageSubtitle,
+    usedLabel: storageUsedLabel,
+    usedDescription: storageUsedDescription,
+    mapsLabel: storageMapsLabel,
+    availableLabel: storageAvailableLabel,
+  } = storageCopy;
+  const {
+    downloadsHeading,
+    downloadsDescription,
+    manageLabel,
+    doneLabel,
+    statusCompleteLabel,
+    statusUpdatingLabel,
+    statusDownloadingLabel,
+    undoDescription,
+    undoButtonLabel,
+    autoHeading,
+  } = downloadsCopy;
+
+  const statusLabels: DownloadStatusLabels = {
+    statusCompleteLabel,
+    statusUpdatingLabel,
+    statusDownloadingLabel,
+  };
 
   const handleDeleteDownload = (downloadId: string) => {
     if (!isManaging) return;
@@ -82,12 +268,12 @@ export function OfflineScreen(): JSX.Element {
       <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
         <div className="screen-stack">
           <AppHeader
-            title="Offline Maps"
-            subtitle="Manage downloads and smart updates"
+            title={headerTitle}
+            subtitle={headerSubtitle}
             leading={
               <button
                 type="button"
-                aria-label="Back to map"
+                aria-label={backLabel}
                 className="header-nav-button"
                 onClick={() => navigate({ to: "/map/quick" })}
               >
@@ -96,7 +282,7 @@ export function OfflineScreen(): JSX.Element {
             }
             trailing={
               <Dialog.Trigger asChild>
-                <button type="button" aria-label="Add offline area" className="header-icon-button">
+                <button type="button" aria-label={addAreaLabel} className="header-icon-button">
                   <Icon token="{icon.action.add}" aria-hidden className="h-5 w-5" />
                 </button>
               </Dialog.Trigger>
@@ -108,16 +294,16 @@ export function OfflineScreen(): JSX.Element {
               <div className="mb-4 flex items-center gap-3">
                 <Icon token="{icon.action.download}" className="text-accent" aria-hidden />
                 <div>
-                  <p className="text-sm font-medium text-base-content">Storage overview</p>
-                  <OfflineDownloadMeta>Auto-delete unused maps after 30 days</OfflineDownloadMeta>
+                  <p className="text-sm font-medium text-base-content">{storageHeading}</p>
+                  <OfflineDownloadMeta>{storageSubtitle}</OfflineDownloadMeta>
                 </div>
               </div>
               <div className="space-y-3">
                 <div>
                   <div className="split-row">
-                    <OfflineDownloadMeta as="span">Used</OfflineDownloadMeta>
+                    <OfflineDownloadMeta as="span">{storageUsedLabel}</OfflineDownloadMeta>
                     <OfflineDownloadMeta as="span" className="font-semibold text-base-content">
-                      2.8 GB of 8 GB
+                      {storageUsedDescription}
                     </OfflineDownloadMeta>
                   </div>
                   <div className="h-2 w-full rounded-full bg-base-300/60">
@@ -127,19 +313,21 @@ export function OfflineScreen(): JSX.Element {
                 <div className="flex items-center gap-3 text-xs text-base-content/60">
                   <span className="flex items-center gap-1">
                     <span className="block h-2 w-2 rounded-full bg-accent" />
-                    Maps
+                    {storageMapsLabel}
                   </span>
                   <span className="flex items-center gap-1">
                     <span className="block h-2 w-2 rounded-full bg-base-300/80" />
-                    Available space
+                    {storageAvailableLabel}
                   </span>
                 </div>
               </div>
             </section>
 
-            {suggestions.length > 0 ? (
+            {suggestions.length > 0 && suggestionsCopy ? (
               <section className="space-y-3">
-                <h2 className="text-base font-semibold text-base-content">Smart travel hints</h2>
+                <h2 className="text-base font-semibold text-base-content">
+                  {suggestionsCopy.heading}
+                </h2>
                 {suggestions.map((suggestion) => (
                   <article
                     key={suggestion.id}
@@ -153,11 +341,21 @@ export function OfflineScreen(): JSX.Element {
                       />
                       <div className="flex-1">
                         <h3 className="text-base font-semibold text-base-100">
-                          {suggestion.title}
+                          {t(`offline-suggestion-${suggestion.id}-title`, {
+                            defaultValue: suggestion.title,
+                          })}
                         </h3>
-                        <p className="mt-1 text-sm text-base-100/80">{suggestion.description}</p>
+                        <p className="mt-1 text-sm text-base-100/80">
+                          {t(`offline-suggestion-${suggestion.id}-description`, {
+                            defaultValue: suggestion.description,
+                          })}
+                        </p>
                         <div className="mt-3 flex flex-wrap gap-2">
-                          <Button size="sm">{suggestion.callToAction}</Button>
+                          <Button size="sm">
+                            {t(`offline-suggestion-${suggestion.id}-cta`, {
+                              defaultValue: suggestion.callToAction,
+                            })}
+                          </Button>
                           <Button
                             size="sm"
                             variant="ghost"
@@ -168,7 +366,7 @@ export function OfflineScreen(): JSX.Element {
                               )
                             }
                           >
-                            Dismiss
+                            {suggestionsCopy.dismissLabel}
                           </Button>
                         </div>
                       </div>
@@ -185,9 +383,9 @@ export function OfflineScreen(): JSX.Element {
                     id="downloaded-areas-heading"
                     className="text-base font-semibold text-base-content"
                   >
-                    Downloaded areas
+                    {downloadsHeading}
                   </h2>
-                  <OfflineDownloadMeta>Manage maps for offline navigation</OfflineDownloadMeta>
+                  <OfflineDownloadMeta>{downloadsDescription}</OfflineDownloadMeta>
                 </div>
                 <Button
                   size="sm"
@@ -204,7 +402,7 @@ export function OfflineScreen(): JSX.Element {
                     })
                   }
                 >
-                  {isManaging ? "Done" : "Manage"}
+                  {isManaging ? doneLabel : manageLabel}
                 </Button>
               </header>
 
@@ -221,8 +419,11 @@ export function OfflineScreen(): JSX.Element {
                         <button
                           type="button"
                           data-testid="offline-delete-button"
-                          aria-label={`Delete ${entry.download.title}`}
-                          className="absolute right-2 top-2 text-base-content/60 transition hover:text-error"
+                          aria-label={t("offline-downloads-delete-aria", {
+                            title: entry.download.title,
+                            defaultValue: `Delete ${entry.download.title}`,
+                          })}
+                          className="offline-download__dismiss"
                           onClick={() => handleDeleteDownload(entry.download.id)}
                         >
                           <Icon token="{icon.action.remove}" className="text-lg" aria-hidden />
@@ -246,19 +447,15 @@ export function OfflineScreen(): JSX.Element {
                               {entry.download.subtitle} • {entry.download.size}
                             </OfflineDownloadMeta>
                           </div>
-                          {entry.download.status === "complete" ? (
-                            <span className="badge badge-success badge-sm">Complete</span>
-                          ) : entry.download.status === "updating" ? (
-                            <span className="badge badge-warning badge-sm">Update available</span>
-                          ) : entry.download.status === "downloading" ? (
-                            <span className="badge badge-info badge-sm">Downloading</span>
-                          ) : null}
+                          {renderStatusBadge(entry.download.status, statusLabels)}
                         </div>
                         <div className="mt-2 flex items-center gap-3">
                           <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
                             <div
                               className={`h-1.5 rounded-full ${entry.download.status === "downloading" ? "bg-amber-400" : "bg-accent"}`}
-                              style={{ width: `${Math.round(entry.download.progress * 100)}%` }}
+                              style={{
+                                width: `${Math.round(entry.download.progress * 100)}%`,
+                              }}
                             />
                           </div>
                           <OfflineDownloadMeta as="span">
@@ -272,11 +469,20 @@ export function OfflineScreen(): JSX.Element {
                       key={`${entry.download.id}-undo`}
                       data-testid="offline-undo-card"
                       className="offline-download__undo"
-                      aria-label={`${entry.download.title} deleted`}
+                      aria-label={t("offline-downloads-undo-aria", {
+                        title: entry.download.title,
+                        description: undoDescriptionDefault,
+                        defaultValue: "{{title}} deleted. {{description}}",
+                      })}
                     >
                       <div>
-                        <p className="font-semibold">{entry.download.title} deleted</p>
-                        <OfflineDownloadMeta>Tap undo to restore this map.</OfflineDownloadMeta>
+                        <p className="font-semibold">
+                          {t("offline-downloads-undo-title", {
+                            title: entry.download.title,
+                            defaultValue: `${entry.download.title} deleted`,
+                          })}
+                        </p>
+                        <OfflineDownloadMeta>{undoDescription}</OfflineDownloadMeta>
                       </div>
                       <button
                         type="button"
@@ -284,7 +490,7 @@ export function OfflineScreen(): JSX.Element {
                         onClick={() => handleUndoDownload(entry.download.id)}
                         data-testid="offline-undo-button"
                       >
-                        Undo
+                        {undoButtonLabel}
                       </button>
                     </article>
                   ),
@@ -294,19 +500,28 @@ export function OfflineScreen(): JSX.Element {
             <section className="space-y-4">
               <header className="flex items-center gap-3">
                 <Icon token="{icon.action.settings}" className="text-accent" aria-hidden />
-                <h2 className="text-base font-semibold text-base-content">Auto-Management</h2>
+                <h2 className="text-base font-semibold text-base-content">{autoHeading}</h2>
               </header>
               <div className="space-y-4">
                 {autoManagementOptions.map((option) => {
                   const checked = autoSettings[option.id] ?? option.defaultEnabled;
+                  const optionParams =
+                    option.id === "auto-delete" ? { days: storageAutoDeleteDays } : {};
+                  const optionTitle = t(`offline-auto-option-${option.id}-title`, {
+                    defaultValue: option.title,
+                  });
+                  const optionDescription = t(`offline-auto-option-${option.id}-description`, {
+                    ...optionParams,
+                    defaultValue: option.description,
+                  });
                   return (
                     <PreferenceToggleCard
                       key={option.id}
                       id={`auto-management-${option.id}`}
                       iconToken={option.iconToken}
                       iconClassName={option.iconClassName}
-                      title={option.title}
-                      description={option.description}
+                      title={optionTitle}
+                      description={optionDescription}
                       isChecked={Boolean(checked)}
                       onCheckedChange={(value) => handleToggleAutoSetting(option.id, value)}
                     />
@@ -317,8 +532,10 @@ export function OfflineScreen(): JSX.Element {
           </main>
 
           <AppBottomNavigation
+            aria-label={bottomNavAriaLabel}
             items={bottomNavigation.map((item) => ({
               ...item,
+              label: t(`nav-${item.id}-label`, { defaultValue: item.label }),
               isActive: item.id === "profile",
             }))}
           />
@@ -328,24 +545,24 @@ export function OfflineScreen(): JSX.Element {
           <Dialog.Overlay className="fixed inset-0 bg-black/60" />
           <Dialog.Content className="dialog-surface">
             <Dialog.Title className="text-lg font-semibold text-base-content">
-              Download new area
+              {dialogCopy?.title ?? "Download new area"}
             </Dialog.Title>
             <Dialog.Description className="text-sm text-base-content/70">
-              Sync maps for offline access. Search for a city or drop a pin to select a custom
-              region.
+              {dialogCopy?.description ??
+                "Sync maps for offline access. Search for a city or drop a pin to select a custom region."}
             </Dialog.Description>
             <input
               type="search"
-              placeholder="Search cities or regions"
+              placeholder={dialogCopy?.searchPlaceholder ?? "Search cities or regions"}
               className="offline-search__input"
             />
             <div className="flex justify-end gap-2">
               <Dialog.Close asChild>
                 <Button size="sm" variant="ghost">
-                  Cancel
+                  {dialogCopy?.cancelLabel ?? "Cancel"}
                 </Button>
               </Dialog.Close>
-              <Button size="sm">Preview download</Button>
+              <Button size="sm">{dialogCopy?.previewLabel ?? "Preview download"}</Button>
             </div>
           </Dialog.Content>
         </Dialog.Portal>

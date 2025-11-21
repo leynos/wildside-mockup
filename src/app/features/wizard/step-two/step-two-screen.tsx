@@ -3,28 +3,97 @@
 import * as Slider from "@radix-ui/react-slider";
 import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { WizardSection } from "../../../components/wizard-section";
 import { accessibilityOptions, wizardSteps } from "../../../data/wizard";
 
+const discoverySummaryDefaults = {
+  hidden: "Hidden gems heavy",
+  hotspots: "Hotspot focused",
+  balanced: "Balanced mix",
+} as const;
+
+type DiscoverySummaryKey = keyof typeof discoverySummaryDefaults;
+
 export function WizardStepTwo(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [discoveryMix, setDiscoveryMix] = useState(60);
   const [accessibility, setAccessibility] = useState<Record<string, boolean>>({
     "well-lit": true,
     wheelchair: false,
     paved: true,
   });
+  const helpMessage = t("wizard-help-placeholder", {
+    defaultValue: "Contextual help coming soon",
+  });
+  const discoveryHeadingDefault = "Discovery style";
+  const discoveryHeading = t("wizard-step-two-discovery-heading", {
+    defaultValue: discoveryHeadingDefault,
+  });
+  const discoverySectionLabel = t("wizard-step-two-discovery-aria", {
+    defaultValue: discoveryHeadingDefault,
+  });
+  const discoveryDescription = t("wizard-step-two-discovery-description", {
+    defaultValue: "Balance popular hotspots with hidden gems to match today’s mood.",
+  });
+  const discoveryBadgeLabel = t("wizard-step-two-discovery-badge", { defaultValue: "New" });
+  const discoveryScaleLeft = t("wizard-step-two-discovery-scale-left", {
+    defaultValue: "Crowded",
+  });
+  const discoveryScaleMid = t("wizard-step-two-discovery-scale-mid", {
+    defaultValue: "Balanced",
+  });
+  const discoveryScaleRight = t("wizard-step-two-discovery-scale-right", {
+    defaultValue: "Secluded",
+  });
+  const discoverySliderAria = t("wizard-step-two-discovery-slider-aria", {
+    defaultValue: "Discovery slider",
+  });
+  const discoveryThumbAria = t("wizard-step-two-discovery-thumb-aria", {
+    defaultValue: "Adjust discovery style balance",
+  });
+  const discoverySummary = useMemo(() => {
+    const summaryKey: DiscoverySummaryKey =
+      discoveryMix >= 70 ? "hidden" : discoveryMix <= 30 ? "hotspots" : "balanced";
+    return t(`wizard-step-two-discovery-summary-${summaryKey}`, {
+      defaultValue: discoverySummaryDefaults[summaryKey],
+    });
+  }, [discoveryMix, t]);
+
+  const accessibilitySectionLabel = t("wizard-step-two-accessibility-section-aria", {
+    defaultValue: "Accessibility & safety",
+  });
+  const accessibilityHeading = t("wizard-step-two-accessibility-heading", {
+    defaultValue: "Accessibility & safety",
+  });
+  const backButtonLabel = t("wizard-header-back-label", { defaultValue: "Back" });
+  const reviewButtonLabel = t("wizard-step-two-review", { defaultValue: "Review walk" });
+
+  const resolvedAccessibilityOptions = useMemo(
+    () =>
+      accessibilityOptions.map((option) => ({
+        ...option,
+        label: t(`wizard-step-two-accessibility-${option.id}-label`, {
+          defaultValue: option.label,
+        }),
+        description: t(`wizard-step-two-accessibility-${option.id}-description`, {
+          defaultValue: option.description,
+        }),
+      })),
+    [t],
+  );
 
   return (
     <WizardLayout
       steps={wizardSteps}
       activeStepId="step-2"
       onBack={() => navigate({ to: "/wizard/step-1" })}
-      onHelp={() => window.alert("Contextual help coming soon")}
+      onHelp={() => window.alert(helpMessage)}
       footer={
         <div className="flex gap-3">
           <button
@@ -32,33 +101,31 @@ export function WizardStepTwo(): JSX.Element {
             className="btn btn-ghost flex-1"
             onClick={() => navigate({ to: "/wizard/step-1" })}
           >
-            Back
+            {backButtonLabel}
           </button>
           <button
             type="button"
             className="btn btn-accent flex-1"
             onClick={() => navigate({ to: "/wizard/step-3" })}
           >
-            Review walk
+            {reviewButtonLabel}
           </button>
         </div>
       }
     >
-      <WizardSection className="mb-8" aria-label="Discovery style">
+      <WizardSection className="mb-8" aria-label={discoverySectionLabel}>
         <div className="section-header-row">
           <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.navigation.explore}" className="text-accent" aria-hidden />
-            Discovery style
+            {discoveryHeading}
           </h2>
-          <span className="wizard-badge font-medium">New</span>
+          <span className="wizard-badge font-medium">{discoveryBadgeLabel}</span>
         </div>
-        <p className="text-sm text-base-content/70">
-          Balance popular hotspots with hidden gems to match today’s mood.
-        </p>
+        <p className="text-sm text-base-content/70">{discoveryDescription}</p>
         <div className="mt-4 flex items-center justify-between text-xs text-base-content/60">
-          <span>Crowded</span>
-          <span>Balanced</span>
-          <span>Secluded</span>
+          <span>{discoveryScaleLeft}</span>
+          <span>{discoveryScaleMid}</span>
+          <span>{discoveryScaleRight}</span>
         </div>
         <Slider.Root
           value={[discoveryMix]}
@@ -66,33 +133,28 @@ export function WizardStepTwo(): JSX.Element {
           max={100}
           step={5}
           onValueChange={(value) => setDiscoveryMix(value[0] ?? discoveryMix)}
-          aria-label="Discovery slider"
+          aria-label={discoverySliderAria}
           className="relative mt-3 flex h-7 items-center"
         >
           <Slider.Track className="relative h-3 flex-1 rounded-full bg-base-300/60">
             <Slider.Range className="absolute h-full rounded-full bg-accent" />
           </Slider.Track>
           <Slider.Thumb
-            aria-label="Adjust discovery style balance"
+            aria-label={discoveryThumbAria}
             className="block h-6 w-6 rounded-full border-2 border-base-100 bg-accent shadow-lg shadow-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
           />
         </Slider.Root>
-        <div className="wizard-discovery__summary">
-          {discoveryMix >= 70
-            ? "Hidden gems heavy"
-            : discoveryMix <= 30
-              ? "Hotspot focused"
-              : "Balanced mix"}
-        </div>
+        <div className="wizard-discovery__summary">{discoverySummary}</div>
       </WizardSection>
 
-      <WizardSection aria-label="Accessibility & safety">
-        <h2 className="section-title">Accessibility & safety</h2>
+      <WizardSection aria-label={accessibilitySectionLabel}>
+        <h2 className="section-title">{accessibilityHeading}</h2>
         <div className="space-y-4">
-          {accessibilityOptions.map((option) => {
+          {resolvedAccessibilityOptions.map((option) => {
             const checked = accessibility[option.id] ?? false;
             const labelId = `${option.id}-label`;
             const descriptionId = `${option.id}-description`;
+            const hasDescription = Boolean(option.description?.length);
             return (
               <div key={option.id} className="wizard-accessibility__option">
                 <div className="flex items-center gap-3">
@@ -103,15 +165,17 @@ export function WizardStepTwo(): JSX.Element {
                     <p id={labelId} className="text-sm font-semibold text-base-content">
                       {option.label}
                     </p>
-                    <p id={descriptionId} className="text-xs text-base-content/60">
-                      {option.description}
-                    </p>
+                    {hasDescription ? (
+                      <p id={descriptionId} className="text-xs text-base-content/60">
+                        {option.description}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
                 <Switch.Root
                   id={option.id}
                   aria-labelledby={labelId}
-                  aria-describedby={descriptionId}
+                  aria-describedby={hasDescription ? descriptionId : undefined}
                   checked={checked}
                   onCheckedChange={(value) =>
                     setAccessibility((prev) => ({

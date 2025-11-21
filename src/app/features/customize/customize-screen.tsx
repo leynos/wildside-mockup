@@ -5,6 +5,7 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useNavigate } from "@tanstack/react-router";
 import type { JSX } from "react";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
@@ -44,6 +45,22 @@ function SegmentPicker({
   options,
   value,
 }: SegmentPickerProps): JSX.Element {
+  const { t } = useTranslation();
+
+  const resolvedOptions = options.map((option) => {
+    const optionLabel = t(`customize-${id}-option-${option.id}-label`, {
+      defaultValue: option.label,
+    });
+    const optionDescription = t(`customize-${id}-option-${option.id}-description`, {
+      defaultValue: option.description,
+    });
+    return {
+      ...option,
+      label: optionLabel,
+      description: optionDescription,
+    };
+  });
+
   return (
     <section className="mb-8" data-segment-id={id}>
       <SectionHeading iconToken={iconToken}>{label}</SectionHeading>
@@ -54,7 +71,7 @@ function SegmentPicker({
         aria-label={label}
         className="grid grid-cols-3 gap-3"
       >
-        {options.map((option) => (
+        {resolvedOptions.map((option) => (
           <CustomizeSegmentToggle
             key={option.id}
             value={option.id}
@@ -73,26 +90,35 @@ interface SurfacePickerProps {
 }
 
 function SurfacePicker({ onChange, value }: SurfacePickerProps): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("customize-surface-heading", { defaultValue: "Surface Type" });
+  const ariaLabel = t("customize-surface-aria-label", { defaultValue: "Surface type" });
+
   return (
     <section className="mb-8">
-      <SectionHeading iconToken="{icon.category.paved}">Surface Type</SectionHeading>
+      <SectionHeading iconToken="{icon.category.paved}">{heading}</SectionHeading>
       <ToggleGroup.Root
         type="single"
         value={value}
         onValueChange={(next) => next && onChange(next)}
-        aria-label="Surface type"
+        aria-label={ariaLabel}
         className="grid grid-cols-2 gap-3"
       >
-        {surfaceOptions.map((surface) => (
-          <ToggleGroup.Item
-            key={surface.id}
-            value={surface.id}
-            className="customize-surface__option"
-          >
-            <Icon token={surface.iconToken} className="text-base" aria-hidden />
-            {surface.label}
-          </ToggleGroup.Item>
-        ))}
+        {surfaceOptions.map((surface) => {
+          const surfaceLabel = t(`customize-surface-option-${surface.id}-label`, {
+            defaultValue: surface.label,
+          });
+          return (
+            <ToggleGroup.Item
+              key={surface.id}
+              value={surface.id}
+              className="customize-surface__option"
+            >
+              <Icon token={surface.iconToken} className="text-base" aria-hidden />
+              {surfaceLabel}
+            </ToggleGroup.Item>
+          );
+        })}
       </ToggleGroup.Root>
     </section>
   );
@@ -104,18 +130,24 @@ interface InterestMixProps {
 }
 
 function InterestMix({ onChange, values }: InterestMixProps): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("customize-interest-heading", { defaultValue: "Interest Mix" });
+
   return (
     <section className="mb-8">
-      <SectionHeading iconToken="{icon.action.like}">Interest Mix</SectionHeading>
+      <SectionHeading iconToken="{icon.action.like}">{heading}</SectionHeading>
       <div className="space-y-6">
         {interestMix.map((slice) => {
           const value = values[slice.id] ?? slice.allocation;
+          const sliceLabel = t(`customize-interest-${slice.id}-label`, {
+            defaultValue: slice.label,
+          });
           return (
             <div key={slice.id}>
               <div className="mb-2 flex items-center justify-between">
                 <span className="flex items-center gap-2 text-sm font-medium text-base-content">
                   <Icon token={slice.iconToken} className={slice.iconColorClass} aria-hidden />
-                  {slice.label}
+                  {sliceLabel}
                 </span>
                 <span className="text-sm font-semibold text-accent">{value}%</span>
               </div>
@@ -132,7 +164,10 @@ function InterestMix({ onChange, values }: InterestMixProps): JSX.Element {
                 </Slider.Track>
                 <Slider.Thumb
                   className="interest-mix__thumb"
-                  aria-label={`${slice.label} allocation`}
+                  aria-label={t("customize-interest-thumb-aria", {
+                    label: sliceLabel,
+                    defaultValue: `${sliceLabel} allocation`,
+                  })}
                 />
               </Slider.Root>
             </div>
@@ -149,18 +184,26 @@ interface RoutePreviewProps {
 }
 
 function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("customize-route-preview-heading", { defaultValue: "Route Preview" });
+  const regenerateLabel = t("customize-route-preview-regenerate", { defaultValue: "Regenerate" });
+  const startLabel = t("customize-route-preview-start", { defaultValue: "Start Route" });
+
   return (
     <section className="mb-8">
-      <SectionHeading iconToken="{icon.action.preview}">Route Preview</SectionHeading>
+      <SectionHeading iconToken="{icon.action.preview}">{heading}</SectionHeading>
       <div className="grid grid-cols-3 gap-3">
         {routePreviews.map((route) => {
           const isActive = route.id === selected;
+          const title = t(`customize-route-preview-${route.id}-title`, {
+            defaultValue: route.title,
+          });
           return (
             <button
               key={route.id}
               type="button"
               onClick={() => onSelect(route.id)}
-              className={`rounded-lg border px-3 py-3 text-left text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
+              className={`rounded-lg border px-3 py-3 text-start text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
                 isActive
                   ? "border-accent bg-accent/15 text-base-content"
                   : "border-base-300/70 bg-base-200/60 text-base-content/80"
@@ -176,7 +219,7 @@ function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
                   aria-hidden
                 />
               </div>
-              <p className="font-semibold">{route.title}</p>
+              <p className="font-semibold">{title}</p>
               <p className="text-[11px] text-base-content/60">
                 {route.distance} • {route.duration}
               </p>
@@ -189,15 +232,15 @@ function RoutePreview({ onSelect, selected }: RoutePreviewProps): JSX.Element {
           type="button"
           className="btn btn-ghost btn-sm flex-1 rounded-xl border border-base-300/70 bg-base-200/60 text-base-content"
         >
-          <Icon token="{icon.action.regenerate}" aria-hidden className="mr-2 h-4 w-4" />
-          Regenerate
+          <Icon token="{icon.action.regenerate}" aria-hidden className="me-2 h-4 w-4" />
+          {regenerateLabel}
         </button>
         <button
           type="button"
           className="btn btn-accent btn-sm flex-1 rounded-xl text-base font-semibold"
         >
-          <Icon token="{icon.action.play}" aria-hidden className="mr-2 h-4 w-4" />
-          Start Route
+          <Icon token="{icon.action.play}" aria-hidden className="me-2 h-4 w-4" />
+          {startLabel}
         </button>
       </div>
     </section>
@@ -210,19 +253,28 @@ interface AdvancedOptionsProps {
 }
 
 function AdvancedOptions({ onToggle, values }: AdvancedOptionsProps): JSX.Element {
+  const { t } = useTranslation();
+  const heading = t("customize-advanced-heading", { defaultValue: "Advanced Options" });
+
   return (
     <section className="mb-8">
-      <SectionHeading iconToken="{icon.action.settings}">Advanced Options</SectionHeading>
+      <SectionHeading iconToken="{icon.action.settings}">{heading}</SectionHeading>
       <div className="space-y-3">
         {advancedOptions.map((option) => {
           const checked = values[option.id] ?? option.defaultEnabled;
+          const title = t(`customize-advanced-${option.id}-title`, {
+            defaultValue: option.label,
+          });
+          const description = t(`customize-advanced-${option.id}-description`, {
+            defaultValue: option.description,
+          });
           return (
             <PreferenceToggleCard
               key={option.id}
               id={`advanced-${option.id}`}
               iconToken={option.iconToken}
-              title={option.label}
-              description={option.description}
+              title={title}
+              description={description}
               isChecked={checked}
               onCheckedChange={(next) => onToggle(option.id, next)}
             />
@@ -234,6 +286,7 @@ function AdvancedOptions({ onToggle, values }: AdvancedOptionsProps): JSX.Elemen
 }
 
 export function CustomizeScreen(): JSX.Element {
+  const { t } = useTranslation();
   const sliderInitialValues = useMemo(
     () => Object.fromEntries(sliders.map((slider) => [slider.id, slider.initialValue])),
     [],
@@ -257,6 +310,7 @@ export function CustomizeScreen(): JSX.Element {
     useState<Record<string, number>>(interestInitialValues);
   const [selectedRoute, setSelectedRoute] = useState(routePreviews[0]?.id ?? "route-a");
   const [advancedValues, setAdvancedValues] = useState<Record<string, boolean>>(advancedInitial);
+  const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
 
   const navigate = useNavigate();
 
@@ -269,12 +323,14 @@ export function CustomizeScreen(): JSX.Element {
     >
       <div className="screen-stack">
         <AppHeader
-          title="Customise Route"
-          subtitle="Fine-tune your walking adventure"
+          title={t("customize-header-title", { defaultValue: "Customise Route" })}
+          subtitle={t("customize-header-subtitle", {
+            defaultValue: "Fine-tune your walking adventure",
+          })}
           leading={
             <button
               type="button"
-              aria-label="Back to map"
+              aria-label={t("customize-header-back-label", { defaultValue: "Back to map" })}
               className="header-nav-button"
               onClick={() => navigate({ to: "/map/quick" })}
             >
@@ -282,7 +338,11 @@ export function CustomizeScreen(): JSX.Element {
             </button>
           }
           trailing={
-            <button type="button" aria-label="Help" className="header-icon-button">
+            <button
+              type="button"
+              aria-label={t("customize-header-help-label", { defaultValue: "Help" })}
+              className="header-icon-button"
+            >
               <Icon token="{icon.action.help}" aria-hidden className="h-5 w-5" />
             </button>
           }
@@ -290,11 +350,18 @@ export function CustomizeScreen(): JSX.Element {
         <main className="screen-scroll pb-6 pt-4">
           {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => {
             const currentValue = sliderValues[id] ?? min;
+            const sliderLabel = t(`customize-slider-${id}-label`, { defaultValue: label });
+            const sliderAriaLabel = t(`customize-slider-${id}-aria`, {
+              defaultValue: `${label} slider`,
+            });
+            const translatedMarkers = markers.map((marker, index) =>
+              t(`customize-slider-${id}-marker-${index}`, { defaultValue: marker }),
+            );
             return (
               <SliderControl
                 key={id}
                 id={id}
-                label={label}
+                label={sliderLabel}
                 iconToken={iconToken}
                 iconClassName={iconColorClass}
                 className="mb-8"
@@ -303,8 +370,8 @@ export function CustomizeScreen(): JSX.Element {
                 step={step}
                 value={currentValue}
                 valueFormatter={(value) => formatSliderValue(id, value)}
-                markers={markers}
-                ariaLabel={`${label} slider`}
+                markers={translatedMarkers}
+                ariaLabel={sliderAriaLabel}
                 onValueChange={(value) =>
                   setSliderValues((current) => ({
                     ...current,
@@ -316,7 +383,7 @@ export function CustomizeScreen(): JSX.Element {
           })}
           <SegmentPicker
             id="crowd"
-            label="Crowd Level"
+            label={t("customize-crowd-heading", { defaultValue: "Crowd Level" })}
             iconToken="{icon.object.family}"
             options={crowdLevelOptions}
             value={crowdLevel}
@@ -324,7 +391,7 @@ export function CustomizeScreen(): JSX.Element {
           />
           <SegmentPicker
             id="elevation"
-            label="Elevation Preference"
+            label={t("customize-elevation-heading", { defaultValue: "Elevation Preference" })}
             iconToken="{icon.accessibility.elevation}"
             options={elevationOptions}
             value={elevation}
@@ -352,7 +419,12 @@ export function CustomizeScreen(): JSX.Element {
           />
         </main>
         <AppBottomNavigation
-          items={bottomNavigation.map((item) => ({ ...item, isActive: Boolean(item.active) }))}
+          aria-label={bottomNavAriaLabel}
+          items={bottomNavigation.map((item) => ({
+            ...item,
+            label: t(`nav-${item.id}-label`, { defaultValue: item.label }),
+            isActive: Boolean(item.active),
+          }))}
         />
       </div>
     </MobileShell>

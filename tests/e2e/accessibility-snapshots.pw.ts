@@ -8,6 +8,7 @@ import {
   captureAccessibilityTree,
   captureComputedStyles,
   slugifyPath,
+  waitForPrimaryContent,
 } from "./utils/accessibility";
 
 interface SnapshotTarget {
@@ -73,6 +74,14 @@ async function removeMapLibreControls(page: Page): Promise<void> {
       link.closest(".maplibregl-ctrl")?.remove();
     });
   }
+
+  const attributionControls = page.locator(".maplibregl-ctrl-attrib");
+  const attributionCount = await attributionControls.count();
+  for (let index = attributionCount - 1; index >= 0; index -= 1) {
+    await attributionControls.nth(index).evaluate((control) => {
+      control.remove();
+    });
+  }
 }
 
 test.describe("Accessibility tree snapshots", () => {
@@ -87,6 +96,7 @@ test.describe("Accessibility tree snapshots", () => {
       if (target.path === "/map/quick") {
         await removeMapLibreControls(page);
       }
+      await waitForPrimaryContent(page);
 
       const tree = await captureAccessibilityTree(page);
       const styleSamples = target.styleTargets

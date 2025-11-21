@@ -1,20 +1,32 @@
-import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { afterAll, afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { screen, within } from "@testing-library/dom";
 import { act } from "react";
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
-
+import { OFFLINE_STORAGE_PLACEHOLDERS } from "../src/app/config/offline-metrics";
 import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
 import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
   accessibilityOptions,
   wizardGeneratedStops,
+  wizardRouteSummary,
   wizardSummaryHighlights,
   wizardWeatherSummary,
 } from "../src/app/data/wizard";
+import { buildWizardRouteStats } from "../src/app/features/wizard/step-three/build-wizard-route-stats";
+import { buildWizardWeatherCopy } from "../src/app/features/wizard/step-three/build-wizard-weather-copy";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
+import {
+  changeLanguage,
+  escapeRegExp,
+  i18n,
+  i18nReady,
+  resetLanguage,
+  withI18nLanguage,
+} from "./helpers/i18nTestHelpers";
+import { installLogicalStyleStub } from "./support/logical-style-stub";
 
 type TestRoute =
   | "/discover"
@@ -35,6 +47,24 @@ const savedRoute = savedRoutes[0];
 if (!savedRoute) {
   throw new Error("Expected at least one saved route for the routed flow tests");
 }
+
+const translate = (
+  key: string,
+  defaultValue: string,
+  options?: Record<string, unknown>,
+): string | undefined => {
+  return i18n.t(key, { defaultValue, ...(options ?? {}) });
+};
+
+const defaultRouteCountLabel = (count: number): string =>
+  `${count} ${count === 1 ? "route" : "routes"}`;
+
+const defaultSaveCountLabel = (count: number): string =>
+  `${count} ${count === 1 ? "save" : "saves"}`;
+
+const defaultSelectionLabel = (count: number): string => `${count} selected`;
+
+const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""), "i");
 
 const clickElement = (element: Element | null | undefined): void => {
   if (element instanceof HTMLElement) {
@@ -69,6 +99,19 @@ function requireContainer(target: HTMLDivElement | null): HTMLDivElement {
   return target;
 }
 
+const setDocumentDirection = (direction: "ltr" | "rtl") => {
+  document.documentElement.dir = direction;
+  document.documentElement.setAttribute("data-direction", direction);
+  document.body.dir = direction;
+  document.body.setAttribute("data-direction", direction);
+};
+
+const removeLogicalStyleStub = installLogicalStyleStub();
+
+afterAll(() => {
+  removeLogicalStyleStub();
+});
+
 describe("Stage 1 routed flows", () => {
   let root: Root | null = null;
   let mount: HTMLDivElement | null = null;
@@ -87,22 +130,33 @@ describe("Stage 1 routed flows", () => {
 
   beforeEach(() => {
     cleanup();
+    setDocumentDirection("ltr");
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
+    setDocumentDirection("ltr");
+    await resetLanguage();
   });
 
   it("tracks selected interests on the discover route", async () => {
     ({ mount, root } = await renderRoute("/discover"));
     const container = requireContainer(mount);
     const view = within(container);
+    const discoverHeading = translate("discover-hero-title", "Discover Your Perfect Walk");
+    const interestsLabel = translate("wizard-step-one-interests-section-aria", "Interests");
+
     expect(
-      view.getByRole("heading", { level: 1, name: /discover your perfect walk/i }),
+      view.getByRole("heading", {
+        level: 1,
+        name: localizedRegex(discoverHeading),
+      }),
     ).toBeTruthy();
 
-    const interestGroup = view.getByRole("group", { name: /interests/i });
-    const parksChip = within(interestGroup).getByRole("button", { name: /parks & nature/i });
+    const interestGroup = view.getByRole("group", { name: localizedRegex(interestsLabel) });
+    const parksChip = within(interestGroup).getByRole("button", {
+      name: /parks & nature/i,
+    });
     act(() => clickElement(parksChip));
 
     const indicator = view.getByText(/themes selected/i);
@@ -114,7 +168,11 @@ describe("Stage 1 routed flows", () => {
     ({ mount, root } = await renderRoute("/explore"));
     const container = requireContainer(mount);
     const view = within(container);
-    const filterButton = view.getByRole("button", { name: /filter walks/i });
+    const filterButtonLabel = translate("explore-filter-aria-label", "Filter walks");
+    const discoverHeading = translate("discover-hero-title", "Discover Your Perfect Walk");
+    const filterButton = view.getByRole("button", {
+      name: localizedRegex(filterButtonLabel),
+    });
 
     await act(async () => {
       clickElement(filterButton);
@@ -122,7 +180,9 @@ describe("Stage 1 routed flows", () => {
       await Promise.resolve();
     });
     expect(
-      await screen.findByRole("heading", { name: /discover your perfect walk/i }),
+      await screen.findByRole("heading", {
+        name: localizedRegex(discoverHeading),
+      }),
     ).toBeTruthy();
   });
 
@@ -131,37 +191,210 @@ describe("Stage 1 routed flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
 
-    const featuredPanel = view.getByRole("region", { name: /walk of the week/i });
-    expect(within(featuredPanel).getByText(/walk of the week/i)).toBeTruthy();
+    const featuredHeading = translate("explore-featured-heading", "Walk of the Week");
+    const featuredPanel = view.getByRole("region", {
+      name: localizedRegex(featuredHeading),
+    });
+    expect(within(featuredPanel).getByText(localizedRegex(featuredHeading))).toBeTruthy();
 
-    expect(view.getByRole("region", { name: /popular themes/i })).toBeTruthy();
-    expect(view.getByRole("region", { name: /curated collections/i })).toBeTruthy();
-    expect(view.getByRole("region", { name: /trending now/i })).toBeTruthy();
-    expect(view.getByRole("region", { name: /community favourite/i })).toBeTruthy();
+    const popularHeading = translate("explore-popular-heading", "Popular Themes");
+    expect(view.getByRole("region", { name: localizedRegex(popularHeading) })).toBeTruthy();
 
-    const searchInput = view.getByPlaceholderText(/search walks/i);
+    const curatedHeading = translate("explore-curated-heading", "Curated Collections");
+    expect(view.getByRole("region", { name: localizedRegex(curatedHeading) })).toBeTruthy();
+
+    const trendingHeading = translate("explore-trending-heading", "Trending Now");
+    expect(view.getByRole("region", { name: localizedRegex(trendingHeading) })).toBeTruthy();
+
+    const communityHeading = translate("explore-community-heading", "Community Favourite");
+    expect(view.getByRole("region", { name: localizedRegex(communityHeading) })).toBeTruthy();
+
+    const searchPlaceholder = translate(
+      "explore-search-placeholder",
+      "Search walks, places, themes...",
+    );
+    const searchInput = view.getByPlaceholderText(
+      searchPlaceholder ?? "Search walks, places, themes...",
+    );
     expect(searchInput.getAttribute("type")).toBe("search");
 
-    const bottomNav = view.getByRole("navigation", { name: /primary navigation/i });
+    const navLabel = translate("nav-primary-aria-label", "Primary navigation");
+    const bottomNav = view.getByRole("navigation", {
+      name: localizedRegex(navLabel),
+    });
     expect(bottomNav).toBeTruthy();
+  });
+
+  it("updates explore headings and labels when the locale changes", async () => {
+    await i18nReady;
+    ({ mount, root } = await renderRoute("/explore"));
+    const container = requireContainer(mount);
+    const view = within(container);
+
+    const initialHeading = view.getByRole("heading", {
+      level: 1,
+      name: /discover/i,
+    });
+    expect(initialHeading).toBeTruthy();
+
+    await changeLanguage("es");
+
+    const translatedTitle = i18n.t("explore-header-title");
+    expect(translatedTitle).toBeTruthy();
+    expect(
+      view.getByRole("heading", {
+        level: 1,
+        name: new RegExp(escapeRegExp(translatedTitle ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+
+    expect(view.queryByRole("heading", { level: 1, name: /discover/i })).toBeNull();
+
+    const searchPlaceholder = i18n.t("explore-search-placeholder");
+    expect(searchPlaceholder).toBeTruthy();
+    expect(view.getByPlaceholderText(searchPlaceholder)).toBeTruthy();
+
+    const categoriesLabel = i18n.t("explore-categories-aria-label");
+    expect(categoriesLabel).toBeTruthy();
+    expect(
+      view.getByRole("region", {
+        name: new RegExp(escapeRegExp(categoriesLabel ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+
+    const featuredHeading = i18n.t("explore-featured-heading");
+    expect(featuredHeading).toBeTruthy();
+    expect(
+      view.getByRole("region", {
+        name: new RegExp(escapeRegExp(featuredHeading ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+
+    const navLabel = i18n.t("nav-primary-aria-label");
+    expect(navLabel).toBeTruthy();
+    expect(
+      view.getByRole("navigation", {
+        name: new RegExp(escapeRegExp(navLabel ?? ""), "i"),
+      }),
+    ).toBeTruthy();
+  });
+
+  it("renders explore stats using Fluent pluralisation", async () => {
+    ({ mount, root } = await renderRoute("/explore"));
+    const container = requireContainer(mount);
+    const view = within(container);
+    const communityHeading = translate("explore-community-heading", "Community Favourite");
+    const curatedHeading = translate("explore-curated-heading", "Curated Collections");
+    const categoriesHeading = translate("explore-categories-aria-label", "Popular categories");
+
+    const communityRegion = view.getByRole("region", {
+      name: localizedRegex(communityHeading),
+    });
+    const communitySaves = translate("explore-community-saves", defaultSaveCountLabel(428), {
+      count: 428,
+    });
+    expect(within(communityRegion).getByText(localizedRegex(communitySaves))).toBeTruthy();
+
+    const curatedRegion = view.getByRole("region", {
+      name: localizedRegex(curatedHeading),
+    });
+    const curatedRoutes = translate("explore-curated-route-count", defaultRouteCountLabel(6), {
+      count: 6,
+    });
+    expect(within(curatedRegion).getByText(localizedRegex(curatedRoutes))).toBeTruthy();
+
+    const categoriesRegion = view.getByRole("region", {
+      name: localizedRegex(categoriesHeading),
+    });
+    const categoriesRoutes = translate("explore-curated-route-count", defaultRouteCountLabel(23), {
+      count: 23,
+    });
+    expect(within(categoriesRegion).getByText(localizedRegex(categoriesRoutes))).toBeTruthy();
+  });
+
+  it("formats explore counts with Fluent singular and plural forms", async () => {
+    await i18nReady;
+    const singularSave =
+      translate("explore-community-saves", defaultSaveCountLabel(1), { count: 1 }) ?? "";
+    const pluralSave =
+      translate("explore-community-saves", defaultSaveCountLabel(3), { count: 3 }) ?? "";
+    expect(singularSave).not.toEqual(pluralSave);
+    expect(singularSave).toContain("1");
+    expect(pluralSave).toContain("3");
+
+    const singularRoute =
+      translate("explore-curated-route-count", defaultRouteCountLabel(1), {
+        count: 1,
+      }) ?? "";
+    const pluralRoute =
+      translate("explore-curated-route-count", defaultRouteCountLabel(3), {
+        count: 3,
+      }) ?? "";
+    expect(singularRoute).not.toEqual(pluralRoute);
+    expect(singularRoute).toContain("1");
+    expect(pluralRoute).toContain("3");
+  });
+
+  it("localises curated difficulty labels for alternate locales", async () => {
+    await i18nReady;
+    await withI18nLanguage("es", async () => {
+      ({ mount, root } = await renderRoute("/explore"));
+      const container = requireContainer(mount);
+      const view = within(container);
+      const easyLabel = i18n.t("difficulty-easy-label");
+      const moderateLabel = i18n.t("difficulty-moderate-label");
+
+      expect(view.getByText(new RegExp(escapeRegExp(easyLabel ?? ""), "i"))).toBeTruthy();
+      expect(view.getByText(new RegExp(escapeRegExp(moderateLabel ?? ""), "i"))).toBeTruthy();
+    });
   });
 
   it("toggles advanced switches on the customize route", async () => {
     ({ mount, root } = await renderRoute("/customize"));
     const container = requireContainer(mount);
     const view = within(container);
-    expect(view.getByRole("button", { name: /help/i })).toBeTruthy();
+    const helpLabel = translate("customize-header-help-label", "Help");
+    expect(view.getByRole("button", { name: localizedRegex(helpLabel) })).toBeTruthy();
 
-    const safetySwitch = view.getByRole("switch", { name: /safety priority/i });
+    const safetyLabel = translate("customize-advanced-safety-title", "Safety Priority");
+    const safetySwitch = view.getByRole("switch", {
+      name: localizedRegex(safetyLabel),
+    });
     expect(safetySwitch.getAttribute("data-state")).toBe("unchecked");
     act(() => clickElement(safetySwitch));
     expect(safetySwitch.getAttribute("data-state")).toBe("checked");
 
-    const surfacePicker = view.getByRole("group", { name: /surface type/i });
+    const surfaceLabel = translate("customize-surface-aria-label", "Surface type");
+    const surfacePicker = view.getByRole("group", {
+      name: localizedRegex(surfaceLabel),
+    });
     expect(within(surfacePicker).getAllByRole("radio").length).toBeGreaterThan(0);
 
     expect(view.getAllByRole("heading", { level: 2 }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("slider").length).toBeGreaterThan(0);
+  });
+
+  it("localises customize copy for alternate locales", async () => {
+    await i18nReady;
+    await withI18nLanguage("es", async () => {
+      ({ mount, root } = await renderRoute("/customize"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      const distanceHeading = translate("customize-slider-distance-label", "Distance");
+      expect(
+        view.getByRole("heading", {
+          level: 2,
+          name: localizedRegex(distanceHeading),
+        }),
+      ).toBeTruthy();
+      const surfaceHeading = translate("customize-surface-aria-label", "Surface type");
+      expect(view.getByRole("group", { name: localizedRegex(surfaceHeading) })).toBeTruthy();
+      const safetyHeading = translate("customize-advanced-safety-title", "Safety Priority");
+      expect(view.getByRole("switch", { name: localizedRegex(safetyHeading) })).toBeTruthy();
+      const regenerateLabel = translate("customize-route-preview-regenerate", "Regenerate");
+      expect(view.getByRole("button", { name: localizedRegex(regenerateLabel) })).toBeTruthy();
+    });
   });
 });
 
@@ -185,24 +418,35 @@ describe("Stage 2 routed flows", () => {
     cleanup();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
+    setDocumentDirection("ltr");
+    await resetLanguage();
   });
 
   it("updates quick walk interests and navigates to saved", async () => {
     ({ mount, root } = await renderRoute("/map/quick"));
     const container = requireContainer(mount);
     const view = within(container);
-    const coffeeChip = view.getByRole("button", { name: /coffee spots/i });
+    const coffeeLabel = translate("interest-coffee-label", "Coffee Spots");
+    const coffeeChip = view.getByRole("button", {
+      name: localizedRegex(coffeeLabel),
+    });
     act(() => clickElement(coffeeChip));
 
-    const selectionBadge = view.getByText(/selected/i);
-    expect(selectionBadge.textContent).toContain("3 selected");
+    const expectedSelection = translate("quick-walk-interests-selected", defaultSelectionLabel(3), {
+      count: 3,
+    });
+    const selectionBadge = view.getByText(localizedRegex(expectedSelection));
+    expect(selectionBadge).toBeTruthy();
 
     const quickHeadings = view.getAllByRole("heading", { level: 2 });
     expect(quickHeadings.length).toBeGreaterThan(0);
 
-    const saveAction = view.getByRole("button", { name: /save quick walk/i });
+    const saveLabel = translate("quick-walk-save-aria", "Save quick walk");
+    const saveAction = view.getByRole("button", {
+      name: localizedRegex(saveLabel),
+    });
 
     await act(async () => {
       clickElement(saveAction);
@@ -220,21 +464,33 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
 
-    const stopsPanel = view.getByRole("region", { name: /quick walk stops/i });
+    const stopsHeading = translate("quick-walk-stops-heading", "Quick walk stops");
+    const notesHeading = translate("quick-walk-notes-heading", "Planning notes");
+    const dismissLabel = translate("quick-walk-dismiss-aria", "Dismiss panel");
+    const stopsPanel = view.getByRole("region", {
+      name: localizedRegex(stopsHeading),
+    });
     expect(stopsPanel.classList.contains("map-panel")).toBe(true);
     expect(stopsPanel.classList.contains("map-panel--stacked")).toBe(true);
 
-    const notesPanel = view.getByRole("region", { name: /quick walk notes|planning notes/i });
+    const notesPanel = view.getByRole("region", {
+      name: localizedRegex(notesHeading),
+    });
     expect(notesPanel.classList.contains("map-panel")).toBe(true);
     expect(notesPanel.classList.contains("map-panel--scroll")).toBe(true);
 
-    const mapHandles = view.getAllByRole("button", { name: /dismiss panel/i });
+    const mapHandles = view.getAllByRole("button", {
+      name: localizedRegex(dismissLabel),
+    });
     expect(mapHandles.length).toBeGreaterThan(0);
 
     const tablist = view.getByRole("tablist");
     expect(tablist.classList.contains("map-panel__tablist")).toBe(true);
 
-    const quickFabButton = view.getByRole("button", { name: /save quick walk/i });
+    const saveQuickLabel = translate("quick-walk-save-aria", "Save quick walk");
+    const quickFabButton = view.getByRole("button", {
+      name: localizedRegex(saveQuickLabel),
+    });
     expect(quickFabButton.classList.contains("pointer-events-auto")).toBe(true);
   });
 
@@ -242,14 +498,22 @@ describe("Stage 2 routed flows", () => {
     ({ mount, root } = await renderRoute("/map/quick"));
     const container = requireContainer(mount);
     const view = within(container);
-    const wandTrigger = view.getByRole("button", { name: /generate a new walk/i });
+    const generateLabel = translate("quick-walk-generate-aria", "Generate a new walk");
+    const wandTrigger = view.getByRole("button", {
+      name: localizedRegex(generateLabel),
+    });
 
     await act(async () => {
       clickElement(wandTrigger);
       await Promise.resolve();
     });
 
-    expect(await screen.findByRole("heading", { name: /walk wizard/i })).toBeTruthy();
+    const wizardHeading = translate("wizard-header-title", "Walk Wizard");
+    expect(
+      await screen.findByRole("heading", {
+        name: localizedRegex(wizardHeading),
+      }),
+    ).toBeTruthy();
   });
 
   it("applies semantic classes to quick walk tab panels", async () => {
@@ -262,18 +526,55 @@ describe("Stage 2 routed flows", () => {
       expect(panel.classList.contains("map-viewport__tab")).toBe(true);
     });
 
-    const generatorHeading = view.getByRole("heading", { name: /quick walk generator/i });
+    const generatorTitle = translate("quick-walk-header-title", "Quick Walk Generator");
+    const generatorHeading = view.getByRole("heading", {
+      name: localizedRegex(generatorTitle),
+    });
     expect(generatorHeading).toBeTruthy();
 
     const mapTablist = view.getByRole("tablist");
     expect(mapTablist.classList.contains("map-panel__tablist")).toBe(true);
 
-    const stopsRegion = view.getByRole("region", { name: /quick walk stops/i });
+    const stopsHeading = translate("quick-walk-stops-heading", "Quick walk stops");
+    const stopsRegion = view.getByRole("region", {
+      name: localizedRegex(stopsHeading),
+    });
     expect(stopsRegion.classList.contains("map-panel")).toBe(true);
 
-    const notesRegion = view.getByRole("region", { name: /planning notes/i });
+    const notesHeading = translate("quick-walk-notes-heading", "Planning notes");
+    const notesRegion = view.getByRole("region", {
+      name: localizedRegex(notesHeading),
+    });
     const notesList = within(notesRegion).getByRole("list");
     expect(within(notesList).getAllByRole("listitem").length).toBeGreaterThanOrEqual(3);
+  });
+
+  it("localises quick walk copy for alternate locales", async () => {
+    await i18nReady;
+    await withI18nLanguage("es", async () => {
+      ({ mount, root } = await renderRoute("/map/quick"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      const localizedTitle = translate("quick-walk-header-title", "Quick Walk Generator");
+      expect(
+        view.getByRole("heading", {
+          level: 1,
+          name: localizedRegex(localizedTitle),
+        }),
+      ).toBeTruthy();
+      const interestsHeading = translate("quick-walk-interests-heading", "Interests");
+      expect(
+        view.getByRole("heading", {
+          level: 2,
+          name: localizedRegex(interestsHeading),
+        }),
+      ).toBeTruthy();
+      const stopsHeading = translate("quick-walk-stops-heading", "Quick walk stops");
+      expect(view.getByRole("region", { name: localizedRegex(stopsHeading) })).toBeTruthy();
+      const saveLabel = translate("quick-walk-save-aria", "Save quick walk");
+      expect(view.getByRole("button", { name: localizedRegex(saveLabel) })).toBeTruthy();
+    });
   });
 
   it("toggles itinerary favourites and opens the share dialog", async () => {
@@ -310,7 +611,9 @@ describe("Stage 2 routed flows", () => {
     expect(stopsPanel.classList.contains("map-overlay")).toBe(true);
     waterfrontDiscoveryRoute.pointsOfInterest.forEach((poi) => {
       expect(
-        within(stopsPanel).getByRole("button", { name: new RegExp(poi.name, "i") }),
+        within(stopsPanel).getByRole("button", {
+          name: new RegExp(poi.name, "i"),
+        }),
       ).toBeTruthy();
     });
 
@@ -322,14 +625,20 @@ describe("Stage 2 routed flows", () => {
       await Promise.resolve();
     });
 
-    const dialog = await screen.findByRole("dialog", { name: /share this walk/i });
+    const dialog = await screen.findByRole("dialog", {
+      name: /share this walk/i,
+    });
     expect(within(dialog).getByText(/wildside\.app\/routes/)).toBeTruthy();
     const closeControl = within(dialog).getByRole("button", { name: /close/i });
     act(() => clickElement(closeControl));
 
-    const favouriteButton = view.getByRole("button", { name: /save this itinerary/i });
+    const favouriteButton = view.getByRole("button", {
+      name: /save this itinerary/i,
+    });
     act(() => clickElement(favouriteButton));
-    const updatedFavourite = view.getByRole("button", { name: /remove saved itinerary/i });
+    const updatedFavourite = view.getByRole("button", {
+      name: /remove saved itinerary/i,
+    });
     expect(updatedFavourite.getAttribute("aria-pressed")).toBe("true");
   });
 
@@ -342,7 +651,9 @@ describe("Stage 2 routed flows", () => {
     expect(tabPanels.length).toBeGreaterThanOrEqual(3);
 
     const notesTabpanel = view.getByRole("tabpanel", { name: /notes/i });
-    const notesList = within(notesTabpanel).getByRole("list", { name: /route notes/i });
+    const notesList = within(notesTabpanel).getByRole("list", {
+      name: /route notes/i,
+    });
     expect(notesList.classList.contains("route-note-list")).toBe(true);
     expect(within(notesList).getAllByRole("listitem").length).toBe(savedRoute.notes.length);
 
@@ -354,7 +665,9 @@ describe("Stage 2 routed flows", () => {
     const stopsTabpanel = view.getByRole("tabpanel", { name: /stops/i });
     savedRoute.pointsOfInterest.forEach((poi) => {
       expect(
-        within(stopsTabpanel).getByRole("button", { name: new RegExp(poi.name, "i") }),
+        within(stopsTabpanel).getByRole("button", {
+          name: new RegExp(poi.name, "i"),
+        }),
       ).toBeTruthy();
     });
 
@@ -363,20 +676,26 @@ describe("Stage 2 routed flows", () => {
     expect(view.getByText(savedRoute.duration)).toBeTruthy();
 
     const shareTrigger = view.getByRole("button", { name: /^share$/i });
-    const favouriteButton = view.getByRole("button", { name: /remove saved walk/i });
+    const favouriteButton = view.getByRole("button", {
+      name: /remove saved walk/i,
+    });
 
     await act(async () => {
       clickElement(shareTrigger);
       await Promise.resolve();
     });
 
-    const dialog = await screen.findByRole("dialog", { name: /share saved walk/i });
+    const dialog = await screen.findByRole("dialog", {
+      name: /share saved walk/i,
+    });
     expect(within(dialog).getByText(`https://wildside.app/routes/${savedRoute.id}`)).toBeTruthy();
     const closeButton = within(dialog).getByRole("button", { name: /close/i });
     act(() => clickElement(closeButton));
 
     act(() => clickElement(favouriteButton));
-    const resetFavourite = view.getByRole("button", { name: /save this walk/i });
+    const resetFavourite = view.getByRole("button", {
+      name: /save this walk/i,
+    });
     expect(resetFavourite.getAttribute("aria-pressed")).toBe("false");
   });
 });
@@ -401,19 +720,55 @@ describe("Stage 3 wizard flows", () => {
     cleanup();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
+    setDocumentDirection("ltr");
+    await resetLanguage();
   });
+
+  type WizardStepThreeTestContext = {
+    view: ReturnType<typeof within>;
+    container: HTMLDivElement;
+    routeTitle: string;
+  };
+
+  const runWizardStepThreeSpanish = async (
+    assertions: (context: WizardStepThreeTestContext) => Promise<void> | void,
+  ): Promise<void> => {
+    await i18nReady;
+    await withI18nLanguage("es", async () => {
+      ({ mount, root } = await renderRoute("/wizard/step-3"));
+      const container = requireContainer(mount);
+      const view = within(container);
+      const routeTitle =
+        translate(wizardRouteSummary.titleKey, wizardRouteSummary.defaultTitle) ??
+        wizardRouteSummary.defaultTitle;
+      await assertions({ view, container, routeTitle });
+    });
+  };
 
   it("advances from wizard step one to step two", async () => {
     ({ mount, root } = await renderRoute("/wizard/step-1"));
     const container = requireContainer(mount);
     const view = within(container);
-    const durationSection = view.getByRole("region", { name: /walk duration controls/i });
+    const durationAria =
+      translate("wizard-step-one-duration-section-aria", "Walk duration controls") ??
+      "Walk duration controls";
+    const durationSection = view.getByRole("region", {
+      name: localizedRegex(durationAria),
+    });
     expect(durationSection.classList.contains("wizard-section")).toBe(true);
-    const interestsSection = view.getByRole("region", { name: /interests/i });
+    const interestsAria =
+      translate("wizard-step-one-interests-section-aria", "Interests") ?? "Interests";
+    const interestsSection = view.getByRole("region", {
+      name: localizedRegex(interestsAria),
+    });
     expect(interestsSection.classList.contains("wizard-section")).toBe(true);
-    const continueButton = view.getByRole("button", { name: /continue to preferences/i });
+    const continueLabel =
+      translate("wizard-step-one-continue", "Continue to preferences") ?? "Continue to preferences";
+    const continueButton = view.getByRole("button", {
+      name: localizedRegex(continueLabel),
+    });
     expect(continueButton.classList.contains("cta-button")).toBe(true);
 
     await act(async () => {
@@ -421,8 +776,38 @@ describe("Stage 3 wizard flows", () => {
       await Promise.resolve();
     });
 
-    const heading = await screen.findByRole("heading", { name: /discovery style/i });
+    const discoveryHeading =
+      translate("wizard-step-two-discovery-heading", "Discovery style") ?? "Discovery style";
+    const heading = await screen.findByRole("heading", {
+      name: localizedRegex(discoveryHeading),
+    });
     expect(heading).toBeTruthy();
+  });
+
+  it("localises wizard step one copy and interpolations for Spanish", async () => {
+    await i18nReady;
+    await withI18nLanguage("es", async () => {
+      ({ mount, root } = await renderRoute("/wizard/step-1"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      const durationAria = i18n.t("wizard-step-one-duration-section-aria") ?? "";
+      expect(view.getByRole("region", { name: localizedRegex(durationAria) })).toBeTruthy();
+      const continueLabel = i18n.t("wizard-step-one-continue") ?? "";
+      expect(view.getByRole("button", { name: localizedRegex(continueLabel) })).toBeTruthy();
+
+      const selectionSummary = view.getByText(/seleccionados$/i);
+      expect(selectionSummary.textContent?.trim()).toBe("2 seleccionados");
+
+      const streetArtLabel = i18n.t("interest-street-art-label") ?? "";
+      const streetArtChip = view.getByRole("button", {
+        name: new RegExp(escapeRegExp(streetArtLabel), "i"),
+      });
+      act(() => clickElement(streetArtChip));
+
+      const updatedSummary = view.getByText(/seleccionado$/i);
+      expect(updatedSummary.textContent?.trim()).toBe("1 seleccionado");
+    });
   });
 
   it("renders wizard step two surfaces with semantic classes", async () => {
@@ -430,19 +815,229 @@ describe("Stage 3 wizard flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
 
-    const discoveryRegion = view.getByRole("region", { name: /discovery style/i });
+    const discoveryAria =
+      translate("wizard-step-two-discovery-aria", "Discovery style") ?? "Discovery style";
+    const discoveryRegion = view.getByRole("region", {
+      name: localizedRegex(discoveryAria),
+    });
     expect(discoveryRegion.classList.contains("wizard-section")).toBe(true);
-    expect(within(discoveryRegion).getByText(/balanced mix/i)).toBeInTheDocument();
-    expect(within(discoveryRegion).getByText(/new/i).classList.contains("wizard-badge")).toBe(true);
+    const balancedSummary =
+      translate("wizard-step-two-discovery-summary-balanced", "Balanced mix") ?? "Balanced mix";
+    expect(within(discoveryRegion).getByText(localizedRegex(balancedSummary))).toBeTruthy();
+    const badgeLabel = translate("wizard-step-two-discovery-badge", "New") ?? "New";
+    expect(
+      within(discoveryRegion)
+        .getByText(localizedRegex(badgeLabel))
+        .classList.contains("wizard-badge"),
+    ).toBe(true);
 
-    const accessibilityRegion = view.getByRole("region", { name: /accessibility & safety/i });
+    const accessibilityAria =
+      translate("wizard-step-two-accessibility-section-aria", "Accessibility & safety") ??
+      "Accessibility & safety";
+    const accessibilityRegion = view.getByRole("region", {
+      name: localizedRegex(accessibilityAria),
+    });
     expect(accessibilityRegion.classList.contains("wizard-section")).toBe(true);
     const switches = within(accessibilityRegion).getAllByRole("switch");
     expect(switches.length).toBe(accessibilityOptions.length);
     accessibilityOptions.forEach((option) => {
       expect(
-        within(accessibilityRegion).getByRole("switch", { name: new RegExp(option.label, "i") }),
+        within(accessibilityRegion).getByRole("switch", {
+          name: localizedRegex(option.label),
+        }),
       ).toBeInTheDocument();
+    });
+  });
+
+  it("localises wizard step two discovery and accessibility copy for Spanish", async () => {
+    await i18nReady;
+    await withI18nLanguage("es", async () => {
+      ({ mount, root } = await renderRoute("/wizard/step-2"));
+      const container = requireContainer(mount);
+      const view = within(container);
+
+      const discoveryRegion = view.getByRole("region", {
+        name: localizedRegex(i18n.t("wizard-step-two-discovery-aria") ?? ""),
+      });
+      expect(
+        within(discoveryRegion).getByText(
+          localizedRegex(i18n.t("wizard-step-two-discovery-description") ?? ""),
+        ),
+      ).toBeTruthy();
+      expect(
+        within(discoveryRegion).getByText(
+          localizedRegex(i18n.t("wizard-step-two-discovery-badge") ?? ""),
+        ),
+      ).toBeTruthy();
+      expect(
+        within(discoveryRegion).getByText(
+          localizedRegex(i18n.t("wizard-step-two-discovery-summary-balanced") ?? ""),
+        ),
+      ).toBeTruthy();
+
+      const accessibilityRegion = view.getByRole("region", {
+        name: localizedRegex(i18n.t("wizard-step-two-accessibility-section-aria") ?? ""),
+      });
+      const wellLitLabel = i18n.t("wizard-step-two-accessibility-well-lit-label") ?? "";
+      const wheelchairLabel = i18n.t("wizard-step-two-accessibility-wheelchair-label") ?? "";
+      const pavedLabel = i18n.t("wizard-step-two-accessibility-paved-label") ?? "";
+
+      expect(within(accessibilityRegion).getByText(localizedRegex(wellLitLabel))).toBeTruthy();
+      expect(
+        within(accessibilityRegion).getByRole("switch", {
+          name: localizedRegex(wellLitLabel),
+        }),
+      ).toBeTruthy();
+      expect(within(accessibilityRegion).getByText(localizedRegex(wheelchairLabel))).toBeTruthy();
+      expect(
+        within(accessibilityRegion).getByRole("switch", {
+          name: localizedRegex(wheelchairLabel),
+        }),
+      ).toBeTruthy();
+      expect(within(accessibilityRegion).getByText(localizedRegex(pavedLabel))).toBeTruthy();
+      expect(
+        within(accessibilityRegion).getByRole("switch", {
+          name: localizedRegex(pavedLabel),
+        }),
+      ).toBeTruthy();
+
+      const footer = view.getByRole("contentinfo");
+      expect(
+        within(footer).getByRole("button", {
+          name: localizedRegex(i18n.t("wizard-step-two-review") ?? ""),
+        }),
+      ).toBeTruthy();
+      expect(
+        within(footer).getByRole("button", {
+          name: localizedRegex(i18n.t("wizard-header-back-label") ?? ""),
+        }),
+      ).toBeTruthy();
+    });
+  });
+
+  it("localises wizard step three route summary for Spanish", async () => {
+    await runWizardStepThreeSpanish(async ({ view, routeTitle }) => {
+      expect(view.getByRole("heading", { name: localizedRegex(routeTitle) })).toBeTruthy();
+
+      const startOverLabel =
+        translate("wizard-step-three-start-over", "Start over") ?? "Start over";
+      expect(view.getByRole("button", { name: localizedRegex(startOverLabel) })).toBeTruthy();
+
+      const summaryRegionLabel =
+        translate(wizardRouteSummary.ariaLabelKey, wizardRouteSummary.defaultAriaLabel) ??
+        wizardRouteSummary.defaultAriaLabel;
+      const summaryRegion = view.getByRole("region", {
+        name: localizedRegex(summaryRegionLabel),
+      });
+      const localizedStats = buildWizardRouteStats(i18n.t.bind(i18n));
+      localizedStats.forEach((stat) => {
+        expect(within(summaryRegion).getByText(localizedRegex(stat.unitLabel))).toBeTruthy();
+      });
+    });
+  });
+
+  it("localises wizard step three preferences panel for Spanish", async () => {
+    await runWizardStepThreeSpanish(async ({ view }) => {
+      const preferencesHeading =
+        translate("wizard-step-three-preferences-heading", "Your preferences applied") ??
+        "Your preferences applied";
+      expect(view.getByRole("heading", { name: localizedRegex(preferencesHeading) })).toBeTruthy();
+
+      const preferencesPanelLabel =
+        translate("wizard-step-three-preferences-panel-aria", "Your preferences applied") ??
+        "Your preferences applied";
+      const preferencesPanel = view.getByRole("region", {
+        name: localizedRegex(preferencesPanelLabel),
+      });
+
+      wizardSummaryHighlights.forEach((highlight) => {
+        const label =
+          translate(highlight.labelKey, highlight.defaultLabel) ?? highlight.defaultLabel;
+        expect(within(preferencesPanel).getByText(localizedRegex(label))).toBeTruthy();
+      });
+    });
+  });
+
+  it("localises wizard step three stops panel for Spanish", async () => {
+    await runWizardStepThreeSpanish(async ({ view }) => {
+      const stopsHeading =
+        translate("wizard-step-three-stops-heading", "Featured stops") ?? "Featured stops";
+      expect(view.getByRole("heading", { name: localizedRegex(stopsHeading) })).toBeTruthy();
+
+      const stopsPanelLabel =
+        translate("wizard-step-three-stops-panel-aria", "Featured stops") ?? "Featured stops";
+      const stopsPanel = view.getByRole("region", {
+        name: localizedRegex(stopsPanelLabel),
+      });
+
+      wizardGeneratedStops.forEach((stop) => {
+        const name = translate(stop.nameKey, stop.defaultName) ?? stop.defaultName;
+        const description =
+          translate(stop.descriptionKey, stop.defaultDescription) ?? stop.defaultDescription;
+        expect(within(stopsPanel).getByText(localizedRegex(name))).toBeTruthy();
+        expect(within(stopsPanel).getByText(localizedRegex(description))).toBeTruthy();
+      });
+    });
+  });
+
+  it("localises wizard step three weather panel for Spanish", async () => {
+    await runWizardStepThreeSpanish(async ({ view }) => {
+      const weatherHeading =
+        translate(wizardWeatherSummary.titleKey, wizardWeatherSummary.defaultTitle) ??
+        wizardWeatherSummary.defaultTitle;
+      expect(view.getByRole("heading", { name: localizedRegex(weatherHeading) })).toBeTruthy();
+
+      const weatherPanel = view.getByRole("region", {
+        name: localizedRegex(weatherHeading),
+      });
+      const spanishWeatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+      expect(
+        within(weatherPanel).getByText(spanishWeatherCopy.summary, {
+          exact: false,
+        }),
+      ).toBeTruthy();
+    });
+  });
+
+  it("localises wizard step three save dialog for Spanish", async () => {
+    await runWizardStepThreeSpanish(async ({ view, routeTitle }) => {
+      const saveLabel =
+        translate("wizard-step-three-save-button", "Save walk and view map") ??
+        "Save walk and view map";
+      const saveButton = view.getByRole("button", {
+        name: localizedRegex(saveLabel),
+      });
+
+      await act(async () => {
+        clickElement(saveButton);
+        await Promise.resolve();
+      });
+
+      const dialogTitle =
+        translate("wizard-step-three-dialog-title", "Walk saved!") ?? "Walk saved!";
+      const dialog = await screen.findByRole("dialog", {
+        name: localizedRegex(dialogTitle),
+      });
+      const dialogDefault = `${routeTitle} is ready under your saved walks. Start the route now or continue exploring other wizard options.`;
+      const dialogDescription =
+        translate("wizard-step-three-dialog-description", dialogDefault, {
+          routeTitle,
+        }) ?? dialogDefault;
+      expect(within(dialog).getByText(localizedRegex(dialogDescription))).toBeTruthy();
+
+      const closeLabel = translate("wizard-step-three-dialog-close", "Close") ?? "Close";
+      const viewMapLabel =
+        translate("wizard-step-three-dialog-view-map", "View on map") ?? "View on map";
+      expect(
+        within(dialog).getByRole("button", {
+          name: localizedRegex(closeLabel),
+        }),
+      ).toBeTruthy();
+      expect(
+        within(dialog).getByRole("button", {
+          name: localizedRegex(viewMapLabel),
+        }),
+      ).toBeTruthy();
     });
   });
 
@@ -450,15 +1045,26 @@ describe("Stage 3 wizard flows", () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);
     const view = within(container);
-    const saveButton = view.getByRole("button", { name: /save walk and view map/i });
+    const saveLabel =
+      translate("wizard-step-three-save-button", "Save walk and view map") ??
+      "Save walk and view map";
+    const saveButton = view.getByRole("button", {
+      name: localizedRegex(saveLabel),
+    });
 
     await act(async () => {
       clickElement(saveButton);
       await Promise.resolve();
     });
 
-    const dialog = await screen.findByRole("dialog", { name: /walk saved/i });
-    const closeButton = within(dialog).getByRole("button", { name: /close/i });
+    const dialogTitle = translate("wizard-step-three-dialog-title", "Walk saved!") ?? "Walk saved!";
+    const dialog = await screen.findByRole("dialog", {
+      name: localizedRegex(dialogTitle),
+    });
+    const closeLabel = translate("wizard-step-three-dialog-close", "Close") ?? "Close";
+    const closeButton = within(dialog).getByRole("button", {
+      name: localizedRegex(closeLabel),
+    });
     act(() => clickElement(closeButton));
   });
 
@@ -467,7 +1073,9 @@ describe("Stage 3 wizard flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
     expect(
-      view.getByRole("heading", { name: new RegExp(savedRoute.title ?? "", "i") }),
+      view.getByRole("heading", {
+        name: new RegExp(savedRoute.title ?? "", "i"),
+      }),
     ).toBeTruthy();
     expect(view.getByText(savedRoute.distance ?? "")).toBeTruthy();
     expect(view.getByText(savedRoute.duration ?? "")).toBeTruthy();
@@ -478,11 +1086,29 @@ describe("Stage 3 wizard flows", () => {
     ({ mount, root } = await renderRoute("/wizard/step-3"));
     const container = requireContainer(mount);
     const view = within(container);
-    const routePanel = view.getByRole("region", { name: /hidden gems loop/i });
-    const preferencesPanel = view.getByRole("region", { name: /your preferences applied/i });
-    const stopsPanel = view.getByRole("region", { name: /featured stops/i });
+    const routePanelLabel =
+      translate(wizardRouteSummary.ariaLabelKey, wizardRouteSummary.defaultAriaLabel) ??
+      wizardRouteSummary.defaultAriaLabel;
+    const preferencesPanelLabel =
+      translate("wizard-step-three-preferences-panel-aria", "Your preferences applied") ??
+      "Your preferences applied";
+    const stopsPanelLabel =
+      translate("wizard-step-three-stops-panel-aria", "Featured stops") ?? "Featured stops";
+    const weatherPanelTitle =
+      translate(wizardWeatherSummary.titleKey, wizardWeatherSummary.defaultTitle) ??
+      wizardWeatherSummary.defaultTitle;
+
+    const routePanel = view.getByRole("region", {
+      name: localizedRegex(routePanelLabel),
+    });
+    const preferencesPanel = view.getByRole("region", {
+      name: localizedRegex(preferencesPanelLabel),
+    });
+    const stopsPanel = view.getByRole("region", {
+      name: localizedRegex(stopsPanelLabel),
+    });
     const weatherPanel = view.getByRole("region", {
-      name: new RegExp(wizardWeatherSummary.title, "i"),
+      name: localizedRegex(weatherPanelTitle),
     });
 
     [routePanel, preferencesPanel, stopsPanel, weatherPanel].forEach((panel) => {
@@ -490,18 +1116,28 @@ describe("Stage 3 wizard flows", () => {
       expect(panel.classList.contains("wizard-section")).toBe(true);
     });
 
-    const summaryBadge = within(routePanel).getByText(/custom/i);
+    const badgeLabel =
+      translate(wizardRouteSummary.badgeKey, wizardRouteSummary.defaultBadge) ??
+      wizardRouteSummary.defaultBadge;
+    const summaryBadge = within(routePanel).getByText(localizedRegex(badgeLabel));
     expect(summaryBadge.classList.contains("wizard-badge")).toBe(true);
 
     wizardSummaryHighlights.forEach((highlight) => {
-      expect(within(preferencesPanel).getByText(new RegExp(highlight.label, "i"))).toBeTruthy();
+      const label = translate(highlight.labelKey, highlight.defaultLabel) ?? highlight.defaultLabel;
+      expect(within(preferencesPanel).getByText(localizedRegex(label))).toBeTruthy();
     });
 
     wizardGeneratedStops.forEach((stop) => {
-      expect(within(stopsPanel).getByText(new RegExp(stop.name, "i"))).toBeTruthy();
+      const name = translate(stop.nameKey, stop.defaultName) ?? stop.defaultName;
+      expect(within(stopsPanel).getByText(localizedRegex(name))).toBeTruthy();
     });
 
-    expect(within(weatherPanel).getByText(wizardWeatherSummary.summary)).toBeTruthy();
+    const localizedWeatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+    expect(
+      within(weatherPanel).getByText(localizedWeatherCopy.summary, {
+        exact: false,
+      }),
+    ).toBeTruthy();
   });
 });
 
@@ -525,87 +1161,144 @@ describe("Stage 4 completion flows", () => {
     cleanup();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
+    setDocumentDirection("ltr");
+    await resetLanguage();
   });
 
   it("shows a celebratory toast when rating a completed walk", async () => {
     ({ mount, root } = await renderRoute("/walk-complete"));
     const container = requireContainer(mount);
     const view = within(container);
-    const badge = view.getByText(/route completed/i);
+    const badgeLabel = translate("walk-complete-badge-route", "Route completed");
+    const badge = view.getByText(localizedRegex(badgeLabel));
     expect(badge.classList.contains("walk-complete__badge")).toBe(true);
 
     const completionHeadings = view.getAllByRole("heading", { level: 2 });
     expect(completionHeadings.length).toBeGreaterThan(0);
 
-    const rateButton = view.getByRole("button", { name: /rate this walk/i });
+    const rateLabel = translate("walk-complete-actions-rate", "Rate this walk");
+    const rateButton = view.getByRole("button", {
+      name: localizedRegex(rateLabel),
+    });
     await act(async () => {
       clickElement(rateButton);
       await Promise.resolve();
     });
 
-    expect(await screen.findByText(/rating saved/i)).toBeTruthy();
+    const toastLabel = translate("walk-complete-toast-rating-saved", "Rating saved");
+    expect(await screen.findByText(localizedRegex(toastLabel))).toBeTruthy();
 
-    const shareButton = view.getByRole("button", { name: /^share$/i });
+    const shareActionLabel = translate("walk-complete-actions-share", "Share");
+    const shareButton = view.getByRole("button", {
+      name: localizedRegex(shareActionLabel),
+    });
     await act(async () => {
       clickElement(shareButton);
       await Promise.resolve();
     });
 
-    const dialog = await screen.findByRole("dialog", { name: /share highlights/i });
+    const dialogTitle = translate("walk-complete-share-dialog-title", "Share highlights");
+    const dialog = await screen.findByRole("dialog", {
+      name: localizedRegex(dialogTitle),
+    });
     walkCompletionShareOptions.forEach((option) => {
       expect(within(dialog).getByText(new RegExp(option.label, "i"))).toBeInTheDocument();
     });
-    const cancelButton = within(dialog).getByRole("button", { name: /cancel/i });
+    const cancelLabel = translate("walk-complete-share-dialog-cancel", "Cancel");
+    const cancelButton = within(dialog).getByRole("button", {
+      name: localizedRegex(cancelLabel),
+    });
     act(() => clickElement(cancelButton));
   });
 
   it("lists existing downloads on the offline manager route", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    const downloadsHeading = translate("offline-downloads-heading", "Downloaded areas");
+    const downloadsRegion = view.getByRole("region", {
+      name: localizedRegex(downloadsHeading),
+    });
     expect(within(downloadsRegion).getAllByRole("article").length).toBeGreaterThan(0);
-    expect(within(downloadsRegion).getByText(/manage maps for offline navigation/i)).toBeTruthy();
+    const downloadsDescription = translate(
+      "offline-downloads-description",
+      "Manage maps for offline navigation",
+    );
+    expect(within(downloadsRegion).getByText(localizedRegex(downloadsDescription))).toBeTruthy();
   });
 
   it("renders offline storage overview summary", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    expect(view.getByText(/storage overview/i)).toBeTruthy();
-    expect(view.getByText(/2\.8 gb of 8 gb/i)).toBeTruthy();
+    const storageHeading = translate("offline-storage-heading", "Storage overview");
+    expect(view.getByText(localizedRegex(storageHeading))).toBeTruthy();
+
+    const { usedLabel, totalLabel } = OFFLINE_STORAGE_PLACEHOLDERS;
+    const storageUsedDescription = translate(
+      "offline-storage-used-description",
+      `${usedLabel} of ${totalLabel}`,
+      { used: usedLabel, total: totalLabel },
+    );
+    const pattern = localizedRegex(storageUsedDescription ?? `${usedLabel} ${totalLabel}`);
+
+    expect(view.getByText(pattern)).toBeTruthy();
   });
 
   it("opens the offline download dialog with the add button", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    const addButton = view.getByRole("button", { name: /add offline area/i });
+    const addAreaLabel = translate("offline-header-add-area-label", "Add offline area");
+    const addButton = view.getByRole("button", {
+      name: localizedRegex(addAreaLabel),
+    });
 
     await act(async () => {
       clickElement(addButton);
       await Promise.resolve();
     });
 
-    const dialog = await screen.findByRole("dialog", { name: /download new area/i });
+    const dialogTitle = translate("offline-dialog-title", "Download new area");
+    const dialog = await screen.findByRole("dialog", {
+      name: localizedRegex(dialogTitle),
+    });
     expect(dialog).toBeTruthy();
-    expect(within(dialog).getByPlaceholderText(/search cities or regions/i)).toBeTruthy();
+    const searchPlaceholder = translate(
+      "offline-dialog-search-placeholder",
+      "Search cities or regions",
+    );
+    expect(
+      within(dialog).getByPlaceholderText(searchPlaceholder ?? "Search cities or regions"),
+    ).toBeTruthy();
+    const dialogCancel = translate("offline-dialog-cancel", "Cancel");
+    expect(
+      within(dialog).getByRole("button", {
+        name: localizedRegex(dialogCancel),
+      }),
+    ).toBeTruthy();
   });
 
   it("allows removing a download when managing the offline list", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    const downloadsRegion = view.getByRole("region", {
+      name: /downloaded areas/i,
+    });
     const initialDownloads = within(downloadsRegion).getAllByRole("article");
     expect(initialDownloads.length).toBeGreaterThan(0);
 
-    const manageButton = within(downloadsRegion).getByRole("button", { name: /^manage$/i });
+    const manageButton = within(downloadsRegion).getByRole("button", {
+      name: /^manage$/i,
+    });
 
     await act(async () => {
       clickElement(manageButton);
       await Promise.resolve();
     });
 
-    const deleteButtons = within(downloadsRegion).getAllByRole("button", { name: /delete/i });
+    const deleteButtons = within(downloadsRegion).getAllByRole("button", {
+      name: /delete/i,
+    });
     expect(deleteButtons.length).toBe(initialDownloads.length);
 
     await act(async () => {
@@ -613,28 +1306,38 @@ describe("Stage 4 completion flows", () => {
       await Promise.resolve();
     });
 
-    const undoCards = within(downloadsRegion).getAllByRole("article", { name: /deleted/i });
+    const undoCards = within(downloadsRegion).getAllByRole("article", {
+      name: /deleted/i,
+    });
     expect(undoCards.length).toBe(1);
   });
 
   it("restores a download via undo", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
-    const manageButton = within(downloadsRegion).getByRole("button", { name: /^manage$/i });
+    const downloadsRegion = view.getByRole("region", {
+      name: /downloaded areas/i,
+    });
+    const manageButton = within(downloadsRegion).getByRole("button", {
+      name: /^manage$/i,
+    });
 
     await act(async () => {
       clickElement(manageButton);
       await Promise.resolve();
     });
 
-    const deleteButtons = within(downloadsRegion).getAllByRole("button", { name: /delete/i });
+    const deleteButtons = within(downloadsRegion).getAllByRole("button", {
+      name: /delete/i,
+    });
     await act(async () => {
       clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
-    const undoCard = within(downloadsRegion).getByRole("article", { name: /deleted/i });
+    const undoCard = within(downloadsRegion).getByRole("article", {
+      name: /deleted/i,
+    });
     const undoButton = within(undoCard).getByRole("button", { name: /undo/i });
 
     await act(async () => {
@@ -648,15 +1351,21 @@ describe("Stage 4 completion flows", () => {
   it("clears undo panels when finishing manage mode", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
-    const manageButton = within(downloadsRegion).getByRole("button", { name: /^manage$/i });
+    const downloadsRegion = view.getByRole("region", {
+      name: /downloaded areas/i,
+    });
+    const manageButton = within(downloadsRegion).getByRole("button", {
+      name: /^manage$/i,
+    });
 
     await act(async () => {
       clickElement(manageButton);
       await Promise.resolve();
     });
 
-    const deleteButtons = within(downloadsRegion).getAllByRole("button", { name: /delete/i });
+    const deleteButtons = within(downloadsRegion).getAllByRole("button", {
+      name: /delete/i,
+    });
     await act(async () => {
       clickElement(deleteButtons[0]);
       await Promise.resolve();
@@ -664,7 +1373,9 @@ describe("Stage 4 completion flows", () => {
 
     expect(within(downloadsRegion).getByRole("article", { name: /deleted/i })).toBeTruthy();
 
-    const doneButton = within(downloadsRegion).getByRole("button", { name: /^done$/i });
+    const doneButton = within(downloadsRegion).getByRole("button", {
+      name: /^done$/i,
+    });
     await act(async () => {
       clickElement(doneButton);
       await Promise.resolve();
@@ -676,7 +1387,9 @@ describe("Stage 4 completion flows", () => {
   it("labels offline download cards as readable articles", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    const downloadsRegion = view.getByRole("region", { name: /downloaded areas/i });
+    const downloadsRegion = view.getByRole("region", {
+      name: /downloaded areas/i,
+    });
     const downloadCards = within(downloadsRegion).getAllByRole("article");
     expect(downloadCards.length).toBeGreaterThan(0);
     downloadCards.forEach((card) => {
@@ -726,5 +1439,232 @@ describe("Stage 4 completion flows", () => {
     });
 
     expect(await screen.findByRole("dialog", { name: /preferences saved/i })).toBeTruthy();
+  });
+
+  it("localises the safety & accessibility screen for Spanish", async () => {
+    await i18nReady;
+    await withI18nLanguage("es", async () => {
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      const view = within(requireContainer(mount));
+
+      const headerTitle =
+        translate("safety-header-title", "Safety & Accessibility") ?? "Safety & Accessibility";
+      const headerDescription =
+        translate(
+          "safety-header-description",
+          "Customise your walking routes for comfort and safety",
+        ) ?? "Customise your walking routes for comfort and safety";
+      const saveLabel = translate("safety-save-button", "Save preferences") ?? "Save preferences";
+      expect(view.getByRole("heading", { name: localizedRegex(headerTitle) })).toBeTruthy();
+      expect(view.getByText(localizedRegex(headerDescription))).toBeTruthy();
+      expect(view.getByRole("button", { name: localizedRegex(saveLabel) })).toBeTruthy();
+
+      const accordionLabel =
+        translate("safety-section-mobility-title", "Mobility Support") ?? "Mobility Support";
+      const accordionItem = view.getByRole("button", {
+        name: localizedRegex(accordionLabel),
+      });
+      expect(accordionItem).toBeTruthy();
+
+      const toggleLabel =
+        translate("safety-toggle-step-free-label", "Step-free routes") ?? "Step-free routes";
+      const toggle = view.getByRole("switch", {
+        name: localizedRegex(toggleLabel),
+      });
+      act(() => clickElement(toggle));
+
+      const saveButton = view.getByRole("button", {
+        name: localizedRegex(saveLabel),
+      });
+      await act(async () => {
+        clickElement(saveButton);
+        await Promise.resolve();
+      });
+
+      const dialogTitle =
+        translate("safety-dialog-title", "Preferences saved") ?? "Preferences saved";
+      const dialogDescription =
+        translate(
+          "safety-dialog-description",
+          "Your safety and accessibility settings are now part of future walk planning.",
+        ) ?? "Your safety and accessibility settings are now part of future walk planning.";
+      const dialogContinue = translate("safety-dialog-continue", "Continue") ?? "Continue";
+
+      const dialog = await screen.findByRole("dialog", {
+        name: localizedRegex(dialogTitle),
+      });
+      expect(within(dialog).getByText(localizedRegex(dialogDescription))).toBeTruthy();
+      expect(
+        within(dialog).getByRole("button", {
+          name: localizedRegex(dialogContinue),
+        }),
+      ).toBeTruthy();
+    });
+  });
+
+  it("localises the safety & accessibility screen for Portuguese", async () => {
+    await i18nReady;
+    await withI18nLanguage("pt", async () => {
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      const view = within(requireContainer(mount));
+
+      const headerTitle =
+        translate("safety-header-title", "Safety & Accessibility") ?? "Safety & Accessibility";
+      const headerDescription =
+        translate(
+          "safety-header-description",
+          "Customise your walking routes for comfort and safety",
+        ) ?? "Customise your walking routes for comfort and safety";
+      const saveLabel = translate("safety-save-button", "Save preferences") ?? "Save preferences";
+      expect(view.getByRole("heading", { name: localizedRegex(headerTitle) })).toBeTruthy();
+      expect(view.getByText(localizedRegex(headerDescription))).toBeTruthy();
+      expect(view.getByRole("button", { name: localizedRegex(saveLabel) })).toBeTruthy();
+
+      const accordionLabel =
+        translate("safety-section-mobility-title", "Mobility Support") ?? "Mobility Support";
+      const accordionItem = view.getByRole("button", {
+        name: localizedRegex(accordionLabel),
+      });
+      expect(accordionItem).toBeTruthy();
+
+      const toggleLabel =
+        translate("safety-toggle-step-free-label", "Step-free routes") ?? "Step-free routes";
+      const toggle = view.getByRole("switch", {
+        name: localizedRegex(toggleLabel),
+      });
+      act(() => clickElement(toggle));
+
+      const saveButton = view.getByRole("button", {
+        name: localizedRegex(saveLabel),
+      });
+      await act(async () => {
+        clickElement(saveButton);
+        await Promise.resolve();
+      });
+
+      const dialogTitle =
+        translate("safety-dialog-title", "Preferences saved") ?? "Preferences saved";
+      const dialogDescription =
+        translate(
+          "safety-dialog-description",
+          "Your safety and accessibility settings are now part of future walk planning.",
+        ) ?? "Your safety and accessibility settings are now part of future walk planning.";
+      const dialogContinue = translate("safety-dialog-continue", "Continue") ?? "Continue";
+
+      const dialog = await screen.findByRole("dialog", {
+        name: localizedRegex(dialogTitle),
+      });
+      expect(within(dialog).getByText(localizedRegex(dialogDescription))).toBeTruthy();
+      expect(
+        within(dialog).getByRole("button", {
+          name: localizedRegex(dialogContinue),
+        }),
+      ).toBeTruthy();
+    });
+  });
+
+  describe("Logical layout behaviour", () => {
+    it("positions the discover skip action via logical offsets", async () => {
+      await changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/discover"));
+      const ltrContainer = requireContainer(mount);
+      const ltrView = within(ltrContainer);
+      const skipButton = ltrView.getByRole("button", { name: /skip/i });
+      const readInset = (element: HTMLElement, property: string) =>
+        window.getComputedStyle(element).getPropertyValue(property);
+
+      expect(readInset(skipButton, "inset-inline-end")).toBe("1.5rem");
+
+      cleanup();
+      await changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/discover"));
+      const rtlContainer = requireContainer(mount);
+      const rtlView = within(rtlContainer);
+      const rtlSkipButton = rtlView.getByRole("button", { name: /skip/i });
+      expect(readInset(rtlSkipButton, "inset-inline-end")).toBe("1.5rem");
+    });
+
+    it("aligns customize route previews using text-start semantics", async () => {
+      await changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/customize"));
+      let container = requireContainer(mount);
+      let view = within(container);
+      const findRouteButton = () => {
+        const buttons = view.getAllByRole("button");
+        const label = i18n.t("customize-route-preview-route-a-title", {
+          defaultValue: "Route A",
+        });
+        const pattern = new RegExp(escapeRegExp(label), "i");
+        return buttons.find((button) => pattern.test(button.textContent ?? ""));
+      };
+      const preview = findRouteButton();
+      if (!preview) {
+        throw new Error("Route A preview not rendered");
+      }
+      expect(window.getComputedStyle(preview).textAlign).toBe("left");
+
+      cleanup();
+      await changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/customize"));
+      container = requireContainer(mount);
+      view = within(container);
+      const rtlPreview = findRouteButton();
+      if (!rtlPreview) {
+        throw new Error("Route A preview not rendered for RTL");
+      }
+      expect(window.getComputedStyle(rtlPreview).textAlign).toBe("right");
+    });
+
+    it("keeps safety accordion triggers aligned for both directions", async () => {
+      await changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      let container = requireContainer(mount);
+      let view = within(container);
+      const ltrLabel = i18n.t("safety-section-mobility-title", {
+        defaultValue: "Mobility Support",
+      });
+      const ltrHeading = view.getByText(new RegExp(escapeRegExp(ltrLabel ?? ""), "i"));
+      const ltrTrigger = ltrHeading.closest("button");
+      expect(ltrTrigger).toBeTruthy();
+      expect(window.getComputedStyle(ltrTrigger as Element).textAlign).toBe("left");
+
+      cleanup();
+      await changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/safety-accessibility"));
+      container = requireContainer(mount);
+      view = within(container);
+      const rtlLabel = i18n.t("safety-section-mobility-title", {
+        defaultValue: "Mobility Support",
+      });
+      const rtlHeading = view.getByText(new RegExp(escapeRegExp(rtlLabel ?? ""), "i"));
+      const rtlTrigger = rtlHeading.closest("button");
+      expect(rtlTrigger).toBeTruthy();
+      expect(window.getComputedStyle(rtlTrigger as Element).textAlign).toBe("right");
+    });
+
+    it("mirrors wizard weather summaries with text-end alignment", async () => {
+      await changeLanguage("en-GB");
+      ({ mount, root } = await renderRoute("/wizard/step-3"));
+      let container = requireContainer(mount);
+      let view = within(container);
+      let weatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+      const temperature = view.getByText(weatherCopy.temperatureLabel);
+      const summaryBlock = temperature.parentElement as HTMLElement;
+      expect(window.getComputedStyle(summaryBlock).textAlign).toBe("right");
+
+      cleanup();
+      await changeLanguage("ar");
+      setDocumentDirection("rtl");
+      ({ mount, root } = await renderRoute("/wizard/step-3"));
+      container = requireContainer(mount);
+      view = within(container);
+      weatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+      const rtlTemperature = view.getByText(weatherCopy.temperatureLabel);
+      const rtlSummaryBlock = rtlTemperature.parentElement as HTMLElement;
+      expect(window.getComputedStyle(rtlSummaryBlock).textAlign).toBe("left");
+    });
   });
 });

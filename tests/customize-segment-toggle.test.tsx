@@ -1,9 +1,17 @@
-import { afterEach, beforeEach, describe, expect, it } from "bun:test";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from "bun:test";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { act, type JSX, useState } from "react";
 import { createRoot, type Root } from "react-dom/client";
 
 import { CustomizeSegmentToggle } from "../src/app/features/customize/segment-toggle-card";
+import { installLogicalStyleStub } from "./support/logical-style-stub";
+
+const applyDocumentDirection = (direction: "ltr" | "rtl") => {
+  document.documentElement.dir = direction;
+  document.documentElement.setAttribute("data-direction", direction);
+  document.body.dir = direction;
+  document.body.setAttribute("data-direction", direction);
+};
 
 function Harness(): JSX.Element {
   const [value, setValue] = useState("balanced");
@@ -32,6 +40,7 @@ function Harness(): JSX.Element {
 describe("CustomizeSegmentToggle", () => {
   let mountNode: HTMLDivElement | null = null;
   let root: Root | null = null;
+  let removeStyles: (() => void) | undefined;
 
   function mount(): void {
     mountNode = document.createElement("div");
@@ -53,6 +62,14 @@ describe("CustomizeSegmentToggle", () => {
     mountNode = null;
     document.body.innerHTML = "";
   }
+
+  beforeAll(() => {
+    removeStyles = installLogicalStyleStub();
+  });
+
+  afterAll(() => {
+    removeStyles?.();
+  });
 
   beforeEach(() => {
     cleanup();
@@ -89,5 +106,27 @@ describe("CustomizeSegmentToggle", () => {
     const pressedState =
       pressed?.getAttribute("aria-pressed") ?? pressed?.getAttribute("aria-checked");
     expect(pressedState).toBe("true");
+  });
+
+  it("aligns selection content using logical text-start declarations", () => {
+    const readActiveToggle = () =>
+      mountNode?.querySelector<HTMLButtonElement>("button[data-state='on']") ?? null;
+
+    let activeToggle = readActiveToggle();
+    expect(activeToggle).toBeTruthy();
+
+    applyDocumentDirection("ltr");
+    expect(window.getComputedStyle(activeToggle as Element).textAlign).toBe("left");
+
+    cleanup();
+    applyDocumentDirection("rtl");
+    mount();
+    activeToggle = readActiveToggle();
+    expect(activeToggle).toBeTruthy();
+    expect(window.getComputedStyle(activeToggle as Element).textAlign).toBe("right");
+
+    cleanup();
+    applyDocumentDirection("ltr");
+    mount();
   });
 });

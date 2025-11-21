@@ -1,41 +1,68 @@
 /** @file Walk wizard step one: duration and interests. */
 
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useMemo, useState } from "react";
+import { type JSX, useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { InterestToggleGroup } from "../../../components/interest-toggle-group";
 import { SliderControl } from "../../../components/slider-control";
 import { WizardLayout } from "../../../components/wizard-layout";
 import { WizardSection } from "../../../components/wizard-section";
-import { defaultSelectedInterests, discoverInterests } from "../../../data/discover";
+import { defaultSelectedInterests, discoverInterestDescriptors } from "../../../data/discover";
 import { wizardSteps } from "../../../data/wizard";
-
-function formatDuration(value: number) {
-  return `${value} min`;
-}
 
 export function WizardStepOne(): JSX.Element {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [duration, setDuration] = useState(60);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([
     ...defaultSelectedInterests,
   ]);
+  const helpMessage = t("wizard-help-placeholder", {
+    defaultValue: "Contextual help coming soon",
+  });
+  const durationSectionLabel = t("wizard-step-one-duration-section-aria", {
+    defaultValue: "Walk duration controls",
+  });
+  const durationLabel = t("wizard-step-one-duration-label", { defaultValue: "Walk duration" });
+  const durationAriaLabel = t("wizard-step-one-duration-aria", {
+    defaultValue: "Walk duration slider",
+  });
+  const durationMarkers = [
+    t("wizard-step-one-duration-marker-start", { defaultValue: "15 min" }),
+    t("wizard-step-one-duration-marker-mid", { defaultValue: "90 min" }),
+    t("wizard-step-one-duration-marker-end", { defaultValue: "180 min" }),
+  ];
+  const interestsSectionLabel = t("wizard-step-one-interests-section-aria", {
+    defaultValue: "Interests",
+  });
+  const interestsHeading = t("wizard-step-one-interests-heading", { defaultValue: "Interests" });
+  const interestPickerAria = t("wizard-step-one-interests-picker-aria", {
+    defaultValue: "Select walk interests",
+  });
+  const continueLabel = t("wizard-step-one-continue", {
+    defaultValue: "Continue to preferences",
+  });
 
-  const interestIds = useMemo(
-    () =>
-      Array.from(
-        new Set<string>([
-          ...defaultSelectedInterests,
-          ...discoverInterests.map((option) => option.id),
-        ]),
-      ),
-    [],
-  );
+  const interestIds = useMemo(() => discoverInterestDescriptors.map((option) => option.id), []);
 
   const selectedLabel = useMemo(
-    () => `${selectedInterests.length} selected`,
-    [selectedInterests.length],
+    () =>
+      t("wizard-step-one-interests-selected", {
+        count: selectedInterests.length,
+        defaultValue: `${selectedInterests.length} selected`,
+      }),
+    [selectedInterests.length, t],
+  );
+
+  const formatDuration = useCallback(
+    (value: number) =>
+      t("wizard-step-one-duration-format", {
+        minutes: value,
+        defaultValue: `${value} min`,
+      }),
+    [t],
   );
 
   return (
@@ -43,38 +70,38 @@ export function WizardStepOne(): JSX.Element {
       steps={wizardSteps}
       activeStepId="step-1"
       onBack={() => navigate({ to: "/explore" })}
-      onHelp={() => window.alert("Contextual help coming soon")}
+      onHelp={() => window.alert(helpMessage)}
       footer={
         <button
           type="button"
           className="cta-button"
           onClick={() => navigate({ to: "/wizard/step-2" })}
         >
-          Continue to preferences
+          {continueLabel}
         </button>
       }
     >
-      <WizardSection className="mb-8" aria-label="Walk duration controls">
+      <WizardSection className="mb-8" aria-label={durationSectionLabel}>
         <SliderControl
           id="wizard-duration"
-          label="Walk duration"
+          label={durationLabel}
           iconToken="{icon.object.duration}"
           value={duration}
           min={15}
           max={180}
           step={5}
           valueFormatter={formatDuration}
-          markers={["15m", "90m", "180m"]}
-          ariaLabel="Walk duration slider"
+          markers={durationMarkers}
+          ariaLabel={durationAriaLabel}
           onValueChange={setDuration}
         />
       </WizardSection>
 
-      <WizardSection aria-label="Interests">
+      <WizardSection aria-label={interestsSectionLabel}>
         <header className="mb-4 flex items-center justify-between">
           <h2 className="section-heading section-heading--spacious text-base-content">
             <Icon token="{icon.action.like}" className="text-accent" aria-hidden />
-            Interests
+            {interestsHeading}
           </h2>
           <span className="text-xs font-medium text-base-content/60">{selectedLabel}</span>
         </header>
@@ -82,7 +109,7 @@ export function WizardStepOne(): JSX.Element {
           interestIds={interestIds}
           selected={selectedInterests}
           onChange={setSelectedInterests}
-          ariaLabel="Select walk interests"
+          ariaLabel={interestPickerAria}
         />
       </WizardSection>
     </WizardLayout>
