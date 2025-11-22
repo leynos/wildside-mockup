@@ -5,13 +5,11 @@ import { type JSX, type ReactNode, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
+import type { ExploreCategory, FeaturedWalk, PopularTheme } from "../../data/explore";
 import {
   communityPick,
   curatedCollections,
-  type ExploreCategory,
-  type FeaturedWalk,
   formatRating,
-  popularThemes,
   trendingRoutes,
 } from "../../data/explore";
 import type {
@@ -145,10 +143,12 @@ export function FeaturedWalkCard({
 
 type PopularThemesGridProps = {
   formatDistanceRangeLabel: (range: readonly [number, number]) => string;
+  themes: readonly PopularTheme[];
 };
 
 export function PopularThemesGrid({
   formatDistanceRangeLabel,
+  themes,
 }: PopularThemesGridProps): JSX.Element {
   const { t } = useTranslation();
   const heading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
@@ -159,7 +159,7 @@ export function PopularThemesGrid({
         {heading}
       </h2>
       <div className="grid grid-cols-2 gap-4">
-        {popularThemes.map((theme) => (
+        {themes.map((theme) => (
           <article key={theme.id} className="explore-compact__card">
             <div className="relative mb-3 h-24 overflow-hidden rounded-lg">
               <img
