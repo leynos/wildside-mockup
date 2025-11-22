@@ -309,7 +309,13 @@ offline-dialog-cancel = Annulla
 offline-dialog-preview = Anteprima download
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute = minuti
+unit-duration-minute =
+    { $count ->
+       *[other] minuti
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = soste
+unit-count-stop =
+    { $count ->
+       *[other] soste
+    }

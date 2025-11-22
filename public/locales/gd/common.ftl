@@ -321,7 +321,13 @@ offline-dialog-cancel = Sguir dheth
 offline-dialog-preview = Ro-shealladh luchdachaidh sìos
 unit-distance-kilometre = km
 unit-distance-mile = mìltean
-unit-duration-minute = mionaidean
+unit-duration-minute =
+    { $count ->
+       *[other] mionaidean
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = stadan
+unit-count-stop =
+    { $count ->
+       *[other] stadan
+    }

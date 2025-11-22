@@ -309,7 +309,13 @@ offline-dialog-cancel = Peruuta
 offline-dialog-preview = Esikatsele latausta
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute = minuuttia
+unit-duration-minute =
+    { $count ->
+       *[other] minuuttia
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = pysähdystä
+unit-count-stop =
+    { $count ->
+       *[other] pysähdystä
+    }

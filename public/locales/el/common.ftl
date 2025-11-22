@@ -309,7 +309,13 @@ offline-dialog-cancel = Ακύρωση
 offline-dialog-preview = Προεπισκόπηση λήψης
 unit-distance-kilometre = χλμ
 unit-distance-mile = mi
-unit-duration-minute = λεπτά
+unit-duration-minute =
+    { $count ->
+       *[other] λεπτά
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = στάσεις
+unit-count-stop =
+    { $count ->
+       *[other] στάσεις
+    }

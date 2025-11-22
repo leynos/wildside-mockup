@@ -309,7 +309,13 @@ offline-dialog-cancel = 취소
 offline-dialog-preview = 다운로드 미리보기
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute = 분
+unit-duration-minute =
+    { $count ->
+       *[other] 분
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = 정차 지점
+unit-count-stop =
+    { $count ->
+       *[other] 정차 지점
+    }

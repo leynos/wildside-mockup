@@ -309,7 +309,13 @@ offline-dialog-cancel = İptal
 offline-dialog-preview = İndirmeyi önizle
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute = dakika
+unit-duration-minute =
+    { $count ->
+       *[other] dakika
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = durak
+unit-count-stop =
+    { $count ->
+       *[other] durak
+    }

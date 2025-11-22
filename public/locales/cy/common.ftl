@@ -325,7 +325,13 @@ offline-dialog-cancel = Canslo
 offline-dialog-preview = Rhagolwg lawrlwytho
 unit-distance-kilometre = km
 unit-distance-mile = milltir
-unit-duration-minute = mun
+unit-duration-minute =
+    { $count ->
+       *[other] mun
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = stopiau
+unit-count-stop =
+    { $count ->
+       *[other] stopiau
+    }

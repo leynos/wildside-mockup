@@ -307,7 +307,13 @@ offline-dialog-cancel = 取消
 offline-dialog-preview = 預覽下載
 unit-distance-kilometre = 公里
 unit-distance-mile = mi
-unit-duration-minute = 分鐘
+unit-duration-minute =
+    { $count ->
+       *[other] 分鐘
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = 站
+unit-count-stop =
+    { $count ->
+       *[other] 站
+    }

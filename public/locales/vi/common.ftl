@@ -311,7 +311,13 @@ offline-dialog-cancel = Hủy
 offline-dialog-preview = Xem trước tải xuống
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute = phút
+unit-duration-minute =
+    { $count ->
+       *[other] phút
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = điểm dừng
+unit-count-stop =
+    { $count ->
+       *[other] điểm dừng
+    }

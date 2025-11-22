@@ -325,7 +325,23 @@ offline-dialog-cancel = إلغاء
 offline-dialog-preview = معاينة التنزيل
 unit-distance-kilometre = كم
 unit-distance-mile = mi
-unit-duration-minute = دقائق
+unit-duration-minute =
+    { $count ->
+        [zero] دقائق
+        [one] دقيقة
+        [two] دقيقتان
+        [few] دقائق
+        [many] دقيقة
+       *[other] دقيقة
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = محطات
+unit-count-stop =
+    { $count ->
+        [zero] محطات
+        [one] محطة
+        [two] محطتان
+        [few] محطات
+        [many] محطة
+       *[other] محطة
+    }

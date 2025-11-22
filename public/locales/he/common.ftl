@@ -323,7 +323,13 @@ offline-dialog-cancel = ביטול
 offline-dialog-preview = תצוגה מקדימה של ההורדה
 unit-distance-kilometre = ק"מ
 unit-distance-mile = mi
-unit-duration-minute = דקות
+unit-duration-minute =
+    { $count ->
+       *[other] דקות
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = עצירות
+unit-count-stop =
+    { $count ->
+       *[other] עצירות
+    }

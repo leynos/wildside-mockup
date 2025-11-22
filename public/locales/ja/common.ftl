@@ -301,7 +301,13 @@ offline-dialog-cancel = キャンセル
 offline-dialog-preview = ダウンロードをプレビュー
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute = 分
+unit-duration-minute =
+    { $count ->
+       *[other] 分
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = 箇所
+unit-count-stop =
+    { $count ->
+       *[other] 箇所
+    }

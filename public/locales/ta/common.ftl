@@ -309,7 +309,13 @@ offline-dialog-cancel = ரத்து
 offline-dialog-preview = பதிவிறக்க முன்னோட்டம்
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute = நிமிடங்கள்
+unit-duration-minute =
+    { $count ->
+       *[other] நிமிடங்கள்
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-unit-count-stop = நிறுத்தங்கள்
+unit-count-stop =
+    { $count ->
+       *[other] நிறுத்தங்கள்
+    }
