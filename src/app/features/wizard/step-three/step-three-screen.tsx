@@ -210,13 +210,14 @@ export function WizardStepThree(): JSX.Element {
             const description = t(stop.descriptionKey, {
               defaultValue: stop.defaultDescription,
             });
-            const distanceLabel = stop.noteDistanceMetres
-              ? formatDistance(stop.noteDistanceMetres, {
-                  t,
-                  locale: i18n.language,
-                  unitSystem,
-                })
-              : undefined;
+            const distanceLabel =
+              stop.noteDistanceMetres != null
+                ? formatDistance(stop.noteDistanceMetres, {
+                    t,
+                    locale: i18n.language,
+                    unitSystem,
+                  })
+                : undefined;
             const note = t(stop.noteKey, {
               defaultValue: stop.defaultNote,
               ...(distanceLabel
