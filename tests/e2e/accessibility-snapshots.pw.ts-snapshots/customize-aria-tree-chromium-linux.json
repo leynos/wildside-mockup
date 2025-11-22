@@ -172,7 +172,7 @@
                                               {
                                                 "role": "slider",
                                                 "name": "Distance slider handle",
-                                                "value": 3.200000047683716
+                                                "value": 3200
                                               }
                                             ]
                                           }
@@ -211,11 +211,11 @@
                                             "children": [
                                               {
                                                 "role": "text",
-                                                "name": "75 min",
+                                                "name": "75 minutes",
                                                 "children": [
                                                   {
                                                     "role": "InlineTextBox",
-                                                    "name": "75 min"
+                                                    "name": "75 minutes"
                                                   }
                                                 ]
                                               }
@@ -244,7 +244,7 @@
                                               {
                                                 "role": "slider",
                                                 "name": "Duration slider handle",
-                                                "value": 75
+                                                "value": 4500
                                               }
                                             ]
                                           }
@@ -956,7 +956,7 @@
                                         "children": [
                                           {
                                             "role": "button",
-                                            "name": "Route A 3.2 km • 75 min",
+                                            "name": "Route A 3.2 km • 75 minutes",
                                             "pressed": true,
                                             "children": [
                                               {
@@ -1005,7 +1005,7 @@
                                                   },
                                                   {
                                                     "role": "text",
-                                                    "name": "75 min",
+                                                    "name": "75 minutes",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
@@ -1013,7 +1013,7 @@
                                                       },
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "min"
+                                                        "name": "minutes"
                                                       }
                                                     ]
                                                   }
@@ -1023,7 +1023,7 @@
                                           },
                                           {
                                             "role": "button",
-                                            "name": "Route B 2.8 km • 68 min",
+                                            "name": "Route B 2.8 km • 68 minutes",
                                             "pressed": false,
                                             "children": [
                                               {
@@ -1072,7 +1072,7 @@
                                                   },
                                                   {
                                                     "role": "text",
-                                                    "name": "68 min",
+                                                    "name": "68 minutes",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
@@ -1080,7 +1080,7 @@
                                                       },
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "min"
+                                                        "name": "minutes"
                                                       }
                                                     ]
                                                   }
@@ -1090,7 +1090,7 @@
                                           },
                                           {
                                             "role": "button",
-                                            "name": "Route C 3.6 km • 82 min",
+                                            "name": "Route C 3.6 km • 82 minutes",
                                             "pressed": false,
                                             "children": [
                                               {
@@ -1139,7 +1139,7 @@
                                                   },
                                                   {
                                                     "role": "text",
-                                                    "name": "82 min",
+                                                    "name": "82 minutes",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
@@ -1147,7 +1147,7 @@
                                                       },
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "min"
+                                                        "name": "minutes"
                                                       }
                                                     ]
                                                   }

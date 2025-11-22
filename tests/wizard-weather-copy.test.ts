@@ -37,7 +37,7 @@ describe("buildWizardWeatherCopy", () => {
         .replaceAll("{{sky}}", sky);
     }) as TFunction;
 
-    const weatherCopy = buildWizardWeatherCopy(stubT);
+    const weatherCopy = buildWizardWeatherCopy(stubT, "en-GB", "metric");
 
     expect(weatherCopy.temperatureLabel).toBe(
       `${wizardWeatherSummary.temperatureCelsius.toFixed(1)}\u00B0C`,
@@ -49,5 +49,8 @@ describe("buildWizardWeatherCopy", () => {
     expect(summaryCall?.options?.temperature).toBe(weatherCopy.temperatureLabel);
     expect(summaryCall?.options?.wind).toBe(wizardWeatherSummary.defaultWindDescriptor);
     expect(summaryCall?.options?.sky).toBe(wizardWeatherSummary.defaultSkyDescriptor);
+
+    const temperatureUnitCall = calls.find((call) => call.key === "unit-temperature-celsius");
+    expect(temperatureUnitCall?.options?.defaultValue).toBe("°C");
   });
 });

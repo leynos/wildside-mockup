@@ -56,7 +56,6 @@ nav-discover-label = Исследовать
 nav-routes-label = Маршруты
 nav-profile-label = Профиль
 nav-primary-aria-label = Основная навигация
-
 interest-parks-label = Парки и природа
 interest-coffee-label = Кофейни
 interest-street-art-label = Стрит-арт
@@ -67,7 +66,6 @@ difficulty-easy-label = Лёгкий
 difficulty-moderate-label = Средний
 difficulty-challenging-label = Сложный
 poi-highlight-label = Особое место
-
 quick-walk-map-aria-label = Область карты быстрого маршрута
 quick-walk-dismiss-aria = Закрыть панель
 quick-walk-header-title = Генератор быстрого маршрута
@@ -97,9 +95,6 @@ quick-walk-tab-map = Исследовать
 quick-walk-tab-stops = Остановки
 quick-walk-tab-notes = Заметки
 quick-walk-save-aria = Сохранить быстрый маршрут
-
-
-
 wizard-header-title = Мастер маршрута
 wizard-header-back-label = Назад
 wizard-header-help-label = Справка
@@ -229,11 +224,6 @@ safety-preset-senior-title = Для пожилых
 safety-preset-senior-description = Небольшие подъёмы, места для отдыха и хорошее освещение
 safety-preset-night-title = Ночной прогулщик
 safety-preset-night-description = Хорошо освещённые оживлённые районы с экстренным обменом местоположением
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Язык
 walk-complete-hero-title = Прогулка завершена!
@@ -286,7 +276,6 @@ explore-curated-route-count =
         [many] {$count} маршрутов
        *[other] {$count} маршрута
     }
-
 offline-header-title = Оффлайн-карты
 offline-header-subtitle = Управляйте загрузками и умными обновлениями
 offline-header-back-label = Назад к карте
@@ -326,3 +315,9 @@ offline-dialog-description = Синхронизируйте карты для р
 offline-dialog-search-placeholder = Поиск городов или регионов
 offline-dialog-cancel = Отмена
 offline-dialog-preview = Просмотр загрузки
+unit-distance-kilometre = км
+unit-distance-mile = mi
+unit-duration-minute = минут
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = остановок

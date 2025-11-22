@@ -6,7 +6,7 @@ describe("buildWizardRouteStats", () => {
   it("localises wizard route stat units", () => {
     const { t: stubT, calls } = createStubT();
 
-    const stats = buildWizardRouteStats(stubT);
+    const stats = buildWizardRouteStats(stubT, "en-GB", "metric");
 
     expect(stats).toHaveLength(3);
 
@@ -20,13 +20,13 @@ describe("buildWizardRouteStats", () => {
     const stopsStat = stats.find((stat) => stat.id === "stops");
     expect(stopsStat?.unitLabel).toBe("stops");
 
-    const distanceCall = calls.find((call) => call.key === "wizard-step-three-route-distance-unit");
+    const distanceCall = calls.find((call) => call.key === "unit-distance-kilometre");
     expect(distanceCall?.options?.defaultValue).toBe("km");
 
-    const durationCall = calls.find((call) => call.key === "wizard-step-three-route-duration-unit");
+    const durationCall = calls.find((call) => call.key === "unit-duration-minute");
     expect(durationCall?.options?.defaultValue).toBe("minutes");
 
-    const stopsCall = calls.find((call) => call.key === "wizard-step-three-route-stops-unit");
+    const stopsCall = calls.find((call) => call.key === "unit-count-stop");
     expect(stopsCall?.options?.defaultValue).toBe("stops");
   });
 });

@@ -397,7 +397,11 @@
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Harbour Lights Promenade"
+                                                                "name": "Harbour Lights "
+                                                              },
+                                                              {
+                                                                "role": "InlineTextBox",
+                                                                "name": "Promenade"
                                                               }
                                                             ]
                                                           }
@@ -413,15 +417,15 @@
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Golden hour stroll weaving past skyline "
+                                                                "name": "Golden hour stroll weaving past "
                                                               },
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "overlooks, coffee pit stops, and art "
+                                                                "name": "skyline overlooks, coffee pit stops, "
                                                               },
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "installations."
+                                                                "name": "and art installations."
                                                               }
                                                             ]
                                                           }
@@ -443,11 +447,7 @@
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "3.6 "
-                                                              },
-                                                              {
-                                                                "role": "InlineTextBox",
-                                                                "name": "km"
+                                                                "name": "3.6 km"
                                                               }
                                                             ]
                                                           }
@@ -459,7 +459,7 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "65 min",
+                                                            "name": "65 minutes",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
@@ -467,7 +467,7 @@
                                                               },
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "min"
+                                                                "name": "minutes"
                                                               }
                                                             ]
                                                           }
@@ -637,11 +637,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "1.5–3 km",
+                                                            "name": "1.5–3.0 km",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "1.5–3 km"
+                                                                "name": "1.5–3.0 km"
                                                               }
                                                             ]
                                                           }
@@ -744,11 +744,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "2–4 km",
+                                                            "name": "2.0–4.0 km",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "2–4 km"
+                                                                "name": "2.0–4.0 km"
                                                               }
                                                             ]
                                                           }
@@ -851,11 +851,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "1–5 km",
+                                                            "name": "1.0–5.0 km",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "1–5 km"
+                                                                "name": "1.0–5.0 km"
                                                               }
                                                             ]
                                                           }
@@ -958,11 +958,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "2–3 km",
+                                                            "name": "2.0–3.0 km",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "2–3 km"
+                                                                "name": "2.0–3.0 km"
                                                               }
                                                             ]
                                                           }
@@ -1090,11 +1090,11 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "text",
-                                                                    "name": "1–2 km",
+                                                                    "name": "1.0–2.0 km",
                                                                     "children": [
                                                                       {
                                                                         "role": "InlineTextBox",
-                                                                        "name": "1–2 km"
+                                                                        "name": "1.0–2.0 km"
                                                                       }
                                                                     ]
                                                                   }
@@ -1106,11 +1106,11 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "text",
-                                                                    "name": "30–45 min",
+                                                                    "name": "30–45 minutes",
                                                                     "children": [
                                                                       {
                                                                         "role": "InlineTextBox",
-                                                                        "name": "30–45 min"
+                                                                        "name": "30–45 minutes"
                                                                       }
                                                                     ]
                                                                   }
@@ -1245,11 +1245,11 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "text",
-                                                                    "name": "2–4 km",
+                                                                    "name": "2.0–4.0 km",
                                                                     "children": [
                                                                       {
                                                                         "role": "InlineTextBox",
-                                                                        "name": "2–4 km"
+                                                                        "name": "2.0–4.0 km"
                                                                       }
                                                                     ]
                                                                   }
@@ -1261,11 +1261,11 @@
                                                                 "children": [
                                                                   {
                                                                     "role": "text",
-                                                                    "name": "45–70 min",
+                                                                    "name": "45–70 minutes",
                                                                     "children": [
                                                                       {
                                                                         "role": "InlineTextBox",
-                                                                        "name": "45–70 min"
+                                                                        "name": "45–70 minutes"
                                                                       }
                                                                     ]
                                                                   }
@@ -1365,61 +1365,66 @@
                                                     "name": "",
                                                     "children": [
                                                       {
-                                                        "role": "image",
-                                                        "name": "Cherry Blossom Trail"
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "heading",
-                                                        "name": "Cherry Blossom Trail",
-                                                        "level": 3,
+                                                        "role": "none",
+                                                        "name": "",
                                                         "children": [
                                                           {
-                                                            "role": "text",
-                                                            "name": "Cherry Blossom Trail",
+                                                            "role": "image",
+                                                            "name": "Cherry Blossom Trail"
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "none",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "paragraph",
+                                                            "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "InlineTextBox",
-                                                                "name": "Cherry Blossom Trail"
+                                                                "role": "text",
+                                                                "name": "Cherry Blossom Trail",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "InlineTextBox",
+                                                                    "name": "Cherry Blossom Trail"
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          },
+                                                          {
+                                                            "role": "paragraph",
+                                                            "name": "",
+                                                            "children": [
+                                                              {
+                                                                "role": "text",
+                                                                "name": "Limited time — Spring only",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "InlineTextBox",
+                                                                    "name": "Limited time — Spring only"
+                                                                  }
+                                                                ]
                                                               }
                                                             ]
                                                           }
                                                         ]
                                                       },
                                                       {
-                                                        "role": "paragraph",
+                                                        "role": "none",
                                                         "name": "",
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "Limited time — Spring only",
+                                                            "name": "+127%",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Limited time — Spring only"
+                                                                "name": "+127%"
                                                               }
                                                             ]
-                                                          }
-                                                        ]
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "text",
-                                                        "name": "+127%",
-                                                        "children": [
-                                                          {
-                                                            "role": "InlineTextBox",
-                                                            "name": "+127%"
                                                           }
                                                         ]
                                                       }
@@ -1436,61 +1441,66 @@
                                                     "name": "",
                                                     "children": [
                                                       {
-                                                        "role": "image",
-                                                        "name": "Food Truck Friday"
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "heading",
-                                                        "name": "Food Truck Friday",
-                                                        "level": 3,
+                                                        "role": "none",
+                                                        "name": "",
                                                         "children": [
                                                           {
-                                                            "role": "text",
-                                                            "name": "Food Truck Friday",
+                                                            "role": "image",
+                                                            "name": "Food Truck Friday"
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "none",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "paragraph",
+                                                            "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "InlineTextBox",
-                                                                "name": "Food Truck Friday"
+                                                                "role": "text",
+                                                                "name": "Food Truck Friday",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "InlineTextBox",
+                                                                    "name": "Food Truck Friday"
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          },
+                                                          {
+                                                            "role": "paragraph",
+                                                            "name": "",
+                                                            "children": [
+                                                              {
+                                                                "role": "text",
+                                                                "name": "Weekly event route",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "InlineTextBox",
+                                                                    "name": "Weekly event route"
+                                                                  }
+                                                                ]
                                                               }
                                                             ]
                                                           }
                                                         ]
                                                       },
                                                       {
-                                                        "role": "paragraph",
+                                                        "role": "none",
                                                         "name": "",
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "Weekly event route",
+                                                            "name": "+89%",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Weekly event route"
+                                                                "name": "+89%"
                                                               }
                                                             ]
-                                                          }
-                                                        ]
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "text",
-                                                        "name": "+89%",
-                                                        "children": [
-                                                          {
-                                                            "role": "InlineTextBox",
-                                                            "name": "+89%"
                                                           }
                                                         ]
                                                       }
@@ -1507,61 +1517,66 @@
                                                     "name": "",
                                                     "children": [
                                                       {
-                                                        "role": "image",
-                                                        "name": "Rooftop Views Circuit"
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "heading",
-                                                        "name": "Rooftop Views Circuit",
-                                                        "level": 3,
+                                                        "role": "none",
+                                                        "name": "",
                                                         "children": [
                                                           {
-                                                            "role": "text",
-                                                            "name": "Rooftop Views Circuit",
+                                                            "role": "image",
+                                                            "name": "Rooftop Views Circuit"
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "role": "none",
+                                                        "name": "",
+                                                        "children": [
+                                                          {
+                                                            "role": "paragraph",
+                                                            "name": "",
                                                             "children": [
                                                               {
-                                                                "role": "InlineTextBox",
-                                                                "name": "Rooftop Views Circuit"
+                                                                "role": "text",
+                                                                "name": "Rooftop Views Circuit",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "InlineTextBox",
+                                                                    "name": "Rooftop Views Circuit"
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          },
+                                                          {
+                                                            "role": "paragraph",
+                                                            "name": "",
+                                                            "children": [
+                                                              {
+                                                                "role": "text",
+                                                                "name": "Best skyline spots",
+                                                                "children": [
+                                                                  {
+                                                                    "role": "InlineTextBox",
+                                                                    "name": "Best skyline spots"
+                                                                  }
+                                                                ]
                                                               }
                                                             ]
                                                           }
                                                         ]
                                                       },
                                                       {
-                                                        "role": "paragraph",
+                                                        "role": "none",
                                                         "name": "",
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "Best skyline spots",
+                                                            "name": "+56%",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "Best skyline spots"
+                                                                "name": "+56%"
                                                               }
                                                             ]
-                                                          }
-                                                        ]
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "role": "none",
-                                                    "name": "",
-                                                    "children": [
-                                                      {
-                                                        "role": "text",
-                                                        "name": "+56%",
-                                                        "children": [
-                                                          {
-                                                            "role": "InlineTextBox",
-                                                            "name": "+56%"
                                                           }
                                                         ]
                                                       }
@@ -1757,11 +1772,11 @@
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "75 min",
+                                                    "name": "75 minutes",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "75 min"
+                                                        "name": "75 minutes"
                                                       }
                                                     ]
                                                   }

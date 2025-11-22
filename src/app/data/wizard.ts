@@ -110,9 +110,7 @@ export interface WizardGeneratedStop {
   readonly accentClass: string;
   readonly noteKey: string;
   readonly defaultNote: string;
-  readonly noteDistanceMiles?: number;
-  readonly noteDistanceUnitKey?: string;
-  readonly defaultNoteDistanceUnit?: string;
+  readonly noteDistanceMetres?: number;
 }
 
 export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
@@ -137,9 +135,7 @@ export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
     accentClass: "text-purple-400",
     noteKey: "wizard-step-three-stop-art-note",
     defaultNote: "Photo spot • {{distance}} {{unit}} in",
-    noteDistanceMiles: 1.1,
-    noteDistanceUnitKey: "wizard-step-three-stop-distance-unit",
-    defaultNoteDistanceUnit: "miles",
+    noteDistanceMetres: 1_770.2784,
   },
   {
     id: "garden",
@@ -151,17 +147,16 @@ export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
     accentClass: "text-emerald-400",
     noteKey: "wizard-step-three-stop-garden-note",
     defaultNote: "Rest area • {{distance}} {{unit}} in",
-    noteDistanceMiles: 1.8,
-    noteDistanceUnitKey: "wizard-step-three-stop-distance-unit",
-    defaultNoteDistanceUnit: "miles",
+    noteDistanceMetres: 2_896.8192,
   },
 ] as const;
 
 export interface WizardRouteStat {
   readonly id: string;
-  readonly value: string;
-  readonly unitKey: string;
-  readonly defaultUnit: string;
+  readonly quantity:
+    | { kind: "distance"; metres: number }
+    | { kind: "duration"; seconds: number }
+    | { kind: "count"; value: number };
 }
 
 export interface WizardRouteSummary {
@@ -189,21 +184,15 @@ export const wizardRouteSummary: WizardRouteSummary = {
   stats: [
     {
       id: "distance",
-      value: "3.7",
-      unitKey: "wizard-step-three-route-distance-unit",
-      defaultUnit: "km",
+      quantity: { kind: "distance", metres: 3_700 },
     },
     {
       id: "duration",
-      value: "45",
-      unitKey: "wizard-step-three-route-duration-unit",
-      defaultUnit: "minutes",
+      quantity: { kind: "duration", seconds: 2_700 },
     },
     {
       id: "stops",
-      value: "7",
-      unitKey: "wizard-step-three-route-stops-unit",
-      defaultUnit: "stops",
+      quantity: { kind: "count", value: 7 },
     },
   ],
 } as const;

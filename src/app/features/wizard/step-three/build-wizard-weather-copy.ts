@@ -3,6 +3,8 @@
 import type { TFunction } from "i18next";
 
 import { wizardWeatherSummary } from "../../../data/wizard";
+import { formatTemperature } from "../../../units/unit-format";
+import type { UnitSystem } from "../../../units/unit-system";
 
 export type WizardWeatherCopy = {
   readonly title: string;
@@ -12,9 +14,11 @@ export type WizardWeatherCopy = {
   readonly sentiment: string;
 };
 
-const formatTemperatureLabel = (celsius: number): string => `${celsius.toFixed(1)}\u00B0C`;
-
-export const buildWizardWeatherCopy = (t: TFunction): WizardWeatherCopy => {
+export const buildWizardWeatherCopy = (
+  t: TFunction,
+  locale: string,
+  unitSystem: UnitSystem,
+): WizardWeatherCopy => {
   const title = t(wizardWeatherSummary.titleKey, {
     defaultValue: wizardWeatherSummary.defaultTitle,
   });
@@ -35,7 +39,20 @@ export const buildWizardWeatherCopy = (t: TFunction): WizardWeatherCopy => {
     defaultValue: wizardWeatherSummary.defaultSkyDescriptor,
   });
 
-  const temperatureLabel = formatTemperatureLabel(wizardWeatherSummary.temperatureCelsius);
+  const { value: temperatureValue, unitLabel: temperatureUnit } = formatTemperature(
+    wizardWeatherSummary.temperatureCelsius,
+    {
+      t,
+      locale,
+      unitSystem,
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    },
+  );
+
+  const temperatureLabel = `${temperatureValue}${
+    temperatureUnit.startsWith("°") ? "" : " "
+  }${temperatureUnit}`;
 
   const summary = t(wizardWeatherSummary.summaryKey, {
     defaultValue: wizardWeatherSummary.defaultSummary,

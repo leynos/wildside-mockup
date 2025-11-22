@@ -56,7 +56,6 @@ nav-discover-label = استكشف
 nav-routes-label = مسارات
 nav-profile-label = الملف الشخصي
 nav-primary-aria-label = التنقل الرئيسي
-
 interest-parks-label = الحدائق والطبيعة
 interest-coffee-label = مقاهي القهوة
 interest-street-art-label = فن الشارع
@@ -67,7 +66,6 @@ difficulty-easy-label = سهل
 difficulty-moderate-label = متوسط
 difficulty-challenging-label = صعب
 poi-highlight-label = مميز
-
 quick-walk-map-aria-label = منطقة عرض خريطة السير السريع
 quick-walk-dismiss-aria = إغلاق اللوحة
 quick-walk-header-title = مولِّد السير السريع
@@ -99,9 +97,6 @@ quick-walk-tab-map = استكشاف
 quick-walk-tab-stops = محطات
 quick-walk-tab-notes = ملاحظات
 quick-walk-save-aria = احفظ السير السريع
-
-
-
 wizard-header-title = معالج الجولات
 wizard-header-back-label = رجوع
 wizard-header-help-label = مساعدة
@@ -233,11 +228,6 @@ safety-preset-senior-title = مناسب لكبار السن
 safety-preset-senior-description = ميلان خفيف، نقاط استراحة، إنارة جيدة
 safety-preset-night-title = مناسب للمشي الليلي
 safety-preset-night-description = مناطق مضاءة ومزدحمة ومشاركة طوارئ
-
-
-
-
-
 app-shell-title = وايلدسايد موك آب
 controls-language-label = اللغة
 walk-complete-hero-title = تم إنهاء المسار!
@@ -294,7 +284,6 @@ explore-curated-route-count =
         [many] {$count} مسار
        *[other] {$count} مسارات
     }
-
 offline-header-title = الخرائط دون اتصال
 offline-header-subtitle = إدارة التنزيلات والتحديثات الذكية
 offline-header-back-label = العودة إلى الخريطة
@@ -334,3 +323,9 @@ offline-dialog-description = قم بمزامنة الخرائط للاستخدا
 offline-dialog-search-placeholder = ابحث عن مدن أو مناطق
 offline-dialog-cancel = إلغاء
 offline-dialog-preview = معاينة التنزيل
+unit-distance-kilometre = كم
+unit-distance-mile = mi
+unit-duration-minute = دقائق
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = محطات

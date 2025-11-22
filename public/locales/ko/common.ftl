@@ -56,7 +56,6 @@ nav-discover-label = 탐색
 nav-routes-label = 루트
 nav-profile-label = 프로필
 nav-primary-aria-label = 주요 탐색
-
 interest-parks-label = 공원과 자연
 interest-coffee-label = 커피 스폿
 interest-street-art-label = 스트리트 아트
@@ -67,7 +66,6 @@ difficulty-easy-label = 쉬움
 difficulty-moderate-label = 보통
 difficulty-challenging-label = 도전적
 poi-highlight-label = 하이라이트
-
 quick-walk-map-aria-label = 빠른 걷기 지도 뷰포트
 quick-walk-dismiss-aria = 패널 닫기
 quick-walk-header-title = 빠른 걷기 생성기
@@ -95,9 +93,6 @@ quick-walk-tab-map = 탐색
 quick-walk-tab-stops = 정차
 quick-walk-tab-notes = 메모
 quick-walk-save-aria = 빠른 걷기 저장
-
-
-
 wizard-header-title = 경로 마법사
 wizard-header-back-label = 뒤로
 wizard-header-help-label = 도움말
@@ -225,11 +220,6 @@ safety-preset-senior-title = 시니어 친화적
 safety-preset-senior-description = 완만한 경사, 휴식 포인트, 밝은 조명
 safety-preset-night-title = 야간 워커
 safety-preset-night-description = 밝고 번화한 지역 + 긴급 공유
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = 언어
 walk-complete-hero-title = 걷기가 완료되었습니다!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} 루트
        *[other] {$count} 루트
     }
-
 offline-header-title = 오프라인 지도
 offline-header-subtitle = 다운로드와 스마트 업데이트 관리
 offline-header-back-label = 지도로 돌아가기
@@ -318,3 +307,9 @@ offline-dialog-description = 오프라인 사용을 위해 지도를 동기화�
 offline-dialog-search-placeholder = 도시 또는 지역 검색
 offline-dialog-cancel = 취소
 offline-dialog-preview = 다운로드 미리보기
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = 분
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = 정차 지점

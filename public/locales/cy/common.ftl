@@ -56,7 +56,6 @@ nav-discover-label = Darganfod
 nav-routes-label = Llwybrau
 nav-profile-label = Proffil
 nav-primary-aria-label = Prif lywio
-
 interest-parks-label = Parciau a Natur
 interest-coffee-label = Safleoedd coffi
 interest-street-art-label = Celf stryd
@@ -67,7 +66,6 @@ difficulty-easy-label = Hawdd
 difficulty-moderate-label = Cymedrol
 difficulty-challenging-label = Heriol
 poi-highlight-label = Uchafbwynt
-
 quick-walk-map-aria-label = Golygfa map cerdded cyflym
 quick-walk-dismiss-aria = Cau’r panel
 quick-walk-header-title = Cynhyrchydd taith gyflym
@@ -99,9 +97,6 @@ quick-walk-tab-map = Archwilio
 quick-walk-tab-stops = Safleoedd
 quick-walk-tab-notes = Nodiadau
 quick-walk-save-aria = Cadw’r daith gyflym
-
-
-
 wizard-header-title = Dewin taith
 wizard-header-back-label = Nôl
 wizard-header-help-label = Cymorth
@@ -233,11 +228,6 @@ safety-preset-senior-title = Addas i oedolion hŷn
 safety-preset-senior-description = Graddiantau ysgafn, mannau gorffwys a goleuo digonol
 safety-preset-night-title = Cerddwr nos
 safety-preset-night-description = Ardaloedd goleuol, prysur gyda rhannu mewn argyfwng
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Iaith
 walk-complete-hero-title = Taith gerdded wedi’i chwblhau!
@@ -294,7 +284,6 @@ explore-curated-route-count =
         [many] {$count} o deithiau wedi’u curadu
        *[other] {$count} o deithiau wedi’u curadu
     }
-
 offline-header-title = Mapiau all-lein
 offline-header-subtitle = Rheoli lawrlwythiadau a diweddariadau deallus
 offline-header-back-label = Nôl i’r map
@@ -334,3 +323,9 @@ offline-dialog-description = Cydamserwch fapiau ar gyfer defnydd all-lein. Chwil
 offline-dialog-search-placeholder = Chwilio dinasoedd neu ranbarthau
 offline-dialog-cancel = Canslo
 offline-dialog-preview = Rhagolwg lawrlwytho
+unit-distance-kilometre = km
+unit-distance-mile = milltir
+unit-duration-minute = mun
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = stopiau

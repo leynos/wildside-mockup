@@ -4,6 +4,7 @@ import type { JSX } from "react";
 import { DisplayModeProvider } from "./providers/display-mode-provider";
 import { ThemeProvider } from "./providers/theme-provider";
 import { AppRoutes } from "./routes/app-routes";
+import { UnitPreferencesProvider } from "./units/unit-preferences-provider";
 
 /**
  * Entry point for the Wildside mockup SPA.
@@ -19,10 +20,12 @@ import { AppRoutes } from "./routes/app-routes";
  */
 export default function App(): JSX.Element {
   return (
-    <DisplayModeProvider>
-      <ThemeProvider>
-        <AppRoutes />
-      </ThemeProvider>
-    </DisplayModeProvider>
+    <UnitPreferencesProvider>
+      <DisplayModeProvider>
+        <ThemeProvider>
+          <AppRoutes />
+        </ThemeProvider>
+      </DisplayModeProvider>
+    </UnitPreferencesProvider>
   );
 }

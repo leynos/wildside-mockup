@@ -6,6 +6,7 @@ import { createRoot, type Root } from "react-dom/client";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
+import { UnitPreferencesProvider } from "../src/app/units/unit-preferences-provider";
 
 async function renderRoute(path: string) {
   window.history.replaceState(null, "", path);
@@ -22,11 +23,13 @@ async function renderRoute(path: string) {
   await act(async () => {
     root.render(
       <React.Suspense fallback={null}>
-        <DisplayModeProvider>
-          <ThemeProvider>
-            <AppRoutes routerInstance={router} />
-          </ThemeProvider>
-        </DisplayModeProvider>
+        <UnitPreferencesProvider>
+          <DisplayModeProvider>
+            <ThemeProvider>
+              <AppRoutes routerInstance={router} />
+            </ThemeProvider>
+          </DisplayModeProvider>
+        </UnitPreferencesProvider>
       </React.Suspense>,
     );
     await Promise.resolve();

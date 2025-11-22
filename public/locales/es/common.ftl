@@ -13,7 +13,6 @@ customize-route-preview-heading = Vista previa de la ruta
 customize-route-preview-regenerate = Regenerar
 customize-route-preview-start = Iniciar ruta
 customize-advanced-heading = Opciones avanzadas
-
 customize-slider-distance-label = Distancia
 customize-slider-distance-aria = Control deslizante de distancia
 customize-slider-distance-marker-0 = 1 km
@@ -57,7 +56,6 @@ nav-discover-label = Descubrir
 nav-routes-label = Rutas
 nav-profile-label = Perfil
 nav-primary-aria-label = Navegación principal
-
 interest-parks-label = Parques y naturaleza
 interest-coffee-label = Cafeterías
 interest-street-art-label = Arte urbano
@@ -68,7 +66,6 @@ difficulty-easy-label = Fácil
 difficulty-moderate-label = Moderada
 difficulty-challenging-label = Exigente
 poi-highlight-label = Destacado
-
 quick-walk-map-aria-label = Vista del mapa de caminata rápida
 quick-walk-dismiss-aria = Cerrar panel
 quick-walk-header-title = Generador de caminatas rápidas
@@ -96,9 +93,6 @@ quick-walk-tab-map = Explorar
 quick-walk-tab-stops = Paradas
 quick-walk-tab-notes = Notas
 quick-walk-save-aria = Guardar caminata rápida
-
-
-
 wizard-header-title = Asistente de rutas
 wizard-header-back-label = Atrás
 wizard-header-help-label = Ayuda
@@ -187,7 +181,6 @@ wizard-step-three-weather-reminder = Lleva capas ligeras por si acaso.
 wizard-step-three-weather-sentiment = Ideal
 wizard-step-three-weather-wind = brisa ligera
 wizard-step-three-weather-sky = cielo despejado
-
 safety-header-title = Seguridad y accesibilidad
 safety-header-description = Personaliza tus recorridos a pie para mayor comodidad y seguridad
 safety-presets-heading = Perfiles predefinidos
@@ -227,8 +220,6 @@ safety-preset-senior-title = Amigable para personas mayores
 safety-preset-senior-description = Pendientes suaves, puntos de descanso y buena iluminación
 safety-preset-night-title = Paseo nocturno
 safety-preset-night-description = Buenas luces, zonas concurridas y compartir en emergencias
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Idioma
 walk-complete-hero-title = ¡Caminata completada!
@@ -277,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} ruta
        *[other] {$count} rutas
     }
-
 offline-header-title = Mapas sin conexión
 offline-header-subtitle = Gestiona descargas y actualizaciones inteligentes
 offline-header-back-label = Volver al mapa
@@ -317,3 +307,9 @@ offline-dialog-description = Sincroniza mapas para acceder sin conexión. Busca 
 offline-dialog-search-placeholder = Buscar ciudades o regiones
 offline-dialog-cancel = Cancelar
 offline-dialog-preview = Previsualizar descarga
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = minutos
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = paradas

@@ -1,5 +1,17 @@
 /** @file Configurable values powering the route customiser screen. */
 
+import type { TFunction } from "i18next";
+
+import {
+  formatDistance,
+  formatDuration,
+  metresFromKilometres,
+  secondsFromMinutes,
+} from "../units/unit-format";
+import type { UnitSystem } from "../units/unit-system";
+
+type SliderQuantity = "distance" | "duration";
+
 export interface SliderConfig {
   id: string;
   label: string;
@@ -9,8 +21,8 @@ export interface SliderConfig {
   max: number;
   step: number;
   initialValue: number;
-  unit: string;
-  markers: string[];
+  quantity: SliderQuantity;
+  markers: number[];
 }
 
 export interface SegmentOption {
@@ -37,8 +49,8 @@ export interface InterestMixSlice {
 export interface RoutePreviewOption {
   id: string;
   title: string;
-  distance: string;
-  duration: string;
+  distanceMetres: number;
+  durationSeconds: number;
   iconColorClass: string;
   gradientClass: string;
   featured?: boolean;
@@ -66,24 +78,24 @@ export const sliders: SliderConfig[] = [
     label: "Distance",
     iconToken: "{icon.object.distance}",
     iconColorClass: "text-accent",
-    min: 1,
-    max: 10,
-    step: 0.1,
-    initialValue: 3.2,
-    unit: "km",
-    markers: ["1 km", "5 km", "10 km"],
+    min: metresFromKilometres(1),
+    max: metresFromKilometres(10),
+    step: metresFromKilometres(0.1),
+    initialValue: metresFromKilometres(3.2),
+    quantity: "distance",
+    markers: [metresFromKilometres(1), metresFromKilometres(5), metresFromKilometres(10)],
   },
   {
     id: "duration",
     label: "Duration",
     iconToken: "{icon.object.duration}",
     iconColorClass: "text-accent",
-    min: 15,
-    max: 180,
-    step: 5,
-    initialValue: 75,
-    unit: "min",
-    markers: ["15m", "90m", "180m"],
+    min: secondsFromMinutes(15),
+    max: secondsFromMinutes(180),
+    step: secondsFromMinutes(5),
+    initialValue: secondsFromMinutes(75),
+    quantity: "duration",
+    markers: [secondsFromMinutes(15), secondsFromMinutes(90), secondsFromMinutes(180)],
   },
 ];
 
@@ -134,8 +146,8 @@ export const routePreviews: RoutePreviewOption[] = [
   {
     id: "route-a",
     title: "Route A",
-    distance: "3.2 km",
-    duration: "75 min",
+    distanceMetres: metresFromKilometres(3.2),
+    durationSeconds: secondsFromMinutes(75),
     iconColorClass: "text-accent",
     gradientClass: "from-accent/20 to-sky-400/20",
     featured: true,
@@ -143,16 +155,16 @@ export const routePreviews: RoutePreviewOption[] = [
   {
     id: "route-b",
     title: "Route B",
-    distance: "2.8 km",
-    duration: "68 min",
+    distanceMetres: metresFromKilometres(2.8),
+    durationSeconds: secondsFromMinutes(68),
     iconColorClass: "text-emerald-400",
     gradientClass: "from-emerald-400/20 to-amber-400/20",
   },
   {
     id: "route-c",
     title: "Route C",
-    distance: "3.6 km",
-    duration: "82 min",
+    distanceMetres: metresFromKilometres(3.6),
+    durationSeconds: secondsFromMinutes(82),
     iconColorClass: "text-purple-400",
     gradientClass: "from-purple-400/20 to-pink-400/20",
   },
@@ -200,11 +212,32 @@ export const bottomNavigation: BottomNavigationItem[] = [
  *
  * @example
  * ```ts
- * formatSliderValue("distance", 3.2); // "3.2 km"
+ * formatSliderValue("distance", 3200, t, "en-GB", "metric"); // "3.2 km"
  * ```
  */
-export function formatSliderValue(configId: string, value: number): string {
+export function formatSliderValue(
+  configId: string,
+  value: number,
+  t: TFunction,
+  locale: string,
+  unitSystem: UnitSystem,
+): string {
   const slider = sliders.find((entry) => entry.id === configId);
   if (!slider) return value.toString();
-  return `${value.toFixed(slider.step < 1 ? 1 : 0)} ${slider.unit}`;
+
+  const sharedOptions = { t, locale, unitSystem };
+
+  if (slider.quantity === "distance") {
+    const { value: formattedValue, unitLabel } = formatDistance(value, {
+      ...sharedOptions,
+    });
+    return `${formattedValue} ${unitLabel}`;
+  }
+
+  const { value: formattedValue, unitLabel } = formatDuration(value, {
+    ...sharedOptions,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  return `${formattedValue} ${unitLabel}`;
 }

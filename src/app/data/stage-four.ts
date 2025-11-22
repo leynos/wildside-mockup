@@ -1,23 +1,52 @@
 /** @file Data fixtures supporting Stage 4 routes (completion and safety flows). */
 
 import walkRouteMap1 from "../../assets/walks/walk-route-map-1.png";
+import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
 
 export interface WalkCompletionStat {
   id: string;
   label: string;
-  value: string;
+  value:
+    | { kind: "distance"; metres: number }
+    | { kind: "duration"; seconds: number }
+    | { kind: "count"; value: number; unitToken?: string };
   iconToken: string;
 }
 
 export const walkCompletionPrimaryStats: WalkCompletionStat[] = [
-  { id: "distance", label: "Distance", value: "3.2 km", iconToken: "{icon.object.distance}" },
-  { id: "duration", label: "Duration", value: "58 min", iconToken: "{icon.object.duration}" },
+  {
+    id: "distance",
+    label: "Distance",
+    value: { kind: "distance", metres: metresFromKilometres(3.2) },
+    iconToken: "{icon.object.distance}",
+  },
+  {
+    id: "duration",
+    label: "Duration",
+    value: { kind: "duration", seconds: secondsFromMinutes(58) },
+    iconToken: "{icon.object.duration}",
+  },
 ];
 
 export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
-  { id: "calories", label: "Calories", value: "247", iconToken: "{icon.object.calories}" },
-  { id: "stops", label: "Stops", value: "7", iconToken: "{icon.object.stops}" },
-  { id: "starred", label: "Starred", value: "3", iconToken: "{icon.object.star}" },
+  {
+    id: "calories",
+    label: "Calories",
+    value: { kind: "count", value: 247 },
+    iconToken: "{icon.object.calories}",
+  },
+  {
+    id: "stops",
+    label: "Stops",
+    value: { kind: "count", value: 7, unitToken: "count-stop" },
+    iconToken: "{icon.object.stops}",
+  },
+  {
+    id: "starred",
+    label: "Starred",
+    value: { kind: "count", value: 3 },
+    iconToken: "{icon.object.star}",
+  },
 ];
 
 const withBasePath = (path: string): string => {

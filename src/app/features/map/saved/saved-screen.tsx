@@ -4,7 +4,8 @@ import * as Dialog from "@radix-ui/react-dialog";
 import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, type ReactNode, useState } from "react";
+import { type JSX, type ReactNode, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
@@ -13,6 +14,8 @@ import { PointOfInterestList } from "../../../components/point-of-interest-list"
 import { WildsideMap } from "../../../components/wildside-map";
 import { savedRoutes } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
+import { formatDistance, formatDuration, formatStops } from "../../../units/unit-format";
+import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 
 const savedRoute = savedRoutes[0];
 const tabTriggerClass =
@@ -52,9 +55,15 @@ function Metric({ label, value }: { label: string; value: string }) {
 
 export function SavedScreen(): JSX.Element {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const { unitSystem } = useUnitPreferences();
   const [isFavourite, setIsFavourite] = useState(true);
   const [shareOpen, setShareOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("map");
+  const unitOptions = useMemo(
+    () => ({ t, locale: i18n.language, unitSystem }),
+    [i18n.language, t, unitSystem],
+  );
 
   if (!savedRoute) {
     return (
@@ -67,6 +76,18 @@ export function SavedScreen(): JSX.Element {
       </MobileShell>
     );
   }
+
+  const distance = formatDistance(savedRoute.distanceMetres, unitOptions);
+  const duration = formatDuration(savedRoute.durationSeconds, {
+    ...unitOptions,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  const stops = formatStops(savedRoute.stopsCount, {
+    ...unitOptions,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
 
   return (
     <MobileShell tone="dark">
@@ -121,13 +142,25 @@ export function SavedScreen(): JSX.Element {
                     <h1 className="text-2xl font-semibold">{savedRoute.title}</h1>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
                       <RouteSummaryMeta iconToken="{icon.object.route}">
-                        {savedRoute.distance}
+                        {t("saved-route-distance-value", {
+                          value: distance.value,
+                          unit: distance.unitLabel,
+                          defaultValue: `${distance.value} ${distance.unitLabel}`,
+                        })}
                       </RouteSummaryMeta>
                       <RouteSummaryMeta iconToken="{icon.object.duration}">
-                        {savedRoute.duration}
+                        {t("saved-route-duration-value", {
+                          value: duration.value,
+                          unit: duration.unitLabel,
+                          defaultValue: `${duration.value} ${duration.unitLabel}`,
+                        })}
                       </RouteSummaryMeta>
                       <RouteSummaryMeta iconToken="{icon.object.stops}">
-                        {savedRoute.stopsCount} stops
+                        {t("saved-route-stops-value", {
+                          value: stops.value,
+                          unit: stops.unitLabel,
+                          defaultValue: `${stops.value} ${stops.unitLabel}`,
+                        })}
                       </RouteSummaryMeta>
                     </div>
                   </div>
