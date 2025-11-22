@@ -14,6 +14,7 @@ import {
   exploreCategories,
   featuredWalk,
   popularThemes,
+  trendingRoutes,
 } from "../../data/explore";
 import { buildDifficultyLookup } from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
@@ -160,7 +161,7 @@ export function ExploreScreen(): JSX.Element {
               formatDistanceRangeLabel={formatDistanceRangeLabel}
               formatDurationRangeLabel={formatDurationRangeLabel}
             />
-            <TrendingRoutesList />
+            <TrendingRoutesList routes={trendingRoutes} />
             <CommunityPickPanel
               formatDistanceLabel={formatDistanceLabel}
               formatDurationLabel={formatDurationLabel}

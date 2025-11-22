@@ -10,8 +10,9 @@ import type {
   ExploreCategory,
   FeaturedWalk,
   PopularTheme,
+  TrendingRoute,
 } from "../../data/explore";
-import { communityPick, formatRating, trendingRoutes } from "../../data/explore";
+import { communityPick, formatRating } from "../../data/explore";
 import type {
   DifficultyId,
   ResolvedDifficultyDescriptor,
@@ -275,7 +276,7 @@ export function CuratedCollectionsList({
   );
 }
 
-export function TrendingRoutesList(): JSX.Element {
+export function TrendingRoutesList({ routes }: { routes: TrendingRoute[] }): JSX.Element {
   const { t } = useTranslation();
   const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
   const headingId = useId();
@@ -285,7 +286,7 @@ export function TrendingRoutesList(): JSX.Element {
         {heading}
       </h2>
       <div className="space-y-3">
-        {trendingRoutes.map((route) => (
+        {routes.map((route) => (
           <article key={route.id} className="explore-trending__card">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 overflow-hidden rounded-lg">
