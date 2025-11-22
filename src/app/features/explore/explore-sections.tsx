@@ -6,13 +6,14 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import type {
+  CommunityPick,
   CuratedCollection,
   ExploreCategory,
   FeaturedWalk,
   PopularTheme,
   TrendingRoute,
 } from "../../data/explore";
-import { communityPick, formatRating } from "../../data/explore";
+import { formatRating } from "../../data/explore";
 import type {
   DifficultyId,
   ResolvedDifficultyDescriptor,
@@ -314,12 +315,14 @@ export function TrendingRoutesList({ routes }: { routes: TrendingRoute[] }): JSX
 }
 
 type CommunityPickPanelProps = {
+  pick: CommunityPick;
   formatDistanceLabel: (metres: number) => string;
   formatDurationLabel: (seconds: number) => string;
   formatSaveCount: (count: number) => string;
 };
 
 export function CommunityPickPanel({
+  pick,
   formatDistanceLabel,
   formatDurationLabel,
   formatSaveCount,
@@ -337,33 +340,31 @@ export function CommunityPickPanel({
       <div className="mb-3 flex items-center gap-3">
         <div className="h-9 w-9 overflow-hidden rounded-full border border-base-300/60">
           <img
-            src={communityPick.curatorAvatarUrl}
-            alt={communityPick.curator}
+            src={pick.curatorAvatarUrl}
+            alt={pick.curator}
             className="h-full w-full object-cover"
             loading="lazy"
           />
         </div>
         <div className="flex-1">
-          <p className="text-sm font-medium text-base-content">{communityPick.curator}</p>
+          <p className="text-sm font-medium text-base-content">{pick.curator}</p>
           <p className="text-xs text-base-content/60">{subtitle}</p>
         </div>
         <span className="rating-indicator rating-indicator--strong">
           <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
-          {formatRating(communityPick.rating)}
+          {formatRating(pick.rating)}
         </span>
       </div>
-      <h3 className="text-base font-semibold text-base-content">{communityPick.title}</h3>
-      <p className="mt-2 text-sm text-base-content/70">{communityPick.description}</p>
+      <h3 className="text-base font-semibold text-base-content">{pick.title}</h3>
+      <p className="mt-2 text-sm text-base-content/70">{pick.description}</p>
       <div className="mt-3 explore-meta-list">
         <RouteMetric iconToken="{icon.object.route}">
-          {formatDistanceLabel(communityPick.distanceMetres)}
+          {formatDistanceLabel(pick.distanceMetres)}
         </RouteMetric>
         <RouteMetric iconToken="{icon.object.duration}">
-          {formatDurationLabel(communityPick.durationSeconds)}
+          {formatDurationLabel(pick.durationSeconds)}
         </RouteMetric>
-        <RouteMetric iconToken="{icon.action.save}">
-          {formatSaveCount(communityPick.saves)}
-        </RouteMetric>
+        <RouteMetric iconToken="{icon.action.save}">{formatSaveCount(pick.saves)}</RouteMetric>
       </div>
     </section>
   );

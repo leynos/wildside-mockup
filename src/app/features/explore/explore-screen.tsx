@@ -10,6 +10,7 @@ import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
 import {
+  communityPick,
   curatedCollections,
   exploreCategories,
   featuredWalk,
@@ -163,6 +164,7 @@ export function ExploreScreen(): JSX.Element {
             />
             <TrendingRoutesList routes={trendingRoutes} />
             <CommunityPickPanel
+              pick={communityPick}
               formatDistanceLabel={formatDistanceLabel}
               formatDurationLabel={formatDurationLabel}
               formatSaveCount={formatSaveCount}
