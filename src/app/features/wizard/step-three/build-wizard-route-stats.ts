@@ -15,22 +15,17 @@ export const buildWizardRouteStats = (
   t: TFunction,
   locale: string,
   unitSystem: UnitSystem,
-): WizardRouteStatCopy[] =>
-  wizardRouteSummary.stats.map((stat) => {
+): WizardRouteStatCopy[] => {
+  const unitOptions = { t, locale, unitSystem } as const;
+  return wizardRouteSummary.stats.map((stat) => {
     switch (stat.quantity.kind) {
       case "distance": {
-        const { value, unitLabel } = formatDistance(stat.quantity.metres, {
-          t,
-          locale,
-          unitSystem,
-        });
+        const { value, unitLabel } = formatDistance(stat.quantity.metres, unitOptions);
         return { id: stat.id, value, unitLabel };
       }
       case "duration": {
         const { value, unitLabel } = formatDuration(stat.quantity.seconds, {
-          t,
-          locale,
-          unitSystem,
+          ...unitOptions,
           minimumFractionDigits: 0,
           maximumFractionDigits: 0,
         });
@@ -38,9 +33,7 @@ export const buildWizardRouteStats = (
       }
       case "count": {
         const { value, unitLabel } = formatStops(stat.quantity.value, {
-          t,
-          locale,
-          unitSystem,
+          ...unitOptions,
           minimumFractionDigits: 0,
           maximumFractionDigits: 0,
         });
@@ -51,3 +44,4 @@ export const buildWizardRouteStats = (
       }
     }
   });
+};

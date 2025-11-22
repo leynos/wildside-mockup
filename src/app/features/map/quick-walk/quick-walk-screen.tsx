@@ -16,7 +16,6 @@ import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
-import { secondsFromMinutes } from "../../../units/unit-format";
 import { useUnitFormatters } from "../../../units/use-unit-formatters";
 
 type TabKey = "map" | "stops" | "notes";
@@ -79,13 +78,14 @@ export function QuickWalkScreen(): JSX.Element {
   });
   const durationLabel = t("quick-walk-duration-label", { defaultValue: "Duration" });
   const durationAria = t("quick-walk-duration-aria", { defaultValue: "Walk duration" });
+  const { min: minDurationSeconds, max: maxDurationSeconds } = quickWalkConfig.durationRangeSeconds;
   const durationMarkers = useMemo(
     () => [
-      formatDurationLabel(quickWalkConfig.durationRangeSeconds.min),
-      formatDurationLabel(secondsFromMinutes(90)),
-      formatDurationLabel(quickWalkConfig.durationRangeSeconds.max),
+      formatDurationLabel(minDurationSeconds),
+      formatDurationLabel(Math.round((minDurationSeconds + maxDurationSeconds) / 2)),
+      formatDurationLabel(maxDurationSeconds),
     ],
-    [formatDurationLabel],
+    [formatDurationLabel, maxDurationSeconds, minDurationSeconds],
   );
   const interestsHeading = t("quick-walk-interests-heading", { defaultValue: "Interests" });
   const interestsAria = t("quick-walk-interests-aria", {
