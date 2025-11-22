@@ -1,5 +1,10 @@
 /** @file Fixture data for the Explore catalogue experience. */
 
+import {
+  metresFromKilometres,
+  secondsFromMinutes,
+} from "../units/unit-format";
+
 export interface ExploreCategory {
   id: string;
   title: string;
@@ -14,8 +19,8 @@ export interface FeaturedWalk {
   title: string;
   description: string;
   heroImageUrl: string;
-  distance: string;
-  duration: string;
+  distanceMetres: number;
+  durationSeconds: number;
   rating: number;
   badges: string[];
 }
@@ -26,7 +31,7 @@ export interface PopularTheme {
   description: string;
   imageUrl: string;
   walkCount: number;
-  distanceRange: string;
+  distanceRangeMetres: readonly [number, number];
   rating: number;
 }
 
@@ -36,8 +41,8 @@ export interface CuratedCollection {
   description: string;
   leadImageUrl: string;
   mapImageUrl: string;
-  distanceRange: string;
-  durationRange: string;
+  distanceRangeMetres: readonly [number, number];
+  durationRangeSeconds: readonly [number, number];
   difficultyId: DifficultyId;
   routes: number;
 }
@@ -57,8 +62,8 @@ export interface CommunityPick {
   rating: number;
   title: string;
   description: string;
-  distance: string;
-  duration: string;
+  distanceMetres: number;
+  durationSeconds: number;
   saves: number;
 }
 
@@ -110,8 +115,8 @@ export const featuredWalk: FeaturedWalk = {
   description:
     "Golden hour stroll weaving past skyline overlooks, coffee pit stops, and art installations.",
   heroImageUrl: heroHarborSunset,
-  distance: "3.6 km",
-  duration: "65 min",
+  distanceMetres: metresFromKilometres(3.6),
+  durationSeconds: secondsFromMinutes(65),
   rating: 4.9,
   badges: ["Sunset pick", "Teal line"],
 };
@@ -123,7 +128,7 @@ export const popularThemes: PopularTheme[] = [
     description: "Best cafés & roasters",
     imageUrl: heroCoffeeCulture,
     walkCount: 12,
-    distanceRange: "1.5–3 km",
+    distanceRangeMetres: [metresFromKilometres(1.5), metresFromKilometres(3)],
     rating: 4.7,
   },
   {
@@ -132,7 +137,7 @@ export const popularThemes: PopularTheme[] = [
     description: "Secret green spaces",
     imageUrl: heroHiddenGarden,
     walkCount: 8,
-    distanceRange: "2–4 km",
+    distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(4)],
     rating: 4.8,
   },
   {
@@ -141,7 +146,7 @@ export const popularThemes: PopularTheme[] = [
     description: "Murals & installations",
     imageUrl: heroStreetArt,
     walkCount: 15,
-    distanceRange: "1–5 km",
+    distanceRangeMetres: [metresFromKilometres(1), metresFromKilometres(5)],
     rating: 4.6,
   },
   {
@@ -150,7 +155,7 @@ export const popularThemes: PopularTheme[] = [
     description: "Local food & crafts",
     imageUrl: heroMarket,
     walkCount: 9,
-    distanceRange: "2–3 km",
+    distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(3)],
     rating: 4.5,
   },
 ];
@@ -162,8 +167,8 @@ export const curatedCollections: CuratedCollection[] = [
     description: "Perfect lazy morning routes",
     leadImageUrl: heroCoffeeCultureAlt,
     mapImageUrl: walkRouteMap2,
-    distanceRange: "1–2 km",
-    durationRange: "30–45 min",
+    distanceRangeMetres: [metresFromKilometres(1), metresFromKilometres(2)],
+    durationRangeSeconds: [secondsFromMinutes(30), secondsFromMinutes(45)],
     difficultyId: "easy",
     routes: 6,
   },
@@ -173,8 +178,8 @@ export const curatedCollections: CuratedCollection[] = [
     description: "Safe, well-lit evening routes",
     leadImageUrl: heroAfterDark,
     mapImageUrl: walkRouteMap3,
-    distanceRange: "2–4 km",
-    durationRange: "45–70 min",
+    distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(4)],
+    durationRangeSeconds: [secondsFromMinutes(45), secondsFromMinutes(70)],
     difficultyId: "moderate",
     routes: 4,
   },
@@ -211,8 +216,8 @@ export const communityPick: CommunityPick = {
   rating: 4.9,
   title: "Bookstore & Bistro Crawl",
   description: "A perfect blend of literary gems and cosy eateries through the cultural district.",
-  distance: "2.8 km",
-  duration: "75 min",
+  distanceMetres: metresFromKilometres(2.8),
+  durationSeconds: secondsFromMinutes(75),
   saves: 428,
 };
 

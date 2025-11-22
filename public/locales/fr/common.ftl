@@ -56,7 +56,6 @@ nav-discover-label = Découvrir
 nav-routes-label = Itinéraires
 nav-profile-label = Profil
 nav-primary-aria-label = Navigation principale
-
 interest-parks-label = Parcs et nature
 interest-coffee-label = Spots café
 interest-street-art-label = Art urbain
@@ -67,7 +66,6 @@ difficulty-easy-label = Facile
 difficulty-moderate-label = Modérée
 difficulty-challenging-label = Exigeante
 poi-highlight-label = Immanquable
-
 quick-walk-map-aria-label = Vue de la carte de balade express
 quick-walk-dismiss-aria = Fermer le panneau
 quick-walk-header-title = Générateur de balade express
@@ -95,9 +93,6 @@ quick-walk-tab-map = Explorer
 quick-walk-tab-stops = Arrêts
 quick-walk-tab-notes = Notes
 quick-walk-save-aria = Enregistrer la balade express
-
-
-
 wizard-header-title = Assistant d’itinéraire
 wizard-header-back-label = Retour
 wizard-header-help-label = Aide
@@ -225,11 +220,6 @@ safety-preset-senior-title = Adapté aux seniors
 safety-preset-senior-description = Pentes légères, points de repos, bonne luminosité
 safety-preset-night-title = Baladeur nocturne
 safety-preset-night-description = Zones bien éclairées et animées avec partage d’urgence
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Langue
 walk-complete-hero-title = Balade terminée !
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} parcours
        *[other] {$count} parcours
     }
-
 offline-header-title = Cartes hors ligne
 offline-header-subtitle = Gérez les téléchargements et les mises à jour intelligentes
 offline-header-back-label = Retour à la carte
@@ -318,3 +307,9 @@ offline-dialog-description = Synchronisez les cartes pour un accès hors ligne. 
 offline-dialog-search-placeholder = Rechercher des villes ou des régions
 offline-dialog-cancel = Annuler
 offline-dialog-preview = Prévisualiser le téléchargement
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = minutes
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = arrêts

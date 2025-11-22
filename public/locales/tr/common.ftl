@@ -56,7 +56,6 @@ nav-discover-label = Keşfet
 nav-routes-label = Rotalar
 nav-profile-label = Profil
 nav-primary-aria-label = Ana gezinme
-
 interest-parks-label = Parklar ve doğa
 interest-coffee-label = Kahve durakları
 interest-street-art-label = Sokak sanatı
@@ -67,7 +66,6 @@ difficulty-easy-label = Kolay
 difficulty-moderate-label = Orta
 difficulty-challenging-label = Zorlu
 poi-highlight-label = Öne çıkan
-
 quick-walk-map-aria-label = Hızlı yürüyüş harita görünümü
 quick-walk-dismiss-aria = Paneli kapat
 quick-walk-header-title = Hızlı yürüyüş oluşturucu
@@ -95,9 +93,6 @@ quick-walk-tab-map = Keşfet
 quick-walk-tab-stops = Duraklar
 quick-walk-tab-notes = Notlar
 quick-walk-save-aria = Hızlı yürüyüşü kaydet
-
-
-
 wizard-header-title = Rota sihirbazı
 wizard-header-back-label = Geri
 wizard-header-help-label = Yardım
@@ -225,11 +220,6 @@ safety-preset-senior-title = Kıdemli dostu
 safety-preset-senior-description = Hafif eğimler, dinlenme noktaları ve iyi aydınlatma
 safety-preset-night-title = Gece yürüyüşçüsü
 safety-preset-night-description = İyi aydınlatılmış, kalabalık alanlar ve acil paylaşım
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Dil
 walk-complete-hero-title = Yürüyüş tamamlandı!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} rota
        *[other] {$count} rota
     }
-
 offline-header-title = Çevrimdışı haritalar
 offline-header-subtitle = İndirmeleri ve akıllı güncellemeleri yönetin
 offline-header-back-label = Haritaya geri dön
@@ -318,3 +307,9 @@ offline-dialog-description = Haritaları çevrimdışı kullanım için eşitley
 offline-dialog-search-placeholder = Şehir veya bölge ara
 offline-dialog-cancel = İptal
 offline-dialog-preview = İndirmeyi önizle
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = dakika
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = durak

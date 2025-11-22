@@ -56,7 +56,6 @@ nav-discover-label = Lorg
 nav-routes-label = Slighean
 nav-profile-label = Pròifil
 nav-primary-aria-label = Prìomh sheòladh
-
 interest-parks-label = Pàircean is nàdar
 interest-coffee-label = Cafaidhean cofaidh
 interest-street-art-label = Ealain sràide
@@ -67,7 +66,6 @@ difficulty-easy-label = Furasta
 difficulty-moderate-label = Meadhanach
 difficulty-challenging-label = Dùbhlanach
 poi-highlight-label = Prìomh rud
-
 quick-walk-map-aria-label = Sealladh mapa na cuairte luath
 quick-walk-dismiss-aria = Dùin am pannal
 quick-walk-header-title = Gineadair cuairte luaithe
@@ -98,9 +96,6 @@ quick-walk-tab-map = Rannsaich
 quick-walk-tab-stops = Stadan
 quick-walk-tab-notes = Nòtaichean
 quick-walk-save-aria = Sàbhail a’ chuairt luath
-
-
-
 wizard-header-title = Draoidh slighe
 wizard-header-back-label = Air ais
 wizard-header-help-label = Cobhair
@@ -231,11 +226,6 @@ safety-preset-senior-title = Freagarrach do sheann daoine
 safety-preset-senior-description = Claonaidhean bog, puingean fois, solas math
 safety-preset-night-title = Coiseachd oidhche
 safety-preset-night-description = Sgìrean le solas math, trang, le co-roinneadh èiginn
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Cànan
 walk-complete-hero-title = Cuairt choise crìochnaichte!
@@ -290,7 +280,6 @@ explore-curated-route-count =
         [many] {$count} slighean
        *[other] {$count} slighean
     }
-
 offline-header-title = Mapaichean far loidhne
 offline-header-subtitle = Stiùirich luchdadh a-nuas agus ùrachaidhean tuigseach
 offline-header-back-label = Air ais dhan mhapa
@@ -330,3 +319,9 @@ offline-dialog-description = Sioncronaich mapaichean airson cleachdadh far loidh
 offline-dialog-search-placeholder = Lorg bailtean no roinnean
 offline-dialog-cancel = Sguir dheth
 offline-dialog-preview = Ro-shealladh luchdachaidh sìos
+unit-distance-kilometre = km
+unit-distance-mile = mìltean
+unit-duration-minute = mionaidean
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = stadan

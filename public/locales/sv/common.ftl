@@ -56,7 +56,6 @@ nav-discover-label = Upptäck
 nav-routes-label = Rutter
 nav-profile-label = Profil
 nav-primary-aria-label = Primär navigering
-
 interest-parks-label = Parker och natur
 interest-coffee-label = Kaffeställen
 interest-street-art-label = Street art
@@ -67,7 +66,6 @@ difficulty-easy-label = Lätt
 difficulty-moderate-label = Medel
 difficulty-challenging-label = Utmanande
 poi-highlight-label = Höjdpunkt
-
 quick-walk-map-aria-label = Snabbvandringskartans vy
 quick-walk-dismiss-aria = Stäng panel
 quick-walk-header-title = Generator för snabbvandring
@@ -95,9 +93,6 @@ quick-walk-tab-map = Utforska
 quick-walk-tab-stops = Stopp
 quick-walk-tab-notes = Anteckningar
 quick-walk-save-aria = Spara snabbvandring
-
-
-
 wizard-header-title = Ruttguide
 wizard-header-back-label = Tillbaka
 wizard-header-help-label = Hjälp
@@ -225,11 +220,6 @@ safety-preset-senior-title = Seniorvänlig
 safety-preset-senior-description = Mjuka lutningar, viloplatser och bra belysning
 safety-preset-night-title = Nattvandrare
 safety-preset-night-description = Väl upplysta, livliga områden med nöd-delning
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Språk
 walk-complete-hero-title = Promenaden är klar!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} rutt
        *[other] {$count} rutter
     }
-
 offline-header-title = Offline-kartor
 offline-header-subtitle = Hantera nedladdningar och smarta uppdateringar
 offline-header-back-label = Tillbaka till kartan
@@ -318,3 +307,9 @@ offline-dialog-description = Synka kartor för offline-läge. Sök efter en stad
 offline-dialog-search-placeholder = Sök efter städer eller regioner
 offline-dialog-cancel = Avbryt
 offline-dialog-preview = Förhandsgranska nedladdning
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = minuter
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = stopp

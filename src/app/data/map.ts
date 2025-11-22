@@ -1,10 +1,12 @@
 /** @file Fixture data powering Stage 2 map experiences. */
 
+import { metresFromMiles, secondsFromMinutes } from "../units/unit-format";
+
 export interface QuickWalkConfig {
   backgroundImageUrl: string;
   backgroundAlt: string;
-  defaultDuration: number;
-  durationRange: { min: number; max: number; step: number };
+  defaultDurationSeconds: number;
+  durationRangeSeconds: { min: number; max: number; step: number };
   interestIds: string[];
 }
 
@@ -25,8 +27,8 @@ export interface WalkPointOfInterest {
 export interface WalkRouteSummary {
   id: string;
   title: string;
-  distance: string;
-  duration: string;
+  distanceMetres: number;
+  durationSeconds: number;
   stopsCount: number;
   difficulty: string;
   rating: number;
@@ -45,16 +47,20 @@ export const quickWalkConfig: QuickWalkConfig = {
   backgroundImageUrl:
     "https://storage.googleapis.com/uxpilot-auth.appspot.com/ba98316c6a-339af7a71b2bf241cb90.png",
   backgroundAlt: "Satellite map view of the city used in the quick walk generator",
-  defaultDuration: 60,
-  durationRange: { min: 15, max: 180, step: 5 },
+  defaultDurationSeconds: secondsFromMinutes(60),
+  durationRangeSeconds: {
+    min: secondsFromMinutes(15),
+    max: secondsFromMinutes(180),
+    step: secondsFromMinutes(5),
+  },
   interestIds: ["parks", "coffee", "street-art", "historic", "waterfront", "markets"],
 };
 
 export const waterfrontDiscoveryRoute: WalkRouteSummary = {
   id: "waterfront-discovery",
   title: "Waterfront Discovery Walk",
-  distance: "2.3 mi",
-  duration: "45 min",
+  distanceMetres: metresFromMiles(2.3),
+  durationSeconds: secondsFromMinutes(45),
   stopsCount: 6,
   difficulty: "Easy",
   rating: 4.8,

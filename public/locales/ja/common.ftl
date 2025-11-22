@@ -56,7 +56,6 @@ nav-discover-label = 発見
 nav-routes-label = ルート
 nav-profile-label = プロフィール
 nav-primary-aria-label = メインナビゲーション
-
 interest-parks-label = 公園と自然
 interest-coffee-label = 珈琲屋
 interest-street-art-label = 路上アート
@@ -67,7 +66,6 @@ difficulty-easy-label = やさしい
 difficulty-moderate-label = 中くらい
 difficulty-challenging-label = チャレンジ
 poi-highlight-label = ハイライト
-
 quick-walk-map-aria-label = クイック散歩マップビュー
 quick-walk-dismiss-aria = パネルを閉じる
 quick-walk-header-title = クイック散歩ジェネレーター
@@ -95,9 +93,6 @@ quick-walk-tab-map = 探す
 quick-walk-tab-stops = 立ち寄り
 quick-walk-tab-notes = メモ
 quick-walk-save-aria = クイック散歩を保存
-
-
-
 wizard-header-title = ルートウィザード
 wizard-header-back-label = 戻る
 wizard-header-help-label = ヘルプ
@@ -225,11 +220,6 @@ safety-preset-senior-title = シニア向け
 safety-preset-senior-description = ゆるやかな坂、休憩ポイント、十分な照明
 safety-preset-night-title = ナイトウォーカー
 safety-preset-night-description = 明るく人通りの多いエリア＋緊急共有
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = 言語
 walk-complete-hero-title = ウォーク完了！
@@ -270,7 +260,6 @@ explore-community-heading = コミュニティのお気に入り
 explore-community-subtitle = 今週もっとも共有されたルート
 explore-community-saves = {$count} 件の保存
 explore-curated-route-count = {$count} 件のルート
-
 offline-header-title = オフラインマップ
 offline-header-subtitle = ダウンロードとスマート更新を管理
 offline-header-back-label = 地図に戻る
@@ -310,3 +299,9 @@ offline-dialog-description = オフライン利用のためにマップを同期
 offline-dialog-search-placeholder = 都市または地域を検索
 offline-dialog-cancel = キャンセル
 offline-dialog-preview = ダウンロードをプレビュー
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = 分
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = 箇所

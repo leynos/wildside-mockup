@@ -56,7 +56,6 @@ nav-discover-label = 发现
 nav-routes-label = 路线
 nav-profile-label = 个人资料
 nav-primary-aria-label = 主导航
-
 interest-parks-label = 公园与自然
 interest-coffee-label = 咖啡好去处
 interest-street-art-label = 街头艺术
@@ -67,7 +66,6 @@ difficulty-easy-label = 轻松
 difficulty-moderate-label = 适中
 difficulty-challenging-label = 挑战
 poi-highlight-label = 亮点
-
 quick-walk-map-aria-label = 快速步行地图视图
 quick-walk-dismiss-aria = 关闭面板
 quick-walk-header-title = 快速步行生成器
@@ -95,9 +93,6 @@ quick-walk-tab-map = 探索
 quick-walk-tab-stops = 站点
 quick-walk-tab-notes = 备注
 quick-walk-save-aria = 保存快速步行
-
-
-
 wizard-header-title = 路线向导
 wizard-header-back-label = 返回
 wizard-header-help-label = 帮助
@@ -225,11 +220,6 @@ safety-preset-senior-title = 适合长者
 safety-preset-senior-description = 缓坡、休息点与良好照明
 safety-preset-night-title = 夜行者
 safety-preset-night-description = 照明充足且人流量高的区域，附带紧急共享
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = 语言
 walk-complete-hero-title = 行程完成！
@@ -270,7 +260,6 @@ explore-community-heading = 社区最爱
 explore-community-subtitle = 本周分享最多
 explore-community-saves = {$count} 次收藏
 explore-curated-route-count = {$count} 条路线
-
 offline-header-title = 离线地图
 offline-header-subtitle = 管理下载与智能更新
 offline-header-back-label = 返回地图
@@ -310,3 +299,9 @@ offline-dialog-description = 同步地图以便离线使用。搜索城市或投
 offline-dialog-search-placeholder = 搜索城市或地区
 offline-dialog-cancel = 取消
 offline-dialog-preview = 预览下载
+unit-distance-kilometre = 公里
+unit-distance-mile = mi
+unit-duration-minute = 分钟
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = 站点

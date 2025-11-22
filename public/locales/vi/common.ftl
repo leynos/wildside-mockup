@@ -56,7 +56,6 @@ nav-discover-label = Khám phá
 nav-routes-label = Lộ trình
 nav-profile-label = Hồ sơ
 nav-primary-aria-label = Điều hướng chính
-
 interest-parks-label = Công viên & thiên nhiên
 interest-coffee-label = Quán cà phê
 interest-street-art-label = Nghệ thuật đường phố
@@ -67,7 +66,6 @@ difficulty-easy-label = Dễ
 difficulty-moderate-label = Trung bình
 difficulty-challenging-label = Thử thách
 poi-highlight-label = Nổi bật
-
 quick-walk-map-aria-label = Khung nhìn bản đồ đi bộ nhanh
 quick-walk-dismiss-aria = Đóng bảng
 quick-walk-header-title = Trình tạo lộ trình đi bộ nhanh
@@ -95,9 +93,6 @@ quick-walk-tab-map = Khám phá
 quick-walk-tab-stops = Điểm dừng
 quick-walk-tab-notes = Ghi chú
 quick-walk-save-aria = Lưu chuyến đi bộ nhanh
-
-
-
 wizard-header-title = Trợ lý tuyến đường
 wizard-header-back-label = Quay lại
 wizard-header-help-label = Trợ giúp
@@ -225,11 +220,6 @@ safety-preset-senior-title = Thân thiện người lớn tuổi
 safety-preset-senior-description = Dốc thoải, điểm nghỉ và ánh sáng tốt
 safety-preset-night-title = Người đi đêm
 safety-preset-night-description = Khu vực sáng sủa, đông người kèm chia sẻ khẩn cấp
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Ngôn ngữ
 walk-complete-hero-title = Hoàn thành chuyến đi!
@@ -280,7 +270,6 @@ explore-curated-route-count =
         [one] {$count} tuyến
        *[other] {$count} tuyến
     }
-
 offline-header-title = Bản đồ ngoại tuyến
 offline-header-subtitle = Quản lý tải xuống và cập nhật thông minh
 offline-header-back-label = Quay lại bản đồ
@@ -320,3 +309,9 @@ offline-dialog-description = Đồng bộ bản đồ để dùng ngoại tuyế
 offline-dialog-search-placeholder = Tìm thành phố hoặc khu vực
 offline-dialog-cancel = Hủy
 offline-dialog-preview = Xem trước tải xuống
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = phút
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = điểm dừng

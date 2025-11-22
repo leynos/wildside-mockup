@@ -56,7 +56,6 @@ nav-discover-label = கண்டறி
 nav-routes-label = பாதைகள்
 nav-profile-label = சுயவிவரம்
 nav-primary-aria-label = முதன்மை வழிசெலுத்தல்
-
 interest-parks-label = பூங்கா & இயற்கை
 interest-coffee-label = காபி இடங்கள்
 interest-street-art-label = தெருக்கலை
@@ -67,7 +66,6 @@ difficulty-easy-label = எளிது
 difficulty-moderate-label = நடுத்தரம்
 difficulty-challenging-label = சவாலான
 poi-highlight-label = முக்கிய அம்சம்
-
 quick-walk-map-aria-label = விரைவு நடை வரைபட காட்சி
 quick-walk-dismiss-aria = பலகையை மூடு
 quick-walk-header-title = விரைவு நடை உருவாக்கி
@@ -95,9 +93,6 @@ quick-walk-tab-map = ஆராய்க
 quick-walk-tab-stops = நிறுத்தங்கள்
 quick-walk-tab-notes = குறிப்புகள்
 quick-walk-save-aria = விரைவு நடையைச் சேமிக்கவும்
-
-
-
 wizard-header-title = நடைபாதை உதவியாளர்
 wizard-header-back-label = மீண்டும்
 wizard-header-help-label = உதவி
@@ -225,11 +220,6 @@ safety-preset-senior-title = மூத்தோர் நட்பு
 safety-preset-senior-description = மெதுவான ஏற்றங்கள், ஓய்வு இடங்கள், நல்ல விளக்கு
 safety-preset-night-title = இரவுநடை பயணி
 safety-preset-night-description = நன்றாக விளக்கமிட்ட கூட்டமான பகுதிகள், அவசர பகிர்வு
-
-
-
-
-
 app-shell-title = வில்ட்சைட் மாக்அப்
 controls-language-label = மொழி
 walk-complete-hero-title = நடை முடிந்தது!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} பாதை
        *[other] {$count} பாதைகள்
     }
-
 offline-header-title = ஆஃப்லைன் வரைபடங்கள்
 offline-header-subtitle = பதிவிறக்கங்களையும் ஸ்மார்ட் புதுப்பிப்புகளையும் நிர்வகிக்கவும்
 offline-header-back-label = வரைபடத்திற்குத் திரும்ப
@@ -318,3 +307,9 @@ offline-dialog-description = ஆஃப்லைன் பயன்பாட்�
 offline-dialog-search-placeholder = நகரங்கள் அல்லது பகுதிகளைத் தேடுங்கள்
 offline-dialog-cancel = ரத்து
 offline-dialog-preview = பதிவிறக்க முன்னோட்டம்
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = நிமிடங்கள்
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = நிறுத்தங்கள்

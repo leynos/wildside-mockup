@@ -56,7 +56,6 @@ nav-discover-label = Opdag
 nav-routes-label = Ruter
 nav-profile-label = Profil
 nav-primary-aria-label = Primær navigation
-
 interest-parks-label = Parker og natur
 interest-coffee-label = Kaffesteder
 interest-street-art-label = Street art
@@ -67,7 +66,6 @@ difficulty-easy-label = Nem
 difficulty-moderate-label = Moderat
 difficulty-challenging-label = Udfordrende
 poi-highlight-label = Højdepunkt
-
 quick-walk-map-aria-label = Visning af kortet til hurtig gåtur
 quick-walk-dismiss-aria = Luk panel
 quick-walk-header-title = Generator til hurtige gåture
@@ -95,9 +93,6 @@ quick-walk-tab-map = Udforsk
 quick-walk-tab-stops = Stop
 quick-walk-tab-notes = Noter
 quick-walk-save-aria = Gem hurtig gåtur
-
-
-
 wizard-header-title = Ruteassistent
 wizard-header-back-label = Tilbage
 wizard-header-help-label = Hjælp
@@ -225,11 +220,6 @@ safety-preset-senior-title = Seniorvenlig
 safety-preset-senior-description = Blide hældninger, hvilepunkter, god belysning
 safety-preset-night-title = Nattevandrer
 safety-preset-night-description = Velbelyste, travle områder og nød-deling
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Sprog
 walk-complete-hero-title = Gåturen er gennemført!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} rute
        *[other] {$count} ruter
     }
-
 offline-header-title = Offlinekort
 offline-header-subtitle = Administrer downloads og smarte opdateringer
 offline-header-back-label = Tilbage til kortet
@@ -318,3 +307,9 @@ offline-dialog-description = Synkroniser kort til offline adgang. Søg efter en 
 offline-dialog-search-placeholder = Søg efter byer eller regioner
 offline-dialog-cancel = Annuller
 offline-dialog-preview = Vis download
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = minutter
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = stop

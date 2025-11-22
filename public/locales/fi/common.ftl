@@ -56,7 +56,6 @@ nav-discover-label = Tutustu
 nav-routes-label = Reitit
 nav-profile-label = Profiili
 nav-primary-aria-label = Päänavigaatio
-
 interest-parks-label = Puistot ja luonto
 interest-coffee-label = Kahvipaikat
 interest-street-art-label = Katutaide
@@ -67,7 +66,6 @@ difficulty-easy-label = Helppo
 difficulty-moderate-label = Keskitaso
 difficulty-challenging-label = Haastava
 poi-highlight-label = Kohokohta
-
 quick-walk-map-aria-label = Pikakävelykartan näkymä
 quick-walk-dismiss-aria = Sulje paneeli
 quick-walk-header-title = Pikakävelyn generaattori
@@ -95,9 +93,6 @@ quick-walk-tab-map = Tutki
 quick-walk-tab-stops = Pysähdykset
 quick-walk-tab-notes = Muistiinpanot
 quick-walk-save-aria = Tallenna pikakävely
-
-
-
 wizard-header-title = Reittiavustaja
 wizard-header-back-label = Takaisin
 wizard-header-help-label = Ohje
@@ -225,11 +220,6 @@ safety-preset-senior-title = Senioriystävällinen
 safety-preset-senior-description = Loivat nousut, lepoalueet ja hyvä valaistus
 safety-preset-night-title = Yökulkija
 safety-preset-night-description = Hyvin valaistut, vilkkaat alueet ja hätäjako
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Kieli
 walk-complete-hero-title = Kävely valmis!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} reitti
        *[other] {$count} reittejä
     }
-
 offline-header-title = Offline-kartat
 offline-header-subtitle = Hallitse latauksia ja älypäivityksiä
 offline-header-back-label = Takaisin karttaan
@@ -318,3 +307,9 @@ offline-dialog-description = Synkronoi kartat offline-käyttöön. Hae kaupunkia
 offline-dialog-search-placeholder = Hae kaupunkeja tai alueita
 offline-dialog-cancel = Peruuta
 offline-dialog-preview = Esikatsele latausta
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = minuuttia
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = pysähdystä

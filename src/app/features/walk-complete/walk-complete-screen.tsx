@@ -10,6 +10,7 @@ import { Icon } from "../../components/icon";
 import { SectionHeading } from "../../components/section-heading";
 import { SectionHero } from "../../components/section-hero";
 import {
+  type WalkCompletionStat,
   walkCompletionMapImage,
   walkCompletionMoments,
   walkCompletionPrimaryStats,
@@ -17,6 +18,8 @@ import {
   walkCompletionShareOptions,
 } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
+import { useUnitPreferences } from "../../units/unit-preferences-provider";
+import { formatDistance, formatDuration, formatStops } from "../../units/unit-format";
 
 const secondaryStatIconTone: Record<string, string> = {
   calories: "text-orange-400",
@@ -52,7 +55,8 @@ export function WalkCompleteScreen(): JSX.Element {
   const navigate = useNavigate();
   const [toastOpen, setToastOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { unitSystem } = useUnitPreferences();
 
   const heroTitle = t("walk-complete-hero-title", { defaultValue: "Walk complete!" });
   const heroDescription = t("walk-complete-hero-description", {
@@ -98,6 +102,44 @@ export function WalkCompleteScreen(): JSX.Element {
     }
     return labels;
   }, [t]);
+
+  const unitOptions = useMemo(
+    () => ({ t, locale: i18n.language, unitSystem }),
+    [i18n.language, t, unitSystem],
+  );
+
+  const formatStatValue = useCallback(
+    (value: WalkCompletionStat["value"]): string => {
+      switch (value.kind) {
+        case "distance": {
+          const { value: formatted, unitLabel } = formatDistance(value.metres, unitOptions);
+          return `${formatted} ${unitLabel}`;
+        }
+        case "duration": {
+          const { value: formatted, unitLabel } = formatDuration(value.seconds, {
+            ...unitOptions,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          });
+          return `${formatted} ${unitLabel}`;
+        }
+        case "count": {
+          if (value.unitToken === "count-stop") {
+            const { value: formatted, unitLabel } = formatStops(value.value, {
+              ...unitOptions,
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            });
+            return `${formatted} ${unitLabel}`;
+          }
+          return new Intl.NumberFormat(unitOptions.locale).format(value.value);
+        }
+        default:
+          return "";
+      }
+    },
+    [unitOptions],
+  );
 
   return (
     <Toast.Provider swipeDirection="right">
@@ -150,7 +192,7 @@ export function WalkCompleteScreen(): JSX.Element {
                         })}
                       </span>
                     </div>
-                    <p className="text-2xl font-semibold">{stat.value}</p>
+                    <p className="text-2xl font-semibold">{formatStatValue(stat.value)}</p>
                   </article>
                 ))}
               </div>
@@ -168,7 +210,9 @@ export function WalkCompleteScreen(): JSX.Element {
                       className={`walk-complete__secondary-icon ${secondaryStatIconTone[stat.id] ?? "text-accent"}`}
                       aria-hidden
                     />
-                    <p className="text-lg font-semibold text-base-content">{stat.value}</p>
+                    <p className="text-lg font-semibold text-base-content">
+                      {formatStatValue(stat.value)}
+                    </p>
                     <p className="text-xs text-base-content/70">
                       {t(`walk-complete-secondary-${stat.id}-label`, {
                         defaultValue: stat.label,

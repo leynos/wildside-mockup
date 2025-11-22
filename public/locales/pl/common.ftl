@@ -56,7 +56,6 @@ nav-discover-label = Odkrywaj
 nav-routes-label = Trasy
 nav-profile-label = Profil
 nav-primary-aria-label = Nawigacja główna
-
 interest-parks-label = Parki i natura
 interest-coffee-label = Kawiarnie
 interest-street-art-label = Sztuka uliczna
@@ -67,7 +66,6 @@ difficulty-easy-label = Łatwa
 difficulty-moderate-label = Średnia
 difficulty-challenging-label = Wymagająca
 poi-highlight-label = Atrakcja
-
 quick-walk-map-aria-label = Widok mapy szybkiego spaceru
 quick-walk-dismiss-aria = Zamknij panel
 quick-walk-header-title = Generator szybkiego spaceru
@@ -97,9 +95,6 @@ quick-walk-tab-map = Mapa
 quick-walk-tab-stops = Przystanki
 quick-walk-tab-notes = Notatki
 quick-walk-save-aria = Zapisz szybki spacer
-
-
-
 wizard-header-title = Kreator trasy
 wizard-header-back-label = Wstecz
 wizard-header-help-label = Pomoc
@@ -229,11 +224,6 @@ safety-preset-senior-title = Przyjazne seniorom
 safety-preset-senior-description = Łagodne wzniesienia, miejsca odpoczynku i dobre oświetlenie
 safety-preset-night-title = Nocny wędrowiec
 safety-preset-night-description = Dobrze oświetlone, tętniące życiem strefy z udostępnianiem awaryjnym
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Język
 walk-complete-hero-title = Spacer zakończony!
@@ -286,7 +276,6 @@ explore-curated-route-count =
         [many] {$count} tras
        *[other] {$count} tras
     }
-
 offline-header-title = Mapy offline
 offline-header-subtitle = Zarządzaj pobraniami i inteligentnymi aktualizacjami
 offline-header-back-label = Wróć do mapy
@@ -326,3 +315,9 @@ offline-dialog-description = Synchronizuj mapy do użytku offline. Wyszukaj mias
 offline-dialog-search-placeholder = Wyszukaj miasta lub regiony
 offline-dialog-cancel = Anuluj
 offline-dialog-preview = Podgląd pobierania
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute = minut
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop = przystanków

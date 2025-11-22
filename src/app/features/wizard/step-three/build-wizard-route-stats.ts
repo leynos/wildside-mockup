@@ -3,6 +3,8 @@
 import type { TFunction } from "i18next";
 
 import { wizardRouteSummary } from "../../../data/wizard";
+import type { UnitSystem } from "../../../units/unit-system";
+import { formatDistance, formatDuration, formatStops } from "../../../units/unit-format";
 
 export type WizardRouteStatCopy = {
   readonly id: string;
@@ -10,9 +12,43 @@ export type WizardRouteStatCopy = {
   readonly unitLabel: string;
 };
 
-export const buildWizardRouteStats = (t: TFunction): WizardRouteStatCopy[] =>
-  wizardRouteSummary.stats.map((stat) => ({
-    id: stat.id,
-    value: stat.value,
-    unitLabel: t(stat.unitKey, { defaultValue: stat.defaultUnit }),
-  }));
+export const buildWizardRouteStats = (
+  t: TFunction,
+  locale: string,
+  unitSystem: UnitSystem,
+): WizardRouteStatCopy[] =>
+  wizardRouteSummary.stats.map((stat) => {
+    switch (stat.quantity.kind) {
+      case "distance": {
+        const { value, unitLabel } = formatDistance(stat.quantity.metres, {
+          t,
+          locale,
+          unitSystem,
+        });
+        return { id: stat.id, value, unitLabel };
+      }
+      case "duration": {
+        const { value, unitLabel } = formatDuration(stat.quantity.seconds, {
+          t,
+          locale,
+          unitSystem,
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        });
+        return { id: stat.id, value, unitLabel };
+      }
+      case "count": {
+        const { value, unitLabel } = formatStops(stat.quantity.value, {
+          t,
+          locale,
+          unitSystem,
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        });
+        return { id: stat.id, value, unitLabel };
+      }
+      default: {
+        return { id: stat.id, value: "", unitLabel: "" };
+      }
+    }
+  });
