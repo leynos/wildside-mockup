@@ -108,6 +108,34 @@ const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""),
 
 const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
 
+const buildSavedRouteCopy = (route: WalkRouteSummary) => {
+  const savedMetrics = formatRouteMetrics(route);
+  const savedDistanceCopy =
+    i18n.t("saved-route-distance-value", {
+      value: savedMetrics.distance.value,
+      unit: savedMetrics.distance.unitLabel,
+      defaultValue: savedMetrics.distanceText,
+    }) ?? savedMetrics.distanceText;
+  const savedDurationCopy =
+    i18n.t("saved-route-duration-value", {
+      value: savedMetrics.duration.value,
+      unit: savedMetrics.duration.unitLabel,
+      defaultValue: savedMetrics.durationText,
+    }) ?? savedMetrics.durationText;
+  const savedStopsCopy =
+    i18n.t("saved-route-stops-value", {
+      value: savedMetrics.stops.value,
+      unit: savedMetrics.stops.unitLabel,
+      defaultValue: savedMetrics.stopsText,
+    }) ?? savedMetrics.stopsText;
+
+  return {
+    savedDistanceCopy,
+    savedDurationCopy,
+    savedStopsCopy,
+  } as const;
+};
+
 const clickElement = (element: Element | null | undefined): void => {
   if (element instanceof HTMLElement) {
     element.click();
@@ -749,25 +777,8 @@ describe("Stage 2 routed flows", () => {
     });
 
     expect(view.getByRole("heading", { name: new RegExp(savedRoute.title, "i") })).toBeTruthy();
-    const savedMetrics = formatRouteMetrics(savedRoute);
-    const savedDistanceCopy =
-      i18n.t("saved-route-distance-value", {
-        value: savedMetrics.distance.value,
-        unit: savedMetrics.distance.unitLabel,
-        defaultValue: savedMetrics.distanceText,
-      }) ?? savedMetrics.distanceText;
-    const savedDurationCopy =
-      i18n.t("saved-route-duration-value", {
-        value: savedMetrics.duration.value,
-        unit: savedMetrics.duration.unitLabel,
-        defaultValue: savedMetrics.durationText,
-      }) ?? savedMetrics.durationText;
-    const savedStopsCopy =
-      i18n.t("saved-route-stops-value", {
-        value: savedMetrics.stops.value,
-        unit: savedMetrics.stops.unitLabel,
-        defaultValue: savedMetrics.stopsText,
-      }) ?? savedMetrics.stopsText;
+    const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
+      buildSavedRouteCopy(savedRoute);
 
     expect(view.getByText(localizedRegex(savedDistanceCopy))).toBeTruthy();
     expect(view.getByText(localizedRegex(savedDurationCopy))).toBeTruthy();
@@ -1175,25 +1186,8 @@ describe("Stage 3 wizard flows", () => {
         name: new RegExp(savedRoute.title ?? "", "i"),
       }),
     ).toBeTruthy();
-    const savedMetrics = formatRouteMetrics(savedRoute);
-    const savedDistanceCopy =
-      i18n.t("saved-route-distance-value", {
-        value: savedMetrics.distance.value,
-        unit: savedMetrics.distance.unitLabel,
-        defaultValue: savedMetrics.distanceText,
-      }) ?? savedMetrics.distanceText;
-    const savedDurationCopy =
-      i18n.t("saved-route-duration-value", {
-        value: savedMetrics.duration.value,
-        unit: savedMetrics.duration.unitLabel,
-        defaultValue: savedMetrics.durationText,
-      }) ?? savedMetrics.durationText;
-    const savedStopsCopy =
-      i18n.t("saved-route-stops-value", {
-        value: savedMetrics.stops.value,
-        unit: savedMetrics.stops.unitLabel,
-        defaultValue: savedMetrics.stopsText,
-      }) ?? savedMetrics.stopsText;
+    const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
+      buildSavedRouteCopy(savedRoute);
 
     expect(view.getByText(localizedRegex(savedDistanceCopy))).toBeTruthy();
     expect(view.getByText(localizedRegex(savedDurationCopy))).toBeTruthy();
