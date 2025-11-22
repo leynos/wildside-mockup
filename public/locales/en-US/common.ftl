@@ -317,7 +317,7 @@ offline-dialog-search-placeholder = Search cities or regions
 offline-dialog-cancel = Cancel
 offline-dialog-preview = Preview download
 unit-distance-kilometre = km
-unit-distance-mile = miles
+unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
        *[other] minutes
@@ -326,5 +326,6 @@ unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] stop
        *[other] stops
     }

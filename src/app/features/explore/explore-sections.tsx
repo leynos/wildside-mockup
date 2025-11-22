@@ -8,7 +8,7 @@ import { Icon } from "../../components/icon";
 import {
   communityPick,
   curatedCollections,
-  exploreCategories,
+  type ExploreCategory,
   featuredWalk,
   formatRating,
   popularThemes,
@@ -39,7 +39,7 @@ export function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Elem
   );
 }
 
-export function CategoryScroller(): JSX.Element {
+export function CategoryScroller({ categories }: { categories: ExploreCategory[] }): JSX.Element {
   const { t } = useTranslation();
   const ariaLabel = t("explore-categories-aria-label", { defaultValue: "Popular categories" });
   const formatRouteCount = (count: number) =>
@@ -56,7 +56,7 @@ export function CategoryScroller(): JSX.Element {
       <ScrollArea.Root className="w-full" type="scroll">
         <ScrollArea.Viewport className="w-full">
           <div className="flex gap-3 pb-2" style={{ paddingInlineEnd: "1.5rem" }}>
-            {exploreCategories.map((category) => (
+            {categories.map((category) => (
               <article
                 key={category.id}
                 className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}

@@ -1,5 +1,7 @@
 /** @file Data backing the walk wizard flow. */
 
+import { metresFromMiles } from "../units/unit-format";
+
 export interface WizardStep {
   id: string;
   title: string;
@@ -135,7 +137,7 @@ export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
     accentClass: "text-purple-400",
     noteKey: "wizard-step-three-stop-art-note",
     defaultNote: "Photo spot • {{distance}} {{unit}} in",
-    noteDistanceMetres: 1_770.2784,
+    noteDistanceMetres: metresFromMiles(1.1),
   },
   {
     id: "garden",
@@ -147,7 +149,7 @@ export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
     accentClass: "text-emerald-400",
     noteKey: "wizard-step-three-stop-garden-note",
     defaultNote: "Rest area • {{distance}} {{unit}} in",
-    noteDistanceMetres: 2_896.8192,
+    noteDistanceMetres: metresFromMiles(1.8),
   },
 ] as const;
 

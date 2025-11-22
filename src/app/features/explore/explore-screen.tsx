@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
+import { exploreCategories } from "../../data/explore";
 import { buildDifficultyLookup } from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
@@ -138,7 +139,7 @@ export function ExploreScreen(): JSX.Element {
         </AppHeader>
         <main className="screen-scroll">
           <div className="space-y-8">
-            <CategoryScroller />
+            <CategoryScroller categories={exploreCategories} />
             <FeaturedWalkCard
               formatDistanceLabel={formatDistanceLabel}
               formatDurationLabel={formatDurationLabel}

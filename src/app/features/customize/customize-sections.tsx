@@ -79,11 +79,13 @@ export interface SurfacePickerProps {
   value: string;
   options: SurfaceOption[];
   onChange: (value: string) => void;
+  iconToken?: string;
 }
 
 export function SurfacePicker({
   ariaLabel,
   heading,
+  iconToken = "{icon.category.paved}",
   onChange,
   options,
   value,
@@ -91,7 +93,7 @@ export function SurfacePicker({
   const { t } = useTranslation();
   return (
     <section className="mb-8">
-      <SectionHeading iconToken="{icon.category.paved}">{heading}</SectionHeading>
+      <SectionHeading iconToken={iconToken}>{heading}</SectionHeading>
       <ToggleGroup.Root
         type="single"
         value={value}

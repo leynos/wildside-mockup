@@ -21,8 +21,7 @@ import {
 } from "../../data/customize";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
-import { formatDistance, formatDuration } from "../../units/unit-format";
-import { useUnitPreferences } from "../../units/unit-preferences-provider";
+import { useUnitFormatters } from "../../units/use-unit-formatters";
 import {
   AdvancedOptions,
   InterestMix,
@@ -33,28 +32,26 @@ import {
 
 export function CustomizeScreen(): JSX.Element {
   const { t, i18n } = useTranslation();
-  const { unitSystem } = useUnitPreferences();
-  const unitOptions = useMemo(
-    () => ({ t, locale: i18n.language, unitSystem }),
-    [i18n.language, t, unitSystem],
-  );
+  const { formatDistanceValue, formatDurationValue, unitSystem } = useUnitFormatters();
   const formatDistanceLabel = useCallback(
     (metres: number) => {
-      const { value, unitLabel } = formatDistance(metres, unitOptions);
+      const { value, unitLabel } = formatDistanceValue(metres, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      });
       return `${value} ${unitLabel}`;
     },
-    [unitOptions],
+    [formatDistanceValue],
   );
   const formatDurationLabel = useCallback(
     (seconds: number) => {
-      const { value, unitLabel } = formatDuration(seconds, {
-        ...unitOptions,
+      const { value, unitLabel } = formatDurationValue(seconds, {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });
       return `${value} ${unitLabel}`;
     },
-    [unitOptions],
+    [formatDurationValue],
   );
 
   const sliderInitialValues = useMemo(
@@ -174,6 +171,7 @@ export function CustomizeScreen(): JSX.Element {
             heading={t("customize-surface-heading", { defaultValue: "Surface Type" })}
             ariaLabel={t("customize-surface-aria-label", { defaultValue: "Surface type" })}
             options={surfaceOptions}
+            iconToken="{icon.category.paved}"
             value={surface}
             onChange={setSurface}
           />

@@ -311,11 +311,13 @@ unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
+        [one] நிமிடம்
        *[other] நிமிடங்கள்
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] நிறுத்தம்
        *[other] நிறுத்தங்கள்
     }

@@ -16,11 +16,8 @@ import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
-import {
-  formatDuration as formatDurationValue,
-  secondsFromMinutes,
-} from "../../../units/unit-format";
-import { useUnitPreferences } from "../../../units/unit-preferences-provider";
+import { secondsFromMinutes } from "../../../units/unit-format";
+import { useUnitFormatters } from "../../../units/use-unit-formatters";
 
 type TabKey = "map" | "stops" | "notes";
 
@@ -51,17 +48,12 @@ export function QuickWalkScreen(): JSX.Element {
     return getHashTab(window.location.hash) ?? "map";
   });
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-  const { unitSystem } = useUnitPreferences();
-  const unitOptions = useMemo(
-    () => ({ t, locale: i18n.language, unitSystem }),
-    [i18n.language, t, unitSystem],
-  );
+  const { t } = useTranslation();
+  const { formatDurationValue } = useUnitFormatters();
 
   const formatDurationLabel = useCallback(
     (seconds: number) => {
       const { value, unitLabel } = formatDurationValue(seconds, {
-        ...unitOptions,
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });
@@ -71,7 +63,7 @@ export function QuickWalkScreen(): JSX.Element {
         defaultValue: `${value} ${unitLabel}`,
       });
     },
-    [t, unitOptions],
+    [formatDurationValue, t],
   );
 
   const mapViewportAria = t("quick-walk-map-aria-label", {
