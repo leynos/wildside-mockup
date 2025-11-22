@@ -5,13 +5,13 @@ import { type JSX, type ReactNode, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
-import type { ExploreCategory, FeaturedWalk, PopularTheme } from "../../data/explore";
-import {
-  communityPick,
-  curatedCollections,
-  formatRating,
-  trendingRoutes,
+import type {
+  CuratedCollection,
+  ExploreCategory,
+  FeaturedWalk,
+  PopularTheme,
 } from "../../data/explore";
+import { communityPick, formatRating, trendingRoutes } from "../../data/explore";
 import type {
   DifficultyId,
   ResolvedDifficultyDescriptor,
@@ -191,12 +191,14 @@ export function PopularThemesGrid({
 }
 
 type CuratedCollectionsListProps = {
+  collections: CuratedCollection[];
   difficultyLookup: Map<DifficultyId, ResolvedDifficultyDescriptor>;
   formatDistanceRangeLabel: (range: readonly [number, number]) => string;
   formatDurationRangeLabel: (range: readonly [number, number]) => string;
 };
 
 export function CuratedCollectionsList({
+  collections,
   difficultyLookup,
   formatDistanceRangeLabel,
   formatDurationRangeLabel,
@@ -215,7 +217,7 @@ export function CuratedCollectionsList({
         {heading}
       </h2>
       <div className="space-y-4">
-        {curatedCollections.map((collection) => (
+        {collections.map((collection) => (
           <article key={collection.id} className="explore-collection__card">
             <div className="flex gap-4">
               <div className="h-16 w-16 overflow-hidden rounded-lg border border-base-300/50">

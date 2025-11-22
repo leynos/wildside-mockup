@@ -9,7 +9,12 @@ import { useTranslation } from "react-i18next";
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
-import { exploreCategories, featuredWalk, popularThemes } from "../../data/explore";
+import {
+  curatedCollections,
+  exploreCategories,
+  featuredWalk,
+  popularThemes,
+} from "../../data/explore";
 import { buildDifficultyLookup } from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
@@ -150,6 +155,7 @@ export function ExploreScreen(): JSX.Element {
               themes={popularThemes}
             />
             <CuratedCollectionsList
+              collections={curatedCollections}
               difficultyLookup={difficultyLookup}
               formatDistanceRangeLabel={formatDistanceRangeLabel}
               formatDurationRangeLabel={formatDurationRangeLabel}
