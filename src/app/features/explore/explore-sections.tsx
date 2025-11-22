@@ -9,7 +9,7 @@ import {
   communityPick,
   curatedCollections,
   type ExploreCategory,
-  featuredWalk,
+  type FeaturedWalk,
   formatRating,
   popularThemes,
   trendingRoutes,
@@ -80,11 +80,13 @@ export function CategoryScroller({ categories }: { categories: ExploreCategory[]
 type FeaturedWalkCardProps = {
   formatDistanceLabel: (metres: number) => string;
   formatDurationLabel: (seconds: number) => string;
+  featuredWalk: FeaturedWalk;
 };
 
 export function FeaturedWalkCard({
   formatDistanceLabel,
   formatDurationLabel,
+  featuredWalk,
 }: FeaturedWalkCardProps): JSX.Element {
   const { t } = useTranslation();
   const heading = t("explore-featured-heading", { defaultValue: "Walk of the Week" });
