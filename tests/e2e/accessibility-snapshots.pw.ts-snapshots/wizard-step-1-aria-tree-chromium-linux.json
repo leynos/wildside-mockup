@@ -253,7 +253,7 @@
                                                 "children": [
                                                   {
                                                     "role": "slider",
-                                                    "name": "Walk duration slider handle",
+                                                    "name": "Walk duration slider",
                                                     "value": 60
                                                   }
                                                 ]

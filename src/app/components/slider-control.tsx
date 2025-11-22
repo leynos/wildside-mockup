@@ -68,7 +68,7 @@ export function SliderControl({
         </Slider.Track>
         <Slider.Thumb
           className="slider-control__thumb"
-          aria-label={`${label} slider handle`}
+          aria-label={ariaLabel ?? label}
           aria-valuetext={displayValue}
         />
       </Slider.Root>

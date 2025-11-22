@@ -36,4 +36,17 @@ describe("unit format helpers", () => {
     expect(fahrenheit.value).toBe("32.0");
     expect(fahrenheit.unitLabel).toBe("°F");
   });
+
+  it("keeps Celsius output for metric preference", () => {
+    const { t } = createStubT();
+
+    const celsius = formatTemperature(0, {
+      t,
+      locale: "en-US",
+      unitSystem: "metric",
+    });
+
+    expect(celsius.value).toBe("0.0");
+    expect(celsius.unitLabel).toBe("°C");
+  });
 });
