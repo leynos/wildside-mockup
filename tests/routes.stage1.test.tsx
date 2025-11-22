@@ -66,10 +66,44 @@ const defaultSelectionLabel = (count: number): string => `${count} selected`;
 
 const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""), "i");
 
+const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
+
 const clickElement = (element: Element | null | undefined): void => {
   if (element instanceof HTMLElement) {
     element.click();
   }
+};
+
+const buildOfflineDownloadsCopy = () => {
+  const downloadsHeading =
+    translate("offline-downloads-heading", "Downloaded areas") ?? "Downloaded areas";
+  const downloadsDescription =
+    translate("offline-downloads-description", "Manage maps for offline navigation") ??
+    "Manage maps for offline navigation";
+  const manageLabel = translate("offline-downloads-manage", "Manage") ?? "Manage";
+  const doneLabel = translate("offline-downloads-done", "Done") ?? "Done";
+  const undoDescription =
+    translate("offline-downloads-undo-description", offlineUndoDescriptionDefault) ??
+    offlineUndoDescriptionDefault;
+  const undoButtonLabel = translate("offline-downloads-undo-button", "Undo") ?? "Undo";
+  const deleteAriaLabel = (title: string) =>
+    translate("offline-downloads-delete-aria", `Delete ${title}`, { title }) ?? `Delete ${title}`;
+  const undoAriaLabel = (title: string, description: string) =>
+    translate("offline-downloads-undo-aria", "{{title}} deleted. {{description}}", {
+      title,
+      description,
+    }) ?? `${title} deleted. ${description}`;
+
+  return {
+    downloadsHeading,
+    downloadsDescription,
+    manageLabel,
+    doneLabel,
+    undoDescription,
+    undoButtonLabel,
+    deleteAriaLabel,
+    undoAriaLabel,
+  } as const;
 };
 
 async function renderRoute(path: TestRoute) {
@@ -1145,6 +1179,11 @@ describe("Stage 4 completion flows", () => {
   let root: Root | null = null;
   let mount: HTMLDivElement | null = null;
 
+  const extractDownloadTitles = (cards: readonly HTMLElement[]): string[] =>
+    cards.map((card) => {
+      return within(card).getByRole("heading", { level: 3 }).textContent?.trim() ?? "Download";
+    });
+
   function cleanup() {
     if (root && mount) {
       act(() => {
@@ -1281,14 +1320,16 @@ describe("Stage 4 completion flows", () => {
   it("allows removing a download when managing the offline list", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
+    const offlineCopy = buildOfflineDownloadsCopy();
     const downloadsRegion = view.getByRole("region", {
-      name: /downloaded areas/i,
+      name: localizedRegex(offlineCopy.downloadsHeading),
     });
     const initialDownloads = within(downloadsRegion).getAllByRole("article");
+    const downloadTitles = extractDownloadTitles(initialDownloads);
     expect(initialDownloads.length).toBeGreaterThan(0);
 
     const manageButton = within(downloadsRegion).getByRole("button", {
-      name: /^manage$/i,
+      name: localizedRegex(offlineCopy.manageLabel),
     });
 
     await act(async () => {
@@ -1296,8 +1337,11 @@ describe("Stage 4 completion flows", () => {
       await Promise.resolve();
     });
 
-    const deleteButtons = within(downloadsRegion).getAllByRole("button", {
-      name: /delete/i,
+    const deleteButtons = initialDownloads.map((card, index) => {
+      const title = downloadTitles[index] ?? "Download";
+      return within(card).getByRole("button", {
+        name: localizedRegex(offlineCopy.deleteAriaLabel(title)),
+      });
     });
     expect(deleteButtons.length).toBe(initialDownloads.length);
 
@@ -1306,8 +1350,9 @@ describe("Stage 4 completion flows", () => {
       await Promise.resolve();
     });
 
+    const deletedTitle = downloadTitles[0] ?? "Download";
     const undoCards = within(downloadsRegion).getAllByRole("article", {
-      name: /deleted/i,
+      name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
     });
     expect(undoCards.length).toBe(1);
   });
@@ -1315,11 +1360,12 @@ describe("Stage 4 completion flows", () => {
   it("restores a download via undo", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
+    const offlineCopy = buildOfflineDownloadsCopy();
     const downloadsRegion = view.getByRole("region", {
-      name: /downloaded areas/i,
+      name: localizedRegex(offlineCopy.downloadsHeading),
     });
     const manageButton = within(downloadsRegion).getByRole("button", {
-      name: /^manage$/i,
+      name: localizedRegex(offlineCopy.manageLabel),
     });
 
     await act(async () => {
@@ -1327,35 +1373,48 @@ describe("Stage 4 completion flows", () => {
       await Promise.resolve();
     });
 
-    const deleteButtons = within(downloadsRegion).getAllByRole("button", {
-      name: /delete/i,
+    const downloadCards = within(downloadsRegion).getAllByRole("article");
+    const downloadTitles = extractDownloadTitles(downloadCards);
+    const deleteButtons = downloadCards.map((card, index) => {
+      const title = downloadTitles[index] ?? "Download";
+      return within(card).getByRole("button", {
+        name: localizedRegex(offlineCopy.deleteAriaLabel(title)),
+      });
     });
     await act(async () => {
       clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
+    const deletedTitle = downloadTitles[0] ?? "Download";
     const undoCard = within(downloadsRegion).getByRole("article", {
-      name: /deleted/i,
+      name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
     });
-    const undoButton = within(undoCard).getByRole("button", { name: /undo/i });
+    const undoButton = within(undoCard).getByRole("button", {
+      name: localizedRegex(offlineCopy.undoButtonLabel),
+    });
 
     await act(async () => {
       clickElement(undoButton);
       await Promise.resolve();
     });
 
-    expect(within(downloadsRegion).queryByRole("article", { name: /deleted/i })).toBeNull();
+    expect(
+      within(downloadsRegion).queryByRole("article", {
+        name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
+      }),
+    ).toBeNull();
   });
 
   it("clears undo panels when finishing manage mode", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
+    const offlineCopy = buildOfflineDownloadsCopy();
     const downloadsRegion = view.getByRole("region", {
-      name: /downloaded areas/i,
+      name: localizedRegex(offlineCopy.downloadsHeading),
     });
     const manageButton = within(downloadsRegion).getByRole("button", {
-      name: /^manage$/i,
+      name: localizedRegex(offlineCopy.manageLabel),
     });
 
     await act(async () => {
@@ -1363,32 +1422,47 @@ describe("Stage 4 completion flows", () => {
       await Promise.resolve();
     });
 
-    const deleteButtons = within(downloadsRegion).getAllByRole("button", {
-      name: /delete/i,
+    const downloadCards = within(downloadsRegion).getAllByRole("article");
+    const downloadTitles = extractDownloadTitles(downloadCards);
+    const deleteButtons = downloadCards.map((card, index) => {
+      const title = downloadTitles[index] ?? "Download";
+      return within(card).getByRole("button", {
+        name: localizedRegex(offlineCopy.deleteAriaLabel(title)),
+      });
     });
     await act(async () => {
       clickElement(deleteButtons[0]);
       await Promise.resolve();
     });
 
-    expect(within(downloadsRegion).getByRole("article", { name: /deleted/i })).toBeTruthy();
+    const deletedTitle = downloadTitles[0] ?? "Download";
+    expect(
+      within(downloadsRegion).getByRole("article", {
+        name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
+      }),
+    ).toBeTruthy();
 
     const doneButton = within(downloadsRegion).getByRole("button", {
-      name: /^done$/i,
+      name: localizedRegex(offlineCopy.doneLabel),
     });
     await act(async () => {
       clickElement(doneButton);
       await Promise.resolve();
     });
 
-    expect(within(downloadsRegion).queryByRole("article", { name: /deleted/i })).toBeNull();
+    expect(
+      within(downloadsRegion).queryByRole("article", {
+        name: localizedRegex(offlineCopy.undoAriaLabel(deletedTitle, offlineCopy.undoDescription)),
+      }),
+    ).toBeNull();
   });
 
   it("labels offline download cards as readable articles", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
+    const offlineCopy = buildOfflineDownloadsCopy();
     const downloadsRegion = view.getByRole("region", {
-      name: /downloaded areas/i,
+      name: localizedRegex(offlineCopy.downloadsHeading),
     });
     const downloadCards = within(downloadsRegion).getAllByRole("article");
     expect(downloadCards.length).toBeGreaterThan(0);

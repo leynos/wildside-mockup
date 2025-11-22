@@ -45,6 +45,7 @@ export const SUPPORTED_LOCALES = [
 ] as const satisfies Readonly<[SupportedLocale, ...SupportedLocale[]]>;
 
 export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0].code;
+export const DETECTION_ORDER = ["querystring", "localStorage"] as const;
 
 const LOCALE_MAP: Record<string, SupportedLocale> = SUPPORTED_LOCALES.reduce(
   (map, locale) => {
