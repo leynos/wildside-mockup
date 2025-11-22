@@ -90,7 +90,7 @@ export const formatDistanceRange = (
   options: UnitFormatOptions,
 ): LocalisedUnitValue & { readonly maxValue: string } => {
   const start = formatDistance(minMetres, options);
-  const end = formatDistance(maxMetres, { ...options, unitSystem: options.unitSystem });
+  const end = formatDistance(maxMetres, options);
 
   return {
     ...start,
