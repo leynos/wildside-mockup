@@ -56,16 +56,20 @@ export interface UnitPreferencesProviderProps {
 
 export function UnitPreferencesProvider({ children }: UnitPreferencesProviderProps): JSX.Element {
   const { i18n } = useTranslation();
-  const storedPreference = readStoredUnitSystem();
 
-  const [unitSystem, setUnitSystemState] = useState<UnitSystem>(() => {
-    if (storedPreference) {
-      return storedPreference;
-    }
-    return detectUnitSystem(i18n.language);
-  });
+  const [unitSystem, setUnitSystemState] = useState<UnitSystem>(() =>
+    detectUnitSystem(i18n.language),
+  );
 
-  const [hasUserPreference, setHasUserPreference] = useState<boolean>(Boolean(storedPreference));
+  const [hasUserPreference, setHasUserPreference] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!canUseDom()) return;
+    const stored = readStoredUnitSystem();
+    if (!stored) return;
+    setUnitSystemState(stored);
+    setHasUserPreference(true);
+  }, []);
 
   useEffect(() => {
     if (hasUserPreference) {
