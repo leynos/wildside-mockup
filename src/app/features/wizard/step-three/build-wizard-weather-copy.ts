@@ -51,7 +51,7 @@ export const buildWizardWeatherCopy = (
   );
 
   const temperatureLabel = `${temperatureValue}${
-    temperatureUnit.startsWith("°") ? "" : " "
+    temperatureUnit.trimStart().startsWith("°") ? "" : " "
   }${temperatureUnit}`;
 
   const summary = t(wizardWeatherSummary.summaryKey, {
