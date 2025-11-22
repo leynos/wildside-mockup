@@ -35,6 +35,11 @@ export type UnitFormatOptions = {
   readonly maximumFractionDigits?: number;
 };
 
+type NumberFormatOptions = {
+  readonly minimumFractionDigits?: number;
+  readonly maximumFractionDigits?: number;
+};
+
 const DEFAULT_UNIT_LABELS: Record<UnitToken, string> = {
   "distance-kilometre": "km",
   "distance-mile": "miles",
@@ -47,7 +52,7 @@ const DEFAULT_UNIT_LABELS: Record<UnitToken, string> = {
 const formatNumber = (
   locale: string,
   value: number,
-  { minimumFractionDigits, maximumFractionDigits }: Partial<UnitFormatOptions>,
+  { minimumFractionDigits, maximumFractionDigits }: NumberFormatOptions,
 ): string => {
   return new Intl.NumberFormat(locale, {
     minimumFractionDigits,
