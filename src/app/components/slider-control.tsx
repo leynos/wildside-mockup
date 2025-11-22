@@ -66,7 +66,11 @@ export function SliderControl({
         <Slider.Track className="slider-control__track">
           <Slider.Range className="slider-control__range" />
         </Slider.Track>
-        <Slider.Thumb className="slider-control__thumb" aria-label={`${label} slider handle`} />
+        <Slider.Thumb
+          className="slider-control__thumb"
+          aria-label={`${label} slider handle`}
+          aria-valuetext={displayValue}
+        />
       </Slider.Root>
       {markers && markers.length > 0 ? (
         <div className="slider-control__markers" aria-hidden="true">
