@@ -16,8 +16,11 @@ import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
+import {
+  formatDuration as formatDurationValue,
+  secondsFromMinutes,
+} from "../../../units/unit-format";
 import { useUnitPreferences } from "../../../units/unit-preferences-provider";
-import { formatDuration as formatDurationValue, secondsFromMinutes } from "../../../units/unit-format";
 
 type TabKey = "map" | "stops" | "notes";
 

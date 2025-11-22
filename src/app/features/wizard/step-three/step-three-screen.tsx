@@ -14,8 +14,8 @@ import {
   wizardSteps,
   wizardSummaryHighlights,
 } from "../../../data/wizard";
-import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 import { formatDistance } from "../../../units/unit-format";
+import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
 
@@ -46,12 +46,10 @@ export function WizardStepThree(): JSX.Element {
   const helpMessage = t("wizard-help-placeholder", {
     defaultValue: "Contextual help coming soon",
   });
-  // biome-ignore lint/correctness/useExhaustiveDependencies: recompute when the active locale changes even if t is memoised
   const routeStats = useMemo(
     () => buildWizardRouteStats(t, i18n.language, unitSystem),
     [t, i18n.language, unitSystem],
   );
-  // biome-ignore lint/correctness/useExhaustiveDependencies: ensure weather copy follows locale changes
   const weatherCopy = useMemo(
     () => buildWizardWeatherCopy(t, i18n.language, unitSystem),
     [t, i18n.language, unitSystem],

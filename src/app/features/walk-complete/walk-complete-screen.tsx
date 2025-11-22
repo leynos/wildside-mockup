@@ -3,7 +3,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Toast from "@radix-ui/react-toast";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, type ReactNode, useMemo, useState } from "react";
+import { type JSX, type ReactNode, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
@@ -18,8 +18,8 @@ import {
   walkCompletionShareOptions,
 } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
-import { useUnitPreferences } from "../../units/unit-preferences-provider";
 import { formatDistance, formatDuration, formatStops } from "../../units/unit-format";
+import { useUnitPreferences } from "../../units/unit-preferences-provider";
 
 const secondaryStatIconTone: Record<string, string> = {
   calories: "text-orange-400",

@@ -3,13 +3,13 @@
 import type { TFunction } from "i18next";
 
 import {
+  celsiusToFahrenheit,
   METRES_PER_KILOMETRE,
   METRES_PER_MILE,
-  UnitSystem,
-  celsiusToFahrenheit,
   metresToKilometres,
   metresToMiles,
   secondsToMinutes,
+  type UnitSystem,
 } from "./unit-system";
 
 export type UnitToken =
@@ -60,7 +60,13 @@ export const getUnitLabel = (t: TFunction, unitToken: UnitToken): string =>
 
 export const formatDistance = (
   metres: number,
-  { locale, t, unitSystem, minimumFractionDigits = 1, maximumFractionDigits = 1 }: UnitFormatOptions,
+  {
+    locale,
+    t,
+    unitSystem,
+    minimumFractionDigits = 1,
+    maximumFractionDigits = 1,
+  }: UnitFormatOptions,
 ): LocalisedUnitValue => {
   const useImperial = unitSystem === "imperial";
   const numericValue = useImperial ? metresToMiles(metres) : metresToKilometres(metres);
@@ -89,7 +95,13 @@ export const formatDistanceRange = (
 
 export const formatDuration = (
   seconds: number,
-  { locale, t, unitSystem, minimumFractionDigits = 0, maximumFractionDigits = 0 }: UnitFormatOptions,
+  {
+    locale,
+    t,
+    unitSystem: _unitSystem,
+    minimumFractionDigits = 0,
+    maximumFractionDigits = 0,
+  }: UnitFormatOptions,
 ): LocalisedUnitValue => {
   const minutes = secondsToMinutes(seconds);
   const unitToken: UnitToken = "duration-minute";
@@ -101,13 +113,22 @@ export const formatDuration = (
 
 export const formatTemperature = (
   celsius: number,
-  { locale, t, unitSystem, minimumFractionDigits = 1, maximumFractionDigits = 1 }: UnitFormatOptions,
+  {
+    locale,
+    t,
+    unitSystem,
+    minimumFractionDigits = 1,
+    maximumFractionDigits = 1,
+  }: UnitFormatOptions,
 ): LocalisedUnitValue => {
   const useImperial = unitSystem === "imperial";
   const numericValue = useImperial ? celsiusToFahrenheit(celsius) : celsius;
   const unitToken: UnitToken = useImperial ? "temperature-fahrenheit" : "temperature-celsius";
   const unitLabel = getUnitLabel(t, unitToken);
-  const value = formatNumber(locale, numericValue, { minimumFractionDigits, maximumFractionDigits });
+  const value = formatNumber(locale, numericValue, {
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
 
   return { value, numericValue, unitLabel, unitToken };
 };
@@ -123,7 +144,8 @@ export const formatStops = (
   return { value, numericValue: stops, unitLabel, unitToken };
 };
 
-export const metresFromKilometres = (kilometres: number): number => kilometres * METRES_PER_KILOMETRE;
+export const metresFromKilometres = (kilometres: number): number =>
+  kilometres * METRES_PER_KILOMETRE;
 
 export const metresFromMiles = (miles: number): number => miles * METRES_PER_MILE;
 

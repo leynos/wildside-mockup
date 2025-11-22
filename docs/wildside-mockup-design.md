@@ -22,6 +22,20 @@ Last updated: 29 October 2025
   CI/CD (GitHub Pages deploy pipeline) and allow developers to build locally as
   needed.
 
+## Localisation and units
+
+- Store measurements in SI base units (metres, seconds, and Celsius) and
+  convert to user-preferred systems at the presentation layer. A
+  `UnitPreferencesProvider` persists the chosen unit system and defaults to
+  locale-driven detection when no preference is stored.
+- Translation bundles expose shared unit labels via keys such as
+  `unit-distance-kilometre`, `unit-distance-mile`, `unit-duration-minute`, and
+  temperature/count counterparts so all screens interpolate consistent unit
+  names per locale.
+- Presentational helpers (`formatDistance`, `formatDuration`, `formatTemperature`)
+  convert SI values and inject translated unit names, ensuring wizard, explore,
+  customise, and map flows respect both locale and user preferences.
+
 ## Current assets
 
 - `public/mockups/` contains 12 HTML screens preserved from the original

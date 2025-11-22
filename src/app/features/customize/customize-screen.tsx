@@ -1,7 +1,8 @@
 /** @file Route customiser translating slider-heavy mockups to Radix UI. */
 
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useCallback, useMemo, useState } from "react";
+import type { JSX } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
@@ -20,8 +21,8 @@ import {
 } from "../../data/customize";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
-import { useUnitPreferences } from "../../units/unit-preferences-provider";
 import { formatDistance, formatDuration } from "../../units/unit-format";
+import { useUnitPreferences } from "../../units/unit-preferences-provider";
 import {
   AdvancedOptions,
   InterestMix,
@@ -75,7 +76,8 @@ export function CustomizeScreen(): JSX.Element {
   const [surface, setSurface] = useState(
     surfaceOptions.find((option) => option.emphasis)?.id ?? surfaceOptions[0]?.id ?? "paved",
   );
-  const [interestValues, setInterestValues] = useState<Record<string, number>>(interestInitialValues);
+  const [interestValues, setInterestValues] =
+    useState<Record<string, number>>(interestInitialValues);
   const [selectedRoute, setSelectedRoute] = useState(routePreviews[0]?.id ?? "route-a");
   const [advancedValues, setAdvancedValues] = useState<Record<string, boolean>>(advancedInitial);
   const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });

@@ -4,7 +4,7 @@ import type { JSX, ReactNode } from "react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { UnitSystem, detectUnitSystem } from "./unit-system";
+import { detectUnitSystem, type UnitSystem } from "./unit-system";
 
 interface UnitPreferencesContextValue {
   readonly unitSystem: UnitSystem;
@@ -96,7 +96,9 @@ export function UnitPreferencesProvider({ children }: UnitPreferencesProviderPro
     };
   }, [hasUserPreference, resetToLocaleDefault, setUnitSystem, unitSystem]);
 
-  return <UnitPreferencesContext.Provider value={value}>{children}</UnitPreferencesContext.Provider>;
+  return (
+    <UnitPreferencesContext.Provider value={value}>{children}</UnitPreferencesContext.Provider>
+  );
 }
 
 export const useUnitPreferences = (): UnitPreferencesContextValue => {

@@ -1,9 +1,6 @@
 import { describe, expect, it } from "bun:test";
 
-import {
-  formatDistance,
-  formatTemperature,
-} from "../src/app/units/unit-format";
+import { formatDistance, formatTemperature } from "../src/app/units/unit-format";
 import { createStubT } from "./i18n-stub";
 
 describe("unit format helpers", () => {

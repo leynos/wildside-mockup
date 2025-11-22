@@ -1,9 +1,6 @@
 /** @file Fixture data for the Explore catalogue experience. */
 
-import {
-  metresFromKilometres,
-  secondsFromMinutes,
-} from "../units/unit-format";
+import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
 
 export interface ExploreCategory {
   id: string;

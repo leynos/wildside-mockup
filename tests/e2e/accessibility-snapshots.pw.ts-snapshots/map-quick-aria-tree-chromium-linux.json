@@ -210,7 +210,7 @@
                                                                   {
                                                                     "role": "slider",
                                                                     "name": "Duration slider handle",
-                                                                    "value": 60
+                                                                    "value": 3600
                                                                   }
                                                                 ]
                                                               }

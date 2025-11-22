@@ -2,17 +2,18 @@
 
 import * as Slider from "@radix-ui/react-slider";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import type { JSX } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import { PreferenceToggleCard } from "../../components/preference-toggle-card";
 import { SectionHeading } from "../../components/section-heading";
-import {
-  type AdvancedToggleOption,
-  type InterestMixSlice,
-  type RoutePreviewOption,
-  type SegmentOption,
-  type SurfaceOption,
+import type {
+  AdvancedToggleOption,
+  InterestMixSlice,
+  RoutePreviewOption,
+  SegmentOption,
+  SurfaceOption,
 } from "../../data/customize";
 import { CustomizeSegmentToggle } from "./segment-toggle-card";
 
@@ -80,7 +81,13 @@ export interface SurfacePickerProps {
   onChange: (value: string) => void;
 }
 
-export function SurfacePicker({ ariaLabel, heading, onChange, options, value }: SurfacePickerProps): JSX.Element {
+export function SurfacePicker({
+  ariaLabel,
+  heading,
+  onChange,
+  options,
+  value,
+}: SurfacePickerProps): JSX.Element {
   const { t } = useTranslation();
   return (
     <section className="mb-8">

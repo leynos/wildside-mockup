@@ -2,7 +2,8 @@
 
 import { useNavigate } from "@tanstack/react-router";
 import type { TFunction } from "i18next";
-import { type JSX, useCallback, useMemo } from "react";
+import type { JSX } from "react";
+import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
@@ -11,16 +12,16 @@ import { bottomNavigation } from "../../data/customize";
 import { buildDifficultyLookup } from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
-import { useUnitPreferences } from "../../units/unit-preferences-provider";
 import { formatDistance, formatDistanceRange, formatDuration } from "../../units/unit-format";
+import { useUnitPreferences } from "../../units/unit-preferences-provider";
 import {
   CategoryScroller,
   CommunityPickPanel,
   CuratedCollectionsList,
+  defaultSaveCountLabel,
   FeaturedWalkCard,
   PopularThemesGrid,
   TrendingRoutesList,
-  defaultSaveCountLabel,
 } from "./explore-sections";
 
 type ExploreCopy = {
@@ -123,7 +124,11 @@ export function ExploreScreen(): JSX.Element {
           }
         >
           <div className="relative">
-            <Icon token="{icon.action.search}" aria-hidden className="explore-search__icon h-4 w-4" />
+            <Icon
+              token="{icon.action.search}"
+              aria-hidden
+              className="explore-search__icon h-4 w-4"
+            />
             <input
               type="search"
               placeholder={copy.searchPlaceholder}

@@ -1,8 +1,8 @@
 /** @file Presentational building blocks for the Explore catalogue screen. */
 
 import * as ScrollArea from "@radix-ui/react-scroll-area";
-import { useTranslation } from "react-i18next";
 import { type JSX, type ReactNode, useId } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import {
@@ -49,7 +49,7 @@ export function CategoryScroller(): JSX.Element {
     });
   const headingId = useId();
   return (
-    <section className="w-full pt-2" aria-labelledby={headingId} role="region">
+    <section className="w-full pt-2" aria-labelledby={headingId}>
       <h2 id={headingId} className="sr-only">
         {ariaLabel}
       </h2>
@@ -92,7 +92,7 @@ export function FeaturedWalkCard({
   const distanceLabel = formatDistanceLabel(featuredWalk.distanceMetres);
   const durationLabel = formatDurationLabel(featuredWalk.durationSeconds);
   return (
-    <section className="explore-featured__panel" aria-labelledby={headingId} role="region">
+    <section className="explore-featured__panel" aria-labelledby={headingId}>
       <h2 id={headingId} className="section-heading text-base-content">
         <Icon token="{icon.object.crown}" className="text-amber-400" aria-hidden />
         {heading}
@@ -152,7 +152,7 @@ export function PopularThemesGrid({
   const heading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId} role="region">
+    <section aria-labelledby={headingId}>
       <h2 id={headingId} className="section-title">
         {heading}
       </h2>
@@ -208,7 +208,7 @@ export function CuratedCollectionsList({
     });
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId} role="region">
+    <section aria-labelledby={headingId}>
       <h2 id={headingId} className="section-title">
         {heading}
       </h2>
@@ -276,7 +276,7 @@ export function TrendingRoutesList(): JSX.Element {
   const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId} role="region">
+    <section aria-labelledby={headingId}>
       <h2 id={headingId} className="section-title">
         {heading}
       </h2>
@@ -285,7 +285,12 @@ export function TrendingRoutesList(): JSX.Element {
           <article key={route.id} className="explore-trending__card">
             <div className="flex items-center gap-3">
               <div className="h-12 w-12 overflow-hidden rounded-lg">
-                <img src={route.imageUrl} alt={route.title} className="h-full w-full" loading="lazy" />
+                <img
+                  src={route.imageUrl}
+                  alt={route.title}
+                  className="h-full w-full"
+                  loading="lazy"
+                />
               </div>
               <div className="flex-1">
                 <p className="text-sm font-semibold text-base-content">{route.title}</p>
@@ -319,7 +324,7 @@ export function CommunityPickPanel({
   const subtitle = t("explore-community-subtitle", { defaultValue: "Most shared this week" });
   const headingId = useId();
   return (
-    <section className="explore-info__panel" aria-labelledby={headingId} role="region">
+    <section className="explore-info__panel" aria-labelledby={headingId}>
       <h2 id={headingId} className="section-heading mb-4 text-base-content">
         <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
         {heading}

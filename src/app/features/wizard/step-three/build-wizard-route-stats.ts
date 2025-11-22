@@ -1,10 +1,9 @@
 /** @file Builds translated wizard route stats for step three. */
 
 import type { TFunction } from "i18next";
-
 import { wizardRouteSummary } from "../../../data/wizard";
-import type { UnitSystem } from "../../../units/unit-system";
 import { formatDistance, formatDuration, formatStops } from "../../../units/unit-format";
+import type { UnitSystem } from "../../../units/unit-system";
 
 export type WizardRouteStatCopy = {
   readonly id: string;
