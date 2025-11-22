@@ -22,7 +22,7 @@ Last updated: 29 October 2025
   CI/CD (GitHub Pages deploy pipeline) and allow developers to build locally as
   needed.
 
-## Localisation and units
+## Localization and units
 
 - Store measurements in SI base units (metres, seconds, and Celsius) and
   convert to user-preferred systems at the presentation layer. A
@@ -34,7 +34,7 @@ Last updated: 29 October 2025
   names per locale.
 - Presentational helpers (`formatDistance`, `formatDuration`, `formatTemperature`)
   convert SI values and inject translated unit names, ensuring wizard, explore,
-  customise, and map flows respect both locale and user preferences.
+  customize, and map flows respect both locale and user preferences.
 
 ## Current assets
 
