@@ -21,7 +21,7 @@ export interface SegmentPickerProps {
   id: string;
   label: string;
   iconToken: string;
-  options: SegmentOption[];
+  options: readonly SegmentOption[];
   value: string;
   onChange: (value: string) => void;
 }
