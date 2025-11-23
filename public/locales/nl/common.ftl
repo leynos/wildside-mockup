@@ -316,6 +316,11 @@ unit-duration-minute =
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} wandeling
+       *[other] {$count} wandelingen
+    }
 unit-count-stop =
     { $count ->
         [one] halte

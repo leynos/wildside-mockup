@@ -316,8 +316,13 @@ unit-duration-minute =
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} เส้นทางเดิน
+       *[other] {$count} เส้นทางเดิน
+    }
 unit-count-stop =
     { $count ->
         [one] ป้าย
-       *[other] ป้าย
+        *[other] ป้าย
     }

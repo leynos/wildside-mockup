@@ -308,8 +308,13 @@ unit-duration-minute =
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} 条步行路线
+       *[other] {$count} 条步行路线
+    }
 unit-count-stop =
     { $count ->
         [one] 站点
-       *[other] 站点
+        *[other] 站点
     }

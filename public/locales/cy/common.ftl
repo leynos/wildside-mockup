@@ -332,8 +332,13 @@ unit-duration-minute =
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} taith gerdded
+       *[other] {$count} teithiau cerdded
+    }
 unit-count-stop =
     { $count ->
         [one] stop
-       *[other] stopiau
+        *[other] stopiau
     }
