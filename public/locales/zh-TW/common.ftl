@@ -309,11 +309,13 @@ unit-distance-kilometre = 公里
 unit-distance-mile = 英里
 unit-duration-minute =
     { $count ->
+        [one] 分鐘
        *[other] 分鐘
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] 站
        *[other] 站
     }

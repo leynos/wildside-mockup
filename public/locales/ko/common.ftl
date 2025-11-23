@@ -311,11 +311,13 @@ unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
+        [one] 분
        *[other] 분
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] 정차 지점
        *[other] 정차 지점
     }

@@ -311,11 +311,13 @@ unit-distance-kilometre = χλμ
 unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
+        [one] λεπτό
        *[other] λεπτά
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] στάση
        *[other] στάσεις
     }

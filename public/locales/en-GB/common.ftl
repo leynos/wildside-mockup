@@ -308,11 +308,7 @@ offline-dialog-search-placeholder = Search cities or regions
 offline-dialog-cancel = Cancel
 offline-dialog-preview = Preview download
 unit-distance-kilometre = km
-unit-distance-mile =
-    { $count ->
-        [one] mile
-       *[other] miles
-    }
+unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
         [one] minute

@@ -311,11 +311,13 @@ unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
+        [one] min
        *[other] min
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] stopp
        *[other] stopp
     }
