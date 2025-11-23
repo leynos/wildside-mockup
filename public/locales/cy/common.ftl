@@ -347,6 +347,10 @@ explore-theme-walk-count =
     }
 unit-count-stop =
     { $count ->
+        [zero] stopiau
         [one] stop
+        [two] stop
+        [few] stop
+        [many] stopiau
         *[other] stopiau
     }
