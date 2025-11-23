@@ -60,8 +60,8 @@ const formatNumber = (
   }).format(value);
 };
 
-export const getUnitLabel = (t: TFunction, unitToken: UnitToken): string =>
-  t(`unit-${unitToken}`, { defaultValue: DEFAULT_UNIT_LABELS[unitToken] });
+export const getUnitLabel = (t: TFunction, unitToken: UnitToken, count?: number): string =>
+  t(`unit-${unitToken}`, { defaultValue: DEFAULT_UNIT_LABELS[unitToken], count });
 
 export const formatDistance = (
   metres: number,
@@ -110,7 +110,7 @@ export const formatDuration = (
 ): LocalisedUnitValue => {
   const minutes = secondsToMinutes(seconds);
   const unitToken: UnitToken = "duration-minute";
-  const unitLabel = getUnitLabel(t, unitToken);
+  const unitLabel = getUnitLabel(t, unitToken, minutes);
   const value = formatNumber(locale, minutes, { minimumFractionDigits, maximumFractionDigits });
 
   return { value, numericValue: minutes, unitLabel, unitToken }; // duration units do not vary by system today
@@ -143,7 +143,7 @@ export const formatStops = (
   { locale, t, minimumFractionDigits = 0, maximumFractionDigits = 0 }: UnitFormatOptions,
 ): LocalisedUnitValue => {
   const unitToken: UnitToken = "count-stop";
-  const unitLabel = getUnitLabel(t, unitToken);
+  const unitLabel = getUnitLabel(t, unitToken, stops);
   const value = formatNumber(locale, stops, { minimumFractionDigits, maximumFractionDigits });
 
   return { value, numericValue: stops, unitLabel, unitToken };

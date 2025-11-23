@@ -311,7 +311,7 @@ unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
     { $count ->
         [one] {$count} 条步行路线
-       *[other] {$count} 条步行路线
+      *[other] {$count} 条步行路线
     }
 unit-count-stop =
     { $count ->

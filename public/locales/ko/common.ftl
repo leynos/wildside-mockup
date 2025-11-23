@@ -268,6 +268,11 @@ explore-curated-route-count =
         [one] {$count} 루트
        *[other] {$count} 루트
     }
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} 산책
+       *[other] {$count} 산책
+    }
 offline-header-title = 오프라인 지도
 offline-header-subtitle = 다운로드와 스마트 업데이트 관리
 offline-header-back-label = 지도로 돌아가기
@@ -316,11 +321,6 @@ unit-duration-minute =
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
-explore-theme-walk-count =
-    { $count ->
-        [one] {$count} 산책
-       *[other] {$count} 산책
-    }
 unit-count-stop =
     { $count ->
         [one] 정차 지점
