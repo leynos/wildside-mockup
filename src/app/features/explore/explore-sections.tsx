@@ -39,7 +39,11 @@ export function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Elem
   );
 }
 
-export function CategoryScroller({ categories }: { categories: ExploreCategory[] }): JSX.Element {
+export interface CategoryScrollerProps {
+  categories: readonly ExploreCategory[];
+}
+
+export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Element {
   const { t } = useTranslation();
   const ariaLabel = t("explore-categories-aria-label", { defaultValue: "Popular categories" });
   const formatRouteCount = (count: number) =>

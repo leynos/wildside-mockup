@@ -12,7 +12,6 @@ import { bottomNavigation } from "../../data/customize";
 import {
   communityPick,
   curatedCollections,
-  exploreCategories,
   featuredWalk,
   popularThemes,
   trendingRoutes,
@@ -31,6 +30,7 @@ import {
   PopularThemesGrid,
   TrendingRoutesList,
 } from "./explore-sections";
+import type { ExploreCategory } from "../../data/explore";
 
 type ExploreCopy = {
   headerTitle: string;
@@ -113,6 +113,7 @@ export function ExploreScreen(): JSX.Element {
 
   const copy = useMemo(() => buildExploreCopy(t), [t]);
   const difficultyLookup = useMemo(() => buildDifficultyLookup(t), [t]);
+  const categories: readonly ExploreCategory[] = exploreCategories;
 
   return (
     <MobileShell>
