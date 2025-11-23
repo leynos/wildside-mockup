@@ -327,8 +327,8 @@ unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
     { $count ->
-        [one] { $count } walk
-       *[other] { $count } walks
+        [one] {$count} walk
+       *[other] {$count} walks
     }
 unit-count-stop =
     { $count ->
