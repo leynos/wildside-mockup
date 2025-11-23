@@ -540,7 +540,7 @@ Mapping guidance:
   generator card no longer overlaps when switching tabs.
 - Bottom navigation styling is now shared between explore and map flows,
   with end-to-end coverage confirming the handset baseline stays consistent.
-- Updated the explore bottom navigation ordering to emphasize the map-first
+- Updated the Explore screen bottom navigation ordering to emphasize the map-first
   journey while retaining parity with the map screens.
 - Added Playwright + axe accessibility smoke tests for `/explore`, `/map/quick`,
   and `/wizard/step-1`, applying targeted slider labelling and landmark fixes to
