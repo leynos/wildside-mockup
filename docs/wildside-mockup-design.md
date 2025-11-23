@@ -30,7 +30,7 @@ Last updated: 29 October 2025
   locale-driven detection when no preference is stored.
 - Translation bundles expose shared unit labels via keys such as
   `unit-distance-kilometre`, `unit-distance-mile`, `unit-duration-minute`, and
-  temperature/count counterparts so all screens interpolate consistent unit
+  temperature/count counterparts, so all screens interpolate consistent unit
   names per locale.
 - Presentational helpers (`formatDistance`, `formatDuration`, `formatTemperature`)
   convert SI values and inject translated unit names, ensuring wizard, explore,
@@ -145,7 +145,7 @@ Mapping guidance:
   4. Update `tailwind.config.cjs` to consume the generated JS exports:
      - Spread `theme.extend` with spacing, radius, and colour tokens.
      - Register DaisyUI themes so `wildsideNight` is the default and
-     `wildsideDay` is marked with `--preferslight`.
+       `wildsideDay` is marked with `--preferslight`.
   5. Include `@tailwindcss/vite` in `vite.config.ts` to ensure HMR picks up
      token rebuilds, and wire watch paths to `tokens/dist`.
   6. Ensure the GitHub Pages workflow runs `bun run tokens:build` before
@@ -194,7 +194,7 @@ Mapping guidance:
   - Static routes powered by TanStack Router (e.g., `/discover`, `/map/quick`,
     `/wizard/advanced`). Each route composes the relevant feature module.
 - Router instances normalize `import.meta.env.BASE_URL` to honour GitHub Pages
-    prefixes (for example, `/wildside-mockup`) so direct deep links resolve.
+  prefixes (for example, `/wildside-mockup`) so direct deep links resolve.
 - `src/app/data`
   - JSON/TS modules representing the mock content (walk cards, interests,
     stats) to keep JSX clean and enable future API wiring.
@@ -354,8 +354,8 @@ Mapping guidance:
 
 - The `/customize` screen combines relatively static, data-driven copy
   (slider labels, segment options, advanced toggles) with header and control
-  chrome. Treat `src/app/data/customize.ts` as a source of *IDs and English
-  defaults* and localize at render time rather than embedding translations
+  chrome. Treat `src/app/data/customize.ts` as a source of _IDs and English
+  defaults_ and localize at render time rather than embedding translations
   into the data layer.
 - Each cluster of strings on the screen maps to a small family of Fluent
   messages keyed by the same identifiers as the fixtures:
@@ -621,7 +621,7 @@ Mapping guidance:
 
 - Determine timeline and success criteria for evaluating alternative icon sets.
 - Define local developer ergonomics for token rebuilds (for example, `bun run
-  tokens:build`) and ensure documentation reflects the expected workflow.
+tokens:build`) and ensure documentation reflects the expected workflow.
 
 ## Display mode toggle roadmap (29 October 2025)
 
