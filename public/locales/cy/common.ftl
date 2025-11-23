@@ -327,7 +327,11 @@ unit-distance-kilometre = km
 unit-distance-mile = milltir
 unit-duration-minute =
     { $count ->
+        [zero] mun
         [one] mun
+        [two] mun
+        [few] mun
+        [many] mun
        *[other] mun
     }
 unit-temperature-celsius = °C
