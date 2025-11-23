@@ -117,7 +117,7 @@ export function SurfacePicker({
 }
 
 export interface InterestMixProps {
-  slices: InterestMixSlice[];
+  slices: readonly InterestMixSlice[];
   values: Record<string, number>;
   onChange: (id: string, value: number) => void;
 }
