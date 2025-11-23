@@ -27,6 +27,9 @@ type RouteMetricProps = {
 export const defaultRouteCountLabel = (count: number): string =>
   `${count} ${count === 1 ? "route" : "routes"}`;
 
+export const defaultWalkCountLabel = (count: number): string =>
+  `${count} ${count === 1 ? "walk" : "walks"}`;
+
 export const defaultSaveCountLabel = (count: number): string =>
   `${count} ${count === 1 ? "save" : "saves"}`;
 
@@ -159,6 +162,11 @@ export function PopularThemesGrid({
   const { t } = useTranslation();
   const heading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
   const headingId = useId();
+  const formatWalkCount = (count: number) =>
+    t("explore-theme-walk-count", {
+      count,
+      defaultValue: defaultWalkCountLabel(count),
+    });
   return (
     <section aria-labelledby={headingId}>
       <h2 id={headingId} className="section-title">
@@ -175,7 +183,7 @@ export function PopularThemesGrid({
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-black/25" />
-              <span className="explore-theme__badge">{theme.walkCount}</span>
+              <span className="explore-theme__badge">{formatWalkCount(theme.walkCount)}</span>
             </div>
             <h3 className="text-sm font-semibold text-base-content">{theme.title}</h3>
             <p className="mt-1 text-xs text-base-content/60">{theme.description}</p>
