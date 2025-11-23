@@ -323,11 +323,19 @@ unit-distance-kilometre = km
 unit-distance-mile = mìltean
 unit-duration-minute =
     { $count ->
+        [one] mionaid
+        [two] mionaid
+        [few] mionaidean
+        [many] mionaidean
        *[other] mionaidean
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] stad
+        [two] stadan
+        [few] stadan
+        [many] stadan
        *[other] stadan
     }
