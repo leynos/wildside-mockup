@@ -320,6 +320,7 @@ unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
+        [one] minute
        *[other] minutes
     }
 unit-temperature-celsius = °C
