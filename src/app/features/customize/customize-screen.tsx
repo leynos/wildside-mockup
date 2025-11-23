@@ -22,6 +22,7 @@ import {
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 import { useUnitFormatters } from "../../units/use-unit-formatters";
+import { useUnitLabelFormatters } from "../../units/use-unit-labels";
 import {
   AdvancedOptions,
   InterestMix,
@@ -32,26 +33,23 @@ import {
 
 export function CustomizeScreen(): JSX.Element {
   const { t, i18n } = useTranslation();
-  const { formatDistanceValue, formatDurationValue, unitSystem } = useUnitFormatters();
+  const {
+    formatDistanceLabel: formatDistanceLabelRaw,
+    formatDurationLabel: formatDurationLabelRaw,
+  } = useUnitLabelFormatters();
+  const { unitSystem } = useUnitFormatters();
   const formatDistanceLabel = useCallback(
-    (metres: number) => {
-      const { value, unitLabel } = formatDistanceValue(metres, {
+    (metres: number) =>
+      formatDistanceLabelRaw(metres, {
         minimumFractionDigits: 1,
         maximumFractionDigits: 1,
-      });
-      return `${value} ${unitLabel}`;
-    },
-    [formatDistanceValue],
+      }),
+    [formatDistanceLabelRaw],
   );
   const formatDurationLabel = useCallback(
-    (seconds: number) => {
-      const { value, unitLabel } = formatDurationValue(seconds, {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      });
-      return `${value} ${unitLabel}`;
-    },
-    [formatDurationValue],
+    (seconds: number) =>
+      formatDurationLabelRaw(seconds, { minimumFractionDigits: 0, maximumFractionDigits: 0 }),
+    [formatDurationLabelRaw],
   );
 
   const sliderInitialValues = useMemo(

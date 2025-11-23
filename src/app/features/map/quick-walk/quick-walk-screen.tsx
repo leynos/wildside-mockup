@@ -16,7 +16,7 @@ import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
-import { useUnitFormatters } from "../../../units/use-unit-formatters";
+import { useUnitLabelFormatters } from "../../../units/use-unit-labels";
 
 type TabKey = "map" | "stops" | "notes";
 
@@ -48,7 +48,7 @@ export function QuickWalkScreen(): JSX.Element {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { formatDurationValue } = useUnitFormatters();
+  const { formatDurationValue } = useUnitLabelFormatters();
 
   const formatDurationLabel = useCallback(
     (seconds: number) => {
