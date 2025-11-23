@@ -77,7 +77,7 @@ export interface SurfacePickerProps {
   heading: string;
   ariaLabel: string;
   value: string;
-  options: SurfaceOption[];
+  options: readonly SurfaceOption[];
   onChange: (value: string) => void;
   iconToken?: string;
 }
