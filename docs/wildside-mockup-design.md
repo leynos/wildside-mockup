@@ -649,7 +649,7 @@ tokens:build`) and ensure documentation reflects the expected workflow.
   than updating imports.
 - Audit feature screens for responsive gaps. Add max-width containers and
   flex/grid fallbacks so expanding beyond the handset width does not create
-  sparse or broken layouts. Prioritize the discover, map, wizard, and offline
+  sparse or broken layouts. Prioritize the Discover screen, map, wizard, and offline
   flows, which carry the densest UI.
 - Implement a tabbed drawer component that tucks controls away in
   full-browser mode. The drawer should collapse to a discreet edge tab,
