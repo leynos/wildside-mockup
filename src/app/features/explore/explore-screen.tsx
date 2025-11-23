@@ -9,9 +9,11 @@ import { useTranslation } from "react-i18next";
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
+import type { ExploreCategory } from "../../data/explore";
 import {
   communityPick,
   curatedCollections,
+  exploreCategories,
   featuredWalk,
   popularThemes,
   trendingRoutes,
@@ -30,7 +32,6 @@ import {
   PopularThemesGrid,
   TrendingRoutesList,
 } from "./explore-sections";
-import type { ExploreCategory } from "../../data/explore";
 
 type ExploreCopy = {
   headerTitle: string;
@@ -147,7 +148,7 @@ export function ExploreScreen(): JSX.Element {
         </AppHeader>
         <main className="screen-scroll">
           <div className="space-y-8">
-            <CategoryScroller categories={exploreCategories} />
+            <CategoryScroller categories={categories} />
             <FeaturedWalkCard
               formatDistanceLabel={formatDistanceLabel}
               formatDurationLabel={formatDurationLabel}
