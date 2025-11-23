@@ -252,7 +252,7 @@ export function RoutePreview({
 }
 
 export interface AdvancedOptionsProps {
-  options: AdvancedToggleOption[];
+  options: readonly AdvancedToggleOption[];
   values: Record<string, boolean>;
   onToggle: (id: string, value: boolean) => void;
 }
