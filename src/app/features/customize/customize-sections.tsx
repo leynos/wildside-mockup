@@ -79,7 +79,7 @@ export interface SurfacePickerProps {
   value: string;
   options: SurfaceOption[];
   onChange: (value: string) => void;
-  iconToken?: string;
+  iconToken: string;
 }
 
 export function SurfacePicker({
