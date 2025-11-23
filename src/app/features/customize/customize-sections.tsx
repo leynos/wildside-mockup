@@ -172,7 +172,7 @@ export function InterestMix({ onChange, slices, values }: InterestMixProps): JSX
 }
 
 export interface RoutePreviewProps {
-  routes: RoutePreviewOption[];
+  routes: readonly RoutePreviewOption[];
   selected: string;
   onSelect: (id: string) => void;
   formatDistanceLabel: (metres: number) => string;
