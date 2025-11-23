@@ -318,5 +318,6 @@ unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] stopp
        *[other] stopp
     }
