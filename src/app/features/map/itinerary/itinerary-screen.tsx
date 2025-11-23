@@ -4,7 +4,8 @@ import * as Dialog from "@radix-ui/react-dialog";
 import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
@@ -13,6 +14,8 @@ import { PointOfInterestList } from "../../../components/point-of-interest-list"
 import { WildsideMap } from "../../../components/wildside-map";
 import { waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
+import { formatDistance, formatDuration, formatStops } from "../../../units/unit-format";
+import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 
 const tabTriggerClass =
   "py-3 text-sm font-semibold text-base-content/70 data-[state=active]:text-accent";
@@ -42,6 +45,26 @@ function MapRouteStat({ label, value }: MapRouteStatProps): JSX.Element {
 
 export function ItineraryScreen(): JSX.Element {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const { unitSystem } = useUnitPreferences();
+  const unitOptions = useMemo(
+    () => ({ t, locale: i18n.language, unitSystem }),
+    [i18n.language, t, unitSystem],
+  );
+  const distance = formatDistance(waterfrontDiscoveryRoute.distanceMetres, unitOptions);
+  const duration = formatDuration(waterfrontDiscoveryRoute.durationSeconds, {
+    ...unitOptions,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  const stops = formatStops(waterfrontDiscoveryRoute.stopsCount, {
+    ...unitOptions,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  const distanceLabel = t("map-itinerary-distance-label", { defaultValue: "Distance" });
+  const durationLabel = t("map-itinerary-duration-label", { defaultValue: "Walking" });
+  const stopsLabel = t("map-itinerary-stops-label", { defaultValue: "Stops" });
   const [isFavourite, setIsFavourite] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("map");
@@ -68,9 +91,18 @@ export function ItineraryScreen(): JSX.Element {
                     </button>
                     <div className="map-route__meta">
                       <div className="flex items-center gap-4">
-                        <MapRouteStat label="Distance" value={waterfrontDiscoveryRoute.distance} />
-                        <MapRouteStat label="Walking" value={waterfrontDiscoveryRoute.duration} />
-                        <MapRouteStat label="Stops" value={waterfrontDiscoveryRoute.stopsCount} />
+                        <MapRouteStat
+                          label={distanceLabel}
+                          value={`${distance.value} ${distance.unitLabel}`}
+                        />
+                        <MapRouteStat
+                          label={durationLabel}
+                          value={`${duration.value} ${duration.unitLabel}`}
+                        />
+                        <MapRouteStat
+                          label={stopsLabel}
+                          value={`${stops.value} ${stops.unitLabel}`}
+                        />
                       </div>
                     </div>
                     <button

@@ -1,7 +1,8 @@
 /** @file Walk wizard step one: duration and interests. */
 
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useCallback, useMemo, useState } from "react";
+import type { JSX } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
@@ -11,10 +12,13 @@ import { WizardLayout } from "../../../components/wizard-layout";
 import { WizardSection } from "../../../components/wizard-section";
 import { defaultSelectedInterests, discoverInterestDescriptors } from "../../../data/discover";
 import { wizardSteps } from "../../../data/wizard";
+import { secondsFromMinutes } from "../../../units/unit-format";
+import { useUnitLabelFormatters } from "../../../units/use-unit-labels";
 
 export function WizardStepOne(): JSX.Element {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { formatDurationValue } = useUnitLabelFormatters();
   const [duration, setDuration] = useState(60);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([
     ...defaultSelectedInterests,
@@ -57,12 +61,18 @@ export function WizardStepOne(): JSX.Element {
   );
 
   const formatDuration = useCallback(
-    (value: number) =>
-      t("wizard-step-one-duration-format", {
-        minutes: value,
-        defaultValue: `${value} min`,
-      }),
-    [t],
+    (value: number) => {
+      const { value: minutesLabel, unitLabel } = formatDurationValue(secondsFromMinutes(value), {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      });
+      return t("wizard-step-one-duration-format", {
+        minutes: minutesLabel,
+        unit: unitLabel,
+        defaultValue: `${minutesLabel} ${unitLabel}`,
+      });
+    },
+    [formatDurationValue, t],
   );
 
   return (

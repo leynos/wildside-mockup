@@ -16,6 +16,7 @@ import { WildsideMap } from "../../../components/wildside-map";
 import { defaultSelectedInterests } from "../../../data/discover";
 import { quickWalkConfig, waterfrontDiscoveryRoute } from "../../../data/map";
 import { MobileShell } from "../../../layout/mobile-shell";
+import { useUnitLabelFormatters } from "../../../units/use-unit-labels";
 
 type TabKey = "map" | "stops" | "notes";
 
@@ -32,7 +33,9 @@ function MapViewportTab({ className, ...props }: MapViewportTabProps): JSX.Eleme
 }
 
 export function QuickWalkScreen(): JSX.Element {
-  const [duration, setDuration] = useState<number>(quickWalkConfig.defaultDuration);
+  const [durationSeconds, setDurationSeconds] = useState<number>(
+    quickWalkConfig.defaultDurationSeconds,
+  );
   const [selectedInterests, setSelectedInterests] = useState<string[]>([
     ...defaultSelectedInterests,
   ]);
@@ -45,11 +48,21 @@ export function QuickWalkScreen(): JSX.Element {
   });
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { formatDurationValue } = useUnitLabelFormatters();
 
-  const formatDuration = useCallback(
-    (value: number) =>
-      t("quick-walk-duration-format", { minutes: value, defaultValue: `${value} min` }),
-    [t],
+  const formatDurationLabel = useCallback(
+    (seconds: number) => {
+      const { value, unitLabel } = formatDurationValue(seconds, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      });
+      return t("quick-walk-duration-format", {
+        minutes: value,
+        unit: unitLabel,
+        defaultValue: `${value} ${unitLabel}`,
+      });
+    },
+    [formatDurationValue, t],
   );
 
   const mapViewportAria = t("quick-walk-map-aria-label", {
@@ -65,22 +78,18 @@ export function QuickWalkScreen(): JSX.Element {
   });
   const durationLabel = t("quick-walk-duration-label", { defaultValue: "Duration" });
   const durationAria = t("quick-walk-duration-aria", { defaultValue: "Walk duration" });
+  const { min: minDurationSeconds, max: maxDurationSeconds } = quickWalkConfig.durationRangeSeconds;
+  const midpointDurationSeconds = useMemo(
+    () => Math.round((minDurationSeconds + maxDurationSeconds) / 2),
+    [maxDurationSeconds, minDurationSeconds],
+  );
   const durationMarkers = useMemo(
     () => [
-      t("quick-walk-duration-marker-start", {
-        minutes: quickWalkConfig.durationRange.min,
-        defaultValue: `${quickWalkConfig.durationRange.min}m`,
-      }),
-      t("quick-walk-duration-marker-mid", {
-        minutes: 90,
-        defaultValue: "90m",
-      }),
-      t("quick-walk-duration-marker-end", {
-        minutes: quickWalkConfig.durationRange.max,
-        defaultValue: `${quickWalkConfig.durationRange.max}m`,
-      }),
+      formatDurationLabel(minDurationSeconds),
+      formatDurationLabel(midpointDurationSeconds),
+      formatDurationLabel(maxDurationSeconds),
     ],
-    [t],
+    [formatDurationLabel, maxDurationSeconds, midpointDurationSeconds, minDurationSeconds],
   );
   const interestsHeading = t("quick-walk-interests-heading", { defaultValue: "Interests" });
   const interestsAria = t("quick-walk-interests-aria", {
@@ -199,14 +208,14 @@ export function QuickWalkScreen(): JSX.Element {
                       id="quick-walk-duration"
                       label={durationLabel}
                       iconToken="{icon.object.duration}"
-                      value={duration}
-                      min={quickWalkConfig.durationRange.min}
-                      max={quickWalkConfig.durationRange.max}
-                      step={quickWalkConfig.durationRange.step}
-                      valueFormatter={formatDuration}
+                      value={durationSeconds}
+                      min={quickWalkConfig.durationRangeSeconds.min}
+                      max={quickWalkConfig.durationRangeSeconds.max}
+                      step={quickWalkConfig.durationRangeSeconds.step}
+                      valueFormatter={formatDurationLabel}
                       markers={durationMarkers}
                       ariaLabel={durationAria}
-                      onValueChange={setDuration}
+                      onValueChange={setDurationSeconds}
                       className="mb-6"
                     />
 

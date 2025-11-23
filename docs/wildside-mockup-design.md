@@ -22,6 +22,20 @@ Last updated: 29 October 2025
   CI/CD (GitHub Pages deploy pipeline) and allow developers to build locally as
   needed.
 
+## Localization and units
+
+- Store measurements in SI base units (metres, seconds, and Celsius) and
+  convert to user-preferred systems at the presentation layer. A
+  `UnitPreferencesProvider` persists the chosen unit system and defaults to
+  locale-driven detection when no preference is stored.
+- Translation bundles expose shared unit labels via keys such as
+  `unit-distance-kilometre`, `unit-distance-mile`, `unit-duration-minute`, and
+  temperature/count counterparts, so all screens interpolate consistent unit
+  names per locale.
+- Presentational helpers (`formatDistance`, `formatDuration`, `formatTemperature`)
+  convert SI values and inject translated unit names, ensuring wizard, explore,
+  customize, and map flows respect both locale and user preferences.
+
 ## Current assets
 
 - `public/mockups/` contains 12 HTML screens preserved from the original
@@ -73,7 +87,7 @@ Mapping guidance:
 ## Design token strategy
 
 - Extract colour samples from each mockup screen, grouping them into candidate
-  theme roles (base, neutral, primary, accent, feedback). Prioritise the shared
+  theme roles (base, neutral, primary, accent, feedback). Prioritize the shared
   dark teal palette as the initial default theme; capture wizard-specific
   highlights as secondary accents or contextual layers. Mirror these decisions
   in a light variant to support theme switching.
@@ -131,7 +145,7 @@ Mapping guidance:
   4. Update `tailwind.config.cjs` to consume the generated JS exports:
      - Spread `theme.extend` with spacing, radius, and colour tokens.
      - Register DaisyUI themes so `wildsideNight` is the default and
-     `wildsideDay` is marked with `--preferslight`.
+       `wildsideDay` is marked with `--preferslight`.
   5. Include `@tailwindcss/vite` in `vite.config.ts` to ensure HMR picks up
      token rebuilds, and wire watch paths to `tokens/dist`.
   6. Ensure the GitHub Pages workflow runs `bun run tokens:build` before
@@ -179,8 +193,8 @@ Mapping guidance:
 - `src/app/routes`
   - Static routes powered by TanStack Router (e.g., `/discover`, `/map/quick`,
     `/wizard/advanced`). Each route composes the relevant feature module.
-  - Router instances normalise `import.meta.env.BASE_URL` to honour GitHub Pages
-    prefixes (for example, `/wildside-mockup`) so direct deep links resolve.
+- Router instances normalize `import.meta.env.BASE_URL` to honour GitHub Pages
+  prefixes (for example, `/wildside-mockup`) so direct deep links resolve.
 - `src/app/data`
   - JSON/TS modules representing the mock content (walk cards, interests,
     stats) to keep JSX clean and enable future API wiring.
@@ -299,7 +313,7 @@ Mapping guidance:
   - Build shared wizard stepper, slider, and Radix `Dialog` for confirmations.
 - Stage 4 – Completion and offline support:
   - `walk-complete`, `offline`, `safety-accessibility`.
-  - Emphasise `Accordion` for safety lists and celebratory toasts/modals.
+- Emphasize `Accordion` for safety lists and celebratory toasts/modals.
 - Stage 5 – Account handling:
   - `sign-in`.
   - Wire Radix `Dialog`/`Popover` patterns for tooltips and integrate form
@@ -340,8 +354,8 @@ Mapping guidance:
 
 - The `/customize` screen combines relatively static, data-driven copy
   (slider labels, segment options, advanced toggles) with header and control
-  chrome. Treat `src/app/data/customize.ts` as a source of *IDs and English
-  defaults* and localize at render time rather than embedding translations
+  chrome. Treat `src/app/data/customize.ts` as a source of _IDs and English
+  defaults_ and localize at render time rather than embedding translations
   into the data layer.
 - Each cluster of strings on the screen maps to a small family of Fluent
   messages keyed by the same identifiers as the fixtures:
@@ -473,14 +487,14 @@ Mapping guidance:
 - `discover`, `explore`, and `customize` screens now render via Radix feature
   modules and TanStack Router routes. Components consume generated tokens and
   DaisyUI primitives instead of inline Tailwind scripts.
-- Introduced a shared `FontAwesomeIcon` wrapper to centralise icon rendering
+- Introduced a shared `FontAwesomeIcon` wrapper to centralize icon rendering
   and accessibility handling. This keeps Font Awesome in play while we plan
   future icon set evaluations.
 - Added smoke tests for the three routes to exercise Radix interactions
   (toggle chips, navigation buttons, switch toggles). Tests mount the router
   with a memory history to mirror the SPA shell.
 - Outstanding follow-ups: hook up real TanStack query data sources once mock
-  fixtures stabilise, and extend coverage to the remaining mockup flows per the
+  fixtures stabilize, and extend coverage to the remaining mockup flows per the
   migration workflow.
 
 ### Stage 2 implementation notes (27 October 2025)
@@ -512,7 +526,7 @@ Mapping guidance:
   the other tabs surface stops and planning notes.
 - Introduced shared components (`WildsideMap`, `PointOfInterestList`,
   `AppBottomNavigation`) to eliminate duplicated markup between map flows and
-  the explore/customise screens.
+  the explore/customize screens.
 - Tests exercise the new tabbed experiences and share modals; the Happy DOM
   harness now polyfills `NodeFilter`/`HTMLInputElement`, so Radix focus scopes
   operate without runtime errors even when MapLibre short-circuits.
@@ -526,7 +540,7 @@ Mapping guidance:
   generator card no longer overlaps when switching tabs.
 - Bottom navigation styling is now shared between explore and map flows,
   with end-to-end coverage confirming the handset baseline stays consistent.
-- Updated the explore bottom navigation ordering to emphasise the map-first
+- Updated the Explore screen bottom navigation ordering to emphasize the map-first
   journey while retaining parity with the map screens.
 - Added Playwright + axe accessibility smoke tests for `/explore`, `/map/quick`,
   and `/wizard/step-1`, applying targeted slider labelling and landmark fixes to
@@ -538,7 +552,7 @@ Mapping guidance:
   a stop toggles feature-state on the shared source without re-rendering the
   map, and new unit tests guard the store’s behaviour with mocked MapLibre
   calls.
-- Map tabs synchronise with URL fragments (`#map`, `#stops`, `#notes`) while
+- Map tabs synchronize with URL fragments (`#map`, `#stops`, `#notes`) while
   keeping the MapLibre canvas mounted, so deep links preserve context without
   blanking the background.
 
@@ -607,7 +621,7 @@ Mapping guidance:
 
 - Determine timeline and success criteria for evaluating alternative icon sets.
 - Define local developer ergonomics for token rebuilds (for example, `bun run
-  tokens:build`) and ensure documentation reflects the expected workflow.
+tokens:build`) and ensure documentation reflects the expected workflow.
 
 ## Display mode toggle roadmap (29 October 2025)
 
@@ -635,7 +649,7 @@ Mapping guidance:
   than updating imports.
 - Audit feature screens for responsive gaps. Add max-width containers and
   flex/grid fallbacks so expanding beyond the handset width does not create
-  sparse or broken layouts. Prioritise the discover, map, wizard, and offline
+  sparse or broken layouts. Prioritize the Discover screen, map, wizard, and offline
   flows, which carry the densest UI.
 - Implement a tabbed drawer component that tucks controls away in
   full-browser mode. The drawer should collapse to a discreet edge tab,

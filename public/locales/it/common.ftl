@@ -56,7 +56,6 @@ nav-discover-label = Scopri
 nav-routes-label = Percorsi
 nav-profile-label = Profilo
 nav-primary-aria-label = Navigazione principale
-
 interest-parks-label = Parchi e natura
 interest-coffee-label = Caffetterie
 interest-street-art-label = Street art
@@ -67,7 +66,6 @@ difficulty-easy-label = Facile
 difficulty-moderate-label = Moderata
 difficulty-challenging-label = Impegnativa
 poi-highlight-label = In evidenza
-
 quick-walk-map-aria-label = Vista mappa della passeggiata rapida
 quick-walk-dismiss-aria = Chiudi pannello
 quick-walk-header-title = Generatore di passeggiate rapide
@@ -95,9 +93,6 @@ quick-walk-tab-map = Esplora
 quick-walk-tab-stops = Tappe
 quick-walk-tab-notes = Note
 quick-walk-save-aria = Salva passeggiata rapida
-
-
-
 wizard-header-title = Assistente percorso
 wizard-header-back-label = Indietro
 wizard-header-help-label = Guida
@@ -225,11 +220,6 @@ safety-preset-senior-title = Adatto agli anziani
 safety-preset-senior-description = Pendenze leggere, punti di riposo, buona illuminazione
 safety-preset-night-title = Camminatore notturno
 safety-preset-night-description = Zone ben illuminate e animate con condivisione d’emergenza
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Lingua
 walk-complete-hero-title = Passeggiata completata!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} percorso
        *[other] {$count} percorsi
     }
-
 offline-header-title = Mappe offline
 offline-header-subtitle = Gestisci download e aggiornamenti intelligenti
 offline-header-back-label = Torna alla mappa
@@ -318,3 +307,17 @@ offline-dialog-description = Sincronizza le mappe per l’uso offline. Cerca una
 offline-dialog-search-placeholder = Cerca città o regioni
 offline-dialog-cancel = Annulla
 offline-dialog-preview = Anteprima download
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] minuto
+       *[other] minuti
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop =
+    { $count ->
+        [one] sosta
+       *[other] soste
+    }

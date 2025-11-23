@@ -56,7 +56,6 @@ nav-discover-label = Ontdek
 nav-routes-label = Routes
 nav-profile-label = Profiel
 nav-primary-aria-label = Primaire navigatie
-
 interest-parks-label = Parken & natuur
 interest-coffee-label = Koffiespots
 interest-street-art-label = Street art
@@ -67,7 +66,6 @@ difficulty-easy-label = Makkelijk
 difficulty-moderate-label = Gemiddeld
 difficulty-challenging-label = Uitdagend
 poi-highlight-label = Blikvanger
-
 quick-walk-map-aria-label = Kaartweergave voor snelle wandeling
 quick-walk-dismiss-aria = Paneel sluiten
 quick-walk-header-title = Generator voor snelle wandelingen
@@ -95,9 +93,6 @@ quick-walk-tab-map = Verkennen
 quick-walk-tab-stops = Haltes
 quick-walk-tab-notes = Notities
 quick-walk-save-aria = Snelle wandeling opslaan
-
-
-
 wizard-header-title = Route-assistent
 wizard-header-back-label = Terug
 wizard-header-help-label = Help
@@ -225,11 +220,6 @@ safety-preset-senior-title = Seniorvriendelijk
 safety-preset-senior-description = Zachte hellingen, rustpunten en goede verlichting
 safety-preset-night-title = Nachtwandelaar
 safety-preset-night-description = Goed verlichte, drukke gebieden met nooddeling
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Taal
 walk-complete-hero-title = Wandeling voltooid!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} route
        *[other] {$count} routes
     }
-
 offline-header-title = Offline kaarten
 offline-header-subtitle = Beheer downloads en slimme updates
 offline-header-back-label = Terug naar de kaart
@@ -318,3 +307,22 @@ offline-dialog-description = Synchroniseer kaarten voor offline gebruik. Zoek ee
 offline-dialog-search-placeholder = Zoek naar steden of regio’s
 offline-dialog-cancel = Annuleren
 offline-dialog-preview = Download bekijken
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] minuut
+       *[other] minuten
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} wandeling
+       *[other] {$count} wandelingen
+    }
+unit-count-stop =
+    { $count ->
+        [one] halte
+       *[other] haltes
+    }

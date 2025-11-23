@@ -13,7 +13,6 @@ customize-route-preview-heading = Route Preview
 customize-route-preview-regenerate = Regenerate
 customize-route-preview-start = Start Route
 customize-advanced-heading = Advanced Options
-
 customize-slider-distance-label = Distance
 customize-slider-distance-aria = Distance slider
 customize-slider-distance-marker-0 = 1 km
@@ -57,7 +56,6 @@ nav-discover-label = Discover
 nav-routes-label = Routes
 nav-profile-label = Profile
 nav-primary-aria-label = Primary navigation
-
 interest-parks-label = Parks & Nature
 interest-coffee-label = Coffee Spots
 interest-street-art-label = Street Art
@@ -68,7 +66,6 @@ difficulty-easy-label = Easy
 difficulty-moderate-label = Moderate
 difficulty-challenging-label = Challenging
 poi-highlight-label = Highlight
-
 quick-walk-map-aria-label = Quick walk map viewport
 quick-walk-dismiss-aria = Dismiss panel
 quick-walk-header-title = Quick Walk Generator
@@ -96,8 +93,6 @@ quick-walk-tab-map = Explore
 quick-walk-tab-stops = Stops
 quick-walk-tab-notes = Notes
 quick-walk-save-aria = Save quick walk
-
-
 wizard-header-title = Walk Wizard
 wizard-header-back-label = Back
 wizard-header-help-label = Help
@@ -225,11 +220,6 @@ safety-preset-senior-title = Senior Friendly
 safety-preset-senior-description = Gentle slopes, resting points, well-lit
 safety-preset-night-title = Night Walker
 safety-preset-night-description = Well-lit, busy areas, emergency sharing
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Language
 walk-complete-hero-title = Walk complete!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} route
        *[other] {$count} routes
     }
-
 offline-header-title = Offline Maps
 offline-header-subtitle = Manage downloads and smart updates
 offline-header-back-label = Back to map
@@ -318,3 +307,22 @@ offline-dialog-description = Sync maps for offline access. Search for a city or 
 offline-dialog-search-placeholder = Search cities or regions
 offline-dialog-cancel = Cancel
 offline-dialog-preview = Preview download
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] minute
+       *[other] minutes
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] { $count } walk
+       *[other] { $count } walks
+    }
+unit-count-stop =
+    { $count ->
+        [one] stop
+       *[other] stops
+    }

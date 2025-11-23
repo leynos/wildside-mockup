@@ -56,7 +56,6 @@ nav-discover-label = Entdecken
 nav-routes-label = Routen
 nav-profile-label = Profil
 nav-primary-aria-label = Primäre Navigation
-
 interest-parks-label = Parks & Natur
 interest-coffee-label = Cafés & Kaffee
 interest-street-art-label = Street Art
@@ -67,7 +66,6 @@ difficulty-easy-label = Leicht
 difficulty-moderate-label = Mittel
 difficulty-challenging-label = Anspruchsvoll
 poi-highlight-label = Highlight
-
 quick-walk-map-aria-label = Kartenausschnitt der Schnellroute
 quick-walk-dismiss-aria = Panel schließen
 quick-walk-header-title = Generator für Schnellrouten
@@ -95,9 +93,6 @@ quick-walk-tab-map = Entdecken
 quick-walk-tab-stops = Stopps
 quick-walk-tab-notes = Notizen
 quick-walk-save-aria = Schnellroute speichern
-
-
-
 wizard-header-title = Routenassistent
 wizard-header-back-label = Zurück
 wizard-header-help-label = Hilfe
@@ -145,8 +140,6 @@ wizard-step-two-accessibility-wheelchair-description = Breite, glatte Wege
 wizard-step-two-accessibility-paved-label = Befestigte Flächen
 wizard-step-two-accessibility-paved-description = Vermeide Schotterpfade und Rasen
 wizard-step-two-review = Route prüfen
-
-
 wizard-step-three-start-over = Neu beginnen
 wizard-step-three-save-button = Route speichern und Karte anzeigen
 wizard-step-three-dialog-title = Route gespeichert!
@@ -188,7 +181,6 @@ wizard-step-three-weather-reminder = Nimm zur Sicherheit leichte Schichten mit.
 wizard-step-three-weather-sentiment = Ideal
 wizard-step-three-weather-wind = leichte Brise
 wizard-step-three-weather-sky = klarer Himmel
-
 safety-header-title = Sicherheit & Barrierefreiheit
 safety-header-description = Passe deine Gehstrecken für Komfort und Sicherheit an
 safety-presets-heading = Voreingestellte Profile
@@ -228,11 +220,6 @@ safety-preset-senior-title = Seniorenfreundlich
 safety-preset-senior-description = Sanfte Steigungen, Rastpunkte, gute Beleuchtung
 safety-preset-night-title = Nachtläufer
 safety-preset-night-description = Gut beleuchtet, belebte Bereiche, Notfallfreigabe
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Sprache
 walk-complete-hero-title = Spaziergang abgeschlossen!
@@ -281,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} Route
        *[other] {$count} Routen
     }
-
 offline-header-title = Offline-Karten
 offline-header-subtitle = Downloads und intelligente Aktualisierungen verwalten
 offline-header-back-label = Zur Karte zurück
@@ -321,3 +307,17 @@ offline-dialog-description = Synchronisiere Karten für den Offline-Zugriff. Suc
 offline-dialog-search-placeholder = Städte oder Regionen suchen
 offline-dialog-cancel = Abbrechen
 offline-dialog-preview = Download anzeigen
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] Minute
+       *[other] Minuten
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop =
+    { $count ->
+        [one] Haltestelle
+       *[other] Haltestellen
+    }

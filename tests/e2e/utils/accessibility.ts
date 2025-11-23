@@ -4,6 +4,7 @@ interface AccessibilityNodeSummary {
   role?: string;
   name?: string;
   value?: string | number | boolean;
+  valueText?: string;
   checked?: string | boolean;
   selected?: boolean;
   pressed?: boolean;
@@ -59,6 +60,9 @@ function normaliseNode(
 
   const simplifiedValue = simplifyValue(node.value);
   if (simplifiedValue !== undefined) summary.value = simplifiedValue;
+  if (typeof (node as { valuetext?: unknown }).valuetext === "string") {
+    summary.valueText = (node as { valuetext: string }).valuetext;
+  }
 
   if (node.checked !== undefined) summary.checked = node.checked;
   if (node.selected !== undefined) summary.selected = node.selected;

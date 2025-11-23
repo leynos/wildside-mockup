@@ -4,6 +4,7 @@ import { act } from "react";
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
 import { OFFLINE_STORAGE_PLACEHOLDERS } from "../src/app/config/offline-metrics";
+import type { WalkRouteSummary } from "../src/app/data/map";
 import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
 import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
@@ -18,6 +19,9 @@ import { buildWizardWeatherCopy } from "../src/app/features/wizard/step-three/bu
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
+import { formatDistance, formatDuration, formatStops } from "../src/app/units/unit-format";
+import { UnitPreferencesProvider } from "../src/app/units/unit-preferences-provider";
+import { detectUnitSystem } from "../src/app/units/unit-system";
 import {
   changeLanguage,
   escapeRegExp,
@@ -56,6 +60,42 @@ const translate = (
   return i18n.t(key, { defaultValue, ...(options ?? {}) });
 };
 
+const buildUnitOptions = () => ({
+  t: i18n.t.bind(i18n),
+  locale: i18n.language,
+  unitSystem: detectUnitSystem(i18n.language),
+});
+
+const formatRouteMetrics = (route: WalkRouteSummary) => {
+  const unitOptions = buildUnitOptions();
+  const distance = formatDistance(route.distanceMetres, unitOptions);
+  const duration = formatDuration(route.durationSeconds, {
+    ...unitOptions,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  const stops = formatStops(route.stopsCount, {
+    ...unitOptions,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+
+  return {
+    distance,
+    duration,
+    stops,
+    distanceText: `${distance.value} ${distance.unitLabel}`,
+    durationText: `${duration.value} ${duration.unitLabel}`,
+    stopsText: `${stops.value} ${stops.unitLabel}`,
+  };
+};
+
+const buildWizardStatsCopy = () =>
+  buildWizardRouteStats(i18n.t.bind(i18n), i18n.language, detectUnitSystem(i18n.language));
+
+const buildWizardWeather = () =>
+  buildWizardWeatherCopy(i18n.t.bind(i18n), i18n.language, detectUnitSystem(i18n.language));
+
 const defaultRouteCountLabel = (count: number): string =>
   `${count} ${count === 1 ? "route" : "routes"}`;
 
@@ -67,6 +107,34 @@ const defaultSelectionLabel = (count: number): string => `${count} selected`;
 const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""), "i");
 
 const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
+
+const buildSavedRouteCopy = (route: WalkRouteSummary) => {
+  const savedMetrics = formatRouteMetrics(route);
+  const savedDistanceCopy =
+    i18n.t("saved-route-distance-value", {
+      value: savedMetrics.distance.value,
+      unit: savedMetrics.distance.unitLabel,
+      defaultValue: savedMetrics.distanceText,
+    }) ?? savedMetrics.distanceText;
+  const savedDurationCopy =
+    i18n.t("saved-route-duration-value", {
+      value: savedMetrics.duration.value,
+      unit: savedMetrics.duration.unitLabel,
+      defaultValue: savedMetrics.durationText,
+    }) ?? savedMetrics.durationText;
+  const savedStopsCopy =
+    i18n.t("saved-route-stops-value", {
+      value: savedMetrics.stops.value,
+      unit: savedMetrics.stops.unitLabel,
+      defaultValue: savedMetrics.stopsText,
+    }) ?? savedMetrics.stopsText;
+
+  return {
+    savedDistanceCopy,
+    savedDurationCopy,
+    savedStopsCopy,
+  } as const;
+};
 
 const clickElement = (element: Element | null | undefined): void => {
   if (element instanceof HTMLElement) {
@@ -115,11 +183,13 @@ async function renderRoute(path: TestRoute) {
   const root = createRoot(mount);
   await act(async () => {
     root.render(
-      <DisplayModeProvider>
-        <ThemeProvider>
-          <AppRoutes routerInstance={routerInstance} />
-        </ThemeProvider>
-      </DisplayModeProvider>,
+      <UnitPreferencesProvider>
+        <DisplayModeProvider>
+          <ThemeProvider>
+            <AppRoutes routerInstance={routerInstance} />
+          </ThemeProvider>
+        </DisplayModeProvider>
+      </UnitPreferencesProvider>,
     );
     await Promise.resolve();
   });
@@ -623,9 +693,10 @@ describe("Stage 2 routed flows", () => {
     });
     expect(routeSummaryHeading).toBeTruthy();
 
-    expect(view.getByText(waterfrontDiscoveryRoute.distance)).toBeTruthy();
-    expect(view.getByText(waterfrontDiscoveryRoute.duration)).toBeTruthy();
-    expect(view.getByText(String(waterfrontDiscoveryRoute.stopsCount))).toBeTruthy();
+    const itineraryMetrics = formatRouteMetrics(waterfrontDiscoveryRoute);
+    expect(view.getByText(localizedRegex(itineraryMetrics.distanceText))).toBeTruthy();
+    expect(view.getByText(localizedRegex(itineraryMetrics.durationText))).toBeTruthy();
+    expect(view.getByText(localizedRegex(itineraryMetrics.stopsText))).toBeTruthy();
 
     waterfrontDiscoveryRoute.highlights.forEach((highlight) => {
       expect(view.getAllByText(new RegExp(highlight, "i"))[0]).toBeTruthy();
@@ -706,8 +777,12 @@ describe("Stage 2 routed flows", () => {
     });
 
     expect(view.getByRole("heading", { name: new RegExp(savedRoute.title, "i") })).toBeTruthy();
-    expect(view.getByText(savedRoute.distance)).toBeTruthy();
-    expect(view.getByText(savedRoute.duration)).toBeTruthy();
+    const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
+      buildSavedRouteCopy(savedRoute);
+
+    expect(view.getByText(localizedRegex(savedDistanceCopy))).toBeTruthy();
+    expect(view.getByText(localizedRegex(savedDurationCopy))).toBeTruthy();
+    expect(view.getByText(localizedRegex(savedStopsCopy))).toBeTruthy();
 
     const shareTrigger = view.getByRole("button", { name: /^share$/i });
     const favouriteButton = view.getByRole("button", {
@@ -963,7 +1038,7 @@ describe("Stage 3 wizard flows", () => {
       const summaryRegion = view.getByRole("region", {
         name: localizedRegex(summaryRegionLabel),
       });
-      const localizedStats = buildWizardRouteStats(i18n.t.bind(i18n));
+      const localizedStats = buildWizardStatsCopy();
       localizedStats.forEach((stat) => {
         expect(within(summaryRegion).getByText(localizedRegex(stat.unitLabel))).toBeTruthy();
       });
@@ -1024,7 +1099,7 @@ describe("Stage 3 wizard flows", () => {
       const weatherPanel = view.getByRole("region", {
         name: localizedRegex(weatherHeading),
       });
-      const spanishWeatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+      const spanishWeatherCopy = buildWizardWeather();
       expect(
         within(weatherPanel).getByText(spanishWeatherCopy.summary, {
           exact: false,
@@ -1111,9 +1186,12 @@ describe("Stage 3 wizard flows", () => {
         name: new RegExp(savedRoute.title ?? "", "i"),
       }),
     ).toBeTruthy();
-    expect(view.getByText(savedRoute.distance ?? "")).toBeTruthy();
-    expect(view.getByText(savedRoute.duration ?? "")).toBeTruthy();
-    expect(view.getByText(new RegExp(`${savedRoute.stopsCount} stops`, "i"))).toBeTruthy();
+    const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
+      buildSavedRouteCopy(savedRoute);
+
+    expect(view.getByText(localizedRegex(savedDistanceCopy))).toBeTruthy();
+    expect(view.getByText(localizedRegex(savedDurationCopy))).toBeTruthy();
+    expect(view.getByText(localizedRegex(savedStopsCopy))).toBeTruthy();
   });
 
   it("renders wizard summary panels with semantic class", async () => {
@@ -1166,7 +1244,7 @@ describe("Stage 3 wizard flows", () => {
       expect(within(stopsPanel).getByText(localizedRegex(name))).toBeTruthy();
     });
 
-    const localizedWeatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+    const localizedWeatherCopy = buildWizardWeather();
     expect(
       within(weatherPanel).getByText(localizedWeatherCopy.summary, {
         exact: false,
@@ -1724,7 +1802,7 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       let container = requireContainer(mount);
       let view = within(container);
-      let weatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+      let weatherCopy = buildWizardWeather();
       const temperature = view.getByText(weatherCopy.temperatureLabel);
       const summaryBlock = temperature.parentElement as HTMLElement;
       expect(window.getComputedStyle(summaryBlock).textAlign).toBe("right");
@@ -1735,7 +1813,7 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       container = requireContainer(mount);
       view = within(container);
-      weatherCopy = buildWizardWeatherCopy(i18n.t.bind(i18n));
+      weatherCopy = buildWizardWeather();
       const rtlTemperature = view.getByText(weatherCopy.temperatureLabel);
       const rtlSummaryBlock = rtlTemperature.parentElement as HTMLElement;
       expect(window.getComputedStyle(rtlSummaryBlock).textAlign).toBe("left");

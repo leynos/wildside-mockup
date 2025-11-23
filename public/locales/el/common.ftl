@@ -56,7 +56,6 @@ nav-discover-label = Ανακάλυψη
 nav-routes-label = Διαδρομές
 nav-profile-label = Προφίλ
 nav-primary-aria-label = Κύρια πλοήγηση
-
 interest-parks-label = Πάρκα & φύση
 interest-coffee-label = Σημεία για καφέ
 interest-street-art-label = Τέχνη δρόμου
@@ -67,7 +66,6 @@ difficulty-easy-label = Εύκολη
 difficulty-moderate-label = Μέτρια
 difficulty-challenging-label = Προκλητική
 poi-highlight-label = Κορυφαίο σημείο
-
 quick-walk-map-aria-label = Περιοχή χάρτη για τη γρήγορη διαδρομή
 quick-walk-dismiss-aria = Κλείσιμο πάνελ
 quick-walk-header-title = Δημιουργός γρήγορης διαδρομής
@@ -95,9 +93,6 @@ quick-walk-tab-map = Εξερεύνηση
 quick-walk-tab-stops = Στάσεις
 quick-walk-tab-notes = Σημειώσεις
 quick-walk-save-aria = Αποθήκευση γρήγορης διαδρομής
-
-
-
 wizard-header-title = Βοηθός διαδρομής
 wizard-header-back-label = Πίσω
 wizard-header-help-label = Βοήθεια
@@ -225,11 +220,6 @@ safety-preset-senior-title = Φιλικό για ηλικιωμένους
 safety-preset-senior-description = Ήπιες κλίσεις, σημεία ξεκούρασης, καλός φωτισμός
 safety-preset-night-title = Νυχτερινός περιπατητής
 safety-preset-night-description = Καλά φωτισμένα, πολυσύχναστα σημεία με κοινοποίηση ανάγκης
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Γλώσσα
 walk-complete-hero-title = Η διαδρομή ολοκληρώθηκε!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} διαδρομή
        *[other] {$count} διαδρομές
     }
-
 offline-header-title = Χάρτες εκτός σύνδεσης
 offline-header-subtitle = Διαχειριστείτε λήψεις και έξυπνες ενημερώσεις
 offline-header-back-label = Επιστροφή στον χάρτη
@@ -318,3 +307,22 @@ offline-dialog-description = Συγχρονίστε χάρτες για χρήσ
 offline-dialog-search-placeholder = Αναζήτηση πόλεων ή περιοχών
 offline-dialog-cancel = Ακύρωση
 offline-dialog-preview = Προεπισκόπηση λήψης
+unit-distance-kilometre = χλμ
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] λεπτό
+       *[other] λεπτά
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} διαδρομή
+       *[other] {$count} διαδρομές
+    }
+unit-count-stop =
+    { $count ->
+        [one] στάση
+        *[other] στάσεις
+    }

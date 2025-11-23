@@ -56,7 +56,6 @@ nav-discover-label = גילוי
 nav-routes-label = מסלולים
 nav-profile-label = פרופיל
 nav-primary-aria-label = ניווט ראשי
-
 interest-parks-label = פארקים וטבע
 interest-coffee-label = בתי קפה
 interest-street-art-label = אמנות רחוב
@@ -67,7 +66,6 @@ difficulty-easy-label = קל
 difficulty-moderate-label = בינוני
 difficulty-challenging-label = מאתגר
 poi-highlight-label = נקודת שיא
-
 quick-walk-map-aria-label = אזור מפה למסלול המהיר
 quick-walk-dismiss-aria = סגירת הלוח
 quick-walk-header-title = מחולל מסלול מהיר
@@ -96,9 +94,6 @@ quick-walk-tab-map = לחקור
 quick-walk-tab-stops = עצירות
 quick-walk-tab-notes = הערות
 quick-walk-save-aria = שמרו מסלול מהיר
-
-
-
 wizard-header-title = אשף המסלול
 wizard-header-back-label = חזרה
 wizard-header-help-label = עזרה
@@ -227,11 +222,6 @@ safety-preset-senior-title = מתאים לבני גיל הזהב
 safety-preset-senior-description = מדרונות קלים, נקודות מנוחה ותאורה טובה
 safety-preset-night-title = הולך הלילה
 safety-preset-night-description = אזורים מוארים ושוקקים עם שיתוף חירום
-
-
-
-
-
 app-shell-title = ‏הדמיית Wildside
 controls-language-label = שפה
 walk-complete-hero-title = ההליכה הושלמה!
@@ -282,7 +272,6 @@ explore-curated-route-count =
         [two] {$count} מסלולים
        *[other] {$count} מסלולים
     }
-
 offline-header-title = מפות לא מקוונות
 offline-header-subtitle = נהלו הורדות ועדכונים חכמים
 offline-header-back-label = חזרה למפה
@@ -332,3 +321,21 @@ offline-dialog-description = סנכרנו מפות לשימוש לא מקוון.
 offline-dialog-search-placeholder = חיפוש ערים או אזורים
 offline-dialog-cancel = ביטול
 offline-dialog-preview = תצוגה מקדימה של ההורדה
+unit-distance-kilometre = ק"מ
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] דקה
+        [two] דקות
+        [many] דקות
+       *[other] דקות
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+unit-count-stop =
+    { $count ->
+        [one] עצירה
+        [two] עצירות
+        [many] עצירות
+       *[other] עצירות
+    }

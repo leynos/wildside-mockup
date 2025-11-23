@@ -56,7 +56,6 @@ nav-discover-label = खोजें
 nav-routes-label = मार्ग
 nav-profile-label = प्रोफ़ाइल
 nav-primary-aria-label = मुख्य नेविगेशन
-
 interest-parks-label = पार्क और प्रकृति
 interest-coffee-label = कॉफी स्थान
 interest-street-art-label = स्ट्रीट आर्ट
@@ -67,7 +66,6 @@ difficulty-easy-label = आसान
 difficulty-moderate-label = मध्यम
 difficulty-challenging-label = चुनौतीपूर्ण
 poi-highlight-label = मुख्य आकर्षण
-
 quick-walk-map-aria-label = क्विक वॉक नक्शे का दृश्य
 quick-walk-dismiss-aria = पैनल बंद करें
 quick-walk-header-title = क्विक वॉक जनरेटर
@@ -95,9 +93,6 @@ quick-walk-tab-map = खोजें
 quick-walk-tab-stops = स्टॉप
 quick-walk-tab-notes = नोट्स
 quick-walk-save-aria = क्विक वॉक सहेजें
-
-
-
 wizard-header-title = मार्ग सहायक
 wizard-header-back-label = वापस
 wizard-header-help-label = सहायता
@@ -225,11 +220,6 @@ safety-preset-senior-title = वरिष्ठ-अनुकूल
 safety-preset-senior-description = हल्की ढलानें, विश्राम बिंदु और अच्छी रोशनी
 safety-preset-night-title = रात्रि यात्री
 safety-preset-night-description = अच्छी रोशनी वाले व्यस्त क्षेत्र एवं आपातकाल साझाकरण
-
-
-
-
-
 app-shell-title = वाइल्डसाइड मॉकअप
 controls-language-label = भाषा
 walk-complete-hero-title = वॉक पूर्ण हुई!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} मार्ग
        *[other] {$count} मार्गों
     }
-
 offline-header-title = ऑफ़लाइन मानचित्र
 offline-header-subtitle = डाउनलोड और स्मार्ट अपडेट प्रबंधित करें
 offline-header-back-label = मानचित्र पर वापस जाएँ
@@ -318,3 +307,22 @@ offline-dialog-description = ऑफ़लाइन उपयोग के लि
 offline-dialog-search-placeholder = शहर या क्षेत्र खोजें
 offline-dialog-cancel = रद्द करें
 offline-dialog-preview = डाउनलोड पूर्वावलोकन
+unit-distance-kilometre = किमी
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] मिनट
+       *[other] मिनट
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} सैर
+       *[other] {$count} सैरें
+    }
+unit-count-stop =
+    { $count ->
+        [one] स्टॉप
+        *[other] स्टॉप
+    }

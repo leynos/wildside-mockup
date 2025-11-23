@@ -14,21 +14,10 @@ import {
   wizardSteps,
   wizardSummaryHighlights,
 } from "../../../data/wizard";
+import { formatDistance } from "../../../units/unit-format";
+import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
-
-const MILES_TO_KILOMETRES = 1.60934;
-const IMPERIAL_DISTANCE_LOCALES = ["en-us"] as const;
-
-const getPreferredDistanceUnit = (locale?: string): "km" | "miles" => {
-  if (!locale) {
-    return "km";
-  }
-  const normalized = locale.toLowerCase();
-  return IMPERIAL_DISTANCE_LOCALES.some((imperialLocale) => normalized.startsWith(imperialLocale))
-    ? "miles"
-    : "km";
-};
 
 type WizardSummaryPanelProps = WizardSectionProps & {
   readonly className?: string;
@@ -52,25 +41,18 @@ function WizardSummaryPanel({
 export function WizardStepThree(): JSX.Element {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { unitSystem } = useUnitPreferences();
   const [dialogOpen, setDialogOpen] = useState(false);
   const helpMessage = t("wizard-help-placeholder", {
     defaultValue: "Contextual help coming soon",
   });
-  // biome-ignore lint/correctness/useExhaustiveDependencies: recompute when the active locale changes even if t is memoised
-  const routeStats = useMemo(() => buildWizardRouteStats(t), [t, i18n.language]);
-  // biome-ignore lint/correctness/useExhaustiveDependencies: ensure weather copy follows locale changes
-  const weatherCopy = useMemo(() => buildWizardWeatherCopy(t), [t, i18n.language]);
-  const preferredDistanceUnit = useMemo(
-    () => getPreferredDistanceUnit(i18n.language),
-    [i18n.language],
+  const routeStats = useMemo(
+    () => buildWizardRouteStats(t, i18n.language, unitSystem),
+    [t, i18n.language, unitSystem],
   );
-  const distanceFormatter = useMemo(
-    () =>
-      new Intl.NumberFormat(i18n.language, {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
-      }),
-    [i18n.language],
+  const weatherCopy = useMemo(
+    () => buildWizardWeatherCopy(t, i18n.language, unitSystem),
+    [t, i18n.language, unitSystem],
   );
 
   return (
@@ -228,43 +210,20 @@ export function WizardStepThree(): JSX.Element {
             const description = t(stop.descriptionKey, {
               defaultValue: stop.defaultDescription,
             });
-            const unitLabel =
-              stop.noteDistanceMiles !== undefined
-                ? t(stop.noteDistanceUnitKey ?? "wizard-step-three-stop-distance-unit", {
-                    defaultValue: stop.defaultNoteDistanceUnit ?? "miles",
+            const distanceLabel =
+              stop.noteDistanceMetres != null
+                ? formatDistance(stop.noteDistanceMetres, {
+                    t,
+                    locale: i18n.language,
+                    unitSystem,
                   })
                 : undefined;
-            const kilometreUnitLabel = (() => {
-              if (stop.noteDistanceMiles === undefined) {
-                return undefined;
-              }
-              const kmUnit = t("wizard-step-three-stop-distance-unit-km", {
-                defaultValue: "",
-              });
-              const fallbackUnit =
-                kmUnit ||
-                t("wizard-step-three-route-distance-unit", {
-                  defaultValue: "km",
-                });
-              return fallbackUnit;
-            })();
-            const prefersKilometres =
-              stop.noteDistanceMiles !== undefined && preferredDistanceUnit === "km";
-            const formattedDistance =
-              stop.noteDistanceMiles !== undefined
-                ? distanceFormatter.format(
-                    prefersKilometres
-                      ? stop.noteDistanceMiles * MILES_TO_KILOMETRES
-                      : stop.noteDistanceMiles,
-                  )
-                : undefined;
-            const effectiveUnit = prefersKilometres ? kilometreUnitLabel : unitLabel;
             const note = t(stop.noteKey, {
               defaultValue: stop.defaultNote,
-              ...(stop.noteDistanceMiles !== undefined && effectiveUnit
+              ...(distanceLabel
                 ? {
-                    distance: formattedDistance,
-                    unit: effectiveUnit,
+                    distance: distanceLabel.value,
+                    unit: distanceLabel.unitLabel,
                   }
                 : {}),
             });

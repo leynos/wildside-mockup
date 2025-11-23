@@ -56,7 +56,6 @@ nav-discover-label = Utforsk
 nav-routes-label = Ruter
 nav-profile-label = Profil
 nav-primary-aria-label = Hovednavigasjon
-
 interest-parks-label = Parker og natur
 interest-coffee-label = Kaffesteder
 interest-street-art-label = Gatekunst
@@ -67,7 +66,6 @@ difficulty-easy-label = Lett
 difficulty-moderate-label = Middels
 difficulty-challenging-label = Utfordrende
 poi-highlight-label = Høydepunkt
-
 quick-walk-map-aria-label = Kartvisning for hurtiggåtur
 quick-walk-dismiss-aria = Lukk panel
 quick-walk-header-title = Generator for hurtiggåtur
@@ -95,9 +93,6 @@ quick-walk-tab-map = Utforsk
 quick-walk-tab-stops = Stopp
 quick-walk-tab-notes = Notater
 quick-walk-save-aria = Lagre hurtiggåtur
-
-
-
 wizard-header-title = Ruteveileder
 wizard-header-back-label = Tilbake
 wizard-header-help-label = Hjelp
@@ -225,11 +220,6 @@ safety-preset-senior-title = Seniorvennlig
 safety-preset-senior-description = Myke stigninger, hvilepunkter og god belysning
 safety-preset-night-title = Nattvandrer
 safety-preset-night-description = Godt opplyste og travle områder med nøddeling
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = Språk
 walk-complete-hero-title = Gåtur fullført!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} rute
        *[other] {$count} ruter
     }
-
 offline-header-title = Frakoblede kart
 offline-header-subtitle = Administrer nedlastinger og smarte oppdateringer
 offline-header-back-label = Tilbake til kartet
@@ -318,3 +307,22 @@ offline-dialog-description = Synkroniser kart for bruk uten nett. Søk etter en 
 offline-dialog-search-placeholder = Søk etter byer eller regioner
 offline-dialog-cancel = Avbryt
 offline-dialog-preview = Forhåndsvis nedlasting
+unit-distance-kilometre = km
+unit-distance-mile = mi
+unit-duration-minute =
+    { $count ->
+        [one] min
+       *[other] min
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} tur
+       *[other] {$count} turer
+    }
+unit-count-stop =
+    { $count ->
+        [one] stopp
+        *[other] stopp
+    }

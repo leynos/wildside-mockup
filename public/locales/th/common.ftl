@@ -56,7 +56,6 @@ nav-discover-label = สำรวจ
 nav-routes-label = เส้นทาง
 nav-profile-label = โปรไฟล์
 nav-primary-aria-label = การนำทางหลัก
-
 interest-parks-label = สวนและธรรมชาติ
 interest-coffee-label = ร้านกาแฟ
 interest-street-art-label = ศิลปะสตรีท
@@ -67,7 +66,6 @@ difficulty-easy-label = ง่าย
 difficulty-moderate-label = ปานกลาง
 difficulty-challenging-label = ท้าทาย
 poi-highlight-label = จุดเด่น
-
 quick-walk-map-aria-label = มุมมองแผนที่เดินเร็ว
 quick-walk-dismiss-aria = ปิดแผง
 quick-walk-header-title = ตัวสร้างเส้นทางเดินเร็ว
@@ -95,9 +93,6 @@ quick-walk-tab-map = สำรวจ
 quick-walk-tab-stops = จุดแวะ
 quick-walk-tab-notes = บันทึก
 quick-walk-save-aria = บันทึกการเดินเร็ว
-
-
-
 wizard-header-title = ตัวช่วยจัดเส้นทาง
 wizard-header-back-label = กลับ
 wizard-header-help-label = ความช่วยเหลือ
@@ -225,11 +220,6 @@ safety-preset-senior-title = เหมาะกับผู้สูงวัย
 safety-preset-senior-description = ทางลาดชันต่ำ มีจุดพัก และไฟส่องสว่างเพียงพอ
 safety-preset-night-title = นักเดินกลางคืน
 safety-preset-night-description = พื้นที่สว่าง คนพลุกพล่าน พร้อมการแชร์ฉุกเฉิน
-
-
-
-
-
 app-shell-title = Wildside Mockup
 controls-language-label = ภาษา
 walk-complete-hero-title = เดินจบเรียบร้อย!
@@ -278,7 +268,6 @@ explore-curated-route-count =
         [one] {$count} เส้นทาง
        *[other] {$count} เส้นทาง
     }
-
 offline-header-title = แผนที่ออฟไลน์
 offline-header-subtitle = จัดการการดาวน์โหลดและอัปเดตอัจฉริยะ
 offline-header-back-label = กลับไปยังแผนที่
@@ -318,3 +307,22 @@ offline-dialog-description = ซิงก์แผนที่เพื่อใ
 offline-dialog-search-placeholder = ค้นหาเมืองหรือภูมิภาค
 offline-dialog-cancel = ยกเลิก
 offline-dialog-preview = ดูตัวอย่างการดาวน์โหลด
+unit-distance-kilometre = กม.
+unit-distance-mile = ไมล์
+unit-duration-minute =
+    { $count ->
+        [one] นาที
+       *[other] นาที
+    }
+unit-temperature-celsius = °C
+unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} เส้นทางเดิน
+       *[other] {$count} เส้นทางเดิน
+    }
+unit-count-stop =
+    { $count ->
+        [one] ป้าย
+        *[other] ป้าย
+    }
