@@ -321,7 +321,6 @@ unit-duration-minute =
     { $count ->
         [zero] minut
         [one] minuta
-        [two] minuty
         [few] minuty
         [many] minut
        *[other] minut
@@ -332,7 +331,6 @@ unit-count-stop =
     { $count ->
         [zero] przystanków
         [one] przystanek
-        [two] przystanki
         [few] przystanki
         [many] przystanków
        *[other] przystanków
