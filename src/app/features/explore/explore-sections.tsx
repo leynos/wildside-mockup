@@ -281,7 +281,11 @@ export function CuratedCollectionsList({
   );
 }
 
-export function TrendingRoutesList({ routes }: { routes: TrendingRoute[] }): JSX.Element {
+type TrendingRoutesListProps = {
+  readonly routes: readonly TrendingRoute[];
+};
+
+export function TrendingRoutesList({ routes }: TrendingRoutesListProps): JSX.Element {
   const { t } = useTranslation();
   const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
   const headingId = useId();
