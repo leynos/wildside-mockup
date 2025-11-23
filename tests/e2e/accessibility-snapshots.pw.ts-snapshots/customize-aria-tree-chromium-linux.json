@@ -172,7 +172,8 @@
                                               {
                                                 "role": "slider",
                                                 "name": "Distance slider",
-                                                "value": 3200
+                                                "value": 3200,
+                                                "valueText": "3.2 km"
                                               }
                                             ]
                                           }
@@ -244,7 +245,8 @@
                                               {
                                                 "role": "slider",
                                                 "name": "Duration slider",
-                                                "value": 4500
+                                                "value": 4500,
+                                                "valueText": "75 minutes"
                                               }
                                             ]
                                           }
@@ -755,7 +757,8 @@
                                                       {
                                                         "role": "slider",
                                                         "name": "Nature allocation",
-                                                        "value": 40
+                                                        "value": 40,
+                                                        "valueText": ""
                                                       }
                                                     ]
                                                   }
@@ -836,7 +839,8 @@
                                                       {
                                                         "role": "slider",
                                                         "name": "History allocation",
-                                                        "value": 30
+                                                        "value": 30,
+                                                        "valueText": ""
                                                       }
                                                     ]
                                                   }
@@ -917,7 +921,8 @@
                                                       {
                                                         "role": "slider",
                                                         "name": "Food & Drink allocation",
-                                                        "value": 30
+                                                        "value": 30,
+                                                        "valueText": ""
                                                       }
                                                     ]
                                                   }
