@@ -79,13 +79,17 @@ export function QuickWalkScreen(): JSX.Element {
   const durationLabel = t("quick-walk-duration-label", { defaultValue: "Duration" });
   const durationAria = t("quick-walk-duration-aria", { defaultValue: "Walk duration" });
   const { min: minDurationSeconds, max: maxDurationSeconds } = quickWalkConfig.durationRangeSeconds;
+  const midpointDurationSeconds = useMemo(
+    () => Math.round((minDurationSeconds + maxDurationSeconds) / 2),
+    [maxDurationSeconds, minDurationSeconds],
+  );
   const durationMarkers = useMemo(
     () => [
       formatDurationLabel(minDurationSeconds),
-      formatDurationLabel(Math.round((minDurationSeconds + maxDurationSeconds) / 2)),
+      formatDurationLabel(midpointDurationSeconds),
       formatDurationLabel(maxDurationSeconds),
     ],
-    [formatDurationLabel, maxDurationSeconds, minDurationSeconds],
+    [formatDurationLabel, maxDurationSeconds, midpointDurationSeconds, minDurationSeconds],
   );
   const interestsHeading = t("quick-walk-interests-heading", { defaultValue: "Interests" });
   const interestsAria = t("quick-walk-interests-aria", {
