@@ -306,7 +306,7 @@ offline-dialog-search-placeholder = 搜尋城市或地區
 offline-dialog-cancel = 取消
 offline-dialog-preview = 預覽下載
 unit-distance-kilometre = 公里
-unit-distance-mile = mi
+unit-distance-mile = 英里
 unit-duration-minute =
     { $count ->
        *[other] 分鐘
