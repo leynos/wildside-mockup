@@ -197,7 +197,7 @@ export function PopularThemesGrid({
 }
 
 type CuratedCollectionsListProps = {
-  collections: CuratedCollection[];
+  collections: readonly CuratedCollection[];
   difficultyLookup: Map<DifficultyId, ResolvedDifficultyDescriptor>;
   formatDistanceRangeLabel: (range: readonly [number, number]) => string;
   formatDurationRangeLabel: (range: readonly [number, number]) => string;
