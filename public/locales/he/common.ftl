@@ -325,11 +325,17 @@ unit-distance-kilometre = ק"מ
 unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
+        [one] דקה
+        [two] דקות
+        [many] דקות
        *[other] דקות
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
     { $count ->
+        [one] עצירה
+        [two] עצירות
+        [many] עצירות
        *[other] עצירות
     }
