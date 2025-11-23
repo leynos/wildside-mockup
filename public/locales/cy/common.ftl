@@ -338,8 +338,12 @@ unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
     { $count ->
+        [zero] {$count} o deithiau cerdded
         [one] {$count} taith gerdded
-       *[other] {$count} teithiau cerdded
+        [two] {$count} daith gerdded
+        [few] {$count} thaith gerdded
+        [many] {$count} o deithiau cerdded
+       *[other] {$count} o deithiau cerdded
     }
 unit-count-stop =
     { $count ->
