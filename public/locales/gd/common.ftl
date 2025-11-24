@@ -336,7 +336,7 @@ offline-dialog-search-placeholder = Lorg bailtean no roinnean
 offline-dialog-cancel = Sguir dheth
 offline-dialog-preview = Ro-shealladh luchdachaidh sìos
 unit-distance-kilometre = km
-unit-distance-mile = mìltean
+unit-distance-mile = mi
 unit-duration-minute =
     { $count ->
         [one] mionaid
