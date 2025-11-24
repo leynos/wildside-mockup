@@ -21,7 +21,11 @@ export type UnitToken =
   | "temperature-fahrenheit"
   | "count-stop"
   | "energy-calorie"
-  | "energy-kilojoule";
+  | "energy-joule"
+  | "energy-kilojoule"
+  | "energy-btu"
+  | "weight-kilogram"
+  | "weight-pound";
 
 export type LocalisedUnitValue = {
   readonly value: string;
@@ -50,8 +54,12 @@ const DEFAULT_UNIT_LABELS: Record<UnitToken, string> = {
   "temperature-celsius": "°C",
   "temperature-fahrenheit": "°F",
   "count-stop": "stops",
+  "energy-joule": "J",
   "energy-calorie": "kcal",
   "energy-kilojoule": "kJ",
+  "energy-btu": "BTU",
+  "weight-kilogram": "kg",
+  "weight-pound": "lb",
 };
 
 const formatNumber = (
@@ -172,6 +180,28 @@ export const formatEnergy = (
   const useImperial = unitSystem === "imperial";
   const unitToken: UnitToken = useImperial ? "energy-calorie" : "energy-kilojoule";
   const numericValue = useImperial ? kilocalories : kilocalories * KILOJOULES_PER_KILOCALORIE;
+  const unitLabel = getUnitLabel(t, unitToken, numericValue);
+  const value = formatNumber(locale, numericValue, {
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  return { value, numericValue, unitLabel, unitToken };
+};
+
+export const formatWeight = (
+  kilograms: number,
+  {
+    locale,
+    t,
+    unitSystem,
+    minimumFractionDigits = 0,
+    maximumFractionDigits = 1,
+  }: UnitFormatOptions,
+): LocalisedUnitValue => {
+  const useImperial = unitSystem === "imperial";
+  const numericValue = useImperial ? kilograms * 2.20462 : kilograms;
+  const unitToken: UnitToken = useImperial ? "weight-pound" : "weight-kilogram";
   const unitLabel = getUnitLabel(t, unitToken, numericValue);
   const value = formatNumber(locale, numericValue, {
     minimumFractionDigits,
