@@ -68,26 +68,33 @@ export function DiscoverScreen(): JSX.Element {
           onClick={() => navigate({ to: "/explore" })}
           className="discover-screen__skip"
         >
-          Skip
+          {t("discover-skip", { defaultValue: "Skip" })}
         </button>
 
         <SectionHero
           iconToken="{icon.object.magic}"
-          title="Discover Your Perfect Walk"
-          description="Tell us what interests you and we will craft magical routes tailored for you."
+          title={t("discover-hero-title", { defaultValue: "Discover your perfect walk" })}
+          description={t("discover-hero-description", {
+            defaultValue:
+              "Tell us what interests you and we’ll craft magical routes tailored for you.",
+          })}
         />
 
         <section className="discover-interests__section">
           <div className="mb-6 text-center">
-            <h2 className="text-lg font-semibold text-base-content">What sparks your curiosity?</h2>
+            <h2 className="text-lg font-semibold text-base-content">
+              {t("discover-curiosity-heading", { defaultValue: "What sparks your curiosity?" })}
+            </h2>
             <p className="mt-1 text-sm text-base-content/60">
-              Select a few themes that catch your eye.
+              {t("discover-curiosity-subheading", {
+                defaultValue: "Select a few themes that catch your eye.",
+              })}
             </p>
           </div>
           <ToggleGroup.Root
             type="multiple"
             className="grid flex-1 grid-cols-2 gap-3"
-            aria-label="Interests"
+            aria-label={t("wizard-step-one-interests-heading", { defaultValue: "Interests" })}
             value={selected}
             onValueChange={(values) => setSelected(values)}
           >
@@ -96,7 +103,11 @@ export function DiscoverScreen(): JSX.Element {
             ))}
           </ToggleGroup.Root>
           <p className="mt-8 text-center text-sm text-base-content/70">
-            <span className="font-semibold text-accent">{selectedCount}</span> themes selected
+            <span className="font-semibold text-accent">{selectedCount}</span>{" "}
+            {t("discover-themes-selected", {
+              count: selectedCount,
+              defaultValue: selectedCount === 1 ? "theme selected" : "themes selected",
+            })}
           </p>
         </section>
 
@@ -110,17 +121,17 @@ export function DiscoverScreen(): JSX.Element {
             {isGenerating ? (
               <span className="inline-action-cluster">
                 <Icon token="{icon.action.loading}" className="h-5 w-5 animate-spin" aria-hidden />
-                Creating your experience...
+                {t("discover-start-loading", { defaultValue: "Creating your experience…" })}
               </span>
             ) : (
               <span className="inline-action-cluster">
-                Start Exploring
+                {t("discover-start", { defaultValue: "Start exploring" })}
                 <Icon token="{icon.navigation.forward}" aria-hidden className="h-4 w-4" />
               </span>
             )}
           </button>
           <p className="mt-3 text-center text-sm text-base-content/60">
-            You can always change these later.
+            {t("discover-change-later", { defaultValue: "You can always change these later." })}
           </p>
         </section>
       </div>

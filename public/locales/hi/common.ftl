@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = धन्यवाद! रेटिंग भ
 walk-complete-share-channel-facebook = फ़ेसबुक
 walk-complete-share-channel-instagram = इंस्टाग्राम
 walk-complete-share-channel-twitter = X (ट्विटर)
+discover-skip = छोड़ें
+discover-hero-title = अपनी परफ़ेक्ट सैर खोजें
+discover-hero-description = हमें बताएं कि आपको क्या पसंद है, हम आपके लिए जादुई रास्ते बनाएंगे।
+discover-curiosity-heading = क्या आपकी जिज्ञासा को जगाता है?
+discover-curiosity-subheading = कुछ थीम चुनें जो आपको आकर्षित करें।
+discover-themes-selected =
+    { $count ->
+        [one] थीम चुनी गई
+       *[other] थीम्स चुनी गईं
+    }
+discover-start = खोज शुरू करें
+discover-start-loading = आपका अनुभव तैयार किया जा रहा है…
+discover-change-later = आप इन्हें बाद में कभी भी बदल सकते हैं।
 explore-header-title = खोजें
 explore-header-subtitle = चयनित वॉक और छिपे गहने खोजें
 explore-filter-aria-label = वॉक फ़िल्टर करें

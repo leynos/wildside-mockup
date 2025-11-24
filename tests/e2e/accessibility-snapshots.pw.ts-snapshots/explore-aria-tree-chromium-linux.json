@@ -582,11 +582,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "12",
+                                                            "name": "12 walks",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "12"
+                                                                "name": "12 walks"
                                                               }
                                                             ]
                                                           }
@@ -689,11 +689,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "8",
+                                                            "name": "8 walks",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "8"
+                                                                "name": "8 walks"
                                                               }
                                                             ]
                                                           }
@@ -796,11 +796,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "15",
+                                                            "name": "15 walks",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "15"
+                                                                "name": "15 walks"
                                                               }
                                                             ]
                                                           }
@@ -903,11 +903,11 @@
                                                         "children": [
                                                           {
                                                             "role": "text",
-                                                            "name": "9",
+                                                            "name": "9 walks",
                                                             "children": [
                                                               {
                                                                 "role": "InlineTextBox",
-                                                                "name": "9"
+                                                                "name": "9 walks"
                                                               }
                                                             ]
                                                           }

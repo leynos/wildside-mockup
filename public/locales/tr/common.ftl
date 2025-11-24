@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = Teşekkürler! Değerlendirmen gelecekteki ö
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Atla
+discover-hero-title = Mükemmel yürüyüşünü keşfet
+discover-hero-description = Sizi nelerin ilgilendirdiğini söyleyin, size özel sihirli rotalar oluşturalım.
+discover-curiosity-heading = Merakını ne ateşliyor?
+discover-curiosity-subheading = Gözüne çarpan birkaç temayı seç.
+discover-themes-selected =
+    { $count ->
+        [one] tema seçildi
+       *[other] tema seçildi
+    }
+discover-start = Keşfetmeye başla
+discover-start-loading = Deneyimin hazırlanıyor…
+discover-change-later = Bunları dilediğin zaman değiştirebilirsin.
 explore-header-title = Keşfet
 explore-header-subtitle = Özenle seçilmiş yürüyüşleri ve gizli hazineleri keşfet
 explore-filter-aria-label = Yürüyüşleri filtrele

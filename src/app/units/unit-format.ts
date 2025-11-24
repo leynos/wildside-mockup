@@ -60,8 +60,13 @@ const formatNumber = (
   }).format(value);
 };
 
-export const getUnitLabel = (t: TFunction, unitToken: UnitToken, count?: number): string =>
-  t(`unit-${unitToken}`, { defaultValue: DEFAULT_UNIT_LABELS[unitToken], count });
+export const getUnitLabel = (t: TFunction, unitToken: UnitToken, count?: number): string => {
+  if (count == null) {
+    return t(`unit-${unitToken}`, DEFAULT_UNIT_LABELS[unitToken]);
+  }
+
+  return t(`unit-${unitToken}`, DEFAULT_UNIT_LABELS[unitToken], { count });
+};
 
 export const formatDistance = (
   metres: number,

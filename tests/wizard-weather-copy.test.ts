@@ -19,7 +19,16 @@ type TranslationCall = {
 describe("buildWizardWeatherCopy", () => {
   it("interpolates Celsius temperature and descriptors", () => {
     const calls: TranslationCall[] = [];
-    const stubT = ((key: string, options?: TranslationOptions) => {
+    const stubT = ((
+      key: string,
+      optionsOrDefault?: string | TranslationOptions,
+      maybeOptions?: TranslationOptions,
+    ) => {
+      const options: TranslationOptions | undefined =
+        typeof optionsOrDefault === "string"
+          ? { ...maybeOptions, defaultValue: optionsOrDefault }
+          : optionsOrDefault;
+
       if (options) {
         calls.push({ key, options });
       } else {
@@ -35,7 +44,7 @@ describe("buildWizardWeatherCopy", () => {
         .replaceAll("{{temperature}}", temperature)
         .replaceAll("{{wind}}", wind)
         .replaceAll("{{sky}}", sky);
-    }) as TFunction;
+    }) as unknown as TFunction;
 
     const weatherCopy = buildWizardWeatherCopy(stubT, "en-GB", "metric");
 

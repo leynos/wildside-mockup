@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = Kiitos! Arvio tallennettu tulevia ehdotuksia 
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Ohita
+discover-hero-title = Löydä täydellinen kävelysi
+discover-hero-description = Kerro, mikä kiinnostaa sinua, niin luomme sinulle taianomaisia reittejä.
+discover-curiosity-heading = Mikä herättää uteliaisuutesi?
+discover-curiosity-subheading = Valitse muutama teema, jotka kiinnittävät huomiosi.
+discover-themes-selected =
+    { $count ->
+        [one] teema valittu
+       *[other] teemaa valittu
+    }
+discover-start = Aloita tutkiminen
+discover-start-loading = Luodaan kokemustasi…
+discover-change-later = Voit aina muuttaa näitä myöhemmin.
 explore-header-title = Löydä
 explore-header-subtitle = Tutki kuratoituja kävelyjä ja kätkettyjä helmiä
 explore-filter-aria-label = Suodata kävelyt

@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = Ευχαριστούμε! Η βαθμολογ
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Παράλειψη
+discover-hero-title = Ανακαλύψτε τον ιδανικό σας περίπατο
+discover-hero-description = Πείτε μας τι σας ενδιαφέρει και θα δημιουργήσουμε μαγικές διαδρομές προσαρμοσμένες σε εσάς.
+discover-curiosity-heading = Τι πυροδοτεί την περιέργειά σας;
+discover-curiosity-subheading = Επιλέξτε μερικά θέματα που σας τραβούν την προσοχή.
+discover-themes-selected =
+    { $count ->
+        [one] θέμα επιλεγμένο
+       *[other] θέματα επιλεγμένα
+    }
+discover-start = Ξεκινήστε την εξερεύνηση
+discover-start-loading = Δημιουργούμε την εμπειρία σας…
+discover-change-later = Μπορείτε πάντα να τα αλλάξετε αργότερα.
 explore-header-title = Ανακάλυψε
 explore-header-subtitle = Εξερεύνησε επιμελημένες διαδρομές και κρυμμένους θησαυρούς
 explore-filter-aria-label = Φίλτραρε διαδρομές

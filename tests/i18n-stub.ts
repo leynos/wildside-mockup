@@ -19,21 +19,35 @@ export type StubT = {
 
 export const createStubT = (): StubT => {
   const calls: TranslationCall[] = [];
-  const t = ((key: string, options?: TranslationOptions) => {
+  const t = (
+    key: string,
+    optionsOrDefault?: string | TranslationOptions,
+    maybeOptions?: TranslationOptions,
+  ) => {
+    const options: TranslationOptions | undefined =
+      typeof optionsOrDefault === "string"
+        ? { ...maybeOptions, defaultValue: optionsOrDefault }
+        : optionsOrDefault;
+
     if (options) {
       calls.push({ key, options });
     } else {
       calls.push({ key });
     }
+
     if (typeof options?.defaultValue === "string") {
       return options.defaultValue;
     }
+
     const count = options?.count;
     if (typeof count === "number") {
       return `${key}:${count}`;
     }
-    return `translated:${key}`;
-  }) as TFunction;
 
-  return { t, calls };
+    return `translated:${key}`;
+  };
+
+  const typedT = t as unknown as TFunction;
+
+  return { t: typedT, calls };
 };

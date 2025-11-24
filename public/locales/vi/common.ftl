@@ -247,6 +247,18 @@ walk-complete-toast-rating-saved = Cảm ơn! Đánh giá đã được lưu cho
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Bỏ qua
+discover-hero-title = Khám phá chuyến đi bộ hoàn hảo của bạn
+discover-hero-description = Cho chúng tôi biết bạn quan tâm điều gì, chúng tôi sẽ tạo những lộ trình kỳ diệu phù hợp với bạn.
+discover-curiosity-heading = Điều gì khơi gợi sự tò mò của bạn?
+discover-curiosity-subheading = Chọn vài chủ đề thu hút bạn.
+discover-themes-selected =
+    { $count ->
+       *[other] chủ đề đã chọn
+    }
+discover-start = Bắt đầu khám phá
+discover-start-loading = Đang tạo trải nghiệm của bạn…
+discover-change-later = Bạn luôn có thể thay đổi những lựa chọn này sau.
 explore-header-title = Khám phá
 explore-header-subtitle = Khám phá những hành trình được tuyển chọn và báu vật ẩn mình
 explore-filter-aria-label = Lọc hành trình

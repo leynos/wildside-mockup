@@ -247,6 +247,18 @@ walk-complete-toast-rating-saved = 感謝！評分已儲存，供未來建議使
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X（Twitter）
+discover-skip = 跳過
+discover-hero-title = 發現你的理想步行路線
+discover-hero-description = 告訴我們你的興趣，我們會為你打造專屬的奇幻路線。
+discover-curiosity-heading = 是什麼激起你的好奇心？
+discover-curiosity-subheading = 選幾個吸引你的主題。
+discover-themes-selected =
+    { $count ->
+       *[other] 個主題已選
+    }
+discover-start = 開始探索
+discover-start-loading = 正在建立你的體驗…
+discover-change-later = 之後隨時可以再調整。
 explore-header-title = 探索
 explore-header-subtitle = 探索精選步行路線與隱藏景點
 explore-filter-aria-label = 篩選路線

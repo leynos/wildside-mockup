@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = Takk! Vurderingen er lagret for fremtidige fo
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Hopp over
+discover-hero-title = Oppdag din perfekte tur
+discover-hero-description = Fortell oss hva som interesserer deg, så lager vi magiske ruter tilpasset deg.
+discover-curiosity-heading = Hva vekker nysgjerrigheten din?
+discover-curiosity-subheading = Velg noen temaer som fanger oppmerksomheten din.
+discover-themes-selected =
+    { $count ->
+        [one] tema valgt
+       *[other] temaer valgt
+    }
+discover-start = Start utforskningen
+discover-start-loading = Lager opplevelsen din…
+discover-change-later = Du kan alltid endre dette senere.
 explore-header-title = Oppdag
 explore-header-subtitle = Utforsk kuraterte turer og skjulte perler
 explore-filter-aria-label = Filtrer turer

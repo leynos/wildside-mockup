@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = நன்றி! மதிப்பீடு 
 walk-complete-share-channel-facebook = பேஸ்புக்
 walk-complete-share-channel-instagram = இன்ஸ்டாகிராம்
 walk-complete-share-channel-twitter = X (ட்விட்டர்)
+discover-skip = தவிர்க்கவும்
+discover-hero-title = உங்கள் சிறந்த நடைப்பயணத்தை கண்டறியுங்கள்
+discover-hero-description = உங்களுக்கு விருப்பமானதைச் சொல்லுங்கள்; உங்களுக்கேற்ப மாயமான பாதைகளை உருவாக்குகிறோம்.
+discover-curiosity-heading = எது உங்கள் ஆர்வத்தை தூண்டும்?
+discover-curiosity-subheading = உங்கள் கவனத்தை ஈர்க்கும் சில தலைப்புகளைத் தேர்ந்தெடுக்கவும்.
+discover-themes-selected =
+    { $count ->
+        [one] தீம் தேர்ந்தெடுக்கப்பட்டது
+       *[other] தீம்கள் தேர்ந்தெடுக்கப்பட்டன
+    }
+discover-start = ஆராய தொடங்கவும்
+discover-start-loading = உங்கள் அனுபவத்தை உருவாக்குகிறோம்…
+discover-change-later = இவற்றை நீங்கள் பின்னரும் எப்போது வேண்டுமானாலும் மாற்றலாம்.
 explore-header-title = கண்டறியுங்கள்
 explore-header-subtitle = தொகுக்கப்பட்ட நடைப்பாதைகளையும் மறைந்த ரத்தினங்களையும் ஆராயுங்கள்
 explore-filter-aria-label = நடைப்பாதைகளை வடிகட்டி

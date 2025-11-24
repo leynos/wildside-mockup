@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = Danke! Bewertung für zukünftige Vorschläge
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Überspringen
+discover-hero-title = Entdecke deinen perfekten Spaziergang
+discover-hero-description = Sag uns, was dich interessiert, und wir gestalten magische Routen für dich.
+discover-curiosity-heading = Was weckt deine Neugier?
+discover-curiosity-subheading = Wähle ein paar Themen, die dir ins Auge fallen.
+discover-themes-selected =
+    { $count ->
+        [one] Thema ausgewählt
+       *[other] Themen ausgewählt
+    }
+discover-start = Jetzt entdecken
+discover-start-loading = Wir erstellen dein Erlebnis…
+discover-change-later = Du kannst das jederzeit später ändern.
 explore-header-title = Entdecken
 explore-header-subtitle = Erkunde kuratierte Spaziergänge und verborgene Highlights
 explore-filter-aria-label = Spaziergänge filtern

@@ -249,6 +249,20 @@ walk-complete-toast-rating-saved = תודה! הדירוג נשמר להצעות 
 walk-complete-share-channel-facebook = פייסבוק
 walk-complete-share-channel-instagram = אינסטגרם
 walk-complete-share-channel-twitter = X ‏(טוויטר)
+discover-skip = דלג
+discover-hero-title = גלו את הטיול המושלם שלכם
+discover-hero-description = ספרו לנו מה מעניין אתכם וניצור מסלולים קסומים המותאמים עבורכם.
+discover-curiosity-heading = מה מצית את הסקרנות שלכם?
+discover-curiosity-subheading = בחרו כמה נושאים שתופסים את העין.
+discover-themes-selected =
+    { $count ->
+        [one] נושא נבחר
+        [two] שני נושאים נבחרו
+       *[other] נושאים נבחרים
+    }
+discover-start = התחילו לחקור
+discover-start-loading = יוצרים את החוויה שלכם…
+discover-change-later = תמיד תוכלו לשנות זאת מאוחר יותר.
 explore-header-title = גלה
 explore-header-subtitle = חקור מסלולים אצורים ואוצרות חבויים
 explore-filter-aria-label = סינון מסלולים

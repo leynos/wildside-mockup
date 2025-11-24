@@ -251,6 +251,21 @@ walk-complete-toast-rating-saved = Dziękujemy! Ocena zapisana na potrzeby przys
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Pomiń
+discover-hero-title = Odkryj swój idealny spacer
+discover-hero-description = Powiedz nam, co Cię interesuje, a stworzymy magiczne trasy dopasowane do Ciebie.
+discover-curiosity-heading = Co rozpala Twoją ciekawość?
+discover-curiosity-subheading = Wybierz kilka motywów, które wpadną Ci w oko.
+discover-themes-selected =
+    { $count ->
+        [one] motyw wybrany
+        [few] motywy wybrane
+        [many] motywów wybranych
+       *[other] motywów wybranych
+    }
+discover-start = Zacznij odkrywać
+discover-start-loading = Tworzymy Twoje doświadczenie…
+discover-change-later = Zawsze możesz to zmienić później.
 explore-header-title = Odkrywaj
 explore-header-subtitle = Odkrywaj wyselekcjonowane spacery i ukryte perełki
 explore-filter-aria-label = Filtruj trasy

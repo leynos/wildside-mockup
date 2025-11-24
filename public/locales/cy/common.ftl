@@ -255,6 +255,22 @@ walk-complete-toast-rating-saved = Diolch! Cadwyd eich sgôr ar gyfer awgrymiada
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Hepgor
+discover-hero-title = Darganfod eich taith gerdded berffaith
+discover-hero-description = Dywedwch wrthym beth sy’n eich diddori a chreichawn lwybrau hud wedi’u teilwra i chi.
+discover-curiosity-heading = Beth sy’n tanio eich chwilfrydedd?
+discover-curiosity-subheading = Dewiswch ychydig o themâu sy’n dal eich llygad.
+discover-themes-selected =
+    { $count ->
+        [one] thema wedi’i dewis
+        [two] themâu wedi’u dewis
+        [few] themâu wedi’u dewis
+        [many] themâu wedi’u dewis
+       *[other] themâu wedi’u dewis
+    }
+discover-start = Dechrau archwilio
+discover-start-loading = Wrthi’n creu eich profiad…
+discover-change-later = Gallwch newid y rhain unrhyw bryd wedyn.
 explore-header-title = Darganfod
 explore-header-subtitle = Archwiliwch deithiau wedi’u curadu a thrysorau cudd
 explore-filter-aria-label = Hidlo teithiau cerdded

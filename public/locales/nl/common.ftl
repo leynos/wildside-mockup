@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = Bedankt! Beoordeling opgeslagen voor toekomst
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Overslaan
+discover-hero-title = Ontdek je perfecte wandeling
+discover-hero-description = Vertel ons wat je interesseert en wij maken magische routes op maat voor jou.
+discover-curiosity-heading = Wat prikkelt je nieuwsgierigheid?
+discover-curiosity-subheading = Kies een paar thema’s die je aanspreken.
+discover-themes-selected =
+    { $count ->
+        [one] thema geselecteerd
+       *[other] thema’s geselecteerd
+    }
+discover-start = Begin met ontdekken
+discover-start-loading = Je ervaring wordt gemaakt…
+discover-change-later = Je kunt dit later altijd aanpassen.
 explore-header-title = Ontdekken
 explore-header-subtitle = Verken gecureerde wandelingen en verborgen parels
 explore-filter-aria-label = Wandelingen filteren

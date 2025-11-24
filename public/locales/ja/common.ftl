@@ -247,6 +247,18 @@ walk-complete-toast-rating-saved = ありがとう！評価を保存しました
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X（Twitter）
+discover-skip = スキップ
+discover-hero-title = 理想の散歩を見つけよう
+discover-hero-description = 興味のあることを教えてください。あなたに合わせた特別なルートを作ります。
+discover-curiosity-heading = 何に好奇心がくすぐられますか？
+discover-curiosity-subheading = 気になるテーマをいくつか選んでください。
+discover-themes-selected =
+    { $count ->
+       *[other] テーマを選択済み
+    }
+discover-start = 探索を始める
+discover-start-loading = 体験を作成しています…
+discover-change-later = 後からいつでも変更できます。
 explore-header-title = 発見する
 explore-header-subtitle = 厳選された散策ルートと隠れた名所を巡ろう
 explore-filter-aria-label = ルートを絞り込む

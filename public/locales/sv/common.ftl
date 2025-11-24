@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = Tack! Betyget sparades för framtida förslag
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Hoppa över
+discover-hero-title = Upptäck din perfekta promenad
+discover-hero-description = Berätta vad som intresserar dig så skapar vi magiska rutter anpassade för dig.
+discover-curiosity-heading = Vad väcker din nyfikenhet?
+discover-curiosity-subheading = Välj några teman som fångar din blick.
+discover-themes-selected =
+    { $count ->
+        [one] tema valt
+       *[other] teman valda
+    }
+discover-start = Börja utforska
+discover-start-loading = Skapar din upplevelse…
+discover-change-later = Du kan alltid ändra detta senare.
 explore-header-title = Upptäck
 explore-header-subtitle = Utforska kuraterade promenader och dolda pärlor
 explore-filter-aria-label = Filtrera promenader

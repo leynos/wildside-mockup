@@ -255,6 +255,23 @@ walk-complete-toast-rating-saved = شكرًا لك! تم حفظ التقييم �
 walk-complete-share-channel-facebook = فيسبوك
 walk-complete-share-channel-instagram = إنستغرام
 walk-complete-share-channel-twitter = X ‏(تويتر)
+discover-skip = تخطي
+discover-hero-title = اكتشف نزهتك المثالية
+discover-hero-description = أخبرنا بما يهمك وسنصنع مسارات سحرية مصممة خصيصًا لك.
+discover-curiosity-heading = ما الذي يثير فضولك؟
+discover-curiosity-subheading = اختر بعض السمات التي تلفت انتباهك.
+discover-themes-selected =
+    { $count ->
+        [zero] موضوع محدد
+        [one] موضوع محدد
+        [two] موضوعان محددان
+        [few] مواضيع محددة
+        [many] موضوعًا محددًا
+       *[other] مواضيع محددة
+    }
+discover-start = ابدأ الاستكشاف
+discover-start-loading = جارٍ إنشاء تجربتك…
+discover-change-later = يمكنك دائمًا تغيير هذه الاختيارات لاحقًا.
 explore-header-title = اكتشف
 explore-header-subtitle = استكشف مسارات منسقة وجواهر مخفية
 explore-filter-aria-label = تصفية المسارات

@@ -1721,7 +1721,12 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/discover"));
       const ltrContainer = requireContainer(mount);
       const ltrView = within(ltrContainer);
-      const skipButton = ltrView.getByRole("button", { name: /skip/i });
+      const skipPattern = () => {
+        const label = translate("discover-skip", "Skip");
+        return new RegExp(escapeRegExp(label ?? "Skip"), "i");
+      };
+
+      const skipButton = ltrView.getByRole("button", { name: skipPattern() });
       const readInset = (element: HTMLElement, property: string) =>
         window.getComputedStyle(element).getPropertyValue(property);
 
@@ -1733,7 +1738,7 @@ describe("Stage 4 completion flows", () => {
       ({ mount, root } = await renderRoute("/discover"));
       const rtlContainer = requireContainer(mount);
       const rtlView = within(rtlContainer);
-      const rtlSkipButton = rtlView.getByRole("button", { name: /skip/i });
+      const rtlSkipButton = rtlView.getByRole("button", { name: skipPattern() });
       expect(readInset(rtlSkipButton, "inset-inline-end")).toBe("1.5rem");
     });
 

@@ -247,6 +247,18 @@ walk-complete-toast-rating-saved = 感谢！评分已保存，用于后续推荐
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X（Twitter）
+discover-skip = 跳过
+discover-hero-title = 发现你的理想步行路线
+discover-hero-description = 告诉我们你的兴趣，我们会为你定制奇妙路线。
+discover-curiosity-heading = 是什么激发了你的好奇心？
+discover-curiosity-subheading = 选几个吸引你的主题。
+discover-themes-selected =
+    { $count ->
+       *[other] 个主题已选
+    }
+discover-start = 开始探索
+discover-start-loading = 正在打造你的体验…
+discover-change-later = 这些随时可以再调整。
 explore-header-title = 探索
 explore-header-subtitle = 发现精选步行路线与隐藏宝藏
 explore-filter-aria-label = 筛选路线

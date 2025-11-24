@@ -253,6 +253,22 @@ walk-complete-toast-rating-saved = Tapadh leat! Chaidh an rangachadh a shàbhala
 walk-complete-share-channel-facebook = Facebook
 walk-complete-share-channel-instagram = Instagram
 walk-complete-share-channel-twitter = X (Twitter)
+discover-skip = Leum seachad
+discover-hero-title = Lorg an coiseachd foirfe agad
+discover-hero-description = Innis dhuinn dè tha gad ùidh agus cruthaichidh sinn slighean draoidheil dhut fhèin.
+discover-curiosity-heading = Dè a tha a’ dùsgadh do fheòrachas?
+discover-curiosity-subheading = Tagh beagan chuspairean a ghlacas do shùil.
+discover-themes-selected =
+    { $count ->
+        [one] cuspair air a thaghadh
+        [two] cuspairean air an taghadh
+        [few] cuspairean air an taghadh
+        [many] cuspairean air an taghadh
+       *[other] cuspairean air an taghadh
+    }
+discover-start = Tòisich air rannsachadh
+discover-start-loading = A’ cruthachadh do eòlas…
+discover-change-later = ’S urrainn dhut seo atharrachadh uair sam bith nas fhaide air adhart.
 explore-header-title = Lorg
 explore-header-subtitle = Rannsaich cuairtean air an cur ri chèile agus ulaidhean falaichte
 explore-filter-aria-label = Criathraich cuairtean

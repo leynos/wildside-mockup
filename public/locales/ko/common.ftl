@@ -247,6 +247,19 @@ walk-complete-toast-rating-saved = 감사합니다! 평가가 저장되어 다�
 walk-complete-share-channel-facebook = 페이스북
 walk-complete-share-channel-instagram = 인스타그램
 walk-complete-share-channel-twitter = X(트위터)
+discover-skip = 건너뛰기
+discover-hero-title = 완벽한 산책을 찾아보세요
+discover-hero-description = 관심사를 알려주시면 당신에게 맞춘 마법 같은 코스를 만들어 드립니다.
+discover-curiosity-heading = 무엇이 호기심을 자극하나요?
+discover-curiosity-subheading = 눈에 들어오는 테마 몇 가지를 선택하세요.
+discover-themes-selected =
+    { $count ->
+        [one] 테마 선택됨
+       *[other] 테마 선택됨
+    }
+discover-start = 탐색 시작
+discover-start-loading = 경험을 만드는 중…
+discover-change-later = 이 설정은 언제든지 바꿀 수 있어요.
 explore-header-title = 탐색
 explore-header-subtitle = 큐레이션된 산책과 숨은 명소를 둘러보세요
 explore-filter-aria-label = 산책 필터
