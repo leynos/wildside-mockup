@@ -20,7 +20,7 @@ export type UnitToken =
   | "temperature-celsius"
   | "temperature-fahrenheit"
   | "count-stop"
-  | "energy-kilocalorie"
+  | "energy-calorie"
   | "energy-kilojoule";
 
 export type LocalisedUnitValue = {
@@ -50,7 +50,7 @@ const DEFAULT_UNIT_LABELS: Record<UnitToken, string> = {
   "temperature-celsius": "°C",
   "temperature-fahrenheit": "°F",
   "count-stop": "stops",
-  "energy-kilocalorie": "kcal",
+  "energy-calorie": "kcal",
   "energy-kilojoule": "kJ",
 };
 
@@ -170,7 +170,7 @@ export const formatEnergy = (
   }: UnitFormatOptions,
 ): LocalisedUnitValue => {
   const useImperial = unitSystem === "imperial";
-  const unitToken: UnitToken = useImperial ? "energy-kilocalorie" : "energy-kilojoule";
+  const unitToken: UnitToken = useImperial ? "energy-calorie" : "energy-kilojoule";
   const numericValue = useImperial ? kilocalories : kilocalories * KILOJOULES_PER_KILOCALORIE;
   const unitLabel = getUnitLabel(t, unitToken, numericValue);
   const value = formatNumber(locale, numericValue, {
