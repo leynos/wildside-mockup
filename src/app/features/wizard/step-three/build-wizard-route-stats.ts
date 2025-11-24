@@ -24,20 +24,28 @@ export const buildWizardRouteStats = (
         return { id: stat.id, value, unitLabel };
       }
       case "duration": {
-        const { value, unitLabel } = formatDuration(stat.quantity.seconds, {
+        const duration = formatDuration(stat.quantity.seconds, {
           ...unitOptions,
           minimumFractionDigits: 0,
           maximumFractionDigits: 0,
         });
-        return { id: stat.id, value, unitLabel };
+        const unitLabel = t("wizard-step-three-route-duration-unit", {
+          count: duration.numericValue,
+          defaultValue: duration.unitLabel,
+        });
+        return { id: stat.id, value: duration.value, unitLabel };
       }
       case "count": {
-        const { value, unitLabel } = formatStops(stat.quantity.value, {
+        const stops = formatStops(stat.quantity.value, {
           ...unitOptions,
           minimumFractionDigits: 0,
           maximumFractionDigits: 0,
         });
-        return { id: stat.id, value, unitLabel };
+        const unitLabel = t("wizard-step-three-route-stops-unit", {
+          count: stops.numericValue,
+          defaultValue: stops.unitLabel,
+        });
+        return { id: stat.id, value: stops.value, unitLabel };
       }
       default: {
         return { id: stat.id, value: "", unitLabel: "" };
