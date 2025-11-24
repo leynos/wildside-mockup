@@ -16,6 +16,18 @@ import { appLogger, reportError } from "./app/observability/logger";
 
 const supportedLngs = SUPPORTED_LOCALES.map((locale) => locale.code);
 
+export const normaliseBasePath = (rawBase: string | undefined): string => {
+  const candidate = rawBase && rawBase.length > 0 ? rawBase : "/";
+  const withLeading = candidate.startsWith("/") ? candidate : `/${candidate}`;
+  return withLeading.endsWith("/") ? withLeading : `${withLeading}/`;
+};
+
+export const buildFluentLoadPath = (rawBase: string | undefined): string => {
+  const basePath = normaliseBasePath(rawBase);
+  const path = "locales/{{lng}}/{{ns}}.ftl";
+  return `${basePath}${path}`;
+};
+
 type AjaxResponse = {
   status: number;
   statusText?: string;
@@ -113,7 +125,7 @@ export const i18nReady = i18n
   .use(initReactI18next)
   .init({
     backend: {
-      loadPath: "/locales/{{lng}}/{{ns}}.ftl",
+      loadPath: buildFluentLoadPath(import.meta.env.BASE_URL as string | undefined),
       ajax: fetchAjax,
     },
     fallbackLng: DEFAULT_LOCALE,
