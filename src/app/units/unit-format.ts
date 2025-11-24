@@ -4,6 +4,7 @@ import type { TFunction } from "i18next";
 
 import {
   celsiusToFahrenheit,
+  KILOJOULES_PER_KILOCALORIE,
   METRES_PER_KILOMETRE,
   METRES_PER_MILE,
   metresToKilometres,
@@ -18,7 +19,9 @@ export type UnitToken =
   | "duration-minute"
   | "temperature-celsius"
   | "temperature-fahrenheit"
-  | "count-stop";
+  | "count-stop"
+  | "energy-kilocalorie"
+  | "energy-kilojoule";
 
 export type LocalisedUnitValue = {
   readonly value: string;
@@ -47,6 +50,8 @@ const DEFAULT_UNIT_LABELS: Record<UnitToken, string> = {
   "temperature-celsius": "°C",
   "temperature-fahrenheit": "°F",
   "count-stop": "stops",
+  "energy-kilocalorie": "kcal",
+  "energy-kilojoule": "kJ",
 };
 
 const formatNumber = (
@@ -152,6 +157,28 @@ export const formatStops = (
   const value = formatNumber(locale, stops, { minimumFractionDigits, maximumFractionDigits });
 
   return { value, numericValue: stops, unitLabel, unitToken };
+};
+
+export const formatEnergy = (
+  kilocalories: number,
+  {
+    locale,
+    t,
+    unitSystem,
+    minimumFractionDigits = 0,
+    maximumFractionDigits = 0,
+  }: UnitFormatOptions,
+): LocalisedUnitValue => {
+  const useImperial = unitSystem === "imperial";
+  const unitToken: UnitToken = useImperial ? "energy-kilocalorie" : "energy-kilojoule";
+  const numericValue = useImperial ? kilocalories : kilocalories * KILOJOULES_PER_KILOCALORIE;
+  const unitLabel = getUnitLabel(t, unitToken, numericValue);
+  const value = formatNumber(locale, numericValue, {
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  return { value, numericValue, unitLabel, unitToken };
 };
 
 export const metresFromKilometres = (kilometres: number): number =>
