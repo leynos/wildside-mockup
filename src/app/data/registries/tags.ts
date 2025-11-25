@@ -1,6 +1,11 @@
 /** @file Tag descriptor registry with embedded localisations. */
 
-import type { EntityLocalizations } from "../../domain/entities/localization";
+import type {
+  EntityLocalizations,
+  LocaleCode,
+  LocalizedStringSet,
+} from "../../domain/entities/localization";
+import { defaultFallbackLocales, pickLocalization } from "../../domain/entities/localization";
 
 export interface TagDescriptor {
   readonly id: string;
@@ -8,6 +13,8 @@ export interface TagDescriptor {
   readonly iconToken?: string;
   readonly accentClass?: string;
 }
+
+export type ResolvedTagDescriptor = TagDescriptor & { readonly localization: LocalizedStringSet };
 
 export const tagDescriptors: ReadonlyArray<TagDescriptor> = [
   {
@@ -110,3 +117,16 @@ export const tagDescriptors: ReadonlyArray<TagDescriptor> = [
     },
   },
 ];
+
+export const getTagDescriptor = (
+  id: string,
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
+): ResolvedTagDescriptor | undefined => {
+  const descriptor = tagDescriptors.find((entry) => entry.id === id);
+  if (!descriptor) return undefined;
+  return {
+    ...descriptor,
+    localization: pickLocalization(descriptor.localizations, locale, fallbackLocales),
+  };
+};
