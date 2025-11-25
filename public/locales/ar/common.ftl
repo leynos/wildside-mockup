@@ -353,6 +353,15 @@ unit-duration-minute =
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [zero] {$count} مسارات
+        [one] {$count} مسار
+        [two] {$count} مساران
+        [few] {$count} مسارات
+        [many] {$count} مسارًا
+       *[other] {$count} مسار
+    }
 unit-count-stop =
     { $count ->
         [zero] محطات
