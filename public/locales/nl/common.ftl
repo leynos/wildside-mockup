@@ -72,11 +72,11 @@ quick-walk-header-title = Generator voor snelle wandelingen
 quick-walk-header-description = Stel duur en interesses af om de suggesties te vernieuwen.
 quick-walk-generate-aria = Nieuwe wandeling maken
 quick-walk-duration-label = Duur
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Duur van de wandeling
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Interesses
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = Schuifregelaar voor de duur van de wandeling
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Interesses
 wizard-step-one-interests-heading = Interesses
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = Verborgen Parels-lus
 wizard-step-three-route-badge = Aangepast
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Een persoonlijke wandeling die street-artsteegjes, onafhankelijke cafés en rustige uitzichten langs het water combineert.
@@ -322,6 +322,12 @@ offline-dialog-cancel = Annuleren
 offline-dialog-preview = Download bekijken
 unit-distance-kilometre = km
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] minuut
+       *[other] minuten
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] minuut

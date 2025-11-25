@@ -72,11 +72,11 @@ quick-walk-header-title = מחולל מסלול מהיר
 quick-walk-header-description = כיילו משך ותחומי עניין כדי לרענן את ההמלצות.
 quick-walk-generate-aria = יצירת מסלול חדש
 quick-walk-duration-label = משך
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = משך ההליכה
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = תחומי עניין
 quick-walk-interests-selected =
     { $count ->
@@ -110,7 +110,7 @@ wizard-step-one-duration-aria = מחוון משך ההליכה
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = תחומי עניין
 wizard-step-one-interests-heading = תחומי עניין
 wizard-step-one-interests-selected =
@@ -153,7 +153,7 @@ wizard-step-three-route-title = לולאת האוצרות הנסתרים
 wizard-step-three-route-badge = מותאם אישית
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = מסלול מותאם אישי המשולב בסמטאות אמנות רחוב, בתי קפה עצמאיים ונקודות תצפית שקטות על קו החוף.
@@ -337,6 +337,14 @@ offline-dialog-cancel = ביטול
 offline-dialog-preview = תצוגה מקדימה של ההורדה
 unit-distance-kilometre = ק"מ
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] דקה
+        [two] דקות
+        [many] דקות
+       *[other] דקות
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] דקה

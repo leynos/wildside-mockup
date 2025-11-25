@@ -72,11 +72,11 @@ quick-walk-header-title = Gineadair cuairte luaithe
 quick-walk-header-description = Cuir air dòigh an ùine agus na h-ùidhean gus molaidhean ùrachadh.
 quick-walk-generate-aria = Cruthaich cuairt ùr
 quick-walk-duration-label = Ùine
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Ùine na cuairte-coise
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Ùidhean
 quick-walk-interests-selected =
     { $count ->
@@ -112,7 +112,7 @@ wizard-step-one-duration-aria = Sleamhnag ùine na cuairte
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Ùidhean
 wizard-step-one-interests-heading = Ùidhean
 wizard-step-one-interests-selected =
@@ -157,7 +157,7 @@ wizard-step-three-route-title = Cuairt nan Ulaidhean Falaichte
 wizard-step-three-route-badge = Gnàthaichte
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Cuairt phearsanta a tha a’ cothlamadh sràidean ealain, càbaidean neo-eisimeileach agus seallaidhean sàmhach air an oirthir.
@@ -337,6 +337,15 @@ offline-dialog-cancel = Sguir dheth
 offline-dialog-preview = Ro-shealladh luchdachaidh sìos
 unit-distance-kilometre = km
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] mionaid
+        [two] mionaid
+        [few] mionaidean
+        [many] mionaidean
+       *[other] mionaidean
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] mionaid

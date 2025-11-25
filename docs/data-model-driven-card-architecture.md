@@ -4,8 +4,9 @@ Last updated: 25 November 2025
 
 ## Purpose
 
-We must ensure every card in the mockup renders from a concrete entity data
-model that already contains its localised strings and SI-based measurements.
+Every card in the mockup must render from a concrete entity data model that
+already contains its localised strings and International System of Units
+(SI)-based measurements.
 Locale bundles should keep only UI chrome and formatting scaffolding. This
 document audits current card usages and defines the schemas, localisation
 rules, and migration steps to align the codebase.
@@ -118,7 +119,8 @@ available locale. Components must not construct names from translation keys.
   - `OfflineMapArea`: `id`, `localizations`, `sizeBytes: number`,
     `progress: number`, `status: "complete" | "updating" | "downloading"`,
     `image: ImageAsset`, `lastUpdated: Instant`
-  - `OfflineSuggestion`: `id`, `localizations`, `ctaLocalizations`,
+  - `OfflineSuggestion`: `id`, `localizations`, `ctaLocalizations` (call-to-action,
+    CTA),
     `accentClass`, `iconToken`
   - `AutoManagementOption`: `id`, `localizations`, `iconToken`,
     `defaultEnabled: boolean`, optional numeric parameters (`days`, etc.) in SI
@@ -210,4 +212,3 @@ available locale. Components must not construct names from translation keys.
     quality gates.
   - Remove obsolete translation keys and document the schema in
     `docs/pure-accessible-and-localizable-react-components.md`.
-

@@ -72,11 +72,11 @@ quick-walk-header-title = Генератор быстрого маршрута
 quick-walk-header-description = Подберите длительность и интересы, чтобы обновить рекомендации.
 quick-walk-generate-aria = Создать новый маршрут
 quick-walk-duration-label = Длительность
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Длительность прогулки
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Интересы
 quick-walk-interests-selected =
     { $count ->
@@ -111,7 +111,7 @@ wizard-step-one-duration-aria = Ползунок длительности про
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Интересы
 wizard-step-one-interests-heading = Интересы
 wizard-step-one-interests-selected =
@@ -155,7 +155,7 @@ wizard-step-three-route-title = Цикл Скрытых Жемчужин
 wizard-step-three-route-badge = Индивидуальный
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Персональная прогулка, сочетающая переулки со стрит-артом, независимые кафе и тихие виды на набережную.
@@ -332,6 +332,14 @@ offline-dialog-cancel = Отмена
 offline-dialog-preview = Просмотр загрузки
 unit-distance-kilometre = км
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] минута
+        [few] минуты
+        [many] минут
+       *[other] минут
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] минута

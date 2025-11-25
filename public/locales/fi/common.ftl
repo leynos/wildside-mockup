@@ -72,11 +72,11 @@ quick-walk-header-title = Pikakävelyn generaattori
 quick-walk-header-description = Säädä kestoa ja kiinnostuksia päivittääksesi suositukset.
 quick-walk-generate-aria = Luo uusi kävely
 quick-walk-duration-label = Kesto
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Kävelyn kesto
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Kiinnostukset
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = Kävelyn keston liukusäädin
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Kiinnostukset
 wizard-step-one-interests-heading = Kiinnostukset
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = Kätkettyjen helmien kierros
 wizard-step-three-route-badge = Mukautettu
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Räätälöity kävely, jossa yhdistyvät street art -kujat, itsenäiset kahvilat ja rauhalliset rantamaisemat.
@@ -322,6 +322,12 @@ offline-dialog-cancel = Peruuta
 offline-dialog-preview = Esikatsele latausta
 unit-distance-kilometre = km
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] minuutti
+       *[other] minuuttia
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] minuutti

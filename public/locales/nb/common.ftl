@@ -72,11 +72,11 @@ quick-walk-header-title = Generator for hurtiggåtur
 quick-walk-header-description = Juster varighet og interesser for å oppdatere forslagene.
 quick-walk-generate-aria = Lag en ny rute
 quick-walk-duration-label = Varighet
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Varighet for gåturen
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Interesser
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = Skyver for turens varighet
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Interesser
 wizard-step-one-interests-heading = Interesser
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = Skjulte perler-sløyfen
 wizard-step-three-route-badge = Tilpasset
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = En personlig gåtur som kombinerer street art-gater, uavhengige kafeer og rolige utsiktspunkter ved vannet.
@@ -322,6 +322,12 @@ offline-dialog-cancel = Avbryt
 offline-dialog-preview = Forhåndsvis nedlasting
 unit-distance-kilometre = km
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] min
+       *[other] min
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] min

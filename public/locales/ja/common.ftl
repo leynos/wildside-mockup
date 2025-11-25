@@ -72,11 +72,11 @@ quick-walk-header-title = クイック散歩ジェネレーター
 quick-walk-header-description = 所要時間と興味を調整しておすすめを更新します。
 quick-walk-generate-aria = 新しい散歩を作成
 quick-walk-duration-label = 所要時間
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = 散歩の所要時間
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = 興味
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = 所要時間スライダー
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = 興味
 wizard-step-one-interests-heading = 興味
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = 隠れた名所ループ
 wizard-step-three-route-badge = カスタム
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = ストリートアートの路地、個人経営のカフェ、静かなウォーターフロントを組み合わせたカスタムウォークです。
@@ -313,6 +313,12 @@ offline-dialog-cancel = キャンセル
 offline-dialog-preview = ダウンロードをプレビュー
 unit-distance-kilometre = km
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] 分
+       *[other] 分
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] 分

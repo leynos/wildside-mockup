@@ -72,11 +72,11 @@ quick-walk-header-title = Δημιουργός γρήγορης διαδρομή
 quick-walk-header-description = Ρύθμισε τη διάρκεια και τα ενδιαφέροντα για να ανανεώσεις τις προτάσεις.
 quick-walk-generate-aria = Δημιούργησε νέα διαδρομή
 quick-walk-duration-label = Διάρκεια
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Διάρκεια διαδρομής
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Ενδιαφέροντα
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = Ρυθμιστικό διάρκειας διαδ
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Ενδιαφέροντα
 wizard-step-one-interests-heading = Ενδιαφέροντα
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = Κύκλος Κρυμμένων Θησαυρών
 wizard-step-three-route-badge = Προσαρμοσμένη
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Μια εξατομικευμένη βόλτα που συνδυάζει σοκάκια street art, ανεξάρτητα καφέ και ήρεμες θέες στο νερό.
@@ -322,6 +322,12 @@ offline-dialog-cancel = Ακύρωση
 offline-dialog-preview = Προεπισκόπηση λήψης
 unit-distance-kilometre = χλμ
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] λεπτό
+       *[other] λεπτά
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] λεπτό

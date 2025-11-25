@@ -73,12 +73,16 @@ export function WizardStepOne(): JSX.Element {
 
   const formatDuration = useCallback(
     (value: number) => {
-      const { value: minutesLabel, unitLabel } = formatDurationValue(secondsFromMinutes(value), {
+      const {
+        value: minutesLabel,
+        unitLabel,
+        numericValue,
+      } = formatDurationValue(secondsFromMinutes(value), {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });
       return t("wizard-step-one-duration-format", {
-        minutes: minutesLabel,
+        count: numericValue,
         unit: unitLabel,
         defaultValue: `${minutesLabel} ${unitLabel}`,
       });

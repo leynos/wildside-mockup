@@ -23,6 +23,18 @@ const buildCandidateLocales = (requested: string): string[] => {
   return [trimmed];
 };
 
+const toNormalizedLocalizationMap = (
+  localizations: EntityLocalizations,
+): Record<string, LocalizedStringSet> => {
+  const map: Record<string, LocalizedStringSet> = {};
+  for (const [key, value] of Object.entries(localizations)) {
+    if (value) {
+      map[normaliseLocale(key)] = value;
+    }
+  }
+  return map;
+};
+
 /**
  * Pick the best available localisation, falling back predictably.
  *
@@ -37,18 +49,17 @@ export function pickLocalization(
     throw new Error("No localizations available for entity");
   }
 
+  const normalizedMap = toNormalizedLocalizationMap(localizations);
+
   const candidateOrder = [
     ...buildCandidateLocales(locale),
     ...fallbackLocales.map(normaliseLocale),
-    ...Object.keys(localizations).map(normaliseLocale),
+    ...Object.keys(normalizedMap),
   ];
 
   for (const candidate of candidateOrder) {
-    const entry = Object.entries(localizations).find(([key]) => normaliseLocale(key) === candidate);
-    const localisation = entry?.[1];
-    if (localisation) {
-      return localisation;
-    }
+    const localisation = normalizedMap[normaliseLocale(candidate)];
+    if (localisation) return localisation;
   }
 
   throw new Error("Failed to resolve localisation for entity");

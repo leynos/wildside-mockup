@@ -52,12 +52,12 @@ export function QuickWalkScreen(): JSX.Element {
 
   const formatDurationLabel = useCallback(
     (seconds: number) => {
-      const { value, unitLabel } = formatDurationValue(seconds, {
+      const { value, unitLabel, numericValue } = formatDurationValue(seconds, {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });
       return t("quick-walk-duration-format", {
-        minutes: value,
+        count: numericValue,
         unit: unitLabel,
         defaultValue: `${value} ${unitLabel}`,
       });

@@ -72,11 +72,11 @@ quick-walk-header-title = Trình tạo lộ trình đi bộ nhanh
 quick-walk-header-description = Điều chỉnh thời lượng và sở thích để làm mới gợi ý.
 quick-walk-generate-aria = Tạo lộ trình mới
 quick-walk-duration-label = Thời lượng
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Thời lượng cuộc đi bộ
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Sở thích
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = Thanh trượt thời lượng chuyến đi bộ
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Sở thích
 wizard-step-one-interests-heading = Sở thích
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = Vòng Viên Ngọc Ẩn
 wizard-step-three-route-badge = Tùy chỉnh
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Hành trình cá nhân hóa kết hợp các con hẻm nghệ thuật đường phố, quán cà phê độc lập và điểm ngắm ven sông yên tĩnh.
@@ -323,6 +323,12 @@ offline-dialog-cancel = Hủy
 offline-dialog-preview = Xem trước tải xuống
 unit-distance-kilometre = km
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] phút
+       *[other] phút
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] phút

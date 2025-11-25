@@ -72,11 +72,11 @@ quick-walk-header-title = 快速步行生成器
 quick-walk-header-description = 调整时长与兴趣以刷新推荐。
 quick-walk-generate-aria = 生成新的步行路线
 quick-walk-duration-label = 时长
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = 步行时长
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = 兴趣
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = 步行时长滑块
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = 兴趣
 wizard-step-one-interests-heading = 兴趣
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = 隐藏宝藏环线
 wizard-step-three-route-badge = 自定义
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = 个性化步行体验，融合街头艺术小巷、独立咖啡店与静谧水岸观景点。
@@ -313,6 +313,12 @@ offline-dialog-cancel = 取消
 offline-dialog-preview = 预览下载
 unit-distance-kilometre = 公里
 unit-distance-mile = 英里
+unit-duration-minute-label =
+    { $count ->
+        [one] 分钟
+       *[other] 分钟
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] 分钟

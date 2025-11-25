@@ -72,11 +72,11 @@ quick-walk-header-title = விரைவு நடை உருவாக்க�
 quick-walk-header-description = பரிந்துரைகளைப் புதுப்பிக்க காலஅளவும் விருப்பங்களையும் சரிசெய்க.
 quick-walk-generate-aria = புதிய நடையை உருவாக்கு
 quick-walk-duration-label = காலஅளவு
-quick-walk-duration-format = {$minutes} {-unit-duration-minute}
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = நடை காலஅளவு
-quick-walk-duration-marker-start = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-mid = {$minutes} {-unit-duration-minute}
-quick-walk-duration-marker-end = {$minutes} {-unit-duration-minute}
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = ஆர்வங்கள்
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +109,7 @@ wizard-step-one-duration-aria = நடைபயண கால ஸ்லைடர�
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute}
-wizard-step-one-duration-format = {$minutes} {-unit-duration-minute}
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = விருப்பங்கள்
 wizard-step-one-interests-heading = விருப்பங்கள்
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = மறைக்கப்பட்ட நகை�
 wizard-step-three-route-badge = தனிப்பயன்
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = தெரு கலை பாதைகள், சுயாதீனக் கஃபேக்கள், அமைதியான நீர்கரை காட்சிகள் கலந்து உருவான தனிப்பயன் நடைபாதை.
@@ -322,6 +322,12 @@ offline-dialog-cancel = ரத்து
 offline-dialog-preview = பதிவிறக்க முன்னோட்டம்
 unit-distance-kilometre = km
 unit-distance-mile = mi
+unit-duration-minute-label =
+    { $count ->
+        [one] நிமிடம்
+       *[other] நிமிடங்கள்
+    }
+
 -unit-duration-minute =
     { $count ->
         [one] நிமிடம்
