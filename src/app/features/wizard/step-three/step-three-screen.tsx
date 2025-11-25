@@ -218,7 +218,14 @@ export function WizardStepThree(): JSX.Element {
                       locale: i18n.language,
                       unitSystem,
                     });
-                    const unitKeySuffix = unitSystem === "imperial" ? "mi" : "km";
+                    const unitKeySuffix =
+                      formatted.unitToken === "distance-mile"
+                        ? "mi"
+                        : formatted.unitToken === "distance-kilometre"
+                          ? "km"
+                          : unitSystem === "imperial"
+                            ? "mi"
+                            : "km";
                     const unitLabel = t(`wizard-step-three-stop-distance-unit-${unitKeySuffix}`, {
                       defaultValue: formatted.unitLabel,
                     });
