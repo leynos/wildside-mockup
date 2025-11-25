@@ -15,14 +15,14 @@ customize-crowd-heading = Kalabalık düzeyi
 customize-elevation-heading = Yükseklik tercihi
 customize-slider-distance-label = Mesafe
 customize-slider-distance-aria = Mesafe kaydırıcısı
-customize-slider-distance-marker-0 = 1 km
-customize-slider-distance-marker-1 = 5 km
-customize-slider-distance-marker-2 = 10 km
+customize-slider-distance-marker-0 = 1 { unit-distance-kilometre }
+customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
+customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = Süre
 customize-slider-duration-aria = Süre kaydırıcısı
-customize-slider-duration-marker-0 = 15 dk
-customize-slider-duration-marker-1 = 90 dk
-customize-slider-duration-marker-2 = 180 dk
+customize-slider-duration-marker-0 = 15 { unit-duration-minute }
+customize-slider-duration-marker-1 = 90 { unit-duration-minute }
+customize-slider-duration-marker-2 = 180 { unit-duration-minute }
 customize-crowd-option-quiet-label = Sakin
 customize-crowd-option-quiet-description = Sakin sokaklar
 customize-crowd-option-balanced-label = Dengeli
@@ -72,11 +72,11 @@ quick-walk-header-title = Hızlı yürüyüş oluşturucu
 quick-walk-header-description = Önerileri yenilemek için süre ve ilgi alanlarını ayarla.
 quick-walk-generate-aria = Yeni bir yürüyüş oluştur
 quick-walk-duration-label = Süre
-quick-walk-duration-format = {$minutes} dk
+quick-walk-duration-format = {$minutes} { unit-duration-minute }
 quick-walk-duration-aria = Yürüyüş süresi
-quick-walk-duration-marker-start = {$minutes} dk
-quick-walk-duration-marker-mid = {$minutes} dk
-quick-walk-duration-marker-end = {$minutes} dk
+quick-walk-duration-marker-start = {$minutes} { unit-duration-minute }
+quick-walk-duration-marker-mid = {$minutes} { unit-duration-minute }
+quick-walk-duration-marker-end = {$minutes} { unit-duration-minute }
 quick-walk-interests-heading = İlgi alanları
 quick-walk-interests-selected =
     { $count ->
@@ -106,10 +106,10 @@ wizard-step-3-description = Kişiselleştirilmiş rotayı oluşturun
 wizard-step-one-duration-section-aria = Yürüyüş süresi denetimleri
 wizard-step-one-duration-label = Yürüyüş süresi
 wizard-step-one-duration-aria = Yürüyüş süresi kaydırıcısı
-wizard-step-one-duration-marker-start = 15 dk
-wizard-step-one-duration-marker-mid = 90 dk
-wizard-step-one-duration-marker-end = 180 dk
-wizard-step-one-duration-format = {$minutes} dk
+wizard-step-one-duration-marker-start = 15 { unit-duration-minute }
+wizard-step-one-duration-marker-mid = 90 { unit-duration-minute }
+wizard-step-one-duration-marker-end = 180 { unit-duration-minute }
+wizard-step-one-duration-format = {$minutes} { unit-duration-minute }
 wizard-step-one-interests-section-aria = İlgi alanları
 wizard-step-one-interests-heading = İlgi alanları
 wizard-step-one-interests-selected =
@@ -149,11 +149,11 @@ wizard-step-three-dialog-view-map = Haritada görüntüle
 wizard-step-three-route-panel-aria = Gizli mücevherler rotası özeti
 wizard-step-three-route-title = Gizli Mücevherler Döngüsü
 wizard-step-three-route-badge = Özel
-wizard-step-three-route-distance-unit = km
-wizard-step-three-stop-distance-unit-km = km
-wizard-step-three-route-duration-unit = dakika
-wizard-step-three-route-stops-unit = durak
-wizard-step-three-stop-distance-unit = km
+wizard-step-three-route-distance-unit = { unit-distance-kilometre }
+wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
+wizard-step-three-route-duration-unit = { unit-duration-minute }
+wizard-step-three-route-stops-unit = { unit-count-stop }
+wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Sokak sanatı ara sokakları, bağımsız kafeler ve sakin sahil manzaralarını harmanlayan kişiselleştirilmiş bir yürüyüş.
 wizard-step-three-preferences-panel-aria = Tercihlerin uygulandı
 wizard-step-three-preferences-heading = Tercihlerin uygulandı
@@ -329,8 +329,19 @@ unit-duration-minute =
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
+explore-theme-walk-count =
+    { $count ->
+        [one] {$count} yürüyüş
+       *[other] {$count} yürüyüş
+    }
 unit-count-stop =
     { $count ->
         [one] durak
        *[other] durak
     }
+unit-weight-kilogram = kg
+unit-weight-pound = lb
+unit-energy-joule = J
+unit-energy-kilojoule = kJ
+unit-energy-calorie = kcal
+unit-energy-btu = BTU

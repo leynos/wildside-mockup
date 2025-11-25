@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import {
   formatDistance,
   formatDuration,
+  formatEnergy,
   formatStops,
   formatTemperature,
   type LocalisedUnitValue,
@@ -26,6 +27,7 @@ export interface UnitFormatters {
   readonly formatDurationValue: FormatFn;
   readonly formatStopsValue: FormatFn;
   readonly formatTemperatureValue: FormatFn;
+  readonly formatEnergyValue: FormatFn;
 }
 
 export const useUnitFormatters = (): UnitFormatters => {
@@ -57,6 +59,12 @@ export const useUnitFormatters = (): UnitFormatters => {
     [unitOptions],
   );
 
+  const formatEnergyValue = useCallback<FormatFn>(
+    (kilocalories, overrides) =>
+      formatEnergy(kilocalories, { ...unitOptions, ...(overrides ?? {}) }),
+    [unitOptions],
+  );
+
   return {
     unitOptions,
     unitSystem,
@@ -64,5 +72,6 @@ export const useUnitFormatters = (): UnitFormatters => {
     formatDurationValue,
     formatStopsValue,
     formatTemperatureValue,
+    formatEnergyValue,
   };
 };

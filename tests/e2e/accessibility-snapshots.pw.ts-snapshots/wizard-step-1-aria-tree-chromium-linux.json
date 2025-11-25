@@ -221,11 +221,11 @@
                                                 "children": [
                                                   {
                                                     "role": "text",
-                                                    "name": "60 min",
+                                                    "name": "60 minutes",
                                                     "children": [
                                                       {
                                                         "role": "InlineTextBox",
-                                                        "name": "60 min"
+                                                        "name": "60 minutes"
                                                       }
                                                     ]
                                                   }
@@ -255,7 +255,7 @@
                                                     "role": "slider",
                                                     "name": "Walk duration slider",
                                                     "value": 60,
-                                                    "valueText": "60 min"
+                                                    "valueText": "60 minutes"
                                                   }
                                                 ]
                                               }

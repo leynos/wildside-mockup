@@ -5,6 +5,7 @@ export type UnitSystem = "metric" | "imperial";
 export const METRES_PER_KILOMETRE = 1_000;
 export const METRES_PER_MILE = 1_609.344;
 export const SECONDS_PER_MINUTE = 60;
+export const KILOJOULES_PER_KILOCALORIE = 4.184;
 
 const IMPERIAL_LOCALE_PREFIXES = ["en-us"] as const;
 

@@ -18,7 +18,7 @@ import {
   walkCompletionShareOptions,
 } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
-import { formatDistance, formatDuration, formatStops } from "../../units/unit-format";
+import { formatDistance, formatDuration, formatEnergy, formatStops } from "../../units/unit-format";
 import { useUnitPreferences } from "../../units/unit-preferences-provider";
 
 const secondaryStatIconTone: Record<string, string> = {
@@ -133,6 +133,14 @@ export function WalkCompleteScreen(): JSX.Element {
             return `${formatted} ${unitLabel}`;
           }
           return new Intl.NumberFormat(unitOptions.locale).format(value.value);
+        }
+        case "energy": {
+          const { value: formatted, unitLabel } = formatEnergy(value.kilocalories, {
+            ...unitOptions,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          });
+          return `${formatted} ${unitLabel}`;
         }
         default:
           return "";

@@ -4,6 +4,7 @@ import type { TFunction } from "i18next";
 
 import {
   celsiusToFahrenheit,
+  KILOJOULES_PER_KILOCALORIE,
   METRES_PER_KILOMETRE,
   METRES_PER_MILE,
   metresToKilometres,
@@ -18,7 +19,13 @@ export type UnitToken =
   | "duration-minute"
   | "temperature-celsius"
   | "temperature-fahrenheit"
-  | "count-stop";
+  | "count-stop"
+  | "energy-calorie"
+  | "energy-joule"
+  | "energy-kilojoule"
+  | "energy-btu"
+  | "weight-kilogram"
+  | "weight-pound";
 
 export type LocalisedUnitValue = {
   readonly value: string;
@@ -47,6 +54,12 @@ const DEFAULT_UNIT_LABELS: Record<UnitToken, string> = {
   "temperature-celsius": "°C",
   "temperature-fahrenheit": "°F",
   "count-stop": "stops",
+  "energy-joule": "J",
+  "energy-calorie": "kcal",
+  "energy-kilojoule": "kJ",
+  "energy-btu": "BTU",
+  "weight-kilogram": "kg",
+  "weight-pound": "lb",
 };
 
 const formatNumber = (
@@ -152,6 +165,50 @@ export const formatStops = (
   const value = formatNumber(locale, stops, { minimumFractionDigits, maximumFractionDigits });
 
   return { value, numericValue: stops, unitLabel, unitToken };
+};
+
+export const formatEnergy = (
+  kilocalories: number,
+  {
+    locale,
+    t,
+    unitSystem,
+    minimumFractionDigits = 0,
+    maximumFractionDigits = 0,
+  }: UnitFormatOptions,
+): LocalisedUnitValue => {
+  const useImperial = unitSystem === "imperial";
+  const unitToken: UnitToken = useImperial ? "energy-calorie" : "energy-kilojoule";
+  const numericValue = useImperial ? kilocalories : kilocalories * KILOJOULES_PER_KILOCALORIE;
+  const unitLabel = getUnitLabel(t, unitToken, numericValue);
+  const value = formatNumber(locale, numericValue, {
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  return { value, numericValue, unitLabel, unitToken };
+};
+
+export const formatWeight = (
+  kilograms: number,
+  {
+    locale,
+    t,
+    unitSystem,
+    minimumFractionDigits = 0,
+    maximumFractionDigits = 1,
+  }: UnitFormatOptions,
+): LocalisedUnitValue => {
+  const useImperial = unitSystem === "imperial";
+  const numericValue = useImperial ? kilograms * 2.20462 : kilograms;
+  const unitToken: UnitToken = useImperial ? "weight-pound" : "weight-kilogram";
+  const unitLabel = getUnitLabel(t, unitToken, numericValue);
+  const value = formatNumber(locale, numericValue, {
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  return { value, numericValue, unitLabel, unitToken };
 };
 
 export const metresFromKilometres = (kilometres: number): number =>

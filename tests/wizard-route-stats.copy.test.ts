@@ -23,10 +23,12 @@ describe("buildWizardRouteStats", () => {
     const distanceCall = calls.find((call) => call.key === "unit-distance-kilometre");
     expect(distanceCall?.options?.defaultValue).toBe("km");
 
-    const durationCall = calls.find((call) => call.key === "unit-duration-minute");
+    const durationCall = calls.find((call) => call.key === "wizard-step-three-route-duration-unit");
     expect(durationCall?.options?.defaultValue).toBe("minutes");
+    expect(durationCall?.options?.count).toBe(45);
 
-    const stopsCall = calls.find((call) => call.key === "unit-count-stop");
+    const stopsCall = calls.find((call) => call.key === "wizard-step-three-route-stops-unit");
     expect(stopsCall?.options?.defaultValue).toBe("stops");
+    expect(stopsCall?.options?.count).toBe(7);
   });
 });

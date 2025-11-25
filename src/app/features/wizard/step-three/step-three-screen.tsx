@@ -212,11 +212,25 @@ export function WizardStepThree(): JSX.Element {
             });
             const distanceLabel =
               stop.noteDistanceMetres != null
-                ? formatDistance(stop.noteDistanceMetres, {
-                    t,
-                    locale: i18n.language,
-                    unitSystem,
-                  })
+                ? (() => {
+                    const formatted = formatDistance(stop.noteDistanceMetres, {
+                      t,
+                      locale: i18n.language,
+                      unitSystem,
+                    });
+                    const unitKeySuffix =
+                      formatted.unitToken === "distance-mile"
+                        ? "mi"
+                        : formatted.unitToken === "distance-kilometre"
+                          ? "km"
+                          : unitSystem === "imperial"
+                            ? "mi"
+                            : "km";
+                    const unitLabel = t(`wizard-step-three-stop-distance-unit-${unitKeySuffix}`, {
+                      defaultValue: formatted.unitLabel,
+                    });
+                    return { ...formatted, unitLabel };
+                  })()
                 : undefined;
             const note = t(stop.noteKey, {
               defaultValue: stop.defaultNote,

@@ -33,10 +33,21 @@ export function WizardStepOne(): JSX.Element {
   const durationAriaLabel = t("wizard-step-one-duration-aria", {
     defaultValue: "Walk duration slider",
   });
+  const durationMarkerDefaults = useMemo(
+    () =>
+      [15, 90, 180].map((minutes) => {
+        const { value, unitLabel } = formatDurationValue(secondsFromMinutes(minutes), {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        });
+        return `${value} ${unitLabel}`;
+      }),
+    [formatDurationValue],
+  );
   const durationMarkers = [
-    t("wizard-step-one-duration-marker-start", { defaultValue: "15 min" }),
-    t("wizard-step-one-duration-marker-mid", { defaultValue: "90 min" }),
-    t("wizard-step-one-duration-marker-end", { defaultValue: "180 min" }),
+    t("wizard-step-one-duration-marker-start", { defaultValue: durationMarkerDefaults[0] }),
+    t("wizard-step-one-duration-marker-mid", { defaultValue: durationMarkerDefaults[1] }),
+    t("wizard-step-one-duration-marker-end", { defaultValue: durationMarkerDefaults[2] }),
   ];
   const interestsSectionLabel = t("wizard-step-one-interests-section-aria", {
     defaultValue: "Interests",

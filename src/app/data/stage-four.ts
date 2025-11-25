@@ -9,7 +9,8 @@ export interface WalkCompletionStat {
   value:
     | { kind: "distance"; metres: number }
     | { kind: "duration"; seconds: number }
-    | { kind: "count"; value: number; unitToken?: string };
+    | { kind: "count"; value: number; unitToken?: string }
+    | { kind: "energy"; kilocalories: number };
   iconToken: string;
 }
 
@@ -32,7 +33,7 @@ export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
   {
     id: "calories",
     label: "Calories",
-    value: { kind: "count", value: 247 },
+    value: { kind: "energy", kilocalories: 247 },
     iconToken: "{icon.object.calories}",
   },
   {
