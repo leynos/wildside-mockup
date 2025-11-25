@@ -1,6 +1,11 @@
 import { describe, expect, it } from "bun:test";
 
-import { formatDistance, formatTemperature } from "../src/app/units/unit-format";
+import {
+  formatDistance,
+  formatEnergy,
+  formatTemperature,
+  formatWeight,
+} from "../src/app/units/unit-format";
 import { createStubT } from "./i18n-stub";
 
 describe("unit format helpers", () => {
@@ -48,5 +53,49 @@ describe("unit format helpers", () => {
 
     expect(celsius.value).toBe("0.0");
     expect(celsius.unitLabel).toBe("°C");
+  });
+
+  it("formats energy in metric as kilojoules and imperial as kilocalories", () => {
+    const { t } = createStubT();
+
+    const metric = formatEnergy(250, {
+      t,
+      locale: "en-GB",
+      unitSystem: "metric",
+    });
+
+    expect(metric.value).toBe("1,046");
+    expect(metric.unitLabel).toBe("kJ");
+
+    const imperial = formatEnergy(250, {
+      t,
+      locale: "en-US",
+      unitSystem: "imperial",
+    });
+
+    expect(imperial.value).toBe("250");
+    expect(imperial.unitLabel).toBe("kcal");
+  });
+
+  it("formats weight respecting the preferred unit system", () => {
+    const { t } = createStubT();
+
+    const metric = formatWeight(70, {
+      t,
+      locale: "en-GB",
+      unitSystem: "metric",
+    });
+
+    expect(metric.value).toBe("70");
+    expect(metric.unitLabel).toBe("kg");
+
+    const imperial = formatWeight(70, {
+      t,
+      locale: "en-US",
+      unitSystem: "imperial",
+    });
+
+    expect(imperial.value).toBe("154.3");
+    expect(imperial.unitLabel).toBe("lb");
   });
 });
