@@ -325,6 +325,9 @@ offline-dialog-cancel = Cancel
 offline-dialog-preview = Preview download
 unit-distance-kilometre = km
 unit-distance-mile = mi
+# unit-duration-minute-label is the public user-facing unit label for durations.
+# -unit-duration-minute is the internal term for fixed patterns that still need
+# an explicit numeric argument.
 unit-duration-minute-label =
     { $count ->
         [one] minute

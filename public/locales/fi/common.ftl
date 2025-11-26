@@ -325,11 +325,7 @@ offline-dialog-cancel = Peruuta
 offline-dialog-preview = Esikatsele latausta
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] minuutti
-       *[other] minuuttia
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

@@ -335,13 +335,7 @@ offline-dialog-cancel = Отмена
 offline-dialog-preview = Просмотр загрузки
 unit-distance-kilometre = км
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] минута
-        [few] минуты
-        [many] минут
-       *[other] минут
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

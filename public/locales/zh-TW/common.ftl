@@ -322,15 +322,10 @@ offline-dialog-cancel = 取消
 offline-dialog-preview = 預覽下載
 unit-distance-kilometre = 公里
 unit-distance-mile = 英里
-unit-duration-minute-label =
-    { $count ->
-        [one] 分鐘
-       *[other] 分鐘
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->
-        [one] 分鐘
        *[other] 分鐘
     }
 unit-temperature-celsius = °C
