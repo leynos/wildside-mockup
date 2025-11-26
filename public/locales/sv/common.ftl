@@ -151,7 +151,10 @@ wizard-step-three-route-title = Slingan Dolda Pärlor
 wizard-step-three-route-badge = Anpassad
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
+wizard-step-three-route-duration-unit =
+    { $count ->
+       *[other] {-unit-duration-minute($count)}
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = En personlig promenad som blandar street‑artgränder, fristående kaféer och lugna utsikter vid vattnet.

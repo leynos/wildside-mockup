@@ -153,7 +153,7 @@ wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
 wizard-step-three-route-duration-unit =
     { $count ->
-       *[other] { unit-duration-minute-label }
+       *[other] {-unit-duration-minute($count)}
     }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
