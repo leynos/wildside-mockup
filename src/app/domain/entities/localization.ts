@@ -38,6 +38,14 @@ const toNormalizedLocalizationMap = (
 /**
  * Pick the best available localisation, falling back predictably.
  *
+ * @example
+ * const localizations = {
+ *   "en-GB": { name: "Harbour Loop" },
+ *   fr: { name: "Boucle du port" },
+ * };
+ * const resolved = pickLocalization(localizations, "es-MX", ["en-US", "fr"]);
+ * // resolved.name === "Boucle du port"
+ *
  * @throws {Error} when no localisation entries are present.
  */
 export function pickLocalization(
