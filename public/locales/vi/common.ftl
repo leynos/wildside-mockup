@@ -325,13 +325,11 @@ unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
     { $count ->
-        [one] phút
        *[other] phút
     }
 
 -unit-duration-minute =
     { $count ->
-        [one] phút
        *[other] phút
     }
 unit-temperature-celsius = °C

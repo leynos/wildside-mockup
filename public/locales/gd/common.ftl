@@ -337,7 +337,7 @@ offline-dialog-cancel = Sguir dheth
 offline-dialog-preview = Ro-shealladh luchdachaidh sìos
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
+-unit-duration-minute =
     { $count ->
         [one] mionaid
         [two] mionaid
@@ -346,13 +346,9 @@ unit-duration-minute-label =
        *[other] mionaidean
     }
 
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
-        [one] mionaid
-        [two] mionaid
-        [few] mionaidean
-        [many] mionaidean
-       *[other] mionaidean
+       *[other] { -unit-duration-minute }
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
