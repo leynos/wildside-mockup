@@ -72,27 +72,11 @@ quick-walk-header-title = Generator für Schnellrouten
 quick-walk-header-description = Stelle Dauer und Interessen ein, um Vorschläge zu aktualisieren.
 quick-walk-generate-aria = Neue Route erstellen
 quick-walk-duration-label = Dauer
-quick-walk-duration-format =
-    { $count ->
-        [one] {$count} Minute
-       *[other] {$count} Minuten
-    }
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Dauer des Spaziergangs
-quick-walk-duration-marker-start =
-    { $count ->
-        [one] {$count} Minute
-       *[other] {$count} Minuten
-    }
-quick-walk-duration-marker-mid =
-    { $count ->
-        [one] {$count} Minute
-       *[other] {$count} Minuten
-    }
-quick-walk-duration-marker-end =
-    { $count ->
-        [one] {$count} Minute
-       *[other] {$count} Minuten
-    }
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Interessen
 quick-walk-interests-selected =
     { $count ->
@@ -122,9 +106,9 @@ wizard-step-3-description = Erstelle die maßgeschneiderte Route
 wizard-step-one-duration-section-aria = Steuerung für die Spazierdauer
 wizard-step-one-duration-label = Dauer des Spaziergangs
 wizard-step-one-duration-aria = Schieberegler für die Spazierdauer
-wizard-step-one-duration-marker-start = 15 {-unit-duration-minute(count: 15)}
-wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute(count: 90)}
-wizard-step-one-duration-marker-end = 180 {-unit-duration-minute(count: 180)}
+wizard-step-one-duration-marker-start = 15 { unit-duration-minute-label }
+wizard-step-one-duration-marker-mid = 90 { unit-duration-minute-label }
+wizard-step-one-duration-marker-end = 180 { unit-duration-minute-label }
 wizard-step-one-duration-format =
     { $count ->
         [one] {$count} Minute
@@ -173,7 +157,8 @@ wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
 wizard-step-three-route-duration-unit =
     { $count ->
-       *[other] { unit-duration-minute-label }
+        [one] Minute
+       *[other] Minuten
     }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }

@@ -30,7 +30,7 @@ rules, and migration steps to align the codebase.
 - **Discover screen (`discover-screen.tsx`)**: interest chips driven by
   `resolveDiscoverInterests` over the interest registry; labels drawn from
   Fluent keys.
-- **Customise screen (`customize-sections.tsx`)**: segment toggle cards,
+- **Customize screen (`customize-sections.tsx`)**: segment toggle cards,
   surface option cards, route preview cards, advanced preference toggle cards.
   Text is currently split between fixtures and Fluent keys.
 - **Offline screen (`offline-screen.tsx`)**: offline suggestion cards, offline
@@ -190,10 +190,10 @@ available locale. Components must not construct names from translation keys.
   - Reshape `data/explore.ts` into new entity shapes with localization maps.
   - Update `explore-sections` components to consume entities and call
     `pickLocalization`; drop related keys from Fluent bundles.
-  - Move discover interest labels into the registry and remove interest keys
+- Move Discover interest labels into the registry and remove interest keys
     from Fluent.
-- **Phase 2: customise & safety**
-  - Convert customise sliders, segment options, route previews, and advanced
+- **Phase 2: customize & safety**
+  - Convert customize sliders, segment options, route previews, and advanced
     toggles to entity-based inputs; replace per-option translation keys.
   - Refactor safety accordion sections to reference `SafetyToggle` entities and
     presets with localization maps; prune Fluent keys.
