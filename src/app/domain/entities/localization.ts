@@ -94,7 +94,7 @@ export function pickLocalization(
   ];
 
   for (const candidate of candidateOrder) {
-    const localisation = normalizedMap[normaliseLocale(candidate)];
+    const localisation = normalizedMap[candidate];
     if (localisation) return localisation;
   }
 
