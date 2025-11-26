@@ -1,6 +1,34 @@
 /** @file Shared localisation primitives and helpers for entity-driven cards. */
 
-export type LocaleCode = "en-GB" | "en-US" | "fr" | "de" | "es" | "fi" | "da" | "el" | "cy" | "ar";
+export type LocaleCode =
+  | "ar"
+  | "cy"
+  | "da"
+  | "de"
+  | "el"
+  | "en-GB"
+  | "en-US"
+  | "es"
+  | "fi"
+  | "fr"
+  | "gd"
+  | "he"
+  | "hi"
+  | "it"
+  | "ja"
+  | "ko"
+  | "nb"
+  | "nl"
+  | "pl"
+  | "pt"
+  | "ru"
+  | "sv"
+  | "ta"
+  | "th"
+  | "tr"
+  | "vi"
+  | "zh-CN"
+  | "zh-TW";
 
 export type LocalizedStringSet = {
   readonly name: string;
