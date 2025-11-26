@@ -106,9 +106,9 @@ wizard-step-3-description = Erstelle die maßgeschneiderte Route
 wizard-step-one-duration-section-aria = Steuerung für die Spazierdauer
 wizard-step-one-duration-label = Dauer des Spaziergangs
 wizard-step-one-duration-aria = Schieberegler für die Spazierdauer
-wizard-step-one-duration-marker-start = 15 { unit-duration-minute-label }
-wizard-step-one-duration-marker-mid = 90 { unit-duration-minute-label }
-wizard-step-one-duration-marker-end = 180 { unit-duration-minute-label }
+wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
 wizard-step-one-duration-format =
     { $count ->
         [one] {$count} Minute

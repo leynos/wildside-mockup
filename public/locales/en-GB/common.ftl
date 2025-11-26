@@ -107,11 +107,11 @@ wizard-step-one-duration-section-aria = Walk duration controls
 wizard-step-one-duration-label = Walk duration
 wizard-step-one-duration-aria = Walk duration slider
 # NOTE: If you change the visible number, update the count argument to keep plural forms correct.
-wizard-step-one-duration-marker-start = 15 {-unit-duration-minute(count: 15)}
+wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
 # NOTE: If you change the visible number, update the count argument to keep plural forms correct.
-wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute(count: 90)}
+wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
 # NOTE: If you change the visible number, update the count argument to keep plural forms correct.
-wizard-step-one-duration-marker-end = 180 {-unit-duration-minute(count: 180)}
+wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
 wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Interests
 wizard-step-one-interests-heading = Interests
