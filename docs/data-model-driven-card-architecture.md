@@ -1,14 +1,14 @@
-# Data model driven card architecture
+# Data model-driven card architecture
 
 Last updated: 25 November 2025
 
 ## Purpose
 
 Every card in the mockup must render from a concrete entity data model that
-already contains its localised strings and International System of Units
+already contains its localized strings and International System of Units
 (SI)-based measurements.
 Locale bundles should keep only UI chrome and formatting scaffolding. This
-document audits current card usages and defines the schemas, localisation
+document audits current card usages and defines the schemas, localization
 rules, and migration steps to align the codebase.
 
 ## Principles to enforce
@@ -18,7 +18,7 @@ rules, and migration steps to align the codebase.
   descriptor registries (difficulties, interests, surfaces, tags).
 - Numeric values are stored in SI base units; conversion happens at render
   time via the existing unit-format helpers.
-- Counts stay as integers; pluralisation belongs to the translation system.
+- Counts stay as integers; pluralization belongs to the translation system.
 - Components receive fully formed entities and only format/present them.
 
 ## Card inventory and current data sources
@@ -140,7 +140,7 @@ available locale. Components must not construct names from translation keys.
   - `image?: ImageAsset`
 - **Walk completion**
   - `WalkCompletionStat`: `id`, `kind`, SI value, `iconToken`,
-    `localizations.label`
+    `localizations: EntityLocalizations` (use `name` for the label)
   - `WalkCompletionMoment`: `id`, `localizations`, `image: ImageAsset`,
     `iconToken?`
   - `WalkCompletionShareOption`: `id`, `localizations`, `iconToken`,
@@ -151,7 +151,7 @@ available locale. Components must not construct names from translation keys.
   - `WizardRouteSummary`: `routeId` link plus `badgeLocalization` and stat
     projections; remove per-stat translation keys.
 
-## Localisation handling rules
+## Localization handling rules
 
 - Every entity exposes `localizations`; UI selects the matching locale once per
   render using a `pickLocalization(entity, locale)` helper.
@@ -187,7 +187,7 @@ available locale. Components must not construct names from translation keys.
     `pickLocalization` helper with deterministic fallback.
   - Introduce `tagDescriptors` and `badgeDescriptors` registries.
 - **Phase 1: explore & discover**
-  - Reshape `data/explore.ts` into new entity shapes with localisation maps.
+  - Reshape `data/explore.ts` into new entity shapes with localization maps.
   - Update `explore-sections` components to consume entities and call
     `pickLocalization`; drop related keys from Fluent bundles.
   - Move discover interest labels into the registry and remove interest keys
@@ -196,10 +196,10 @@ available locale. Components must not construct names from translation keys.
   - Convert customise sliders, segment options, route previews, and advanced
     toggles to entity-based inputs; replace per-option translation keys.
   - Refactor safety accordion sections to reference `SafetyToggle` entities and
-    presets with localisation maps; prune Fluent keys.
+    presets with localization maps; prune Fluent keys.
 - **Phase 3: offline & map**
   - Migrate offline suggestions and downloads to SI/numeric fields and
-    localisation maps; update cards and undo states.
+    localization maps; update cards and undo states.
   - Reshape `WalkPointOfInterest` and saved routes; ensure tags use registries
     and unit formatting covers all numerical values.
 - **Phase 4: wizard & completion**
