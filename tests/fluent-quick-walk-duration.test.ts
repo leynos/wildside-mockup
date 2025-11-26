@@ -1,3 +1,4 @@
+/** @file Verifies Fluent translations and quick-walk duration formatting. */
 import { describe, expect, it } from "bun:test";
 import fs from "node:fs";
 import path from "node:path";
