@@ -72,11 +72,27 @@ quick-walk-header-title = Generator für Schnellrouten
 quick-walk-header-description = Stelle Dauer und Interessen ein, um Vorschläge zu aktualisieren.
 quick-walk-generate-aria = Neue Route erstellen
 quick-walk-duration-label = Dauer
-quick-walk-duration-format = {$count} { unit-duration-minute-label }
+quick-walk-duration-format =
+    { $count ->
+        [one] {$count} Minute
+       *[other] {$count} Minuten
+    }
 quick-walk-duration-aria = Dauer des Spaziergangs
-quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-start =
+    { $count ->
+        [one] {$count} Minute
+       *[other] {$count} Minuten
+    }
+quick-walk-duration-marker-mid =
+    { $count ->
+        [one] {$count} Minute
+       *[other] {$count} Minuten
+    }
+quick-walk-duration-marker-end =
+    { $count ->
+        [one] {$count} Minute
+       *[other] {$count} Minuten
+    }
 quick-walk-interests-heading = Interessen
 quick-walk-interests-selected =
     { $count ->
@@ -109,7 +125,11 @@ wizard-step-one-duration-aria = Schieberegler für die Spazierdauer
 wizard-step-one-duration-marker-start = 15 {-unit-duration-minute(count: 15)}
 wizard-step-one-duration-marker-mid = 90 {-unit-duration-minute(count: 90)}
 wizard-step-one-duration-marker-end = 180 {-unit-duration-minute(count: 180)}
-wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-format =
+    { $count ->
+        [one] {$count} Minute
+       *[other] {$count} Minuten
+    }
 wizard-step-one-interests-section-aria = Interessen
 wizard-step-one-interests-heading = Interessen
 wizard-step-one-interests-selected =
@@ -151,7 +171,7 @@ wizard-step-three-route-title = Schleife der verborgenen Schätze
 wizard-step-three-route-badge = Individuell
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute-label }
+wizard-step-three-route-duration-unit = {-unit-duration-minute}
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Ein personalisierter Spaziergang, der Street-Art-Gassen, unabhängige Cafés und ruhige Aussichtspunkte am Wasser verbindet.
