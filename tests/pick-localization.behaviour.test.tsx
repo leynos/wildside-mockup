@@ -26,6 +26,6 @@ describe("pickLocalization behavioural usage", () => {
       />,
     );
 
-    expect(screen.getByText("Harbour Walk").textContent).toBe("Harbour Walk");
+    expect(screen.getByText("Harbour Walk")).toBeInTheDocument();
   });
 });
