@@ -151,10 +151,7 @@ wizard-step-three-route-title = Vòng Viên Ngọc Ẩn
 wizard-step-three-route-badge = Tùy chỉnh
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] { unit-duration-minute-label }
-    }
+wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Hành trình cá nhân hóa kết hợp các con hẻm nghệ thuật đường phố, quán cà phê độc lập và điểm ngắm ven sông yên tĩnh.
@@ -326,10 +323,7 @@ offline-dialog-cancel = Hủy
 offline-dialog-preview = Xem trước tải xuống
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-       *[other] phút
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

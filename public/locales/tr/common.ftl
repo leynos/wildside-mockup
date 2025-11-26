@@ -151,10 +151,7 @@ wizard-step-three-route-title = Gizli Mücevherler Döngüsü
 wizard-step-three-route-badge = Özel
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] { unit-duration-minute-label }
-    }
+wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Sokak sanatı ara sokakları, bağımsız kafeler ve sakin sahil manzaralarını harmanlayan kişiselleştirilmiş bir yürüyüş.
