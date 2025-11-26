@@ -345,15 +345,7 @@ offline-dialog-cancel = إلغاء
 offline-dialog-preview = معاينة التنزيل
 unit-distance-kilometre = كم
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [zero] دقائق
-        [one] دقيقة
-        [two] دقيقتان
-        [few] دقائق
-        [many] دقيقة
-       *[other] دقيقة
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->
