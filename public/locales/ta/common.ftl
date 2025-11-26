@@ -151,7 +151,10 @@ wizard-step-three-route-title = மறைக்கப்பட்ட நகை�
 wizard-step-three-route-badge = தனிப்பயன்
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute-label }
+wizard-step-three-route-duration-unit =
+    { $count ->
+       *[other] { unit-duration-minute-label }
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = தெரு கலை பாதைகள், சுயாதீனக் கஃபேக்கள், அமைதியான நீர்கரை காட்சிகள் கலந்து உருவான தனிப்பயன் நடைபாதை.

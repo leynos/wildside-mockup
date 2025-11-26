@@ -157,7 +157,10 @@ wizard-step-three-route-title = Cuairt nan Ulaidhean Falaichte
 wizard-step-three-route-badge = Gnàthaichte
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute-label }
+wizard-step-three-route-duration-unit =
+    { $count ->
+       *[other] { unit-duration-minute-label }
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Cuairt phearsanta a tha a’ cothlamadh sràidean ealain, càbaidean neo-eisimeileach agus seallaidhean sàmhach air an oirthir.
@@ -348,7 +351,11 @@ unit-distance-mile = mi
 
 unit-duration-minute-label =
     { $count ->
-       *[other] { -unit-duration-minute }
+        [one] mionaid
+        [two] mionaid
+        [few] mionaidean
+        [many] mionaidean
+       *[other] mionaidean
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F

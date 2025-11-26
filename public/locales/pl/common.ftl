@@ -155,7 +155,10 @@ wizard-step-three-route-title = Pętla Ukrytych Pereł
 wizard-step-three-route-badge = Indywidualny
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute-label }
+wizard-step-three-route-duration-unit =
+    { $count ->
+       *[other] { unit-duration-minute-label }
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Personalizowany spacer łączący uliczne murale, niezależne kawiarnie i spokojne widoki nad wodą.

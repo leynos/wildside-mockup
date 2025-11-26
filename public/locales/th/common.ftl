@@ -151,7 +151,10 @@ wizard-step-three-route-title = ลูปอัญมณีที่ซ่อน
 wizard-step-three-route-badge = ปรับแต่ง
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute-label }
+wizard-step-three-route-duration-unit =
+    { $count ->
+       *[other] { unit-duration-minute-label }
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = เส้นทางแบบเฉพาะตัวที่ผสมตรอกศิลปะข้างถนน คาเฟ่อิสระ และจุดชมวิวริมน้ำอันเงียบสงบ
@@ -329,7 +332,8 @@ unit-distance-mile = ไมล์
 
 unit-duration-minute-label =
     { $count ->
-       *[other] { -unit-duration-minute }
+        [one] นาที
+       *[other] นาที
     }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F

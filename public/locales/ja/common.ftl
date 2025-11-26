@@ -151,7 +151,10 @@ wizard-step-three-route-title = 隠れた名所ループ
 wizard-step-three-route-badge = カスタム
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute-label }
+wizard-step-three-route-duration-unit =
+    { $count ->
+       *[other] { unit-duration-minute-label }
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = ストリートアートの路地、個人経営のカフェ、静かなウォーターフロントを組み合わせたカスタムウォークです。
