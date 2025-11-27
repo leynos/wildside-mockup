@@ -20,9 +20,21 @@ customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
 customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = நேரம்
 customize-slider-duration-aria = நேரம் ஸ்லைடர்
-customize-slider-duration-marker-0 = {$count} { unit-duration-minute-label }
-customize-slider-duration-marker-1 = {$count} { unit-duration-minute-label }
-customize-slider-duration-marker-2 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-0 =
+    { $count ->
+        [one] { $count } { -unit-duration-minute($count) }
+       *[other] { $count } { -unit-duration-minute($count) }
+    }
+customize-slider-duration-marker-1 =
+    { $count ->
+        [one] { $count } { -unit-duration-minute($count) }
+       *[other] { $count } { -unit-duration-minute($count) }
+    }
+customize-slider-duration-marker-2 =
+    { $count ->
+        [one] { $count } { -unit-duration-minute($count) }
+       *[other] { $count } { -unit-duration-minute($count) }
+    }
 customize-crowd-option-quiet-label = அமைதி
 customize-crowd-option-quiet-description = அமைதியான தெருக்கள்
 customize-crowd-option-balanced-label = சமநிலை
