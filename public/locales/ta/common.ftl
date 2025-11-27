@@ -84,11 +84,11 @@ quick-walk-header-title = விரைவு நடை உருவாக்க�
 quick-walk-header-description = பரிந்துரைகளைப் புதுப்பிக்க காலஅளவும் விருப்பங்களையும் சரிசெய்க.
 quick-walk-generate-aria = புதிய நடையை உருவாக்கு
 quick-walk-duration-label = காலஅளவு
-quick-walk-duration-format = {$count} { unit-duration-minute-label }
+quick-walk-duration-format = {$count} { -unit-duration-minute($count) }
 quick-walk-duration-aria = நடை காலஅளவு
-quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-start = {$count} { -unit-duration-minute($count) }
+quick-walk-duration-marker-mid = {$count} { -unit-duration-minute($count) }
+quick-walk-duration-marker-end = {$count} { -unit-duration-minute($count) }
 quick-walk-interests-heading = ஆர்வங்கள்
 quick-walk-interests-selected =
     { $count ->

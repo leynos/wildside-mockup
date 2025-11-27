@@ -54,11 +54,15 @@ export function WizardStepOne(): JSX.Element {
       ] as const,
     [],
   );
-  const durationMarkers = durationMarkerKeys.map((key, index) =>
-    t(key, {
-      count: durationMarkerMinutes[index] ?? 0,
-      defaultValue: durationMarkerDefaults[index] ?? "",
-    }),
+  const durationMarkers = useMemo(
+    () =>
+      durationMarkerKeys.map((key, index) =>
+        t(key, {
+          count: durationMarkerMinutes[index] ?? 0,
+          defaultValue: durationMarkerDefaults[index] ?? "",
+        }),
+      ),
+    [t, durationMarkerDefaults, durationMarkerKeys, durationMarkerMinutes],
   );
   const interestsSectionLabel = t("wizard-step-one-interests-section-aria", {
     defaultValue: "Interests",
