@@ -2,14 +2,17 @@
 import { describe, expect, it } from "bun:test";
 import { render, screen } from "@testing-library/react";
 
-import { pickLocalization } from "../src/app/domain/entities/localization";
+import {
+  type EntityLocalizations,
+  pickLocalization,
+} from "../src/app/domain/entities/localization";
 
 const DemoCard = ({
   locale,
   localizations,
 }: {
   locale: string;
-  localizations: Record<string, { name: string }>;
+  localizations: EntityLocalizations;
 }) => {
   const resolved = pickLocalization(localizations, locale);
   return <p>{resolved.name}</p>;
