@@ -151,7 +151,7 @@ wizard-step-three-route-title = Κύκλος Κρυμμένων Θησαυρών
 wizard-step-three-route-badge = Προσαρμοσμένη
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
+wizard-step-three-route-duration-unit = { -unit-duration-minute($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Μια εξατομικευμένη βόλτα που συνδυάζει σοκάκια street art, ανεξάρτητα καφέ και ήρεμες θέες στο νερό.
@@ -322,11 +322,7 @@ offline-dialog-cancel = Ακύρωση
 offline-dialog-preview = Προεπισκόπηση λήψης
 unit-distance-kilometre = χλμ
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] λεπτό
-       *[other] λεπτά
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

@@ -341,13 +341,7 @@ offline-dialog-preview = Ro-shealladh luchdachaidh sìos
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { $count ->
-        [one] mionaid
-        [two] mionaid
-        [few] mionaidean
-        [many] mionaidean
-       *[other] mionaidean
-    }
+    { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->
