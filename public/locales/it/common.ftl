@@ -151,10 +151,7 @@ wizard-step-three-route-title = Circuito dei Tesori Nascosti
 wizard-step-three-route-badge = Personalizzato
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Passeggiata personalizzata che abbina vicoli di street art, caffetterie indipendenti e viste serene sul lungomare.
