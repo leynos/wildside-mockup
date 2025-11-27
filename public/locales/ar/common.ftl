@@ -159,10 +159,7 @@ wizard-step-three-route-title = حلقة الجواهر المخفية
 wizard-step-three-route-badge = مخصص
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = جولة مخصصة تمزج أزقة فن الشارع والمقاهي المستقلة وإطلالات هادئة على الواجهة البحرية.
