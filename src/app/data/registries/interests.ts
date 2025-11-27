@@ -74,6 +74,16 @@ export const interestDescriptors: ReadonlyArray<InterestDescriptor> = [
     },
   },
   {
+    id: "food",
+    iconToken: "{icon.category.food}",
+    iconBackgroundClass: "bg-rose-500/20",
+    iconColorClass: "text-rose-400",
+    localizations: {
+      "en-GB": { name: "Street Food" },
+      es: { name: "Comida callejera" },
+    },
+  },
+  {
     id: "markets",
     iconToken: "{icon.category.shops}",
     iconBackgroundClass: "bg-orange-500/20",
