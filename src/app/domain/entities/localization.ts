@@ -1,4 +1,4 @@
-/** @file Shared localisation primitives and helpers for entity-driven cards. */
+/** @file Shared localization primitives and helpers for entity-driven cards. */
 
 export type LocaleCode =
   | "ar"
@@ -40,10 +40,10 @@ export type EntityLocalizations = Partial<Record<LocaleCode, LocalizedStringSet>
 
 const defaultFallbackChain: readonly LocaleCode[] = ["en-GB", "en-US"];
 
-const normaliseLocale = (input: string): string => input.trim().toLowerCase();
+const normalizeLocale = (input: string): string => input.trim().toLowerCase();
 
 const buildCandidateLocales = (requested: string): string[] => {
-  const trimmed = normaliseLocale(requested);
+  const trimmed = normalizeLocale(requested);
   const parts = trimmed.split("-");
   if (parts.length > 1) {
     return [parts.join("-"), parts[0] ?? trimmed];
@@ -57,14 +57,14 @@ const toNormalizedLocalizationMap = (
   const map: Record<string, LocalizedStringSet> = {};
   for (const [key, value] of Object.entries(localizations)) {
     if (value) {
-      map[normaliseLocale(key)] = value;
+      map[normalizeLocale(key)] = value;
     }
   }
   return map;
 };
 
 /**
- * Pick the best available localisation, falling back predictably.
+ * Pick the best available localization, falling back predictably.
  *
  * @example
  * const localizations = {
@@ -74,7 +74,7 @@ const toNormalizedLocalizationMap = (
  * const resolved = pickLocalization(localizations, "es-MX", ["en-US", "fr"]);
  * // resolved.name === "Boucle du port"
  *
- * @throws {Error} when no localisation entries are present.
+ * @throws {Error} when no localization entries are present.
  */
 export function pickLocalization(
   localizations: EntityLocalizations | undefined,
@@ -89,16 +89,16 @@ export function pickLocalization(
 
   const candidateOrder = [
     ...buildCandidateLocales(locale),
-    ...fallbackLocales.map(normaliseLocale),
+    ...fallbackLocales.map(normalizeLocale),
     ...Object.keys(normalizedMap),
   ];
 
   for (const candidate of candidateOrder) {
-    const localisation = normalizedMap[candidate];
-    if (localisation) return localisation;
+    const localization = normalizedMap[candidate];
+    if (localization) return localization;
   }
 
-  throw new Error("Failed to resolve localisation for entity");
+  throw new Error("Failed to resolve localization for entity");
 }
 
 export const defaultFallbackLocales = defaultFallbackChain;

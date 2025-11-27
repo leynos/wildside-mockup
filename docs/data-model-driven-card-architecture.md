@@ -130,8 +130,8 @@ available locale. Components must not construct names from translation keys.
     `defaultChecked: boolean`
   - `SafetyPreset`: `id`, `localizations`, `iconToken`, `accentClass`,
     `appliedToggleIds: string[]`
-  - Accordion sections become descriptors referencing toggle ids rather than
-    carrying their own text keys.
+  - Accordion sections become descriptors referencing toggle ids instead of
+    storing their own text keys.
 - **PointOfInterest (POI cards)**
   - `id`, `localizations`
   - `categoryId: TagId` (resolved via descriptor registry)
