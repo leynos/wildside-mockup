@@ -348,7 +348,13 @@ unit-distance-mile = mi
        *[other] דקות
     }
 
-unit-duration-minute-label = { -unit-duration-minute(count: $count) }
+unit-duration-minute-label =
+    { $count ->
+        [one] דקה
+        [two] דקות
+        [many] דקות
+       *[other] דקות
+    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

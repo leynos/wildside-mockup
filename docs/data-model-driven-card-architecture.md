@@ -190,7 +190,7 @@ available locale. Components must not construct names from translation keys.
   - Reshape `data/explore.ts` into new entity shapes with localization maps.
   - Update `explore-sections` components to consume entities and call
     `pickLocalization`; drop related keys from Fluent bundles.
-- Move Discover interest labels into the registry and remove interest keys
+  - Move Discover interest labels into the registry and remove interest keys
     from Fluent.
 - **Phase 2: customize & safety**
   - Convert customize sliders, segment options, route previews, and advanced
