@@ -153,10 +153,7 @@ wizard-step-three-route-title = לולאת האוצרות הנסתרים
 wizard-step-three-route-badge = מותאם אישית
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = מסלול מותאם אישי המשולב בסמטאות אמנות רחוב, בתי קפה עצמאיים ונקודות תצפית שקטות על קו החוף.
@@ -348,13 +345,15 @@ unit-distance-mile = mi
        *[other] דקות
     }
 
-unit-duration-minute-label =
+-unit-duration-minute =
     { $count ->
         [one] דקה
         [two] דקות
         [many] דקות
        *[other] דקות
     }
+
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

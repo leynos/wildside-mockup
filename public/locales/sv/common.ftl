@@ -151,10 +151,7 @@ wizard-step-three-route-title = Slingan Dolda Pärlor
 wizard-step-three-route-badge = Anpassad
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = En personlig promenad som blandar street‑artgränder, fristående kaféer och lugna utsikter vid vattnet.
@@ -325,17 +322,13 @@ offline-dialog-cancel = Avbryt
 offline-dialog-preview = Förhandsgranska nedladdning
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] minut
-       *[other] minuter
-    }
-
 -unit-duration-minute =
     { $count ->
         [one] minut
        *[other] minuter
     }
+
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

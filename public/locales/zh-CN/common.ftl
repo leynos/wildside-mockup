@@ -316,10 +316,7 @@ offline-dialog-cancel = 取消
 offline-dialog-preview = 预览下载
 unit-distance-kilometre = 公里
 unit-distance-mile = 英里
-unit-duration-minute-label =
-    { $count ->
-       *[other] 分钟
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

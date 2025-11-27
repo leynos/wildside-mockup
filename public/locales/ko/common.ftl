@@ -151,10 +151,7 @@ wizard-step-three-route-title = 숨겨진 보석 루프
 wizard-step-three-route-badge = 맞춤형
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = 스트리트 아트 골목, 독립 카페, 잔잔한 워터프런트 전망을 조합한 맞춤 워크입니다.
@@ -330,17 +327,13 @@ offline-dialog-cancel = 취소
 offline-dialog-preview = 다운로드 미리보기
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] 분
-       *[other] 분
-    }
-
 -unit-duration-minute =
     { $count ->
         [one] 분
        *[other] 분
     }
+
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

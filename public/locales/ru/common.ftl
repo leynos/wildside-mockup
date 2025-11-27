@@ -155,7 +155,7 @@ wizard-step-three-route-title = Цикл Скрытых Жемчужин
 wizard-step-three-route-badge = Индивидуальный
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
+wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Персональная прогулка, сочетающая переулки со стрит-артом, независимые кафе и тихие виды на набережную.
@@ -332,9 +332,7 @@ offline-dialog-cancel = Отмена
 offline-dialog-preview = Просмотр загрузки
 unit-distance-kilometre = км
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] минута
         [few] минуты

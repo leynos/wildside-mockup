@@ -151,10 +151,7 @@ wizard-step-three-route-title = Skjulte perler-sløyfen
 wizard-step-three-route-badge = Tilpasset
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = En personlig gåtur som kombinerer street art-gater, uavhengige kafeer og rolige utsiktspunkter ved vannet.
