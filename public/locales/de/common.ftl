@@ -109,11 +109,7 @@ wizard-step-one-duration-aria = Schieberegler für die Spazierdauer
 wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
 wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
 wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
-wizard-step-one-duration-format =
-    { $count ->
-        [one] {$count} Minute
-       *[other] {$count} Minuten
-    }
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Interessen
 wizard-step-one-interests-heading = Interessen
 wizard-step-one-interests-selected =
