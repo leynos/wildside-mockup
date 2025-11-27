@@ -1,12 +1,11 @@
-/** @file Localised interest descriptor registry consumed across flows. */
+/** @file Localised interest descriptors resolved without Fluent. */
 
-import type { TFunction } from "i18next";
-
-import {
-  buildDescriptorLookup,
-  type LocalizedDescriptor,
-  type ResolvedDescriptor,
-} from "../../i18n/descriptors";
+import type {
+  EntityLocalizations,
+  LocaleCode,
+  LocalizedStringSet,
+} from "../../domain/entities/localization";
+import { defaultFallbackLocales, pickLocalization } from "../../domain/entities/localization";
 
 type InterestVisualMetadata = {
   readonly iconToken: string;
@@ -14,61 +13,114 @@ type InterestVisualMetadata = {
   readonly iconColorClass: string;
 };
 
-export type InterestDescriptor = LocalizedDescriptor<InterestVisualMetadata>;
-export type ResolvedInterestDescriptor = ResolvedDescriptor<InterestVisualMetadata>;
+export interface InterestDescriptor extends InterestVisualMetadata {
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+}
 
-export const interestDescriptors = [
+export interface ResolvedInterestDescriptor extends InterestDescriptor {
+  readonly localization: LocalizedStringSet;
+}
+
+export const interestDescriptors: ReadonlyArray<InterestDescriptor> = [
   {
     id: "parks",
-    labelKey: "interest-parks-label",
-    defaultLabel: "Parks & Nature",
     iconToken: "{icon.category.trails}",
     iconBackgroundClass: "bg-green-500/20",
     iconColorClass: "text-green-400",
+    localizations: {
+      "en-GB": { name: "Parks & Nature" },
+      es: { name: "Parques y naturaleza" },
+    },
   },
   {
     id: "coffee",
-    labelKey: "interest-coffee-label",
-    defaultLabel: "Coffee Spots",
     iconToken: "{icon.category.food}",
     iconBackgroundClass: "bg-amber-500/20",
     iconColorClass: "text-amber-400",
+    localizations: {
+      "en-GB": { name: "Coffee Spots" },
+      es: { name: "Cafés" },
+    },
   },
   {
     id: "street-art",
-    labelKey: "interest-street-art-label",
-    defaultLabel: "Street Art",
     iconToken: "{icon.category.art}",
     iconBackgroundClass: "bg-accent/20",
     iconColorClass: "text-accent",
+    localizations: {
+      "en-GB": { name: "Street Art" },
+      es: { name: "Arte urbano" },
+    },
   },
   {
     id: "historic",
-    labelKey: "interest-historic-label",
-    defaultLabel: "Historic Sites",
     iconToken: "{icon.category.landmarks}",
     iconBackgroundClass: "bg-purple-500/20",
     iconColorClass: "text-purple-400",
+    localizations: {
+      "en-GB": { name: "Historic Sites" },
+      es: { name: "Sitios históricos" },
+    },
   },
   {
     id: "waterfront",
-    labelKey: "interest-waterfront-label",
-    defaultLabel: "Waterfront",
     iconToken: "{icon.category.water}",
     iconBackgroundClass: "bg-accent/20",
     iconColorClass: "text-accent",
+    localizations: {
+      "en-GB": { name: "Waterfront" },
+      es: { name: "Frente marítimo" },
+    },
   },
   {
     id: "markets",
-    labelKey: "interest-markets-label",
-    defaultLabel: "Markets",
     iconToken: "{icon.category.shops}",
     iconBackgroundClass: "bg-orange-500/20",
     iconColorClass: "text-orange-400",
+    localizations: {
+      "en-GB": { name: "Markets" },
+      es: { name: "Mercados" },
+    },
   },
-] as const satisfies ReadonlyArray<InterestDescriptor>;
+] as const;
 
 export type InterestId = (typeof interestDescriptors)[number]["id"];
 
-export const buildInterestLookup = (t: TFunction): Map<InterestId, ResolvedInterestDescriptor> =>
-  buildDescriptorLookup<InterestVisualMetadata, typeof interestDescriptors>(interestDescriptors, t);
+const resolveInterestDescriptor = (
+  descriptor: InterestDescriptor,
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
+): ResolvedInterestDescriptor => ({
+  ...descriptor,
+  localization: pickLocalization(descriptor.localizations, locale, fallbackLocales),
+});
+
+export const resolveInterestDescriptors = (
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
+): ResolvedInterestDescriptor[] =>
+  interestDescriptors.map((descriptor) =>
+    resolveInterestDescriptor(descriptor, locale, fallbackLocales),
+  );
+
+export const buildInterestLookup = (
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
+): Map<InterestId, ResolvedInterestDescriptor> =>
+  new Map(
+    resolveInterestDescriptors(locale, fallbackLocales).map((descriptor) => [
+      descriptor.id,
+      descriptor,
+    ]),
+  );
+
+export const getInterestDescriptor = (
+  id: InterestId,
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
+): ResolvedInterestDescriptor | undefined => {
+  const descriptor = interestDescriptors.find((entry) => entry.id === id);
+  if (!descriptor) return undefined;
+  return resolveInterestDescriptor(descriptor, locale, fallbackLocales);
+};

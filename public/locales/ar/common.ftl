@@ -56,12 +56,12 @@ nav-discover-label = استكشف
 nav-routes-label = مسارات
 nav-profile-label = الملف الشخصي
 nav-primary-aria-label = التنقل الرئيسي
-interest-parks-label = الحدائق والطبيعة
-interest-coffee-label = مقاهي القهوة
-interest-street-art-label = فن الشارع
-interest-historic-label = مواقع تاريخية
-interest-waterfront-label = الواجهة البحرية
-interest-markets-label = الأسواق
+
+
+
+
+
+
 difficulty-easy-label = سهل
 difficulty-moderate-label = متوسط
 difficulty-challenging-label = صعب

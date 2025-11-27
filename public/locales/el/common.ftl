@@ -56,12 +56,12 @@ nav-discover-label = Ανακάλυψη
 nav-routes-label = Διαδρομές
 nav-profile-label = Προφίλ
 nav-primary-aria-label = Κύρια πλοήγηση
-interest-parks-label = Πάρκα & φύση
-interest-coffee-label = Σημεία για καφέ
-interest-street-art-label = Τέχνη δρόμου
-interest-historic-label = Ιστορικοί χώροι
-interest-waterfront-label = Παραθαλάσσια ζώνη
-interest-markets-label = Αγορές
+
+
+
+
+
+
 difficulty-easy-label = Εύκολη
 difficulty-moderate-label = Μέτρια
 difficulty-challenging-label = Προκλητική

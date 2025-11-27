@@ -370,7 +370,7 @@
                                             "children": [
                                               {
                                                 "role": "image",
-                                                "name": "Harbour Lights Promenade"
+                                                "name": "Sunset across the harbour viewed from a waterfront promenade."
                                               }
                                             ]
                                           },
@@ -503,11 +503,11 @@
                                                     "children": [
                                                       {
                                                         "role": "text",
-                                                        "name": "Sunset pick",
+                                                        "name": "Sunset",
                                                         "children": [
                                                           {
                                                             "role": "InlineTextBox",
-                                                            "name": "Sunset pick"
+                                                            "name": "Sunset"
                                                           }
                                                         ]
                                                       }
@@ -519,11 +519,11 @@
                                                     "children": [
                                                       {
                                                         "role": "text",
-                                                        "name": "Teal line",
+                                                        "name": "Teal",
                                                         "children": [
                                                           {
                                                             "role": "InlineTextBox",
-                                                            "name": "Teal line"
+                                                            "name": "Teal"
                                                           }
                                                         ]
                                                       }
@@ -570,7 +570,7 @@
                                                     "children": [
                                                       {
                                                         "role": "image",
-                                                        "name": "Coffee Culture"
+                                                        "name": "Flat white poured in a ceramic cup beside beans."
                                                       },
                                                       {
                                                         "role": "generic",
@@ -677,7 +677,7 @@
                                                     "children": [
                                                       {
                                                         "role": "image",
-                                                        "name": "Hidden Gardens"
+                                                        "name": "Sun-dappled courtyard garden behind tall walls."
                                                       },
                                                       {
                                                         "role": "generic",
@@ -784,7 +784,7 @@
                                                     "children": [
                                                       {
                                                         "role": "image",
-                                                        "name": "Street Art Hunt"
+                                                        "name": "Colourful mural wall in an alleyway."
                                                       },
                                                       {
                                                         "role": "generic",
@@ -891,7 +891,7 @@
                                                     "children": [
                                                       {
                                                         "role": "image",
-                                                        "name": "Market Hopping"
+                                                        "name": "Market stalls selling food and crafts under string lights."
                                                       },
                                                       {
                                                         "role": "generic",
@@ -1031,7 +1031,7 @@
                                                         "children": [
                                                           {
                                                             "role": "image",
-                                                            "name": "Sunday Coffee Loops"
+                                                            "name": "Outdoor café table with pastries and pour-over coffee."
                                                           }
                                                         ]
                                                       },
@@ -1166,7 +1166,7 @@
                                                     "children": [
                                                       {
                                                         "role": "image",
-                                                        "name": "Sunday Coffee Loops map preview"
+                                                        "name": "Map preview of the coffee loop routes."
                                                       }
                                                     ]
                                                   }
@@ -1186,7 +1186,7 @@
                                                         "children": [
                                                           {
                                                             "role": "image",
-                                                            "name": "After Dark Adventures"
+                                                            "name": "City lights reflecting on wet pavement after dusk."
                                                           }
                                                         ]
                                                       },
@@ -1321,7 +1321,7 @@
                                                     "children": [
                                                       {
                                                         "role": "image",
-                                                        "name": "After Dark Adventures map preview"
+                                                        "name": "Route map preview for evening walks."
                                                       }
                                                     ]
                                                   }
@@ -1370,7 +1370,7 @@
                                                         "children": [
                                                           {
                                                             "role": "image",
-                                                            "name": "Cherry Blossom Trail"
+                                                            "name": "Cherry blossom trees arching over a riverside path."
                                                           }
                                                         ]
                                                       },
@@ -1446,7 +1446,7 @@
                                                         "children": [
                                                           {
                                                             "role": "image",
-                                                            "name": "Food Truck Friday"
+                                                            "name": "Street food trucks lined up at dusk."
                                                           }
                                                         ]
                                                       },
@@ -1522,7 +1522,7 @@
                                                         "children": [
                                                           {
                                                             "role": "image",
-                                                            "name": "Rooftop Views Circuit"
+                                                            "name": "City skyline from a rooftop bar at golden hour."
                                                           }
                                                         ]
                                                       },
@@ -1649,7 +1649,7 @@
                                                 "children": [
                                                   {
                                                     "role": "image",
-                                                    "name": "Sarah's Pick"
+                                                    "name": "Portrait of Sarah smiling at dusk."
                                                   }
                                                 ]
                                               },
@@ -1663,11 +1663,11 @@
                                                     "children": [
                                                       {
                                                         "role": "text",
-                                                        "name": "Sarah's Pick",
+                                                        "name": "Sarah's pick",
                                                         "children": [
                                                           {
                                                             "role": "InlineTextBox",
-                                                            "name": "Sarah's Pick"
+                                                            "name": "Sarah's pick"
                                                           }
                                                         ]
                                                       }
@@ -1732,15 +1732,15 @@
                                             "children": [
                                               {
                                                 "role": "text",
-                                                "name": "A perfect blend of literary gems and cosy eateries through the cultural district.",
+                                                "name": "A blend of literary gems and cosy eateries in the cultural district.",
                                                 "children": [
                                                   {
                                                     "role": "InlineTextBox",
-                                                    "name": "A perfect blend of literary gems and cosy "
+                                                    "name": "A blend of literary gems and cosy eateries in "
                                                   },
                                                   {
                                                     "role": "InlineTextBox",
-                                                    "name": "eateries through the cultural district."
+                                                    "name": "the cultural district."
                                                   }
                                                 ]
                                               }

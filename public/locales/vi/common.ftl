@@ -56,12 +56,12 @@ nav-discover-label = Khám phá
 nav-routes-label = Lộ trình
 nav-profile-label = Hồ sơ
 nav-primary-aria-label = Điều hướng chính
-interest-parks-label = Công viên & thiên nhiên
-interest-coffee-label = Quán cà phê
-interest-street-art-label = Nghệ thuật đường phố
-interest-historic-label = Địa điểm lịch sử
-interest-waterfront-label = Bờ sông biển
-interest-markets-label = Chợ
+
+
+
+
+
+
 difficulty-easy-label = Dễ
 difficulty-moderate-label = Trung bình
 difficulty-challenging-label = Thử thách

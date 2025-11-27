@@ -13,6 +13,8 @@ export interface BadgeDescriptor {
   readonly accentClass?: string;
 }
 
+export type BadgeId = BadgeDescriptor["id"];
+
 export type ResolvedBadgeDescriptor = BadgeDescriptor & {
   readonly localization: LocalizedStringSet;
 };

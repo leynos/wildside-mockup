@@ -192,6 +192,10 @@ available locale. Components must not construct names from translation keys.
     `pickLocalization`; drop related keys from Fluent bundles.
   - Move Discover interest labels into the registry and remove interest keys
     from Fluent.
+  - Status (27 Nov 2025): Explore routes, themes, collections, categories, and
+    community picks now ship their own localization maps and the Explore UI
+    resolves them through `pickLocalization`. Discover interest labels are read
+    from the registry only and the `interest-*` Fluent keys have been removed.
 - **Phase 2: customize & safety**
   - Convert customize sliders, segment options, route previews, and advanced
     toggles to entity-based inputs; replace per-option translation keys.

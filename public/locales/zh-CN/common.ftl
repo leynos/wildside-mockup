@@ -56,12 +56,12 @@ nav-discover-label = 发现
 nav-routes-label = 路线
 nav-profile-label = 个人资料
 nav-primary-aria-label = 主导航
-interest-parks-label = 公园与自然
-interest-coffee-label = 咖啡好去处
-interest-street-art-label = 街头艺术
-interest-historic-label = 历史景点
-interest-waterfront-label = 滨水区
-interest-markets-label = 市集
+
+
+
+
+
+
 difficulty-easy-label = 轻松
 difficulty-moderate-label = 适中
 difficulty-challenging-label = 挑战

@@ -56,12 +56,12 @@ nav-discover-label = Lorg
 nav-routes-label = Slighean
 nav-profile-label = Pròifil
 nav-primary-aria-label = Prìomh sheòladh
-interest-parks-label = Pàircean is nàdar
-interest-coffee-label = Cafaidhean cofaidh
-interest-street-art-label = Ealain sràide
-interest-historic-label = Làraichean eachdraidheil
-interest-waterfront-label = Oirthir-uisge
-interest-markets-label = Margaidhean
+
+
+
+
+
+
 difficulty-easy-label = Furasta
 difficulty-moderate-label = Meadhanach
 difficulty-challenging-label = Dùbhlanach

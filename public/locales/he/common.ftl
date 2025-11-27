@@ -56,12 +56,12 @@ nav-discover-label = גילוי
 nav-routes-label = מסלולים
 nav-profile-label = פרופיל
 nav-primary-aria-label = ניווט ראשי
-interest-parks-label = פארקים וטבע
-interest-coffee-label = בתי קפה
-interest-street-art-label = אמנות רחוב
-interest-historic-label = אתרים היסטוריים
-interest-waterfront-label = טיילת חוף
-interest-markets-label = שווקים
+
+
+
+
+
+
 difficulty-easy-label = קל
 difficulty-moderate-label = בינוני
 difficulty-challenging-label = מאתגר

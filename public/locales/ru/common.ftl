@@ -56,12 +56,12 @@ nav-discover-label = Исследовать
 nav-routes-label = Маршруты
 nav-profile-label = Профиль
 nav-primary-aria-label = Основная навигация
-interest-parks-label = Парки и природа
-interest-coffee-label = Кофейни
-interest-street-art-label = Стрит-арт
-interest-historic-label = Исторические места
-interest-waterfront-label = Набережная
-interest-markets-label = Рынки
+
+
+
+
+
+
 difficulty-easy-label = Лёгкий
 difficulty-moderate-label = Средний
 difficulty-challenging-label = Сложный

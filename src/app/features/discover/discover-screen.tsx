@@ -31,7 +31,7 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
         />
       </div>
       <h3 className="text-center text-sm font-medium text-base-content group-data-[state=on]:text-accent">
-        {interest.label}
+        {interest.localization.shortLabel ?? interest.localization.name}
       </h3>
     </ToggleGroup.Item>
   );
@@ -41,9 +41,9 @@ export function DiscoverScreen(): JSX.Element {
   const [selected, setSelected] = useState<string[]>([...defaultSelectedInterests]);
   const [isGenerating, setIsGenerating] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const interests = useMemo(() => resolveDiscoverInterests(t), [t]);
+  const interests = useMemo(() => resolveDiscoverInterests(i18n.language), [i18n.language]);
 
   const selectedCount = useMemo(() => selected.length, [selected]);
 

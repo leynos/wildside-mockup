@@ -56,12 +56,12 @@ nav-discover-label = Discover
 nav-routes-label = Routes
 nav-profile-label = Profile
 nav-primary-aria-label = Primary navigation
-interest-parks-label = Parks & Nature
-interest-coffee-label = Coffee Spots
-interest-street-art-label = Street Art
-interest-historic-label = Historic Sites
-interest-waterfront-label = Waterfront
-interest-markets-label = Markets
+
+
+
+
+
+
 difficulty-easy-label = Easy
 difficulty-moderate-label = Moderate
 difficulty-challenging-label = Challenging

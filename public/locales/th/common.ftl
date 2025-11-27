@@ -56,12 +56,12 @@ nav-discover-label = สำรวจ
 nav-routes-label = เส้นทาง
 nav-profile-label = โปรไฟล์
 nav-primary-aria-label = การนำทางหลัก
-interest-parks-label = สวนและธรรมชาติ
-interest-coffee-label = ร้านกาแฟ
-interest-street-art-label = ศิลปะสตรีท
-interest-historic-label = สถานที่ประวัติศาสตร์
-interest-waterfront-label = ริมน้ำ
-interest-markets-label = ตลาด
+
+
+
+
+
+
 difficulty-easy-label = ง่าย
 difficulty-moderate-label = ปานกลาง
 difficulty-challenging-label = ท้าทาย

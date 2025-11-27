@@ -56,12 +56,12 @@ nav-discover-label = Utforsk
 nav-routes-label = Ruter
 nav-profile-label = Profil
 nav-primary-aria-label = Hovednavigasjon
-interest-parks-label = Parker og natur
-interest-coffee-label = Kaffesteder
-interest-street-art-label = Gatekunst
-interest-historic-label = Historiske steder
-interest-waterfront-label = Vannkanten
-interest-markets-label = Markeder
+
+
+
+
+
+
 difficulty-easy-label = Lett
 difficulty-moderate-label = Middels
 difficulty-challenging-label = Utfordrende

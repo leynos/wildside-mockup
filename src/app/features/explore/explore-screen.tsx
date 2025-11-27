@@ -9,15 +9,16 @@ import { useTranslation } from "react-i18next";
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
 import { bottomNavigation } from "../../data/customize";
-import type { ExploreCategory } from "../../data/explore";
 import {
   communityPick,
   curatedCollections,
   exploreCategories,
-  featuredWalk,
+  exploreRoutes,
+  featuredRoute,
   popularThemes,
   trendingRoutes,
 } from "../../data/explore";
+import type { Route, RouteCategory, RouteId } from "../../data/explore.models";
 import { buildDifficultyLookup } from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
@@ -28,8 +29,9 @@ import {
   CommunityPickPanel,
   CuratedCollectionsList,
   defaultSaveCountLabel,
-  FeaturedWalkCard,
+  FeaturedRouteCard,
   PopularThemesGrid,
+  type TrendingRouteCard,
   TrendingRoutesList,
 } from "./explore-sections";
 
@@ -114,7 +116,20 @@ export function ExploreScreen(): JSX.Element {
 
   const copy = useMemo(() => buildExploreCopy(t), [t]);
   const difficultyLookup = useMemo(() => buildDifficultyLookup(t), [t]);
-  const categories: readonly ExploreCategory[] = exploreCategories;
+  const categories: readonly RouteCategory[] = exploreCategories;
+  const routesById = useMemo(
+    () => new Map<RouteId, Route>(exploreRoutes.map((route) => [route.id, route])),
+    [],
+  );
+  const trendingRouteCards = useMemo<TrendingRouteCard[]>(() => {
+    const cards: TrendingRouteCard[] = [];
+    trendingRoutes.forEach((highlight) => {
+      const route = routesById.get(highlight.routeId);
+      if (!route) return;
+      cards.push({ route, highlight });
+    });
+    return cards;
+  }, [routesById]);
 
   return (
     <MobileShell>
@@ -149,10 +164,10 @@ export function ExploreScreen(): JSX.Element {
         <main className="screen-scroll">
           <div className="space-y-8">
             <CategoryScroller categories={categories} />
-            <FeaturedWalkCard
+            <FeaturedRouteCard
               formatDistanceLabel={formatDistanceLabel}
               formatDurationLabel={formatDurationLabel}
-              featuredWalk={featuredWalk}
+              route={featuredRoute}
             />
             <PopularThemesGrid
               formatDistanceRangeLabel={formatDistanceRangeLabel}
@@ -164,7 +179,7 @@ export function ExploreScreen(): JSX.Element {
               formatDistanceRangeLabel={formatDistanceRangeLabel}
               formatDurationRangeLabel={formatDurationRangeLabel}
             />
-            <TrendingRoutesList routes={trendingRoutes} />
+            <TrendingRoutesList routes={trendingRouteCards} />
             <CommunityPickPanel
               pick={communityPick}
               formatDistanceLabel={formatDistanceLabel}

@@ -56,12 +56,12 @@ nav-discover-label = Ontdek
 nav-routes-label = Routes
 nav-profile-label = Profiel
 nav-primary-aria-label = Primaire navigatie
-interest-parks-label = Parken & natuur
-interest-coffee-label = Koffiespots
-interest-street-art-label = Street art
-interest-historic-label = Historische plekken
-interest-waterfront-label = Waterfront
-interest-markets-label = Markten
+
+
+
+
+
+
 difficulty-easy-label = Makkelijk
 difficulty-moderate-label = Gemiddeld
 difficulty-challenging-label = Uitdagend

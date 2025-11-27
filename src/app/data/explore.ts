@@ -1,68 +1,4 @@
-/** @file Fixture data for the Explore catalogue experience. */
-
-import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
-
-export interface ExploreCategory {
-  id: string;
-  title: string;
-  routes: number;
-  iconToken: string;
-  /** Tailwind gradient utilities applied to the chip background. */
-  gradientClass: string;
-}
-
-export interface FeaturedWalk {
-  id: string;
-  title: string;
-  description: string;
-  heroImageUrl: string;
-  distanceMetres: number;
-  durationSeconds: number;
-  rating: number;
-  badges: string[];
-}
-
-export interface PopularTheme {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  walkCount: number;
-  distanceRangeMetres: readonly [number, number];
-  rating: number;
-}
-
-export interface CuratedCollection {
-  id: string;
-  title: string;
-  description: string;
-  leadImageUrl: string;
-  mapImageUrl: string;
-  distanceRangeMetres: readonly [number, number];
-  durationRangeSeconds: readonly [number, number];
-  difficultyId: DifficultyId;
-  routes: number;
-}
-
-export interface TrendingRoute {
-  id: string;
-  title: string;
-  subtitle: string;
-  imageUrl: string;
-  trendDelta: string;
-}
-
-export interface CommunityPick {
-  id: string;
-  curator: string;
-  curatorAvatarUrl: string;
-  rating: number;
-  title: string;
-  description: string;
-  distanceMetres: number;
-  durationSeconds: number;
-  saves: number;
-}
+/** @file Entity-shaped fixtures for the Explore catalogue experience. */
 
 import heroAfterDark from "../../assets/explore/after_dark.jpg";
 import heroCoffeeCulture from "../../assets/explore/coffee_culture.jpg";
@@ -73,160 +9,380 @@ import heroMarket from "../../assets/explore/market.jpg";
 import heroStreetArt from "../../assets/explore/street_art2.jpg";
 import walkRouteMap2 from "../../assets/walks/walk-route-map-2.png";
 import walkRouteMap3 from "../../assets/walks/walk-route-map-3.png";
-import type { DifficultyId } from "./registries/difficulties";
+import type { ImageAsset } from "../domain/entities/localization";
+import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
+import type {
+  CommunityPick,
+  Route,
+  RouteCategory,
+  RouteCollection,
+  Theme,
+  TrendingRouteHighlight,
+} from "./explore.models";
 
-export const exploreCategories: ExploreCategory[] = [
+const image = (url: string, alt: string): ImageAsset => ({ url, alt });
+
+export const exploreRoutes: Route[] = [
+  {
+    id: "harbour-lights",
+    localizations: {
+      "en-GB": {
+        name: "Harbour Lights Promenade",
+        description:
+          "Golden hour stroll weaving past skyline overlooks, coffee pit stops, and art installations.",
+      },
+      es: {
+        name: "Paseo Luces del Puerto",
+        description: "Paseo al atardecer con miradores, cafés acogedores y arte público.",
+      },
+    },
+    heroImage: image(
+      heroHarborSunset,
+      "Sunset across the harbour viewed from a waterfront promenade.",
+    ),
+    distanceMetres: metresFromKilometres(3.6),
+    durationSeconds: secondsFromMinutes(65),
+    rating: 4.9,
+    badges: ["sunset-pick", "teal-line"],
+    difficultyId: "moderate",
+    interests: ["waterfront", "coffee", "street-art"],
+  },
+  {
+    id: "coffee-culture-loop",
+    localizations: {
+      "en-GB": {
+        name: "Coffee Culture Circuit",
+        description: "Roasters, latte art labs, and leafy courtyards to linger in.",
+      },
+      es: {
+        name: "Circuito Cultura del Café",
+        description: "Tostadores, barras de latte art y patios verdes para disfrutar.",
+      },
+    },
+    heroImage: image(heroCoffeeCulture, "Barista pouring latte art inside a warm café interior."),
+    distanceMetres: metresFromKilometres(2.4),
+    durationSeconds: secondsFromMinutes(45),
+    rating: 4.7,
+    badges: ["community-favourite"],
+    difficultyId: "easy",
+    interests: ["coffee", "markets"],
+  },
+  {
+    id: "hidden-garden-lanes",
+    localizations: {
+      "en-GB": {
+        name: "Hidden Garden Lanes",
+        description: "Secret courtyards, vertical gardens, and quiet cloisters.",
+      },
+      es: {
+        name: "Pasajes de Jardines Secretos",
+        description: "Patios ocultos, jardines verticales y claustros tranquilos.",
+      },
+    },
+    heroImage: image(
+      heroHiddenGarden,
+      "Lush hidden garden tucked between historic brick buildings.",
+    ),
+    distanceMetres: metresFromKilometres(3),
+    durationSeconds: secondsFromMinutes(55),
+    rating: 4.8,
+    badges: ["teal-line"],
+    difficultyId: "easy",
+    interests: ["parks", "historic"],
+  },
+  {
+    id: "street-art-sprint",
+    localizations: {
+      "en-GB": {
+        name: "Street Art Sprint",
+        description: "Mural-lined backstreets with rotating installations.",
+      },
+      es: {
+        name: "Sprint de Arte Urbano",
+        description: "Calles llenas de murales e instalaciones cambiantes.",
+      },
+    },
+    heroImage: image(heroStreetArt, "Bright street art mural with abstract shapes and characters."),
+    distanceMetres: metresFromKilometres(4.2),
+    durationSeconds: secondsFromMinutes(70),
+    rating: 4.6,
+    badges: ["teal-line"],
+    difficultyId: "moderate",
+    interests: ["street-art", "coffee"],
+  },
+  {
+    id: "market-hop-classic",
+    localizations: {
+      "en-GB": {
+        name: "Market Hop Classic",
+        description: "Laneway markets with local makers and late-night bites.",
+      },
+      es: {
+        name: "Clásico de Mercados",
+        description: "Mercados de callejones con artesanos locales y bocados nocturnos.",
+      },
+    },
+    heroImage: image(heroMarket, "Bustling indoor market with food stalls and hanging lights."),
+    distanceMetres: metresFromKilometres(2.8),
+    durationSeconds: secondsFromMinutes(50),
+    rating: 4.5,
+    badges: ["community-favourite"],
+    difficultyId: "easy",
+    interests: ["markets", "coffee"],
+  },
+  {
+    id: "cherry-blossom-trail",
+    localizations: {
+      "en-GB": {
+        name: "Cherry Blossom Trail",
+        description: "Limited time bloom corridor with picnic lawns.",
+      },
+      es: {
+        name: "Ruta de los Cerezos en Flor",
+        description: "Corredor de floración temporal con zonas de picnic.",
+      },
+    },
+    heroImage: image(heroHiddenGarden, "Cherry blossom trees arching over a riverside path."),
+    distanceMetres: metresFromKilometres(3),
+    durationSeconds: secondsFromMinutes(60),
+    rating: 4.8,
+    badges: ["sunset-pick"],
+    difficultyId: "easy",
+    interests: ["parks", "waterfront"],
+  },
+  {
+    id: "food-truck-friday",
+    localizations: {
+      "en-GB": {
+        name: "Food Truck Friday",
+        description: "Weekly street food crawl with live music breaks.",
+      },
+      es: {
+        name: "Viernes de Food Trucks",
+        description: "Recorrido gastronómico semanal con música en vivo.",
+      },
+    },
+    heroImage: image(heroMarket, "Street food trucks lined up at dusk."),
+    distanceMetres: metresFromKilometres(2.2),
+    durationSeconds: secondsFromMinutes(40),
+    rating: 4.5,
+    badges: ["community-favourite"],
+    difficultyId: "easy",
+    interests: ["markets", "food"],
+  },
+  {
+    id: "rooftop-views-circuit",
+    localizations: {
+      "en-GB": {
+        name: "Rooftop Views Circuit",
+        description: "Skyline terraces, glass skybridges, and elevator hops.",
+      },
+      es: {
+        name: "Circuito de Azoteas con Vistas",
+        description: "Terrazas panorámicas y pasarelas de cristal entre torres.",
+      },
+    },
+    heroImage: image(heroHarborSunset, "City skyline from a rooftop bar at golden hour."),
+    distanceMetres: metresFromKilometres(4.5),
+    durationSeconds: secondsFromMinutes(80),
+    rating: 4.7,
+    badges: ["sunset-pick"],
+    difficultyId: "moderate",
+    interests: ["historic", "street-art", "waterfront"],
+  },
+];
+export const exploreCategories: RouteCategory[] = [
   {
     id: "nature",
-    title: "Nature Walks",
-    routes: 23,
+    localizations: {
+      "en-GB": { name: "Nature Walks" },
+      es: { name: "Paseos en la naturaleza" },
+    },
+    routeCount: 23,
     iconToken: "{icon.category.nature}",
     gradientClass: "bg-gradient-to-r from-emerald-500 to-teal-500",
   },
   {
     id: "street-art",
-    title: "Street Art",
-    routes: 18,
+    localizations: {
+      "en-GB": { name: "Street Art" },
+      es: { name: "Arte urbano" },
+    },
+    routeCount: 18,
     iconToken: "{icon.category.art}",
     gradientClass: "bg-gradient-to-r from-orange-500 to-rose-500",
   },
   {
     id: "historic",
-    title: "Historic",
-    routes: 15,
+    localizations: {
+      "en-GB": { name: "Historic" },
+      es: { name: "Histórico" },
+    },
+    routeCount: 15,
     iconToken: "{icon.category.landmarks}",
     gradientClass: "bg-gradient-to-r from-sky-500 to-indigo-500",
   },
   {
     id: "family",
-    title: "Family Friendly",
-    routes: 12,
+    localizations: {
+      "en-GB": { name: "Family Friendly" },
+      es: { name: "Para familias" },
+    },
+    routeCount: 12,
     iconToken: "{icon.category.wildlife}",
     gradientClass: "bg-gradient-to-r from-fuchsia-500 to-purple-500",
   },
 ];
-
-export const featuredWalk: FeaturedWalk = {
-  id: "waterfront",
-  title: "Harbour Lights Promenade",
-  description:
-    "Golden hour stroll weaving past skyline overlooks, coffee pit stops, and art installations.",
-  heroImageUrl: heroHarborSunset,
-  distanceMetres: metresFromKilometres(3.6),
-  durationSeconds: secondsFromMinutes(65),
-  rating: 4.9,
-  badges: ["Sunset pick", "Teal line"],
-};
-
-export const popularThemes: PopularTheme[] = [
+const featuredFallbackRoute = exploreRoutes[0];
+if (!featuredFallbackRoute) {
+  throw new Error("Explore catalogue requires at least one seeded route");
+}
+export const featuredRoute: Route =
+  exploreRoutes.find((route) => route.id === "harbour-lights") ?? featuredFallbackRoute;
+export const popularThemes: Theme[] = [
   {
     id: "coffee-culture",
-    title: "Coffee Culture",
-    description: "Best cafés & roasters",
-    imageUrl: heroCoffeeCulture,
+    localizations: {
+      "en-GB": { name: "Coffee Culture", description: "Best cafés & roasters" },
+      es: { name: "Cultura del café", description: "Mejores cafés y tostadores" },
+    },
+    image: image(heroCoffeeCulture, "Flat white poured in a ceramic cup beside beans."),
     walkCount: 12,
     distanceRangeMetres: [metresFromKilometres(1.5), metresFromKilometres(3)],
     rating: 4.7,
   },
   {
     id: "secret-gardens",
-    title: "Hidden Gardens",
-    description: "Secret green spaces",
-    imageUrl: heroHiddenGarden,
+    localizations: {
+      "en-GB": { name: "Hidden Gardens", description: "Secret green spaces" },
+      es: { name: "Jardines secretos", description: "Espacios verdes escondidos" },
+    },
+    image: image(heroHiddenGarden, "Sun-dappled courtyard garden behind tall walls."),
     walkCount: 8,
     distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(4)],
     rating: 4.8,
   },
   {
     id: "street-art",
-    title: "Street Art Hunt",
-    description: "Murals & installations",
-    imageUrl: heroStreetArt,
+    localizations: {
+      "en-GB": { name: "Street Art Hunt", description: "Murals & installations" },
+      es: { name: "Caza de arte urbano", description: "Murales e instalaciones" },
+    },
+    image: image(heroStreetArt, "Colourful mural wall in an alleyway."),
     walkCount: 15,
     distanceRangeMetres: [metresFromKilometres(1), metresFromKilometres(5)],
     rating: 4.6,
   },
   {
     id: "market-hop",
-    title: "Market Hopping",
-    description: "Local food & crafts",
-    imageUrl: heroMarket,
+    localizations: {
+      "en-GB": { name: "Market Hopping", description: "Local food & crafts" },
+      es: { name: "Ruta de mercados", description: "Comida y artesanía local" },
+    },
+    image: image(heroMarket, "Market stalls selling food and crafts under string lights."),
     walkCount: 9,
     distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(3)],
     rating: 4.5,
   },
 ];
 
-export const curatedCollections: CuratedCollection[] = [
+export const curatedCollections: RouteCollection[] = [
   {
     id: "coffee-loops",
-    title: "Sunday Coffee Loops",
-    description: "Perfect lazy morning routes",
-    leadImageUrl: heroCoffeeCultureAlt,
-    mapImageUrl: walkRouteMap2,
+    localizations: {
+      "en-GB": { name: "Sunday Coffee Loops", description: "Perfect lazy morning routes" },
+      es: { name: "Circuitos cafeteros", description: "Rutas relajadas para la mañana" },
+    },
+    leadImage: image(
+      heroCoffeeCultureAlt,
+      "Outdoor café table with pastries and pour-over coffee.",
+    ),
+    mapPreview: image(walkRouteMap2, "Map preview of the coffee loop routes."),
     distanceRangeMetres: [metresFromKilometres(1), metresFromKilometres(2)],
     durationRangeSeconds: [secondsFromMinutes(30), secondsFromMinutes(45)],
     difficultyId: "easy",
-    routes: 6,
+    routeIds: [
+      "coffee-culture-loop",
+      "market-hop-classic",
+      "harbour-lights",
+      "food-truck-friday",
+      "street-art-sprint",
+      "hidden-garden-lanes",
+    ],
   },
   {
     id: "after-dark",
-    title: "After Dark Adventures",
-    description: "Safe, well-lit evening routes",
-    leadImageUrl: heroAfterDark,
-    mapImageUrl: walkRouteMap3,
+    localizations: {
+      "en-GB": { name: "After Dark Adventures", description: "Safe, well-lit evening routes" },
+      es: { name: "Aventuras nocturnas", description: "Rutas nocturnas bien iluminadas" },
+    },
+    leadImage: image(heroAfterDark, "City lights reflecting on wet pavement after dusk."),
+    mapPreview: image(walkRouteMap3, "Route map preview for evening walks."),
     distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(4)],
     durationRangeSeconds: [secondsFromMinutes(45), secondsFromMinutes(70)],
     difficultyId: "moderate",
-    routes: 4,
+    routeIds: [
+      "harbour-lights",
+      "rooftop-views-circuit",
+      "street-art-sprint",
+      "cherry-blossom-trail",
+    ],
   },
 ];
 
-export const trendingRoutes: TrendingRoute[] = [
+export const trendingRoutes: TrendingRouteHighlight[] = [
   {
-    id: "cherry-blossom",
-    title: "Cherry Blossom Trail",
-    subtitle: "Limited time — Spring only",
-    imageUrl: heroHiddenGarden,
+    routeId: "cherry-blossom-trail",
     trendDelta: "+127%",
+    subtitleLocalizations: {
+      "en-GB": { name: "Limited time — Spring only" },
+      es: { name: "Tiempo limitado — solo primavera" },
+    },
   },
   {
-    id: "food-truck",
-    title: "Food Truck Friday",
-    subtitle: "Weekly event route",
-    imageUrl: heroMarket,
+    routeId: "food-truck-friday",
     trendDelta: "+89%",
+    subtitleLocalizations: {
+      "en-GB": { name: "Weekly event route" },
+      es: { name: "Ruta semanal de eventos" },
+    },
   },
   {
-    id: "rooftop-views",
-    title: "Rooftop Views Circuit",
-    subtitle: "Best skyline spots",
-    imageUrl: heroHarborSunset,
+    routeId: "rooftop-views-circuit",
     trendDelta: "+56%",
+    subtitleLocalizations: {
+      "en-GB": { name: "Best skyline spots" },
+      es: { name: "Mejores vistas del skyline" },
+    },
   },
 ];
 
 export const communityPick: CommunityPick = {
   id: "bookstore-bistro",
-  curator: "Sarah's Pick",
-  curatorAvatarUrl: heroAfterDark,
+  localizations: {
+    "en-GB": {
+      name: "Bookstore & Bistro Crawl",
+      description: "A blend of literary gems and cosy eateries in the cultural district.",
+    },
+    es: {
+      name: "Ruta de librerías y bistrós",
+      description: "Mezcla de joyas literarias y bistrós acogedores en el distrito cultural.",
+    },
+  },
+  curator: {
+    localizations: {
+      "en-GB": { name: "Sarah's pick" },
+      es: { name: "Selección de Sarah" },
+    },
+    avatar: image(heroAfterDark, "Portrait of Sarah smiling at dusk."),
+  },
   rating: 4.9,
-  title: "Bookstore & Bistro Crawl",
-  description: "A perfect blend of literary gems and cosy eateries through the cultural district.",
   distanceMetres: metresFromKilometres(2.8),
   durationSeconds: secondsFromMinutes(75),
   saves: 428,
 };
 
-/**
- * Simple helper returning a formatted rating label for display copy.
- *
- * @example
- * ```ts
- * const label = formatRating(4.87);
- * console.log(label); // "4.9"
- * ```
- */
+/** Format rating to one decimal place for display copy. */
 export function formatRating(input: number): string {
   return input.toFixed(1);
 }

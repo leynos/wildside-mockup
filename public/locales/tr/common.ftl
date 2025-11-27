@@ -56,12 +56,12 @@ nav-discover-label = Keşfet
 nav-routes-label = Rotalar
 nav-profile-label = Profil
 nav-primary-aria-label = Ana gezinme
-interest-parks-label = Parklar ve doğa
-interest-coffee-label = Kahve durakları
-interest-street-art-label = Sokak sanatı
-interest-historic-label = Tarihi mekânlar
-interest-waterfront-label = Sahil şeridi
-interest-markets-label = Pazarlar
+
+
+
+
+
+
 difficulty-easy-label = Kolay
 difficulty-moderate-label = Orta
 difficulty-challenging-label = Zorlu

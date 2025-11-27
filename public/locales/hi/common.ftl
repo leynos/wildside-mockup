@@ -56,12 +56,12 @@ nav-discover-label = खोजें
 nav-routes-label = मार्ग
 nav-profile-label = प्रोफ़ाइल
 nav-primary-aria-label = मुख्य नेविगेशन
-interest-parks-label = पार्क और प्रकृति
-interest-coffee-label = कॉफी स्थान
-interest-street-art-label = स्ट्रीट आर्ट
-interest-historic-label = ऐतिहासिक स्थल
-interest-waterfront-label = वाटरफ्रंट
-interest-markets-label = बाज़ार
+
+
+
+
+
+
 difficulty-easy-label = आसान
 difficulty-moderate-label = मध्यम
 difficulty-challenging-label = चुनौतीपूर्ण

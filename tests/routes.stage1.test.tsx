@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import { OFFLINE_STORAGE_PLACEHOLDERS } from "../src/app/config/offline-metrics";
 import type { WalkRouteSummary } from "../src/app/data/map";
 import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
+import { getInterestDescriptor } from "../src/app/data/registries/interests";
 import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
   accessibilityOptions,
@@ -908,7 +909,11 @@ describe("Stage 3 wizard flows", () => {
       const selectionSummary = view.getByText(/seleccionados$/i);
       expect(selectionSummary.textContent?.trim()).toBe("2 seleccionados");
 
-      const streetArtLabel = i18n.t("interest-street-art-label") ?? "";
+      const streetArtDescriptor = getInterestDescriptor("street-art", "es");
+      const streetArtLabel =
+        streetArtDescriptor?.localization.shortLabel ??
+        streetArtDescriptor?.localization.name ??
+        "";
       const streetArtChip = view.getByRole("button", {
         name: new RegExp(escapeRegExp(streetArtLabel), "i"),
       });

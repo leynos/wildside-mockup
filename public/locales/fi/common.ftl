@@ -56,12 +56,12 @@ nav-discover-label = Tutustu
 nav-routes-label = Reitit
 nav-profile-label = Profiili
 nav-primary-aria-label = Päänavigaatio
-interest-parks-label = Puistot ja luonto
-interest-coffee-label = Kahvipaikat
-interest-street-art-label = Katutaide
-interest-historic-label = Historialliset kohteet
-interest-waterfront-label = Rantaviiva
-interest-markets-label = Markkinat
+
+
+
+
+
+
 difficulty-easy-label = Helppo
 difficulty-moderate-label = Keskitaso
 difficulty-challenging-label = Haastava
