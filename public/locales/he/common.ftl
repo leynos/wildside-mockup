@@ -20,9 +20,9 @@ customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
 customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = משך
 customize-slider-duration-aria = מחוון משך
-customize-slider-duration-marker-0 = 15 { unit-duration-minute }
-customize-slider-duration-marker-1 = 90 { unit-duration-minute }
-customize-slider-duration-marker-2 = 180 { unit-duration-minute }
+customize-slider-duration-marker-0 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-1 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-2 = {$count} { unit-duration-minute-label }
 customize-crowd-option-quiet-label = שקט
 customize-crowd-option-quiet-description = רחובות שקטים
 customize-crowd-option-balanced-label = מאוזן
@@ -72,11 +72,11 @@ quick-walk-header-title = מחולל מסלול מהיר
 quick-walk-header-description = כיילו משך ותחומי עניין כדי לרענן את ההמלצות.
 quick-walk-generate-aria = יצירת מסלול חדש
 quick-walk-duration-label = משך
-quick-walk-duration-format = {$minutes} { unit-duration-minute }
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = משך ההליכה
-quick-walk-duration-marker-start = {$minutes} { unit-duration-minute }
-quick-walk-duration-marker-mid = {$minutes} { unit-duration-minute }
-quick-walk-duration-marker-end = {$minutes} { unit-duration-minute }
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = תחומי עניין
 quick-walk-interests-selected =
     { $count ->
@@ -107,10 +107,10 @@ wizard-step-3-description = צרו את המסלול המותאם
 wizard-step-one-duration-section-aria = בקרות משך ההליכה
 wizard-step-one-duration-label = משך ההליכה
 wizard-step-one-duration-aria = מחוון משך ההליכה
-wizard-step-one-duration-marker-start = 15 { unit-duration-minute }
-wizard-step-one-duration-marker-mid = 90 { unit-duration-minute }
-wizard-step-one-duration-marker-end = 180 { unit-duration-minute }
-wizard-step-one-duration-format = {$minutes} { unit-duration-minute }
+wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = תחומי עניין
 wizard-step-one-interests-heading = תחומי עניין
 wizard-step-one-interests-selected =
@@ -153,7 +153,7 @@ wizard-step-three-route-title = לולאת האוצרות הנסתרים
 wizard-step-three-route-badge = מותאם אישית
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute }
+wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = מסלול מותאם אישי המשולב בסמטאות אמנות רחוב, בתי קפה עצמאיים ונקודות תצפית שקטות על קו החוף.
@@ -337,13 +337,23 @@ offline-dialog-cancel = ביטול
 offline-dialog-preview = תצוגה מקדימה של ההורדה
 unit-distance-kilometre = ק"מ
 unit-distance-mile = mi
-unit-duration-minute =
+-unit-duration-minute =
     { $count ->
         [one] דקה
         [two] דקות
         [many] דקות
        *[other] דקות
     }
+
+-unit-duration-minute =
+    { $count ->
+        [one] דקה
+        [two] דקות
+        [many] דקות
+       *[other] דקות
+    }
+
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

@@ -20,9 +20,9 @@ customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
 customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = Thời lượng
 customize-slider-duration-aria = Thanh trượt thời lượng
-customize-slider-duration-marker-0 = 15 { unit-duration-minute }
-customize-slider-duration-marker-1 = 90 { unit-duration-minute }
-customize-slider-duration-marker-2 = 180 { unit-duration-minute }
+customize-slider-duration-marker-0 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-1 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-2 = {$count} { unit-duration-minute-label }
 customize-crowd-option-quiet-label = Yên tĩnh
 customize-crowd-option-quiet-description = Con phố yên ắng
 customize-crowd-option-balanced-label = Cân bằng
@@ -72,11 +72,11 @@ quick-walk-header-title = Trình tạo lộ trình đi bộ nhanh
 quick-walk-header-description = Điều chỉnh thời lượng và sở thích để làm mới gợi ý.
 quick-walk-generate-aria = Tạo lộ trình mới
 quick-walk-duration-label = Thời lượng
-quick-walk-duration-format = {$minutes} { unit-duration-minute(count: $minutes) }
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Thời lượng cuộc đi bộ
-quick-walk-duration-marker-start = {$minutes} { unit-duration-minute(count: $minutes) }
-quick-walk-duration-marker-mid = {$minutes} { unit-duration-minute(count: $minutes) }
-quick-walk-duration-marker-end = {$minutes} { unit-duration-minute(count: $minutes) }
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Sở thích
 quick-walk-interests-selected =
     { $count ->
@@ -106,10 +106,10 @@ wizard-step-3-description = Tạo tuyến đường được cá nhân hóa
 wizard-step-one-duration-section-aria = Điều khiển thời lượng chuyến đi bộ
 wizard-step-one-duration-label = Thời lượng chuyến đi bộ
 wizard-step-one-duration-aria = Thanh trượt thời lượng chuyến đi bộ
-wizard-step-one-duration-marker-start = 15 { unit-duration-minute }
-wizard-step-one-duration-marker-mid = 90 { unit-duration-minute }
-wizard-step-one-duration-marker-end = 180 { unit-duration-minute }
-wizard-step-one-duration-format = {$minutes} { unit-duration-minute(count: $minutes) }
+wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Sở thích
 wizard-step-one-interests-heading = Sở thích
 wizard-step-one-interests-selected =
@@ -151,7 +151,10 @@ wizard-step-three-route-title = Vòng Viên Ngọc Ẩn
 wizard-step-three-route-badge = Tùy chỉnh
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute }
+wizard-step-three-route-duration-unit =
+    { $count ->
+       *[other] {-unit-duration-minute($count)}
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Hành trình cá nhân hóa kết hợp các con hẻm nghệ thuật đường phố, quán cà phê độc lập và điểm ngắm ven sông yên tĩnh.
@@ -323,9 +326,10 @@ offline-dialog-cancel = Hủy
 offline-dialog-preview = Xem trước tải xuống
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute =
+unit-duration-minute-label = { -unit-duration-minute($count) }
+
+-unit-duration-minute =
     { $count ->
-        [one] phút
        *[other] phút
     }
 unit-temperature-celsius = °C

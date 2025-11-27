@@ -20,9 +20,9 @@ customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
 customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = अवधि
 customize-slider-duration-aria = अवधि स्लाइडर
-customize-slider-duration-marker-0 = 15 { unit-duration-minute }
-customize-slider-duration-marker-1 = 90 { unit-duration-minute }
-customize-slider-duration-marker-2 = 180 { unit-duration-minute }
+customize-slider-duration-marker-0 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-1 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-2 = {$count} { unit-duration-minute-label }
 customize-crowd-option-quiet-label = शांत
 customize-crowd-option-quiet-description = शांत सड़कें
 customize-crowd-option-balanced-label = संतुलित
@@ -72,11 +72,11 @@ quick-walk-header-title = क्विक वॉक जनरेटर
 quick-walk-header-description = सुझावों को ताज़ा करने के लिए अवधि और रुचियाँ समायोजित करें।
 quick-walk-generate-aria = नई सैर बनाएँ
 quick-walk-duration-label = अवधि
-quick-walk-duration-format = {$minutes} { unit-duration-minute(count: $minutes) }
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = वॉक की अवधि
-quick-walk-duration-marker-start = {$minutes} { unit-duration-minute(count: $minutes) }
-quick-walk-duration-marker-mid = {$minutes} { unit-duration-minute(count: $minutes) }
-quick-walk-duration-marker-end = {$minutes} { unit-duration-minute(count: $minutes) }
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = रुचियाँ
 quick-walk-interests-selected =
     { $count ->
@@ -106,10 +106,10 @@ wizard-step-3-description = अनुकूलित मार्ग तैय�
 wizard-step-one-duration-section-aria = वॉक अवधि नियंत्रण
 wizard-step-one-duration-label = वॉक की अवधि
 wizard-step-one-duration-aria = वॉक अवधि स्लाइडर
-wizard-step-one-duration-marker-start = 15 { unit-duration-minute }
-wizard-step-one-duration-marker-mid = 90 { unit-duration-minute }
-wizard-step-one-duration-marker-end = 180 { unit-duration-minute }
-wizard-step-one-duration-format = {$minutes} { unit-duration-minute(count: $minutes) }
+wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = रुचियाँ
 wizard-step-one-interests-heading = रुचियाँ
 wizard-step-one-interests-selected =
@@ -151,7 +151,11 @@ wizard-step-three-route-title = छिपे रत्नों की लूप
 wizard-step-three-route-badge = व्यक्तिगत
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute }
+wizard-step-three-route-duration-unit =
+    { $count ->
+        [one] { unit-duration-minute-label }
+       *[other] { unit-duration-minute-label }
+    }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = स्ट्रीट आर्ट की गलियों, स्वतंत्र कैफ़े और शांत जल-किनारे दृश्यों का मेल करती एक निजी वॉक।
@@ -322,11 +326,13 @@ offline-dialog-cancel = रद्द करें
 offline-dialog-preview = डाउनलोड पूर्वावलोकन
 unit-distance-kilometre = किमी
 unit-distance-mile = mi
-unit-duration-minute =
+-unit-duration-minute =
     { $count ->
         [one] मिनट
        *[other] मिनट
     }
+
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =

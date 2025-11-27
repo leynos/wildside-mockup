@@ -20,9 +20,9 @@ customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
 customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = Duration
 customize-slider-duration-aria = Duration slider
-customize-slider-duration-marker-0 = 15 { unit-duration-minute }
-customize-slider-duration-marker-1 = 90 { unit-duration-minute }
-customize-slider-duration-marker-2 = 180 { unit-duration-minute }
+customize-slider-duration-marker-0 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-1 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-2 = {$count} { unit-duration-minute-label }
 customize-crowd-option-quiet-label = Quiet
 customize-crowd-option-quiet-description = Tranquil streets
 customize-crowd-option-balanced-label = Balanced
@@ -72,11 +72,11 @@ quick-walk-header-title = Quick Walk Generator
 quick-walk-header-description = Dial in duration and interests to refresh suggestions.
 quick-walk-generate-aria = Generate a new walk
 quick-walk-duration-label = Duration
-quick-walk-duration-format = {$minutes} { unit-duration-minute }
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$minutes} { unit-duration-minute }
-quick-walk-duration-marker-mid = {$minutes} { unit-duration-minute }
-quick-walk-duration-marker-end = {$minutes} { unit-duration-minute }
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = Interests
 quick-walk-interests-selected =
     { $count ->
@@ -106,10 +106,13 @@ wizard-step-3-description = Generate the tailored walk
 wizard-step-one-duration-section-aria = Walk duration controls
 wizard-step-one-duration-label = Walk duration
 wizard-step-one-duration-aria = Walk duration slider
-wizard-step-one-duration-marker-start = 15 { unit-duration-minute }
-wizard-step-one-duration-marker-mid = 90 { unit-duration-minute }
-wizard-step-one-duration-marker-end = 180 { unit-duration-minute }
-wizard-step-one-duration-format = {$minutes} { unit-duration-minute }
+# NOTE: If you change the visible number, update the count argument to keep plural forms correct.
+wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
+# NOTE: If you change the visible number, update the count argument to keep plural forms correct.
+wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
+# NOTE: If you change the visible number, update the count argument to keep plural forms correct.
+wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
 wizard-step-one-interests-section-aria = Interests
 wizard-step-one-interests-heading = Interests
 wizard-step-one-interests-selected =
@@ -151,7 +154,7 @@ wizard-step-three-route-title = Hidden Gems Loop
 wizard-step-three-route-badge = Custom
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute }
+wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = A personalised walk blending street art laneways, independent cafés, and quiet waterfront viewpoints.
@@ -322,11 +325,16 @@ offline-dialog-cancel = Cancel
 offline-dialog-preview = Preview download
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute =
+# unit-duration-minute-label is the public user-facing unit label for durations.
+# -unit-duration-minute is the internal term for fixed patterns that still need
+# an explicit numeric argument.
+-unit-duration-minute =
     { $count ->
         [one] minute
        *[other] minutes
     }
+
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =

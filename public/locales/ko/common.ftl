@@ -20,9 +20,9 @@ customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
 customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = 소요 시간
 customize-slider-duration-aria = 소요 시간 슬라이더
-customize-slider-duration-marker-0 = 15 { unit-duration-minute }
-customize-slider-duration-marker-1 = 90 { unit-duration-minute }
-customize-slider-duration-marker-2 = 180 { unit-duration-minute }
+customize-slider-duration-marker-0 = {$count}{ unit-duration-minute-label }
+customize-slider-duration-marker-1 = {$count}{ unit-duration-minute-label }
+customize-slider-duration-marker-2 = {$count}{ unit-duration-minute-label }
 customize-crowd-option-quiet-label = 조용함
 customize-crowd-option-quiet-description = 조용한 거리
 customize-crowd-option-balanced-label = 균형
@@ -72,11 +72,11 @@ quick-walk-header-title = 빠른 걷기 생성기
 quick-walk-header-description = 지속 시간과 관심사를 조정해 추천을 새로고침하세요.
 quick-walk-generate-aria = 새로운 걷기 만들기
 quick-walk-duration-label = 소요 시간
-quick-walk-duration-format = {$minutes} { unit-duration-minute }
+quick-walk-duration-format = {$count}{ unit-duration-minute-label }
 quick-walk-duration-aria = 걷기 소요 시간
-quick-walk-duration-marker-start = {$minutes} { unit-duration-minute }
-quick-walk-duration-marker-mid = {$minutes} { unit-duration-minute }
-quick-walk-duration-marker-end = {$minutes} { unit-duration-minute }
+quick-walk-duration-marker-start = {$count}{ unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count}{ unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count}{ unit-duration-minute-label }
 quick-walk-interests-heading = 관심사
 quick-walk-interests-selected =
     { $count ->
@@ -106,10 +106,10 @@ wizard-step-3-description = 맞춤형 경로를 생성합니다
 wizard-step-one-duration-section-aria = 걷기 시간 제어
 wizard-step-one-duration-label = 걷기 소요 시간
 wizard-step-one-duration-aria = 걷기 시간 슬라이더
-wizard-step-one-duration-marker-start = 15 { unit-duration-minute }
-wizard-step-one-duration-marker-mid = 90 { unit-duration-minute }
-wizard-step-one-duration-marker-end = 180 { unit-duration-minute }
-wizard-step-one-duration-format = {$minutes} { unit-duration-minute }
+wizard-step-one-duration-marker-start = {$count}{ unit-duration-minute-label }
+wizard-step-one-duration-marker-mid = {$count}{ unit-duration-minute-label }
+wizard-step-one-duration-marker-end = {$count}{ unit-duration-minute-label }
+wizard-step-one-duration-format = {$count}{ unit-duration-minute-label }
 wizard-step-one-interests-section-aria = 관심사
 wizard-step-one-interests-heading = 관심사
 wizard-step-one-interests-selected =
@@ -151,7 +151,7 @@ wizard-step-three-route-title = 숨겨진 보석 루프
 wizard-step-three-route-badge = 맞춤형
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { unit-duration-minute }
+wizard-step-three-route-duration-unit = {$count}{ unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = 스트리트 아트 골목, 독립 카페, 잔잔한 워터프런트 전망을 조합한 맞춤 워크입니다.
@@ -327,11 +327,13 @@ offline-dialog-cancel = 취소
 offline-dialog-preview = 다운로드 미리보기
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute =
+-unit-duration-minute =
     { $count ->
         [one] 분
        *[other] 분
     }
+
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
