@@ -8,7 +8,7 @@ import type { InterestId } from "./registries/interests";
 export type RouteId = string;
 
 export interface Route {
-  readonly id: string;
+  readonly id: RouteId;
   readonly localizations: EntityLocalizations;
   readonly heroImage: ImageAsset;
   readonly distanceMetres: number;

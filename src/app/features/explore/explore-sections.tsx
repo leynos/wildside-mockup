@@ -44,6 +44,23 @@ export function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Elem
   );
 }
 
+type RouteBadgeProps = {
+  readonly id: string;
+  readonly locale: string;
+};
+
+function RouteBadge({ id, locale }: RouteBadgeProps): JSX.Element {
+  const badgeDescriptor = getBadgeDescriptor(id, locale);
+  const badgeLabel =
+    badgeDescriptor?.localization.shortLabel ?? badgeDescriptor?.localization.name ?? id;
+  const badgeToneClass = badgeDescriptor?.accentClass ?? "bg-accent/20 text-accent";
+  return (
+    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${badgeToneClass}`}>
+      {badgeLabel}
+    </span>
+  );
+}
+
 export interface CategoryScrollerProps {
   categories: readonly RouteCategory[];
 }
@@ -143,22 +160,9 @@ export function FeaturedRouteCard({
             <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
             {formatRating(route.rating)}
           </span>
-          {route.badges.map((badgeId) => {
-            const badgeDescriptor = getBadgeDescriptor(badgeId, locale);
-            const badgeLabel =
-              badgeDescriptor?.localization.shortLabel ??
-              badgeDescriptor?.localization.name ??
-              badgeId;
-            const badgeToneClass = badgeDescriptor?.accentClass ?? "bg-accent/20 text-accent";
-            return (
-              <span
-                key={badgeId}
-                className={`rounded-full px-3 py-1 text-xs font-semibold ${badgeToneClass}`}
-              >
-                {badgeLabel}
-              </span>
-            );
-          })}
+          {route.badges.map((badgeId) => (
+            <RouteBadge key={badgeId} id={badgeId} locale={locale} />
+          ))}
         </div>
       </div>
     </section>
@@ -189,39 +193,35 @@ export function PopularThemesGrid({
         {heading}
       </h2>
       <div className="grid grid-cols-2 gap-4">
-        {themes.map((theme) => (
-          <article key={theme.id} className="explore-compact__card">
-            {(() => {
-              const localization = pickLocalization(theme.localizations, locale);
-              return (
-                <>
-                  <div className="relative mb-3 h-24 overflow-hidden rounded-lg">
-                    <img
-                      src={theme.image.url}
-                      alt={theme.image.alt}
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-black/25" />
-                    <span className="explore-theme__badge">{formatWalkCount(theme.walkCount)}</span>
-                  </div>
-                  <h3 className="text-sm font-semibold text-base-content">{localization.name}</h3>
-                  <p className="mt-1 text-xs text-base-content/60">{localization.description}</p>
-                </>
-              );
-            })()}
-            <div className="mt-2 flex items-center justify-between text-xs text-base-content/60">
-              <span className="flex items-center gap-1">
-                <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
-                {formatDistanceRangeLabel(theme.distanceRangeMetres)}
-              </span>
-              <span className="rating-indicator">
-                <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
-                {formatRating(theme.rating)}
-              </span>
-            </div>
-          </article>
-        ))}
+        {themes.map((theme) => {
+          const localization = pickLocalization(theme.localizations, locale);
+          return (
+            <article key={theme.id} className="explore-compact__card">
+              <div className="relative mb-3 h-24 overflow-hidden rounded-lg">
+                <img
+                  src={theme.image.url}
+                  alt={theme.image.alt}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/25" />
+                <span className="explore-theme__badge">{formatWalkCount(theme.walkCount)}</span>
+              </div>
+              <h3 className="text-sm font-semibold text-base-content">{localization.name}</h3>
+              <p className="mt-1 text-xs text-base-content/60">{localization.description}</p>
+              <div className="mt-2 flex items-center justify-between text-xs text-base-content/60">
+                <span className="flex items-center gap-1">
+                  <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
+                  {formatDistanceRangeLabel(theme.distanceRangeMetres)}
+                </span>
+                <span className="rating-indicator">
+                  <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
+                  {formatRating(theme.rating)}
+                </span>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -255,68 +255,57 @@ export function CuratedCollectionsList({
         {heading}
       </h2>
       <div className="space-y-4">
-        {collections.map((collection) => (
-          <article key={collection.id} className="explore-collection__card">
-            <div className="flex gap-4">
-              <div className="h-16 w-16 overflow-hidden rounded-lg border border-base-300/50">
+        {collections.map((collection) => {
+          const localization = pickLocalization(collection.localizations, locale);
+          const difficulty = difficultyLookup.get(collection.difficultyId);
+          const badgeToneClass = difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
+          return (
+            <article key={collection.id} className="explore-collection__card">
+              <div className="flex gap-4">
+                <div className="h-16 w-16 overflow-hidden rounded-lg border border-base-300/50">
+                  <img
+                    src={collection.leadImage.url}
+                    alt={collection.leadImage.alt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-base-content">{localization.name}</h3>
+                  <p className="text-sm text-base-content/70">{localization.description}</p>
+                  <div className="mt-2 explore-meta-list">
+                    <span className="flex items-center gap-1">
+                      <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
+                      {formatDistanceRangeLabel(collection.distanceRangeMetres)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
+                      {formatDurationRangeLabel(collection.durationRangeSeconds)}
+                    </span>
+                    <span
+                      className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeToneClass}`}
+                    >
+                      {difficulty?.label ?? collection.difficultyId}
+                    </span>
+                  </div>
+                </div>
+                <div className="explore-stat-group explore-stat-group--right">
+                  <span className="text-sm font-semibold text-base-content">
+                    {formatRouteCount(collection.routeIds.length)}
+                  </span>
+                </div>
+              </div>
+              <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">
                 <img
-                  src={collection.leadImage.url}
-                  alt={collection.leadImage.alt}
+                  src={collection.mapPreview.url}
+                  alt={collection.mapPreview.alt}
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
-              </div>
-              <div className="flex-1">
-                {(() => {
-                  const localization = pickLocalization(collection.localizations, locale);
-                  return (
-                    <>
-                      <h3 className="text-base font-semibold text-base-content">
-                        {localization.name}
-                      </h3>
-                      <p className="text-sm text-base-content/70">{localization.description}</p>
-                    </>
-                  );
-                })()}
-                <div className="mt-2 explore-meta-list">
-                  <span className="flex items-center gap-1">
-                    <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
-                    {formatDistanceRangeLabel(collection.distanceRangeMetres)}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
-                    {formatDurationRangeLabel(collection.durationRangeSeconds)}
-                  </span>
-                  {(() => {
-                    const difficulty = difficultyLookup.get(collection.difficultyId);
-                    const badgeToneClass =
-                      difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
-                    return (
-                      <span
-                        className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeToneClass}`}
-                      >
-                        {difficulty?.label ?? collection.difficultyId}
-                      </span>
-                    );
-                  })()}
-                </div>
-              </div>
-              <div className="explore-stat-group explore-stat-group--right">
-                <span className="text-sm font-semibold text-base-content">
-                  {formatRouteCount(collection.routeIds.length)}
-                </span>
-              </div>
-            </div>
-            <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">
-              <img
-                src={collection.mapPreview.url}
-                alt={collection.mapPreview.alt}
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </figure>
-          </article>
-        ))}
+              </figure>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -325,6 +314,33 @@ export function CuratedCollectionsList({
 export type TrendingRouteCard = {
   readonly route: Route;
   readonly highlight: TrendingRouteHighlight;
+};
+
+type TrendingRouteViewModel = {
+  readonly id: string;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly imageUrl: string;
+  readonly imageAlt: string;
+  readonly trendDelta: string;
+};
+
+const toTrendingRouteViewModel = (
+  card: TrendingRouteCard,
+  locale: string,
+): TrendingRouteViewModel => {
+  const { route, highlight } = card;
+  const routeLocalization = pickLocalization(route.localizations, locale);
+  const subtitle = pickLocalization(highlight.subtitleLocalizations, locale).name;
+
+  return {
+    id: route.id,
+    title: routeLocalization.name,
+    subtitle,
+    imageUrl: route.heroImage.url,
+    imageAlt: route.heroImage.alt,
+    trendDelta: highlight.trendDelta,
+  };
 };
 
 type TrendingRoutesListProps = {
@@ -342,29 +358,26 @@ export function TrendingRoutesList({ routes }: TrendingRoutesListProps): JSX.Ele
         {heading}
       </h2>
       <div className="space-y-3">
-        {routes.map(({ route, highlight }) => {
-          const routeLocalization = pickLocalization(route.localizations, locale);
-          const subtitle = pickLocalization(highlight.subtitleLocalizations, locale).name;
+        {routes.map((card) => {
+          const viewModel = toTrendingRouteViewModel(card, locale);
           return (
-            <article key={route.id} className="explore-trending__card">
+            <article key={viewModel.id} className="explore-trending__card">
               <div className="flex items-center gap-3">
                 <div className="h-12 w-12 overflow-hidden rounded-lg">
                   <img
-                    src={route.heroImage.url}
-                    alt={route.heroImage.alt}
+                    src={viewModel.imageUrl}
+                    alt={viewModel.imageAlt}
                     className="h-full w-full"
                     loading="lazy"
                   />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-base-content">
-                    {routeLocalization.name}
-                  </p>
-                  <p className="text-xs text-base-content/60">{subtitle}</p>
+                  <p className="text-sm font-semibold text-base-content">{viewModel.title}</p>
+                  <p className="text-xs text-base-content/60">{viewModel.subtitle}</p>
                 </div>
                 <span className="flex items-center gap-1 text-sm font-semibold text-orange-300">
                   <Icon token="{icon.object.trend}" aria-hidden className="h-4 w-4" />
-                  {highlight.trendDelta}
+                  {viewModel.trendDelta}
                 </span>
               </div>
             </article>

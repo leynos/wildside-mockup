@@ -7,11 +7,8 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import { SectionHero } from "../../components/section-hero";
-import {
-  type DiscoverInterest,
-  defaultSelectedInterests,
-  resolveDiscoverInterests,
-} from "../../data/discover";
+import { type DiscoverInterest, defaultSelectedInterests } from "../../data/discover";
+import { buildInterestLookup } from "../../data/registries/interests";
 import { MobileShell } from "../../layout/mobile-shell";
 
 interface InterestChipProps {
@@ -43,7 +40,10 @@ export function DiscoverScreen(): JSX.Element {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  const interests = useMemo(() => resolveDiscoverInterests(i18n.language), [i18n.language]);
+  const interests = useMemo(() => {
+    const lookup = buildInterestLookup(i18n.language);
+    return Array.from(lookup.values());
+  }, [i18n.language]);
 
   const selectedCount = useMemo(() => selected.length, [selected]);
 

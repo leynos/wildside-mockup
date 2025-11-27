@@ -187,23 +187,23 @@ available locale. Components must not construct names from translation keys.
     `pickLocalization` helper with deterministic fallback.
   - Introduce `tagDescriptors` and `badgeDescriptors` registries.
 - **Phase 1: explore & discover**
-  - Reshape `data/explore.ts` into new entity shapes with localization maps.
+  - Reshape `data/explore.ts` into new entity shapes with localisation maps.
   - Update `explore-sections` components to consume entities and call
     `pickLocalization`; drop related keys from Fluent bundles.
   - Move Discover interest labels into the registry and remove interest keys
     from Fluent.
   - Status (27 Nov 2025): Explore routes, themes, collections, categories, and
-    community picks now ship their own localization maps and the Explore UI
+    community picks now ship their own localisation maps and the Explore UI
     resolves them through `pickLocalization`. Discover interest labels are read
     from the registry only and the `interest-*` Fluent keys have been removed.
 - **Phase 2: customize & safety**
   - Convert customize sliders, segment options, route previews, and advanced
     toggles to entity-based inputs; replace per-option translation keys.
   - Refactor safety accordion sections to reference `SafetyToggle` entities and
-    presets with localization maps; prune Fluent keys.
+    presets with localisation maps; prune Fluent keys.
 - **Phase 3: offline & map**
   - Migrate offline suggestions and downloads to SI/numeric fields and
-    localization maps; update cards and undo states.
+    localisation maps; update cards and undo states.
   - Reshape `WalkPointOfInterest` and saved routes; ensure tags use registries
     and unit formatting covers all numerical values.
 - **Phase 4: wizard & completion**

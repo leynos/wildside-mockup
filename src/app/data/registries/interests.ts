@@ -97,31 +97,17 @@ export const interestDescriptors: ReadonlyArray<InterestDescriptor> = [
 
 export type InterestId = (typeof interestDescriptors)[number]["id"];
 
-const resolveInterestDescriptor = (
-  descriptor: InterestDescriptor,
-  locale: string,
-  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
-): ResolvedInterestDescriptor => ({
-  ...descriptor,
-  localization: pickLocalization(descriptor.localizations, locale, fallbackLocales),
-});
-
-export const resolveInterestDescriptors = (
-  locale: string,
-  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
-): ResolvedInterestDescriptor[] =>
-  interestDescriptors.map((descriptor) =>
-    resolveInterestDescriptor(descriptor, locale, fallbackLocales),
-  );
-
 export const buildInterestLookup = (
   locale: string,
   fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
 ): Map<InterestId, ResolvedInterestDescriptor> =>
   new Map(
-    resolveInterestDescriptors(locale, fallbackLocales).map((descriptor) => [
+    interestDescriptors.map((descriptor) => [
       descriptor.id,
-      descriptor,
+      {
+        ...descriptor,
+        localization: pickLocalization(descriptor.localizations, locale, fallbackLocales),
+      },
     ]),
   );
 
@@ -132,5 +118,14 @@ export const getInterestDescriptor = (
 ): ResolvedInterestDescriptor | undefined => {
   const descriptor = interestDescriptors.find((entry) => entry.id === id);
   if (!descriptor) return undefined;
-  return resolveInterestDescriptor(descriptor, locale, fallbackLocales);
+  return {
+    ...descriptor,
+    localization: pickLocalization(descriptor.localizations, locale, fallbackLocales),
+  };
 };
+
+export const resolveInterestDescriptors = (
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
+): ResolvedInterestDescriptor[] =>
+  Array.from(buildInterestLookup(locale, fallbackLocales).values());

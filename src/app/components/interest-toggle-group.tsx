@@ -4,10 +4,7 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { type JSX, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import {
-  type ResolvedInterestDescriptor,
-  resolveInterestDescriptors,
-} from "../data/registries/interests";
+import { buildInterestLookup } from "../data/registries/interests";
 import { Icon } from "./icon";
 
 const CHIP_BASE_CLASSES =
@@ -30,13 +27,7 @@ export function InterestToggleGroup({
 }: InterestToggleGroupProps): JSX.Element {
   const { i18n } = useTranslation();
   const locale = i18n.language;
-  const interestLookup = useMemo(
-    () =>
-      new Map<string, ResolvedInterestDescriptor>(
-        resolveInterestDescriptors(locale).map((descriptor) => [descriptor.id, descriptor]),
-      ),
-    [locale],
-  );
+  const interestLookup = useMemo(() => buildInterestLookup(locale), [locale]);
 
   return (
     <ToggleGroup.Root

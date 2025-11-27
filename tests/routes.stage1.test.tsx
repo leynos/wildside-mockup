@@ -910,10 +910,11 @@ describe("Stage 3 wizard flows", () => {
       expect(selectionSummary.textContent?.trim()).toBe("2 seleccionados");
 
       const streetArtDescriptor = getInterestDescriptor("street-art", "es");
+      if (!streetArtDescriptor) {
+        throw new Error("street-art descriptor should be registered");
+      }
       const streetArtLabel =
-        streetArtDescriptor?.localization.shortLabel ??
-        streetArtDescriptor?.localization.name ??
-        "";
+        streetArtDescriptor.localization.shortLabel ?? streetArtDescriptor.localization.name ?? "";
       const streetArtChip = view.getByRole("button", {
         name: new RegExp(escapeRegExp(streetArtLabel), "i"),
       });

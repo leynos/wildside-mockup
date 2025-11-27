@@ -142,7 +142,10 @@ export const exploreRoutes: Route[] = [
         description: "Corredor de floración temporal con zonas de picnic.",
       },
     },
-    heroImage: image(heroHiddenGarden, "Cherry blossom trees arching over a riverside path."),
+    heroImage: image(
+      heroHiddenGarden,
+      "Lush hidden garden tucked between historic brick buildings.",
+    ),
     distanceMetres: metresFromKilometres(3),
     durationSeconds: secondsFromMinutes(60),
     rating: 4.8,
