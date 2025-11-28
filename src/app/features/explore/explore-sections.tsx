@@ -46,6 +46,11 @@ type RouteBadgeProps = {
 
 function RouteBadge({ id, locale }: RouteBadgeProps): JSX.Element {
   const badgeDescriptor = getBadgeDescriptor(id, locale);
+  if (!badgeDescriptor && process.env.NODE_ENV !== "production") {
+    // Warn during development to surface missing descriptors early.
+    // eslint-disable-next-line no-console
+    console.warn(`Missing badge descriptor`, { id, locale });
+  }
   const badgeLabel =
     badgeDescriptor?.localization.shortLabel ?? badgeDescriptor?.localization.name ?? id;
   const badgeToneClass = badgeDescriptor?.accentClass ?? "bg-accent/20 text-accent";

@@ -1,3 +1,7 @@
+/** @file Unit tests for Explore presentational components.
+ * Validates localisation, imagery, and badge rendering via the i18n test
+ * harness.
+ */
 import { beforeAll, describe, expect, it } from "bun:test";
 import { render, screen } from "@testing-library/react";
 import type { JSX } from "react";
@@ -104,8 +108,3 @@ describe("Explore presentational components", () => {
     expect(screen.getByText("Ruta de librerías y bistrós")).toBeInTheDocument();
   });
 });
-/**
- * @file Unit tests for Explore presentational components.
- * Validates localisation, imagery, and badge rendering via the i18n test
- * harness.
- */

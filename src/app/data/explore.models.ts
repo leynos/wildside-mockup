@@ -6,6 +6,9 @@ import type { DifficultyId } from "./registries/difficulties";
 import type { InterestId } from "./registries/interests";
 
 export type RouteId = string & { readonly __brand: "RouteId" };
+export type RouteCategoryId = string & { readonly __brand: "RouteCategoryId" };
+export type ThemeId = string & { readonly __brand: "ThemeId" };
+export type RouteCollectionId = string & { readonly __brand: "RouteCollectionId" };
 
 export interface Route {
   readonly id: RouteId;
@@ -20,7 +23,7 @@ export interface Route {
 }
 
 export interface RouteCategory {
-  readonly id: string;
+  readonly id: RouteCategoryId;
   readonly localizations: EntityLocalizations;
   readonly routeCount: number;
   readonly iconToken: string;
@@ -29,7 +32,7 @@ export interface RouteCategory {
 }
 
 export interface Theme {
-  readonly id: string;
+  readonly id: ThemeId;
   readonly localizations: EntityLocalizations;
   readonly image: ImageAsset;
   readonly walkCount: number;
@@ -38,7 +41,7 @@ export interface Theme {
 }
 
 export interface RouteCollection {
-  readonly id: string;
+  readonly id: RouteCollectionId;
   readonly localizations: EntityLocalizations;
   readonly leadImage: ImageAsset;
   readonly mapPreview: ImageAsset;

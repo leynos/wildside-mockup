@@ -15,15 +15,23 @@ import type {
   CommunityPick,
   Route,
   RouteCategory,
+  RouteCategoryId,
   RouteCollection,
+  RouteCollectionId,
   RouteId,
   Theme,
+  ThemeId,
   TrendingRouteHighlight,
 } from "./explore.models";
+import type { BadgeId } from "./registries/badges";
 
 const image = (url: string, alt: string): ImageAsset => ({ url, alt });
 
 const routeId = (value: string): RouteId => value as RouteId;
+const routeCategoryId = (value: string): RouteCategoryId => value as RouteCategoryId;
+const themeId = (value: string): ThemeId => value as ThemeId;
+const routeCollectionId = (value: string): RouteCollectionId => value as RouteCollectionId;
+const badgeId = (value: string): BadgeId => value as BadgeId;
 
 export const exploreRoutes: Route[] = [
   {
@@ -46,7 +54,7 @@ export const exploreRoutes: Route[] = [
     distanceMetres: metresFromKilometres(3.6),
     durationSeconds: secondsFromMinutes(65),
     rating: 4.9,
-    badges: ["sunset-pick", "teal-line"],
+    badges: [badgeId("sunset-pick"), badgeId("teal-line")],
     difficultyId: "moderate",
     interests: ["waterfront", "coffee", "street-art"],
   },
@@ -66,7 +74,7 @@ export const exploreRoutes: Route[] = [
     distanceMetres: metresFromKilometres(2.4),
     durationSeconds: secondsFromMinutes(45),
     rating: 4.7,
-    badges: ["community-favourite"],
+    badges: [badgeId("community-favourite")],
     difficultyId: "easy",
     interests: ["coffee", "markets"],
   },
@@ -84,12 +92,12 @@ export const exploreRoutes: Route[] = [
     },
     heroImage: image(
       heroHiddenGarden,
-      "Lush hidden garden tucked between historic brick buildings.",
+      "Secret courtyard garden with brick walls and dense spring greenery.",
     ),
     distanceMetres: metresFromKilometres(3),
     durationSeconds: secondsFromMinutes(55),
     rating: 4.8,
-    badges: ["teal-line"],
+    badges: [badgeId("teal-line")],
     difficultyId: "easy",
     interests: ["parks", "historic"],
   },
@@ -109,7 +117,7 @@ export const exploreRoutes: Route[] = [
     distanceMetres: metresFromKilometres(4.2),
     durationSeconds: secondsFromMinutes(70),
     rating: 4.6,
-    badges: ["teal-line"],
+    badges: [badgeId("teal-line")],
     difficultyId: "moderate",
     interests: ["street-art", "coffee"],
   },
@@ -129,7 +137,7 @@ export const exploreRoutes: Route[] = [
     distanceMetres: metresFromKilometres(2.8),
     durationSeconds: secondsFromMinutes(50),
     rating: 4.5,
-    badges: ["community-favourite"],
+    badges: [badgeId("community-favourite")],
     difficultyId: "easy",
     interests: ["markets", "coffee"],
   },
@@ -152,7 +160,7 @@ export const exploreRoutes: Route[] = [
     distanceMetres: metresFromKilometres(3),
     durationSeconds: secondsFromMinutes(60),
     rating: 4.8,
-    badges: ["sunset-pick"],
+    badges: [badgeId("sunset-pick")],
     difficultyId: "easy",
     interests: ["parks", "waterfront"],
   },
@@ -172,7 +180,7 @@ export const exploreRoutes: Route[] = [
     distanceMetres: metresFromKilometres(2.2),
     durationSeconds: secondsFromMinutes(40),
     rating: 4.5,
-    badges: ["community-favourite"],
+    badges: [badgeId("community-favourite")],
     difficultyId: "easy",
     interests: ["markets", "food"],
   },
@@ -192,14 +200,14 @@ export const exploreRoutes: Route[] = [
     distanceMetres: metresFromKilometres(4.5),
     durationSeconds: secondsFromMinutes(80),
     rating: 4.7,
-    badges: ["sunset-pick"],
+    badges: [badgeId("sunset-pick")],
     difficultyId: "moderate",
     interests: ["historic", "street-art", "waterfront"],
   },
 ];
 export const exploreCategories: RouteCategory[] = [
   {
-    id: "nature",
+    id: routeCategoryId("nature"),
     localizations: {
       "en-GB": { name: "Nature Walks" },
       es: { name: "Paseos en la naturaleza" },
@@ -209,7 +217,7 @@ export const exploreCategories: RouteCategory[] = [
     gradientClass: "bg-gradient-to-r from-emerald-500 to-teal-500",
   },
   {
-    id: "street-art",
+    id: routeCategoryId("street-art"),
     localizations: {
       "en-GB": { name: "Street Art" },
       es: { name: "Arte urbano" },
@@ -219,7 +227,7 @@ export const exploreCategories: RouteCategory[] = [
     gradientClass: "bg-gradient-to-r from-orange-500 to-rose-500",
   },
   {
-    id: "historic",
+    id: routeCategoryId("historic"),
     localizations: {
       "en-GB": { name: "Historic" },
       es: { name: "Histórico" },
@@ -229,7 +237,7 @@ export const exploreCategories: RouteCategory[] = [
     gradientClass: "bg-gradient-to-r from-sky-500 to-indigo-500",
   },
   {
-    id: "family",
+    id: routeCategoryId("family"),
     localizations: {
       "en-GB": { name: "Family Friendly" },
       es: { name: "Para familias" },
@@ -248,7 +256,7 @@ export const featuredRoute: Route =
   exploreRoutes.find((route) => route.id === featuredRouteId) ?? featuredFallbackRoute;
 export const popularThemes: Theme[] = [
   {
-    id: "coffee-culture",
+    id: themeId("coffee-culture"),
     localizations: {
       "en-GB": { name: "Coffee Culture", description: "Best cafés & roasters" },
       es: { name: "Cultura del café", description: "Mejores cafés y tostadores" },
@@ -259,7 +267,7 @@ export const popularThemes: Theme[] = [
     rating: 4.7,
   },
   {
-    id: "secret-gardens",
+    id: themeId("secret-gardens"),
     localizations: {
       "en-GB": { name: "Hidden Gardens", description: "Secret green spaces" },
       es: { name: "Jardines secretos", description: "Espacios verdes escondidos" },
@@ -270,7 +278,7 @@ export const popularThemes: Theme[] = [
     rating: 4.8,
   },
   {
-    id: "street-art",
+    id: themeId("street-art"),
     localizations: {
       "en-GB": { name: "Street Art Hunt", description: "Murals & installations" },
       es: { name: "Caza de arte urbano", description: "Murales e instalaciones" },
@@ -281,7 +289,7 @@ export const popularThemes: Theme[] = [
     rating: 4.6,
   },
   {
-    id: "market-hop",
+    id: themeId("market-hop"),
     localizations: {
       "en-GB": { name: "Market Hopping", description: "Local food & crafts" },
       es: { name: "Ruta de mercados", description: "Comida y artesanía local" },
@@ -295,7 +303,7 @@ export const popularThemes: Theme[] = [
 
 export const curatedCollections: RouteCollection[] = [
   {
-    id: "coffee-loops",
+    id: routeCollectionId("coffee-loops"),
     localizations: {
       "en-GB": { name: "Sunday Coffee Loops", description: "Perfect lazy morning routes" },
       es: { name: "Circuitos cafeteros", description: "Rutas relajadas para la mañana" },
@@ -318,7 +326,7 @@ export const curatedCollections: RouteCollection[] = [
     ],
   },
   {
-    id: "after-dark",
+    id: routeCollectionId("after-dark"),
     localizations: {
       "en-GB": { name: "After Dark Adventures", description: "Safe, well-lit evening routes" },
       es: { name: "Aventuras nocturnas", description: "Rutas nocturnas bien iluminadas" },
