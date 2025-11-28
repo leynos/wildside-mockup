@@ -6,20 +6,15 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import { formatRating } from "../../data/explore";
-import type {
-  CommunityPick,
-  Route,
-  RouteCategory,
-  RouteCollection,
-  Theme,
-  TrendingRouteHighlight,
-} from "../../data/explore.models";
+import type { Route, RouteCategory, RouteCollection, Theme } from "../../data/explore.models";
 import { getBadgeDescriptor } from "../../data/registries/badges";
 import type {
   DifficultyId,
   ResolvedDifficultyDescriptor,
 } from "../../data/registries/difficulties";
 import { pickLocalization } from "../../domain/entities/localization";
+import { CommunityPickPanel } from "./explore-community";
+import { TrendingRoutesList } from "./explore-trending";
 
 type RouteMetricProps = {
   readonly iconToken: string;
@@ -311,138 +306,5 @@ export function CuratedCollectionsList({
   );
 }
 
-export type TrendingRouteCard = {
-  readonly route: Route;
-  readonly highlight: TrendingRouteHighlight;
-};
-
-type TrendingRouteViewModel = {
-  readonly id: string;
-  readonly title: string;
-  readonly subtitle: string;
-  readonly imageUrl: string;
-  readonly imageAlt: string;
-  readonly trendDelta: string;
-};
-
-const toTrendingRouteViewModel = (
-  card: TrendingRouteCard,
-  locale: string,
-): TrendingRouteViewModel => {
-  const { route, highlight } = card;
-  const routeLocalization = pickLocalization(route.localizations, locale);
-  const subtitle = pickLocalization(highlight.subtitleLocalizations, locale).name;
-
-  return {
-    id: route.id,
-    title: routeLocalization.name,
-    subtitle,
-    imageUrl: route.heroImage.url,
-    imageAlt: route.heroImage.alt,
-    trendDelta: highlight.trendDelta,
-  };
-};
-
-type TrendingRoutesListProps = {
-  readonly routes: readonly TrendingRouteCard[];
-};
-
-export function TrendingRoutesList({ routes }: TrendingRoutesListProps): JSX.Element {
-  const { t, i18n } = useTranslation();
-  const locale = i18n.language;
-  const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
-  const headingId = useId();
-  return (
-    <section aria-labelledby={headingId}>
-      <h2 id={headingId} className="section-title">
-        {heading}
-      </h2>
-      <div className="space-y-3">
-        {routes.map((card) => {
-          const viewModel = toTrendingRouteViewModel(card, locale);
-          return (
-            <article key={viewModel.id} className="explore-trending__card">
-              <div className="flex items-center gap-3">
-                <div className="h-12 w-12 overflow-hidden rounded-lg">
-                  <img
-                    src={viewModel.imageUrl}
-                    alt={viewModel.imageAlt}
-                    className="h-full w-full"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold text-base-content">{viewModel.title}</p>
-                  <p className="text-xs text-base-content/60">{viewModel.subtitle}</p>
-                </div>
-                <span className="flex items-center gap-1 text-sm font-semibold text-orange-300">
-                  <Icon token="{icon.object.trend}" aria-hidden className="h-4 w-4" />
-                  {viewModel.trendDelta}
-                </span>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-type CommunityPickPanelProps = {
-  pick: CommunityPick;
-  formatDistanceLabel: (metres: number) => string;
-  formatDurationLabel: (seconds: number) => string;
-  formatSaveCount: (count: number) => string;
-};
-
-export function CommunityPickPanel({
-  pick,
-  formatDistanceLabel,
-  formatDurationLabel,
-  formatSaveCount,
-}: CommunityPickPanelProps): JSX.Element {
-  const { t, i18n } = useTranslation();
-  const locale = i18n.language;
-  const heading = t("explore-community-heading", { defaultValue: "Community Favourite" });
-  const subtitle = t("explore-community-subtitle", { defaultValue: "Most shared this week" });
-  const headingId = useId();
-  const localization = pickLocalization(pick.localizations, locale);
-  const curator = pickLocalization(pick.curator.localizations, locale);
-  return (
-    <section className="explore-info__panel" aria-labelledby={headingId}>
-      <h2 id={headingId} className="section-heading mb-4 text-base-content">
-        <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
-        {heading}
-      </h2>
-      <div className="mb-3 flex items-center gap-3">
-        <div className="h-9 w-9 overflow-hidden rounded-full border border-base-300/60">
-          <img
-            src={pick.curator.avatar.url}
-            alt={pick.curator.avatar.alt}
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="flex-1">
-          <p className="text-sm font-medium text-base-content">{curator.name}</p>
-          <p className="text-xs text-base-content/60">{subtitle}</p>
-        </div>
-        <span className="rating-indicator rating-indicator--strong">
-          <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
-          {formatRating(pick.rating)}
-        </span>
-      </div>
-      <h3 className="text-base font-semibold text-base-content">{localization.name}</h3>
-      <p className="mt-2 text-sm text-base-content/70">{localization.description}</p>
-      <div className="mt-3 explore-meta-list">
-        <RouteMetric iconToken="{icon.object.route}">
-          {formatDistanceLabel(pick.distanceMetres)}
-        </RouteMetric>
-        <RouteMetric iconToken="{icon.object.duration}">
-          {formatDurationLabel(pick.durationSeconds)}
-        </RouteMetric>
-        <RouteMetric iconToken="{icon.action.save}">{formatSaveCount(pick.saves)}</RouteMetric>
-      </div>
-    </section>
-  );
-}
+export { CommunityPickPanel, TrendingRoutesList };
+export type { TrendingRouteCard } from "./explore-trending";
