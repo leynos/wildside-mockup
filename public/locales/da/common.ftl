@@ -57,11 +57,6 @@ nav-routes-label = Ruter
 nav-profile-label = Profil
 nav-primary-aria-label = Primær navigation
 
-
-
-
-
-
 difficulty-easy-label = Nem
 difficulty-moderate-label = Moderat
 difficulty-challenging-label = Udfordrende
