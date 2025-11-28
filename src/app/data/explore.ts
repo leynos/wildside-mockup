@@ -9,7 +9,8 @@ import heroMarket from "../../assets/explore/market.jpg";
 import heroStreetArt from "../../assets/explore/street_art2.jpg";
 import walkRouteMap2 from "../../assets/walks/walk-route-map-2.png";
 import walkRouteMap3 from "../../assets/walks/walk-route-map-3.png";
-import type { ImageAsset } from "../domain/entities/localization";
+import type { EntityLocalizations, ImageAsset, LocaleCode } from "../domain/entities/localization";
+import { SUPPORTED_LOCALES } from "../i18n/supported-locales";
 import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
 import type {
   CommunityPick,
@@ -39,10 +40,34 @@ const unsafeRouteCollectionId = (value: string): RouteCollectionId => value as R
 const unsafeBadgeId = (value: string): BadgeId => value as BadgeId;
 const communityPickId = (value: string): CommunityPickId => value as CommunityPickId;
 
+const supportedLocaleCodes: readonly LocaleCode[] = SUPPORTED_LOCALES.map(
+  (locale) => locale.code as LocaleCode,
+);
+
+const fillLocalizations = (
+  localizations: EntityLocalizations,
+  fallbackLocale: LocaleCode = "en-GB",
+): EntityLocalizations => {
+  const fallback =
+    localizations[fallbackLocale] ??
+    Object.values(localizations).find((value): value is NonNullable<typeof value> =>
+      Boolean(value),
+    ) ??
+    undefined;
+  if (!fallback) {
+    return localizations;
+  }
+
+  return supportedLocaleCodes.reduce<EntityLocalizations>((acc, code) => {
+    acc[code] = localizations[code] ?? fallback;
+    return acc;
+  }, {});
+};
+
 export const exploreRoutes: Route[] = [
   {
     id: unsafeRouteId("harbour-lights"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Harbour Lights Promenade",
         description:
@@ -52,7 +77,7 @@ export const exploreRoutes: Route[] = [
         name: "Paseo Luces del Puerto",
         description: "Paseo al atardecer con miradores, cafés acogedores y arte público.",
       },
-    },
+    }),
     heroImage: image(
       heroHarborSunset,
       "Sunset across the harbour viewed from a waterfront promenade.",
@@ -66,7 +91,7 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("coffee-culture-loop"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Coffee Culture Circuit",
         description: "Roasters, latte art labs, and leafy courtyards to linger in.",
@@ -75,7 +100,7 @@ export const exploreRoutes: Route[] = [
         name: "Circuito Cultura del Café",
         description: "Tostadores, barras de latte art y patios verdes para disfrutar.",
       },
-    },
+    }),
     heroImage: image(heroCoffeeCulture, "Barista pouring latte art inside a warm café interior."),
     distanceMetres: metresFromKilometres(2.4),
     durationSeconds: secondsFromMinutes(45),
@@ -86,7 +111,7 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("hidden-garden-lanes"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Hidden Garden Lanes",
         description: "Secret courtyards, vertical gardens, and quiet cloisters.",
@@ -95,7 +120,7 @@ export const exploreRoutes: Route[] = [
         name: "Pasajes de Jardines Secretos",
         description: "Patios ocultos, jardines verticales y claustros tranquilos.",
       },
-    },
+    }),
     heroImage: image(
       heroHiddenGarden,
       "Secret courtyard garden with brick walls and dense spring greenery.",
@@ -109,7 +134,7 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("street-art-sprint"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Street Art Sprint",
         description: "Mural-lined backstreets with rotating installations.",
@@ -118,7 +143,7 @@ export const exploreRoutes: Route[] = [
         name: "Sprint de Arte Urbano",
         description: "Calles llenas de murales e instalaciones cambiantes.",
       },
-    },
+    }),
     heroImage: image(heroStreetArt, "Bright street art mural with abstract shapes and characters."),
     distanceMetres: metresFromKilometres(4.2),
     durationSeconds: secondsFromMinutes(70),
@@ -129,7 +154,7 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("market-hop-classic"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Market Hop Classic",
         description: "Laneway markets with local makers and late-night bites.",
@@ -138,7 +163,7 @@ export const exploreRoutes: Route[] = [
         name: "Clásico de Mercados",
         description: "Mercados de callejones con artesanos locales y bocados nocturnos.",
       },
-    },
+    }),
     heroImage: image(heroMarket, "Bustling indoor market with food stalls and hanging lights."),
     distanceMetres: metresFromKilometres(2.8),
     durationSeconds: secondsFromMinutes(50),
@@ -149,7 +174,7 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("cherry-blossom-trail"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Cherry Blossom Trail",
         description: "Limited time bloom corridor with picnic lawns.",
@@ -158,7 +183,7 @@ export const exploreRoutes: Route[] = [
         name: "Ruta de los Cerezos en Flor",
         description: "Corredor de floración temporal con zonas de picnic.",
       },
-    },
+    }),
     heroImage: image(
       heroHiddenGarden,
       "Lush hidden garden tucked between historic brick buildings.",
@@ -172,7 +197,7 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("food-truck-friday"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Food Truck Friday",
         description: "Weekly street food crawl with live music breaks.",
@@ -181,7 +206,7 @@ export const exploreRoutes: Route[] = [
         name: "Viernes de Food Trucks",
         description: "Recorrido gastronómico semanal con música en vivo.",
       },
-    },
+    }),
     heroImage: image(heroMarket, "Street food trucks lined up at dusk."),
     distanceMetres: metresFromKilometres(2.2),
     durationSeconds: secondsFromMinutes(40),
@@ -192,7 +217,7 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("rooftop-views-circuit"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": {
         name: "Rooftop Views Circuit",
         description: "Skyline terraces, glass skybridges, and elevator hops.",
@@ -201,7 +226,7 @@ export const exploreRoutes: Route[] = [
         name: "Circuito de Azoteas con Vistas",
         description: "Terrazas panorámicas y pasarelas de cristal entre torres.",
       },
-    },
+    }),
     heroImage: image(heroHarborSunset, "City skyline from a rooftop bar at golden hour."),
     distanceMetres: metresFromKilometres(4.5),
     durationSeconds: secondsFromMinutes(80),
@@ -214,40 +239,40 @@ export const exploreRoutes: Route[] = [
 export const exploreCategories: RouteCategory[] = [
   {
     id: unsafeRouteCategoryId("nature"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Nature Walks" },
       es: { name: "Paseos en la naturaleza" },
-    },
+    }),
     routeCount: 23,
     iconToken: "{icon.category.nature}",
     gradientClass: "bg-gradient-to-r from-emerald-500 to-teal-500",
   },
   {
     id: unsafeRouteCategoryId("street-art"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Street Art" },
       es: { name: "Arte urbano" },
-    },
+    }),
     routeCount: 18,
     iconToken: "{icon.category.art}",
     gradientClass: "bg-gradient-to-r from-orange-500 to-rose-500",
   },
   {
     id: unsafeRouteCategoryId("historic"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Historic" },
       es: { name: "Histórico" },
-    },
+    }),
     routeCount: 15,
     iconToken: "{icon.category.landmarks}",
     gradientClass: "bg-gradient-to-r from-sky-500 to-indigo-500",
   },
   {
     id: unsafeRouteCategoryId("family"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Family Friendly" },
       es: { name: "Para familias" },
-    },
+    }),
     routeCount: 12,
     iconToken: "{icon.category.wildlife}",
     gradientClass: "bg-gradient-to-r from-fuchsia-500 to-purple-500",
@@ -263,10 +288,10 @@ export const featuredRoute: Route =
 export const popularThemes: Theme[] = [
   {
     id: unsafeThemeId("coffee-culture"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Coffee Culture", description: "Best cafés & roasters" },
       es: { name: "Cultura del café", description: "Mejores cafés y tostadores" },
-    },
+    }),
     image: image(heroCoffeeCulture, "Flat white poured in a ceramic cup beside beans."),
     walkCount: 12,
     distanceRangeMetres: [metresFromKilometres(1.5), metresFromKilometres(3)],
@@ -274,10 +299,10 @@ export const popularThemes: Theme[] = [
   },
   {
     id: unsafeThemeId("secret-gardens"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Hidden Gardens", description: "Secret green spaces" },
       es: { name: "Jardines secretos", description: "Espacios verdes escondidos" },
-    },
+    }),
     image: image(heroHiddenGarden, "Sun-dappled courtyard garden behind tall walls."),
     walkCount: 8,
     distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(4)],
@@ -285,10 +310,10 @@ export const popularThemes: Theme[] = [
   },
   {
     id: unsafeThemeId("street-art"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Street Art Hunt", description: "Murals & installations" },
       es: { name: "Caza de arte urbano", description: "Murales e instalaciones" },
-    },
+    }),
     image: image(heroStreetArt, "Colourful mural wall in an alleyway."),
     walkCount: 15,
     distanceRangeMetres: [metresFromKilometres(1), metresFromKilometres(5)],
@@ -296,10 +321,10 @@ export const popularThemes: Theme[] = [
   },
   {
     id: unsafeThemeId("market-hop"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Market Hopping", description: "Local food & crafts" },
       es: { name: "Ruta de mercados", description: "Comida y artesanía local" },
-    },
+    }),
     image: image(heroMarket, "Market stalls selling food and crafts under string lights."),
     walkCount: 9,
     distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(3)],
@@ -310,10 +335,10 @@ export const popularThemes: Theme[] = [
 export const curatedCollections: RouteCollection[] = [
   {
     id: unsafeRouteCollectionId("coffee-loops"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Sunday Coffee Loops", description: "Perfect lazy morning routes" },
       es: { name: "Circuitos cafeteros", description: "Rutas relajadas para la mañana" },
-    },
+    }),
     leadImage: image(
       heroCoffeeCultureAlt,
       "Outdoor café table with pastries and pour-over coffee.",
@@ -333,10 +358,10 @@ export const curatedCollections: RouteCollection[] = [
   },
   {
     id: unsafeRouteCollectionId("after-dark"),
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "After Dark Adventures", description: "Safe, well-lit evening routes" },
       es: { name: "Aventuras nocturnas", description: "Rutas nocturnas bien iluminadas" },
-    },
+    }),
     leadImage: image(heroAfterDark, "City lights reflecting on wet pavement after dusk."),
     mapPreview: image(walkRouteMap3, "Route map preview for evening walks."),
     distanceRangeMetres: [metresFromKilometres(2), metresFromKilometres(4)],
@@ -355,32 +380,32 @@ export const trendingRoutes: TrendingRouteHighlight[] = [
   {
     routeId: unsafeRouteId("cherry-blossom-trail"),
     trendDelta: "+127%",
-    subtitleLocalizations: {
+    subtitleLocalizations: fillLocalizations({
       "en-GB": { name: "Limited time — Spring only" },
       es: { name: "Tiempo limitado — solo primavera" },
-    },
+    }),
   },
   {
     routeId: unsafeRouteId("food-truck-friday"),
     trendDelta: "+89%",
-    subtitleLocalizations: {
+    subtitleLocalizations: fillLocalizations({
       "en-GB": { name: "Weekly event route" },
       es: { name: "Ruta semanal de eventos" },
-    },
+    }),
   },
   {
     routeId: unsafeRouteId("rooftop-views-circuit"),
     trendDelta: "+56%",
-    subtitleLocalizations: {
+    subtitleLocalizations: fillLocalizations({
       "en-GB": { name: "Best skyline spots" },
       es: { name: "Mejores vistas del skyline" },
-    },
+    }),
   },
 ];
 
 export const communityPick: CommunityPick = {
   id: communityPickId("bookstore-bistro"),
-  localizations: {
+  localizations: fillLocalizations({
     "en-GB": {
       name: "Bookstore & Bistro Crawl",
       description: "A blend of literary gems and cosy eateries in the cultural district.",
@@ -389,12 +414,12 @@ export const communityPick: CommunityPick = {
       name: "Ruta de librerías y bistrós",
       description: "Mezcla de joyas literarias y bistrós acogedores en el distrito cultural.",
     },
-  },
+  }),
   curator: {
-    localizations: {
+    localizations: fillLocalizations({
       "en-GB": { name: "Sarah's pick" },
       es: { name: "Selección de Sarah" },
-    },
+    }),
     avatar: image(heroAfterDark, "Portrait of Sarah smiling at dusk."),
   },
   rating: 4.9,
