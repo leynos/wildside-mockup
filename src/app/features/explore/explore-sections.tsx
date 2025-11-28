@@ -12,7 +12,11 @@ import type {
   DifficultyId,
   ResolvedDifficultyDescriptor,
 } from "../../data/registries/difficulties";
-import { type LocaleCode, pickLocalization } from "../../domain/entities/localization";
+import {
+  type EntityLocalizations,
+  type LocaleCode,
+  pickLocalization,
+} from "../../domain/entities/localization";
 import { CommunityPickPanel } from "./explore-community";
 import { TrendingRoutesList } from "./explore-trending";
 
@@ -42,6 +46,22 @@ export function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Elem
 type RouteBadgeProps = {
   readonly id: BadgeId;
   readonly locale: LocaleCode;
+};
+
+const safeLocalization = (
+  localizations: EntityLocalizations,
+  locale: LocaleCode,
+  fallbackName: string,
+): { readonly name: string; readonly description?: string } => {
+  try {
+    return pickLocalization(localizations, locale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.warn("Falling back to safe localization", { locale, fallbackName, error });
+    }
+    return { name: fallbackName, description: "" };
+  }
 };
 
 function RouteBadge({ id, locale }: RouteBadgeProps): JSX.Element {
@@ -90,7 +110,7 @@ export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Ele
               >
                 <Icon token={category.iconToken} className="text-lg" aria-hidden />
                 <p className="text-sm font-semibold">
-                  {pickLocalization(category.localizations, locale).name}
+                  {safeLocalization(category.localizations, locale, category.id).name}
                 </p>
                 <p className="text-xs text-white/70">{formatRouteCount(category.routeCount)}</p>
               </article>
@@ -123,7 +143,7 @@ export function FeaturedRouteCard({
   const headingId = useId();
   const distanceLabel = formatDistanceLabel(route.distanceMetres);
   const durationLabel = formatDurationLabel(route.durationSeconds);
-  const localization = pickLocalization(route.localizations, locale);
+  const localization = safeLocalization(route.localizations, locale, route.id);
   return (
     <section className="explore-featured__panel" aria-labelledby={headingId}>
       <h2 id={headingId} className="section-heading text-base-content">
@@ -194,7 +214,7 @@ export function PopularThemesGrid({
       </h2>
       <div className="grid grid-cols-2 gap-4">
         {themes.map((theme) => {
-          const localization = pickLocalization(theme.localizations, locale);
+          const localization = safeLocalization(theme.localizations, locale, theme.id);
           return (
             <article key={theme.id} className="explore-compact__card">
               <div className="relative mb-3 h-24 overflow-hidden rounded-lg">
@@ -256,7 +276,7 @@ export function CuratedCollectionsList({
       </h2>
       <div className="space-y-4">
         {collections.map((collection) => {
-          const localization = pickLocalization(collection.localizations, locale);
+          const localization = safeLocalization(collection.localizations, locale, collection.id);
           const difficulty = difficultyLookup.get(collection.difficultyId);
           const badgeToneClass = difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
           return (
