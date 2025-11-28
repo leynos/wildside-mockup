@@ -13,13 +13,11 @@ export interface BadgeDescriptor {
   readonly accentClass?: string;
 }
 
-export type BadgeId = BadgeDescriptor["id"];
-
 export type ResolvedBadgeDescriptor = BadgeDescriptor & {
   readonly localization: LocalizedStringSet;
 };
 
-export const badgeDescriptors: ReadonlyArray<BadgeDescriptor> = [
+export const badgeDescriptors = [
   {
     id: "sunset-pick",
     accentClass: "bg-amber-400/20 text-amber-300",
@@ -44,7 +42,9 @@ export const badgeDescriptors: ReadonlyArray<BadgeDescriptor> = [
       es: { name: "Favorito de la comunidad", shortLabel: "Comunidad" },
     },
   },
-];
+] as const satisfies readonly BadgeDescriptor[];
+
+export type BadgeId = (typeof badgeDescriptors)[number]["id"];
 
 export const getBadgeDescriptor = (
   id: BadgeId,
