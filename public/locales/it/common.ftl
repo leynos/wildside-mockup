@@ -68,14 +68,26 @@ quick-walk-header-description = Regola durata e interessi per aggiornare i sugge
 quick-walk-generate-aria = Crea una nuova passeggiata
 quick-walk-duration-label = Durata
 quick-walk-duration-format =
-    { $count } { -unit-duration-minute($count) }
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
 quick-walk-duration-aria = Durata della passeggiata
 quick-walk-duration-marker-start =
-    { $count } { -unit-duration-minute($count) }
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
 quick-walk-duration-marker-mid =
-    { $count } { -unit-duration-minute($count) }
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
 quick-walk-duration-marker-end =
-    { $count } { -unit-duration-minute($count) }
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
 quick-walk-interests-heading = Interessi
 quick-walk-interests-selected =
     { $count ->

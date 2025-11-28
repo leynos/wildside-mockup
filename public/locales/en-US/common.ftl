@@ -67,11 +67,27 @@ quick-walk-header-title = Quick Walk Generator
 quick-walk-header-description = Dial in duration and interests to refresh suggestions.
 quick-walk-generate-aria = Generate a new walk
 quick-walk-duration-label = Duration
-quick-walk-duration-format = { $count } { -unit-duration-minute($count) }
+quick-walk-duration-format =
+    { $count ->
+        [one] {$count} minute
+       *[other] {$count} minutes
+    }
 quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = { $count } { -unit-duration-minute($count) }
-quick-walk-duration-marker-mid = { $count } { -unit-duration-minute($count) }
-quick-walk-duration-marker-end = { $count } { -unit-duration-minute($count) }
+quick-walk-duration-marker-start =
+    { $count ->
+        [one] {$count} minute
+       *[other] {$count} minutes
+    }
+quick-walk-duration-marker-mid =
+    { $count ->
+        [one] {$count} minute
+       *[other] {$count} minutes
+    }
+quick-walk-duration-marker-end =
+    { $count ->
+        [one] {$count} minute
+       *[other] {$count} minutes
+    }
 quick-walk-interests-heading = Interests
 quick-walk-interests-selected =
     { $count ->

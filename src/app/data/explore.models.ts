@@ -9,6 +9,7 @@ export type RouteId = string & { readonly __brand: "RouteId" };
 export type RouteCategoryId = string & { readonly __brand: "RouteCategoryId" };
 export type ThemeId = string & { readonly __brand: "ThemeId" };
 export type RouteCollectionId = string & { readonly __brand: "RouteCollectionId" };
+export type CommunityPickId = string & { readonly __brand: "CommunityPickId" };
 
 export interface Route {
   readonly id: RouteId;
@@ -58,7 +59,7 @@ export interface TrendingRouteHighlight {
 }
 
 export interface CommunityPick {
-  readonly id: string;
+  readonly id: CommunityPickId;
   readonly localizations: EntityLocalizations;
   readonly curator: {
     readonly localizations: EntityLocalizations;

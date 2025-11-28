@@ -13,6 +13,7 @@ import type { ImageAsset } from "../domain/entities/localization";
 import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
 import type {
   CommunityPick,
+  CommunityPickId,
   Route,
   RouteCategory,
   RouteCategoryId,
@@ -32,6 +33,7 @@ const routeCategoryId = (value: string): RouteCategoryId => value as RouteCatego
 const themeId = (value: string): ThemeId => value as ThemeId;
 const routeCollectionId = (value: string): RouteCollectionId => value as RouteCollectionId;
 const badgeId = (value: string): BadgeId => value as BadgeId;
+const communityPickId = (value: string): CommunityPickId => value as CommunityPickId;
 
 export const exploreRoutes: Route[] = [
   {
@@ -373,7 +375,7 @@ export const trendingRoutes: TrendingRouteHighlight[] = [
 ];
 
 export const communityPick: CommunityPick = {
-  id: "bookstore-bistro",
+  id: communityPickId("bookstore-bistro"),
   localizations: {
     "en-GB": {
       name: "Bookstore & Bistro Crawl",
