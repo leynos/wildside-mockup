@@ -40,6 +40,8 @@ export function InterestToggleGroup({
       {interestIds.map((id) => {
         const interest = interestLookup.get(id);
         if (!interest) return null;
+        const label = interest.localization.shortLabel ?? interest.localization.name;
+        if (!label) return null;
         return (
           <ToggleGroup.Item key={id} value={id} className={CHIP_BASE_CLASSES}>
             <Icon
@@ -47,7 +49,7 @@ export function InterestToggleGroup({
               className={`interest-chip__icon text-lg transition ${interest.iconColorClass}`}
               aria-hidden
             />
-            {interest.localization.shortLabel ?? interest.localization.name}
+            {label}
           </ToggleGroup.Item>
         );
       })}
