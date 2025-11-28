@@ -46,7 +46,7 @@ type RouteBadgeProps = {
 
 function RouteBadge({ id, locale }: RouteBadgeProps): JSX.Element {
   const badgeDescriptor = getBadgeDescriptor(id, locale);
-  if (!badgeDescriptor && process.env.NODE_ENV !== "production") {
+  if (!badgeDescriptor && import.meta.env.DEV) {
     // Warn during development to surface missing descriptors early.
     // eslint-disable-next-line no-console
     console.warn(`Missing badge descriptor`, { id, locale });
