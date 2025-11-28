@@ -57,11 +57,6 @@ nav-routes-label = 路线
 nav-profile-label = 个人资料
 nav-primary-aria-label = 主导航
 
-
-
-
-
-
 difficulty-easy-label = 轻松
 difficulty-moderate-label = 适中
 difficulty-challenging-label = 挑战

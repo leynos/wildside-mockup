@@ -57,11 +57,6 @@ nav-routes-label = Routes
 nav-profile-label = Profile
 nav-primary-aria-label = Primary navigation
 
-
-
-
-
-
 difficulty-easy-label = Easy
 difficulty-moderate-label = Moderate
 difficulty-challenging-label = Challenging
@@ -348,10 +343,7 @@ offline-dialog-preview = Preview download
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { $count ->
-        [one] minute
-       *[other] minutes
-    }
+    { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

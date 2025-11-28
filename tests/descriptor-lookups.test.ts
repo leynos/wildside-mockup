@@ -23,7 +23,7 @@ describe("descriptor lookup helpers", () => {
     });
 
     it("respects fallback locales when the requested locale is missing", () => {
-      const resolved = getBadgeDescriptor("teal-line", "fr-CA");
+      const resolved = getBadgeDescriptor("teal-line", "fr");
       expect(resolved?.localization.name).toBe("Teal line");
     });
 

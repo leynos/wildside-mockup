@@ -325,11 +325,7 @@ offline-dialog-cancel = İptal
 offline-dialog-preview = İndirmeyi önizle
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] dakika
-       *[other] dakika
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

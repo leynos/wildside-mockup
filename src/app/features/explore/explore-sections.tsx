@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 import { Icon } from "../../components/icon";
 import { formatRating } from "../../data/explore";
 import type { Route, RouteCategory, RouteCollection, Theme } from "../../data/explore.models";
-import { getBadgeDescriptor } from "../../data/registries/badges";
+import { type BadgeId, getBadgeDescriptor } from "../../data/registries/badges";
 import type {
   DifficultyId,
   ResolvedDifficultyDescriptor,
 } from "../../data/registries/difficulties";
-import { pickLocalization } from "../../domain/entities/localization";
+import { type LocaleCode, pickLocalization } from "../../domain/entities/localization";
 import { CommunityPickPanel } from "./explore-community";
 import { TrendingRoutesList } from "./explore-trending";
 
@@ -40,8 +40,8 @@ export function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Elem
 }
 
 type RouteBadgeProps = {
-  readonly id: string;
-  readonly locale: string;
+  readonly id: BadgeId;
+  readonly locale: LocaleCode;
 };
 
 function RouteBadge({ id, locale }: RouteBadgeProps): JSX.Element {
@@ -62,7 +62,7 @@ export interface CategoryScrollerProps {
 
 export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Element {
   const { t, i18n } = useTranslation();
-  const locale = i18n.language;
+  const locale = i18n.language as LocaleCode;
   const ariaLabel = t("explore-categories-aria-label", { defaultValue: "Popular categories" });
   const formatRouteCount = (count: number) =>
     t("explore-curated-route-count", {
@@ -113,7 +113,7 @@ export function FeaturedRouteCard({
   route,
 }: FeaturedRouteCardProps): JSX.Element {
   const { t, i18n } = useTranslation();
-  const locale = i18n.language;
+  const locale = i18n.language as LocaleCode;
   const heading = t("explore-featured-heading", { defaultValue: "Walk of the Week" });
   const headingId = useId();
   const distanceLabel = formatDistanceLabel(route.distanceMetres);
@@ -174,7 +174,7 @@ export function PopularThemesGrid({
   themes,
 }: PopularThemesGridProps): JSX.Element {
   const { t, i18n } = useTranslation();
-  const locale = i18n.language;
+  const locale = i18n.language as LocaleCode;
   const heading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
   const headingId = useId();
   const formatWalkCount = (count: number) =>
@@ -236,7 +236,7 @@ export function CuratedCollectionsList({
   formatDurationRangeLabel,
 }: CuratedCollectionsListProps): JSX.Element {
   const { t, i18n } = useTranslation();
-  const locale = i18n.language;
+  const locale = i18n.language as LocaleCode;
   const heading = t("explore-curated-heading", { defaultValue: "Curated Collections" });
   const formatRouteCount = (count: number) =>
     t("explore-curated-route-count", {

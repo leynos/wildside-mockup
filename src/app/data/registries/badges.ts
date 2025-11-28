@@ -47,8 +47,8 @@ export const badgeDescriptors: ReadonlyArray<BadgeDescriptor> = [
 ];
 
 export const getBadgeDescriptor = (
-  id: string,
-  locale: string,
+  id: BadgeId,
+  locale: LocaleCode,
   fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
 ): ResolvedBadgeDescriptor | undefined => {
   const descriptor = badgeDescriptors.find((entry) => entry.id === id);

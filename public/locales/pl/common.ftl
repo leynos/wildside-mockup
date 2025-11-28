@@ -57,11 +57,6 @@ nav-routes-label = Trasy
 nav-profile-label = Profil
 nav-primary-aria-label = Nawigacja główna
 
-
-
-
-
-
 difficulty-easy-label = Łatwa
 difficulty-moderate-label = Średnia
 difficulty-challenging-label = Wymagająca
@@ -335,14 +330,7 @@ offline-dialog-cancel = Anuluj
 offline-dialog-preview = Podgląd pobierania
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [zero] minut
-        [one] minuta
-        [few] minuty
-        [many] minut
-       *[other] minut
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

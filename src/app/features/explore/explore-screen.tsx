@@ -121,15 +121,14 @@ export function ExploreScreen(): JSX.Element {
     () => new Map<RouteId, Route>(exploreRoutes.map((route) => [route.id, route])),
     [],
   );
-  const trendingRouteCards = useMemo<TrendingRouteCard[]>(() => {
-    const cards: TrendingRouteCard[] = [];
-    trendingRoutes.forEach((highlight) => {
-      const route = routesById.get(highlight.routeId);
-      if (!route) return;
-      cards.push({ route, highlight });
-    });
-    return cards;
-  }, [routesById]);
+  const trendingRouteCards = useMemo<TrendingRouteCard[]>(
+    () =>
+      trendingRoutes.flatMap((highlight) => {
+        const route = routesById.get(highlight.routeId);
+        return route ? [{ route, highlight }] : [];
+      }),
+    [routesById],
+  );
 
   return (
     <MobileShell>

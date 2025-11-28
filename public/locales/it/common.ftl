@@ -344,11 +344,7 @@ unit-distance-mile = mi
        *[other] minuti
     }
 
-unit-duration-minute-label =
-    { $count ->
-        [one] minuto
-       *[other] minuti
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

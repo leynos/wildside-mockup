@@ -337,11 +337,7 @@ offline-dialog-cancel = ரத்து
 offline-dialog-preview = பதிவிறக்க முன்னோட்டம்
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] நிமிடம்
-       *[other] நிமிடங்கள்
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

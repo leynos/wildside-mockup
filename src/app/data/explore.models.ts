@@ -5,7 +5,7 @@ import type { BadgeId } from "./registries/badges";
 import type { DifficultyId } from "./registries/difficulties";
 import type { InterestId } from "./registries/interests";
 
-export type RouteId = string;
+export type RouteId = string & { readonly __brand: "RouteId" };
 
 export interface Route {
   readonly id: RouteId;

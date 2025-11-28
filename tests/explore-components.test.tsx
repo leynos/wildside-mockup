@@ -86,7 +86,7 @@ describe("Explore presentational components", () => {
         const route = routesById.get(highlight.routeId);
         return route ? { route, highlight } : undefined;
       })
-      .filter(Boolean) as TrendingRouteCard[];
+      .filter((card): card is TrendingRouteCard => card !== undefined);
 
     renderWithI18n(
       <>
@@ -104,3 +104,8 @@ describe("Explore presentational components", () => {
     expect(screen.getByText("Ruta de librerías y bistrós")).toBeInTheDocument();
   });
 });
+/**
+ * @file Unit tests for Explore presentational components.
+ * Validates localisation, imagery, and badge rendering via the i18n test
+ * harness.
+ */

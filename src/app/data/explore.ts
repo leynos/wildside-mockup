@@ -16,15 +16,18 @@ import type {
   Route,
   RouteCategory,
   RouteCollection,
+  RouteId,
   Theme,
   TrendingRouteHighlight,
 } from "./explore.models";
 
 const image = (url: string, alt: string): ImageAsset => ({ url, alt });
 
+const routeId = (value: string): RouteId => value as RouteId;
+
 export const exploreRoutes: Route[] = [
   {
-    id: "harbour-lights",
+    id: routeId("harbour-lights"),
     localizations: {
       "en-GB": {
         name: "Harbour Lights Promenade",
@@ -48,7 +51,7 @@ export const exploreRoutes: Route[] = [
     interests: ["waterfront", "coffee", "street-art"],
   },
   {
-    id: "coffee-culture-loop",
+    id: routeId("coffee-culture-loop"),
     localizations: {
       "en-GB": {
         name: "Coffee Culture Circuit",
@@ -68,7 +71,7 @@ export const exploreRoutes: Route[] = [
     interests: ["coffee", "markets"],
   },
   {
-    id: "hidden-garden-lanes",
+    id: routeId("hidden-garden-lanes"),
     localizations: {
       "en-GB": {
         name: "Hidden Garden Lanes",
@@ -91,7 +94,7 @@ export const exploreRoutes: Route[] = [
     interests: ["parks", "historic"],
   },
   {
-    id: "street-art-sprint",
+    id: routeId("street-art-sprint"),
     localizations: {
       "en-GB": {
         name: "Street Art Sprint",
@@ -111,7 +114,7 @@ export const exploreRoutes: Route[] = [
     interests: ["street-art", "coffee"],
   },
   {
-    id: "market-hop-classic",
+    id: routeId("market-hop-classic"),
     localizations: {
       "en-GB": {
         name: "Market Hop Classic",
@@ -131,7 +134,7 @@ export const exploreRoutes: Route[] = [
     interests: ["markets", "coffee"],
   },
   {
-    id: "cherry-blossom-trail",
+    id: routeId("cherry-blossom-trail"),
     localizations: {
       "en-GB": {
         name: "Cherry Blossom Trail",
@@ -154,7 +157,7 @@ export const exploreRoutes: Route[] = [
     interests: ["parks", "waterfront"],
   },
   {
-    id: "food-truck-friday",
+    id: routeId("food-truck-friday"),
     localizations: {
       "en-GB": {
         name: "Food Truck Friday",
@@ -174,7 +177,7 @@ export const exploreRoutes: Route[] = [
     interests: ["markets", "food"],
   },
   {
-    id: "rooftop-views-circuit",
+    id: routeId("rooftop-views-circuit"),
     localizations: {
       "en-GB": {
         name: "Rooftop Views Circuit",
@@ -240,8 +243,9 @@ const featuredFallbackRoute = exploreRoutes[0];
 if (!featuredFallbackRoute) {
   throw new Error("Explore catalogue requires at least one seeded route");
 }
+const featuredRouteId = routeId("harbour-lights");
 export const featuredRoute: Route =
-  exploreRoutes.find((route) => route.id === "harbour-lights") ?? featuredFallbackRoute;
+  exploreRoutes.find((route) => route.id === featuredRouteId) ?? featuredFallbackRoute;
 export const popularThemes: Theme[] = [
   {
     id: "coffee-culture",
@@ -305,12 +309,12 @@ export const curatedCollections: RouteCollection[] = [
     durationRangeSeconds: [secondsFromMinutes(30), secondsFromMinutes(45)],
     difficultyId: "easy",
     routeIds: [
-      "coffee-culture-loop",
-      "market-hop-classic",
-      "harbour-lights",
-      "food-truck-friday",
-      "street-art-sprint",
-      "hidden-garden-lanes",
+      routeId("coffee-culture-loop"),
+      routeId("market-hop-classic"),
+      routeId("harbour-lights"),
+      routeId("food-truck-friday"),
+      routeId("street-art-sprint"),
+      routeId("hidden-garden-lanes"),
     ],
   },
   {
@@ -325,17 +329,17 @@ export const curatedCollections: RouteCollection[] = [
     durationRangeSeconds: [secondsFromMinutes(45), secondsFromMinutes(70)],
     difficultyId: "moderate",
     routeIds: [
-      "harbour-lights",
-      "rooftop-views-circuit",
-      "street-art-sprint",
-      "cherry-blossom-trail",
+      routeId("harbour-lights"),
+      routeId("rooftop-views-circuit"),
+      routeId("street-art-sprint"),
+      routeId("cherry-blossom-trail"),
     ],
   },
 ];
 
 export const trendingRoutes: TrendingRouteHighlight[] = [
   {
-    routeId: "cherry-blossom-trail",
+    routeId: routeId("cherry-blossom-trail"),
     trendDelta: "+127%",
     subtitleLocalizations: {
       "en-GB": { name: "Limited time — Spring only" },
@@ -343,7 +347,7 @@ export const trendingRoutes: TrendingRouteHighlight[] = [
     },
   },
   {
-    routeId: "food-truck-friday",
+    routeId: routeId("food-truck-friday"),
     trendDelta: "+89%",
     subtitleLocalizations: {
       "en-GB": { name: "Weekly event route" },
@@ -351,7 +355,7 @@ export const trendingRoutes: TrendingRouteHighlight[] = [
     },
   },
   {
-    routeId: "rooftop-views-circuit",
+    routeId: routeId("rooftop-views-circuit"),
     trendDelta: "+56%",
     subtitleLocalizations: {
       "en-GB": { name: "Best skyline spots" },
@@ -385,7 +389,12 @@ export const communityPick: CommunityPick = {
   saves: 428,
 };
 
-/** Format rating to one decimal place for display copy. */
+/**
+ * Format rating to one decimal place for display copy.
+ *
+ * @example
+ *   formatRating(4.456); // "4.5"
+ */
 export function formatRating(input: number): string {
   return input.toFixed(1);
 }

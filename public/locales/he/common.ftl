@@ -57,11 +57,6 @@ nav-routes-label = מסלולים
 nav-profile-label = פרופיל
 nav-primary-aria-label = ניווט ראשי
 
-
-
-
-
-
 difficulty-easy-label = קל
 difficulty-moderate-label = בינוני
 difficulty-challenging-label = מאתגר
