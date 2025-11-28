@@ -121,13 +121,19 @@ export function ExploreScreen(): JSX.Element {
     () => new Map<RouteId, Route>(exploreRoutes.map((route) => [route.id, route])),
     [],
   );
+  // biome-ignore lint/correctness/useExhaustiveDependencies: trendingRoutes is a static fixture; keep for clarity.
   const trendingRouteCards = useMemo<TrendingRouteCard[]>(
     () =>
-      trendingRoutes.flatMap((highlight) => {
-        const route = routesById.get(highlight.routeId);
-        return route ? [{ route, highlight }] : [];
-      }),
-    [routesById],
+      trendingRoutes
+        .filter((highlight) => routesById.has(highlight.routeId))
+        .map((highlight) => {
+          const route = routesById.get(highlight.routeId);
+          if (!route) {
+            throw new Error(`Missing route for trending highlight ${highlight.routeId}`);
+          }
+          return { route, highlight };
+        }),
+    [routesById, trendingRoutes],
   );
 
   return (
