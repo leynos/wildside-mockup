@@ -57,11 +57,6 @@ nav-routes-label = Percorsi
 nav-profile-label = Profilo
 nav-primary-aria-label = Navigazione principale
 
-
-
-
-
-
 difficulty-easy-label = Facile
 difficulty-moderate-label = Moderata
 difficulty-challenging-label = Impegnativa
