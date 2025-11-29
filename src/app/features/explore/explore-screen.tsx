@@ -121,7 +121,6 @@ export function ExploreScreen(): JSX.Element {
     () => new Map<RouteId, Route>(exploreRoutes.map((route) => [route.id, route])),
     [],
   );
-  // biome-ignore lint/correctness/useExhaustiveDependencies: trendingRoutes is a static fixture; keep for clarity.
   const trendingRouteCards = useMemo<TrendingRouteCard[]>(
     () =>
       trendingRoutes
@@ -133,7 +132,7 @@ export function ExploreScreen(): JSX.Element {
           }
           return { route, highlight };
         }),
-    [routesById, trendingRoutes],
+    [routesById],
   );
 
   return (
