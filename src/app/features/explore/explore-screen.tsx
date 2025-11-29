@@ -123,15 +123,13 @@ export function ExploreScreen(): JSX.Element {
   );
   const trendingRouteCards = useMemo<TrendingRouteCard[]>(
     () =>
-      trendingRoutes
-        .filter((highlight) => routesById.has(highlight.routeId))
-        .map((highlight) => {
-          const route = routesById.get(highlight.routeId);
-          if (!route) {
-            throw new Error(`Missing route for trending highlight ${highlight.routeId}`);
-          }
-          return { route, highlight };
-        }),
+      trendingRoutes.map((highlight) => {
+        const route = routesById.get(highlight.routeId);
+        if (!route) {
+          throw new Error(`Missing route for trending highlight ${highlight.routeId}`);
+        }
+        return { route, highlight };
+      }),
     [routesById],
   );
 
