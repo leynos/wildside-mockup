@@ -56,12 +56,7 @@ nav-discover-label = Opdag
 nav-routes-label = Ruter
 nav-profile-label = Profil
 nav-primary-aria-label = Primær navigation
-interest-parks-label = Parker og natur
-interest-coffee-label = Kaffesteder
-interest-street-art-label = Street art
-interest-historic-label = Historiske steder
-interest-waterfront-label = Havnefront
-interest-markets-label = Markeder
+
 difficulty-easy-label = Nem
 difficulty-moderate-label = Moderat
 difficulty-challenging-label = Udfordrende
@@ -325,11 +320,7 @@ offline-dialog-cancel = Annuller
 offline-dialog-preview = Vis download
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] minut
-       *[other] minutter
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

@@ -56,12 +56,7 @@ nav-discover-label = Scopri
 nav-routes-label = Percorsi
 nav-profile-label = Profilo
 nav-primary-aria-label = Navigazione principale
-interest-parks-label = Parchi e natura
-interest-coffee-label = Caffetterie
-interest-street-art-label = Street art
-interest-historic-label = Siti storici
-interest-waterfront-label = Lungomare
-interest-markets-label = Mercati
+
 difficulty-easy-label = Facile
 difficulty-moderate-label = Moderata
 difficulty-challenging-label = Impegnativa
@@ -72,11 +67,27 @@ quick-walk-header-title = Generatore di passeggiate rapide
 quick-walk-header-description = Regola durata e interessi per aggiornare i suggerimenti.
 quick-walk-generate-aria = Crea una nuova passeggiata
 quick-walk-duration-label = Durata
-quick-walk-duration-format = {$count} { unit-duration-minute-label }
+quick-walk-duration-format =
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
 quick-walk-duration-aria = Durata della passeggiata
-quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-start =
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
+quick-walk-duration-marker-mid =
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
+quick-walk-duration-marker-end =
+    { $count ->
+        [one] {$count} minuto
+       *[other] {$count} minuti
+    }
 quick-walk-interests-heading = Interessi
 quick-walk-interests-selected =
     { $count ->
@@ -328,11 +339,7 @@ unit-distance-mile = mi
        *[other] minuti
     }
 
-unit-duration-minute-label =
-    { $count ->
-        [one] minuto
-       *[other] minuti
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

@@ -56,12 +56,12 @@ nav-discover-label = Darganfod
 nav-routes-label = Llwybrau
 nav-profile-label = Proffil
 nav-primary-aria-label = Prif lywio
-interest-parks-label = Parciau a Natur
-interest-coffee-label = Safleoedd coffi
-interest-street-art-label = Celf stryd
-interest-historic-label = Safleoedd hanesyddol
-interest-waterfront-label = Arfordir
-interest-markets-label = Marchnadoedd
+
+
+
+
+
+
 difficulty-easy-label = Hawdd
 difficulty-moderate-label = Cymedrol
 difficulty-challenging-label = Heriol

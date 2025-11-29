@@ -56,12 +56,7 @@ nav-discover-label = Odkrywaj
 nav-routes-label = Trasy
 nav-profile-label = Profil
 nav-primary-aria-label = Nawigacja główna
-interest-parks-label = Parki i natura
-interest-coffee-label = Kawiarnie
-interest-street-art-label = Sztuka uliczna
-interest-historic-label = Miejsca historyczne
-interest-waterfront-label = Nadbrzeże
-interest-markets-label = Bazary
+
 difficulty-easy-label = Łatwa
 difficulty-moderate-label = Średnia
 difficulty-challenging-label = Wymagająca
@@ -335,14 +330,7 @@ offline-dialog-cancel = Anuluj
 offline-dialog-preview = Podgląd pobierania
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [zero] minut
-        [one] minuta
-        [few] minuty
-        [many] minut
-       *[other] minut
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

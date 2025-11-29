@@ -56,12 +56,12 @@ nav-discover-label = Keşfet
 nav-routes-label = Rotalar
 nav-profile-label = Profil
 nav-primary-aria-label = Ana gezinme
-interest-parks-label = Parklar ve doğa
-interest-coffee-label = Kahve durakları
-interest-street-art-label = Sokak sanatı
-interest-historic-label = Tarihi mekânlar
-interest-waterfront-label = Sahil şeridi
-interest-markets-label = Pazarlar
+
+
+
+
+
+
 difficulty-easy-label = Kolay
 difficulty-moderate-label = Orta
 difficulty-challenging-label = Zorlu
@@ -325,11 +325,7 @@ offline-dialog-cancel = İptal
 offline-dialog-preview = İndirmeyi önizle
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] dakika
-       *[other] dakika
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

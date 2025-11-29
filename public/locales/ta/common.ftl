@@ -68,12 +68,12 @@ nav-discover-label = கண்டறி
 nav-routes-label = பாதைகள்
 nav-profile-label = சுயவிவரம்
 nav-primary-aria-label = முதன்மை வழிசெலுத்தல்
-interest-parks-label = பூங்கா & இயற்கை
-interest-coffee-label = காபி இடங்கள்
-interest-street-art-label = தெருக்கலை
-interest-historic-label = வரலாற்றுச் சின்னங்கள்
-interest-waterfront-label = நீர்த்தீரம்
-interest-markets-label = சந்தைகள்
+
+
+
+
+
+
 difficulty-easy-label = எளிது
 difficulty-moderate-label = நடுத்தரம்
 difficulty-challenging-label = சவாலான
@@ -337,11 +337,7 @@ offline-dialog-cancel = ரத்து
 offline-dialog-preview = பதிவிறக்க முன்னோட்டம்
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-        [one] நிமிடம்
-       *[other] நிமிடங்கள்
-    }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 
 -unit-duration-minute =
     { $count ->

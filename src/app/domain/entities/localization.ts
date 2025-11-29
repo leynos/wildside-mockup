@@ -38,6 +38,11 @@ export type LocalizedStringSet = {
 
 export type EntityLocalizations = Partial<Record<LocaleCode, LocalizedStringSet>>;
 
+export type ImageAsset = {
+  readonly url: string;
+  readonly alt: string;
+};
+
 const defaultFallbackChain: readonly LocaleCode[] = ["en-GB", "en-US"];
 
 const normalizeLocale = (input: string): string => input.trim().toLowerCase();

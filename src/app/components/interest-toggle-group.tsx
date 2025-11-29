@@ -3,8 +3,8 @@
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { type JSX, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { interestDescriptors, type ResolvedInterestDescriptor } from "../data/registries/interests";
-import { resolveDescriptor } from "../i18n/descriptors";
+
+import { buildInterestLookup } from "../data/registries/interests";
 import { Icon } from "./icon";
 
 const CHIP_BASE_CLASSES =
@@ -25,14 +25,9 @@ export function InterestToggleGroup({
   ariaLabel,
   className,
 }: InterestToggleGroupProps): JSX.Element {
-  const { t } = useTranslation();
-  const interestLookup = useMemo(
-    () =>
-      new Map<string, ResolvedInterestDescriptor>(
-        interestDescriptors.map((descriptor) => [descriptor.id, resolveDescriptor(descriptor, t)]),
-      ),
-    [t],
-  );
+  const { i18n } = useTranslation();
+  const locale = i18n.language;
+  const interestLookup = useMemo(() => buildInterestLookup(locale), [locale]);
 
   return (
     <ToggleGroup.Root
@@ -45,6 +40,8 @@ export function InterestToggleGroup({
       {interestIds.map((id) => {
         const interest = interestLookup.get(id);
         if (!interest) return null;
+        const label = interest.localization.shortLabel ?? interest.localization.name;
+        if (!label) return null;
         return (
           <ToggleGroup.Item key={id} value={id} className={CHIP_BASE_CLASSES}>
             <Icon
@@ -52,7 +49,7 @@ export function InterestToggleGroup({
               className={`interest-chip__icon text-lg transition ${interest.iconColorClass}`}
               aria-hidden
             />
-            {interest.label}
+            {label}
           </ToggleGroup.Item>
         );
       })}

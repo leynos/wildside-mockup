@@ -56,12 +56,7 @@ nav-discover-label = גילוי
 nav-routes-label = מסלולים
 nav-profile-label = פרופיל
 nav-primary-aria-label = ניווט ראשי
-interest-parks-label = פארקים וטבע
-interest-coffee-label = בתי קפה
-interest-street-art-label = אמנות רחוב
-interest-historic-label = אתרים היסטוריים
-interest-waterfront-label = טיילת חוף
-interest-markets-label = שווקים
+
 difficulty-easy-label = קל
 difficulty-moderate-label = בינוני
 difficulty-challenging-label = מאתגר
@@ -337,23 +332,13 @@ offline-dialog-cancel = ביטול
 offline-dialog-preview = תצוגה מקדימה של ההורדה
 unit-distance-kilometre = ק"מ
 unit-distance-mile = mi
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] דקה
         [two] דקות
         [many] דקות
        *[other] דקות
     }
-
--unit-duration-minute =
-    { $count ->
-        [one] דקה
-        [two] דקות
-        [many] דקות
-       *[other] דקות
-    }
-
-unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

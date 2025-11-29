@@ -56,12 +56,12 @@ nav-discover-label = 탐색
 nav-routes-label = 루트
 nav-profile-label = 프로필
 nav-primary-aria-label = 주요 탐색
-interest-parks-label = 공원과 자연
-interest-coffee-label = 커피 스폿
-interest-street-art-label = 스트리트 아트
-interest-historic-label = 역사 명소
-interest-waterfront-label = 워터프런트
-interest-markets-label = 시장
+
+
+
+
+
+
 difficulty-easy-label = 쉬움
 difficulty-moderate-label = 보통
 difficulty-challenging-label = 도전적

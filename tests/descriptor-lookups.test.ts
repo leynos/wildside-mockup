@@ -23,11 +23,12 @@ describe("descriptor lookup helpers", () => {
     });
 
     it("respects fallback locales when the requested locale is missing", () => {
-      const resolved = getBadgeDescriptor("teal-line", "fr-CA");
+      const resolved = getBadgeDescriptor("teal-line", "fr");
       expect(resolved?.localization.name).toBe("Teal line");
     });
 
     it("returns undefined for unknown ids", () => {
+      // @ts-expect-error intentional invalid id to verify runtime guard
       expect(getBadgeDescriptor("unknown", "en-GB")).toBeUndefined();
     });
   });

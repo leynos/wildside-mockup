@@ -1,12 +1,13 @@
 /** @file Static fixtures supporting the Discover onboarding flow. */
 
-import type { TFunction } from "i18next";
+import { defaultFallbackLocales, type LocaleCode } from "../domain/entities/localization";
 
-import { resolveDescriptor } from "../i18n/descriptors";
 import {
+  getInterestDescriptor,
   type InterestDescriptor,
   interestDescriptors,
   type ResolvedInterestDescriptor,
+  resolveInterestDescriptors,
 } from "./registries/interests";
 
 export type DiscoverInterest = ResolvedInterestDescriptor;
@@ -18,17 +19,17 @@ export type DiscoverInterestId = InterestDescriptor["id"];
 
 export const discoverInterestDescriptors = interestDescriptors;
 
-export function resolveDiscoverInterests(t: TFunction): DiscoverInterest[] {
-  return interestDescriptors.map((descriptor) => resolveDescriptor(descriptor, t));
+export function resolveDiscoverInterests(
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
+): DiscoverInterest[] {
+  return resolveInterestDescriptors(locale, fallbackLocales);
 }
 
 export function getDiscoverInterest(
   id: DiscoverInterestId,
-  t: TFunction,
+  locale: string,
+  fallbackLocales: readonly LocaleCode[] = defaultFallbackLocales,
 ): DiscoverInterest | undefined {
-  const match = interestDescriptors.find((interest) => interest.id === id);
-  if (!match) {
-    return undefined;
-  }
-  return resolveDescriptor(match, t);
+  return getInterestDescriptor(id, locale, fallbackLocales);
 }

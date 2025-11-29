@@ -56,12 +56,12 @@ nav-discover-label = 発見
 nav-routes-label = ルート
 nav-profile-label = プロフィール
 nav-primary-aria-label = メインナビゲーション
-interest-parks-label = 公園と自然
-interest-coffee-label = 珈琲屋
-interest-street-art-label = 路上アート
-interest-historic-label = 歴史スポット
-interest-waterfront-label = ウォーターフロント
-interest-markets-label = マーケット
+
+
+
+
+
+
 difficulty-easy-label = やさしい
 difficulty-moderate-label = 中くらい
 difficulty-challenging-label = チャレンジ

@@ -7,11 +7,8 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import { SectionHero } from "../../components/section-hero";
-import {
-  type DiscoverInterest,
-  defaultSelectedInterests,
-  resolveDiscoverInterests,
-} from "../../data/discover";
+import { type DiscoverInterest, defaultSelectedInterests } from "../../data/discover";
+import { buildInterestLookup } from "../../data/registries/interests";
 import { MobileShell } from "../../layout/mobile-shell";
 
 interface InterestChipProps {
@@ -31,7 +28,7 @@ function InterestChip({ interest }: InterestChipProps): JSX.Element {
         />
       </div>
       <h3 className="text-center text-sm font-medium text-base-content group-data-[state=on]:text-accent">
-        {interest.label}
+        {interest.localization.shortLabel ?? interest.localization.name}
       </h3>
     </ToggleGroup.Item>
   );
@@ -41,9 +38,12 @@ export function DiscoverScreen(): JSX.Element {
   const [selected, setSelected] = useState<string[]>([...defaultSelectedInterests]);
   const [isGenerating, setIsGenerating] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const interests = useMemo(() => resolveDiscoverInterests(t), [t]);
+  const interests = useMemo(() => {
+    const lookup = buildInterestLookup(i18n.language);
+    return Array.from(lookup.values());
+  }, [i18n.language]);
 
   const selectedCount = useMemo(() => selected.length, [selected]);
 
