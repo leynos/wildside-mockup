@@ -40,10 +40,10 @@ const toTrendingRouteViewModel = (
 };
 
 type TrendingRoutesListProps = {
-  readonly routes: readonly TrendingRouteCard[];
+  readonly cards: readonly TrendingRouteCard[];
 };
 
-export function TrendingRoutesList({ routes }: TrendingRoutesListProps): JSX.Element {
+export function TrendingRoutesList({ cards }: TrendingRoutesListProps): JSX.Element {
   const { t, i18n } = useTranslation();
   const locale = i18n.language;
   const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
@@ -54,7 +54,7 @@ export function TrendingRoutesList({ routes }: TrendingRoutesListProps): JSX.Ele
         {heading}
       </h2>
       <div className="space-y-3">
-        {routes.map((card) => {
+        {cards.map((card) => {
           const viewModel = toTrendingRouteViewModel(card, locale);
           return (
             <article key={viewModel.id} className="explore-trending__card">

@@ -181,7 +181,7 @@ export function ExploreScreen(): JSX.Element {
               formatDistanceRangeLabel={formatDistanceRangeLabel}
               formatDurationRangeLabel={formatDurationRangeLabel}
             />
-            <TrendingRoutesList routes={trendingRouteCards} />
+            <TrendingRoutesList cards={trendingRouteCards} />
             <CommunityPickPanel
               pick={communityPick}
               formatDistanceLabel={formatDistanceLabel}

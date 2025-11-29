@@ -94,7 +94,7 @@ describe("Explore presentational components", () => {
 
     renderWithI18n(
       <>
-        <TrendingRoutesList routes={cards} />
+        <TrendingRoutesList cards={cards} />
         <CommunityPickPanel
           pick={communityPick}
           formatDistanceLabel={formatDistanceLabel}
