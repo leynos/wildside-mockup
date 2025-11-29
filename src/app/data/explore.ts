@@ -79,17 +79,21 @@ const fillLocalizations = (
 export const exploreRoutes: Route[] = [
   {
     id: unsafeRouteId("harbour-lights"),
-    localizations: fillLocalizations({
-      "en-GB": {
-        name: "Harbour Lights Promenade",
-        description:
-          "Golden hour stroll weaving past skyline overlooks, coffee pit stops, and art installations.",
+    localizations: fillLocalizations(
+      {
+        "en-GB": {
+          name: "Harbour Lights Promenade",
+          description:
+            "Golden hour stroll weaving past skyline overlooks, coffee pit stops, and art installations.",
+        },
+        es: {
+          name: "Paseo Luces del Puerto",
+          description: "Paseo al atardecer con miradores, cafés acogedores y arte público.",
+        },
       },
-      es: {
-        name: "Paseo Luces del Puerto",
-        description: "Paseo al atardecer con miradores, cafés acogedores y arte público.",
-      },
-    }),
+      "en-GB",
+      "route: harbour-lights",
+    ),
     heroImage: image(
       heroHarborSunset,
       "Sunset across the harbour viewed from a waterfront promenade.",
@@ -103,16 +107,20 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("coffee-culture-loop"),
-    localizations: fillLocalizations({
-      "en-GB": {
-        name: "Coffee Culture Circuit",
-        description: "Roasters, latte art labs, and leafy courtyards to linger in.",
+    localizations: fillLocalizations(
+      {
+        "en-GB": {
+          name: "Coffee Culture Circuit",
+          description: "Roasters, latte art labs, and leafy courtyards to linger in.",
+        },
+        es: {
+          name: "Circuito Cultura del Café",
+          description: "Tostadores, barras de latte art y patios verdes para disfrutar.",
+        },
       },
-      es: {
-        name: "Circuito Cultura del Café",
-        description: "Tostadores, barras de latte art y patios verdes para disfrutar.",
-      },
-    }),
+      "en-GB",
+      "route: coffee-culture-loop",
+    ),
     heroImage: image(heroCoffeeCulture, "Barista pouring latte art inside a warm café interior."),
     distanceMetres: metresFromKilometres(2.4),
     durationSeconds: secondsFromMinutes(45),
@@ -123,16 +131,20 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("hidden-garden-lanes"),
-    localizations: fillLocalizations({
-      "en-GB": {
-        name: "Hidden Garden Lanes",
-        description: "Secret courtyards, vertical gardens, and quiet cloisters.",
+    localizations: fillLocalizations(
+      {
+        "en-GB": {
+          name: "Hidden Garden Lanes",
+          description: "Secret courtyards, vertical gardens, and quiet cloisters.",
+        },
+        es: {
+          name: "Pasajes de Jardines Secretos",
+          description: "Patios ocultos, jardines verticales y claustros tranquilos.",
+        },
       },
-      es: {
-        name: "Pasajes de Jardines Secretos",
-        description: "Patios ocultos, jardines verticales y claustros tranquilos.",
-      },
-    }),
+      "en-GB",
+      "route: hidden-garden-lanes",
+    ),
     heroImage: image(
       heroHiddenGarden,
       "Secret courtyard garden with brick walls and dense spring greenery.",
@@ -146,16 +158,20 @@ export const exploreRoutes: Route[] = [
   },
   {
     id: unsafeRouteId("street-art-sprint"),
-    localizations: fillLocalizations({
-      "en-GB": {
-        name: "Street Art Sprint",
-        description: "Mural-lined backstreets with rotating installations.",
+    localizations: fillLocalizations(
+      {
+        "en-GB": {
+          name: "Street Art Sprint",
+          description: "Mural-lined backstreets with rotating installations.",
+        },
+        es: {
+          name: "Sprint de Arte Urbano",
+          description: "Calles llenas de murales e instalaciones cambiantes.",
+        },
       },
-      es: {
-        name: "Sprint de Arte Urbano",
-        description: "Calles llenas de murales e instalaciones cambiantes.",
-      },
-    }),
+      "en-GB",
+      "route: street-art-sprint",
+    ),
     heroImage: image(heroStreetArt, "Bright street art mural with abstract shapes and characters."),
     distanceMetres: metresFromKilometres(4.2),
     durationSeconds: secondsFromMinutes(70),
