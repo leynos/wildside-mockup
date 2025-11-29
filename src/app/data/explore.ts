@@ -47,6 +47,7 @@ const supportedLocaleCodes: readonly LocaleCode[] = SUPPORTED_LOCALES.map(
 const fillLocalizations = (
   localizations: EntityLocalizations,
   fallbackLocale: LocaleCode = "en-GB",
+  context?: string,
 ): EntityLocalizations => {
   const fallback =
     localizations[fallbackLocale] ??
@@ -56,6 +57,17 @@ const fillLocalizations = (
     undefined;
   if (!fallback) {
     return localizations;
+  }
+
+  const missingLocales = supportedLocaleCodes.filter((code) => !localizations[code]);
+  if (import.meta.env.DEV && missingLocales.length > 0) {
+    // eslint-disable-next-line no-console
+    console.warn("fillLocalizations applied fallback", {
+      context,
+      missingLocales,
+      availableLocales: Object.keys(localizations),
+      fallbackLocale,
+    });
   }
 
   return supportedLocaleCodes.reduce<EntityLocalizations>((acc, code) => {
