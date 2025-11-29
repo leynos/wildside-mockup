@@ -57,11 +57,6 @@ nav-routes-label = เส้นทาง
 nav-profile-label = โปรไฟล์
 nav-primary-aria-label = การนำทางหลัก
 
-
-
-
-
-
 difficulty-easy-label = ง่าย
 difficulty-moderate-label = ปานกลาง
 difficulty-challenging-label = ท้าทาย
@@ -151,7 +146,7 @@ wizard-step-three-route-title = ลูปอัญมณีที่ซ่อน
 wizard-step-three-route-badge = ปรับแต่ง
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { -unit-duration-minute($count) }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = เส้นทางแบบเฉพาะตัวที่ผสมตรอกศิลปะข้างถนน คาเฟ่อิสระ และจุดชมวิวริมน้ำอันเงียบสงบ

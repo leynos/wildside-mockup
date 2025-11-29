@@ -1,0 +1,61 @@
+/** @file Behavioural tests for interest-driven UI components.
+ *
+ * Bun provides the test runner, but we use Vitest's `vi` mocking API for
+ * module stubbing. Bun's type declarations do not include `vi.mock`, so we
+ * import `vi` directly and annotate its usage with @ts-expect-error below to
+ * document the runtime availability.
+ */
+
+import { beforeAll, describe, expect, it } from "bun:test";
+import { render, screen } from "@testing-library/react";
+import type { JSX } from "react";
+import { I18nextProvider } from "react-i18next";
+import { vi } from "vitest";
+
+// @ts-expect-error -- vi.mock is provided by Vitest runtime; Bun's types omit it.
+vi.mock("@tanstack/react-router", () => ({
+  useNavigate: () => vi.fn(),
+}));
+
+import { InterestToggleGroup } from "../src/app/components/interest-toggle-group";
+import { DiscoverScreen } from "../src/app/features/discover";
+import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
+import { changeLanguage, i18n, i18nReady } from "./helpers/i18nTestHelpers";
+
+const renderWithI18n = (ui: JSX.Element) =>
+  render(<I18nextProvider i18n={i18n}>{ui}</I18nextProvider>);
+
+beforeAll(async () => {
+  await i18nReady;
+});
+
+describe("Interest-driven UI", () => {
+  it("renders InterestToggleGroup labels from the registry", async () => {
+    await changeLanguage("es");
+
+    renderWithI18n(
+      <InterestToggleGroup
+        ariaLabel="Interests"
+        interestIds={["markets", "food"]}
+        selected={[]}
+        onChange={() => {}}
+      />,
+    );
+
+    expect(screen.getByText("Mercados")).toBeInTheDocument();
+    expect(screen.getByText("Comida callejera")).toBeInTheDocument();
+  });
+
+  it("uses registry localisations in DiscoverScreen interest chips", async () => {
+    await changeLanguage("es");
+
+    renderWithI18n(
+      <DisplayModeProvider>
+        <DiscoverScreen />
+      </DisplayModeProvider>,
+    );
+
+    expect(screen.getByText("Arte urbano")).toBeInTheDocument();
+    expect(screen.getByText("Parques y naturaleza")).toBeInTheDocument();
+  });
+});

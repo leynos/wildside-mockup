@@ -67,27 +67,11 @@ quick-walk-header-title = Quick Walk Generator
 quick-walk-header-description = Dial in duration and interests to refresh suggestions.
 quick-walk-generate-aria = Generate a new walk
 quick-walk-duration-label = Duration
-quick-walk-duration-format =
-    { $count ->
-        [one] {$count} minute
-       *[other] {$count} minutes
-    }
+quick-walk-duration-format = {$count} {unit-duration-minute-label}
 quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start =
-    { $count ->
-        [one] {$count} minute
-       *[other] {$count} minutes
-    }
-quick-walk-duration-marker-mid =
-    { $count ->
-        [one] {$count} minute
-       *[other] {$count} minutes
-    }
-quick-walk-duration-marker-end =
-    { $count ->
-        [one] {$count} minute
-       *[other] {$count} minutes
-    }
+quick-walk-duration-marker-start = {$count} {unit-duration-minute-label}
+quick-walk-duration-marker-mid = {$count} {unit-duration-minute-label}
+quick-walk-duration-marker-end = {$count} {unit-duration-minute-label}
 quick-walk-interests-heading = Interests
 quick-walk-interests-selected =
     { $count ->
@@ -162,7 +146,7 @@ wizard-step-three-route-title = Hidden Gems Loop
 wizard-step-three-route-badge = Custom
 wizard-step-three-route-distance-unit = { unit-distance-mile }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { -unit-duration-minute($count) }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = A personalised walk blending street art laneways, independent cafés, and quiet waterfront viewpoints.
@@ -343,9 +327,6 @@ offline-dialog-preview = Preview download
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { -unit-duration-minute($count) }
-
--unit-duration-minute =
     { $count ->
         [one] minute
        *[other] minutes

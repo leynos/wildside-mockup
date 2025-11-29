@@ -5,7 +5,12 @@ import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import type { Route, TrendingRouteHighlight } from "../../data/explore.models";
-import { pickLocalization } from "../../domain/entities/localization";
+import {
+  type EntityLocalizations,
+  type LocaleCode,
+  pickLocalization,
+} from "../../domain/entities/localization";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../../i18n/supported-locales";
 
 export type TrendingRouteCard = {
   readonly route: Route;
@@ -21,13 +26,65 @@ type TrendingRouteViewModel = {
   readonly trendDelta: string;
 };
 
+const safePickLocalization = (
+  localizations: EntityLocalizations,
+  locale: LocaleCode,
+  fallbackName: string,
+) => {
+  try {
+    return pickLocalization(localizations, locale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.warn("Missing localisation for trending route card", {
+        locale,
+        fallbackName,
+        error,
+      });
+    }
+    return { name: fallbackName };
+  }
+};
+
+/**
+ * Map a trending route card to a view model with resolved localisation.
+ *
+ * @param card - Trending route data containing a route and its highlight meta.
+ * @param locale - Locale code to resolve localised strings.
+ * @returns A view model ready for rendering.
+ *
+ * @example
+ * ```ts
+ * const card = {
+ *   route: {
+ *     id: "harbour-lights",
+ *     localizations: { "en-GB": { name: "Harbour Lights", description: "Sunset loop" } },
+ *     heroImage: { url: "/harbour.jpg", alt: "Harbour at dusk" },
+ *   },
+ *   highlight: {
+ *     trendDelta: "+25%",
+ *     subtitleLocalizations: { "en-GB": { name: "Weekly favourite" } },
+ *   },
+ * };
+ *
+ * const viewModel = toTrendingRouteViewModel(card, "en-GB");
+ * // viewModel = {
+ * //   id: "harbour-lights",
+ * //   title: "Harbour Lights",
+ * //   subtitle: "Weekly favourite",
+ * //   imageUrl: "/harbour.jpg",
+ * //   imageAlt: "Harbour at dusk",
+ * //   trendDelta: "+25%",
+ * // }
+ * ```
+ */
 const toTrendingRouteViewModel = (
   card: TrendingRouteCard,
-  locale: string,
+  locale: LocaleCode,
 ): TrendingRouteViewModel => {
   const { route, highlight } = card;
-  const routeLocalization = pickLocalization(route.localizations, locale);
-  const subtitle = pickLocalization(highlight.subtitleLocalizations, locale).name;
+  const routeLocalization = safePickLocalization(route.localizations, locale, route.id);
+  const subtitle = safePickLocalization(highlight.subtitleLocalizations, locale, route.id).name;
 
   return {
     id: route.id,
@@ -43,9 +100,14 @@ type TrendingRoutesListProps = {
   readonly cards: readonly TrendingRouteCard[];
 };
 
+const toLocaleCode = (value: string | undefined): LocaleCode => {
+  const supportedCodes = SUPPORTED_LOCALES.map((locale) => locale.code) as readonly LocaleCode[];
+  return supportedCodes.find((code) => code === value) ?? (DEFAULT_LOCALE as LocaleCode);
+};
+
 export function TrendingRoutesList({ cards }: TrendingRoutesListProps): JSX.Element {
   const { t, i18n } = useTranslation();
-  const locale = i18n.language;
+  const locale = toLocaleCode(i18n.language);
   const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
   const headingId = useId();
   return (

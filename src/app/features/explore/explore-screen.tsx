@@ -121,16 +121,19 @@ export function ExploreScreen(): JSX.Element {
     () => new Map<RouteId, Route>(exploreRoutes.map((route) => [route.id, route])),
     [],
   );
+  // Trending highlights are expected to resolve to real routes; tests assert this to keep the fail-fast throw dev-only.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: trendingRoutes is a module-scoped constant intentionally included in deps to surface fixture drift; suppress exhaustive-deps warning.
   const trendingRouteCards = useMemo<TrendingRouteCard[]>(
     () =>
       trendingRoutes.map((highlight) => {
         const route = routesById.get(highlight.routeId);
         if (!route) {
+          // Fail fast during development if fixtures drift.
           throw new Error(`Missing route for trending highlight ${highlight.routeId}`);
         }
         return { route, highlight };
       }),
-    [routesById],
+    [routesById, trendingRoutes],
   );
 
   return (

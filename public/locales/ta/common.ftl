@@ -22,18 +22,18 @@ customize-slider-duration-label = நேரம்
 customize-slider-duration-aria = நேரம் ஸ்லைடர்
 customize-slider-duration-marker-0 =
     { $count ->
-        [one] { $count } { -unit-duration-minute($count) }
-       *[other] { $count } { -unit-duration-minute($count) }
+        [one] {$count} { unit-duration-minute-label }
+       *[other] {$count} { unit-duration-minute-label }
     }
 customize-slider-duration-marker-1 =
     { $count ->
-        [one] { $count } { -unit-duration-minute($count) }
-       *[other] { $count } { -unit-duration-minute($count) }
+        [one] {$count} { unit-duration-minute-label }
+       *[other] {$count} { unit-duration-minute-label }
     }
 customize-slider-duration-marker-2 =
     { $count ->
-        [one] { $count } { -unit-duration-minute($count) }
-       *[other] { $count } { -unit-duration-minute($count) }
+        [one] {$count} { unit-duration-minute-label }
+       *[other] {$count} { unit-duration-minute-label }
     }
 customize-crowd-option-quiet-label = அமைதி
 customize-crowd-option-quiet-description = அமைதியான தெருக்கள்
@@ -69,11 +69,6 @@ nav-routes-label = பாதைகள்
 nav-profile-label = சுயவிவரம்
 nav-primary-aria-label = முதன்மை வழிசெலுத்தல்
 
-
-
-
-
-
 difficulty-easy-label = எளிது
 difficulty-moderate-label = நடுத்தரம்
 difficulty-challenging-label = சவாலான
@@ -84,11 +79,11 @@ quick-walk-header-title = விரைவு நடை உருவாக்க�
 quick-walk-header-description = பரிந்துரைகளைப் புதுப்பிக்க காலஅளவும் விருப்பங்களையும் சரிசெய்க.
 quick-walk-generate-aria = புதிய நடையை உருவாக்கு
 quick-walk-duration-label = காலஅளவு
-quick-walk-duration-format = {$count} { -unit-duration-minute($count) }
+quick-walk-duration-format = {$count} { unit-duration-minute-label }
 quick-walk-duration-aria = நடை காலஅளவு
-quick-walk-duration-marker-start = {$count} { -unit-duration-minute($count) }
-quick-walk-duration-marker-mid = {$count} { -unit-duration-minute($count) }
-quick-walk-duration-marker-end = {$count} { -unit-duration-minute($count) }
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
 quick-walk-interests-heading = ஆர்வங்கள்
 quick-walk-interests-selected =
     { $count ->
@@ -163,10 +158,7 @@ wizard-step-three-route-title = மறைக்கப்பட்ட நகை�
 wizard-step-three-route-badge = தனிப்பயன்
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = தெரு கலை பாதைகள், சுயாதீனக் கஃபேக்கள், அமைதியான நீர்கரை காட்சிகள் கலந்து உருவான தனிப்பயன் நடைபாதை.
@@ -337,9 +329,7 @@ offline-dialog-cancel = ரத்து
 offline-dialog-preview = பதிவிறக்க முன்னோட்டம்
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] நிமிடம்
        *[other] நிமிடங்கள்

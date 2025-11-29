@@ -57,11 +57,6 @@ nav-routes-label = Routes
 nav-profile-label = Profiel
 nav-primary-aria-label = Primaire navigatie
 
-
-
-
-
-
 difficulty-easy-label = Makkelijk
 difficulty-moderate-label = Gemiddeld
 difficulty-challenging-label = Uitdagend
@@ -151,7 +146,7 @@ wizard-step-three-route-title = Verborgen Parels-lus
 wizard-step-three-route-badge = Aangepast
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Een persoonlijke wandeling die street-artsteegjes, onafhankelijke cafés en rustige uitzichten langs het water combineert.

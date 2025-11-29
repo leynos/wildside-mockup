@@ -2,6 +2,7 @@ import { describe, expect, it } from "bun:test";
 
 import { getBadgeDescriptor } from "../src/app/data/registries/badges";
 import { getTagDescriptor } from "../src/app/data/registries/tags";
+import type { LocaleCode } from "../src/app/domain/entities/localization";
 
 describe("descriptor lookup helpers", () => {
   describe("getTagDescriptor", () => {
@@ -18,12 +19,12 @@ describe("descriptor lookup helpers", () => {
 
   describe("getBadgeDescriptor", () => {
     it("returns a resolved descriptor with localisation applied", () => {
-      const resolved = getBadgeDescriptor("sunset-pick", "en-GB");
+      const resolved = getBadgeDescriptor("sunset-pick", "en-GB" satisfies LocaleCode);
       expect(resolved?.localization.shortLabel).toBe("Sunset");
     });
 
     it("respects fallback locales when the requested locale is missing", () => {
-      const resolved = getBadgeDescriptor("teal-line", "fr");
+      const resolved = getBadgeDescriptor("teal-line", "fr" satisfies LocaleCode);
       expect(resolved?.localization.name).toBe("Teal line");
     });
 

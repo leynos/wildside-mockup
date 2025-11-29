@@ -57,11 +57,6 @@ nav-routes-label = मार्ग
 nav-profile-label = प्रोफ़ाइल
 nav-primary-aria-label = मुख्य नेविगेशन
 
-
-
-
-
-
 difficulty-easy-label = आसान
 difficulty-moderate-label = मध्यम
 difficulty-challenging-label = चुनौतीपूर्ण
@@ -151,11 +146,7 @@ wizard-step-three-route-title = छिपे रत्नों की लूप
 wizard-step-three-route-badge = व्यक्तिगत
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-        [one] { unit-duration-minute-label }
-       *[other] { unit-duration-minute-label }
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = स्ट्रीट आर्ट की गलियों, स्वतंत्र कैफ़े और शांत जल-किनारे दृश्यों का मेल करती एक निजी वॉक।

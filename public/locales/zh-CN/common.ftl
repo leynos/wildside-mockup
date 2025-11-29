@@ -146,10 +146,7 @@ wizard-step-three-route-title = 隐藏宝藏环线
 wizard-step-three-route-badge = 自定义
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = 个性化步行体验，融合街头艺术小巷、独立咖啡店与静谧水岸观景点。
@@ -311,12 +308,7 @@ offline-dialog-cancel = 取消
 offline-dialog-preview = 预览下载
 unit-distance-kilometre = 公里
 unit-distance-mile = 英里
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
-    { $count ->
-       *[other] 分钟
-    }
+unit-duration-minute-label = 分钟
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =

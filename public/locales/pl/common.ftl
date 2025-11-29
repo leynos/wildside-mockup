@@ -150,10 +150,7 @@ wizard-step-three-route-title = Pętla Ukrytych Pereł
 wizard-step-three-route-badge = Indywidualny
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Personalizowany spacer łączący uliczne murale, niezależne kawiarnie i spokojne widoki nad wodą.
@@ -330,9 +327,7 @@ offline-dialog-cancel = Anuluj
 offline-dialog-preview = Podgląd pobierania
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [zero] minut
         [one] minuta
@@ -356,3 +351,4 @@ unit-energy-joule = J
 unit-energy-kilojoule = kJ
 unit-energy-calorie = kcal
 unit-energy-btu = BTU
+

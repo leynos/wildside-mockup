@@ -57,11 +57,6 @@ nav-routes-label = Rutas
 nav-profile-label = Perfil
 nav-primary-aria-label = Navegación principal
 
-
-
-
-
-
 difficulty-easy-label = Fácil
 difficulty-moderate-label = Moderada
 difficulty-challenging-label = Exigente
@@ -151,11 +146,7 @@ wizard-step-three-route-title = Circuito de Joyas Ocultas
 wizard-step-three-route-badge = Personalizada
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-        [one] minuto
-       *[other] minutos
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Una caminata personalizada que mezcla callejones de arte urbano, cafeterías independientes y miradores tranquilos junto al agua.
@@ -331,12 +322,6 @@ unit-duration-minute-label =
         [one] minuto
        *[other] minutos
     }
-
--unit-duration-minute =
-    { $count ->
-        [one] minuto
-       *[other] minutos
-    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
@@ -355,3 +340,4 @@ unit-energy-joule = J
 unit-energy-kilojoule = kJ
 unit-energy-calorie = kcal
 unit-energy-btu = BTU
+

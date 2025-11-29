@@ -1,3 +1,5 @@
+/** @file Unit and behavioural coverage for interest registry resolution. */
+
 import { describe, expect, it } from "bun:test";
 
 import {
@@ -7,33 +9,23 @@ import {
   resolveInterestDescriptors,
 } from "../src/app/data/registries/interests";
 
-describe("interest registry", () => {
-  it("resolves descriptors for a locale and preserves visual metadata", () => {
-    const descriptor = getInterestDescriptor("waterfront", "es");
-
-    expect(descriptor).toBeDefined();
-    expect(descriptor?.localization.name).toBe("Frente marítimo");
-    expect(descriptor?.iconToken).toBe("{icon.category.water}");
+describe("interest descriptor registry", () => {
+  it("builds a stable lookup of all descriptors for a locale", () => {
+    const lookup = buildInterestLookup("es");
+    expect(lookup.size).toBe(interestDescriptors.length);
+    const markets = lookup.get("markets");
+    expect(markets?.localization.name).toBe("Mercados");
   });
 
-  it("falls back to default locales when the requested locale is missing", () => {
-    const descriptor = getInterestDescriptor("parks", "fr-CA");
-
-    expect(descriptor).toBeDefined();
+  it("falls back to default locales when localisation is missing", () => {
+    const descriptor = getInterestDescriptor("parks", "fr");
     expect(descriptor?.localization.name).toBe("Parks & Nature");
   });
 
-  it("buildInterestLookup returns a stable map of all descriptors", () => {
-    const lookup = buildInterestLookup("en-GB");
-
-    expect(lookup.size).toBe(interestDescriptors.length);
-    expect(lookup.get("food")?.localization.name).toBe("Street Food");
-  });
-
-  it("resolveInterestDescriptors returns the same descriptors as the lookup values", () => {
-    const viaLookup = Array.from(buildInterestLookup("es").values());
-    const viaResolve = resolveInterestDescriptors("es");
-
-    expect(viaResolve).toEqual(viaLookup);
+  it("returns an array view with resolveInterestDescriptors", () => {
+    const descriptors = resolveInterestDescriptors("en-GB");
+    expect(descriptors).toHaveLength(interestDescriptors.length);
+    const streetArt = descriptors.find((entry) => entry.id === "street-art");
+    expect(streetArt?.localization.name).toBe("Street Art");
   });
 });

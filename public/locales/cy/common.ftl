@@ -57,11 +57,6 @@ nav-routes-label = Llwybrau
 nav-profile-label = Proffil
 nav-primary-aria-label = Prif lywio
 
-
-
-
-
-
 difficulty-easy-label = Hawdd
 difficulty-moderate-label = Cymedrol
 difficulty-challenging-label = Heriol
@@ -159,10 +154,7 @@ wizard-step-three-route-title = Cylch Trysorau Cudd
 wizard-step-three-route-badge = Personol
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Taith gerdded bersonol sy’n cyfuno lonydd celf stryd, caffis annibynnol a golygfeydd tawel ar hyd y glannau.

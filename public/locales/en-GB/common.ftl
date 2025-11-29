@@ -57,11 +57,6 @@ nav-routes-label = Routes
 nav-profile-label = Profile
 nav-primary-aria-label = Primary navigation
 
-
-
-
-
-
 difficulty-easy-label = Easy
 difficulty-moderate-label = Moderate
 difficulty-challenging-label = Challenging
@@ -154,7 +149,7 @@ wizard-step-three-route-title = Hidden Gems Loop
 wizard-step-three-route-badge = Custom
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = A personalised walk blending street art laneways, independent cafés, and quiet waterfront viewpoints.
@@ -328,13 +323,11 @@ unit-distance-mile = mi
 # unit-duration-minute-label is the public user-facing unit label for durations.
 # -unit-duration-minute is the internal term for fixed patterns that still need
 # an explicit numeric argument.
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] minute
        *[other] minutes
     }
-
-unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
