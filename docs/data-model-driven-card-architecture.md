@@ -200,10 +200,10 @@ available locale. Components must not construct names from translation keys.
   - Convert customize sliders, segment options, route previews, and advanced
     toggles to entity-based inputs; replace per-option translation keys.
   - Refactor safety accordion sections to reference `SafetyToggle` entities and
-    presets with localisation maps; prune Fluent keys.
+    presets with localization maps; prune Fluent keys.
 - **Phase 3: offline & map**
   - Migrate offline suggestions and downloads to SI/numeric fields and
-    localisation maps; update cards and undo states.
+    localization maps; update cards and undo states.
   - Reshape `WalkPointOfInterest` and saved routes; ensure tags use registries
     and unit formatting covers all numerical values.
 - **Phase 4: wizard & completion**
