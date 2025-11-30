@@ -52,6 +52,24 @@ const supportedLocaleCodes: readonly LocaleCode[] = SUPPORTED_LOCALES.map(
   (locale) => locale.code as LocaleCode,
 );
 
+/**
+ * Normalise a partial localisation map to cover all supported locales.
+ *
+ * Missing locales are filled from the provided `fallbackLocale` (or the first
+ * available entry). In development a warning is logged when any locales are
+ * backfilled, but the behaviour is unchanged in production.
+ *
+ * @param localizations - Partial map of locale code to localisation strings.
+ * @param fallbackLocale - Preferred locale to use when filling gaps.
+ * @param context - Optional identifier included in the dev-only warning.
+ * @returns A localisation map with entries for every supported locale.
+ *
+ * @example
+ * const sparse = { "en-GB": { name: "Harbour Lights" } };
+ * const filled = fillLocalizations(sparse, "en-GB", "route: harbour-lights");
+ * // filled["en-GB"].name === "Harbour Lights"
+ * // filled["es"].name === "Harbour Lights" (backfilled from en-GB)
+ */
 export const fillLocalizations = (
   localizations: EntityLocalizations,
   fallbackLocale: LocaleCode = "en-GB",
