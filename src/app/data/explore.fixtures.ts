@@ -26,7 +26,7 @@ import {
   unsafeThemeId,
 } from "./explore-fixture-helpers";
 
-const requireCuratedRouteMap = (key: string): string => {
+const requireCuratedRouteMap = (key: keyof typeof curatedRouteMaps): string => {
   const mapPreview = curatedRouteMaps[key];
   if (!mapPreview) {
     throw new Error(`Missing map preview asset for ${key}`);
