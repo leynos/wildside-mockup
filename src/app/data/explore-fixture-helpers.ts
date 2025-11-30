@@ -79,8 +79,7 @@ export const fillLocalizations = (
     localizations[fallbackLocale] ??
     Object.values(localizations).find((value): value is NonNullable<typeof value> =>
       Boolean(value),
-    ) ??
-    undefined;
+    );
   if (!fallback) {
     return localizations;
   }
