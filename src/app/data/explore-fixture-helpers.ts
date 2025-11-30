@@ -11,6 +11,17 @@ import type {
 } from "./explore.models";
 import type { BadgeId } from "./registries/badges";
 
+/**
+ * Create an image asset tuple for fixtures.
+ *
+ * @param url - Absolute or relative image URL.
+ * @param alt - Human-friendly alt text describing the image.
+ * @returns An ImageAsset with `url` and `alt` fields.
+ *
+ * @example
+ * const hero = image("https://example.com/pic.jpg", "Harbour at dusk");
+ * // hero = { url: "https://example.com/pic.jpg", alt: "Harbour at dusk" }
+ */
 export const image = (url: string, alt: string): ImageAsset => ({ url, alt });
 
 type BaseLocalization = { readonly name: string; readonly description?: string };
