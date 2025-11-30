@@ -8,7 +8,7 @@ Every card in the mockup must render from a concrete entity data model that
 already contains its localized strings and International System of Units
 (SI)-based measurements.
 Locale bundles should keep only UI chrome and formatting scaffolding. This
-document audits current card usages and defines the schemas, localisation
+document audits current card usages and defines the schemas, localization
 rules, and migration steps to align the codebase.
 
 ## Principles to enforce
