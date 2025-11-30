@@ -56,6 +56,11 @@ export const unsafeRouteCategoryId = (value: string): RouteCategoryId => value a
 export const unsafeThemeId = (value: string): ThemeId => value as ThemeId;
 export const unsafeRouteCollectionId = (value: string): RouteCollectionId =>
   value as RouteCollectionId;
+/**
+ * Unsafe cast to a badge identifier. `BadgeId` is a literal union sourced from
+ * `badgeDescriptors`; callers must ensure the value exists there. Use
+ * `getBadgeDescriptor` for runtime validation when resolving descriptors.
+ */
 export const unsafeBadgeId = (value: string): BadgeId => value as BadgeId;
 export const unsafeCommunityPickId = (value: string): CommunityPickId => value as CommunityPickId;
 
