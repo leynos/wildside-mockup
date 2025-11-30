@@ -24,6 +24,7 @@ import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
 import { formatDistance, formatDistanceRange, formatDuration } from "../../units/unit-format";
 import { useUnitPreferences } from "../../units/unit-preferences-provider";
+import { appLogger } from "../../observability/logger";
 import {
   CategoryScroller,
   CommunityPickPanel,
@@ -125,13 +126,17 @@ export function ExploreScreen(): JSX.Element {
   // biome-ignore lint/correctness/useExhaustiveDependencies: trendingRoutes is a module-scoped constant intentionally included in deps to surface fixture drift; suppress exhaustive-deps warning.
   const trendingRouteCards = useMemo<TrendingRouteCard[]>(
     () =>
-      trendingRoutes.map((highlight) => {
+      trendingRoutes.flatMap((highlight) => {
         const route = routesById.get(highlight.routeId);
         if (!route) {
-          // Fail fast during development if fixtures drift.
-          throw new Error(`Missing route for trending highlight ${highlight.routeId}`);
+          const message = `Missing route for trending highlight ${highlight.routeId}`;
+          if (import.meta.env.DEV) {
+            throw new Error(message);
+          }
+          appLogger.warn(message);
+          return [];
         }
-        return { route, highlight };
+        return [{ route, highlight }];
       }),
     [routesById, trendingRoutes],
   );
