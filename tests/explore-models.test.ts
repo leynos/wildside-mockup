@@ -1,3 +1,5 @@
+/** @file Unit tests validating Explore fixture integrity and relationships. */
+
 import { describe, expect, it } from "bun:test";
 
 import {
