@@ -270,7 +270,7 @@ export const communityPick: CommunityPick = {
       "en-GB",
       "curator: sarah",
     ),
-    avatar: image(heroAfterDark, "Portrait of Sarah smiling at dusk."),
+    avatar: image(heroAfterDark, "City lights reflecting on wet pavement after dusk."),
   },
   rating: 4.9,
   distanceMetres: metresFromKilometres(2.8),
