@@ -27,7 +27,7 @@ describe("Explore entity fixtures", () => {
 
   it("ensures all curated collections reference existing routes", () => {
     const missing = curatedCollections.flatMap((collection) =>
-      collection.routeIds.filter((id: RouteId) => !routesById.has(id)),
+      collection.routeIds.filter((id) => !routesById.has(id)),
     );
     expect(missing).toHaveLength(0);
   });
