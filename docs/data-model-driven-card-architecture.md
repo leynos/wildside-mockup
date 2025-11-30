@@ -151,7 +151,7 @@ available locale. Components must not construct names from translation keys.
   - `WizardRouteSummary`: `routeId` link plus `badgeLocalization` and stat
     projections; remove per-stat translation keys.
 
-## Localisation handling rules
+## Localization handling rules
 
 - Every entity exposes `localizations`; UI selects the matching locale once per
   render using a `pickLocalization(entity, locale)` helper.
