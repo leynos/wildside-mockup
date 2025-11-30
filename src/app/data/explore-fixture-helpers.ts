@@ -18,6 +18,13 @@ type BaseLocalization = { readonly name: string; readonly description?: string }
 /**
  * Expand a base localisation across all supported locales, with optional
  * per-locale overrides when translations are available.
+ *
+ * @example
+ * const base = { name: "Market Hop", description: "Local food and crafts" };
+ * const overrides = { es: { name: "Ruta de mercados", description: "Comida y artesanía" } };
+ * const localized = localizeAcrossLocales(base, overrides);
+ * // localized.en-GB.name === "Market Hop"
+ * // localized.es.name === "Ruta de mercados"
  */
 export const localizeAcrossLocales = (
   base: BaseLocalization,
