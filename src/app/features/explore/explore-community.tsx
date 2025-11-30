@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Icon } from "../../components/icon";
 import type { CommunityPick } from "../../data/explore.models";
 import { pickLocalization } from "../../domain/entities/localization";
-import { appLogger } from "../observability/logger";
+import { appLogger } from "../../observability/logger";
 import { RouteMetric } from "./explore-sections";
 
 type CommunityPickPanelProps = {
