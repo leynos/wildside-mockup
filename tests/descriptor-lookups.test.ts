@@ -30,7 +30,6 @@ describe("descriptor lookup helpers", () => {
 
     it("returns undefined for unknown ids", () => {
       // @ts-expect-error intentional invalid id to verify runtime guard
-      // @ts-expect-error intentional invalid locale cast for the same runtime guard
       expect(getBadgeDescriptor("unknown", "en-GB" satisfies LocaleCode)).toBeUndefined();
     });
   });
