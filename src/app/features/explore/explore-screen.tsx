@@ -133,7 +133,7 @@ export function ExploreScreen(): JSX.Element {
           if (import.meta.env.DEV) {
             throw new Error(message);
           }
-          appLogger.warn(message);
+          appLogger.warn(message, { routeId: highlight.routeId });
           return [];
         }
         return [{ route, highlight }];
