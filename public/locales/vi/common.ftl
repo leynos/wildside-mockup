@@ -318,10 +318,7 @@ offline-dialog-cancel = Hủy
 offline-dialog-preview = Xem trước tải xuống
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
-    { $count ->
-       *[other] phút
-    }
+unit-duration-minute-label = phút
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
