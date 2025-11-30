@@ -81,7 +81,9 @@ export const fillLocalizations = (
       Boolean(value),
     );
   if (!fallback) {
-    return localizations;
+    throw new Error(
+      `fillLocalizations failed: no fallback found (requested '${fallbackLocale}'), locales present: ${Object.keys(localizations).join(", ")}`,
+    );
   }
 
   const missingLocales = supportedLocaleCodes.filter((code) => !localizations[code]);
