@@ -151,6 +151,204 @@ available locale. Components must not construct names from translation keys.
   - `WizardRouteSummary`: `routeId` link plus `badgeLocalization` and stat
     projections; remove per-stat translation keys.
 
+## Visual model references
+
+Figure 1 illustrates the entity relationships for routes, collections, and
+highlights, mapping how cards should compose their data inputs.
+
+```mermaid
+erDiagram
+  ROUTE {
+    string id
+    number distanceMetres
+    number durationSeconds
+    number rating
+  }
+
+  ROUTE_CATEGORY {
+    string id
+    number routeCount
+  }
+
+  ROUTE_COLLECTION {
+    string id
+    number distanceRangeMinMetres
+    number distanceRangeMaxMetres
+    number durationRangeMinSeconds
+    number durationRangeMaxSeconds
+  }
+
+  ROUTE_COLLECTION_ROUTE {
+    string collectionId
+    string routeId
+  }
+
+  TRENDING_ROUTE_HIGHLIGHT {
+    string routeId
+    string trendDelta
+  }
+
+  COMMUNITY_PICK {
+    string id
+    number distanceMetres
+    number durationSeconds
+    number rating
+    number saves
+  }
+
+  ROUTE ||--o{ ROUTE_COLLECTION_ROUTE : has
+  ROUTE_COLLECTION ||--o{ ROUTE_COLLECTION_ROUTE : contains
+
+  ROUTE ||--o{ TRENDING_ROUTE_HIGHLIGHT : is_highlighted_in
+
+  ROUTE_CATEGORY ||--o{ ROUTE : categorizes
+
+  COMMUNITY_PICK ||--|| ROUTE : is_based_on_optional
+```
+
+Figure 2 sketches the class-level model with localisation-aware fields and
+asset references that underpin the card architecture.
+
+```mermaid
+classDiagram
+  direction LR
+
+  class LocalizedStringSet {
+    +string name
+    optional string shortLabel
+    optional string description
+  }
+
+  class EntityLocalizations {
+    <<type alias>>
+    +Record~LocaleCode, LocalizedStringSet~
+  }
+
+  class ImageAsset {
+    +string url
+    +string alt
+  }
+
+  class Route {
+    +string id
+    +EntityLocalizations localizations
+    +ImageAsset heroImage
+    +number distanceMetres
+    +number durationSeconds
+    +number rating
+    +BadgeId[] badges
+    +optional DifficultyId difficultyId
+    +optional InterestId[] interests
+  }
+
+  class RouteCategory {
+    +string id
+    +EntityLocalizations localizations
+    +number routeCount
+    +string iconToken
+    +string gradientClass
+  }
+
+  class Theme {
+    +string id
+    +EntityLocalizations localizations
+    +ImageAsset image
+    +number walkCount
+    +number[2] distanceRangeMetres
+    +number rating
+  }
+
+  class RouteCollection {
+    +string id
+    +EntityLocalizations localizations
+    +ImageAsset leadImage
+    +ImageAsset mapPreview
+    +number[2] distanceRangeMetres
+    +number[2] durationRangeSeconds
+    +DifficultyId difficultyId
+    +RouteId[] routeIds
+  }
+
+  class TrendingRouteHighlight {
+    +RouteId routeId
+    +string trendDelta
+    +EntityLocalizations subtitleLocalizations
+  }
+
+  class CommunityPick {
+    +string id
+    +EntityLocalizations localizations
+    +CommunityCurator curator
+    +number rating
+    +number distanceMetres
+    +number durationSeconds
+    +number saves
+  }
+
+  class CommunityCurator {
+    +EntityLocalizations localizations
+    +ImageAsset avatar
+  }
+
+  class InterestDescriptor {
+    +string id
+    +EntityLocalizations localizations
+    +string iconToken
+    +string iconBackgroundClass
+    +string iconColorClass
+  }
+
+  class ResolvedInterestDescriptor {
+    +string id
+    +EntityLocalizations localizations
+    +string iconToken
+    +string iconBackgroundClass
+    +string iconColorClass
+    +LocalizedStringSet localization
+  }
+
+  class BadgeDescriptor {
+    +string id
+    +EntityLocalizations localizations
+    +optional string accentClass
+  }
+
+  class ResolvedBadgeDescriptor {
+    +string id
+    +EntityLocalizations localizations
+    +optional string accentClass
+    +LocalizedStringSet localization
+  }
+
+  class ExploreScreenHelpers {
+    +pickLocalization(localizations, locale)
+    +formatRating(input)
+  }
+
+  Route "many" --> "one" ImageAsset : heroImage
+  Theme "many" --> "one" ImageAsset : image
+  RouteCollection "many" --> "one" ImageAsset : leadImage
+  RouteCollection "many" --> "one" ImageAsset : mapPreview
+  CommunityPick "1" --> "1" CommunityCurator : curator
+  CommunityCurator "1" --> "1" ImageAsset : avatar
+
+  InterestDescriptor "*" --> "1" EntityLocalizations
+  ResolvedInterestDescriptor --|> InterestDescriptor
+  ResolvedInterestDescriptor "1" --> "1" LocalizedStringSet : localization
+
+  BadgeDescriptor "*" --> "1" EntityLocalizations
+  ResolvedBadgeDescriptor --|> BadgeDescriptor
+  ResolvedBadgeDescriptor "1" --> "1" LocalizedStringSet : localization
+
+  Route "*" --> "*" InterestDescriptor : interests
+  Route "*" --> "*" BadgeDescriptor : badges
+
+  ExploreScreenHelpers ..> LocalizedStringSet : uses
+  ExploreScreenHelpers ..> EntityLocalizations : uses
+  ExploreScreenHelpers ..> ImageAsset : uses
+
+```
+
 ## Localization handling rules
 
 - Every entity exposes `localizations`; UI selects the matching locale once per
