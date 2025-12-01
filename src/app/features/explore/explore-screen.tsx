@@ -22,9 +22,9 @@ import type { Route, RouteCategory, RouteId } from "../../data/explore.models";
 import { buildDifficultyLookup } from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+import { appLogger } from "../../observability/logger";
 import { formatDistance, formatDistanceRange, formatDuration } from "../../units/unit-format";
 import { useUnitPreferences } from "../../units/unit-preferences-provider";
-import { appLogger } from "../../observability/logger";
 import {
   CategoryScroller,
   CommunityPickPanel,
