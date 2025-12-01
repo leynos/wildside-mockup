@@ -56,12 +56,7 @@ nav-discover-label = Entdecken
 nav-routes-label = Routen
 nav-profile-label = Profil
 nav-primary-aria-label = Primäre Navigation
-interest-parks-label = Parks & Natur
-interest-coffee-label = Cafés & Kaffee
-interest-street-art-label = Street Art
-interest-historic-label = Historische Orte
-interest-waterfront-label = Uferpromenade
-interest-markets-label = Märkte
+
 difficulty-easy-label = Leicht
 difficulty-moderate-label = Mittel
 difficulty-challenging-label = Anspruchsvoll
@@ -151,11 +146,7 @@ wizard-step-three-route-title = Schleife der verborgenen Schätze
 wizard-step-three-route-badge = Individuell
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-        [one] Minute
-       *[other] Minuten
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Ein personalisierter Spaziergang, der Street-Art-Gassen, unabhängige Cafés und ruhige Aussichtspunkte am Wasser verbindet.
@@ -331,12 +322,6 @@ unit-duration-minute-label =
         [one] Minute
        *[other] Minuten
     }
-
--unit-duration-minute =
-    { $count ->
-        [one] Minute
-       *[other] Minuten
-    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =
@@ -350,3 +335,4 @@ unit-energy-joule = J
 unit-energy-kilojoule = kJ
 unit-energy-calorie = kcal
 unit-energy-btu = BTU
+

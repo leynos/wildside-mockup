@@ -56,12 +56,7 @@ nav-discover-label = Odkrywaj
 nav-routes-label = Trasy
 nav-profile-label = Profil
 nav-primary-aria-label = Nawigacja główna
-interest-parks-label = Parki i natura
-interest-coffee-label = Kawiarnie
-interest-street-art-label = Sztuka uliczna
-interest-historic-label = Miejsca historyczne
-interest-waterfront-label = Nadbrzeże
-interest-markets-label = Bazary
+
 difficulty-easy-label = Łatwa
 difficulty-moderate-label = Średnia
 difficulty-challenging-label = Wymagająca
@@ -155,11 +150,8 @@ wizard-step-three-route-title = Pętla Ukrytych Pereł
 wizard-step-three-route-badge = Indywidualny
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
-wizard-step-three-route-stops-unit = { unit-count-stop }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label(count: $count) }
+wizard-step-three-route-stops-unit = { unit-count-stop(count: $count) }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Personalizowany spacer łączący uliczne murale, niezależne kawiarnie i spokojne widoki nad wodą.
 wizard-step-three-preferences-panel-aria = Twoje preferencje zastosowane
@@ -336,15 +328,6 @@ offline-dialog-preview = Podgląd pobierania
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { $count ->
-        [zero] minut
-        [one] minuta
-        [few] minuty
-        [many] minut
-       *[other] minut
-    }
-
--unit-duration-minute =
     { $count ->
         [zero] minut
         [one] minuta

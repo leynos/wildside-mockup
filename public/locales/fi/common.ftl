@@ -56,12 +56,7 @@ nav-discover-label = Tutustu
 nav-routes-label = Reitit
 nav-profile-label = Profiili
 nav-primary-aria-label = Päänavigaatio
-interest-parks-label = Puistot ja luonto
-interest-coffee-label = Kahvipaikat
-interest-street-art-label = Katutaide
-interest-historic-label = Historialliset kohteet
-interest-waterfront-label = Rantaviiva
-interest-markets-label = Markkinat
+
 difficulty-easy-label = Helppo
 difficulty-moderate-label = Keskitaso
 difficulty-challenging-label = Haastava
@@ -151,10 +146,7 @@ wizard-step-three-route-title = Kätkettyjen helmien kierros
 wizard-step-three-route-badge = Mukautettu
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Räätälöity kävely, jossa yhdistyvät street art -kujat, itsenäiset kahvilat ja rauhalliset rantamaisemat.
@@ -325,9 +317,7 @@ offline-dialog-cancel = Peruuta
 offline-dialog-preview = Esikatsele latausta
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] minuutti
        *[other] minuuttia

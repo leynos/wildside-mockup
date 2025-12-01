@@ -56,12 +56,7 @@ nav-discover-label = استكشف
 nav-routes-label = مسارات
 nav-profile-label = الملف الشخصي
 nav-primary-aria-label = التنقل الرئيسي
-interest-parks-label = الحدائق والطبيعة
-interest-coffee-label = مقاهي القهوة
-interest-street-art-label = فن الشارع
-interest-historic-label = مواقع تاريخية
-interest-waterfront-label = الواجهة البحرية
-interest-markets-label = الأسواق
+
 difficulty-easy-label = سهل
 difficulty-moderate-label = متوسط
 difficulty-challenging-label = صعب
@@ -159,7 +154,7 @@ wizard-step-three-route-title = حلقة الجواهر المخفية
 wizard-step-three-route-badge = مخصص
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = جولة مخصصة تمزج أزقة فن الشارع والمقاهي المستقلة وإطلالات هادئة على الواجهة البحرية.
@@ -342,9 +337,7 @@ offline-dialog-cancel = إلغاء
 offline-dialog-preview = معاينة التنزيل
 unit-distance-kilometre = كم
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [zero] دقائق
         [one] دقيقة
@@ -379,3 +372,4 @@ unit-energy-joule = J
 unit-energy-kilojoule = kJ
 unit-energy-calorie = kcal
 unit-energy-btu = BTU
+

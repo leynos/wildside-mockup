@@ -56,12 +56,7 @@ nav-discover-label = 発見
 nav-routes-label = ルート
 nav-profile-label = プロフィール
 nav-primary-aria-label = メインナビゲーション
-interest-parks-label = 公園と自然
-interest-coffee-label = 珈琲屋
-interest-street-art-label = 路上アート
-interest-historic-label = 歴史スポット
-interest-waterfront-label = ウォーターフロント
-interest-markets-label = マーケット
+
 difficulty-easy-label = やさしい
 difficulty-moderate-label = 中くらい
 difficulty-challenging-label = チャレンジ
@@ -151,10 +146,7 @@ wizard-step-three-route-title = 隠れた名所ループ
 wizard-step-three-route-badge = カスタム
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = ストリートアートの路地、個人経営のカフェ、静かなウォーターフロントを組み合わせたカスタムウォークです。
@@ -321,12 +313,6 @@ unit-duration-minute-label =
         [one] 分
        *[other] 分
     }
-
--unit-duration-minute =
-    { $count ->
-        [one] 分
-       *[other] 分
-    }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
@@ -345,3 +331,4 @@ unit-energy-joule = J
 unit-energy-kilojoule = kJ
 unit-energy-calorie = kcal
 unit-energy-btu = BTU
+

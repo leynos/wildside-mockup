@@ -56,12 +56,7 @@ nav-discover-label = 探索
 nav-routes-label = 路線
 nav-profile-label = 個人檔案
 nav-primary-aria-label = 主導覽
-interest-parks-label = 公園與自然
-interest-coffee-label = 咖啡據點
-interest-street-art-label = 街頭藝術
-interest-historic-label = 歷史景點
-interest-waterfront-label = 濱水地帶
-interest-markets-label = 市集
+
 difficulty-easy-label = 輕鬆
 difficulty-moderate-label = 適中
 difficulty-challenging-label = 挑戰性
@@ -151,10 +146,7 @@ wizard-step-three-route-title = 隱藏寶藏環線
 wizard-step-three-route-badge = 自訂
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = 將街頭藝術巷弄、獨立咖啡館與寧靜水岸景點融合的個人化路線。
@@ -322,12 +314,7 @@ offline-dialog-cancel = 取消
 offline-dialog-preview = 預覽下載
 unit-distance-kilometre = 公里
 unit-distance-mile = 英里
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
-    { $count ->
-       *[other] 分鐘
-    }
+unit-duration-minute-label = 分鐘
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =

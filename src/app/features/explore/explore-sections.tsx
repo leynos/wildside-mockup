@@ -5,19 +5,20 @@ import { type JSX, type ReactNode, useId } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
-import type {
-  CommunityPick,
-  CuratedCollection,
-  ExploreCategory,
-  FeaturedWalk,
-  PopularTheme,
-  TrendingRoute,
-} from "../../data/explore";
 import { formatRating } from "../../data/explore";
+import type { Route, RouteCategory, RouteCollection, Theme } from "../../data/explore.models";
+import { type BadgeId, getBadgeDescriptor } from "../../data/registries/badges";
 import type {
   DifficultyId,
   ResolvedDifficultyDescriptor,
 } from "../../data/registries/difficulties";
+import {
+  type EntityLocalizations,
+  type LocaleCode,
+  pickLocalization,
+} from "../../domain/entities/localization";
+import { CommunityPickPanel } from "./explore-community";
+import { TrendingRoutesList } from "./explore-trending";
 
 type RouteMetricProps = {
   readonly iconToken: string;
@@ -42,12 +43,51 @@ export function RouteMetric({ iconToken, children }: RouteMetricProps): JSX.Elem
   );
 }
 
+type RouteBadgeProps = {
+  readonly id: BadgeId;
+  readonly locale: LocaleCode;
+};
+
+const safeLocalization = (
+  localizations: EntityLocalizations,
+  locale: LocaleCode,
+  fallbackName: string,
+): { readonly name: string; readonly description?: string } => {
+  try {
+    return pickLocalization(localizations, locale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.warn("Falling back to safe localization", { locale, fallbackName, error });
+    }
+    return { name: fallbackName, description: "" };
+  }
+};
+
+function RouteBadge({ id, locale }: RouteBadgeProps): JSX.Element {
+  const badgeDescriptor = getBadgeDescriptor(id, locale);
+  if (!badgeDescriptor && import.meta.env.DEV) {
+    // Warn during development to surface missing descriptors early.
+    // eslint-disable-next-line no-console
+    console.warn(`Missing badge descriptor`, { id, locale });
+  }
+  const badgeLabel =
+    badgeDescriptor?.localization.shortLabel ?? badgeDescriptor?.localization.name ?? id;
+  const badgeToneClass = badgeDescriptor?.accentClass ?? "bg-accent/20 text-accent";
+  return (
+    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${badgeToneClass}`}>
+      {badgeLabel}
+    </span>
+  );
+}
+
 export interface CategoryScrollerProps {
-  categories: readonly ExploreCategory[];
+  categories: readonly RouteCategory[];
 }
 
 export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Element {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
   const ariaLabel = t("explore-categories-aria-label", { defaultValue: "Popular categories" });
   const formatRouteCount = (count: number) =>
     t("explore-curated-route-count", {
@@ -69,8 +109,10 @@ export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Ele
                 className={`flex min-w-[150px] flex-col gap-1 rounded-xl p-4 text-white shadow-lg shadow-base-300/20 ${category.gradientClass}`}
               >
                 <Icon token={category.iconToken} className="text-lg" aria-hidden />
-                <p className="text-sm font-semibold">{category.title}</p>
-                <p className="text-xs text-white/70">{formatRouteCount(category.routes)}</p>
+                <p className="text-sm font-semibold">
+                  {safeLocalization(category.localizations, locale, category.id).name}
+                </p>
+                <p className="text-xs text-white/70">{formatRouteCount(category.routeCount)}</p>
               </article>
             ))}
           </div>
@@ -84,22 +126,24 @@ export function CategoryScroller({ categories }: CategoryScrollerProps): JSX.Ele
   );
 }
 
-type FeaturedWalkCardProps = {
+type FeaturedRouteCardProps = {
   formatDistanceLabel: (metres: number) => string;
   formatDurationLabel: (seconds: number) => string;
-  featuredWalk: FeaturedWalk;
+  route: Route;
 };
 
-export function FeaturedWalkCard({
+export function FeaturedRouteCard({
   formatDistanceLabel,
   formatDurationLabel,
-  featuredWalk,
-}: FeaturedWalkCardProps): JSX.Element {
-  const { t } = useTranslation();
+  route,
+}: FeaturedRouteCardProps): JSX.Element {
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
   const heading = t("explore-featured-heading", { defaultValue: "Walk of the Week" });
   const headingId = useId();
-  const distanceLabel = formatDistanceLabel(featuredWalk.distanceMetres);
-  const durationLabel = formatDurationLabel(featuredWalk.durationSeconds);
+  const distanceLabel = formatDistanceLabel(route.distanceMetres);
+  const durationLabel = formatDurationLabel(route.durationSeconds);
+  const localization = safeLocalization(route.localizations, locale, route.id);
   return (
     <section className="explore-featured__panel" aria-labelledby={headingId}>
       <h2 id={headingId} className="section-heading text-base-content">
@@ -108,8 +152,8 @@ export function FeaturedWalkCard({
       </h2>
       <figure className="overflow-hidden rounded-xl border border-base-300/50">
         <img
-          src={featuredWalk.heroImageUrl}
-          alt={featuredWalk.title}
+          src={route.heroImage.url}
+          alt={route.heroImage.alt}
           className="h-40 w-full object-cover"
           loading="lazy"
         />
@@ -117,8 +161,8 @@ export function FeaturedWalkCard({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-base-content">{featuredWalk.title}</h3>
-            <p className="text-sm text-base-content/70">{featuredWalk.description}</p>
+            <h3 className="text-lg font-semibold text-base-content">{localization.name}</h3>
+            <p className="text-sm text-base-content/70">{localization.description}</p>
           </div>
           <div className="explore-stat-group">
             <span className="flex items-center gap-1 font-semibold text-base-content">
@@ -134,15 +178,10 @@ export function FeaturedWalkCard({
         <div className="flex items-center gap-3 text-sm text-base-content/80">
           <span className="rating-indicator">
             <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
-            {formatRating(featuredWalk.rating)}
+            {formatRating(route.rating)}
           </span>
-          {featuredWalk.badges.map((badge) => (
-            <span
-              key={badge}
-              className="rounded-full bg-accent/20 px-3 py-1 text-xs font-semibold text-accent"
-            >
-              {badge}
-            </span>
+          {route.badges.map((badgeId) => (
+            <RouteBadge key={badgeId} id={badgeId} locale={locale} />
           ))}
         </div>
       </div>
@@ -152,14 +191,15 @@ export function FeaturedWalkCard({
 
 type PopularThemesGridProps = {
   formatDistanceRangeLabel: (range: readonly [number, number]) => string;
-  themes: readonly PopularTheme[];
+  themes: readonly Theme[];
 };
 
 export function PopularThemesGrid({
   formatDistanceRangeLabel,
   themes,
 }: PopularThemesGridProps): JSX.Element {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
   const heading = t("explore-popular-heading", { defaultValue: "Popular Themes" });
   const headingId = useId();
   const formatWalkCount = (count: number) =>
@@ -173,39 +213,42 @@ export function PopularThemesGrid({
         {heading}
       </h2>
       <div className="grid grid-cols-2 gap-4">
-        {themes.map((theme) => (
-          <article key={theme.id} className="explore-compact__card">
-            <div className="relative mb-3 h-24 overflow-hidden rounded-lg">
-              <img
-                src={theme.imageUrl}
-                alt={theme.title}
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-black/25" />
-              <span className="explore-theme__badge">{formatWalkCount(theme.walkCount)}</span>
-            </div>
-            <h3 className="text-sm font-semibold text-base-content">{theme.title}</h3>
-            <p className="mt-1 text-xs text-base-content/60">{theme.description}</p>
-            <div className="mt-2 flex items-center justify-between text-xs text-base-content/60">
-              <span className="flex items-center gap-1">
-                <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
-                {formatDistanceRangeLabel(theme.distanceRangeMetres)}
-              </span>
-              <span className="rating-indicator">
-                <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
-                {formatRating(theme.rating)}
-              </span>
-            </div>
-          </article>
-        ))}
+        {themes.map((theme) => {
+          const localization = safeLocalization(theme.localizations, locale, theme.id);
+          return (
+            <article key={theme.id} className="explore-compact__card">
+              <div className="relative mb-3 h-24 overflow-hidden rounded-lg">
+                <img
+                  src={theme.image.url}
+                  alt={theme.image.alt}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/25" />
+                <span className="explore-theme__badge">{formatWalkCount(theme.walkCount)}</span>
+              </div>
+              <h3 className="text-sm font-semibold text-base-content">{localization.name}</h3>
+              <p className="mt-1 text-xs text-base-content/60">{localization.description}</p>
+              <div className="mt-2 flex items-center justify-between text-xs text-base-content/60">
+                <span className="flex items-center gap-1">
+                  <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
+                  {formatDistanceRangeLabel(theme.distanceRangeMetres)}
+                </span>
+                <span className="rating-indicator">
+                  <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
+                  {formatRating(theme.rating)}
+                </span>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
 }
 
 type CuratedCollectionsListProps = {
-  collections: readonly CuratedCollection[];
+  collections: readonly RouteCollection[];
   difficultyLookup: Map<DifficultyId, ResolvedDifficultyDescriptor>;
   formatDistanceRangeLabel: (range: readonly [number, number]) => string;
   formatDurationRangeLabel: (range: readonly [number, number]) => string;
@@ -217,7 +260,8 @@ export function CuratedCollectionsList({
   formatDistanceRangeLabel,
   formatDurationRangeLabel,
 }: CuratedCollectionsListProps): JSX.Element {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.language as LocaleCode;
   const heading = t("explore-curated-heading", { defaultValue: "Curated Collections" });
   const formatRouteCount = (count: number) =>
     t("explore-curated-route-count", {
@@ -231,157 +275,61 @@ export function CuratedCollectionsList({
         {heading}
       </h2>
       <div className="space-y-4">
-        {collections.map((collection) => (
-          <article key={collection.id} className="explore-collection__card">
-            <div className="flex gap-4">
-              <div className="h-16 w-16 overflow-hidden rounded-lg border border-base-300/50">
+        {collections.map((collection) => {
+          const localization = safeLocalization(collection.localizations, locale, collection.id);
+          const difficulty = difficultyLookup.get(collection.difficultyId);
+          const badgeToneClass = difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
+          return (
+            <article key={collection.id} className="explore-collection__card">
+              <div className="flex gap-4">
+                <div className="h-16 w-16 overflow-hidden rounded-lg border border-base-300/50">
+                  <img
+                    src={collection.leadImage.url}
+                    alt={collection.leadImage.alt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-base-content">{localization.name}</h3>
+                  <p className="text-sm text-base-content/70">{localization.description}</p>
+                  <div className="mt-2 explore-meta-list">
+                    <span className="flex items-center gap-1">
+                      <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
+                      {formatDistanceRangeLabel(collection.distanceRangeMetres)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
+                      {formatDurationRangeLabel(collection.durationRangeSeconds)}
+                    </span>
+                    <span
+                      className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeToneClass}`}
+                    >
+                      {difficulty?.label ?? collection.difficultyId}
+                    </span>
+                  </div>
+                </div>
+                <div className="explore-stat-group explore-stat-group--right">
+                  <span className="text-sm font-semibold text-base-content">
+                    {formatRouteCount(collection.routeIds.length)}
+                  </span>
+                </div>
+              </div>
+              <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">
                 <img
-                  src={collection.leadImageUrl}
-                  alt={collection.title}
+                  src={collection.mapPreview.url}
+                  alt={collection.mapPreview.alt}
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-base font-semibold text-base-content">{collection.title}</h3>
-                <p className="text-sm text-base-content/70">{collection.description}</p>
-                <div className="mt-2 explore-meta-list">
-                  <span className="flex items-center gap-1">
-                    <Icon token="{icon.object.route}" aria-hidden className="h-4 w-4" />
-                    {formatDistanceRangeLabel(collection.distanceRangeMetres)}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
-                    {formatDurationRangeLabel(collection.durationRangeSeconds)}
-                  </span>
-                  {(() => {
-                    const difficulty = difficultyLookup.get(collection.difficultyId);
-                    const badgeToneClass =
-                      difficulty?.badgeToneClass ?? "bg-base-300/40 text-base-content";
-                    return (
-                      <span
-                        className={`rounded-full px-2 py-1 text-xs font-semibold ${badgeToneClass}`}
-                      >
-                        {difficulty?.label ?? collection.difficultyId}
-                      </span>
-                    );
-                  })()}
-                </div>
-              </div>
-              <div className="explore-stat-group explore-stat-group--right">
-                <span className="text-sm font-semibold text-base-content">
-                  {formatRouteCount(collection.routes)}
-                </span>
-              </div>
-            </div>
-            <figure className="mt-3 h-12 overflow-hidden rounded-lg border border-base-300/50">
-              <img
-                src={collection.mapImageUrl}
-                alt={`${collection.title} map preview`}
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </figure>
-          </article>
-        ))}
+              </figure>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
 }
 
-type TrendingRoutesListProps = {
-  readonly routes: readonly TrendingRoute[];
-};
-
-export function TrendingRoutesList({ routes }: TrendingRoutesListProps): JSX.Element {
-  const { t } = useTranslation();
-  const heading = t("explore-trending-heading", { defaultValue: "Trending Now" });
-  const headingId = useId();
-  return (
-    <section aria-labelledby={headingId}>
-      <h2 id={headingId} className="section-title">
-        {heading}
-      </h2>
-      <div className="space-y-3">
-        {routes.map((route) => (
-          <article key={route.id} className="explore-trending__card">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 overflow-hidden rounded-lg">
-                <img
-                  src={route.imageUrl}
-                  alt={route.title}
-                  className="h-full w-full"
-                  loading="lazy"
-                />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-base-content">{route.title}</p>
-                <p className="text-xs text-base-content/60">{route.subtitle}</p>
-              </div>
-              <span className="flex items-center gap-1 text-sm font-semibold text-orange-300">
-                <Icon token="{icon.object.trend}" aria-hidden className="h-4 w-4" />
-                {route.trendDelta}
-              </span>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-type CommunityPickPanelProps = {
-  pick: CommunityPick;
-  formatDistanceLabel: (metres: number) => string;
-  formatDurationLabel: (seconds: number) => string;
-  formatSaveCount: (count: number) => string;
-};
-
-export function CommunityPickPanel({
-  pick,
-  formatDistanceLabel,
-  formatDurationLabel,
-  formatSaveCount,
-}: CommunityPickPanelProps): JSX.Element {
-  const { t } = useTranslation();
-  const heading = t("explore-community-heading", { defaultValue: "Community Favourite" });
-  const subtitle = t("explore-community-subtitle", { defaultValue: "Most shared this week" });
-  const headingId = useId();
-  return (
-    <section className="explore-info__panel" aria-labelledby={headingId}>
-      <h2 id={headingId} className="section-heading mb-4 text-base-content">
-        <Icon token="{icon.object.family}" className="text-accent" aria-hidden />
-        {heading}
-      </h2>
-      <div className="mb-3 flex items-center gap-3">
-        <div className="h-9 w-9 overflow-hidden rounded-full border border-base-300/60">
-          <img
-            src={pick.curatorAvatarUrl}
-            alt={pick.curator}
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-        </div>
-        <div className="flex-1">
-          <p className="text-sm font-medium text-base-content">{pick.curator}</p>
-          <p className="text-xs text-base-content/60">{subtitle}</p>
-        </div>
-        <span className="rating-indicator rating-indicator--strong">
-          <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
-          {formatRating(pick.rating)}
-        </span>
-      </div>
-      <h3 className="text-base font-semibold text-base-content">{pick.title}</h3>
-      <p className="mt-2 text-sm text-base-content/70">{pick.description}</p>
-      <div className="mt-3 explore-meta-list">
-        <RouteMetric iconToken="{icon.object.route}">
-          {formatDistanceLabel(pick.distanceMetres)}
-        </RouteMetric>
-        <RouteMetric iconToken="{icon.object.duration}">
-          {formatDurationLabel(pick.durationSeconds)}
-        </RouteMetric>
-        <RouteMetric iconToken="{icon.action.save}">{formatSaveCount(pick.saves)}</RouteMetric>
-      </div>
-    </section>
-  );
-}
+export { CommunityPickPanel, TrendingRoutesList };
+export type { TrendingRouteCard } from "./explore-trending";

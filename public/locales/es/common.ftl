@@ -20,9 +20,9 @@ customize-slider-distance-marker-1 = 5 { unit-distance-kilometre }
 customize-slider-distance-marker-2 = 10 { unit-distance-kilometre }
 customize-slider-duration-label = Duración
 customize-slider-duration-aria = Control deslizante de duración
-customize-slider-duration-marker-0 = {$count} { unit-duration-minute-label }
-customize-slider-duration-marker-1 = {$count} { unit-duration-minute-label }
-customize-slider-duration-marker-2 = {$count} { unit-duration-minute-label }
+customize-slider-duration-marker-0 = {$count} { unit-duration-minute-label($count) }
+customize-slider-duration-marker-1 = {$count} { unit-duration-minute-label($count) }
+customize-slider-duration-marker-2 = {$count} { unit-duration-minute-label($count) }
 customize-crowd-option-quiet-label = Tranquilo
 customize-crowd-option-quiet-description = Calles tranquilas
 customize-crowd-option-balanced-label = Equilibrado
@@ -56,12 +56,7 @@ nav-discover-label = Descubrir
 nav-routes-label = Rutas
 nav-profile-label = Perfil
 nav-primary-aria-label = Navegación principal
-interest-parks-label = Parques y naturaleza
-interest-coffee-label = Cafeterías
-interest-street-art-label = Arte urbano
-interest-historic-label = Sitios históricos
-interest-waterfront-label = Frente marítimo
-interest-markets-label = Mercados
+
 difficulty-easy-label = Fácil
 difficulty-moderate-label = Moderada
 difficulty-challenging-label = Exigente
@@ -72,11 +67,11 @@ quick-walk-header-title = Generador de caminatas rápidas
 quick-walk-header-description = Ajusta la duración e intereses para refrescar las sugerencias.
 quick-walk-generate-aria = Generar una nueva caminata
 quick-walk-duration-label = Duración
-quick-walk-duration-format = {$count} { unit-duration-minute-label }
+quick-walk-duration-format = {$count} { unit-duration-minute-label($count) }
 quick-walk-duration-aria = Duración de la caminata
-quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-start = {$count} { unit-duration-minute-label($count) }
+quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label($count) }
+quick-walk-duration-marker-end = {$count} { unit-duration-minute-label($count) }
 quick-walk-interests-heading = Intereses
 quick-walk-interests-selected =
     { $count ->
@@ -106,10 +101,10 @@ wizard-step-3-description = Genera la caminata personalizada
 wizard-step-one-duration-section-aria = Controles de duración de la caminata
 wizard-step-one-duration-label = Duración de la caminata
 wizard-step-one-duration-aria = Control deslizante de duración de la caminata
-wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label }
-wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label }
-wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label }
-wizard-step-one-duration-format = {$count} { unit-duration-minute-label }
+wizard-step-one-duration-marker-start = {$count} { unit-duration-minute-label($count) }
+wizard-step-one-duration-marker-mid = {$count} { unit-duration-minute-label($count) }
+wizard-step-one-duration-marker-end = {$count} { unit-duration-minute-label($count) }
+wizard-step-one-duration-format = {$count} { unit-duration-minute-label($count) }
 wizard-step-one-interests-section-aria = Intereses
 wizard-step-one-interests-heading = Intereses
 wizard-step-one-interests-selected =
@@ -151,11 +146,7 @@ wizard-step-three-route-title = Circuito de Joyas Ocultas
 wizard-step-three-route-badge = Personalizada
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-        [one] minuto
-       *[other] minutos
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Una caminata personalizada que mezcla callejones de arte urbano, cafeterías independientes y miradores tranquilos junto al agua.
@@ -327,12 +318,6 @@ offline-dialog-preview = Previsualizar descarga
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { $count ->
-        [one] minuto
-       *[other] minutos
-    }
-
--unit-duration-minute =
     { $count ->
         [one] minuto
        *[other] minutos

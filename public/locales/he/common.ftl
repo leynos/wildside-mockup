@@ -56,12 +56,7 @@ nav-discover-label = גילוי
 nav-routes-label = מסלולים
 nav-profile-label = פרופיל
 nav-primary-aria-label = ניווט ראשי
-interest-parks-label = פארקים וטבע
-interest-coffee-label = בתי קפה
-interest-street-art-label = אמנות רחוב
-interest-historic-label = אתרים היסטוריים
-interest-waterfront-label = טיילת חוף
-interest-markets-label = שווקים
+
 difficulty-easy-label = קל
 difficulty-moderate-label = בינוני
 difficulty-challenging-label = מאתגר
@@ -153,7 +148,7 @@ wizard-step-three-route-title = לולאת האוצרות הנסתרים
 wizard-step-three-route-badge = מותאם אישית
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = מסלול מותאם אישי המשולב בסמטאות אמנות רחוב, בתי קפה עצמאיים ונקודות תצפית שקטות על קו החוף.
@@ -337,23 +332,13 @@ offline-dialog-cancel = ביטול
 offline-dialog-preview = תצוגה מקדימה של ההורדה
 unit-distance-kilometre = ק"מ
 unit-distance-mile = mi
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] דקה
         [two] דקות
         [many] דקות
        *[other] דקות
     }
-
--unit-duration-minute =
-    { $count ->
-        [one] דקה
-        [two] דקות
-        [many] דקות
-       *[other] דקות
-    }
-
-unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 unit-count-stop =

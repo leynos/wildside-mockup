@@ -56,12 +56,7 @@ nav-discover-label = Keşfet
 nav-routes-label = Rotalar
 nav-profile-label = Profil
 nav-primary-aria-label = Ana gezinme
-interest-parks-label = Parklar ve doğa
-interest-coffee-label = Kahve durakları
-interest-street-art-label = Sokak sanatı
-interest-historic-label = Tarihi mekânlar
-interest-waterfront-label = Sahil şeridi
-interest-markets-label = Pazarlar
+
 difficulty-easy-label = Kolay
 difficulty-moderate-label = Orta
 difficulty-challenging-label = Zorlu
@@ -151,10 +146,7 @@ wizard-step-three-route-title = Gizli Mücevherler Döngüsü
 wizard-step-three-route-badge = Özel
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Sokak sanatı ara sokakları, bağımsız kafeler ve sakin sahil manzaralarını harmanlayan kişiselleştirilmiş bir yürüyüş.
@@ -326,12 +318,6 @@ offline-dialog-preview = İndirmeyi önizle
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { $count ->
-        [one] dakika
-       *[other] dakika
-    }
-
--unit-duration-minute =
     { $count ->
         [one] dakika
        *[other] dakika

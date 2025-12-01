@@ -56,12 +56,7 @@ nav-discover-label = Opdag
 nav-routes-label = Ruter
 nav-profile-label = Profil
 nav-primary-aria-label = Primær navigation
-interest-parks-label = Parker og natur
-interest-coffee-label = Kaffesteder
-interest-street-art-label = Street art
-interest-historic-label = Historiske steder
-interest-waterfront-label = Havnefront
-interest-markets-label = Markeder
+
 difficulty-easy-label = Nem
 difficulty-moderate-label = Moderat
 difficulty-challenging-label = Udfordrende
@@ -151,10 +146,7 @@ wizard-step-three-route-title = Løkke med skjulte perler
 wizard-step-three-route-badge = Tilpasset
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = En personlig gåtur, der blander gader med gadekunst, uafhængige caféer og rolige udsigtspunkter ved havnefronten.
@@ -326,12 +318,6 @@ offline-dialog-preview = Vis download
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { $count ->
-        [one] minut
-       *[other] minutter
-    }
-
--unit-duration-minute =
     { $count ->
         [one] minut
        *[other] minutter

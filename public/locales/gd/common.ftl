@@ -56,12 +56,7 @@ nav-discover-label = Lorg
 nav-routes-label = Slighean
 nav-profile-label = Pròifil
 nav-primary-aria-label = Prìomh sheòladh
-interest-parks-label = Pàircean is nàdar
-interest-coffee-label = Cafaidhean cofaidh
-interest-street-art-label = Ealain sràide
-interest-historic-label = Làraichean eachdraidheil
-interest-waterfront-label = Oirthir-uisge
-interest-markets-label = Margaidhean
+
 difficulty-easy-label = Furasta
 difficulty-moderate-label = Meadhanach
 difficulty-challenging-label = Dùbhlanach
@@ -157,7 +152,7 @@ wizard-step-three-route-title = Cuairt nan Ulaidhean Falaichte
 wizard-step-three-route-badge = Gnàthaichte
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Cuairt phearsanta a tha a’ cothlamadh sràidean ealain, càbaidean neo-eisimeileach agus seallaidhean sàmhach air an oirthir.
@@ -338,9 +333,6 @@ offline-dialog-preview = Ro-shealladh luchdachaidh sìos
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { -unit-duration-minute($count) }
-
--unit-duration-minute =
     { $count ->
         [one] mionaid
         [two] mionaid

@@ -56,12 +56,7 @@ nav-discover-label = Khám phá
 nav-routes-label = Lộ trình
 nav-profile-label = Hồ sơ
 nav-primary-aria-label = Điều hướng chính
-interest-parks-label = Công viên & thiên nhiên
-interest-coffee-label = Quán cà phê
-interest-street-art-label = Nghệ thuật đường phố
-interest-historic-label = Địa điểm lịch sử
-interest-waterfront-label = Bờ sông biển
-interest-markets-label = Chợ
+
 difficulty-easy-label = Dễ
 difficulty-moderate-label = Trung bình
 difficulty-challenging-label = Thử thách
@@ -151,10 +146,7 @@ wizard-step-three-route-title = Vòng Viên Ngọc Ẩn
 wizard-step-three-route-badge = Tùy chỉnh
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Hành trình cá nhân hóa kết hợp các con hẻm nghệ thuật đường phố, quán cà phê độc lập và điểm ngắm ven sông yên tĩnh.
@@ -326,12 +318,7 @@ offline-dialog-cancel = Hủy
 offline-dialog-preview = Xem trước tải xuống
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
-    { $count ->
-       *[other] phút
-    }
+unit-duration-minute-label = phút
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =

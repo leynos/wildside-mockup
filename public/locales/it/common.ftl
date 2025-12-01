@@ -56,12 +56,7 @@ nav-discover-label = Scopri
 nav-routes-label = Percorsi
 nav-profile-label = Profilo
 nav-primary-aria-label = Navigazione principale
-interest-parks-label = Parchi e natura
-interest-coffee-label = Caffetterie
-interest-street-art-label = Street art
-interest-historic-label = Siti storici
-interest-waterfront-label = Lungomare
-interest-markets-label = Mercati
+
 difficulty-easy-label = Facile
 difficulty-moderate-label = Moderata
 difficulty-challenging-label = Impegnativa
@@ -72,11 +67,11 @@ quick-walk-header-title = Generatore di passeggiate rapide
 quick-walk-header-description = Regola durata e interessi per aggiornare i suggerimenti.
 quick-walk-generate-aria = Crea una nuova passeggiata
 quick-walk-duration-label = Durata
-quick-walk-duration-format = {$count} { unit-duration-minute-label }
+quick-walk-duration-format = {$count} {unit-duration-minute-label}
 quick-walk-duration-aria = Durata della passeggiata
-quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-start = {$count} {unit-duration-minute-label}
+quick-walk-duration-marker-mid = {$count} {unit-duration-minute-label}
+quick-walk-duration-marker-end = {$count} {unit-duration-minute-label}
 quick-walk-interests-heading = Interessi
 quick-walk-interests-selected =
     { $count ->
@@ -151,7 +146,7 @@ wizard-step-three-route-title = Circuito dei Tesori Nascosti
 wizard-step-three-route-badge = Personalizzato
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {$count} { unit-duration-minute-label }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Passeggiata personalizzata che abbina vicoli di street art, caffetterie indipendenti e viste serene sul lungomare.
@@ -322,12 +317,6 @@ offline-dialog-cancel = Annulla
 offline-dialog-preview = Anteprima download
 unit-distance-kilometre = km
 unit-distance-mile = mi
--unit-duration-minute =
-    { $count ->
-        [one] minuto
-       *[other] minuti
-    }
-
 unit-duration-minute-label =
     { $count ->
         [one] minuto

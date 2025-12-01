@@ -56,12 +56,7 @@ nav-discover-label = Discover
 nav-routes-label = Routes
 nav-profile-label = Profile
 nav-primary-aria-label = Primary navigation
-interest-parks-label = Parks & Nature
-interest-coffee-label = Coffee Spots
-interest-street-art-label = Street Art
-interest-historic-label = Historic Sites
-interest-waterfront-label = Waterfront
-interest-markets-label = Markets
+
 difficulty-easy-label = Easy
 difficulty-moderate-label = Moderate
 difficulty-challenging-label = Challenging
@@ -72,11 +67,11 @@ quick-walk-header-title = Quick Walk Generator
 quick-walk-header-description = Dial in duration and interests to refresh suggestions.
 quick-walk-generate-aria = Generate a new walk
 quick-walk-duration-label = Duration
-quick-walk-duration-format = {$count} { unit-duration-minute-label }
+quick-walk-duration-format = {$count} {unit-duration-minute-label}
 quick-walk-duration-aria = Walk duration
-quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-start = {$count} {unit-duration-minute-label}
+quick-walk-duration-marker-mid = {$count} {unit-duration-minute-label}
+quick-walk-duration-marker-end = {$count} {unit-duration-minute-label}
 quick-walk-interests-heading = Interests
 quick-walk-interests-selected =
     { $count ->
@@ -151,7 +146,7 @@ wizard-step-three-route-title = Hidden Gems Loop
 wizard-step-three-route-badge = Custom
 wizard-step-three-route-distance-unit = { unit-distance-mile }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = { -unit-duration-minute($count) }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = A personalised walk blending street art laneways, independent cafés, and quiet waterfront viewpoints.
@@ -332,12 +327,6 @@ offline-dialog-preview = Preview download
 unit-distance-kilometre = km
 unit-distance-mile = mi
 unit-duration-minute-label =
-    { $count ->
-        [one] minute
-       *[other] minutes
-    }
-
--unit-duration-minute =
     { $count ->
         [one] minute
        *[other] minutes

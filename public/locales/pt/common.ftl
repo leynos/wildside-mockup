@@ -56,12 +56,7 @@ nav-discover-label = Descobrir
 nav-routes-label = Rotas
 nav-profile-label = Perfil
 nav-primary-aria-label = Navegação principal
-interest-parks-label = Parques e natureza
-interest-coffee-label = Cafés
-interest-street-art-label = Arte urbana
-interest-historic-label = Sítios históricos
-interest-waterfront-label = Orla
-interest-markets-label = Mercados
+
 difficulty-easy-label = Fácil
 difficulty-moderate-label = Moderada
 difficulty-challenging-label = Desafiante
@@ -151,10 +146,7 @@ wizard-step-three-route-title = Rota Joias Escondidas
 wizard-step-three-route-badge = Personalizada
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit =
-    { $count ->
-       *[other] {-unit-duration-minute($count)}
-    }
+wizard-step-three-route-duration-unit = { unit-duration-minute-label($count) }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = Uma caminhada personalizada que mistura ruelas de arte urbana, cafés independentes e vistas tranquilas junto à água.
@@ -325,9 +317,7 @@ offline-dialog-cancel = Cancelar
 offline-dialog-preview = Pré-visualizar transferência
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] minuto
        *[other] minutos

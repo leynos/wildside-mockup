@@ -56,12 +56,7 @@ nav-discover-label = Utforsk
 nav-routes-label = Ruter
 nav-profile-label = Profil
 nav-primary-aria-label = Hovednavigasjon
-interest-parks-label = Parker og natur
-interest-coffee-label = Kaffesteder
-interest-street-art-label = Gatekunst
-interest-historic-label = Historiske steder
-interest-waterfront-label = Vannkanten
-interest-markets-label = Markeder
+
 difficulty-easy-label = Lett
 difficulty-moderate-label = Middels
 difficulty-challenging-label = Utfordrende
@@ -151,7 +146,7 @@ wizard-step-three-route-title = Skjulte perler-sløyfen
 wizard-step-three-route-badge = Tilpasset
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
-wizard-step-three-route-duration-unit = {-unit-duration-minute($count)}
+wizard-step-three-route-duration-unit = { unit-duration-minute-label() }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
 wizard-step-three-route-description = En personlig gåtur som kombinerer street art-gater, uavhengige kafeer og rolige utsiktspunkter ved vannet.
@@ -322,9 +317,7 @@ offline-dialog-cancel = Avbryt
 offline-dialog-preview = Forhåndsvis nedlasting
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label = { -unit-duration-minute($count) }
-
--unit-duration-minute =
+unit-duration-minute-label =
     { $count ->
         [one] min
        *[other] min
