@@ -167,7 +167,10 @@ export const curatedCollections: RouteCollection[] = [
       heroCoffeeCultureAlt,
       "Outdoor café table with pastries and pour-over coffee.",
     ),
-    mapPreview: image(requireCuratedRouteMap("coffee-loops"), "Map preview of the coffee loop routes."),
+    mapPreview: image(
+      requireCuratedRouteMap("coffee-loops"),
+      "Map preview of the coffee loop routes.",
+    ),
     distanceRangeMetres: [1000, 2000],
     durationRangeSeconds: [1800, 2700],
     difficultyId: "easy",
@@ -191,10 +194,7 @@ export const curatedCollections: RouteCollection[] = [
       "collection: after-dark",
     ),
     leadImage: image(heroAfterDark, "City lights reflecting on wet pavement after dusk."),
-    mapPreview: image(
-      requireCuratedRouteMap("after-dark"),
-      "Route map preview for evening walks.",
-    ),
+    mapPreview: image(requireCuratedRouteMap("after-dark"), "Route map preview for evening walks."),
     distanceRangeMetres: [2000, 4000],
     durationRangeSeconds: [2700, 4200],
     difficultyId: "moderate",

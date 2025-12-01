@@ -57,9 +57,8 @@ export function CommunityPickPanel({
   formatDurationLabel,
   formatSaveCount,
 }: CommunityPickPanelProps): JSX.Element {
-  const { heading, subtitle, pickLocalization, curatorLocalization } = useCommunityPickLocalisation(
-    pick,
-  );
+  const { heading, subtitle, pickLocalization, curatorLocalization } =
+    useCommunityPickLocalisation(pick);
   const headingId = useId();
   return (
     <section className="explore-info__panel" aria-labelledby={headingId}>
