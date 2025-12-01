@@ -15,12 +15,13 @@ import {
   elevationOptions,
   formatSliderValue,
   interestMix,
-  routePreviews,
+  resolvedRoutePreviews,
   sliders,
   surfaceOptions,
 } from "../../data/customize";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+import { coerceLocaleCode, resolveLocalization } from "../../lib/localization-runtime";
 import { useUnitFormatters } from "../../units/use-unit-formatters";
 import { useUnitLabelFormatters } from "../../units/use-unit-labels";
 import {
@@ -33,6 +34,7 @@ import {
 
 export function CustomizeScreen(): JSX.Element {
   const { t, i18n } = useTranslation();
+  const locale = coerceLocaleCode(i18n.language);
   const {
     formatDistanceLabel: formatDistanceLabelRaw,
     formatDurationLabel: formatDurationLabelRaw,
@@ -73,7 +75,7 @@ export function CustomizeScreen(): JSX.Element {
   );
   const [interestValues, setInterestValues] =
     useState<Record<string, number>>(interestInitialValues);
-  const [selectedRoute, setSelectedRoute] = useState(routePreviews[0]?.id ?? "route-a");
+  const [selectedRoute, setSelectedRoute] = useState(resolvedRoutePreviews[0]?.id ?? "route-a");
   const [advancedValues, setAdvancedValues] = useState<Record<string, boolean>>(advancedInitial);
   const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
 
@@ -113,41 +115,40 @@ export function CustomizeScreen(): JSX.Element {
           }
         />
         <main className="screen-scroll pb-6 pt-4">
-          {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => {
-            const currentValue = sliderValues[id] ?? min;
-            const sliderLabel = t(`customize-slider-${id}-label`, { defaultValue: label });
-            const sliderAriaLabel = t(`customize-slider-${id}-aria`, {
-              defaultValue: `${label} slider`,
-            });
-            const markerLabels = markers.map((marker) =>
-              formatSliderValue(id, marker, t, i18n.language, unitSystem),
-            );
-            return (
-              <SliderControl
-                key={id}
-                id={id}
-                label={sliderLabel}
-                iconToken={iconToken}
-                iconClassName={iconColorClass}
-                className="mb-8"
-                min={min}
-                max={max}
-                step={step}
-                value={currentValue}
-                valueFormatter={(value) =>
-                  formatSliderValue(id, value, t, i18n.language, unitSystem)
-                }
-                markers={markerLabels}
-                ariaLabel={sliderAriaLabel}
-                onValueChange={(value) =>
-                  setSliderValues((current) => ({
-                    ...current,
-                    [id]: value,
-                  }))
-                }
-              />
-            );
-          })}
+          {sliders.map(
+            ({ id, iconToken, iconColorClass, localizations, markers, max, min, step }) => {
+              const currentValue = sliderValues[id] ?? min;
+              const sliderLocalization = resolveLocalization(localizations, locale, id);
+              const markerLabels = markers.map((marker) =>
+                formatSliderValue(id, marker, t, i18n.language, unitSystem),
+              );
+              return (
+                <SliderControl
+                  key={id}
+                  id={id}
+                  label={sliderLocalization.name}
+                  iconToken={iconToken}
+                  iconClassName={iconColorClass}
+                  className="mb-8"
+                  min={min}
+                  max={max}
+                  step={step}
+                  value={currentValue}
+                  valueFormatter={(value) =>
+                    formatSliderValue(id, value, t, i18n.language, unitSystem)
+                  }
+                  markers={markerLabels}
+                  ariaLabel={sliderLocalization.description ?? sliderLocalization.name}
+                  onValueChange={(value) =>
+                    setSliderValues((current) => ({
+                      ...current,
+                      [id]: value,
+                    }))
+                  }
+                />
+              );
+            },
+          )}
 
           <SegmentPicker
             id="crowd"
@@ -184,7 +185,7 @@ export function CustomizeScreen(): JSX.Element {
             }
           />
           <RoutePreview
-            routes={routePreviews}
+            routes={resolvedRoutePreviews}
             selected={selectedRoute}
             onSelect={setSelectedRoute}
             formatDistanceLabel={formatDistanceLabel}

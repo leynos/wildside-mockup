@@ -11,11 +11,40 @@ import { SectionHeading } from "../../components/section-heading";
 import type {
   AdvancedToggleOption,
   InterestMixSlice,
-  RoutePreviewOption,
+  ResolvedRoutePreviewOption,
   SegmentOption,
   SurfaceOption,
 } from "../../data/customize";
+import {
+  type EntityLocalizations,
+  type LocaleCode,
+  pickLocalization,
+} from "../../domain/entities/localization";
+import { useLocaleCode } from "../../i18n/use-locale-code";
 import { CustomizeSegmentToggle } from "./segment-toggle-card";
+
+const fallbackLocalization = (
+  localizations: EntityLocalizations,
+  fallbackName: string,
+): { readonly name: string; readonly description?: string; readonly shortLabel?: string } =>
+  Object.values(localizations).find(Boolean) ?? { name: fallbackName };
+
+const resolveLocalization = (
+  localizations: EntityLocalizations,
+  locale: LocaleCode,
+  fallbackName: string,
+): { readonly name: string; readonly description?: string; readonly shortLabel?: string } => {
+  const fallback = fallbackLocalization(localizations, fallbackName);
+  try {
+    return pickLocalization(localizations, locale);
+  } catch (error) {
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.warn("Falling back to default localization", { locale, fallbackName, error });
+    }
+    return fallback;
+  }
+};
 
 export interface SegmentPickerProps {
   id: string;
@@ -34,19 +63,14 @@ export function SegmentPicker({
   options,
   value,
 }: SegmentPickerProps): JSX.Element {
-  const { t } = useTranslation();
+  const locale = useLocaleCode();
 
   const resolvedOptions = options.map((option) => {
-    const optionLabel = t(`customize-${id}-option-${option.id}-label`, {
-      defaultValue: option.label,
-    });
-    const optionDescription = t(`customize-${id}-option-${option.id}-description`, {
-      defaultValue: option.description,
-    });
+    const localization = resolveLocalization(option.localizations, locale, option.id);
     return {
       ...option,
-      label: optionLabel,
-      description: optionDescription,
+      label: localization.name,
+      description: localization.description ?? "",
     };
   });
 
@@ -90,7 +114,7 @@ export function SurfacePicker({
   options,
   value,
 }: SurfacePickerProps): JSX.Element {
-  const { t } = useTranslation();
+  const locale = useLocaleCode();
   return (
     <section className="mb-8">
       <SectionHeading iconToken={iconToken}>{heading}</SectionHeading>
@@ -108,7 +132,7 @@ export function SurfacePicker({
             className="customize-surface__option"
           >
             <Icon token={surface.iconToken} className="text-base" aria-hidden />
-            {t(`customize-surface-option-${surface.id}-label`, { defaultValue: surface.label })}
+            {resolveLocalization(surface.localizations, locale, surface.id).name}
           </ToggleGroup.Item>
         ))}
       </ToggleGroup.Root>
@@ -124,6 +148,7 @@ export interface InterestMixProps {
 
 export function InterestMix({ onChange, slices, values }: InterestMixProps): JSX.Element {
   const { t } = useTranslation();
+  const locale = useLocaleCode();
   const heading = t("customize-interest-heading", { defaultValue: "Interest Mix" });
 
   return (
@@ -132,9 +157,8 @@ export function InterestMix({ onChange, slices, values }: InterestMixProps): JSX
       <div className="space-y-6">
         {slices.map((slice) => {
           const value = values[slice.id] ?? slice.allocation;
-          const sliceLabel = t(`customize-interest-${slice.id}-label`, {
-            defaultValue: slice.label,
-          });
+          const sliceLocalization = resolveLocalization(slice.localizations, locale, slice.id);
+          const sliceLabel = sliceLocalization.shortLabel ?? sliceLocalization.name;
           return (
             <div key={slice.id}>
               <div className="mb-2 flex items-center justify-between">
@@ -172,7 +196,7 @@ export function InterestMix({ onChange, slices, values }: InterestMixProps): JSX
 }
 
 export interface RoutePreviewProps {
-  routes: readonly RoutePreviewOption[];
+  routes: readonly ResolvedRoutePreviewOption[];
   selected: string;
   onSelect: (id: string) => void;
   formatDistanceLabel: (metres: number) => string;
@@ -187,6 +211,7 @@ export function RoutePreview({
   selected,
 }: RoutePreviewProps): JSX.Element {
   const { t } = useTranslation();
+  const locale = useLocaleCode();
   const heading = t("customize-route-preview-heading", { defaultValue: "Route Preview" });
   const regenerateLabel = t("customize-route-preview-regenerate", { defaultValue: "Regenerate" });
   const startLabel = t("customize-route-preview-start", { defaultValue: "Start Route" });
@@ -195,18 +220,20 @@ export function RoutePreview({
     <section className="mb-8">
       <SectionHeading iconToken="{icon.action.preview}">{heading}</SectionHeading>
       <div className="grid grid-cols-3 gap-3">
-        {routes.map((route) => {
-          const isActive = route.id === selected;
-          const title = t(`customize-route-preview-${route.id}-title`, {
-            defaultValue: route.title,
-          });
-          const distanceLabel = formatDistanceLabel(route.distanceMetres);
-          const durationLabel = formatDurationLabel(route.durationSeconds);
+        {routes.map((preview) => {
+          const isActive = preview.id === selected;
+          const localization = resolveLocalization(
+            preview.route.localizations,
+            locale,
+            preview.routeId,
+          );
+          const distanceLabel = formatDistanceLabel(preview.route.distanceMetres);
+          const durationLabel = formatDurationLabel(preview.route.durationSeconds);
           return (
             <button
-              key={route.id}
+              key={preview.id}
               type="button"
-              onClick={() => onSelect(route.id)}
+              onClick={() => onSelect(preview.id)}
               className={`rounded-lg border px-3 py-3 text-start text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${
                 isActive
                   ? "border-accent bg-accent/15 text-base-content"
@@ -215,15 +242,15 @@ export function RoutePreview({
               aria-pressed={isActive}
             >
               <div
-                className={`mb-2 flex h-16 items-center justify-center rounded bg-gradient-to-br ${route.gradientClass}`}
+                className={`mb-2 flex h-16 items-center justify-center rounded bg-gradient-to-br ${preview.gradientClass}`}
               >
                 <Icon
                   token="{icon.object.route}"
-                  className={`text-xl ${route.iconColorClass}`}
+                  className={`text-xl ${preview.iconColorClass}`}
                   aria-hidden
                 />
               </div>
-              <p className="font-semibold">{title}</p>
+              <p className="font-semibold">{localization.name}</p>
               <p className="text-[11px] text-base-content/60">
                 {distanceLabel} • {durationLabel}
               </p>
@@ -259,6 +286,7 @@ export interface AdvancedOptionsProps {
 
 export function AdvancedOptions({ onToggle, options, values }: AdvancedOptionsProps): JSX.Element {
   const { t } = useTranslation();
+  const locale = useLocaleCode();
   const heading = t("customize-advanced-heading", { defaultValue: "Advanced Options" });
 
   return (
@@ -267,19 +295,14 @@ export function AdvancedOptions({ onToggle, options, values }: AdvancedOptionsPr
       <div className="space-y-3">
         {options.map((option) => {
           const checked = values[option.id] ?? option.defaultEnabled;
-          const title = t(`customize-advanced-${option.id}-title`, {
-            defaultValue: option.label,
-          });
-          const description = t(`customize-advanced-${option.id}-description`, {
-            defaultValue: option.description,
-          });
+          const localization = resolveLocalization(option.localizations, locale, option.id);
           return (
             <PreferenceToggleCard
               key={option.id}
               id={`advanced-${option.id}`}
               iconToken={option.iconToken}
-              title={title}
-              description={description}
+              title={localization.name}
+              description={localization.description ?? ""}
               isChecked={checked}
               onCheckedChange={(next) => onToggle(option.id, next)}
             />

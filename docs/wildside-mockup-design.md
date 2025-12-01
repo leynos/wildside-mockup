@@ -218,6 +218,13 @@ Mapping guidance:
   `id`, `labelKey`, optional `descriptionKey`, and presentational fields such
   as `iconToken` or `emoji`. Keep the module text-free so it can be imported on
   both client and server without loading the translation runtime.
+- Runtime localisation now lives in
+  `src/app/lib/localization-runtime.ts` with `resolveLocalization`,
+  `fallbackLocalization`, and `coerceLocaleCode` utilities; feature screens
+  should import these rather than reimplementing fallbacks or locale coercion.
+- Use the shared `useLocaleCode` hook (`src/app/i18n/use-locale-code.ts`) to
+  normalise `i18n.language` to a supported `LocaleCode`, defaulting to
+  `en-GB` when an unsupported tag is supplied.
 - Build three registries under `src/app/data/registries/` that reuse the
   descriptor type:
   - `interestsRegistry` powers `/discover`, `/map/quick`, and `/wizard/step-1`.
@@ -350,68 +357,28 @@ Mapping guidance:
   parity with the mockups. Evaluate Tabler/Remix in a later spike once flows
   are ported.
 
-#### `/customize` localization strategy (Fluent + data fixtures)
+#### `/customize` localisation strategy (entity-first)
 
-- The `/customize` screen combines relatively static, data-driven copy
-  (slider labels, segment options, advanced toggles) with header and control
-  chrome. Treat `src/app/data/customize.ts` as a source of _IDs and English
-  defaults_ and localize at render time rather than embedding translations
-  into the data layer.
-- Each cluster of strings on the screen maps to a small family of Fluent
-  messages keyed by the same identifiers as the fixtures:
-  - Sliders:
-    - `sliders` entries keep `id`, `unit`, and marker defaults.
-    - Call `t("customize-slider-{id}-label")`,
-      `t("customize-slider-{id}-aria")`, and
-      `t("customize-slider-{id}-marker-{index}")` at render time, passing
-      the English values as `defaultValue`. This lets Fluent handle
-      translated labels, aria text, and marker captions whilst tests
-      continue to see the original copy in the default locale.
-  - Segmented options:
-    - `crowdLevelOptions` and `elevationOptions` retain `id`, `label`, and
-      `description` as English fixtures.
-    - `SegmentPicker` uses keys of the form
-      `customize-{segmentId}-option-{optionId}-label` and
-      `customize-{segmentId}-option-{optionId}-description`, again with
-      `defaultValue` drawn from the fixture, so new options only require a
-      matching Fluent message to become localizable.
-  - Surface and interest chips:
-    - `surfaceOptions` and `interestMix` keep their IDs and icon metadata
-      in TypeScript.
-    - Labels are resolved via keys such as
-      `customize-surface-option-{id}-label` and
-      `customize-interest-{id}-label`. Reuse the same translated label for
-      both visible text and thumb `aria-label` composition so that screen
-      reader output matches what users see.
-  - Route previews:
-    - `routePreviews` expose `id`, `distance`, `duration`, and icon styling.
-    - Titles are localized by key
-      `customize-route-preview-{id}-title`, with the English fixture as the
-      default. Leave distances and durations literal for now; lift them into
-      Fluent later once number and unit formatting rules per locale are set.
-  - Advanced options:
-    - `advancedOptions` describes toggles such as “Safety Priority”,
-      “Accessibility”, and “Offline download”.
-    - `AdvancedOptions` resolves the user-facing text from keys like
-      `customize-advanced-{id}-title` and
-      `customize-advanced-{id}-description`, ensuring toggle names and helper
-      copy participate in localization without changing the fixture shape.
-  - Bottom navigation:
-    - `bottomNavigation` continues to model the four primary tabs:
-      `map`, `discover`, `routes`, and `profile`.
-    - When building `AppBottomNavigation` props, map each item’s `id` to a
-      Fluent key (`nav-{id}-label`) and fall back to the English `label`
-      from the fixture. This keeps the existing e2e snapshots (which assert
-      on “Map Map”, “Routes Routes”, etc.) stable in the default locale whilst
-      allowing per-locale labelling.
-- This strategy keeps `customize.ts` small and declarative, whilst pushing all
-  user-visible text through Fluent and `react-i18next`. The key design
-  invariants are:
-  - IDs in fixtures are the single source of truth for message keys.
-  - English copy remains the default via `defaultValue`, so existing tests
-    and snapshots continue to pass.
-  - All translations live under `public/locales/<locale>/common.ftl`, pass
-    `moz-fluent-lint`, and can evolve independently of the data schema.
+- Fixture objects for sliders, segmented options, surface chips, interest
+  weights, advanced toggles, and route previews now ship `localizations`
+  maps. Components call `pickLocalization` with `i18n.language` once per
+  render; no per-option Fluent messages remain.
+- Fluent remains responsible for screen chrome and aria scaffolding only
+  (header copy, section headings, regenerate/start CTAs, and the
+  `customize-interest-thumb-aria` message). This keeps user-facing options
+  aligned to the data model while allowing locale-specific chrome to change
+  independently.
+- Route previews point at real `Route` entities by id; distance and duration
+  come from the shared route fixtures rather than duplicated literals.
+- Advanced toggles, surface options, and interest slices follow the same
+  fallback behaviour used on Explore so sparse locale coverage yields stable
+  copy instead of missing labels.
+- Bottom navigation still resolves `nav-{id}-label` through Fluent to keep
+  tab naming consistent whilst falling back to the fixture text in default
+  locales.
+- Safety & accessibility mirrors this approach: accordion sections and
+  toggles resolve labels from `safetyToggles` localisation maps, presets map
+  to toggle ids, and Fluent keeps only the header, CTA, and dialog chrome.
 
 #### `/wizard` localization strategy (step scaffolding + Fluent)
 

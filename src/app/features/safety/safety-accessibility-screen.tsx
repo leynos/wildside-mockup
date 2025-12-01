@@ -4,68 +4,98 @@ import * as Accordion from "@radix-ui/react-accordion";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Switch from "@radix-ui/react-switch";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../components/icon";
 import {
-  type SafetyAccordionSection,
   type SafetyPreset,
   type SafetyToggle,
+  type SafetyToggleId,
   safetyAccordionSections,
   safetyPresets,
+  safetyToggles,
 } from "../../data/stage-four";
 import { MobileShell } from "../../layout/mobile-shell";
+import { coerceLocaleCode, resolveLocalization } from "../../lib/localization-runtime";
 
-type ToggleState = Record<string, boolean>;
+type ToggleState = Record<SafetyToggleId, boolean>;
 
-type ResolvedSafetyToggle = Omit<
-  SafetyToggle,
-  "labelKey" | "defaultLabel" | "descriptionKey" | "defaultDescription"
-> & {
+type ResolvedSafetyToggle = SafetyToggle & {
   readonly label: string;
-  readonly description: string;
+  readonly description?: string;
 };
 
-type ResolvedSafetySection = Omit<SafetyAccordionSection, "toggles"> & {
+type ResolvedSafetySection = {
+  readonly id: string;
   readonly title: string;
-  readonly description: string;
+  readonly description?: string;
+  readonly iconToken: string;
+  readonly accentClass: string;
+  readonly toggleIds: readonly SafetyToggleId[];
   readonly toggles: ResolvedSafetyToggle[];
 };
 
-type ResolvedSafetyPreset = SafetyPreset & {
+type ResolvedSafetyPreset = Omit<SafetyPreset, "localizations"> & {
   readonly title: string;
-  readonly description: string;
+  readonly description?: string;
 };
 
 export function SafetyAccessibilityScreen(): JSX.Element {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = coerceLocaleCode(i18n.language);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [toggleState, setToggleState] = useState<ToggleState>(() => {
-    const accumulator: ToggleState = {};
-    for (const section of safetyAccordionSections) {
-      for (const toggle of section.toggles) {
-        accumulator[toggle.id] = toggle.defaultChecked;
-      }
+    const accumulator: ToggleState = {} as ToggleState;
+    for (const toggle of safetyToggles) {
+      accumulator[toggle.id] = toggle.defaultChecked;
     }
     return accumulator;
   });
 
-  const handleToggle = (toggleId: string, value: boolean) => {
+  const handleToggle = (toggleId: SafetyToggleId, value: boolean) => {
     setToggleState((prev) => ({ ...prev, [toggleId]: value }));
   };
 
-  const resolvedSections: ResolvedSafetySection[] = safetyAccordionSections.map((section) => {
-    const title = t(section.titleKey, { defaultValue: section.defaultTitle });
-    const description = t(section.descriptionKey, { defaultValue: section.defaultDescription });
-    const toggles = section.toggles.map((toggle) => ({
-      ...toggle,
-      label: t(toggle.labelKey, { defaultValue: toggle.defaultLabel }),
-      description: t(toggle.descriptionKey, { defaultValue: toggle.defaultDescription }),
-    }));
-    return { ...section, title, description, toggles } as ResolvedSafetySection;
-  });
+  const toggleLookup = useMemo(
+    () => new Map<SafetyToggleId, SafetyToggle>(safetyToggles.map((toggle) => [toggle.id, toggle])),
+    [],
+  );
+
+  const resolvedSections: ResolvedSafetySection[] = useMemo(() => {
+    return safetyAccordionSections.map((section) => {
+      const sectionLocalization = resolveLocalization(section.localizations, locale, section.id);
+      const toggles = section.toggleIds
+        .map((toggleId) => {
+          const toggle = toggleLookup.get(toggleId);
+          if (!toggle) {
+            if (import.meta.env.DEV) {
+              // eslint-disable-next-line no-console
+              console.warn("Missing safety toggle", { toggleId, sectionId: section.id });
+            }
+            return null;
+          }
+          const localization = resolveLocalization(toggle.localizations, locale, toggle.id);
+          return {
+            ...toggle,
+            label: localization.name,
+            description: localization.description ?? "",
+          } satisfies ResolvedSafetyToggle;
+        })
+        .filter(Boolean) as ResolvedSafetyToggle[];
+
+      return {
+        id: section.id,
+        title: sectionLocalization.name,
+        description: sectionLocalization.description ?? "",
+        iconToken: section.iconToken,
+        accentClass: section.accentClass,
+        toggleIds: section.toggleIds,
+        toggles,
+      } satisfies ResolvedSafetySection;
+    });
+  }, [locale, toggleLookup]);
 
   const toggleLabelLookup = (() => {
     const entries = new Map<string, string>();
@@ -77,11 +107,10 @@ export function SafetyAccessibilityScreen(): JSX.Element {
     return entries;
   })();
 
-  const resolvedPresets: ResolvedSafetyPreset[] = safetyPresets.map((preset) => ({
-    ...preset,
-    title: t(preset.titleKey, { defaultValue: preset.defaultTitle }),
-    description: t(preset.descriptionKey, { defaultValue: preset.defaultDescription }),
-  }));
+  const resolvedPresets: ResolvedSafetyPreset[] = safetyPresets.map((preset) => {
+    const localization = resolveLocalization(preset.localizations, locale, preset.id);
+    return { ...preset, title: localization.name, description: localization.description ?? "" };
+  });
 
   const backLabel = t("wizard-header-back-label", { defaultValue: "Back" });
   const headerTitle = t("safety-header-title", { defaultValue: "Safety & Accessibility" });
