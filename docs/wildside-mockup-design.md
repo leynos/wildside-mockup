@@ -223,8 +223,8 @@ Mapping guidance:
   `fallbackLocalization`, and `coerceLocaleCode` utilities; feature screens
   should import these rather than reimplementing fallbacks or locale coercion.
 - Use the shared `useLocaleCode` hook (`src/app/i18n/use-locale-code.ts`) to
-  normalise `i18n.language` to a supported `LocaleCode`, defaulting to
-  `en-GB` when an unsupported tag is supplied.
+  normalize `i18n.language` to a supported `LocaleCode`, defaulting to `en-GB`
+  when an unsupported tag is supplied.
 - Build three registries under `src/app/data/registries/` that reuse the
   descriptor type:
   - `interestsRegistry` powers `/discover`, `/map/quick`, and `/wizard/step-1`.
