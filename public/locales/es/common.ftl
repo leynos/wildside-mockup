@@ -29,11 +29,11 @@ quick-walk-header-title = Generador de caminatas rápidas
 quick-walk-header-description = Ajusta la duración e intereses para refrescar las sugerencias.
 quick-walk-generate-aria = Generar una nueva caminata
 quick-walk-duration-label = Duración
-quick-walk-duration-format = {$count} { unit-duration-minute-label }
+quick-walk-duration-format = {$count} { -unit-duration-minute($count) }
 quick-walk-duration-aria = Duración de la caminata
-quick-walk-duration-marker-start = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-mid = {$count} { unit-duration-minute-label }
-quick-walk-duration-marker-end = {$count} { unit-duration-minute-label }
+quick-walk-duration-marker-start = {$count} { -unit-duration-minute($count) }
+quick-walk-duration-marker-mid = {$count} { -unit-duration-minute($count) }
+quick-walk-duration-marker-end = {$count} { -unit-duration-minute($count) }
 quick-walk-interests-heading = Intereses
 quick-walk-interests-selected =
     { $count ->
@@ -247,11 +247,12 @@ offline-dialog-cancel = Cancelar
 offline-dialog-preview = Previsualizar descarga
 unit-distance-kilometre = km
 unit-distance-mile = mi
-unit-duration-minute-label =
+-unit-duration-minute =
     { $count ->
         [one] minuto
        *[other] minutos
     }
+unit-duration-minute-label = { -unit-duration-minute($count) }
 unit-temperature-celsius = °C
 unit-temperature-fahrenheit = °F
 explore-theme-walk-count =
