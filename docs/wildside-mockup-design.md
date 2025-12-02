@@ -371,7 +371,7 @@ Mapping guidance:
 - Route previews point at real `Route` entities by id; distance and duration
   come from the shared route fixtures rather than duplicated literals.
 - Advanced toggles, surface options, and interest slices follow the same
-  fallback behaviour used on Explore so sparse locale coverage yields stable
+  fallback behaviour used on Explore, so sparse locale coverage yields stable
   copy instead of missing labels.
 - Bottom navigation still resolves `nav-{id}-label` through Fluent to keep
   tab naming consistent whilst falling back to the fixture text in default
