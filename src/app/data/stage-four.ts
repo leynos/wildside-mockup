@@ -248,7 +248,9 @@ export const safetyToggles: SafetyToggle[] = [
     id: "step-free",
     localizations: localisation(
       { name: "Step-free routes", description: "Avoid stairs and steps" },
-      {},
+      {
+        fr: { name: "Parcours sans marche", description: "Évitez les escaliers" },
+      },
       "safety-toggle:step-free",
     ),
     iconToken: "{icon.accessibility.stepFree}",
@@ -259,7 +261,12 @@ export const safetyToggles: SafetyToggle[] = [
     id: "avoid-hills",
     localizations: localisation(
       { name: "Avoid steep hills", description: "Limit inclines above 5%" },
-      {},
+      {
+        fr: {
+          name: "Éviter les fortes côtes",
+          description: "Limitez les pentes au‑delà de 5 %",
+        },
+      },
       "safety-toggle:avoid-hills",
     ),
     iconToken: "{icon.accessibility.elevation}",
@@ -273,7 +280,12 @@ export const safetyToggles: SafetyToggle[] = [
         name: "Prefer wider paths",
         description: "Optimised for chairs, buggies, or group walking",
       },
-      {},
+      {
+        fr: {
+          name: "Préférer des chemins larges",
+          description: "Optimisés pour fauteuils, poussettes ou groupes",
+        },
+      },
       "safety-toggle:wider-paths",
     ),
     iconToken: "{icon.category.paved}",
@@ -295,7 +307,12 @@ export const safetyToggles: SafetyToggle[] = [
     id: "busy-areas",
     localizations: localisation(
       { name: "Prefer busy areas", description: "Stay in populated zones" },
-      {},
+      {
+        fr: {
+          name: "Privilégier les zones animées",
+          description: "Restez dans les secteurs fréquentés",
+        },
+      },
       "safety-toggle:busy-areas",
     ),
     iconToken: "{icon.safety.group}",
@@ -306,7 +323,12 @@ export const safetyToggles: SafetyToggle[] = [
     id: "emergency-sharing",
     localizations: localisation(
       { name: "Emergency sharing", description: "Share location with contacts" },
-      {},
+      {
+        fr: {
+          name: "Partage d’urgence",
+          description: "Partagez votre position avec vos contacts",
+        },
+      },
       "safety-toggle:emergency-sharing",
     ),
     iconToken: "{icon.safety.emergencyPhone}",
@@ -317,7 +339,12 @@ export const safetyToggles: SafetyToggle[] = [
     id: "avoid-isolated",
     localizations: localisation(
       { name: "Avoid isolated areas", description: "Skip secluded locations" },
-      {},
+      {
+        fr: {
+          name: "Éviter les zones isolées",
+          description: "Écartez les lieux trop reculés",
+        },
+      },
       "safety-toggle:avoid-isolated",
     ),
     iconToken: "{icon.safety.hide}",
@@ -328,7 +355,12 @@ export const safetyToggles: SafetyToggle[] = [
     id: "shade",
     localizations: localisation(
       { name: "Prioritise shade", description: "Choose tree-lined paths" },
-      {},
+      {
+        fr: {
+          name: "Priorité à l’ombre",
+          description: "Choisissez des sentiers bordés d’arbres",
+        },
+      },
       "safety-toggle:shade",
     ),
     iconToken: "{icon.category.trails}",
@@ -339,7 +371,12 @@ export const safetyToggles: SafetyToggle[] = [
     id: "weather-adaptive",
     localizations: localisation(
       { name: "Weather-adaptive", description: "Adjust routes for weather" },
-      {},
+      {
+        fr: {
+          name: "Adapté à la météo",
+          description: "Ajustez vos parcours selon les conditions",
+        },
+      },
       "safety-toggle:weather",
     ),
     iconToken: "{icon.object.weatherSunny}",
@@ -350,7 +387,12 @@ export const safetyToggles: SafetyToggle[] = [
     id: "quiet-routes",
     localizations: localisation(
       { name: "Prefer quiet routes", description: "Minimise traffic noise" },
-      {},
+      {
+        fr: {
+          name: "Préférer les zones calmes",
+          description: "Réduisez le bruit de la circulation",
+        },
+      },
       "safety-toggle:quiet",
     ),
     iconToken: "{icon.object.audio}",
@@ -364,7 +406,12 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
     id: "mobility",
     localizations: localisation(
       { name: "Mobility Support", description: "Route adjustments for easier navigation" },
-      {},
+      {
+        fr: {
+          name: "Aide à la mobilité",
+          description: "Ajustements de parcours pour faciliter la navigation",
+        },
+      },
       "safety-section:mobility",
     ),
     iconToken: "{icon.accessibility.stepFree}",
@@ -375,7 +422,12 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
     id: "safety",
     localizations: localisation(
       { name: "Safety Features", description: "Enhanced security for your walks" },
-      {},
+      {
+        fr: {
+          name: "Fonctionnalités de sécurité",
+          description: "Sécurité renforcée pendant vos balades",
+        },
+      },
       "safety-section:safety",
     ),
     iconToken: "{icon.safety.priority}",
@@ -386,7 +438,12 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
     id: "comfort",
     localizations: localisation(
       { name: "Comfort Settings", description: "Personalise your walking experience" },
-      {},
+      {
+        fr: {
+          name: "Paramètres de confort",
+          description: "Personnalisez votre expérience de marche",
+        },
+      },
       "safety-section:comfort",
     ),
     iconToken: "{icon.environment.toggle}",
@@ -400,7 +457,12 @@ export const safetyPresets: SafetyPreset[] = [
     id: "family",
     localizations: localisation(
       { name: "Family Friendly", description: "Gentle pace, playground stops, shade" },
-      {},
+      {
+        fr: {
+          name: "Adapté aux familles",
+          description: "Rythme doux, arrêts aires de jeux, ombre",
+        },
+      },
       "safety-preset:family",
     ),
     iconToken: "{icon.object.family}",
@@ -411,7 +473,12 @@ export const safetyPresets: SafetyPreset[] = [
     id: "senior",
     localizations: localisation(
       { name: "Senior Friendly", description: "Gentle slopes, resting points, well-lit" },
-      {},
+      {
+        fr: {
+          name: "Adapté aux seniors",
+          description: "Pentes légères, points de repos, bonne luminosité",
+        },
+      },
       "safety-preset:senior",
     ),
     iconToken: "{icon.accessibility.mobilityAid}",
@@ -422,7 +489,12 @@ export const safetyPresets: SafetyPreset[] = [
     id: "night",
     localizations: localisation(
       { name: "Night Walker", description: "Well-lit, busy areas, emergency sharing" },
-      {},
+      {
+        fr: {
+          name: "Baladeur nocturne",
+          description: "Zones bien éclairées et animées avec partage d’urgence",
+        },
+      },
       "safety-preset:night",
     ),
     iconToken: "{icon.object.weatherNight}",
