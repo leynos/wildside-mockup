@@ -1,10 +1,17 @@
 /** @file Hooks for resolving safety screen data and translations. */
 
+import type { TFunction } from "i18next";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { SafetyToggleId } from "../../data/stage-four";
+import type {
+  SafetyAccordionSection,
+  SafetyPreset,
+  SafetyToggle,
+  SafetyToggleId,
+} from "../../data/stage-four";
 import { safetyAccordionSections, safetyPresets, safetyToggles } from "../../data/stage-four";
+import type { LocaleCode } from "../../domain/entities/localization";
 import { coerceLocaleCode, resolveLocalization } from "../../lib/localization-runtime";
 import type {
   ResolvedSafetyPreset,
@@ -13,6 +20,71 @@ import type {
   SafetyTranslations,
   ToggleState,
 } from "./safety-types";
+
+function resolveToggle(
+  toggleId: SafetyToggleId,
+  toggleLookup: Map<SafetyToggleId, SafetyToggle>,
+  locale: LocaleCode,
+  t: TFunction,
+  sectionId: string,
+): ResolvedSafetyToggle | null {
+  const toggle = toggleLookup.get(toggleId);
+  if (!toggle) {
+    if (import.meta.env.DEV) {
+      console.warn("Missing safety toggle", { toggleId, sectionId });
+    }
+    return null;
+  }
+  const localization = resolveLocalization(toggle.localizations, locale, toggle.id);
+  const label = t(`safety-toggle-${toggle.id}-label`, {
+    defaultValue: localization.name,
+  });
+  const description = t(`safety-toggle-${toggle.id}-description`, {
+    defaultValue: localization.description ?? "",
+  });
+  return { ...toggle, label, description };
+}
+
+function resolveSection(
+  section: SafetyAccordionSection,
+  toggleLookup: Map<SafetyToggleId, SafetyToggle>,
+  locale: LocaleCode,
+  t: TFunction,
+): ResolvedSafetySection {
+  const sectionLocalization = resolveLocalization(section.localizations, locale, section.id);
+  const toggles = section.toggleIds
+    .map((toggleId) => resolveToggle(toggleId, toggleLookup, locale, t, section.id))
+    .filter((toggle): toggle is ResolvedSafetyToggle => toggle !== null);
+
+  return {
+    id: section.id,
+    title: t(`safety-section-${section.id}-title`, {
+      defaultValue: sectionLocalization.name,
+    }),
+    description: t(`safety-section-${section.id}-description`, {
+      defaultValue: sectionLocalization.description ?? "",
+    }),
+    iconToken: section.iconToken,
+    accentClass: section.accentClass,
+    toggleIds: section.toggleIds,
+    toggles,
+  };
+}
+
+function resolvePreset(
+  preset: SafetyPreset,
+  locale: LocaleCode,
+  t: TFunction,
+): ResolvedSafetyPreset {
+  const localization = resolveLocalization(preset.localizations, locale, preset.id);
+  const title = t(`safety-preset-${preset.id}-title`, {
+    defaultValue: localization.name,
+  });
+  const description = t(`safety-preset-${preset.id}-description`, {
+    defaultValue: localization.description ?? "",
+  });
+  return { ...preset, title, description };
+}
 
 export const useSafetyToggles = () => {
   const [toggleState, setToggleState] = useState<ToggleState>(() => {
@@ -41,46 +113,7 @@ export const useSafetyData = (localeInput: string) => {
 
   const resolvedSections: ResolvedSafetySection[] = useMemo(
     () =>
-      safetyAccordionSections.map((section) => {
-        const sectionLocalization = resolveLocalization(section.localizations, locale, section.id);
-        const toggles = section.toggleIds.reduce<ResolvedSafetyToggle[]>((acc, toggleId) => {
-          const toggle = toggleLookup.get(toggleId);
-          if (!toggle) {
-            if (import.meta.env.DEV) {
-              // eslint-disable-next-line no-console
-              console.warn("Missing safety toggle", { toggleId, sectionId: section.id });
-            }
-            return acc;
-          }
-          const localization = resolveLocalization(toggle.localizations, locale, toggle.id);
-          const label = t(`safety-toggle-${toggle.id}-label`, {
-            defaultValue: localization.name,
-          });
-          const description = t(`safety-toggle-${toggle.id}-description`, {
-            defaultValue: localization.description ?? "",
-          });
-          acc.push({
-            ...toggle,
-            label,
-            description,
-          });
-          return acc;
-        }, []);
-
-        return {
-          id: section.id,
-          title: t(`safety-section-${section.id}-title`, {
-            defaultValue: sectionLocalization.name,
-          }),
-          description: t(`safety-section-${section.id}-description`, {
-            defaultValue: sectionLocalization.description ?? "",
-          }),
-          iconToken: section.iconToken,
-          accentClass: section.accentClass,
-          toggleIds: section.toggleIds,
-          toggles,
-        };
-      }),
+      safetyAccordionSections.map((section) => resolveSection(section, toggleLookup, locale, t)),
     [locale, t, toggleLookup],
   );
 
@@ -94,18 +127,10 @@ export const useSafetyData = (localeInput: string) => {
     return entries;
   }, [resolvedSections]);
 
-  const resolvedPresets: ResolvedSafetyPreset[] = useMemo(() => {
-    return safetyPresets.map((preset) => {
-      const localization = resolveLocalization(preset.localizations, locale, preset.id);
-      const title = t(`safety-preset-${preset.id}-title`, {
-        defaultValue: localization.name,
-      });
-      const description = t(`safety-preset-${preset.id}-description`, {
-        defaultValue: localization.description ?? "",
-      });
-      return { ...preset, title, description };
-    });
-  }, [locale, t]);
+  const resolvedPresets: ResolvedSafetyPreset[] = useMemo(
+    () => safetyPresets.map((preset) => resolvePreset(preset, locale, t)),
+    [locale, t],
+  );
 
   return { resolvedSections, resolvedPresets, toggleLookup, toggleLabelLookup } as const;
 };
