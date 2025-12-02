@@ -287,6 +287,10 @@ unit-energy-kilojoule = kJ
 unit-energy-calorie = kcal
 unit-energy-btu = BTU
 
+# TRANSLATORS: These strings describe safety sections (mobility/safety/comfort),
+# individual toggles, and presets (family/senior/night) that combine toggles.
+# Keep the IDs aligned with the data model; {$title} in safety-preset-alert must
+# match the preset title key for the chosen preset.
 safety-presets-heading = Pròifilean ro-shuidhichte
 safety-preset-alert = Thèid an preset “{$title}” a chur an gnìomh ann an togail san àm ri teachd.
 safety-section-mobility-title = Taic gluasaid
@@ -309,10 +313,12 @@ safety-section-comfort-title = Roghainnean comhfhurtachd
 safety-section-comfort-description = Dèan eòlas a’ choiseachd freagarrach dhut fhèin
 safety-toggle-shade-label = Thoir prìomhachas do sgàil
 safety-toggle-shade-description = Tagh slighean a tha air an lìnigeadh le craobhan
-safety-toggle-weather-label = Freagarrach don t-sìde
-safety-toggle-weather-description = Atharraich na slighean a rèir nan suidheachaidhean
-safety-toggle-quiet-label = Is fheàrr slighean sàmhach
-safety-toggle-quiet-description = Lùghdaich fuaim na trafaig
+safety-toggle-weather-adaptive-label = Freagarrach don t-sìde
+safety-toggle-weather-adaptive-description = Atharraich na slighean a rèir nan suidheachaidhean
+safety-toggle-quiet-routes-label = Is fheàrr slighean sàmhach
+safety-toggle-quiet-routes-description = Lùghdaich fuaim na trafaig
+safety-toggle-well-lit-label = Slighean le solas math
+safety-toggle-well-lit-description = Thoir prìomhachas do shlighean le deagh shoillseachadh
 safety-preset-family-title = Freagarrach do theaghlaichean
 safety-preset-family-description = Ruitheam socair, stadan aig raointean-cluiche, tòrr sgàil
 safety-preset-senior-title = Freagarrach do sheann daoine
