@@ -29,6 +29,11 @@ describe("quick walk duration Fluent message", () => {
     expect(loadMessage(0, "it")).toBe("0 minuti");
   });
 
+  it("pluralises Vietnamese minute labels correctly", () => {
+    expect(loadMessage(1, "vi")).toBe("1 phút");
+    expect(loadMessage(3, "vi")).toBe("3 phút");
+  });
+
   it("throws when the required count is omitted", () => {
     const ftlPath = path.join("public", "locales", "it", "common.ftl");
     const source = fs.readFileSync(ftlPath, "utf-8");

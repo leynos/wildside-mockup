@@ -15,36 +15,9 @@ import type {
   SegmentOption,
   SurfaceOption,
 } from "../../data/customize";
-import {
-  type EntityLocalizations,
-  type LocaleCode,
-  pickLocalization,
-} from "../../domain/entities/localization";
 import { useLocaleCode } from "../../i18n/use-locale-code";
+import { resolveLocalization } from "../../lib/localization-runtime";
 import { CustomizeSegmentToggle } from "./segment-toggle-card";
-
-const fallbackLocalization = (
-  localizations: EntityLocalizations,
-  fallbackName: string,
-): { readonly name: string; readonly description?: string; readonly shortLabel?: string } =>
-  Object.values(localizations).find(Boolean) ?? { name: fallbackName };
-
-const resolveLocalization = (
-  localizations: EntityLocalizations,
-  locale: LocaleCode,
-  fallbackName: string,
-): { readonly name: string; readonly description?: string; readonly shortLabel?: string } => {
-  const fallback = fallbackLocalization(localizations, fallbackName);
-  try {
-    return pickLocalization(localizations, locale);
-  } catch (error) {
-    if (import.meta.env.DEV) {
-      // eslint-disable-next-line no-console
-      console.warn("Falling back to default localization", { locale, fallbackName, error });
-    }
-    return fallback;
-  }
-};
 
 export interface SegmentPickerProps {
   id: string;

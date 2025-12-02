@@ -218,7 +218,7 @@ Mapping guidance:
   `id`, `labelKey`, optional `descriptionKey`, and presentational fields such
   as `iconToken` or `emoji`. Keep the module text-free so it can be imported on
   both client and server without loading the translation runtime.
-- Runtime localisation now lives in
+- Runtime localization now lives in
   `src/app/lib/localization-runtime.ts` with `resolveLocalization`,
   `fallbackLocalization`, and `coerceLocaleCode` utilities; feature screens
   should import these rather than reimplementing fallbacks or locale coercion.
@@ -357,7 +357,7 @@ Mapping guidance:
   parity with the mockups. Evaluate Tabler/Remix in a later spike once flows
   are ported.
 
-#### `/customize` localisation strategy (entity-first)
+#### `/customize` localization strategy (entity-first)
 
 - Fixture objects for sliders, segmented options, surface chips, interest
   weights, advanced toggles, and route previews now ship `localizations`
@@ -377,7 +377,7 @@ Mapping guidance:
   tab naming consistent whilst falling back to the fixture text in default
   locales.
 - Safety & accessibility mirrors this approach: accordion sections and
-  toggles resolve labels from `safetyToggles` localisation maps, presets map
+  toggles resolve labels from `safetyToggles` localization maps, presets map
   to toggle ids, and Fluent keeps only the header, CTA, and dialog chrome.
 
 #### `/wizard` localization strategy (step scaffolding + Fluent)

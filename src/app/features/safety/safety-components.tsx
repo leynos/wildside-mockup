@@ -110,7 +110,7 @@ type SavedPreferencesDialogProps = {
   readonly open: boolean;
   readonly onOpenChange: (open: boolean) => void;
   readonly toggleState: ToggleState;
-  readonly toggleLabelLookup: Map<string, string>;
+  readonly toggleLabelLookup: Map<SafetyToggleId, string>;
   readonly translations: Pick<
     SafetyTranslations,
     "dialogTitle" | "dialogDescription" | "dialogContinue" | "dialogChipFallback"

@@ -3,12 +3,8 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import {
-  type SafetyToggleId,
-  safetyAccordionSections,
-  safetyPresets,
-  safetyToggles,
-} from "../../data/stage-four";
+import type { SafetyToggleId } from "../../data/stage-four";
+import { safetyAccordionSections, safetyPresets, safetyToggles } from "../../data/stage-four";
 import { coerceLocaleCode, resolveLocalization } from "../../lib/localization-runtime";
 import type {
   ResolvedSafetyPreset,
@@ -36,6 +32,7 @@ export const useSafetyToggles = () => {
 
 export const useSafetyData = (localeInput: string) => {
   const locale = coerceLocaleCode(localeInput);
+  const { t } = useTranslation();
 
   const toggleLookup = useMemo(
     () => new Map(safetyToggles.map((toggle) => [toggle.id, toggle])),
@@ -56,29 +53,39 @@ export const useSafetyData = (localeInput: string) => {
             return acc;
           }
           const localization = resolveLocalization(toggle.localizations, locale, toggle.id);
+          const label = t(`safety-toggle-${toggle.id}-label`, {
+            defaultValue: localization.name,
+          });
+          const description = t(`safety-toggle-${toggle.id}-description`, {
+            defaultValue: localization.description ?? "",
+          });
           acc.push({
             ...toggle,
-            label: localization.name,
-            description: localization.description ?? "",
+            label,
+            description,
           });
           return acc;
         }, []);
 
         return {
           id: section.id,
-          title: sectionLocalization.name,
-          description: sectionLocalization.description ?? "",
+          title: t(`safety-section-${section.id}-title`, {
+            defaultValue: sectionLocalization.name,
+          }),
+          description: t(`safety-section-${section.id}-description`, {
+            defaultValue: sectionLocalization.description ?? "",
+          }),
           iconToken: section.iconToken,
           accentClass: section.accentClass,
           toggleIds: section.toggleIds,
           toggles,
         };
       }),
-    [locale, toggleLookup],
+    [locale, t, toggleLookup],
   );
 
   const toggleLabelLookup = useMemo(() => {
-    const entries = new Map<string, string>();
+    const entries = new Map<SafetyToggleId, string>();
     resolvedSections.forEach((section) => {
       section.toggles.forEach((toggle) => {
         entries.set(toggle.id, toggle.label);
@@ -87,14 +94,18 @@ export const useSafetyData = (localeInput: string) => {
     return entries;
   }, [resolvedSections]);
 
-  const resolvedPresets: ResolvedSafetyPreset[] = useMemo(
-    () =>
-      safetyPresets.map((preset) => {
-        const localization = resolveLocalization(preset.localizations, locale, preset.id);
-        return { ...preset, title: localization.name, description: localization.description ?? "" };
-      }),
-    [locale],
-  );
+  const resolvedPresets: ResolvedSafetyPreset[] = useMemo(() => {
+    return safetyPresets.map((preset) => {
+      const localization = resolveLocalization(preset.localizations, locale, preset.id);
+      const title = t(`safety-preset-${preset.id}-title`, {
+        defaultValue: localization.name,
+      });
+      const description = t(`safety-preset-${preset.id}-description`, {
+        defaultValue: localization.description ?? "",
+      });
+      return { ...preset, title, description };
+    });
+  }, [locale, t]);
 
   return { resolvedSections, resolvedPresets, toggleLookup, toggleLabelLookup } as const;
 };

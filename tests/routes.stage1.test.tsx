@@ -124,6 +124,7 @@ const resolveAdvancedLabel = (id: string, fallback: string) =>
   );
 
 const resolveSafetySectionTitle = (id: string, fallback: string) =>
+  translate(`safety-section-${id}-title`, fallback) ??
   resolveLocalizationForTest(
     safetyAccordionSections.find((section) => section.id === id)?.localizations,
     fallback,
@@ -131,6 +132,7 @@ const resolveSafetySectionTitle = (id: string, fallback: string) =>
   );
 
 const resolveSafetyToggleLabel = (id: string, fallback: string) =>
+  translate(`safety-toggle-${id}-label`, fallback) ??
   resolveLocalizationForTest(
     safetyToggles.find((toggle) => toggle.id === id)?.localizations,
     fallback,
