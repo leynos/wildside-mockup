@@ -282,8 +282,13 @@ unit-energy-kilojoule = kJ
 unit-energy-calorie = kcal
 unit-energy-btu = BTU
 
+# TRANSLATORS: Safety sections group toggles (mobility/safety/comfort) and
+# presets (family/senior/night) that combine multiple toggles. Keep IDs aligned
+# with the data model; {$title} in safety-preset-alert must match the preset
+# title key.
 safety-presets-heading = Wstępne profile
 safety-preset-alert = Profil „{$title}” zostanie zastosowany w kolejnej wersji.
+
 safety-section-mobility-title = Wsparcie mobilności
 safety-section-mobility-description = Korekty trasy dla łatwiejszej nawigacji
 safety-toggle-step-free-label = Trasy bez schodów
@@ -292,22 +297,27 @@ safety-toggle-avoid-hills-label = Omijaj strome wzniesienia
 safety-toggle-avoid-hills-description = Ogranicz nachylenia powyżej 5%
 safety-toggle-wider-paths-label = Preferuj szersze ścieżki
 safety-toggle-wider-paths-description = Zoptymalizowane pod wózki, wózki inwalidzkie i grupy
+
 safety-section-safety-title = Funkcje bezpieczeństwa
 safety-section-safety-description = Więcej spokoju podczas spacerów
+safety-toggle-well-lit-label = Dobrze oświetlone ścieżki
+safety-toggle-well-lit-description = Priorytetyzuj jasno oświetlone trasy
 safety-toggle-busy-areas-label = Preferuj ruchliwe obszary
 safety-toggle-busy-areas-description = Pozostań w zamieszkałych strefach
 safety-toggle-emergency-sharing-label = Udostępnianie awaryjne
 safety-toggle-emergency-sharing-description = Udostępnij lokalizację kontaktom
 safety-toggle-avoid-isolated-label = Unikaj odosobnionych miejsc
 safety-toggle-avoid-isolated-description = Pomijaj odludne punkty
+
 safety-section-comfort-title = Ustawienia komfortu
 safety-section-comfort-description = Dostosuj doświadczenie spacerowe do siebie
 safety-toggle-shade-label = Priorytet dla cienia
 safety-toggle-shade-description = Wybieraj alejki obsadzone drzewami
-safety-toggle-weather-label = Dopasuj do pogody
-safety-toggle-weather-description = Modyfikuj trasę zależnie od warunków
-safety-toggle-quiet-label = Preferuj spokojne trasy
-safety-toggle-quiet-description = Minimalizuj hałas uliczny
+safety-toggle-weather-adaptive-label = Dopasuj do pogody
+safety-toggle-weather-adaptive-description = Modyfikuj trasę zależnie od warunków
+safety-toggle-quiet-routes-label = Preferuj spokojne trasy
+safety-toggle-quiet-routes-description = Minimalizuj hałas uliczny
+
 safety-preset-family-title = Przyjazne rodzinie
 safety-preset-family-description = Spokojne tempo, przerwy na place zabaw, mnóstwo cienia
 safety-preset-senior-title = Przyjazne seniorom
