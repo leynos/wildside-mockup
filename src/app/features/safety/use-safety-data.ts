@@ -21,13 +21,18 @@ import type {
   ToggleState,
 } from "./safety-types";
 
+interface ResolutionContext {
+  toggleLookup: Map<SafetyToggleId, SafetyToggle>;
+  locale: LocaleCode;
+  t: TFunction;
+  sectionId?: string;
+}
+
 function resolveToggle(
   toggleId: SafetyToggleId,
-  toggleLookup: Map<SafetyToggleId, SafetyToggle>,
-  locale: LocaleCode,
-  t: TFunction,
-  sectionId: string,
+  context: ResolutionContext,
 ): ResolvedSafetyToggle | null {
+  const { toggleLookup, locale, t, sectionId } = context;
   const toggle = toggleLookup.get(toggleId);
   if (!toggle) {
     if (import.meta.env.DEV) {
@@ -47,13 +52,12 @@ function resolveToggle(
 
 function resolveSection(
   section: SafetyAccordionSection,
-  toggleLookup: Map<SafetyToggleId, SafetyToggle>,
-  locale: LocaleCode,
-  t: TFunction,
+  context: Omit<ResolutionContext, "sectionId">,
 ): ResolvedSafetySection {
+  const { locale, t } = context;
   const sectionLocalization = resolveLocalization(section.localizations, locale, section.id);
   const toggles = section.toggleIds
-    .map((toggleId) => resolveToggle(toggleId, toggleLookup, locale, t, section.id))
+    .map((toggleId) => resolveToggle(toggleId, { ...context, sectionId: section.id }))
     .filter((toggle): toggle is ResolvedSafetyToggle => toggle !== null);
 
   return {
@@ -73,9 +77,9 @@ function resolveSection(
 
 function resolvePreset(
   preset: SafetyPreset,
-  locale: LocaleCode,
-  t: TFunction,
+  context: Pick<ResolutionContext, "locale" | "t">,
 ): ResolvedSafetyPreset {
+  const { locale, t } = context;
   const localization = resolveLocalization(preset.localizations, locale, preset.id);
   const title = t(`safety-preset-${preset.id}-title`, {
     defaultValue: localization.name,
@@ -113,7 +117,9 @@ export const useSafetyData = (localeInput: string) => {
 
   const resolvedSections: ResolvedSafetySection[] = useMemo(
     () =>
-      safetyAccordionSections.map((section) => resolveSection(section, toggleLookup, locale, t)),
+      safetyAccordionSections.map((section) =>
+        resolveSection(section, { toggleLookup, locale, t }),
+      ),
     [locale, t, toggleLookup],
   );
 
@@ -128,7 +134,7 @@ export const useSafetyData = (localeInput: string) => {
   }, [resolvedSections]);
 
   const resolvedPresets: ResolvedSafetyPreset[] = useMemo(
-    () => safetyPresets.map((preset) => resolvePreset(preset, locale, t)),
+    () => safetyPresets.map((preset) => resolvePreset(preset, { locale, t })),
     [locale, t],
   );
 
