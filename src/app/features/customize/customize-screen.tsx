@@ -81,6 +81,15 @@ export function CustomizeScreen(): JSX.Element {
 
   const navigate = useNavigate();
 
+  const resolvedSliders = useMemo(
+    () =>
+      sliders.map((slider) => ({
+        ...slider,
+        localization: resolveLocalization(slider.localizations, locale, slider.id),
+      })),
+    [locale],
+  );
+
   return (
     <MobileShell
       tone="dark"
@@ -115,10 +124,9 @@ export function CustomizeScreen(): JSX.Element {
           }
         />
         <main className="screen-scroll pb-6 pt-4">
-          {sliders.map(
-            ({ id, iconToken, iconColorClass, localizations, markers, max, min, step }) => {
+          {resolvedSliders.map(
+            ({ id, iconToken, iconColorClass, markers, max, min, step, localization }) => {
               const currentValue = sliderValues[id] ?? min;
-              const sliderLocalization = resolveLocalization(localizations, locale, id);
               const markerLabels = markers.map((marker) =>
                 formatSliderValue(id, marker, t, i18n.language, unitSystem),
               );
@@ -126,7 +134,7 @@ export function CustomizeScreen(): JSX.Element {
                 <SliderControl
                   key={id}
                   id={id}
-                  label={sliderLocalization.name}
+                  label={localization.name}
                   iconToken={iconToken}
                   iconClassName={iconColorClass}
                   className="mb-8"
@@ -138,7 +146,7 @@ export function CustomizeScreen(): JSX.Element {
                     formatSliderValue(id, value, t, i18n.language, unitSystem)
                   }
                   markers={markerLabels}
-                  ariaLabel={sliderLocalization.description ?? sliderLocalization.name}
+                  ariaLabel={localization.description ?? localization.name}
                   onValueChange={(value) =>
                     setSliderValues((current) => ({
                       ...current,
