@@ -40,7 +40,7 @@ describe("SafetyAccessibilityScreen", () => {
 
     await user.click(screen.getByRole("button", { name: "Guardar preferencias" }));
 
-    expect(await screen.findByText("Preferencias guardadas"))?.toBeInTheDocument();
+    expect(await screen.findByText("Preferencias guardadas")).toBeInTheDocument();
     expect(screen.getAllByText("Rutas sin escalones")[0]).toBeInTheDocument();
   });
 });
