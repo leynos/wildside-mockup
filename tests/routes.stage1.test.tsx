@@ -37,7 +37,7 @@ import {
   resetLanguage,
   withI18nLanguage,
 } from "./helpers/i18nTestHelpers";
-import { resolveLocalizationForTest } from "./helpers/resolveLocalization";
+import { resolveLocalizationNameForTest } from "./helpers/resolveLocalization";
 import { installLogicalStyleStub } from "./support/logical-style-stub";
 
 type TestRoute =
@@ -117,7 +117,7 @@ const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""),
 const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
 
 const resolveAdvancedLabel = (id: string, fallback: string) =>
-  resolveLocalizationForTest(
+  resolveLocalizationNameForTest(
     advancedOptions.find((option) => option.id === id)?.localizations,
     fallback,
     i18n.language,
@@ -125,7 +125,7 @@ const resolveAdvancedLabel = (id: string, fallback: string) =>
 
 const resolveSafetySectionTitle = (id: string, fallback: string) =>
   translate(`safety-section-${id}-title`, fallback) ??
-  resolveLocalizationForTest(
+  resolveLocalizationNameForTest(
     safetyAccordionSections.find((section) => section.id === id)?.localizations,
     fallback,
     i18n.language,
@@ -133,7 +133,7 @@ const resolveSafetySectionTitle = (id: string, fallback: string) =>
 
 const resolveSafetyToggleLabel = (id: string, fallback: string) =>
   translate(`safety-toggle-${id}-label`, fallback) ??
-  resolveLocalizationForTest(
+  resolveLocalizationNameForTest(
     safetyToggles.find((toggle) => toggle.id === id)?.localizations,
     fallback,
     i18n.language,
@@ -1815,7 +1815,7 @@ describe("Stage 4 completion flows", () => {
       const findRouteButton = () => {
         const buttons = view.getAllByRole("button");
         const routePreview = resolvedRoutePreviews.find((preview) => preview.id === "route-a");
-        const label = resolveLocalizationForTest(
+        const label = resolveLocalizationNameForTest(
           routePreview?.route.localizations,
           "Route A",
           i18n.language,

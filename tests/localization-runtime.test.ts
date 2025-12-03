@@ -1,3 +1,4 @@
+/** @file Tests for localisation runtime helpers and fallbacks. */
 import { describe, expect, it } from "bun:test";
 
 import {

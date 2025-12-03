@@ -12,6 +12,12 @@ type ResolutionOptions = {
   readonly fallbackLocales?: readonly LocaleCode[];
 };
 
+/**
+ * Provide a safe localisation fallback when resolution fails or data is sparse.
+ *
+ * @example
+ * const fallback = fallbackLocalization(entity.localizations, entity.id);
+ */
 export const fallbackLocalization = (
   localizations: EntityLocalizations | null | undefined,
   fallbackName: string,
@@ -22,6 +28,9 @@ export const fallbackLocalization = (
 
 /**
  * Resolve an entity localisation with predictable fallbacks and safe logging.
+ *
+ * @example
+ * const title = resolveLocalization(route.localizations, "fr", route.id).name;
  */
 export const resolveLocalization = (
   localizations: EntityLocalizations,
@@ -43,6 +52,9 @@ export const resolveLocalization = (
 
 /**
  * Normalise an incoming language tag to a supported LocaleCode.
+ *
+ * @example
+ * const locale = coerceLocaleCode(i18n.language); // e.g. "en-GB" for "en"
  */
 export const coerceLocaleCode = (
   language: string | undefined,

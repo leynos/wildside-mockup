@@ -25,7 +25,7 @@ interface ResolutionContext {
   toggleLookup: Map<SafetyToggleId, SafetyToggle>;
   locale: LocaleCode;
   t: TFunction;
-  sectionId?: string;
+  sectionId?: SafetyAccordionSection["id"];
 }
 
 function resolveToggle(

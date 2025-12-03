@@ -2,7 +2,6 @@
 
 import { beforeAll, describe, expect, it } from "bun:test";
 import { render, screen } from "@testing-library/react";
-import type { JSX } from "react";
 import { I18nextProvider } from "react-i18next";
 import { vi } from "vitest";
 
@@ -16,14 +15,17 @@ import { DisplayModeProvider } from "../src/app/providers/display-mode-provider"
 import { UnitPreferencesProvider } from "../src/app/units/unit-preferences-provider";
 import { changeLanguage, i18n, i18nReady } from "./helpers/i18nTestHelpers";
 
-const renderWithI18n = (ui: JSX.Element) =>
-  render(
-    <I18nextProvider i18n={i18n}>
-      <DisplayModeProvider>
-        <UnitPreferencesProvider>{ui}</UnitPreferencesProvider>
-      </DisplayModeProvider>
-    </I18nextProvider>,
-  );
+const getWrappedCustomize = () => (
+  <I18nextProvider i18n={i18n}>
+    <DisplayModeProvider>
+      <UnitPreferencesProvider>
+        <CustomizeScreen />
+      </UnitPreferencesProvider>
+    </DisplayModeProvider>
+  </I18nextProvider>
+);
+
+const renderWithI18n = () => render(getWrappedCustomize());
 
 beforeAll(async () => {
   await i18nReady;
@@ -32,20 +34,12 @@ beforeAll(async () => {
 describe("CustomizeScreen localisation", () => {
   it("swaps route preview labels when the language changes", async () => {
     await changeLanguage("es");
-    const { rerender } = renderWithI18n(<CustomizeScreen />);
+    const { rerender } = renderWithI18n();
 
     expect(await screen.findByText("Paseo Luces del Puerto")).toBeInTheDocument();
 
     await changeLanguage("en-GB");
-    rerender(
-      <I18nextProvider i18n={i18n}>
-        <DisplayModeProvider>
-          <UnitPreferencesProvider>
-            <CustomizeScreen />
-          </UnitPreferencesProvider>
-        </DisplayModeProvider>
-      </I18nextProvider>,
-    );
+    rerender(getWrappedCustomize());
 
     expect(await screen.findByText("Harbour Lights Promenade")).toBeInTheDocument();
   });
