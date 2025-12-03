@@ -318,9 +318,6 @@ describe("Stage 1 routed flows", () => {
       // allow the router navigation microtask to flush
       await Promise.resolve();
     });
-    await act(async () => {
-      await route.router.navigate({ to: "/discover" });
-    });
     const discoverHeroHeading = await screen.findByRole("heading", {
       name: localizedRegex(discoverHeading),
     });
