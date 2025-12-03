@@ -277,7 +277,7 @@ unit-energy-calorie = kcal
 unit-energy-btu = BTU
 
 safety-presets-heading = โปรไฟล์สำเร็จรูป
-safety-preset-alert = โปรไฟล์ “{$title}” จะถูกใช้ในเวอร์ชันถัดไป
+safety-preset-alert = โปรไฟล์ “{$title}” จะถูกใช้ในการเดินครั้งถัดไป
 safety-section-mobility-title = ตัวช่วยการเคลื่อนไหว
 safety-section-mobility-description = ปรับเส้นทางให้ง่ายต่อการเดิน
 safety-toggle-step-free-label = ทางเดินไร้ขั้น
