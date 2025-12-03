@@ -81,13 +81,15 @@ export function CustomizeScreen(): JSX.Element {
 
   const navigate = useNavigate();
 
+  const sliderDefinitions = useMemo(() => sliders, []);
+
   const resolvedSliders = useMemo(
     () =>
-      sliders.map((slider) => ({
+      sliderDefinitions.map((slider) => ({
         ...slider,
         localization: resolveLocalization(slider.localizations, locale, slider.id),
       })),
-    [locale],
+    [locale, sliderDefinitions],
   );
 
   return (
