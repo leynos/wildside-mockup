@@ -360,7 +360,7 @@ Mapping guidance:
 #### `/customize` localization strategy (entity-first)
 
 - Fixture objects for sliders, segmented options, surface chips, interest
-  weights, advanced toggles, and route previews now ship `localizations`
+  weights, advanced toggles, and route previews now ship `localization`
   maps. Components call `pickLocalization` with `i18n.language` once per
   render; no per-option Fluent messages remain.
 - Fluent remains responsible for screen chrome and aria scaffolding only
