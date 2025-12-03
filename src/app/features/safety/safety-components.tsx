@@ -135,9 +135,10 @@ export const SavedPreferencesDialog = ({
           {translations.dialogDescription}
         </Dialog.Description>
         <div className="chip-row text-sm text-base-content/80">
-          {Object.entries(toggleState)
-            .filter(([, value]) => value)
-            .map(([id]) => (
+          {Object.keys(toggleState)
+            .filter((id) => toggleState[id as SafetyToggleId])
+            .map((id) => id as SafetyToggleId)
+            .map((id) => (
               <span key={id} className="rounded-full border border-base-300/60 px-3 py-1">
                 {toggleLabelLookup.get(id) ?? translations.dialogChipFallback(id)}
               </span>
