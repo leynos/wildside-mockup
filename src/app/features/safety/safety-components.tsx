@@ -6,7 +6,7 @@ import * as Switch from "@radix-ui/react-switch";
 import type { JSX } from "react";
 
 import { Icon } from "../../components/icon";
-import type { SafetyToggleId } from "../../data/stage-four";
+import type { SafetyToggleId } from "../../data/safety-fixtures";
 import type {
   ResolvedSafetyPreset,
   ResolvedSafetySection,

@@ -8,12 +8,8 @@ import { advancedOptions, resolvedRoutePreviews } from "../src/app/data/customiz
 import type { WalkRouteSummary } from "../src/app/data/map";
 import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
 import { getInterestDescriptor } from "../src/app/data/registries/interests";
-import {
-  autoManagementOptions,
-  safetyAccordionSections,
-  safetyToggles,
-  walkCompletionShareOptions,
-} from "../src/app/data/stage-four";
+import { safetyAccordionSections, safetyToggles } from "../src/app/data/safety-fixtures";
+import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
   accessibilityOptions,
   wizardGeneratedStops,

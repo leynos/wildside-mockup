@@ -1,6 +1,6 @@
 /** @file Shared types for safety screen data and presentation. */
 
-import type { SafetyPreset, SafetyToggle, SafetyToggleId } from "../../data/stage-four";
+import type { SafetyPreset, SafetyToggle, SafetyToggleId } from "../../data/safety-fixtures";
 
 export type ToggleState = Record<SafetyToggleId, boolean>;
 

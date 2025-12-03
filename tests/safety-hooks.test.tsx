@@ -4,7 +4,7 @@ import { renderHook } from "@testing-library/react";
 import { act, type FC, type ReactNode } from "react";
 import { I18nextProvider } from "react-i18next";
 
-import { safetyToggles } from "../src/app/data/stage-four";
+import { safetyToggles } from "../src/app/data/safety-fixtures";
 import {
   useSafetyData,
   useSafetyToggles,

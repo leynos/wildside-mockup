@@ -9,8 +9,8 @@ import type {
   SafetyPreset,
   SafetyToggle,
   SafetyToggleId,
-} from "../../data/stage-four";
-import { safetyAccordionSections, safetyPresets, safetyToggles } from "../../data/stage-four";
+} from "../../data/safety-fixtures";
+import { safetyAccordionSections, safetyPresets, safetyToggles } from "../../data/safety-fixtures";
 import type { LocaleCode } from "../../domain/entities/localization";
 import { coerceLocaleCode, resolveLocalization } from "../../lib/localization-runtime";
 import type {
