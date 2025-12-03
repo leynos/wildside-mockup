@@ -102,7 +102,20 @@ export const safetyToggles: SafetyToggle[] = [
     id: "well-lit",
     localizations: localisation(
       { name: "Well-lit paths", description: "Prioritise brightly lit evening routes" },
-      {},
+      {
+        fr: {
+          name: "Itinéraires bien éclairés",
+          description: "Prioriser les trajets du soir bien éclairés",
+        },
+        vi: {
+          name: "Lối đi đủ ánh sáng",
+          description: "Ưu tiên các tuyến buổi tối được chiếu sáng tốt",
+        },
+        "zh-TW": {
+          name: "光線充足的路徑",
+          description: "優先選擇夜間光線充足的路線",
+        },
+      },
       "safety-toggle:well-lit",
     ),
     iconToken: "{icon.object.guidance}",
