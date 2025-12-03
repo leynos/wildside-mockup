@@ -92,11 +92,11 @@ function resolvePreset(
 
 export const useSafetyToggles = () => {
   const [toggleState, setToggleState] = useState<ToggleState>(() => {
-    const accumulator: ToggleState = {} as ToggleState;
-    for (const toggle of safetyToggles) {
-      accumulator[toggle.id] = toggle.defaultChecked;
-    }
-    return accumulator;
+    const initialToggleState = Object.fromEntries(
+      safetyToggles.map((toggle) => [toggle.id, toggle.defaultChecked] as const),
+    ) satisfies ToggleState;
+
+    return initialToggleState;
   });
 
   const handleToggle = (toggleId: SafetyToggleId, value: boolean) => {

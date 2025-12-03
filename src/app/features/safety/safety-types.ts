@@ -16,7 +16,7 @@ export type ResolvedSafetySection = {
   readonly iconToken: string;
   readonly accentClass: string;
   readonly toggleIds: readonly SafetyToggleId[];
-  readonly toggles: ResolvedSafetyToggle[];
+  readonly toggles: readonly ResolvedSafetyToggle[];
 };
 
 export type ResolvedSafetyPreset = Omit<SafetyPreset, "localizations"> & {

@@ -13,9 +13,12 @@ type ResolutionOptions = {
 };
 
 export const fallbackLocalization = (
-  localizations: EntityLocalizations,
+  localizations: EntityLocalizations | null | undefined,
   fallbackName: string,
-): LocalizedStringSet => Object.values(localizations).find(Boolean) ?? { name: fallbackName };
+): LocalizedStringSet => {
+  const values = localizations ? Object.values(localizations).filter(Boolean) : [];
+  return values[0] ?? { name: fallbackName };
+};
 
 /**
  * Resolve an entity localisation with predictable fallbacks and safe logging.
