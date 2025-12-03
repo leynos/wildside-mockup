@@ -1,3 +1,4 @@
+/** @file Tests for safety hooks behaviour and localisation */
 import { beforeEach, describe, expect, it } from "bun:test";
 import { renderHook } from "@testing-library/react";
 import { act, type FC, type ReactNode } from "react";
