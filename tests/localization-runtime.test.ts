@@ -37,9 +37,11 @@ describe("localization runtime helpers", () => {
   it("falls back safely when pickLocalization throws", () => {
     const warn = console.warn;
     console.warn = () => {};
-    const resolved = resolveLocalization({}, "es", "Harbour Loop");
-    console.warn = warn;
-
-    expect(resolved.name).toBe("Harbour Loop");
+    try {
+      const resolved = resolveLocalization({}, "es", "Harbour Loop");
+      expect(resolved.name).toBe("Harbour Loop");
+    } finally {
+      console.warn = warn;
+    }
   });
 });

@@ -1,4 +1,4 @@
-/** @file Behavioural tests for the customize screen localisation flow. */
+/** @file Behavioural tests for the customize screen localization flow. */
 
 import { beforeAll, describe, expect, it } from "bun:test";
 import { render, screen } from "@testing-library/react";
