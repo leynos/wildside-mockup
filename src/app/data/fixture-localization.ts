@@ -3,7 +3,7 @@
  */
 
 import type { EntityLocalizations, LocaleCode } from "../domain/entities/localization";
-import { SUPPORTED_LOCALES } from "../i18n/supported-locales";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../i18n/supported-locales";
 
 type BaseLocalization = {
   readonly name: string;
@@ -34,7 +34,7 @@ const supportedLocaleCodes: readonly LocaleCode[] = SUPPORTED_LOCALES.map(
  */
 export const fillLocalizations = (
   localizations: EntityLocalizations,
-  fallbackLocale: LocaleCode = "en-GB",
+  fallbackLocale: LocaleCode = DEFAULT_LOCALE as LocaleCode,
   context?: string,
 ): EntityLocalizations => {
   const fallback =
@@ -73,4 +73,4 @@ export const localisation = (
   > = {},
   context?: string,
 ): EntityLocalizations =>
-  fillLocalizations(localizeAcrossLocales(base, overrides), "en-GB", context);
+  fillLocalizations(localizeAcrossLocales(base, overrides), DEFAULT_LOCALE as LocaleCode, context);
