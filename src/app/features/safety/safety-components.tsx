@@ -137,12 +137,14 @@ export const SavedPreferencesDialog = ({
         <div className="chip-row text-sm text-base-content/80">
           {Object.keys(toggleState)
             .filter((id) => toggleState[id as SafetyToggleId])
-            .map((id) => id as SafetyToggleId)
-            .map((id) => (
-              <span key={id} className="rounded-full border border-base-300/60 px-3 py-1">
-                {toggleLabelLookup.get(id) ?? translations.dialogChipFallback(id)}
-              </span>
-            ))}
+            .map((id) => {
+              const toggleId = id as SafetyToggleId;
+              return (
+                <span key={toggleId} className="rounded-full border border-base-300/60 px-3 py-1">
+                  {toggleLabelLookup.get(toggleId) ?? translations.dialogChipFallback(toggleId)}
+                </span>
+              );
+            })}
         </div>
         <div className="flex justify-end">
           <Dialog.Close asChild>
