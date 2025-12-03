@@ -30,7 +30,7 @@ const supportedLocaleCodes: readonly LocaleCode[] = SUPPORTED_LOCALES.map(
 );
 
 /**
- * Normalise a partial localization map to cover all supported locales.
+ * Normalize a partial localization map to cover all supported locales.
  */
 export const fillLocalizations = (
   localizations: EntityLocalizations,
