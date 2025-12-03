@@ -250,6 +250,8 @@ export const safetyToggles: SafetyToggle[] = [
       { name: "Step-free routes", description: "Avoid stairs and steps" },
       {
         fr: { name: "Parcours sans marche", description: "Évitez les escaliers" },
+        vi: { name: "Lộ trình không bậc", description: "Tránh cầu thang và bậc cao" },
+        "zh-TW": { name: "無階梯路線", description: "避免樓梯與臺階" },
       },
       "safety-toggle:step-free",
     ),
@@ -265,6 +267,14 @@ export const safetyToggles: SafetyToggle[] = [
         fr: {
           name: "Éviter les fortes côtes",
           description: "Limitez les pentes au‑delà de 5 %",
+        },
+        vi: {
+          name: "Tránh dốc đứng",
+          description: "Giới hạn độ dốc trên 5%",
+        },
+        "zh-TW": {
+          name: "避免陡坡",
+          description: "限制超過 5% 的坡度",
         },
       },
       "safety-toggle:avoid-hills",
@@ -284,6 +294,14 @@ export const safetyToggles: SafetyToggle[] = [
         fr: {
           name: "Préférer des chemins larges",
           description: "Optimisés pour fauteuils, poussettes ou groupes",
+        },
+        vi: {
+          name: "Ưu tiên lối đi rộng",
+          description: "Tối ưu cho xe lăn, xe đẩy hoặc nhóm đông",
+        },
+        "zh-TW": {
+          name: "優先寬闊路徑",
+          description: "適合輪椅、手推車或團體同行",
         },
       },
       "safety-toggle:wider-paths",
@@ -312,6 +330,14 @@ export const safetyToggles: SafetyToggle[] = [
           name: "Privilégier les zones animées",
           description: "Restez dans les secteurs fréquentés",
         },
+        vi: {
+          name: "Ưu tiên khu vực đông người",
+          description: "Ở trong khu vực có người qua lại",
+        },
+        "zh-TW": {
+          name: "偏好熱鬧區域",
+          description: "待在有人潮的區域",
+        },
       },
       "safety-toggle:busy-areas",
     ),
@@ -327,6 +353,14 @@ export const safetyToggles: SafetyToggle[] = [
         fr: {
           name: "Partage d’urgence",
           description: "Partagez votre position avec vos contacts",
+        },
+        vi: {
+          name: "Chia sẻ khẩn cấp",
+          description: "Chia sẻ vị trí với liên hệ tin cậy",
+        },
+        "zh-TW": {
+          name: "緊急分享",
+          description: "與聯絡人分享你的定位",
         },
       },
       "safety-toggle:emergency-sharing",
@@ -344,6 +378,14 @@ export const safetyToggles: SafetyToggle[] = [
           name: "Éviter les zones isolées",
           description: "Écartez les lieux trop reculés",
         },
+        vi: {
+          name: "Tránh khu vắng vẻ",
+          description: "Bỏ qua các điểm hẻo lánh",
+        },
+        "zh-TW": {
+          name: "避免偏僻地點",
+          description: "略過人跡罕至的區域",
+        },
       },
       "safety-toggle:avoid-isolated",
     ),
@@ -359,6 +401,14 @@ export const safetyToggles: SafetyToggle[] = [
         fr: {
           name: "Priorité à l’ombre",
           description: "Choisissez des sentiers bordés d’arbres",
+        },
+        vi: {
+          name: "Ưu tiên bóng mát",
+          description: "Chọn các cung đường nhiều cây",
+        },
+        "zh-TW": {
+          name: "優先陰涼",
+          description: "選擇林蔭大道",
         },
       },
       "safety-toggle:shade",
@@ -376,6 +426,14 @@ export const safetyToggles: SafetyToggle[] = [
           name: "Adapté à la météo",
           description: "Ajustez vos parcours selon les conditions",
         },
+        vi: {
+          name: "Thích ứng thời tiết",
+          description: "Điều chỉnh lộ trình theo điều kiện trời",
+        },
+        "zh-TW": {
+          name: "天氣自適應",
+          description: "依天氣調整路線",
+        },
       },
       "safety-toggle:weather",
     ),
@@ -391,6 +449,14 @@ export const safetyToggles: SafetyToggle[] = [
         fr: {
           name: "Préférer les zones calmes",
           description: "Réduisez le bruit de la circulation",
+        },
+        vi: {
+          name: "Ưu tiên tuyến yên tĩnh",
+          description: "Giảm tiếng ồn giao thông",
+        },
+        "zh-TW": {
+          name: "偏好安靜路線",
+          description: "降低交通噪音",
         },
       },
       "safety-toggle:quiet",
@@ -411,6 +477,14 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
           name: "Aide à la mobilité",
           description: "Ajustements de parcours pour faciliter la navigation",
         },
+        vi: {
+          name: "Hỗ trợ di chuyển",
+          description: "Điều chỉnh tuyến để di chuyển dễ dàng hơn",
+        },
+        "zh-TW": {
+          name: "行動支援",
+          description: "微調路線以利更好導航",
+        },
       },
       "safety-section:mobility",
     ),
@@ -427,6 +501,14 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
           name: "Fonctionnalités de sécurité",
           description: "Sécurité renforcée pendant vos balades",
         },
+        vi: {
+          name: "Tính năng an toàn",
+          description: "Thêm yên tâm cho mỗi chuyến đi bộ",
+        },
+        "zh-TW": {
+          name: "安全功能",
+          description: "讓每次步行更安心",
+        },
       },
       "safety-section:safety",
     ),
@@ -442,6 +524,14 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
         fr: {
           name: "Paramètres de confort",
           description: "Personnalisez votre expérience de marche",
+        },
+        vi: {
+          name: "Cài đặt thoải mái",
+          description: "Cá nhân hóa trải nghiệm đi bộ",
+        },
+        "zh-TW": {
+          name: "舒適設定",
+          description: "客製你的步行體驗",
         },
       },
       "safety-section:comfort",
@@ -462,6 +552,14 @@ export const safetyPresets: SafetyPreset[] = [
           name: "Adapté aux familles",
           description: "Rythme doux, arrêts aires de jeux, ombre",
         },
+        vi: {
+          name: "Thân thiện gia đình",
+          description: "Nhịp độ nhẹ nhàng, dừng ở sân chơi, nhiều bóng râm",
+        },
+        "zh-TW": {
+          name: "家庭友善",
+          description: "步調溫和、遊戲場停留、遮蔭充足",
+        },
       },
       "safety-preset:family",
     ),
@@ -478,6 +576,14 @@ export const safetyPresets: SafetyPreset[] = [
           name: "Adapté aux seniors",
           description: "Pentes légères, points de repos, bonne luminosité",
         },
+        vi: {
+          name: "Thân thiện người lớn tuổi",
+          description: "Dốc thoải, điểm nghỉ và ánh sáng tốt",
+        },
+        "zh-TW": {
+          name: "長者友善",
+          description: "緩坡、休息點與良好照明",
+        },
       },
       "safety-preset:senior",
     ),
@@ -493,6 +599,14 @@ export const safetyPresets: SafetyPreset[] = [
         fr: {
           name: "Baladeur nocturne",
           description: "Zones bien éclairées et animées avec partage d’urgence",
+        },
+        vi: {
+          name: "Người đi đêm",
+          description: "Khu vực sáng sủa, đông người kèm chia sẻ khẩn cấp",
+        },
+        "zh-TW": {
+          name: "夜間漫步",
+          description: "明亮、熱鬧並支援緊急分享",
         },
       },
       "safety-preset:night",

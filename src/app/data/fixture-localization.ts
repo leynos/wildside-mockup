@@ -1,5 +1,5 @@
 /**
- * @file Shared helpers for seeding entity localisation maps across fixtures.
+ * @file Shared helpers for seeding entity localization maps across fixtures.
  */
 
 import type { EntityLocalizations, LocaleCode } from "../domain/entities/localization";
@@ -12,7 +12,7 @@ type BaseLocalization = {
 };
 
 /**
- * Expand a base localisation across all supported locales, with optional
+ * Expand a base localization across all supported locales, with optional
  * per-locale overrides when translations are available.
  */
 export const localizeAcrossLocales = (
@@ -30,7 +30,7 @@ const supportedLocaleCodes: readonly LocaleCode[] = SUPPORTED_LOCALES.map(
 );
 
 /**
- * Normalise a partial localisation map to cover all supported locales.
+ * Normalise a partial localization map to cover all supported locales.
  */
 export const fillLocalizations = (
   localizations: EntityLocalizations,
