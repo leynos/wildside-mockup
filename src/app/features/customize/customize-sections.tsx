@@ -8,16 +8,58 @@ import { useTranslation } from "react-i18next";
 import { Icon } from "../../components/icon";
 import { PreferenceToggleCard } from "../../components/preference-toggle-card";
 import { SectionHeading } from "../../components/section-heading";
+import { SliderControl } from "../../components/slider-control";
 import type {
   AdvancedToggleOption,
   InterestMixSlice,
   ResolvedRoutePreviewOption,
   SegmentOption,
+  SliderConfig,
   SurfaceOption,
 } from "../../data/customize";
+import type { LocalizedStringSet } from "../../domain/entities/localization";
 import { useLocaleCode } from "../../i18n/use-locale-code";
 import { resolveLocalization } from "../../lib/localization-runtime";
 import { CustomizeSegmentToggle } from "./segment-toggle-card";
+
+interface SliderListProps {
+  readonly sliders: Array<SliderConfig & { localization: LocalizedStringSet }>;
+  readonly sliderValues: Record<string, number>;
+  readonly onSliderChange: (id: string, value: number) => void;
+  readonly formatSliderValue: (id: string, value: number) => string;
+}
+
+export const SliderList = ({
+  sliders,
+  sliderValues,
+  onSliderChange,
+  formatSliderValue,
+}: SliderListProps): JSX.Element => (
+  <>
+    {sliders.map(({ id, iconToken, iconColorClass, markers, max, min, step, localization }) => {
+      const currentValue = sliderValues[id] ?? min;
+      const markerLabels = markers.map((marker) => formatSliderValue(id, marker));
+      return (
+        <SliderControl
+          key={id}
+          id={id}
+          label={localization.name}
+          iconToken={iconToken}
+          iconClassName={iconColorClass}
+          className="mb-8"
+          min={min}
+          max={max}
+          step={step}
+          value={currentValue}
+          valueFormatter={(value) => formatSliderValue(id, value)}
+          markers={markerLabels}
+          ariaLabel={localization.description ?? localization.name}
+          onValueChange={(value) => onSliderChange(id, value)}
+        />
+      );
+    })}
+  </>
+);
 
 export interface SegmentPickerProps {
   id: string;
