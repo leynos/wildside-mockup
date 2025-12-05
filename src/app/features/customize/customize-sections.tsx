@@ -130,6 +130,10 @@ export function SurfacePicker({
   value,
 }: SurfacePickerProps): JSX.Element {
   const locale = useLocaleCode();
+  const resolvedOptions = options.map((surface) => ({
+    ...surface,
+    label: resolveLocalization(surface.localizations, locale, surface.id).name,
+  }));
   return (
     <section className="mb-8">
       <SectionHeading iconToken={iconToken}>{heading}</SectionHeading>
@@ -140,14 +144,14 @@ export function SurfacePicker({
         aria-label={ariaLabel}
         className="grid grid-cols-2 gap-3"
       >
-        {options.map((surface) => (
+        {resolvedOptions.map((surface) => (
           <ToggleGroup.Item
             key={surface.id}
             value={surface.id}
             className="customize-surface__option"
           >
             <Icon token={surface.iconToken} className="text-base" aria-hidden />
-            {resolveLocalization(surface.localizations, locale, surface.id).name}
+            {surface.label}
           </ToggleGroup.Item>
         ))}
       </ToggleGroup.Root>
@@ -230,18 +234,17 @@ export function RoutePreview({
   const heading = t("customize-route-preview-heading", { defaultValue: "Route Preview" });
   const regenerateLabel = t("customize-route-preview-regenerate", { defaultValue: "Regenerate" });
   const startLabel = t("customize-route-preview-start", { defaultValue: "Start Route" });
+  const resolvedRoutes = routes.map((preview) => ({
+    ...preview,
+    localization: resolveLocalization(preview.route.localizations, locale, preview.routeId),
+  }));
 
   return (
     <section className="mb-8">
       <SectionHeading iconToken="{icon.action.preview}">{heading}</SectionHeading>
       <div className="grid grid-cols-3 gap-3">
-        {routes.map((preview) => {
+        {resolvedRoutes.map((preview) => {
           const isActive = preview.id === selected;
-          const localization = resolveLocalization(
-            preview.route.localizations,
-            locale,
-            preview.routeId,
-          );
           const distanceLabel = formatDistanceLabel(preview.route.distanceMetres);
           const durationLabel = formatDurationLabel(preview.route.durationSeconds);
           return (
@@ -265,7 +268,7 @@ export function RoutePreview({
                   aria-hidden
                 />
               </div>
-              <p className="font-semibold">{localization.name}</p>
+              <p className="font-semibold">{preview.localization.name}</p>
               <p className="text-[11px] text-base-content/60">
                 {distanceLabel} • {durationLabel}
               </p>

@@ -1,5 +1,5 @@
 import { afterAll, afterEach, beforeEach, describe, expect, it } from "bun:test";
-import { screen, within } from "@testing-library/dom";
+import { screen, waitFor, within } from "@testing-library/dom";
 import { act } from "react";
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
@@ -49,6 +49,8 @@ type TestRoute =
   | "/walk-complete"
   | "/offline"
   | "/safety-accessibility";
+
+type AppRouterInstance = ReturnType<typeof createAppRouter>;
 
 const savedRoute = savedRoutes[0];
 
@@ -112,28 +114,37 @@ const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""),
 
 const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
 
-const resolveAdvancedLabel = (id: string, fallback: string) =>
-  resolveLocalizationNameForTest(
-    advancedOptions.find((option) => option.id === id)?.localizations,
-    fallback,
-    i18n.language,
-  );
+const resolveAdvancedLabel = (id: string, fallback: string) => {
+  const option = advancedOptions.find((candidate) => candidate.id === id);
+  if (!option) {
+    throw new Error(`Expected advanced option with id "${id}" to exist for tests`);
+  }
+  return resolveLocalizationNameForTest(option.localizations, fallback, i18n.language);
+};
 
-const resolveSafetySectionTitle = (id: string, fallback: string) =>
-  translate(`safety-section-${id}-title`, fallback) ??
-  resolveLocalizationNameForTest(
-    safetyAccordionSections.find((section) => section.id === id)?.localizations,
-    fallback,
-    i18n.language,
-  );
+const resolveSafetySectionTitle = (id: string, fallback: string) => {
+  const localization = translate(`safety-section-${id}-title`, fallback);
+  if (localization) {
+    return localization;
+  }
+  const section = safetyAccordionSections.find((candidate) => candidate.id === id);
+  if (!section) {
+    throw new Error(`Expected safety section with id "${id}" to exist for tests`);
+  }
+  return resolveLocalizationNameForTest(section.localizations, fallback, i18n.language);
+};
 
-const resolveSafetyToggleLabel = (id: string, fallback: string) =>
-  translate(`safety-toggle-${id}-label`, fallback) ??
-  resolveLocalizationNameForTest(
-    safetyToggles.find((toggle) => toggle.id === id)?.localizations,
-    fallback,
-    i18n.language,
-  );
+const resolveSafetyToggleLabel = (id: string, fallback: string) => {
+  const localization = translate(`safety-toggle-${id}-label`, fallback);
+  if (localization) {
+    return localization;
+  }
+  const toggle = safetyToggles.find((candidate) => candidate.id === id);
+  if (!toggle) {
+    throw new Error(`Expected safety toggle with id "${id}" to exist for tests`);
+  }
+  return resolveLocalizationNameForTest(toggle.localizations, fallback, i18n.language);
+};
 
 const buildSavedRouteCopy = (route: WalkRouteSummary) => {
   const savedMetrics = formatRouteMetrics(route);
@@ -201,7 +212,9 @@ const buildOfflineDownloadsCopy = () => {
   } as const;
 };
 
-async function renderRoute(path: TestRoute) {
+async function renderRoute(
+  path: TestRoute,
+): Promise<{ mount: HTMLDivElement; root: Root; router: AppRouterInstance }> {
   window.history.replaceState(null, "", path);
   const routerInstance = createAppRouter();
   await routerInstance.navigate({ to: path, replace: true });
@@ -598,8 +611,11 @@ describe("Stage 2 routed flows", () => {
       await Promise.resolve();
     });
 
-    await act(async () => {
-      await route.router.navigate({ to: "/saved" });
+    await waitFor(() => {
+      if (route.router.state.location.pathname !== "/saved") {
+        void route.router.navigate({ to: "/saved" });
+      }
+      expect(route.router.state.location.pathname).toBe("/saved");
     });
     const savedHeading = await screen.findByRole("heading", {
       name: localizedRegex(savedRoute.title),
@@ -657,10 +673,13 @@ describe("Stage 2 routed flows", () => {
       await Promise.resolve();
     });
 
-    const wizardHeading = translate("wizard-header-title", "Walk Wizard");
-    await act(async () => {
-      await route.router.navigate({ to: "/wizard/step-1" });
+    await waitFor(() => {
+      if (route.router.state.location.pathname !== "/wizard/step-1") {
+        void route.router.navigate({ to: "/wizard/step-1" });
+      }
+      expect(route.router.state.location.pathname).toBe("/wizard/step-1");
     });
+    const wizardHeading = translate("wizard-header-title", "Walk Wizard");
     expect(
       await screen.findByRole("heading", {
         name: localizedRegex(wizardHeading),
@@ -936,11 +955,14 @@ describe("Stage 3 wizard flows", () => {
       await Promise.resolve();
     });
 
+    await waitFor(() => {
+      if (route.router.state.location.pathname !== "/wizard/step-2") {
+        void route.router.navigate({ to: "/wizard/step-2" });
+      }
+      expect(route.router.state.location.pathname).toBe("/wizard/step-2");
+    });
     const discoveryHeading =
       translate("wizard-step-two-discovery-heading", "Discovery style") ?? "Discovery style";
-    await act(async () => {
-      await route.router.navigate({ to: "/wizard/step-2" });
-    });
     const heading = await screen.findByRole("heading", {
       name: localizedRegex(discoveryHeading),
     });
