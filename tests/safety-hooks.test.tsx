@@ -18,7 +18,6 @@ const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
 
 describe("safety hooks", () => {
   beforeEach(async () => {
-    await i18nReady;
     await changeLanguage("es");
   });
 
