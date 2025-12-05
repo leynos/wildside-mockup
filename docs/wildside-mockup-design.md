@@ -378,7 +378,7 @@ Mapping guidance:
   locales.
 - Safety & accessibility mirrors this approach: accordion sections and
   toggles resolve labels from `safetyToggles` localization maps, presets map
-  to toggle ids, and Fluent keeps only the header, CTA, and dialog chrome.
+  to toggle IDs, and Fluent keeps only the header, CTA, and dialog chrome.
 
 #### `/wizard` localization strategy (step scaffolding + Fluent)
 
