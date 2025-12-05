@@ -1,4 +1,4 @@
-/** @file Presentational body for the customise screen. */
+/** @file Presentational body for the customize screen. */
 
 import type { JSX } from "react";
 import {
