@@ -5,7 +5,9 @@
 import type { EntityLocalizations } from "../domain/entities/localization";
 import { localisation } from "./fixture-localization";
 
-export type SafetyToggleId = string;
+export type SafetyToggleId = string & { readonly __brand: "SafetyToggleId" };
+
+export const safetyToggleId = (value: string): SafetyToggleId => value as SafetyToggleId;
 
 export interface SafetyToggle {
   readonly id: SafetyToggleId;
@@ -33,7 +35,7 @@ export interface SafetyPreset {
 
 export const safetyToggles: SafetyToggle[] = [
   {
-    id: "step-free",
+    id: safetyToggleId("step-free"),
     localizations: localisation(
       { name: "Step-free routes", description: "Avoid stairs and steps" },
       {
@@ -48,7 +50,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: true,
   },
   {
-    id: "avoid-hills",
+    id: safetyToggleId("avoid-hills"),
     localizations: localisation(
       { name: "Avoid steep hills", description: "Limit inclines above 5%" },
       {
@@ -72,7 +74,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: false,
   },
   {
-    id: "wider-paths",
+    id: safetyToggleId("wider-paths"),
     localizations: localisation(
       {
         name: "Prefer wider paths",
@@ -99,7 +101,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: true,
   },
   {
-    id: "well-lit",
+    id: safetyToggleId("well-lit"),
     localizations: localisation(
       { name: "Well-lit paths", description: "Prioritise brightly lit evening routes" },
       {
@@ -123,7 +125,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: true,
   },
   {
-    id: "busy-areas",
+    id: safetyToggleId("busy-areas"),
     localizations: localisation(
       { name: "Prefer busy areas", description: "Stay in populated zones" },
       {
@@ -147,7 +149,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: false,
   },
   {
-    id: "emergency-sharing",
+    id: safetyToggleId("emergency-sharing"),
     localizations: localisation(
       { name: "Emergency sharing", description: "Share location with contacts" },
       {
@@ -171,7 +173,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: false,
   },
   {
-    id: "avoid-isolated",
+    id: safetyToggleId("avoid-isolated"),
     localizations: localisation(
       { name: "Avoid isolated areas", description: "Skip secluded locations" },
       {
@@ -195,7 +197,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: true,
   },
   {
-    id: "shade",
+    id: safetyToggleId("shade"),
     localizations: localisation(
       { name: "Prioritise shade", description: "Choose tree-lined paths" },
       {
@@ -219,7 +221,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: false,
   },
   {
-    id: "weather-adaptive",
+    id: safetyToggleId("weather-adaptive"),
     localizations: localisation(
       { name: "Weather-adaptive", description: "Adjust routes for weather" },
       {
@@ -243,7 +245,7 @@ export const safetyToggles: SafetyToggle[] = [
     defaultChecked: true,
   },
   {
-    id: "quiet-routes",
+    id: safetyToggleId("quiet-routes"),
     localizations: localisation(
       { name: "Prefer quiet routes", description: "Minimise traffic noise" },
       {
@@ -291,7 +293,11 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
     ),
     iconToken: "{icon.accessibility.stepFree}",
     accentClass: "bg-sky-500/20 text-sky-400",
-    toggleIds: ["step-free", "avoid-hills", "wider-paths"],
+    toggleIds: [
+      safetyToggleId("step-free"),
+      safetyToggleId("avoid-hills"),
+      safetyToggleId("wider-paths"),
+    ],
   },
   {
     id: "safety",
@@ -315,7 +321,12 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
     ),
     iconToken: "{icon.safety.priority}",
     accentClass: "bg-yellow-500/20 text-yellow-400",
-    toggleIds: ["well-lit", "busy-areas", "emergency-sharing", "avoid-isolated"],
+    toggleIds: [
+      safetyToggleId("well-lit"),
+      safetyToggleId("busy-areas"),
+      safetyToggleId("emergency-sharing"),
+      safetyToggleId("avoid-isolated"),
+    ],
   },
   {
     id: "comfort",
@@ -339,7 +350,11 @@ export const safetyAccordionSections: SafetyAccordionSection[] = [
     ),
     iconToken: "{icon.environment.toggle}",
     accentClass: "bg-emerald-500/20 text-emerald-400",
-    toggleIds: ["shade", "weather-adaptive", "quiet-routes"],
+    toggleIds: [
+      safetyToggleId("shade"),
+      safetyToggleId("weather-adaptive"),
+      safetyToggleId("quiet-routes"),
+    ],
   },
 ];
 
@@ -366,7 +381,12 @@ export const safetyPresets: SafetyPreset[] = [
     ),
     iconToken: "{icon.object.family}",
     accentClass: "bg-amber-500/20 text-amber-400",
-    appliedToggleIds: ["wider-paths", "shade", "avoid-hills", "weather-adaptive"],
+    appliedToggleIds: [
+      safetyToggleId("wider-paths"),
+      safetyToggleId("shade"),
+      safetyToggleId("avoid-hills"),
+      safetyToggleId("weather-adaptive"),
+    ],
   },
   {
     id: "senior",
@@ -390,7 +410,12 @@ export const safetyPresets: SafetyPreset[] = [
     ),
     iconToken: "{icon.accessibility.mobilityAid}",
     accentClass: "bg-green-500/20 text-green-400",
-    appliedToggleIds: ["step-free", "avoid-hills", "wider-paths", "well-lit"],
+    appliedToggleIds: [
+      safetyToggleId("step-free"),
+      safetyToggleId("avoid-hills"),
+      safetyToggleId("wider-paths"),
+      safetyToggleId("well-lit"),
+    ],
   },
   {
     id: "night",
@@ -414,6 +439,11 @@ export const safetyPresets: SafetyPreset[] = [
     ),
     iconToken: "{icon.object.weatherNight}",
     accentClass: "bg-indigo-500/20 text-indigo-300",
-    appliedToggleIds: ["well-lit", "busy-areas", "emergency-sharing", "avoid-isolated"],
+    appliedToggleIds: [
+      safetyToggleId("well-lit"),
+      safetyToggleId("busy-areas"),
+      safetyToggleId("emergency-sharing"),
+      safetyToggleId("avoid-isolated"),
+    ],
   },
 ];

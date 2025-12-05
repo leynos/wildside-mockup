@@ -4,7 +4,7 @@ import { renderHook } from "@testing-library/react";
 import { act, type FC, type ReactNode } from "react";
 import { I18nextProvider } from "react-i18next";
 
-import { safetyToggles } from "../src/app/data/safety-fixtures";
+import { safetyToggleId, safetyToggles } from "../src/app/data/safety-fixtures";
 import {
   useSafetyData,
   useSafetyToggles,
@@ -29,8 +29,9 @@ describe("safety hooks", () => {
       expect(result.current.toggleState[toggle.id]).toBe(toggle.defaultChecked);
     });
 
-    act(() => result.current.handleToggle("avoid-hills", true));
-    expect(result.current.toggleState["avoid-hills"]).toBe(true);
+    const avoidHillsId = safetyToggleId("avoid-hills");
+    act(() => result.current.handleToggle(avoidHillsId, true));
+    expect(result.current.toggleState[avoidHillsId]).toBe(true);
   });
 
   it("resolves section and toggle labels from translations", () => {
@@ -38,10 +39,10 @@ describe("safety hooks", () => {
 
     const stepFree = result.current.resolvedSections
       .flatMap((section) => section.toggles)
-      .find((toggle) => toggle.id === "step-free");
+      .find((toggle) => toggle.id === safetyToggleId("step-free"));
     expect(stepFree?.label).toBe("Rutas sin escalones");
 
-    const dialogLabels = result.current.toggleLabelLookup.get("step-free");
+    const dialogLabels = result.current.toggleLabelLookup.get(safetyToggleId("step-free"));
     expect(dialogLabels).toBe("Rutas sin escalones");
   });
 
