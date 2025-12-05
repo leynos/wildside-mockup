@@ -300,7 +300,10 @@ describe("Stage 1 routed flows", () => {
 
     const interestGroup = view.getByRole("group", { name: localizedRegex(interestsLabel) });
     const parksDescriptor = getInterestDescriptor("parks", i18n.language);
-    const parksLabel = parksDescriptor?.localization.name ?? "Parks & Nature";
+    if (!parksDescriptor) {
+      throw new Error("Expected parks interest descriptor to exist");
+    }
+    const parksLabel = parksDescriptor.localization.name;
     const parksChip = within(interestGroup).getByRole("button", {
       name: localizedRegex(parksLabel),
     });
@@ -586,7 +589,10 @@ describe("Stage 2 routed flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
     const coffeeDescriptor = getInterestDescriptor("coffee", i18n.language);
-    const coffeeLabel = coffeeDescriptor?.localization.name ?? "Coffee Spots";
+    if (!coffeeDescriptor) {
+      throw new Error("Expected coffee interest descriptor to exist");
+    }
+    const coffeeLabel = coffeeDescriptor.localization.name;
     const coffeeChip = view.getByRole("button", {
       name: localizedRegex(coffeeLabel),
     });
@@ -1830,8 +1836,11 @@ describe("Stage 4 completion flows", () => {
       const findRouteButton = () => {
         const buttons = view.getAllByRole("button");
         const routePreview = resolvedRoutePreviews.find((preview) => preview.id === "route-a");
+        if (!routePreview) {
+          throw new Error("Expected route preview with id route-a to exist");
+        }
         const label = resolveLocalizationNameForTest(
-          routePreview?.route.localizations,
+          routePreview.route.localizations,
           "Route A",
           i18n.language,
         );
