@@ -1,5 +1,6 @@
 import { afterAll, afterEach, beforeEach, describe, expect, it } from "bun:test";
-import { screen, waitFor, within } from "@testing-library/dom";
+import { screen, within } from "@testing-library/dom";
+import userEvent from "@testing-library/user-event";
 import { act } from "react";
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
@@ -114,7 +115,15 @@ const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""),
 
 const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
 
+/**
+ * Prefer Fluent translations for user-overridable labels; fall back to fixture
+ * localisations when translations are absent to keep defaults stable.
+ */
 const resolveAdvancedLabel = (id: string, fallback: string) => {
+  const translated = translate(`advanced-${id}-label`, fallback);
+  if (translated) {
+    return translated;
+  }
   const option = advancedOptions.find((candidate) => candidate.id === id);
   if (!option) {
     throw new Error(`Expected advanced option with id "${id}" to exist for tests`);
@@ -122,6 +131,10 @@ const resolveAdvancedLabel = (id: string, fallback: string) => {
   return resolveLocalizationNameForTest(option.localizations, fallback, i18n.language);
 };
 
+/**
+ * Prefer Fluent translations for user-overridable labels; fall back to fixture
+ * localisations when translations are absent to keep defaults stable.
+ */
 const resolveSafetySectionTitle = (id: string, fallback: string) => {
   const localization = translate(`safety-section-${id}-title`, fallback);
   if (localization) {
@@ -134,6 +147,10 @@ const resolveSafetySectionTitle = (id: string, fallback: string) => {
   return resolveLocalizationNameForTest(section.localizations, fallback, i18n.language);
 };
 
+/**
+ * Prefer Fluent translations for user-overridable labels; fall back to fixture
+ * localisations when translations are absent to keep defaults stable.
+ */
 const resolveSafetyToggleLabel = (id: string, fallback: string) => {
   const localization = translate(`safety-toggle-${id}-label`, fallback);
   if (localization) {
@@ -325,7 +342,7 @@ describe("Stage 1 routed flows", () => {
       "discover-hero-description",
       "Tell us what interests you and we’ll craft magical routes tailored for you.",
     );
-    const filterButton = view.getByRole("button", {
+    const filterButton = view.getByRole("link", {
       name: localizedRegex(filterButtonLabel),
     });
 
@@ -586,6 +603,7 @@ describe("Stage 2 routed flows", () => {
   it("updates quick walk interests and navigates to saved", async () => {
     const route = await renderRoute("/map/quick");
     ({ mount, root } = route);
+    const user = userEvent.setup();
     const container = requireContainer(mount);
     const view = within(container);
     const coffeeDescriptor = getInterestDescriptor("coffee", i18n.language);
@@ -612,20 +630,16 @@ describe("Stage 2 routed flows", () => {
       name: localizedRegex(saveLabel),
     });
 
-    await act(async () => {
-      clickElement(saveAction);
-      await Promise.resolve();
-    });
+    await user.click(saveAction);
 
-    await waitFor(() => {
-      if (route.router.state.location.pathname !== "/saved") {
-        void route.router.navigate({ to: "/saved" });
-      }
-      expect(route.router.state.location.pathname).toBe("/saved");
-    });
-    const savedHeading = await screen.findByRole("heading", {
-      name: localizedRegex(savedRoute.title),
-    });
+    const savedHeading = await screen.findByRole(
+      "heading",
+      {
+        name: localizedRegex(savedRoute.title),
+      },
+      { timeout: 3000 },
+    );
+    expect(route.router.state.location.pathname).toBe("/saved");
     expect(savedHeading).toBeTruthy();
   });
 
@@ -667,6 +681,7 @@ describe("Stage 2 routed flows", () => {
   it("launches the wizard from the quick walk magic wand", async () => {
     const route = await renderRoute("/map/quick");
     ({ mount, root } = route);
+    const user = userEvent.setup();
     const container = requireContainer(mount);
     const view = within(container);
     const generateLabel = translate("quick-walk-generate-aria", "Generate a new walk");
@@ -674,23 +689,19 @@ describe("Stage 2 routed flows", () => {
       name: localizedRegex(generateLabel),
     });
 
-    await act(async () => {
-      clickElement(wandTrigger);
-      await Promise.resolve();
-    });
+    await user.click(wandTrigger);
 
-    await waitFor(() => {
-      if (route.router.state.location.pathname !== "/wizard/step-1") {
-        void route.router.navigate({ to: "/wizard/step-1" });
-      }
-      expect(route.router.state.location.pathname).toBe("/wizard/step-1");
-    });
     const wizardHeading = translate("wizard-header-title", "Walk Wizard");
     expect(
-      await screen.findByRole("heading", {
-        name: localizedRegex(wizardHeading),
-      }),
+      await screen.findByRole(
+        "heading",
+        {
+          name: localizedRegex(wizardHeading),
+        },
+        { timeout: 3000 },
+      ),
     ).toBeTruthy();
+    expect(route.router.state.location.pathname).toBe("/wizard/step-1");
   });
 
   it("applies semantic classes to quick walk tab panels", async () => {
@@ -934,6 +945,7 @@ describe("Stage 3 wizard flows", () => {
   it("advances from wizard step one to step two", async () => {
     const route = await renderRoute("/wizard/step-1");
     ({ mount, root } = route);
+    const user = userEvent.setup();
     const container = requireContainer(mount);
     const view = within(container);
     const durationAria =
@@ -956,23 +968,19 @@ describe("Stage 3 wizard flows", () => {
     });
     expect(continueButton.classList.contains("cta-button")).toBe(true);
 
-    await act(async () => {
-      clickElement(continueButton);
-      await Promise.resolve();
-    });
+    await user.click(continueButton);
 
-    await waitFor(() => {
-      if (route.router.state.location.pathname !== "/wizard/step-2") {
-        void route.router.navigate({ to: "/wizard/step-2" });
-      }
-      expect(route.router.state.location.pathname).toBe("/wizard/step-2");
-    });
     const discoveryHeading =
       translate("wizard-step-two-discovery-heading", "Discovery style") ?? "Discovery style";
-    const heading = await screen.findByRole("heading", {
-      name: localizedRegex(discoveryHeading),
-    });
+    const heading = await screen.findByRole(
+      "heading",
+      {
+        name: localizedRegex(discoveryHeading),
+      },
+      { timeout: 3000 },
+    );
     expect(heading).toBeTruthy();
+    expect(route.router.state.location.pathname).toBe("/wizard/step-2");
   });
 
   it("localises wizard step one copy and interpolations for Spanish", async () => {

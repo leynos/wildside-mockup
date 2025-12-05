@@ -1,20 +1,14 @@
 /** @file Behavioural coverage for the safety & accessibility screen. */
 
-import { beforeAll, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { JSX } from "react";
 import { I18nextProvider } from "react-i18next";
-import { vi } from "vitest";
-
-// @ts-expect-error -- vi.mock is provided by Vitest runtime at test time.
-vi.mock("@tanstack/react-router", () => ({
-  useNavigate: () => vi.fn(),
-}));
 
 import { SafetyAccessibilityScreen } from "../src/app/features/safety/safety-accessibility-screen";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
-import { changeLanguage, i18n, i18nReady } from "./helpers/i18nTestHelpers";
+import { changeLanguage, i18n } from "./helpers/i18nTestHelpers";
 
 const renderWithI18n = (ui: JSX.Element) =>
   render(

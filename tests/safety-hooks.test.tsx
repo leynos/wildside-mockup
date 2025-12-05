@@ -10,7 +10,7 @@ import {
   useSafetyToggles,
   useSafetyTranslations,
 } from "../src/app/features/safety/use-safety-data";
-import { changeLanguage, i18n, i18nReady } from "./helpers/i18nTestHelpers";
+import { changeLanguage, i18n } from "./helpers/i18nTestHelpers";
 
 const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
   <I18nextProvider i18n={i18n}>{children}</I18nextProvider>

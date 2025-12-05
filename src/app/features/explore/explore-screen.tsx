@@ -147,21 +147,13 @@ export function ExploreScreen(): JSX.Element {
           title={copy.headerTitle}
           subtitle={copy.headerSubtitle}
           trailing={
-            <Link
-              to="/discover"
-              className="header-icon-button"
-              aria-label={copy.filterLabel}
-            >
-              <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />
+            <Link to="/discover" className="header-icon-button" aria-label={copy.filterLabel}>
+              <Icon token="{icon.action.filter}" className="h-5 w-5" />
             </Link>
           }
         >
           <div className="relative">
-            <Icon
-              token="{icon.action.search}"
-              aria-hidden
-              className="explore-search__icon h-4 w-4"
-            />
+            <Icon token="{icon.action.search}" className="explore-search__icon h-4 w-4" />
             <input
               type="search"
               placeholder={copy.searchPlaceholder}

@@ -20,9 +20,11 @@ import {
   SurfacePicker,
 } from "./customize-sections";
 
+type LocalizedSlider = SliderConfig & { localization: LocalizedStringSet };
+
 type CustomizeContentProps = {
-  readonly sliders: Array<SliderConfig & { localization: LocalizedStringSet }>;
-  readonly sliderValues: Record<string, number>;
+  readonly sliders: readonly LocalizedSlider[];
+  readonly sliderValues: Readonly<Record<string, number>>;
   readonly onSliderChange: (id: string, value: number) => void;
   readonly formatSliderValue: (id: string, value: number) => string;
   readonly crowdLabel: string;
@@ -35,13 +37,13 @@ type CustomizeContentProps = {
   readonly surfaceAriaLabel: string;
   readonly surfaceValue: string;
   readonly onSurfaceChange: (value: string) => void;
-  readonly interestValues: Record<string, number>;
+  readonly interestValues: Readonly<Record<string, number>>;
   readonly onInterestChange: (id: string, value: number) => void;
   readonly selectedRoute: string;
   readonly onRouteSelect: (id: string) => void;
   readonly formatDistanceLabel: (metres: number) => string;
   readonly formatDurationLabel: (seconds: number) => string;
-  readonly advancedValues: Record<string, boolean>;
+  readonly advancedValues: Readonly<Record<string, boolean>>;
   readonly onAdvancedToggle: (id: string, value: boolean) => void;
 };
 

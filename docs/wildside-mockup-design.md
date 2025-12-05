@@ -368,7 +368,7 @@ Mapping guidance:
   `customize-interest-thumb-aria` message). This keeps user-facing options
   aligned to the data model while allowing locale-specific chrome to change
   independently.
-- Route previews point at real `Route` entities by id; distance and duration
+- Route previews point at real `Route` entities by ID; distance and duration
   come from the shared route fixtures rather than duplicated literals.
 - Advanced toggles, surface options, and interest slices follow the same
   fallback behaviour used on Explore, so sparse locale coverage yields stable

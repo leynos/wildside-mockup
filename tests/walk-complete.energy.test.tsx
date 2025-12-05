@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "bun:test";
+import { afterAll, beforeEach, describe, expect, it, vi } from "bun:test";
 import * as router from "@tanstack/react-router";
 import { screen } from "@testing-library/react";
 
@@ -31,6 +31,10 @@ const renderWalkComplete = async (locale: string, unitSystem?: "metric" | "imper
 describe("WalkComplete energy stat", () => {
   beforeEach(() => {
     localStorage.clear();
+  });
+
+  afterAll(() => {
+    vi.restoreAllMocks();
   });
 
   it("shows kilojoules for metric locales", async () => {
