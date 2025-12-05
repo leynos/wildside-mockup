@@ -23,10 +23,6 @@ const renderWithI18n = (ui: JSX.Element) =>
     </I18nextProvider>,
   );
 
-beforeAll(async () => {
-  await i18nReady;
-});
-
 describe("SafetyAccessibilityScreen", () => {
   it("renders translated copy and dialog content for Spanish", async () => {
     await changeLanguage("es");
