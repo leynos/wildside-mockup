@@ -148,7 +148,6 @@ export function ExploreScreen(): JSX.Element {
           subtitle={copy.headerSubtitle}
           trailing={
             <Link
-              role="button"
               to="/discover"
               className="header-icon-button"
               aria-label={copy.filterLabel}
