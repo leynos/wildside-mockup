@@ -22,8 +22,10 @@ import { useLocaleCode } from "../../i18n/use-locale-code";
 import { resolveLocalization } from "../../lib/localization-runtime";
 import { CustomizeSegmentToggle } from "./segment-toggle-card";
 
+type SliderWithLocalization = SliderConfig & { localization: LocalizedStringSet };
+
 interface SliderListProps {
-  readonly sliders: Array<SliderConfig & { localization: LocalizedStringSet }>;
+  readonly sliders: readonly SliderWithLocalization[];
   readonly sliderValues: Record<string, number>;
   readonly onSliderChange: (id: string, value: number) => void;
   readonly formatSliderValue: (id: string, value: number) => string;
