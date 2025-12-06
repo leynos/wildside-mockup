@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "bun:test";
+import { afterAll, beforeEach, describe, expect, it, vi } from "bun:test";
 import * as router from "@tanstack/react-router";
 import { screen } from "@testing-library/react";
 
@@ -10,6 +10,10 @@ import { renderWithProviders } from "./utils/render-with-providers";
 const navigateSpy = vi.fn();
 vi.spyOn(router, "useNavigate").mockReturnValue(navigateSpy);
 globalThis.alert = vi.fn();
+
+afterAll(() => {
+  vi.restoreAllMocks();
+});
 
 const renderStepOne = async (locale: string) => {
   await setupI18nTestHarness();

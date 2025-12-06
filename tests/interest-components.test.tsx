@@ -1,21 +1,12 @@
 /** @file Behavioural tests for interest-driven UI components.
  *
- * Bun provides the test runner, but we use Vitest's `vi` mocking API for
- * module stubbing. Bun's type declarations do not include `vi.mock`, so we
- * import `vi` directly and annotate its usage with @ts-expect-error below to
- * document the runtime availability.
+ * Bun provides the test runner.
  */
 
 import { beforeAll, describe, expect, it } from "bun:test";
 import { render, screen } from "@testing-library/react";
 import type { JSX } from "react";
 import { I18nextProvider } from "react-i18next";
-import { vi } from "vitest";
-
-// @ts-expect-error -- vi.mock is provided by Vitest runtime; Bun's types omit it.
-vi.mock("@tanstack/react-router", () => ({
-  useNavigate: () => vi.fn(),
-}));
 
 import { InterestToggleGroup } from "../src/app/components/interest-toggle-group";
 import { DiscoverScreen } from "../src/app/features/discover";

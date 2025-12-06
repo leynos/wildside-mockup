@@ -1,84 +1,42 @@
 /** @file Route customiser translating slider-heavy mockups to Radix UI. */
-
 import { useNavigate } from "@tanstack/react-router";
 import type { JSX } from "react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-
 import { AppBottomNavigation } from "../../components/app-bottom-navigation";
 import { Icon } from "../../components/icon";
-import { SliderControl } from "../../components/slider-control";
-import {
-  advancedOptions,
-  bottomNavigation,
-  crowdLevelOptions,
-  elevationOptions,
-  formatSliderValue,
-  interestMix,
-  routePreviews,
-  sliders,
-  surfaceOptions,
-} from "../../data/customize";
+import { bottomNavigation, formatSliderValue } from "../../data/customize";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+import { coerceLocaleCode } from "../../lib/localization-runtime";
 import { useUnitFormatters } from "../../units/use-unit-formatters";
 import { useUnitLabelFormatters } from "../../units/use-unit-labels";
+import { CustomizeContent } from "./customize-content";
 import {
-  AdvancedOptions,
-  InterestMix,
-  RoutePreview,
-  SegmentPicker,
-  SurfacePicker,
-} from "./customize-sections";
+  useCustomizeData,
+  useCustomizeState,
+  useCustomizeTranslations,
+} from "./use-customize-data";
 
 export function CustomizeScreen(): JSX.Element {
   const { t, i18n } = useTranslation();
-  const {
-    formatDistanceLabel: formatDistanceLabelRaw,
-    formatDurationLabel: formatDurationLabelRaw,
-  } = useUnitLabelFormatters();
-  const { unitSystem } = useUnitFormatters();
-  const formatDistanceLabel = useCallback(
-    (metres: number) =>
-      formatDistanceLabelRaw(metres, {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
-      }),
-    [formatDistanceLabelRaw],
-  );
-  const formatDurationLabel = useCallback(
-    (seconds: number) =>
-      formatDurationLabelRaw(seconds, { minimumFractionDigits: 0, maximumFractionDigits: 0 }),
-    [formatDurationLabelRaw],
-  );
-
-  const sliderInitialValues = useMemo(
-    () => Object.fromEntries(sliders.map((slider) => [slider.id, slider.initialValue])),
-    [],
-  );
-  const interestInitialValues = useMemo(
-    () => Object.fromEntries(interestMix.map((slice) => [slice.id, slice.allocation])),
-    [],
-  );
-  const advancedInitial = useMemo(
-    () => Object.fromEntries(advancedOptions.map((option) => [option.id, option.defaultEnabled])),
-    [],
-  );
-
-  const [sliderValues, setSliderValues] = useState<Record<string, number>>(sliderInitialValues);
-  const [crowdLevel, setCrowdLevel] = useState(crowdLevelOptions[1]?.id ?? "balanced");
-  const [elevation, setElevation] = useState(elevationOptions[0]?.id ?? "flat");
-  const [surface, setSurface] = useState(
-    surfaceOptions.find((option) => option.emphasis)?.id ?? surfaceOptions[0]?.id ?? "paved",
-  );
-  const [interestValues, setInterestValues] =
-    useState<Record<string, number>>(interestInitialValues);
-  const [selectedRoute, setSelectedRoute] = useState(routePreviews[0]?.id ?? "route-a");
-  const [advancedValues, setAdvancedValues] = useState<Record<string, boolean>>(advancedInitial);
-  const bottomNavAriaLabel = t("nav-primary-aria-label", { defaultValue: "Primary navigation" });
-
+  const locale = coerceLocaleCode(i18n.language);
+  const translations = useCustomizeTranslations();
   const navigate = useNavigate();
-
+  const { unitSystem } = useUnitFormatters();
+  const { formatDistanceLabel: fmtDistRaw, formatDurationLabel: fmtDurRaw } =
+    useUnitLabelFormatters();
+  const { resolvedSliders, sliderInitialValues, interestInitialValues, advancedInitialValues } =
+    useCustomizeData(locale);
+  const state = useCustomizeState({
+    sliders: sliderInitialValues,
+    interests: interestInitialValues,
+    advanced: advancedInitialValues,
+  });
+  const formatSlider = useCallback(
+    (id: string, value: number) => formatSliderValue(id, value, t, i18n.language, unitSystem),
+    [t, i18n.language, unitSystem],
+  );
   return (
     <MobileShell
       tone="dark"
@@ -88,14 +46,12 @@ export function CustomizeScreen(): JSX.Element {
     >
       <div className="screen-stack">
         <AppHeader
-          title={t("customize-header-title", { defaultValue: "Customise Route" })}
-          subtitle={t("customize-header-subtitle", {
-            defaultValue: "Fine-tune your walking adventure",
-          })}
+          title={translations.headerTitle}
+          subtitle={translations.headerSubtitle}
           leading={
             <button
               type="button"
-              aria-label={t("customize-header-back-label", { defaultValue: "Back to map" })}
+              aria-label={translations.backLabel}
               className="header-nav-button"
               onClick={() => navigate({ to: "/map/quick" })}
             >
@@ -105,104 +61,52 @@ export function CustomizeScreen(): JSX.Element {
           trailing={
             <button
               type="button"
-              aria-label={t("customize-header-help-label", { defaultValue: "Help" })}
+              aria-label={translations.helpLabel}
               className="header-icon-button"
             >
               <Icon token="{icon.action.help}" aria-hidden className="h-5 w-5" />
             </button>
           }
         />
-        <main className="screen-scroll pb-6 pt-4">
-          {sliders.map(({ id, iconToken, iconColorClass, label, markers, max, min, step }) => {
-            const currentValue = sliderValues[id] ?? min;
-            const sliderLabel = t(`customize-slider-${id}-label`, { defaultValue: label });
-            const sliderAriaLabel = t(`customize-slider-${id}-aria`, {
-              defaultValue: `${label} slider`,
-            });
-            const markerLabels = markers.map((marker) =>
-              formatSliderValue(id, marker, t, i18n.language, unitSystem),
-            );
-            return (
-              <SliderControl
-                key={id}
-                id={id}
-                label={sliderLabel}
-                iconToken={iconToken}
-                iconClassName={iconColorClass}
-                className="mb-8"
-                min={min}
-                max={max}
-                step={step}
-                value={currentValue}
-                valueFormatter={(value) =>
-                  formatSliderValue(id, value, t, i18n.language, unitSystem)
-                }
-                markers={markerLabels}
-                ariaLabel={sliderAriaLabel}
-                onValueChange={(value) =>
-                  setSliderValues((current) => ({
-                    ...current,
-                    [id]: value,
-                  }))
-                }
-              />
-            );
-          })}
-
-          <SegmentPicker
-            id="crowd"
-            label={t("customize-crowd-heading", { defaultValue: "Crowd Level" })}
-            iconToken="{icon.object.family}"
-            options={crowdLevelOptions}
-            value={crowdLevel}
-            onChange={setCrowdLevel}
-          />
-          <SegmentPicker
-            id="elevation"
-            label={t("customize-elevation-heading", { defaultValue: "Elevation Preference" })}
-            iconToken="{icon.accessibility.elevation}"
-            options={elevationOptions}
-            value={elevation}
-            onChange={setElevation}
-          />
-          <SurfacePicker
-            heading={t("customize-surface-heading", { defaultValue: "Surface Type" })}
-            ariaLabel={t("customize-surface-aria-label", { defaultValue: "Surface type" })}
-            options={surfaceOptions}
-            iconToken="{icon.category.paved}"
-            value={surface}
-            onChange={setSurface}
-          />
-          <InterestMix
-            slices={interestMix}
-            values={interestValues}
-            onChange={(id, value) =>
-              setInterestValues((current) => ({
-                ...current,
-                [id]: Math.min(100, Math.max(0, value)),
-              }))
-            }
-          />
-          <RoutePreview
-            routes={routePreviews}
-            selected={selectedRoute}
-            onSelect={setSelectedRoute}
-            formatDistanceLabel={formatDistanceLabel}
-            formatDurationLabel={formatDurationLabel}
-          />
-          <AdvancedOptions
-            options={advancedOptions}
-            values={advancedValues}
-            onToggle={(id, value) =>
-              setAdvancedValues((current) => ({
-                ...current,
-                [id]: value,
-              }))
-            }
-          />
-        </main>
+        <CustomizeContent
+          sliders={resolvedSliders}
+          sliderValues={state.sliderValues}
+          onSliderChange={(id, value) =>
+            state.setSliderValues((current) => ({ ...current, [id]: value }))
+          }
+          formatSliderValue={formatSlider}
+          crowdLabel={translations.crowdHeading}
+          elevationLabel={translations.elevationHeading}
+          crowdValue={state.crowdLevel}
+          elevationValue={state.elevation}
+          onCrowdChange={state.setCrowdLevel}
+          onElevationChange={state.setElevation}
+          surfaceHeading={translations.surfaceHeading}
+          surfaceAriaLabel={translations.surfaceAriaLabel}
+          surfaceValue={state.surface}
+          onSurfaceChange={state.setSurface}
+          interestValues={state.interestValues}
+          onInterestChange={(id, value) =>
+            state.setInterestValues((current) => ({
+              ...current,
+              [id]: Math.min(100, Math.max(0, value)),
+            }))
+          }
+          selectedRoute={state.selectedRoute}
+          onRouteSelect={state.setSelectedRoute}
+          formatDistanceLabel={(metres) =>
+            fmtDistRaw(metres, { minimumFractionDigits: 1, maximumFractionDigits: 1 })
+          }
+          formatDurationLabel={(seconds) =>
+            fmtDurRaw(seconds, { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+          }
+          advancedValues={state.advancedValues}
+          onAdvancedToggle={(id, value) =>
+            state.setAdvancedValues((current) => ({ ...current, [id]: value }))
+          }
+        />
         <AppBottomNavigation
-          aria-label={bottomNavAriaLabel}
+          aria-label={translations.bottomNavAriaLabel}
           items={bottomNavigation.map((item) => ({
             ...item,
             label: t(`nav-${item.id}-label`, { defaultValue: item.label }),

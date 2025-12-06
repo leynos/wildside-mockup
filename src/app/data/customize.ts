@@ -2,6 +2,7 @@
 
 import type { TFunction } from "i18next";
 
+import type { EntityLocalizations } from "../domain/entities/localization";
 import {
   formatDistance,
   formatDuration,
@@ -9,12 +10,16 @@ import {
   secondsFromMinutes,
 } from "../units/unit-format";
 import type { UnitSystem } from "../units/unit-system";
+import type { Route, RouteId } from "./explore.models";
+import { exploreRoutes } from "./explore.routes";
+import { unsafeRouteId } from "./explore-fixture-helpers";
+import { localisation } from "./fixture-localization";
 
 type SliderQuantity = "distance" | "duration";
 
 export interface SliderConfig {
   id: string;
-  label: string;
+  localizations: EntityLocalizations;
   iconToken: string;
   iconColorClass: string;
   min: number;
@@ -27,20 +32,19 @@ export interface SliderConfig {
 
 export interface SegmentOption {
   id: string;
-  label: string;
-  description: string;
+  localizations: EntityLocalizations;
 }
 
 export interface SurfaceOption {
   id: string;
-  label: string;
+  localizations: EntityLocalizations;
   iconToken: string;
   emphasis?: boolean;
 }
 
 export interface InterestMixSlice {
   id: string;
-  label: string;
+  localizations: EntityLocalizations;
   iconToken: string;
   iconColorClass: string;
   allocation: number;
@@ -48,18 +52,19 @@ export interface InterestMixSlice {
 
 export interface RoutePreviewOption {
   id: string;
-  title: string;
-  distanceMetres: number;
-  durationSeconds: number;
+  routeId: RouteId;
   iconColorClass: string;
   gradientClass: string;
   featured?: boolean;
 }
 
+export interface ResolvedRoutePreviewOption extends RoutePreviewOption {
+  route: Route;
+}
+
 export interface AdvancedToggleOption {
   id: string;
-  label: string;
-  description: string;
+  localizations: EntityLocalizations;
   iconToken: string;
   defaultEnabled: boolean;
 }
@@ -72,10 +77,24 @@ export interface BottomNavigationItem {
   active?: boolean;
 }
 
+const routeLookup = new Map<RouteId, Route>(exploreRoutes.map((route) => [route.id, route]));
+
+const requireRoute = (routeId: RouteId): Route => {
+  const route = routeLookup.get(routeId);
+  if (!route) {
+    throw new Error(`Missing route for preview option '${routeId}'.`);
+  }
+  return route;
+};
+
 export const sliders: SliderConfig[] = [
   {
     id: "distance",
-    label: "Distance",
+    localizations: localisation(
+      { name: "Distance", description: "Target walk length" },
+      {},
+      "slider:distance",
+    ),
     iconToken: "{icon.object.distance}",
     iconColorClass: "text-accent",
     min: metresFromKilometres(1),
@@ -87,7 +106,11 @@ export const sliders: SliderConfig[] = [
   },
   {
     id: "duration",
-    label: "Duration",
+    localizations: localisation(
+      { name: "Duration", description: "Time on foot" },
+      {},
+      "slider:duration",
+    ),
     iconToken: "{icon.object.duration}",
     iconColorClass: "text-accent",
     min: secondsFromMinutes(15),
@@ -100,42 +123,101 @@ export const sliders: SliderConfig[] = [
 ];
 
 export const crowdLevelOptions: SegmentOption[] = [
-  { id: "quiet", label: "Quiet", description: "Tranquil streets" },
-  { id: "balanced", label: "Balanced", description: "Local buzz" },
-  { id: "lively", label: "Lively", description: "Popular spots" },
+  {
+    id: "quiet",
+    localizations: localisation(
+      { name: "Quiet", description: "Tranquil streets" },
+      {},
+      "segment:crowd:quiet",
+    ),
+  },
+  {
+    id: "balanced",
+    localizations: localisation(
+      { name: "Balanced", description: "Local buzz" },
+      {},
+      "segment:crowd:balanced",
+    ),
+  },
+  {
+    id: "lively",
+    localizations: localisation(
+      { name: "Lively", description: "Popular spots" },
+      {},
+      "segment:crowd:lively",
+    ),
+  },
 ];
 
 export const elevationOptions: SegmentOption[] = [
-  { id: "flat", label: "Flat", description: "Minimal climbs" },
-  { id: "rolling", label: "Rolling", description: "Gentle hills" },
-  { id: "steep", label: "Steep", description: "Challenge me" },
+  {
+    id: "flat",
+    localizations: localisation(
+      { name: "Flat", description: "Minimal climbs" },
+      {},
+      "segment:elevation:flat",
+    ),
+  },
+  {
+    id: "rolling",
+    localizations: localisation(
+      { name: "Rolling", description: "Gentle hills" },
+      {},
+      "segment:elevation:rolling",
+    ),
+  },
+  {
+    id: "steep",
+    localizations: localisation(
+      { name: "Steep", description: "Challenge me" },
+      {},
+      "segment:elevation:steep",
+    ),
+  },
 ];
 
 export const surfaceOptions: SurfaceOption[] = [
-  { id: "paved", label: "Paved", iconToken: "{icon.category.paved}", emphasis: true },
-  { id: "trail", label: "Trail", iconToken: "{icon.category.trails}" },
-  { id: "boardwalk", label: "Boardwalk", iconToken: "{icon.category.water}" },
-  { id: "mixed", label: "Mixed", iconToken: "{icon.object.route}" },
+  {
+    id: "paved",
+    localizations: localisation({ name: "Paved" }, {}, "surface:paved"),
+    iconToken: "{icon.category.paved}",
+    emphasis: true,
+  },
+  {
+    id: "trail",
+    localizations: localisation({ name: "Trail" }, {}, "surface:trail"),
+    iconToken: "{icon.category.trails}",
+  },
+  {
+    id: "boardwalk",
+    localizations: localisation({ name: "Boardwalk" }, {}, "surface:boardwalk"),
+    iconToken: "{icon.category.water}",
+  },
+  {
+    id: "mixed",
+    localizations: localisation({ name: "Mixed" }, {}, "surface:mixed"),
+    iconToken: "{icon.object.route}",
+  },
 ];
 
 export const interestMix: InterestMixSlice[] = [
   {
     id: "nature",
-    label: "Nature",
+    localizations: localisation({ name: "Nature" }, {}, "interest:nature"),
     iconToken: "{icon.category.nature}",
     iconColorClass: "text-emerald-400",
     allocation: 40,
   },
   {
     id: "history",
-    label: "History",
+    localizations: localisation({ name: "History" }, {}, "interest:history"),
     iconToken: "{icon.category.history}",
     iconColorClass: "text-sky-400",
     allocation: 30,
   },
   {
     id: "food",
-    label: "Food & Drink",
+    localizations: localisation({ name: "Food & Drink" }, {}, "interest:food"),
     iconToken: "{icon.category.food}",
     iconColorClass: "text-amber-400",
     allocation: 30,
@@ -145,50 +227,58 @@ export const interestMix: InterestMixSlice[] = [
 export const routePreviews: RoutePreviewOption[] = [
   {
     id: "route-a",
-    title: "Route A",
-    distanceMetres: metresFromKilometres(3.2),
-    durationSeconds: secondsFromMinutes(75),
+    routeId: unsafeRouteId("harbour-lights"),
     iconColorClass: "text-accent",
     gradientClass: "from-accent/20 to-sky-400/20",
     featured: true,
   },
   {
     id: "route-b",
-    title: "Route B",
-    distanceMetres: metresFromKilometres(2.8),
-    durationSeconds: secondsFromMinutes(68),
+    routeId: unsafeRouteId("coffee-culture-loop"),
     iconColorClass: "text-emerald-400",
     gradientClass: "from-emerald-400/20 to-amber-400/20",
   },
   {
     id: "route-c",
-    title: "Route C",
-    distanceMetres: metresFromKilometres(3.6),
-    durationSeconds: secondsFromMinutes(82),
+    routeId: unsafeRouteId("hidden-garden-lanes"),
     iconColorClass: "text-purple-400",
     gradientClass: "from-purple-400/20 to-pink-400/20",
   },
 ];
 
+export const resolvedRoutePreviews: ResolvedRoutePreviewOption[] = routePreviews.map((preview) => ({
+  ...preview,
+  route: requireRoute(preview.routeId),
+}));
+
 export const advancedOptions: AdvancedToggleOption[] = [
   {
     id: "safety",
-    label: "Safety Priority",
-    description: "Well-lit, busy routes",
+    localizations: localisation(
+      { name: "Safety Priority", description: "Well-lit, busy routes" },
+      {},
+      "advanced:safety",
+    ),
     iconToken: "{icon.safety.priority}",
     defaultEnabled: false,
   },
   {
     id: "accessibility",
-    label: "Accessibility",
-    description: "Step-free routes",
+    localizations: localisation(
+      { name: "Accessibility", description: "Step-free routes" },
+      {},
+      "advanced:accessibility",
+    ),
     iconToken: "{icon.accessibility.stepFree}",
     defaultEnabled: true,
   },
   {
     id: "download",
-    label: "Offline download",
-    description: "Preload maps and audio",
+    localizations: localisation(
+      { name: "Offline download", description: "Preload maps and audio" },
+      {},
+      "advanced:download",
+    ),
     iconToken: "{icon.action.download}",
     defaultEnabled: false,
   },
@@ -225,7 +315,7 @@ export function formatSliderValue(
   const slider = sliders.find((entry) => entry.id === configId);
   if (!slider) return value.toString();
 
-  const sharedOptions = { t, locale, unitSystem };
+  const sharedOptions = { t, locale, unitSystem } as const;
 
   if (slider.quantity === "distance") {
     const { value: formattedValue, unitLabel } = formatDistance(value, {

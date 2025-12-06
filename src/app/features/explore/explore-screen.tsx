@@ -1,6 +1,6 @@
 /** @file Explore catalogue screen presenting discovery content. */
 
-import { useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import type { TFunction } from "i18next";
 import type { JSX } from "react";
 import { useCallback, useMemo } from "react";
@@ -22,9 +22,9 @@ import type { Route, RouteCategory, RouteId } from "../../data/explore.models";
 import { buildDifficultyLookup } from "../../data/registries/difficulties";
 import { AppHeader } from "../../layout/app-header";
 import { MobileShell } from "../../layout/mobile-shell";
+import { appLogger } from "../../observability/logger";
 import { formatDistance, formatDistanceRange, formatDuration } from "../../units/unit-format";
 import { useUnitPreferences } from "../../units/unit-preferences-provider";
-import { appLogger } from "../../observability/logger";
 import {
   CategoryScroller,
   CommunityPickPanel,
@@ -57,7 +57,6 @@ export const buildExploreCopy = (t: TFunction): ExploreCopy => ({
 });
 
 export function ExploreScreen(): JSX.Element {
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { unitSystem } = useUnitPreferences();
   const unitOptions = useMemo(
@@ -148,22 +147,13 @@ export function ExploreScreen(): JSX.Element {
           title={copy.headerTitle}
           subtitle={copy.headerSubtitle}
           trailing={
-            <button
-              type="button"
-              onClick={() => navigate({ to: "/discover" })}
-              className="header-icon-button"
-              aria-label={copy.filterLabel}
-            >
-              <Icon token="{icon.action.filter}" aria-hidden className="h-5 w-5" />
-            </button>
+            <Link to="/discover" className="header-icon-button" aria-label={copy.filterLabel}>
+              <Icon token="{icon.action.filter}" className="h-5 w-5" />
+            </Link>
           }
         >
           <div className="relative">
-            <Icon
-              token="{icon.action.search}"
-              aria-hidden
-              className="explore-search__icon h-4 w-4"
-            />
+            <Icon token="{icon.action.search}" className="explore-search__icon h-4 w-4" />
             <input
               type="search"
               placeholder={copy.searchPlaceholder}

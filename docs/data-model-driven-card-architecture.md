@@ -399,6 +399,10 @@ classDiagram
     toggles to entity-based inputs; replace per-option translation keys.
   - Refactor safety accordion sections to reference `SafetyToggle` entities and
     presets with localization maps; prune Fluent keys.
+- Status (1 Dec 2025): Customize sliders, chips, route previews, and advanced
+    toggles now resolve names/descriptions from localization maps; safety
+    sections draw from `SafetyToggle` entities with preset toggle mappings and
+    the redundant Fluent messages have been removed.
 - **Phase 3: offline & map**
   - Migrate offline suggestions and downloads to SI/numeric fields and
     localization maps; update cards and undo states.
