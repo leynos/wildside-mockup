@@ -115,54 +115,6 @@ const localizedRegex = (value?: string) => new RegExp(escapeRegExp(value ?? ""),
 
 const offlineUndoDescriptionDefault = "Tap undo to restore this map.";
 
-/**
- * Prefer Fluent translations for user-overridable labels; fall back to fixture
- * localisations when translations are absent to keep defaults stable.
- */
-const resolveAdvancedLabel = (id: string, fallback: string) => {
-  const translated = translate(`advanced-${id}-label`, fallback);
-  if (translated) {
-    return translated;
-  }
-  const option = advancedOptions.find((candidate) => candidate.id === id);
-  if (!option) {
-    throw new Error(`Expected advanced option with id "${id}" to exist for tests`);
-  }
-  return resolveLocalizationNameForTest(option.localizations, fallback, i18n.language);
-};
-
-/**
- * Prefer Fluent translations for user-overridable labels; fall back to fixture
- * localisations when translations are absent to keep defaults stable.
- */
-const resolveSafetySectionTitle = (id: string, fallback: string) => {
-  const localization = translate(`safety-section-${id}-title`, fallback);
-  if (localization) {
-    return localization;
-  }
-  const section = safetyAccordionSections.find((candidate) => candidate.id === id);
-  if (!section) {
-    throw new Error(`Expected safety section with id "${id}" to exist for tests`);
-  }
-  return resolveLocalizationNameForTest(section.localizations, fallback, i18n.language);
-};
-
-/**
- * Prefer Fluent translations for user-overridable labels; fall back to fixture
- * localisations when translations are absent to keep defaults stable.
- */
-const resolveSafetyToggleLabel = (id: string, fallback: string) => {
-  const localization = translate(`safety-toggle-${id}-label`, fallback);
-  if (localization) {
-    return localization;
-  }
-  const toggle = safetyToggles.find((candidate) => candidate.id === id);
-  if (!toggle) {
-    throw new Error(`Expected safety toggle with id "${id}" to exist for tests`);
-  }
-  return resolveLocalizationNameForTest(toggle.localizations, fallback, i18n.language);
-};
-
 const buildSavedRouteCopy = (route: WalkRouteSummary) => {
   const savedMetrics = formatRouteMetrics(route);
   const savedDistanceCopy =
@@ -190,6 +142,57 @@ const buildSavedRouteCopy = (route: WalkRouteSummary) => {
     savedStopsCopy,
   } as const;
 };
+
+/**
+ * Generic helper to resolve labels from Fluent translations or fixture
+ * localisations. Tries translation first, then falls back to fixture data.
+ */
+const resolveEntityLabel = <
+  T extends { id: string; localizations: Parameters<typeof resolveLocalizationNameForTest>[0] },
+>(
+  keyPrefix: string,
+  collection: readonly T[],
+  entityTypeName: string,
+  id: string,
+  fallback: string,
+): string => {
+  const translated = translate(keyPrefix, fallback);
+  if (translated) {
+    return translated;
+  }
+  const entity = collection.find((candidate) => candidate.id === id);
+  if (!entity) {
+    throw new Error(`Expected ${entityTypeName} with id "${id}" to exist for tests`);
+  }
+  return resolveLocalizationNameForTest(entity.localizations, fallback, i18n.language);
+};
+
+/**
+ * Prefer Fluent translations for user-overridable labels; fall back to fixture
+ * localisations when translations are absent to keep defaults stable.
+ */
+const resolveAdvancedLabel = (id: string, fallback: string) =>
+  resolveEntityLabel(`advanced-${id}-label`, advancedOptions, "advanced option", id, fallback);
+
+/**
+ * Prefer Fluent translations for user-overridable labels; fall back to fixture
+ * localisations when translations are absent to keep defaults stable.
+ */
+const resolveSafetySectionTitle = (id: string, fallback: string) =>
+  resolveEntityLabel(
+    `safety-section-${id}-title`,
+    safetyAccordionSections,
+    "safety section",
+    id,
+    fallback,
+  );
+
+/**
+ * Prefer Fluent translations for user-overridable labels; fall back to fixture
+ * localisations when translations are absent to keep defaults stable.
+ */
+const resolveSafetyToggleLabel = (id: string, fallback: string) =>
+  resolveEntityLabel(`safety-toggle-${id}-label`, safetyToggles, "safety toggle", id, fallback);
 
 const clickElement = (element: Element | null | undefined): void => {
   if (element instanceof HTMLElement) {
