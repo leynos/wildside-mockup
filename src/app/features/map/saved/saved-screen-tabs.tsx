@@ -1,0 +1,229 @@
+/** @file Tabbed content components for the saved route screen. */
+
+import * as Dialog from "@radix-ui/react-dialog";
+import type { TabsContentProps } from "@radix-ui/react-tabs";
+import * as Tabs from "@radix-ui/react-tabs";
+import type { TFunction } from "i18next";
+import type { JSX, ReactNode } from "react";
+
+import { Icon } from "../../../components/icon";
+import { MapViewport } from "../../../components/map-viewport";
+import { PointOfInterestList } from "../../../components/point-of-interest-list";
+import { WildsideMap } from "../../../components/wildside-map";
+import type { WalkRouteSummary } from "../../../data/map";
+import { getTagDescriptor } from "../../../data/registries/tags";
+import { pickLocalization } from "../../../domain/entities/localization";
+import type { SavedRouteData } from "./use-saved-route-data";
+
+const stickyHandleClass = "mx-auto block h-2 w-12 rounded-full bg-base-300/70";
+
+export type RouteSummaryMetaProps = {
+  readonly iconToken: string;
+  readonly children: ReactNode;
+};
+
+export function RouteSummaryMeta({ iconToken, children }: RouteSummaryMetaProps): JSX.Element {
+  return (
+    <span className="route-summary__meta">
+      <Icon token={iconToken} className="text-accent" aria-hidden />
+      {children}
+    </span>
+  );
+}
+
+type MapOverlayProps = TabsContentProps;
+
+export function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Element {
+  const composedClassName = className ? `map-overlay ${className}` : "map-overlay";
+  return <Tabs.Content {...props} className={composedClassName} />;
+}
+
+export function Metric({ label, value }: { label: string; value: string }): JSX.Element {
+  return (
+    <div className="text-center">
+      <p className="text-lg font-semibold text-base-content">{value}</p>
+      <p className="text-xs text-base-content/60">{label}</p>
+    </div>
+  );
+}
+
+type MapTabContentProps = {
+  readonly savedRoute: WalkRouteSummary;
+  readonly routeCopy: SavedRouteData["routeCopy"];
+  readonly distance: SavedRouteData["distance"];
+  readonly duration: SavedRouteData["duration"];
+  readonly stops: SavedRouteData["stops"];
+  readonly t: TFunction;
+  readonly onBack: () => void;
+  readonly shareOpen: boolean;
+  readonly onShareOpenChange: (next: boolean) => void;
+};
+
+export function MapTabContent({
+  savedRoute,
+  routeCopy,
+  distance,
+  duration,
+  stops,
+  t,
+  onBack,
+  shareOpen,
+  onShareOpenChange,
+}: MapTabContentProps): JSX.Element {
+  return (
+    <MapOverlay value="map" forceMount>
+      <MapViewport
+        map={<WildsideMap />}
+        gradientClassName="bg-gradient-to-t from-base-900/80 via-base-900/30 to-transparent"
+      >
+        <div className="flex flex-col justify-between px-6 pb-6 pt-8">
+          <div className="flex items-center justify-between text-base-100">
+            <button
+              type="button"
+              aria-label="Back"
+              className="circle-action-button"
+              onClick={onBack}
+            >
+              <Icon token="{icon.navigation.back}" aria-hidden className="h-5 w-5" />
+            </button>
+            <Dialog.Root open={shareOpen} onOpenChange={onShareOpenChange}>
+              <Dialog.Trigger asChild>
+                <button type="button" aria-label="Share" className="circle-action-button">
+                  <Icon token="{icon.action.share}" aria-hidden className="h-5 w-5" />
+                </button>
+              </Dialog.Trigger>
+              <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 bg-black/60" />
+                <Dialog.Content className="dialog-surface">
+                  <Dialog.Title className="text-lg font-semibold text-base-content">
+                    Share saved walk
+                  </Dialog.Title>
+                  <Dialog.Description className="text-sm text-base-content/70">
+                    Sharing is not wired up yet, but this is where the integration will live.
+                  </Dialog.Description>
+                  <div className="route-share__preview">
+                    https://wildside.app/routes/{savedRoute.id}
+                  </div>
+                  <Dialog.Close asChild>
+                    <button type="button" className="btn btn-accent btn-sm self-end">
+                      Close
+                    </button>
+                  </Dialog.Close>
+                </Dialog.Content>
+              </Dialog.Portal>
+            </Dialog.Root>
+          </div>
+
+          <div className="mt-auto saved-summary__panel">
+            <h1 className="text-2xl font-semibold">{routeCopy.name}</h1>
+            <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
+              <RouteSummaryMeta iconToken="{icon.object.route}">
+                {t("saved-route-distance-value", {
+                  value: distance.value,
+                  unit: distance.unitLabel,
+                  defaultValue: `${distance.value} ${distance.unitLabel}`,
+                })}
+              </RouteSummaryMeta>
+              <RouteSummaryMeta iconToken="{icon.object.duration}">
+                {t("saved-route-duration-value", {
+                  value: duration.value,
+                  unit: duration.unitLabel,
+                  defaultValue: `${duration.value} ${duration.unitLabel}`,
+                })}
+              </RouteSummaryMeta>
+              <RouteSummaryMeta iconToken="{icon.object.stops}">
+                {t("saved-route-stops-value", {
+                  value: stops.value,
+                  unit: stops.unitLabel,
+                  defaultValue: `${stops.value} ${stops.unitLabel}`,
+                })}
+              </RouteSummaryMeta>
+            </div>
+          </div>
+        </div>
+      </MapViewport>
+    </MapOverlay>
+  );
+}
+
+type StopsTabContentProps = {
+  readonly savedRoute: WalkRouteSummary;
+  readonly onClose: () => void;
+};
+
+export function StopsTabContent({ savedRoute, onClose }: StopsTabContentProps): JSX.Element {
+  return (
+    <MapOverlay value="stops" forceMount>
+      <div className="pointer-events-none px-6 pb-6">
+        <div className="map-panel map-panel--stacked max-h-[60vh]">
+          <div className="map-panel__handle">
+            <button
+              type="button"
+              className={stickyHandleClass}
+              aria-label="Dismiss panel"
+              onClick={onClose}
+            />
+          </div>
+          <div className="map-panel__body">
+            <PointOfInterestList points={savedRoute.pointsOfInterest} />
+          </div>
+          <div className="map-overlay__fade map-overlay__fade--top" aria-hidden="true" />
+          <div className="map-overlay__fade map-overlay__fade--bottom" aria-hidden="true" />
+        </div>
+      </div>
+    </MapOverlay>
+  );
+}
+
+type NotesTabContentProps = {
+  readonly savedRoute: WalkRouteSummary;
+  readonly routeCopy: SavedRouteData["routeCopy"];
+  readonly difficultyLabel: SavedRouteData["difficultyLabel"];
+  readonly updatedLabel: SavedRouteData["updatedLabel"];
+  readonly numberFormatter: SavedRouteData["numberFormatter"];
+  readonly ratingFormatter: SavedRouteData["ratingFormatter"];
+  readonly i18nLanguage: string;
+};
+
+export function NotesTabContent({
+  savedRoute,
+  routeCopy,
+  difficultyLabel,
+  updatedLabel,
+  numberFormatter,
+  ratingFormatter,
+  i18nLanguage,
+}: NotesTabContentProps): JSX.Element {
+  return (
+    <MapOverlay value="notes" forceMount>
+      <div className="pointer-events-none px-6 pb-6">
+        <div className="map-panel map-panel--scroll map-panel__notes map-panel__notes--spacious">
+          <div className="grid grid-cols-4 gap-4 text-base-content">
+            <Metric label="Rating" value={ratingFormatter.format(savedRoute.rating)} />
+            <Metric label="Saves" value={numberFormatter.format(savedRoute.saves)} />
+            <Metric label="Difficulty" value={difficultyLabel} />
+            <Metric label="Updated" value={updatedLabel} />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {savedRoute.highlightTagIds.map((tagId) => {
+              const tag = getTagDescriptor(tagId, i18nLanguage);
+              const label = tag?.localization.name ?? tagId;
+              return (
+                <span key={tagId} className="route-highlight">
+                  {label}
+                </span>
+              );
+            })}
+          </div>
+          <p className="text-base-content/80">{routeCopy.description}</p>
+          <ul className="route-note-list" aria-label="Route notes">
+            {savedRoute.notes.map((note) => {
+              const noteCopy = pickLocalization(note.localizations, i18nLanguage);
+              return <li key={note.id}>{noteCopy.name}</li>;
+            })}
+          </ul>
+        </div>
+      </div>
+    </MapOverlay>
+  );
+}
