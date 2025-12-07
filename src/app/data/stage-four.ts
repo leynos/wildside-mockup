@@ -1,7 +1,9 @@
 /** @file Data fixtures supporting Stage 4 routes (completion and safety flows). */
 
 import walkRouteMap1 from "../../assets/walks/walk-route-map-1.png";
+import type { EntityLocalizations, ImageAsset } from "../domain/entities/localization";
 import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
+import { fillLocalizations, localizeAcrossLocales } from "./fixture-localization";
 
 export interface WalkCompletionStat {
   id: string;
@@ -49,12 +51,6 @@ export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
     iconToken: "{icon.object.star}",
   },
 ];
-
-const withBasePath = (path: string): string => {
-  const base = import.meta.env.BASE_URL ?? "/";
-  const cleanedPath = path.replace(/^\/+/, "");
-  return `${base}${cleanedPath}`.replace(/\/+/g, "/");
-};
 
 export interface WalkCompletionMoment {
   id: string;
@@ -117,98 +113,191 @@ export const walkCompletionShareOptions: WalkCompletionShareOption[] = [
 
 export const walkCompletionMapImage = walkRouteMap1;
 
+const withBasePath = (path: string, alt: string): ImageAsset => {
+  const base = import.meta.env.BASE_URL ?? "/";
+  const cleanedPath = path.replace(/^\/+/, "");
+  const url = `${base}${cleanedPath}`.replace(/\/+/g, "/");
+  return { url, alt };
+};
+
 export interface OfflineSuggestion {
   id: string;
-  title: string;
-  description: string;
-  callToAction: string;
+  localizations: EntityLocalizations;
+  ctaLocalizations: EntityLocalizations;
   iconToken: string;
   accentClass: string;
   iconClassName?: string;
 }
 
+export interface OfflineMapArea {
+  id: string;
+  localizations: EntityLocalizations;
+  image: ImageAsset;
+  sizeBytes: number;
+  progress: number;
+  status: "complete" | "updating" | "downloading";
+  lastUpdatedAt: string;
+}
+
 export interface AutoManagementOption {
   id: string;
-  title: string;
-  description: string;
+  localizations: EntityLocalizations;
   iconToken: string;
   iconClassName: string;
   defaultEnabled: boolean;
+  retentionDays?: number;
 }
 
 export const offlineSuggestions: OfflineSuggestion[] = [
   {
     id: "reykjavik",
-    title: "Upcoming Trip Detected",
-    description: "Add Reykjavik before your Iceland trip next week",
-    callToAction: "Download Reykjavik",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        {
+          name: "Upcoming Trip Detected",
+          description: "Add Reykjavik before your Iceland trip next week",
+        },
+        {
+          es: {
+            name: "Viaje próximo detectado",
+            description: "Añade Reikiavik antes de tu viaje a Islandia la próxima semana",
+          },
+        },
+      ),
+      "en-GB",
+      "offline-suggestion: reykjavik",
+    ),
+    ctaLocalizations: fillLocalizations(
+      localizeAcrossLocales(
+        { name: "Download Reykjavik" },
+        { es: { name: "Descargar Reikiavik" } },
+      ),
+      "en-GB",
+      "offline-suggestion-cta: reykjavik",
+    ),
     iconToken: "{icon.object.travel}",
     accentClass: "from-sky-500 via-indigo-500 to-purple-600",
     iconClassName: "text-[color:var(--b3)]",
   },
+  {
+    id: "kyoto",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        {
+          name: "Weekend City Break",
+          description: "Save Kyoto before your autumn temple tour",
+        },
+        {
+          ja: {
+            name: "週末シティブレイク",
+            description: "秋の寺巡りに備えて京都を保存しましょう",
+          },
+        },
+      ),
+      "en-GB",
+      "offline-suggestion: kyoto",
+    ),
+    ctaLocalizations: fillLocalizations(
+      localizeAcrossLocales({ name: "Download Kyoto" }, { ja: { name: "京都をダウンロード" } }),
+      "en-GB",
+      "offline-suggestion-cta: kyoto",
+    ),
+    iconToken: "{icon.navigation.download}",
+    accentClass: "from-amber-500 via-rose-500 to-fuchsia-600",
+  },
 ];
 
-export interface OfflineDownload {
-  id: string;
-  title: string;
-  subtitle: string;
-  size: string;
-  progress: number;
-  imageUrl: string;
-  status?: "complete" | "updating" | "downloading";
-}
-
-export const offlineDownloads: OfflineDownload[] = [
+export const offlineMapAreas: OfflineMapArea[] = [
   {
     id: "nyc",
-    title: "New York, NY",
-    subtitle: "Downloaded 3 days ago",
-    size: "847 MB",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        { name: "New York, NY", description: "Downtown and Brooklyn offline pack" },
+        { es: { name: "Nueva York, NY", description: "Paquete offline de Downtown y Brooklyn" } },
+      ),
+      "en-GB",
+      "offline-area: nyc",
+    ),
+    image: withBasePath("images/empire.png", "Empire State Building viewed from above"),
+    sizeBytes: 847 * 1024 ** 2,
     progress: 1,
-    imageUrl: withBasePath("images/empire.png"),
     status: "complete",
+    lastUpdatedAt: "2025-11-29T15:00:00Z",
   },
   {
     id: "sf",
-    title: "San Francisco, CA",
-    subtitle: "Downloaded 1 week ago",
-    size: "623 MB",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        { name: "San Francisco, CA", description: "Waterfront and downtown core" },
+        { es: { name: "San Francisco, CA", description: "Embarcadero y centro de la ciudad" } },
+      ),
+      "en-GB",
+      "offline-area: sf",
+    ),
+    image: withBasePath("images/goldengate.png", "Golden Gate Bridge from an overlook"),
+    sizeBytes: 623 * 1024 ** 2,
     progress: 1,
-    imageUrl: withBasePath("images/goldengate.png"),
     status: "complete",
+    lastUpdatedAt: "2025-11-23T10:00:00Z",
   },
   {
     id: "london",
-    title: "London, UK",
-    subtitle: "Downloading • 1.2 GB",
-    size: "1.2 GB",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        { name: "London, UK", description: "Central London with Thames overlays" },
+        { es: { name: "Londres, Reino Unido", description: "Centro de Londres y el Támesis" } },
+      ),
+      "en-GB",
+      "offline-area: london",
+    ),
+    image: withBasePath("images/londoneye.png", "London skyline with the London Eye"),
+    sizeBytes: Math.round(1.2 * 1024 ** 3),
     progress: 0.65,
-    imageUrl: withBasePath("images/londoneye.png"),
     status: "downloading",
+    lastUpdatedAt: "2025-12-04T08:30:00Z",
   },
 ];
 
 export const autoManagementOptions: AutoManagementOption[] = [
   {
     id: "auto-delete",
-    title: "Auto-delete old maps",
-    description: "Remove maps older than 30 days automatically",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Auto-delete old maps",
+        description: "Remove maps after a retention window",
+      }),
+      "en-GB",
+      "offline-auto: auto-delete",
+    ),
     iconToken: "{icon.offline.delete}",
     iconClassName: "text-amber-400",
     defaultEnabled: true,
+    retentionDays: 30,
   },
   {
     id: "wifi-only",
-    title: "Wi-Fi-only downloads",
-    description: "Only download maps when connected to Wi-Fi",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Wi-Fi-only downloads",
+        description: "Download maps only on trusted networks",
+      }),
+      "en-GB",
+      "offline-auto: wifi-only",
+    ),
     iconToken: "{icon.offline.connectivity}",
     iconClassName: "text-accent",
     defaultEnabled: true,
   },
   {
     id: "auto-update",
-    title: "Auto-update maps",
-    description: "Automatically update maps when new versions are available",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Auto-update maps",
+        description: "Keep offline areas fresh in the background",
+      }),
+      "en-GB",
+      "offline-auto: auto-update",
+    ),
     iconToken: "{icon.offline.sync}",
     iconClassName: "text-purple-400",
     defaultEnabled: false,

@@ -5,6 +5,8 @@ import type { JSX } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { WalkPointOfInterest } from "../data/map";
+import { getTagDescriptor } from "../data/registries/tags";
+import { pickLocalization } from "../domain/entities/localization";
 import { useOptionalMapStore } from "../features/map/map-state";
 import { Icon } from "./icon";
 
@@ -15,98 +17,125 @@ export interface PointOfInterestListProps {
 export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.Element {
   const mapStore = useOptionalMapStore();
   const highlightPois = mapStore?.actions.highlightPois;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const highlightBadgeLabel = t("poi-highlight-label", { defaultValue: "Highlight" });
+  const ratingFormatter = new Intl.NumberFormat(i18n.language, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
 
   return (
     <div className="space-y-3">
-      {points.map((poi) => (
-        <Dialog.Root key={poi.id}>
-          <Dialog.Trigger asChild>
-            <button
-              type="button"
-              className="poi-list__item"
-              onMouseEnter={() => highlightPois?.([poi.id])}
-              onFocus={() => highlightPois?.([poi.id])}
-              onMouseLeave={() => highlightPois?.([])}
-              onBlur={() => highlightPois?.([])}
-            >
-              <div className="poi-list__summary">
-                <div>
-                  <h3 className="text-base font-semibold text-base-content">{poi.name}</h3>
-                  <p className="mt-1 text-sm text-base-content/70">{poi.description}</p>
-                </div>
-                {poi.rating ? (
-                  <span className="rating-indicator rating-indicator--strong">
-                    <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
-                    {poi.rating.toFixed(1)}
-                  </span>
-                ) : null}
-              </div>
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-accent">
-                <span className="poi-highlight">
-                  <Icon
-                    token={poi.categoryIconToken}
-                    className={`h-4 w-4 ${poi.categoryColorClass}`}
-                    label={poi.categoryLabel}
-                  />
-                  <span aria-hidden>{highlightBadgeLabel}</span>
-                </span>
-                {poi.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-base-300/60 bg-base-100 px-2 py-0.5 text-base-content/70"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </button>
-          </Dialog.Trigger>
-          <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 bg-black/60" />
-            <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <div className="poi-sheet">
+      {points.map((poi) => {
+        const localization = pickLocalization(poi.localizations, i18n.language);
+        const categoryDescriptor = getTagDescriptor(poi.categoryId, i18n.language);
+        const categoryLabel = categoryDescriptor?.localization.name ?? localization.name;
+        const tagDescriptors =
+          poi.tagIds
+            .map((tagId) => getTagDescriptor(tagId, i18n.language))
+            .filter((descriptor): descriptor is NonNullable<typeof descriptor> =>
+              Boolean(descriptor),
+            ) ?? [];
+        const formattedRating =
+          typeof poi.rating === "number" ? ratingFormatter.format(poi.rating) : undefined;
+        const openHoursCopy = poi.openHours
+          ? t("poi-open-hours", {
+              opensAt: poi.openHours.opensAt,
+              closesAt: poi.openHours.closesAt,
+              defaultValue: `${poi.openHours.opensAt}–${poi.openHours.closesAt}`,
+            })
+          : null;
+
+        return (
+          <Dialog.Root key={poi.id}>
+            <Dialog.Trigger asChild>
+              <button
+                type="button"
+                className="poi-list__item"
+                onMouseEnter={() => highlightPois?.([poi.id])}
+                onFocus={() => highlightPois?.([poi.id])}
+                onMouseLeave={() => highlightPois?.([])}
+                onBlur={() => highlightPois?.([])}
+              >
                 <div className="poi-list__summary">
                   <div>
-                    <Dialog.Title className="text-lg font-semibold text-base-content">
-                      {poi.name}
-                    </Dialog.Title>
-                    <Dialog.Description className="mt-1 text-sm text-base-content/70">
-                      {poi.description}
-                    </Dialog.Description>
+                    <h3 className="text-base font-semibold text-base-content">
+                      {localization.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-base-content/70">{localization.description}</p>
                   </div>
-                  <Dialog.Close asChild>
-                    <button type="button" className="btn btn-ghost btn-sm">
-                      Close
-                    </button>
-                  </Dialog.Close>
+                  {formattedRating ? (
+                    <span className="rating-indicator rating-indicator--strong">
+                      <Icon token="{icon.object.star}" aria-hidden className="h-4 w-4" />
+                      {formattedRating}
+                    </span>
+                  ) : null}
                 </div>
-                <div className="mt-4 space-y-2 text-sm text-base-content/70">
-                  {poi.tags.length > 0 ? (
-                    <div className="flex flex-wrap gap-2">
-                      {poi.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-accent">
+                  <span className="poi-highlight">
+                    <Icon
+                      token={categoryDescriptor?.iconToken ?? "{icon.object.marker}"}
+                      className={`h-4 w-4 ${categoryDescriptor?.accentClass ?? ""}`.trim()}
+                      label={categoryLabel}
+                    />
+                    <span aria-hidden>{highlightBadgeLabel}</span>
+                  </span>
+                  {tagDescriptors.map((tag) => (
+                    <span
+                      key={tag.id}
+                      className="rounded-full border border-base-300/60 bg-base-100 px-2 py-0.5 text-base-content/70"
+                    >
+                      {tag.localization.name}
+                    </span>
+                  ))}
+                </div>
+              </button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="fixed inset-0 bg-black/60" />
+              <Dialog.Content className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div className="poi-sheet">
+                  <div className="poi-list__summary">
+                    <div>
+                      <Dialog.Title className="text-lg font-semibold text-base-content">
+                        {localization.name}
+                      </Dialog.Title>
+                      <Dialog.Description className="mt-1 text-sm text-base-content/70">
+                        {localization.description}
+                      </Dialog.Description>
                     </div>
-                  ) : null}
-                  {poi.openHours ? (
-                    <p className="flex items-center gap-2 text-xs text-base-content/60">
-                      <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
-                      {poi.openHours}
-                    </p>
-                  ) : null}
+                    <Dialog.Close asChild>
+                      <button type="button" className="btn btn-ghost btn-sm">
+                        {t("action-close", { defaultValue: "Close" })}
+                      </button>
+                    </Dialog.Close>
+                  </div>
+                  <div className="mt-4 space-y-2 text-sm text-base-content/70">
+                    {tagDescriptors.length > 0 ? (
+                      <div className="flex flex-wrap gap-2">
+                        {tagDescriptors.map((tag) => (
+                          <span
+                            key={tag.id}
+                            className="rounded-full border border-base-300/60 bg-base-200/70 px-3 py-1 text-xs"
+                          >
+                            {tag.localization.name}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+                    {openHoursCopy ? (
+                      <p className="flex items-center gap-2 text-xs text-base-content/60">
+                        <Icon token="{icon.object.duration}" aria-hidden className="h-4 w-4" />
+                        {openHoursCopy}
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
-              </div>
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
-      ))}
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
+        );
+      })}
     </div>
   );
 }

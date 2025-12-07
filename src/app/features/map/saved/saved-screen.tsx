@@ -13,7 +13,11 @@ import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
 import { WildsideMap } from "../../../components/wildside-map";
 import { savedRoutes } from "../../../data/map";
+import { buildDifficultyLookup } from "../../../data/registries/difficulties";
+import { getTagDescriptor } from "../../../data/registries/tags";
+import { pickLocalization } from "../../../domain/entities/localization";
 import { MobileShell } from "../../../layout/mobile-shell";
+import { formatRelativeTime } from "../../../lib/relative-time";
 import { formatDistance, formatDuration, formatStops } from "../../../units/unit-format";
 import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 
@@ -60,6 +64,16 @@ export function SavedScreen(): JSX.Element {
   const [isFavourite, setIsFavourite] = useState(true);
   const [shareOpen, setShareOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("map");
+  const numberFormatter = useMemo(() => new Intl.NumberFormat(i18n.language), [i18n.language]);
+  const ratingFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat(i18n.language, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }),
+    [i18n.language],
+  );
+  const difficultyLookup = useMemo(() => buildDifficultyLookup(t), [t]);
   const unitOptions = useMemo(
     () => ({ t, locale: i18n.language, unitSystem }),
     [i18n.language, t, unitSystem],
@@ -76,6 +90,11 @@ export function SavedScreen(): JSX.Element {
       </MobileShell>
     );
   }
+
+  const routeCopy = pickLocalization(savedRoute.localizations, i18n.language);
+  const difficultyLabel =
+    difficultyLookup.get(savedRoute.difficultyId)?.label ?? savedRoute.difficultyId;
+  const updatedLabel = formatRelativeTime(savedRoute.lastUpdatedAt, i18n.language);
 
   const distance = formatDistance(savedRoute.distanceMetres, unitOptions);
   const duration = formatDuration(savedRoute.durationSeconds, {
@@ -139,7 +158,7 @@ export function SavedScreen(): JSX.Element {
                   </div>
 
                   <div className="mt-auto saved-summary__panel">
-                    <h1 className="text-2xl font-semibold">{savedRoute.title}</h1>
+                    <h1 className="text-2xl font-semibold">{routeCopy.name}</h1>
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-base-content/70">
                       <RouteSummaryMeta iconToken="{icon.object.route}">
                         {t("saved-route-distance-value", {
@@ -192,23 +211,28 @@ export function SavedScreen(): JSX.Element {
               <div className="pointer-events-none px-6 pb-6">
                 <div className="map-panel map-panel--scroll map-panel__notes map-panel__notes--spacious">
                   <div className="grid grid-cols-4 gap-4 text-base-content">
-                    <Metric label="Rating" value={savedRoute.rating.toFixed(1)} />
-                    <Metric label="Saves" value={savedRoute.saves.toString()} />
-                    <Metric label="Difficulty" value={savedRoute.difficulty} />
-                    <Metric label="Updated" value={savedRoute.updatedAgo} />
+                    <Metric label="Rating" value={ratingFormatter.format(savedRoute.rating)} />
+                    <Metric label="Saves" value={numberFormatter.format(savedRoute.saves)} />
+                    <Metric label="Difficulty" value={difficultyLabel} />
+                    <Metric label="Updated" value={updatedLabel} />
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {savedRoute.highlights.map((highlight) => (
-                      <span key={highlight} className="route-highlight">
-                        {highlight}
-                      </span>
-                    ))}
+                    {savedRoute.highlightTagIds.map((tagId) => {
+                      const tag = getTagDescriptor(tagId, i18n.language);
+                      const label = tag?.localization.name ?? tagId;
+                      return (
+                        <span key={tagId} className="route-highlight">
+                          {label}
+                        </span>
+                      );
+                    })}
                   </div>
-                  <p className="text-base-content/80">{savedRoute.description}</p>
+                  <p className="text-base-content/80">{routeCopy.description}</p>
                   <ul className="route-note-list" aria-label="Route notes">
-                    {savedRoute.notes.map((note) => (
-                      <li key={note}>{note}</li>
-                    ))}
+                    {savedRoute.notes.map((note) => {
+                      const noteCopy = pickLocalization(note.localizations, i18n.language);
+                      return <li key={note.id}>{noteCopy.name}</li>;
+                    })}
                   </ul>
                 </div>
               </div>

@@ -13,6 +13,8 @@ import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
 import { WildsideMap } from "../../../components/wildside-map";
 import { waterfrontDiscoveryRoute } from "../../../data/map";
+import { getTagDescriptor } from "../../../data/registries/tags";
+import { pickLocalization } from "../../../domain/entities/localization";
 import { MobileShell } from "../../../layout/mobile-shell";
 import { formatDistance, formatDuration, formatStops } from "../../../units/unit-format";
 import { useUnitPreferences } from "../../../units/unit-preferences-provider";
@@ -62,6 +64,7 @@ export function ItineraryScreen(): JSX.Element {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
+  const routeCopy = pickLocalization(waterfrontDiscoveryRoute.localizations, i18n.language);
   const distanceLabel = t("map-itinerary-distance-label", { defaultValue: "Distance" });
   const durationLabel = t("map-itinerary-duration-label", { defaultValue: "Walking" });
   const stopsLabel = t("map-itinerary-stops-label", { defaultValue: "Stops" });
@@ -118,17 +121,19 @@ export function ItineraryScreen(): JSX.Element {
                     <div className="map-route__summary">
                       <p className="text-sm font-medium text-base-content/60">Suggested route</p>
                       <h1 className="mt-1 text-2xl font-semibold text-base-content">
-                        {waterfrontDiscoveryRoute.title}
+                        {routeCopy.name}
                       </h1>
-                      <p className="mt-3 text-sm text-base-content/70">
-                        {waterfrontDiscoveryRoute.description}
-                      </p>
+                      <p className="mt-3 text-sm text-base-content/70">{routeCopy.description}</p>
                       <div className="mt-4 flex flex-wrap gap-2">
-                        {waterfrontDiscoveryRoute.highlights.map((highlight) => (
-                          <span key={highlight} className="route-highlight">
-                            {highlight}
-                          </span>
-                        ))}
+                        {waterfrontDiscoveryRoute.highlightTagIds.map((tagId) => {
+                          const tag = getTagDescriptor(tagId, i18n.language);
+                          const label = tag?.localization.name ?? tagId;
+                          return (
+                            <span key={tagId} className="route-highlight">
+                              {label}
+                            </span>
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -213,9 +218,10 @@ export function ItineraryScreen(): JSX.Element {
                 <div className="map-panel map-panel--scroll map-panel__notes">
                   <p className="text-base font-semibold text-base-content">Route notes</p>
                   <ul className="mt-3 route-note-list" aria-label="Route notes">
-                    {waterfrontDiscoveryRoute.notes.map((note) => (
-                      <li key={note}>{note}</li>
-                    ))}
+                    {waterfrontDiscoveryRoute.notes.map((note) => {
+                      const noteCopy = pickLocalization(note.localizations, i18n.language);
+                      return <li key={note.id}>{noteCopy.name}</li>;
+                    })}
                   </ul>
                 </div>
               </div>

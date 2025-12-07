@@ -12,6 +12,8 @@ import {
 } from "react";
 
 import { waterfrontDiscoveryRoute } from "../../data/map";
+import { pickLocalization } from "../../domain/entities/localization";
+import { DEFAULT_LOCALE } from "../../i18n/supported-locales";
 
 type LngLatTuple = [number, number];
 
@@ -81,12 +83,13 @@ const poiData: FeatureCollection<Point, { id: string; name: string }> = {
   type: "FeatureCollection",
   features: waterfrontDiscoveryRoute.pointsOfInterest.map((poi) => {
     const coordinates = poiCoordinates[poi.id] ?? DEFAULT_CENTER;
+    const localization = pickLocalization(poi.localizations, DEFAULT_LOCALE);
     return {
       type: "Feature",
       id: poi.id,
       properties: {
         id: poi.id,
-        name: poi.name,
+        name: localization.name,
       },
       geometry: {
         type: "Point",

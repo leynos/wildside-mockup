@@ -85,7 +85,7 @@
                                         "name": "",
                                         "children": [
                                           {
-                                            "role": "button",
+                                            "role": "link",
                                             "name": "Filter walks"
                                           }
                                         ]
