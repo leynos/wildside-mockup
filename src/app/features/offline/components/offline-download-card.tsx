@@ -16,17 +16,19 @@ export type DownloadStatusLabels = {
   statusDownloadingLabel: string;
 };
 
+export type OfflineDownloadMetaProps = {
+  readonly as?: "p" | "span" | "div";
+  readonly className?: string;
+  readonly children: ReactNode;
+};
+
 type FormatAreaCopy = (area: OfflineMapArea) => {
   readonly localization: { name: string; description?: string };
   readonly sizeLabel: string;
   readonly updatedLabel: string;
 };
 
-type OfflineDownloadMetaComponent = (props: {
-  readonly as?: "p" | "span" | "div";
-  readonly className?: string;
-  readonly children: ReactNode;
-}) => JSX.Element;
+type OfflineDownloadMetaComponent = (props: OfflineDownloadMetaProps) => JSX.Element;
 
 type OfflineDownloadCardProps = {
   readonly entry: DownloadEntry;
