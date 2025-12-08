@@ -1,6 +1,6 @@
 /** @file Offline download management screen with storage overview. */
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useMemo, useState } from "react";
+import { type JSX, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { OFFLINE_STORAGE_PLACEHOLDERS } from "../../config/offline-metrics";
@@ -85,6 +85,13 @@ export function OfflineScreen(): JSX.Element {
     statusDownloadingLabel: downloadsCopy.statusDownloadingLabel,
   };
 
+  const onToggleAuto = useCallback(
+    (id: string, next: boolean) => setAutoSettings((current) => ({ ...current, [id]: next })),
+    [],
+  );
+
+  const onBack = useCallback(() => navigate({ to: "/map/quick" }), [navigate]);
+
   return (
     <MobileShell>
       <OfflineScreenContent
@@ -107,12 +114,12 @@ export function OfflineScreen(): JSX.Element {
         onUndo={handleUndoDownload}
         toggleManaging={toggleManaging}
         autoSettings={autoSettings}
-        onToggleAuto={(id, next) => setAutoSettings((current) => ({ ...current, [id]: next }))}
+        onToggleAuto={onToggleAuto}
         integerFormatter={integerFormatter}
         dialogCopy={dialogCopy}
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
-        onBack={() => navigate({ to: "/map/quick" })}
+        onBack={onBack}
       />
     </MobileShell>
   );
