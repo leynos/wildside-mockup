@@ -41,7 +41,10 @@ export function OfflineDownloadDialog({ dialogCopy }: OfflineDownloadDialogProps
               {dialogCopy?.cancelLabel ?? "Cancel"}
             </Button>
           </Dialog.Close>
-          <Button size="sm">{dialogCopy?.previewLabel ?? "Preview download"}</Button>
+          {/* TODO: implement preview handler */}
+          <Button size="sm" disabled>
+            {dialogCopy?.previewLabel ?? "Preview download"}
+          </Button>
         </div>
       </Dialog.Content>
     </Dialog.Portal>
