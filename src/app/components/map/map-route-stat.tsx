@@ -16,6 +16,9 @@ export type MapRouteStatProps = {
 /**
  * Displays a single route statistic with a prominent value and label.
  *
+ * Numeric values are rendered inside a semantic `<data>` element with
+ * a machine-readable `value` attribute; string values use a `<span>`.
+ *
  * @example
  * // String value with unit
  * <MapRouteStat label="Distance" value="4.2 km" />
@@ -26,18 +29,24 @@ export type MapRouteStatProps = {
  * // </span>
  *
  * @example
- * // Numeric value
+ * // Numeric value renders inside <data>
  * <MapRouteStat label="Stops" value={5} />
  * // Renders:
  * // <span class="map-route__stat">
- * //   <span class="map-route__stat-value">5</span>
+ * //   <data class="map-route__stat-value" value="5">5</data>
  * //   Stops
  * // </span>
  */
 export function MapRouteStat({ label, value }: MapRouteStatProps): JSX.Element {
   return (
     <span className="map-route__stat">
-      <span className="map-route__stat-value">{value}</span>
+      {typeof value === "number" ? (
+        <data className="map-route__stat-value" value={String(value)}>
+          {value}
+        </data>
+      ) : (
+        <span className="map-route__stat-value">{value}</span>
+      )}
       {label}
     </span>
   );
