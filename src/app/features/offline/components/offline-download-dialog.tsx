@@ -32,6 +32,7 @@ export function OfflineDownloadDialog({ dialogCopy }: OfflineDownloadDialogProps
         <input
           type="search"
           placeholder={dialogCopy?.searchPlaceholder ?? "Search cities or regions"}
+          aria-label={dialogCopy?.searchPlaceholder ?? "Search cities or regions"}
           className="offline-search__input"
         />
         <div className="flex justify-end gap-2">
