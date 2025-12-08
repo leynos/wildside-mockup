@@ -3,22 +3,9 @@
 import type { JSX } from "react";
 
 import { Icon } from "../../../../components/icon";
+import { MapRouteStat } from "../../../../components/map/map-route-stat";
 import type { LocalisedUnitValue } from "../../../../units/unit-format";
 import type { ItineraryLabels } from "../hooks/use-itinerary-data";
-
-type MapRouteStatProps = {
-  readonly label: string;
-  readonly value: string | number;
-};
-
-function MapRouteStat({ label, value }: MapRouteStatProps): JSX.Element {
-  return (
-    <span className="map-route__stat">
-      <p className="map-route__stat-value">{value}</p>
-      {label}
-    </span>
-  );
-}
 
 export type ItineraryMapHeaderProps = {
   readonly distance: LocalisedUnitValue;
