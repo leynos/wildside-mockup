@@ -13,6 +13,27 @@ export type RouteMetrics = {
   readonly stops: ReturnType<typeof formatStops>;
 };
 
+/**
+ * Provides memoised, formatted route metrics for distance, duration, and stops.
+ *
+ * @param route - The walk route summary containing raw metric values.
+ * @returns Formatted metrics with localised values and unit labels.
+ *
+ * @example
+ * ```tsx
+ * const RouteStats = ({ route }: { route: WalkRouteSummary }) => {
+ *   const { distance, duration, stops } = useRouteMetrics(route);
+ *
+ *   return (
+ *     <p>
+ *       {distance.value} {distance.unitLabel} ·{" "}
+ *       {duration.value} {duration.unitLabel} ·{" "}
+ *       {stops.value} {stops.unitLabel}
+ *     </p>
+ *   );
+ * };
+ * ```
+ */
 export const useRouteMetrics = (route: WalkRouteSummary): RouteMetrics => {
   const { t, i18n } = useTranslation();
   const { unitSystem } = useUnitPreferences();
