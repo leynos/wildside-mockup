@@ -11,6 +11,10 @@ import {
   type OfflineMapArea,
   type OfflineSuggestion,
 } from "../../../data/stage-four";
+import type { OfflineDialogCopy } from "../hooks/use-offline-dialog-copy";
+import type { OfflineDownloadsCopy } from "../hooks/use-offline-downloads-copy";
+import type { OfflineStorageCopy } from "../hooks/use-offline-storage-copy";
+import type { OfflineSuggestionsCopy } from "../hooks/use-offline-suggestions-copy";
 import { OfflineAutoManagement } from "./offline-auto-management";
 import type {
   DownloadEntry,
@@ -31,21 +35,15 @@ type OfflineScreenContentProps = {
     readonly addAreaLabel: string;
     readonly bottomNavAriaLabel: string;
   };
-  readonly storageCopy: ReturnType<
-    typeof import("../hooks/use-offline-storage-copy").useOfflineStorageCopy
-  >;
+  readonly storageCopy: OfflineStorageCopy;
   readonly suggestions: OfflineSuggestion[];
-  readonly suggestionsCopy: ReturnType<
-    typeof import("../hooks/use-offline-suggestions-copy").useOfflineSuggestionsCopy
-  >;
+  readonly suggestionsCopy: OfflineSuggestionsCopy;
   readonly setSuggestions: Dispatch<SetStateAction<OfflineSuggestion[]>>;
   readonly downloads: DownloadEntry[];
   readonly isManaging: boolean;
   readonly statusLabels: DownloadStatusLabels;
   readonly percentFormatter: Intl.NumberFormat;
-  readonly downloadsCopy: ReturnType<
-    typeof import("../hooks/use-offline-downloads-copy").useOfflineDownloadsCopy
-  >["copy"];
+  readonly downloadsCopy: OfflineDownloadsCopy;
   readonly undoDescriptionDefault: string;
   readonly MetaComponent: (props: OfflineDownloadMetaProps) => JSX.Element;
   readonly renderStatusBadge: (
@@ -60,9 +58,7 @@ type OfflineScreenContentProps = {
   readonly autoSettings: Record<string, boolean>;
   readonly onToggleAuto: (id: string, next: boolean) => void;
   readonly integerFormatter: Intl.NumberFormat;
-  readonly dialogCopy: ReturnType<
-    typeof import("../hooks/use-offline-dialog-copy").useOfflineDialogCopy
-  >;
+  readonly dialogCopy: OfflineDialogCopy;
   readonly dialogOpen: boolean;
   readonly setDialogOpen: (next: boolean) => void;
   readonly onBack: () => void;

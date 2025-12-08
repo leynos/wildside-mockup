@@ -3,9 +3,25 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
+export type OfflineDownloadsCopy = {
+  readonly downloadsHeading: string;
+  readonly downloadsDescription: string;
+  readonly manageLabel: string;
+  readonly doneLabel: string;
+  readonly statusCompleteLabel: string;
+  readonly statusUpdatingLabel: string;
+  readonly statusDownloadingLabel: string;
+  readonly undoDescription: string;
+  readonly undoButtonLabel: string;
+  readonly autoHeading: string;
+};
+
 const undoDescriptionDefault = "Tap undo to restore this map.";
 
-export const useOfflineDownloadsCopy = () => {
+export const useOfflineDownloadsCopy = (): {
+  readonly copy: OfflineDownloadsCopy;
+  readonly undoDescriptionDefault: string;
+} => {
   const { t } = useTranslation();
 
   const copy = useMemo(

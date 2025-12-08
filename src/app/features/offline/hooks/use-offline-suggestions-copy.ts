@@ -3,7 +3,12 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-export const useOfflineSuggestionsCopy = (suggestionsLength: number) => {
+export type OfflineSuggestionsCopy = {
+  readonly heading: string;
+  readonly dismissLabel: string;
+} | null;
+
+export const useOfflineSuggestionsCopy = (suggestionsLength: number): OfflineSuggestionsCopy => {
   const { t } = useTranslation();
 
   return useMemo(() => {

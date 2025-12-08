@@ -3,6 +3,15 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
+export type OfflineStorageCopy = {
+  readonly heading: string;
+  readonly subtitle: string;
+  readonly usedLabel: string;
+  readonly usedDescription: string;
+  readonly mapsLabel: string;
+  readonly availableLabel: string;
+};
+
 export const useOfflineStorageCopy = (
   storageUsedFormatted: string,
   storageTotalFormatted: string,

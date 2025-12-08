@@ -3,7 +3,15 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-export const useOfflineDialogCopy = (dialogOpen: boolean) => {
+export type OfflineDialogCopy = {
+  readonly title: string;
+  readonly description: string;
+  readonly searchPlaceholder: string;
+  readonly cancelLabel: string;
+  readonly previewLabel: string;
+} | null;
+
+export const useOfflineDialogCopy = (dialogOpen: boolean): OfflineDialogCopy => {
   const { t } = useTranslation();
 
   return useMemo(() => {
