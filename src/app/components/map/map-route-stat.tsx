@@ -10,7 +10,7 @@ export type MapRouteStatProps = {
 export function MapRouteStat({ label, value }: MapRouteStatProps): JSX.Element {
   return (
     <span className="map-route__stat">
-      <p className="map-route__stat-value">{value}</p>
+      <span className="map-route__stat-value">{value}</span>
       {label}
     </span>
   );
