@@ -1,7 +1,7 @@
 /** @file Shared list rendering points of interest with Radix dialog sheets. */
 
 import * as Dialog from "@radix-ui/react-dialog";
-import type { JSX } from "react";
+import { type JSX, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { WalkPointOfInterest } from "../data/map";
@@ -177,10 +177,14 @@ export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.E
   const highlightPois = mapStore?.actions.highlightPois;
   const { t, i18n } = useTranslation();
   const highlightBadgeLabel = t("poi-highlight-label", { defaultValue: "Highlight" });
-  const ratingFormatter = new Intl.NumberFormat(i18n.language, {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
-  });
+  const ratingFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat(i18n.language, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }),
+    [i18n.language],
+  );
 
   return (
     <div className="space-y-3">
