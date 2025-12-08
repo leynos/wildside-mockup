@@ -32,30 +32,54 @@ export const useItineraryData = (route: WalkRouteSummary): ItineraryData => {
     [i18n.language, t, unitSystem],
   );
 
-  const distance = formatDistance(route.distanceMetres, unitOptions);
-  const duration = formatDuration(route.durationSeconds, {
-    ...unitOptions,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
-  const stops = formatStops(route.stopsCount, {
-    ...unitOptions,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
-  const routeCopy = pickLocalization(route.localizations, i18n.language);
-  const labels: ItineraryLabels = {
-    distance: t("map-itinerary-distance-label", { defaultValue: "Distance" }),
-    duration: t("map-itinerary-duration-label", { defaultValue: "Walking" }),
-    stops: t("map-itinerary-stops-label", { defaultValue: "Stops" }),
-  };
+  const distance = useMemo(
+    () => formatDistance(route.distanceMetres, unitOptions),
+    [route.distanceMetres, unitOptions],
+  );
 
-  return {
-    language: i18n.language,
-    routeCopy,
-    distance,
-    duration,
-    stops,
-    labels,
-  };
+  const duration = useMemo(
+    () =>
+      formatDuration(route.durationSeconds, {
+        ...unitOptions,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }),
+    [route.durationSeconds, unitOptions],
+  );
+
+  const stops = useMemo(
+    () =>
+      formatStops(route.stopsCount, {
+        ...unitOptions,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }),
+    [route.stopsCount, unitOptions],
+  );
+
+  const routeCopy = useMemo(
+    () => pickLocalization(route.localizations, i18n.language),
+    [route.localizations, i18n.language],
+  );
+
+  const labels = useMemo<ItineraryLabels>(
+    () => ({
+      distance: t("map-itinerary-distance-label", { defaultValue: "Distance" }),
+      duration: t("map-itinerary-duration-label", { defaultValue: "Walking" }),
+      stops: t("map-itinerary-stops-label", { defaultValue: "Stops" }),
+    }),
+    [t],
+  );
+
+  return useMemo(
+    () => ({
+      language: i18n.language,
+      routeCopy,
+      distance,
+      duration,
+      stops,
+      labels,
+    }),
+    [i18n.language, routeCopy, distance, duration, stops, labels],
+  );
 };
