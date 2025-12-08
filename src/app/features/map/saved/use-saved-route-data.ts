@@ -42,21 +42,45 @@ export const useSavedRouteData = (route: WalkRouteSummary): SavedRouteData => {
     [i18n.language, t, unitSystem],
   );
 
-  const routeCopy = pickLocalization(route.localizations, i18n.language);
-  const difficultyLabel = difficultyLookup.get(route.difficultyId)?.label ?? route.difficultyId;
-  const updatedLabel = formatRelativeTime(route.lastUpdatedAt, i18n.language);
+  const routeCopy = useMemo(
+    () => pickLocalization(route.localizations, i18n.language),
+    [route.localizations, i18n.language],
+  );
 
-  const distance = formatDistance(route.distanceMetres, unitOptions);
-  const duration = formatDuration(route.durationSeconds, {
-    ...unitOptions,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
-  const stops = formatStops(route.stopsCount, {
-    ...unitOptions,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
+  const difficultyLabel = useMemo(
+    () => difficultyLookup.get(route.difficultyId)?.label ?? route.difficultyId,
+    [route.difficultyId, difficultyLookup],
+  );
+
+  const updatedLabel = useMemo(
+    () => formatRelativeTime(route.lastUpdatedAt, i18n.language),
+    [route.lastUpdatedAt, i18n.language],
+  );
+
+  const distance = useMemo(
+    () => formatDistance(route.distanceMetres, unitOptions),
+    [route.distanceMetres, unitOptions],
+  );
+
+  const duration = useMemo(
+    () =>
+      formatDuration(route.durationSeconds, {
+        ...unitOptions,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }),
+    [route.durationSeconds, unitOptions],
+  );
+
+  const stops = useMemo(
+    () =>
+      formatStops(route.stopsCount, {
+        ...unitOptions,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      }),
+    [route.stopsCount, unitOptions],
+  );
 
   return {
     routeCopy,
