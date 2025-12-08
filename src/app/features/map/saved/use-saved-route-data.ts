@@ -82,15 +82,28 @@ export const useSavedRouteData = (route: WalkRouteSummary): SavedRouteData => {
     [route.stopsCount, unitOptions],
   );
 
-  return {
-    routeCopy,
-    difficultyLabel,
-    updatedLabel,
-    distance,
-    duration,
-    stops,
-    numberFormatter,
-    ratingFormatter,
-    difficultyLookup,
-  };
+  return useMemo(
+    () => ({
+      routeCopy,
+      difficultyLabel,
+      updatedLabel,
+      distance,
+      duration,
+      stops,
+      numberFormatter,
+      ratingFormatter,
+      difficultyLookup,
+    }),
+    [
+      routeCopy,
+      difficultyLabel,
+      updatedLabel,
+      distance,
+      duration,
+      stops,
+      numberFormatter,
+      ratingFormatter,
+      difficultyLookup,
+    ],
+  );
 };
