@@ -49,5 +49,7 @@ export const formatRelativeTime = (
     }
   }
 
+  // Unreachable: loop always returns at "second" threshold, but TypeScript
+  // requires a return path. Kept as a defensive fallback.
   return formatter.format(0, "second");
 };
