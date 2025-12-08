@@ -11,6 +11,25 @@ export type RouteFormatters = {
   readonly difficultyLookup: ReturnType<typeof buildDifficultyLookup>;
 };
 
+/**
+ * Provides memoised number formatters and difficulty lookup for route display.
+ *
+ * @returns Formatters for numbers, ratings, and a difficulty label lookup map.
+ *
+ * @example
+ * ```tsx
+ * const RouteRating = ({ rating, difficultyId }: Props) => {
+ *   const { ratingFormatter, difficultyLookup } = useRouteFormatters();
+ *   const difficulty = difficultyLookup.get(difficultyId);
+ *
+ *   return (
+ *     <p>
+ *       {ratingFormatter.format(rating)} · {difficulty?.label}
+ *     </p>
+ *   );
+ * };
+ * ```
+ */
 export const useRouteFormatters = (): RouteFormatters => {
   const { t, i18n } = useTranslation();
 
