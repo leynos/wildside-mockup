@@ -16,6 +16,39 @@ export type SavedRouteData = RouteFormatters &
     readonly updatedLabel: string;
   };
 
+/**
+ * Prepare formatted and localised data for presenting a saved route.
+ *
+ * @param route - The walk route summary to format.
+ * @returns Localised route copy, formatted metrics, and route-related labels.
+ *
+ * @example
+ * ```tsx
+ * const SavedRouteCard = ({ route }: { route: WalkRouteSummary }) => {
+ *   const {
+ *     routeCopy,
+ *     distance,
+ *     duration,
+ *     difficultyLabel,
+ *     updatedLabel,
+ *   } = useSavedRouteData(route);
+ *
+ *   return (
+ *     <article>
+ *       <h2>{routeCopy.name}</h2>
+ *       <p>{routeCopy.description}</p>
+ *       <p>
+ *         {distance.value} {distance.unitLabel} ·{" "}
+ *         {duration.value} {duration.unitLabel}
+ *       </p>
+ *       <p>
+ *         {difficultyLabel} · {updatedLabel}
+ *       </p>
+ *     </article>
+ *   );
+ * };
+ * ```
+ */
 export const useSavedRouteData = (route: WalkRouteSummary): SavedRouteData => {
   const { i18n } = useTranslation();
   const formatters = useRouteFormatters();
