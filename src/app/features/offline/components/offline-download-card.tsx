@@ -66,12 +66,13 @@ export function OfflineDownloadCard({
 }: OfflineDownloadCardProps): JSX.Element {
   const area = entry.area;
   const { localization, sizeLabel, updatedLabel } = formatAreaCopy(area);
-  const progressPercent = percentFormatter.format(area.progress);
+  // Clamp progress to valid percentage bounds (0-100%)
+  const clampedProgress = Math.max(0, Math.min(1, area.progress));
+  const progressPercent = percentFormatter.format(clampedProgress);
 
   if (entry.kind === "undo") {
     return (
       <article
-        key={`${area.id}-undo`}
         data-testid="offline-undo-card"
         className="offline-download__undo"
         aria-label={t("offline-downloads-undo-aria", {
@@ -103,7 +104,6 @@ export function OfflineDownloadCard({
 
   return (
     <article
-      key={area.id}
       data-testid="offline-download-card"
       className="offline-download__card"
       aria-labelledby={`${area.id}-title`}
@@ -143,7 +143,7 @@ export function OfflineDownloadCard({
           <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
             <div
               className={`h-1.5 rounded-full ${area.status === "downloading" ? "bg-amber-400" : "bg-accent"}`}
-              style={{ width: `${Math.round(area.progress * 100)}%` }}
+              style={{ width: `${Math.round(clampedProgress * 100)}%` }}
             />
           </div>
           <MetaComponent as="span">{progressPercent}</MetaComponent>

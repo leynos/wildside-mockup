@@ -15,18 +15,18 @@ export interface QuickWalkConfig {
 }
 
 export interface WalkPointOfInterest {
-  id: string;
-  localizations: EntityLocalizations;
-  categoryId: TagId;
-  tagIds: TagId[];
-  rating?: number;
-  image?: ImageAsset;
-  openHours?: { opensAt: string; closesAt: string };
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly categoryId: TagId;
+  readonly tagIds: readonly TagId[];
+  readonly rating?: number;
+  readonly image?: ImageAsset;
+  readonly openHours?: { readonly opensAt: string; readonly closesAt: string };
 }
 
 export interface RouteNote {
-  id: string;
-  localizations: EntityLocalizations;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
 }
 
 export interface WalkRouteSummary {

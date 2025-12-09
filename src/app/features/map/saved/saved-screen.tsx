@@ -71,7 +71,7 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
               onShareOpenChange={setShareOpen}
             />
 
-            <StopsTabContent savedRoute={savedRoute} onClose={() => setActiveTab("map")} />
+            <StopsTabContent savedRoute={savedRoute} onClose={() => setActiveTab("map")} t={t} />
 
             <NotesTabContent
               savedRoute={savedRoute}
@@ -81,6 +81,7 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
               numberFormatter={numberFormatter}
               ratingFormatter={ratingFormatter}
               i18nLanguage={i18n.language}
+              t={t}
             />
           </div>
 

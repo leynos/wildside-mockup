@@ -116,27 +116,28 @@ export const walkCompletionMapImage = walkRouteMap1;
 const withBasePath = (path: string, alt: string): ImageAsset => {
   const base = import.meta.env.BASE_URL ?? "/";
   const cleanedPath = path.replace(/^\/+/, "");
-  const url = `${base}${cleanedPath}`.replace(/\/+/g, "/");
+  // Collapse duplicate slashes but preserve protocol separators (://)
+  const url = `${base}${cleanedPath}`.replace(/([^:]\/)\/+/g, "$1");
   return { url, alt };
 };
 
 export interface OfflineSuggestion {
-  id: string;
-  localizations: EntityLocalizations;
-  ctaLocalizations: EntityLocalizations;
-  iconToken: string;
-  accentClass: string;
-  iconClassName?: string;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly ctaLocalizations: EntityLocalizations;
+  readonly iconToken: string;
+  readonly accentClass: string;
+  readonly iconClassName?: string;
 }
 
 export interface OfflineMapArea {
-  id: string;
-  localizations: EntityLocalizations;
-  image: ImageAsset;
-  sizeBytes: number;
-  progress: number;
-  status: "complete" | "updating" | "downloading";
-  lastUpdatedAt: string;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly image: ImageAsset;
+  readonly sizeBytes: number;
+  readonly progress: number;
+  readonly status: "complete" | "updating" | "downloading";
+  readonly lastUpdatedAt: string;
 }
 
 export interface AutoManagementOption {

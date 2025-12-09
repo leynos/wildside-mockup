@@ -1,9 +1,10 @@
 /** @file Small helper to format past/future instants as relative time labels. */
 
+import { SECONDS_PER_MINUTE } from "../units/unit-system";
+
 type SupportedUnit = "day" | "hour" | "minute" | "second";
 
 const MILLISECONDS_PER_SECOND = 1000;
-const SECONDS_PER_MINUTE = 60;
 const MINUTES_PER_HOUR = 60;
 const HOURS_PER_DAY = 24;
 
@@ -28,7 +29,7 @@ const normaliseInstant = (input: Date | number | string): number => {
  * Format a timestamp relative to `now`, favouring the largest meaningful unit.
  *
  * @example
- * formatRelativeTime(Date.now() - 36_000, "en-GB"); // "10 hours ago"
+ * formatRelativeTime(Date.now() - 36_000_000, "en-GB"); // "10 hours ago"
  */
 export const formatRelativeTime = (
   input: Date | number | string,
@@ -49,7 +50,7 @@ export const formatRelativeTime = (
     }
   }
 
-  // Unreachable: loop always returns at "second" threshold, but TypeScript
-  // requires a return path. Kept as a defensive fallback.
-  return formatter.format(0, "second");
+  // Satisfy TypeScript's control flow analysis. The loop always returns at the
+  // "second" threshold, making this path unreachable at runtime.
+  throw new Error("Unreachable: UNIT_THRESHOLDS must include 'second'");
 };

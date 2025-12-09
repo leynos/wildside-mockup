@@ -1,6 +1,7 @@
 /** @file Route summary with title, description, and highlight tags. */
 
 import type { JSX } from "react";
+import { useTranslation } from "react-i18next";
 
 import type { TagId } from "../../../../data/registries/tags";
 import { getTagDescriptor } from "../../../../data/registries/tags";
@@ -18,9 +19,14 @@ export function RouteSummarySection({
   highlightTagIds,
   language,
 }: RouteSummarySectionProps): JSX.Element {
+  const { t } = useTranslation();
+  const suggestedRouteCaption = t("route-summary-suggested-caption", {
+    defaultValue: "Suggested route",
+  });
+
   return (
     <div className="map-route__summary">
-      <p className="text-sm font-medium text-base-content/60">Suggested route</p>
+      <p className="text-sm font-medium text-base-content/60">{suggestedRouteCaption}</p>
       <h1 className="mt-1 text-2xl font-semibold text-base-content">{routeName}</h1>
       <p className="mt-3 text-sm text-base-content/70">{routeDescription}</p>
       <div className="mt-4 flex flex-wrap gap-2">

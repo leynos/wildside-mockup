@@ -25,7 +25,7 @@ export function OfflineSuggestionCard({
 
   return (
     <article
-      className={`rounded-2xl border border-base-300/60 bg-gradient-to-r ${suggestion.accentClass} p-4 shadow-lg`}
+      className={`rounded-2xl border border-base-300/60 bg-gradient-to-r p-4 shadow-lg ${suggestion.accentClass}`}
     >
       <div className="flex items-start gap-3 text-base-100">
         <Icon

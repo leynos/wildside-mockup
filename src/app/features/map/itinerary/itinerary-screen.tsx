@@ -3,7 +3,7 @@
 import type { TabsContentProps } from "@radix-ui/react-tabs";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, useCallback, useState } from "react";
 
 import { MapBottomNavigation } from "../../../components/map-bottom-navigation";
 import { MapViewport } from "../../../components/map-viewport";
@@ -33,8 +33,8 @@ export function ItineraryScreen(): JSX.Element {
   const { language, routeCopy, distance, duration, stops, labels } =
     useItineraryData(waterfrontDiscoveryRoute);
 
-  const handleBack = () => navigate({ to: "/map/quick" });
-  const handleDismissStops = () => setActiveTab("map");
+  const handleBack = useCallback(() => navigate({ to: "/map/quick" }), [navigate]);
+  const handleDismissStops = useCallback(() => setActiveTab("map"), []);
 
   return (
     <MobileShell tone="dark">

@@ -15,7 +15,7 @@ export type OfflineLocalisations = {
   readonly undoDescriptionDefault: string;
 };
 
-type OfflineLocalisationOptions = {
+export type OfflineLocalisationOptions = {
   readonly storageUsedFormatted: string;
   readonly storageTotalFormatted: string;
   readonly storageAutoDeleteDays: number;

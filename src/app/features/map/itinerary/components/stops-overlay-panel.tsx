@@ -2,10 +2,9 @@
 
 import type { JSX } from "react";
 
+import { STICKY_HANDLE_CLASS } from "../../../../components/map/map-panel-constants";
 import { PointOfInterestList } from "../../../../components/point-of-interest-list";
 import type { WalkPointOfInterest } from "../../../../data/map";
-
-const stickyHandleClass = "mx-auto block h-2 w-12 rounded-full bg-base-300/70";
 
 export type StopsOverlayPanelProps = {
   readonly points: WalkPointOfInterest[];
@@ -15,11 +14,12 @@ export type StopsOverlayPanelProps = {
 export function StopsOverlayPanel({ points, onDismiss }: StopsOverlayPanelProps): JSX.Element {
   return (
     <div className="pointer-events-none px-6 pb-6">
+      {/* Limit overlay to 60% viewport height to preserve map visibility */}
       <div className="map-panel map-panel--stacked max-h-[60vh]">
         <div className="map-panel__handle bg-transparent">
           <button
             type="button"
-            className={stickyHandleClass}
+            className={STICKY_HANDLE_CLASS}
             aria-label="Dismiss panel"
             onClick={onDismiss}
           />

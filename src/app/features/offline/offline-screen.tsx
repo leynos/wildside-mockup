@@ -120,6 +120,7 @@ export function OfflineScreen(): JSX.Element {
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
         onBack={onBack}
+        activeNavId="profile"
       />
     </MobileShell>
   );

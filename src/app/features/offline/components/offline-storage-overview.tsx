@@ -47,6 +47,7 @@ export function OfflineStorageOverview({
             </MetaComponent>
           </div>
           <div className="h-2 w-full rounded-full bg-base-300/60">
+            {/* Placeholder: 35% progress until real storage API is wired */}
             <div className="h-2 w-[35%] rounded-full bg-accent" />
           </div>
         </div>

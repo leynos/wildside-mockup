@@ -1,7 +1,7 @@
 /** @file Downloads list section for offline screen. */
 
 import type { TFunction } from "i18next";
-import type { JSX } from "react";
+import { type JSX, useCallback } from "react";
 
 import { Button } from "../../../components/button";
 import { formatStorageLabel } from "../../../config/offline-metrics";
@@ -56,16 +56,19 @@ export function OfflineDownloadsSection({
   onUndo,
   toggleManaging,
 }: OfflineDownloadsSectionProps): JSX.Element {
-  const formatAreaCopy = (area: OfflineMapArea) => {
-    const localization = pickLocalization(area.localizations, i18nLanguage);
-    const sizeLabel = formatStorageLabel(area.sizeBytes);
-    const relativeUpdated = formatRelativeTime(area.lastUpdatedAt, i18nLanguage);
-    const updatedLabel = t("offline-downloads-updated", {
-      updated: relativeUpdated,
-      defaultValue: `Updated ${relativeUpdated}`,
-    });
-    return { localization, sizeLabel, updatedLabel };
-  };
+  const formatAreaCopy = useCallback(
+    (area: OfflineMapArea) => {
+      const localization = pickLocalization(area.localizations, i18nLanguage);
+      const sizeLabel = formatStorageLabel(area.sizeBytes);
+      const relativeUpdated = formatRelativeTime(area.lastUpdatedAt, i18nLanguage);
+      const updatedLabel = t("offline-downloads-updated", {
+        updated: relativeUpdated,
+        defaultValue: `Updated ${relativeUpdated}`,
+      });
+      return { localization, sizeLabel, updatedLabel };
+    },
+    [i18nLanguage, t],
+  );
 
   return (
     <section className="space-y-4" aria-labelledby="downloaded-areas-heading">

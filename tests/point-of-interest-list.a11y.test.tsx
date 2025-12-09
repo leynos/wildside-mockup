@@ -33,7 +33,9 @@ describe("PointOfInterestList accessibility", () => {
       expect(await axe(container)).toHaveNoViolations();
 
       const trigger = screen.getByRole("button", { name: new RegExp(poiCopy.name, "i") });
-      expect(within(trigger).getByText(poiCopy.description ?? "")).toBeInTheDocument();
+      if (poiCopy.description) {
+        expect(within(trigger).getByText(poiCopy.description)).toBeInTheDocument();
+      }
       if (ratingLabel) {
         expect(within(trigger).getByText(ratingLabel)).toBeInTheDocument();
       }
@@ -46,7 +48,9 @@ describe("PointOfInterestList accessibility", () => {
 
       const dialog = await screen.findByRole("dialog", { name: poiCopy.name });
       expect(dialog).toBeInTheDocument();
-      expect(within(dialog).getByText(poiCopy.description ?? "")).toBeInTheDocument();
+      if (poiCopy.description) {
+        expect(within(dialog).getByText(poiCopy.description)).toBeInTheDocument();
+      }
       expect(await axe(document.body)).toHaveNoViolations();
 
       await userEvent.click(screen.getByRole("button", { name: /close/i }));

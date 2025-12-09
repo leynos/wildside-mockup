@@ -7,6 +7,7 @@ import type { TFunction } from "i18next";
 import type { JSX, ReactNode } from "react";
 
 import { Icon } from "../../../components/icon";
+import { STICKY_HANDLE_CLASS } from "../../../components/map/map-panel-constants";
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
 import { WildsideMap } from "../../../components/wildside-map";
@@ -14,8 +15,6 @@ import type { WalkRouteSummary } from "../../../data/map";
 import { getTagDescriptor } from "../../../data/registries/tags";
 import { pickLocalization } from "../../../domain/entities/localization";
 import type { SavedRouteData } from "./use-saved-route-data";
-
-const stickyHandleClass = "mx-auto block h-2 w-12 rounded-full bg-base-300/70";
 
 export type RouteSummaryMetaProps = {
   readonly iconToken: string;
@@ -96,17 +95,20 @@ export function MapTabContent({
                 <Dialog.Overlay className="fixed inset-0 bg-black/60" />
                 <Dialog.Content className="dialog-surface">
                   <Dialog.Title className="text-lg font-semibold text-base-content">
-                    Share saved walk
+                    {t("map-saved-share-title", { defaultValue: "Share saved walk" })}
                   </Dialog.Title>
                   <Dialog.Description className="text-sm text-base-content/70">
-                    Sharing is not wired up yet, but this is where the integration will live.
+                    {t("map-saved-share-description", {
+                      defaultValue:
+                        "Sharing is not wired up yet, but this is where the integration will live.",
+                    })}
                   </Dialog.Description>
                   <div className="route-share__preview">
                     https://wildside.app/routes/{savedRoute.id}
                   </div>
                   <Dialog.Close asChild>
                     <button type="button" className="btn btn-accent btn-sm self-end">
-                      Close
+                      {t("action-close", { defaultValue: "Close" })}
                     </button>
                   </Dialog.Close>
                 </Dialog.Content>
@@ -149,9 +151,10 @@ export function MapTabContent({
 type StopsTabContentProps = {
   readonly savedRoute: WalkRouteSummary;
   readonly onClose: () => void;
+  readonly t: TFunction;
 };
 
-export function StopsTabContent({ savedRoute, onClose }: StopsTabContentProps): JSX.Element {
+export function StopsTabContent({ savedRoute, onClose, t }: StopsTabContentProps): JSX.Element {
   return (
     <MapOverlay value="stops" forceMount>
       <div className="pointer-events-none px-6 pb-6">
@@ -159,8 +162,8 @@ export function StopsTabContent({ savedRoute, onClose }: StopsTabContentProps): 
           <div className="map-panel__handle">
             <button
               type="button"
-              className={stickyHandleClass}
-              aria-label="Dismiss panel"
+              className={STICKY_HANDLE_CLASS}
+              aria-label={t("action-dismiss-panel", { defaultValue: "Dismiss panel" })}
               onClick={onClose}
             />
           </div>
@@ -183,6 +186,7 @@ type NotesTabContentProps = {
   readonly numberFormatter: SavedRouteData["numberFormatter"];
   readonly ratingFormatter: SavedRouteData["ratingFormatter"];
   readonly i18nLanguage: string;
+  readonly t: TFunction;
 };
 
 export function NotesTabContent({
@@ -193,16 +197,29 @@ export function NotesTabContent({
   numberFormatter,
   ratingFormatter,
   i18nLanguage,
+  t,
 }: NotesTabContentProps): JSX.Element {
   return (
     <MapOverlay value="notes" forceMount>
       <div className="pointer-events-none px-6 pb-6">
         <div className="map-panel map-panel--scroll map-panel__notes map-panel__notes--spacious">
           <div className="grid grid-cols-4 gap-4 text-base-content">
-            <Metric label="Rating" value={ratingFormatter.format(savedRoute.rating)} />
-            <Metric label="Saves" value={numberFormatter.format(savedRoute.saves)} />
-            <Metric label="Difficulty" value={difficultyLabel} />
-            <Metric label="Updated" value={updatedLabel} />
+            <Metric
+              label={t("saved-route-metric-rating", { defaultValue: "Rating" })}
+              value={ratingFormatter.format(savedRoute.rating)}
+            />
+            <Metric
+              label={t("saved-route-metric-saves", { defaultValue: "Saves" })}
+              value={numberFormatter.format(savedRoute.saves)}
+            />
+            <Metric
+              label={t("saved-route-metric-difficulty", { defaultValue: "Difficulty" })}
+              value={difficultyLabel}
+            />
+            <Metric
+              label={t("saved-route-metric-updated", { defaultValue: "Updated" })}
+              value={updatedLabel}
+            />
           </div>
           <div className="flex flex-wrap gap-2">
             {savedRoute.highlightTagIds.map((tagId) => {
@@ -216,7 +233,10 @@ export function NotesTabContent({
             })}
           </div>
           <p className="text-base-content/80">{routeCopy.description}</p>
-          <ul className="route-note-list" aria-label="Route notes">
+          <ul
+            className="route-note-list"
+            aria-label={t("saved-route-notes-label", { defaultValue: "Route notes" })}
+          >
             {savedRoute.notes.map((note) => {
               const noteCopy = pickLocalization(note.localizations, i18nLanguage);
               return <li key={note.id}>{noteCopy.name}</li>;

@@ -62,6 +62,7 @@ type OfflineScreenContentProps = {
   readonly dialogOpen: boolean;
   readonly setDialogOpen: (next: boolean) => void;
   readonly onBack: () => void;
+  readonly activeNavId: string;
 };
 
 export function OfflineScreenContent({
@@ -90,6 +91,7 @@ export function OfflineScreenContent({
   dialogOpen,
   setDialogOpen,
   onBack,
+  activeNavId,
 }: OfflineScreenContentProps): JSX.Element {
   return (
     <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -155,7 +157,7 @@ export function OfflineScreenContent({
           items={bottomNavigation.map((item) => ({
             ...item,
             label: t(`nav-${item.id}-label`, { defaultValue: item.label }),
-            isActive: item.id === "profile",
+            isActive: item.id === activeNavId,
           }))}
         />
       </div>

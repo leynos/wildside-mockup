@@ -3,7 +3,15 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-export const useOfflineNavigationCopy = () => {
+type OfflineNavigationCopy = {
+  readonly bottomNavAriaLabel: string;
+  readonly headerTitle: string;
+  readonly headerSubtitle: string;
+  readonly backLabel: string;
+  readonly addAreaLabel: string;
+};
+
+export const useOfflineNavigationCopy = (): OfflineNavigationCopy => {
   const { t } = useTranslation();
 
   return useMemo(

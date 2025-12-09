@@ -1,21 +1,22 @@
 /** @file Shared list rendering points of interest with Radix dialog sheets. */
 
 import * as Dialog from "@radix-ui/react-dialog";
+import type { TFunction } from "i18next";
 import { type JSX, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { WalkPointOfInterest } from "../data/map";
-import { getTagDescriptor } from "../data/registries/tags";
-import { pickLocalization } from "../domain/entities/localization";
+import { getTagDescriptor, type ResolvedTagDescriptor } from "../data/registries/tags";
+import { type LocalizedStringSet, pickLocalization } from "../domain/entities/localization";
 import { useOptionalMapStore } from "../features/map/map-state";
 import { Icon } from "./icon";
 
 interface POIPresentation {
-  localization: ReturnType<typeof pickLocalization>;
-  categoryDescriptor?: ReturnType<typeof getTagDescriptor>;
+  localization: LocalizedStringSet;
+  categoryDescriptor: ResolvedTagDescriptor | undefined;
   categoryLabel: string;
-  tagDescriptors: NonNullable<ReturnType<typeof getTagDescriptor>>[];
-  formattedRating?: string | undefined;
+  tagDescriptors: ResolvedTagDescriptor[];
+  formattedRating: string | undefined;
   openHoursCopy: string | null;
 }
 
@@ -24,13 +25,13 @@ interface PointOfInterestItemProps {
   presentation: POIPresentation;
   highlightPois?: ((poiIds: readonly string[]) => void) | undefined;
   highlightBadgeLabel: string;
-  t: ReturnType<typeof useTranslation>["t"];
+  t: TFunction;
 }
 
 const preparePOIPresentation = (
   poi: WalkPointOfInterest,
   language: string,
-  t: ReturnType<typeof useTranslation>["t"],
+  t: TFunction,
   ratingFormatter: Intl.NumberFormat,
 ): POIPresentation => {
   const localization = pickLocalization(poi.localizations, language);
