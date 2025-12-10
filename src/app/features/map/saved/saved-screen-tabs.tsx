@@ -7,7 +7,7 @@ import type { TFunction } from "i18next";
 import type { JSX, ReactNode } from "react";
 
 import { Icon } from "../../../components/icon";
-import { STICKY_HANDLE_CLASS } from "../../../components/map/map-panel-constants";
+import { DRAGGABLE_HANDLE_CLASS } from "../../../components/map/map-panel-constants";
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
 import { WildsideMap } from "../../../components/wildside-map";
@@ -162,7 +162,7 @@ export function StopsTabContent({ savedRoute, onClose, t }: StopsTabContentProps
           <div className="map-panel__handle">
             <button
               type="button"
-              className={STICKY_HANDLE_CLASS}
+              className={DRAGGABLE_HANDLE_CLASS}
               aria-label={t("action-dismiss-panel", { defaultValue: "Dismiss panel" })}
               onClick={onClose}
             />

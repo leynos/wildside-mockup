@@ -9,6 +9,7 @@ import type { WalkPointOfInterest } from "../data/map";
 import { getTagDescriptor, type ResolvedTagDescriptor } from "../data/registries/tags";
 import { type LocalizedStringSet, pickLocalization } from "../domain/entities/localization";
 import { useOptionalMapStore } from "../features/map/map-state";
+import { Button } from "./button";
 import { Icon } from "./icon";
 
 interface POIPresentation {
@@ -81,7 +82,7 @@ const PointOfInterestItem = ({
   const handleHighlight = (ids: string[]) => highlightPois?.(ids);
 
   return (
-    <Dialog.Root key={poi.id}>
+    <Dialog.Root>
       <Dialog.Trigger asChild>
         <button
           type="button"
@@ -137,9 +138,9 @@ const PointOfInterestItem = ({
                 </Dialog.Description>
               </div>
               <Dialog.Close asChild>
-                <button type="button" className="btn btn-ghost btn-sm">
+                <Button variant="ghost" size="sm">
                   {t("action-close", { defaultValue: "Close" })}
-                </button>
+                </Button>
               </Dialog.Close>
             </div>
             <div className="mt-4 space-y-2 text-sm text-base-content/70">

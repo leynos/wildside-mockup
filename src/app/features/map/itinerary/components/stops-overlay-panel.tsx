@@ -1,8 +1,9 @@
 /** @file Overlay panel displaying stops along a route. */
 
 import type { JSX } from "react";
+import { useTranslation } from "react-i18next";
 
-import { STICKY_HANDLE_CLASS } from "../../../../components/map/map-panel-constants";
+import { DRAGGABLE_HANDLE_CLASS } from "../../../../components/map/map-panel-constants";
 import { PointOfInterestList } from "../../../../components/point-of-interest-list";
 import type { WalkPointOfInterest } from "../../../../data/map";
 
@@ -12,6 +13,9 @@ export type StopsOverlayPanelProps = {
 };
 
 export function StopsOverlayPanel({ points, onDismiss }: StopsOverlayPanelProps): JSX.Element {
+  const { t } = useTranslation();
+  const dismissLabel = t("action-dismiss-panel", { defaultValue: "Dismiss panel" });
+
   return (
     <div className="pointer-events-none px-6 pb-6">
       {/* Limit overlay to 60% viewport height to preserve map visibility */}
@@ -19,8 +23,8 @@ export function StopsOverlayPanel({ points, onDismiss }: StopsOverlayPanelProps)
         <div className="map-panel__handle bg-transparent">
           <button
             type="button"
-            className={STICKY_HANDLE_CLASS}
-            aria-label="Dismiss panel"
+            className={DRAGGABLE_HANDLE_CLASS}
+            aria-label={dismissLabel}
             onClick={onDismiss}
           />
         </div>
