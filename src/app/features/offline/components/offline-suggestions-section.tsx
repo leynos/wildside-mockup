@@ -10,6 +10,7 @@ type OfflineSuggestionsSectionProps = {
   readonly heading: string;
   readonly dismissLabel: string;
   readonly i18nLanguage: string;
+  readonly onAction: (id: string) => void;
   readonly onDismiss: (id: string) => void;
 };
 
@@ -18,6 +19,7 @@ export function OfflineSuggestionsSection({
   heading,
   dismissLabel,
   i18nLanguage,
+  onAction,
   onDismiss,
 }: OfflineSuggestionsSectionProps): JSX.Element | null {
   if (suggestions.length === 0) {
@@ -33,6 +35,7 @@ export function OfflineSuggestionsSection({
           suggestion={suggestion}
           dismissLabel={dismissLabel}
           i18nLanguage={i18nLanguage}
+          onAction={() => onAction(suggestion.id)}
           onDismiss={() => onDismiss(suggestion.id)}
         />
       ))}

@@ -1,4 +1,15 @@
-/** @file Card component for recommended offline map downloads. */
+/**
+ * @file Card component for recommended offline map downloads.
+ *
+ * @example
+ * <OfflineSuggestionCard
+ *   suggestion={offlineSuggestions[0]}
+ *   dismissLabel="Dismiss"
+ *   i18nLanguage="en-GB"
+ *   onAction={() => console.log("download started")}
+ *   onDismiss={() => console.log("dismissed")}
+ * />
+ */
 
 import type { JSX } from "react";
 
@@ -11,6 +22,7 @@ type OfflineSuggestionCardProps = {
   readonly suggestion: OfflineSuggestion;
   readonly dismissLabel: string;
   readonly i18nLanguage: string;
+  readonly onAction: () => void;
   readonly onDismiss: () => void;
 };
 
@@ -18,6 +30,7 @@ export function OfflineSuggestionCard({
   suggestion,
   dismissLabel,
   i18nLanguage,
+  onAction,
   onDismiss,
 }: OfflineSuggestionCardProps): JSX.Element {
   const suggestionCopy = pickLocalization(suggestion.localizations, i18nLanguage);
@@ -26,6 +39,7 @@ export function OfflineSuggestionCard({
   return (
     <article
       className={`rounded-2xl border border-base-300/60 bg-gradient-to-r p-4 shadow-lg ${suggestion.accentClass}`}
+      aria-label={suggestionCopy.name}
     >
       <div className="flex items-start gap-3 text-base-100">
         <Icon
@@ -37,7 +51,9 @@ export function OfflineSuggestionCard({
           <h3 className="text-base font-semibold text-base-100">{suggestionCopy.name}</h3>
           <p className="mt-1 text-sm text-base-100/80">{suggestionCopy.description}</p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Button size="sm">{ctaCopy.name}</Button>
+            <Button size="sm" onClick={onAction}>
+              {ctaCopy.name}
+            </Button>
             <Button
               size="sm"
               variant="ghost"

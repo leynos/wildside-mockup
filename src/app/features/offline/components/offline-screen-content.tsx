@@ -121,6 +121,7 @@ export function OfflineScreenContent({
               heading={suggestionsCopy.heading}
               dismissLabel={suggestionsCopy.dismissLabel}
               i18nLanguage={i18nLanguage}
+              onAction={() => setDialogOpen(true)}
               onDismiss={(id) => setSuggestions((prev) => prev.filter((item) => item.id !== id))}
             />
           ) : null}
