@@ -38,11 +38,9 @@ const preparePOIPresentation = (
   const localization = pickLocalization(poi.localizations, language);
   const categoryDescriptor = getTagDescriptor(poi.categoryId, language);
   const categoryLabel = categoryDescriptor?.localization.name ?? localization.name;
-  const tagDescriptors =
-    poi.tagIds
-      .map((tagId) => getTagDescriptor(tagId, language))
-      .filter((descriptor): descriptor is NonNullable<typeof descriptor> => Boolean(descriptor)) ??
-    [];
+  const tagDescriptors = poi.tagIds
+    .map((tagId) => getTagDescriptor(tagId, language))
+    .filter((descriptor): descriptor is NonNullable<typeof descriptor> => Boolean(descriptor));
   const formattedRating =
     typeof poi.rating === "number" ? ratingFormatter.format(poi.rating) : undefined;
   const openHoursCopy = poi.openHours
@@ -79,7 +77,7 @@ const PointOfInterestItem = ({
     openHoursCopy,
   } = presentation;
 
-  const handleHighlight = (ids: string[]) => highlightPois?.(ids);
+  const handleHighlight = (ids: readonly string[]) => highlightPois?.(ids);
 
   return (
     <Dialog.Root>
