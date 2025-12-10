@@ -20,13 +20,15 @@ import { useOfflineNavigationCopy } from "./hooks/use-offline-navigation-copy";
 import { useOfflineStorageCopy } from "./hooks/use-offline-storage-copy";
 import { useOfflineSuggestionsCopy } from "./hooks/use-offline-suggestions-copy";
 
-// biome-ignore format: compact status map to keep file concise.
-const statusBadgeByStatus = { complete: { className: "badge badge-success badge-sm", labelKey: "statusCompleteLabel" }, updating: { className: "badge badge-warning badge-sm", labelKey: "statusUpdatingLabel" }, downloading: { className: "badge badge-info badge-sm", labelKey: "statusDownloadingLabel" } } as const;
+const statusBadgeByStatus = {
+  complete: { className: "badge badge-success badge-sm", labelKey: "statusCompleteLabel" },
+  updating: { className: "badge badge-warning badge-sm", labelKey: "statusUpdatingLabel" },
+  downloading: { className: "badge badge-info badge-sm", labelKey: "statusDownloadingLabel" },
+} as const;
 
 const isDownloadStatus = (
   status: OfflineMapArea["status"],
-): status is keyof typeof statusBadgeByStatus =>
-  typeof status === "string" && status in statusBadgeByStatus;
+): status is keyof typeof statusBadgeByStatus => status in statusBadgeByStatus;
 
 const renderStatusBadge = (
   status: OfflineMapArea["status"],
@@ -79,11 +81,14 @@ export function OfflineScreen(): JSX.Element {
   const { copy: downloadsCopy, undoDescriptionDefault } = useOfflineDownloadsCopy();
   const suggestionsCopy = useOfflineSuggestionsCopy(suggestions.length);
   const dialogCopy = useOfflineDialogCopy(dialogOpen);
-  const statusLabels: OfflineDownloadCard.DownloadStatusLabels = {
-    statusCompleteLabel: downloadsCopy.statusCompleteLabel,
-    statusUpdatingLabel: downloadsCopy.statusUpdatingLabel,
-    statusDownloadingLabel: downloadsCopy.statusDownloadingLabel,
-  };
+  const statusLabels: OfflineDownloadCard.DownloadStatusLabels = useMemo(
+    () => ({
+      statusCompleteLabel: downloadsCopy.statusCompleteLabel,
+      statusUpdatingLabel: downloadsCopy.statusUpdatingLabel,
+      statusDownloadingLabel: downloadsCopy.statusDownloadingLabel,
+    }),
+    [downloadsCopy],
+  );
 
   const onToggleAuto = useCallback(
     (id: string, next: boolean) => setAutoSettings((current) => ({ ...current, [id]: next })),
