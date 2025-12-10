@@ -28,13 +28,16 @@ const normaliseInstant = (input: Date | number | string): number => {
 /**
  * Format a timestamp relative to `now`, favouring the largest meaningful unit.
  *
+ * Returns an empty string when `input` cannot be parsed as a finite timestamp.
+ *
  * @example
- * formatRelativeTime(Date.now() - 36_000_000, "en-GB"); // "10 hours ago"
+ * import { getNow } from "./time";
+ * formatRelativeTime(getNow() - 36_000_000, "en-GB", getNow()); // "10 hours ago"
  */
 export const formatRelativeTime = (
   input: Date | number | string,
   locale: string,
-  now: number = Date.now(),
+  now: number,
 ): string => {
   const targetMs = normaliseInstant(input);
   if (!Number.isFinite(targetMs)) return "";

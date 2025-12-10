@@ -8,6 +8,7 @@ import { formatStorageLabel } from "../../../config/offline-metrics";
 import type { OfflineMapArea } from "../../../data/stage-four";
 import { pickLocalization } from "../../../domain/entities/localization";
 import { formatRelativeTime } from "../../../lib/relative-time";
+import { getNow } from "../../../lib/time";
 import type {
   DownloadEntry,
   DownloadStatusLabels,
@@ -60,7 +61,7 @@ export function OfflineDownloadsSection({
     (area: OfflineMapArea) => {
       const localization = pickLocalization(area.localizations, i18nLanguage);
       const sizeLabel = formatStorageLabel(area.sizeBytes);
-      const relativeUpdated = formatRelativeTime(area.lastUpdatedAt, i18nLanguage);
+      const relativeUpdated = formatRelativeTime(area.lastUpdatedAt, i18nLanguage, getNow());
       const updatedLabel = t("offline-downloads-updated", {
         updated: relativeUpdated,
         defaultValue: `Updated ${relativeUpdated}`,

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import type { WalkRouteSummary } from "../../../data/map";
 import { pickLocalization } from "../../../domain/entities/localization";
 import { formatRelativeTime } from "../../../lib/relative-time";
+import { getNow } from "../../../lib/time";
 import { type RouteFormatters, useRouteFormatters } from "./hooks/use-route-formatters";
 import { type RouteMetrics, useRouteMetrics } from "./hooks/use-route-metrics";
 
@@ -65,7 +66,7 @@ export const useSavedRouteData = (route: WalkRouteSummary): SavedRouteData => {
   );
 
   const updatedLabel = useMemo(
-    () => formatRelativeTime(route.lastUpdatedAt, i18n.language),
+    () => formatRelativeTime(route.lastUpdatedAt, i18n.language, getNow()),
     [route.lastUpdatedAt, i18n.language],
   );
 
