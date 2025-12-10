@@ -28,7 +28,9 @@ export function RouteSummarySection({
     <div className="map-route__summary">
       <p className="text-sm font-medium text-base-content/60">{suggestedRouteCaption}</p>
       <h1 className="mt-1 text-2xl font-semibold text-base-content">{routeName}</h1>
-      <p className="mt-3 text-sm text-base-content/70">{routeDescription}</p>
+      {routeDescription ? (
+        <p className="mt-3 text-sm text-base-content/70">{routeDescription}</p>
+      ) : null}
       <div className="mt-4 flex flex-wrap gap-2">
         {highlightTagIds.map((tagId) => {
           const tag = getTagDescriptor(tagId, language);
