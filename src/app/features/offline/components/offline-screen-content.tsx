@@ -27,7 +27,7 @@ import { OfflineHeader } from "./offline-header";
 import { OfflineStorageOverview } from "./offline-storage-overview";
 import { OfflineSuggestionsSection } from "./offline-suggestions-section";
 
-type OfflineScreenContentProps = {
+export type OfflineScreenContentProps = {
   readonly navigationCopy: {
     readonly headerTitle: string;
     readonly headerSubtitle: string;

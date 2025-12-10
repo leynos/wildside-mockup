@@ -10,7 +10,7 @@ type OfflineDownloadMetaComponent = (props: {
   readonly children: ReactNode;
 }) => JSX.Element;
 
-type OfflineStorageOverviewProps = {
+export type OfflineStorageOverviewProps = {
   readonly storageHeading: string;
   readonly storageSubtitle: string;
   readonly storageUsedLabel: string;

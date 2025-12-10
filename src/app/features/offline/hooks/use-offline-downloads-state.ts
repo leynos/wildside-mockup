@@ -5,7 +5,15 @@ import { useCallback, useState } from "react";
 import type { OfflineMapArea } from "../../../data/stage-four";
 import type { DownloadEntry } from "../components/offline-download-card";
 
-export const useOfflineDownloadsState = (initialAreas: OfflineMapArea[]) => {
+export type OfflineDownloadsState = {
+  readonly downloads: DownloadEntry[];
+  readonly isManaging: boolean;
+  readonly handleDeleteDownload: (downloadId: string) => void;
+  readonly handleUndoDownload: (downloadId: string) => void;
+  readonly toggleManaging: () => void;
+};
+
+export const useOfflineDownloadsState = (initialAreas: OfflineMapArea[]): OfflineDownloadsState => {
   const [downloads, setDownloads] = useState<DownloadEntry[]>(() =>
     initialAreas.map((area) => ({ kind: "download", area })),
   );
@@ -50,5 +58,5 @@ export const useOfflineDownloadsState = (initialAreas: OfflineMapArea[]) => {
     handleDeleteDownload,
     handleUndoDownload,
     toggleManaging,
-  } as const;
+  };
 };

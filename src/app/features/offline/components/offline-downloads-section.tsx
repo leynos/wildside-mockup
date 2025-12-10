@@ -16,7 +16,7 @@ import type {
 } from "./offline-download-card";
 import { OfflineDownloadCard } from "./offline-download-card";
 
-type OfflineDownloadsSectionProps = {
+export type OfflineDownloadsSectionProps = {
   readonly downloads: DownloadEntry[];
   readonly isManaging: boolean;
   readonly statusLabels: DownloadStatusLabels;

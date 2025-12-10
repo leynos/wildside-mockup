@@ -22,13 +22,13 @@ export type OfflineDownloadMetaProps = {
   readonly children: ReactNode;
 };
 
-type FormatAreaCopy = (area: OfflineMapArea) => {
+export type FormatAreaCopy = (area: OfflineMapArea) => {
   readonly localization: { name: string; description?: string };
   readonly sizeLabel: string;
   readonly updatedLabel: string;
 };
 
-type OfflineDownloadMetaComponent = (props: OfflineDownloadMetaProps) => JSX.Element;
+export type OfflineDownloadMetaComponent = (props: OfflineDownloadMetaProps) => JSX.Element;
 
 type OfflineDownloadCardProps = {
   readonly entry: DownloadEntry;
