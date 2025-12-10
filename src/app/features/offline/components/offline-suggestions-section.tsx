@@ -6,7 +6,7 @@ import type { OfflineSuggestion } from "../../../data/stage-four";
 import { OfflineSuggestionCard } from "./offline-suggestion-card";
 
 export type OfflineSuggestionsSectionProps = {
-  readonly suggestions: OfflineSuggestion[];
+  readonly suggestions: readonly OfflineSuggestion[];
   readonly heading: string;
   readonly dismissLabel: string;
   readonly i18nLanguage: string;
