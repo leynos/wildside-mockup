@@ -31,9 +31,8 @@ export function RouteActionButtons({ routeId }: RouteActionButtonsProps): JSX.El
   return (
     <div className="flex justify-end gap-3">
       <Button
-        className={`flex h-10 w-10 items-center justify-center rounded-full border border-base-300/60 transition ${
-          isFavourite ? "bg-accent text-base-900" : "bg-base-200/70 text-base-content"
-        }`}
+        variant="circle"
+        active={isFavourite}
         aria-label={isFavourite ? removeSavedLabel : saveLabel}
         aria-pressed={isFavourite}
         onClick={() => setIsFavourite((prev) => !prev)}
