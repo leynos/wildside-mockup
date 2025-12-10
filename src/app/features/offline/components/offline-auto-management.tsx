@@ -52,7 +52,10 @@ export function OfflineAutoManagement({
                   days: retentionLabel,
                   defaultValue: `Remove maps after ${retentionLabel}`,
                 })
-              : "");
+              : t("offline-auto-option-generic-description", {
+                  name: optionLocalization.name,
+                  defaultValue: `Enable ${optionLocalization.name}`,
+                }));
           return (
             <PreferenceToggleCard
               key={option.id}
