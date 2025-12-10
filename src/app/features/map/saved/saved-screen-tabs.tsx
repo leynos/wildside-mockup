@@ -37,6 +37,12 @@ export function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Elemen
   return <Tabs.Content {...props} className={composedClassName} />;
 }
 
+/**
+ * Displays a single metric value with a label beneath it.
+ *
+ * @param label - The descriptive label for the metric.
+ * @param value - The formatted metric value to display.
+ */
 export function Metric({ label, value }: { label: string; value: string }): JSX.Element {
   return (
     <div className="text-center">
