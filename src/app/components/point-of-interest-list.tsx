@@ -93,7 +93,9 @@ const PointOfInterestItem = ({
           <div className="poi-list__summary">
             <div>
               <h3 className="text-base font-semibold text-base-content">{localization.name}</h3>
-              <p className="mt-1 text-sm text-base-content/70">{localization.description}</p>
+              {localization.description ? (
+                <p className="mt-1 text-sm text-base-content/70">{localization.description}</p>
+              ) : null}
             </div>
             {formattedRating ? (
               <span className="rating-indicator rating-indicator--strong">
@@ -131,9 +133,11 @@ const PointOfInterestItem = ({
                 <Dialog.Title className="text-lg font-semibold text-base-content">
                   {localization.name}
                 </Dialog.Title>
-                <Dialog.Description className="mt-1 text-sm text-base-content/70">
-                  {localization.description}
-                </Dialog.Description>
+                {localization.description ? (
+                  <Dialog.Description className="mt-1 text-sm text-base-content/70">
+                    {localization.description}
+                  </Dialog.Description>
+                ) : null}
               </div>
               <Dialog.Close asChild>
                 <Button variant="ghost" size="sm">
