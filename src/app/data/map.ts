@@ -30,20 +30,20 @@ export interface RouteNote {
 }
 
 export interface WalkRouteSummary {
-  id: string;
-  localizations: EntityLocalizations;
-  coverImage: ImageAsset;
-  mapImage: ImageAsset;
-  distanceMetres: number;
-  durationSeconds: number;
-  stopsCount: number;
-  difficultyId: DifficultyId;
-  rating: number;
-  saves: number;
-  lastUpdatedAt: string;
-  highlightTagIds: TagId[];
-  pointsOfInterest: WalkPointOfInterest[];
-  notes: RouteNote[];
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly coverImage: ImageAsset;
+  readonly mapImage: ImageAsset;
+  readonly distanceMetres: number;
+  readonly durationSeconds: number;
+  readonly stopsCount: number;
+  readonly difficultyId: DifficultyId;
+  readonly rating: number;
+  readonly saves: number;
+  readonly lastUpdatedAt: string;
+  readonly highlightTagIds: readonly TagId[];
+  readonly pointsOfInterest: readonly WalkPointOfInterest[];
+  readonly notes: readonly RouteNote[];
 }
 
 export const quickWalkConfig: QuickWalkConfig = {
