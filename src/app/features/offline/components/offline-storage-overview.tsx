@@ -1,14 +1,9 @@
 /** @file Storage overview panel for offline downloads. */
 
-import type { JSX, ReactNode } from "react";
+import type { JSX } from "react";
 
 import { Icon } from "../../../components/icon";
-
-export type OfflineDownloadMetaComponent = (props: {
-  readonly as?: "p" | "span" | "div";
-  readonly className?: string;
-  readonly children: ReactNode;
-}) => JSX.Element;
+import type { OfflineDownloadMetaComponent } from "./offline-meta";
 
 export type OfflineStorageOverviewProps = {
   readonly storageHeading: string;

@@ -1,10 +1,11 @@
 /** @file Download and undo cards for offline map areas. */
 
 import type { TFunction } from "i18next";
-import type { JSX, ReactNode } from "react";
+import type { JSX } from "react";
 
 import { Icon } from "../../../components/icon";
 import type { OfflineMapArea } from "../../../data/stage-four";
+import type { OfflineDownloadMetaComponent, OfflineDownloadMetaProps } from "./offline-meta";
 
 export type DownloadEntry =
   | { kind: "download"; area: OfflineMapArea }
@@ -16,19 +17,13 @@ export type DownloadStatusLabels = {
   statusDownloadingLabel: string;
 };
 
-export type OfflineDownloadMetaProps = {
-  readonly as?: "p" | "span" | "div";
-  readonly className?: string;
-  readonly children: ReactNode;
-};
+export type { OfflineDownloadMetaProps };
 
 export type FormatAreaCopy = (area: OfflineMapArea) => {
   readonly localization: { name: string; description?: string };
   readonly sizeLabel: string;
   readonly updatedLabel: string;
 };
-
-export type OfflineDownloadMetaComponent = (props: OfflineDownloadMetaProps) => JSX.Element;
 
 export type OfflineDownloadCardProps = {
   readonly entry: DownloadEntry;
