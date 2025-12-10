@@ -16,11 +16,20 @@ import { getTagDescriptor } from "../../../data/registries/tags";
 import { pickLocalization } from "../../../domain/entities/localization";
 import type { SavedRouteData } from "./use-saved-route-data";
 
+/**
+ * Props for the RouteSummaryMeta component.
+ */
 export type RouteSummaryMetaProps = {
   readonly iconToken: string;
   readonly children: ReactNode;
 };
 
+/**
+ * Renders a route summary metadata item with an icon and content.
+ *
+ * @param iconToken - Design token for the metadata icon.
+ * @param children - Content to display alongside the icon.
+ */
 export function RouteSummaryMeta({ iconToken, children }: RouteSummaryMetaProps): JSX.Element {
   return (
     <span className="route-summary__meta">
@@ -30,8 +39,14 @@ export function RouteSummaryMeta({ iconToken, children }: RouteSummaryMetaProps)
   );
 }
 
+/**
+ * Props for the MapOverlay component (extends Radix Tabs.Content).
+ */
 type MapOverlayProps = TabsContentProps;
 
+/**
+ * Wrapper for Radix Tabs.Content with map-overlay styling.
+ */
 export function MapOverlay({ className, ...props }: MapOverlayProps): JSX.Element {
   const composedClassName = className ? `map-overlay ${className}` : "map-overlay";
   return <Tabs.Content {...props} className={composedClassName} />;
@@ -52,6 +67,9 @@ export function Metric({ label, value }: { label: string; value: string }): JSX.
   );
 }
 
+/**
+ * Props for the MapTabContent component.
+ */
 type MapTabContentProps = {
   readonly savedRoute: WalkRouteSummary;
   readonly routeCopy: SavedRouteData["routeCopy"];
@@ -64,6 +82,11 @@ type MapTabContentProps = {
   readonly onShareOpenChange: (next: boolean) => void;
 };
 
+/**
+ * Renders the map tab content showing route summary, map viewport, and share dialog.
+ *
+ * Displays route name, distance, duration, and stops metadata, with Back and Share actions.
+ */
 export function MapTabContent({
   savedRoute,
   routeCopy,
@@ -158,12 +181,20 @@ export function MapTabContent({
   );
 }
 
+/**
+ * Props for the StopsTabContent component.
+ */
 type StopsTabContentProps = {
   readonly savedRoute: WalkRouteSummary;
   readonly onClose: () => void;
   readonly t: TFunction;
 };
 
+/**
+ * Renders the stops tab content displaying points of interest for the route.
+ *
+ * Shows a dismissible panel with a list of route POIs.
+ */
 export function StopsTabContent({ savedRoute, onClose, t }: StopsTabContentProps): JSX.Element {
   return (
     <MapOverlay value="stops" forceMount>
@@ -188,6 +219,9 @@ export function StopsTabContent({ savedRoute, onClose, t }: StopsTabContentProps
   );
 }
 
+/**
+ * Props for the NotesTabContent component.
+ */
 type NotesTabContentProps = {
   readonly savedRoute: WalkRouteSummary;
   readonly routeCopy: SavedRouteData["routeCopy"];
@@ -199,6 +233,11 @@ type NotesTabContentProps = {
   readonly t: TFunction;
 };
 
+/**
+ * Renders the notes tab content displaying route metrics, highlights, description, and notes.
+ *
+ * Shows rating, saves, difficulty, updated date, highlight tags, route description, and per-language notes.
+ */
 export function NotesTabContent({
   savedRoute,
   routeCopy,
