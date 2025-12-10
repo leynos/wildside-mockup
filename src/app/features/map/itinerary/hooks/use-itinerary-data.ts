@@ -62,13 +62,14 @@ export const useItineraryData = (route: WalkRouteSummary): ItineraryData => {
     [route.localizations, i18n.language],
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: i18n.language forces re-computation when language changes
   const labels = useMemo<ItineraryLabels>(
     () => ({
       distance: t("map-itinerary-distance-label", { defaultValue: "Distance" }),
       duration: t("map-itinerary-duration-label", { defaultValue: "Walking" }),
       stops: t("map-itinerary-stops-label", { defaultValue: "Stops" }),
     }),
-    [t],
+    [t, i18n.language],
   );
 
   return useMemo(
