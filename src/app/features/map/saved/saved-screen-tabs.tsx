@@ -79,7 +79,7 @@ export function MapTabContent({
           <div className="flex items-center justify-between text-base-100">
             <button
               type="button"
-              aria-label="Back"
+              aria-label={t("action-back", { defaultValue: "Back" })}
               className="circle-action-button"
               onClick={onBack}
             >
@@ -87,7 +87,11 @@ export function MapTabContent({
             </button>
             <Dialog.Root open={shareOpen} onOpenChange={onShareOpenChange}>
               <Dialog.Trigger asChild>
-                <button type="button" aria-label="Share" className="circle-action-button">
+                <button
+                  type="button"
+                  aria-label={t("action-share", { defaultValue: "Share" })}
+                  className="circle-action-button"
+                >
                   <Icon token="{icon.action.share}" aria-hidden className="h-5 w-5" />
                 </button>
               </Dialog.Trigger>

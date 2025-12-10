@@ -4,7 +4,7 @@ import type { JSX, ReactNode } from "react";
 
 import { Icon } from "../../../components/icon";
 
-type OfflineDownloadMetaComponent = (props: {
+export type OfflineDownloadMetaComponent = (props: {
   readonly as?: "p" | "span" | "div";
   readonly className?: string;
   readonly children: ReactNode;

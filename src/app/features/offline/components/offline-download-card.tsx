@@ -30,7 +30,7 @@ export type FormatAreaCopy = (area: OfflineMapArea) => {
 
 export type OfflineDownloadMetaComponent = (props: OfflineDownloadMetaProps) => JSX.Element;
 
-type OfflineDownloadCardProps = {
+export type OfflineDownloadCardProps = {
   readonly entry: DownloadEntry;
   readonly isManaging: boolean;
   readonly statusLabels: DownloadStatusLabels;

@@ -1,6 +1,6 @@
 /** @file Route summary with title, description, and highlight tags. */
 
-import type { JSX } from "react";
+import { type JSX, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { TagId } from "../../../../data/registries/tags";
@@ -24,6 +24,15 @@ export function RouteSummarySection({
     defaultValue: "Suggested route",
   });
 
+  const tagLabels = useMemo(
+    () =>
+      highlightTagIds.map((tagId) => {
+        const tag = getTagDescriptor(tagId, language);
+        return { tagId, label: tag?.localization.name ?? tagId };
+      }),
+    [highlightTagIds, language],
+  );
+
   return (
     <div className="map-route__summary">
       <p className="text-sm font-medium text-base-content/60">{suggestedRouteCaption}</p>
@@ -32,15 +41,11 @@ export function RouteSummarySection({
         <p className="mt-3 text-sm text-base-content/70">{routeDescription}</p>
       ) : null}
       <div className="mt-4 flex flex-wrap gap-2">
-        {highlightTagIds.map((tagId) => {
-          const tag = getTagDescriptor(tagId, language);
-          const label = tag?.localization.name ?? tagId;
-          return (
-            <span key={tagId} className="route-highlight">
-              {label}
-            </span>
-          );
-        })}
+        {tagLabels.map(({ tagId, label }) => (
+          <span key={tagId} className="route-highlight">
+            {label}
+          </span>
+        ))}
       </div>
     </div>
   );

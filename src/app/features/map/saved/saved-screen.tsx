@@ -2,7 +2,7 @@
 
 import * as Tabs from "@radix-ui/react-tabs";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, useState } from "react";
+import { type JSX, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
@@ -43,6 +43,9 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
   const [shareOpen, setShareOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("map");
 
+  const handleBack = useCallback(() => navigate({ to: "/map/quick" }), [navigate]);
+  const handleDismissStops = useCallback(() => setActiveTab("map"), []);
+
   const {
     routeCopy,
     distance,
@@ -66,12 +69,12 @@ function SavedScreenWithRoute({ savedRoute }: SavedScreenWithRouteProps): JSX.El
               duration={duration}
               stops={stops}
               t={t}
-              onBack={() => navigate({ to: "/map/quick" })}
+              onBack={handleBack}
               shareOpen={shareOpen}
               onShareOpenChange={setShareOpen}
             />
 
-            <StopsTabContent savedRoute={savedRoute} onClose={() => setActiveTab("map")} t={t} />
+            <StopsTabContent savedRoute={savedRoute} onClose={handleDismissStops} t={t} />
 
             <NotesTabContent
               savedRoute={savedRoute}
