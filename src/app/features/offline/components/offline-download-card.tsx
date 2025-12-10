@@ -66,8 +66,10 @@ export function OfflineDownloadCard({
 }: OfflineDownloadCardProps): JSX.Element {
   const area = entry.area;
   const { localization, sizeLabel, updatedLabel } = formatAreaCopy(area);
-  // Clamp progress to valid percentage bounds (0-100%)
-  const clampedProgress = Math.max(0, Math.min(1, area.progress));
+  // Clamp progress to valid percentage bounds (0-100%), defaulting to 0 for non-finite values
+  const clampedProgress = Number.isFinite(area.progress)
+    ? Math.max(0, Math.min(1, area.progress))
+    : 0;
   const progressPercent = percentFormatter.format(clampedProgress);
 
   if (entry.kind === "undo") {

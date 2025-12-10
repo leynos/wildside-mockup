@@ -171,7 +171,7 @@ const PointOfInterestItem = ({
 };
 
 export interface PointOfInterestListProps {
-  points: WalkPointOfInterest[];
+  readonly points: readonly WalkPointOfInterest[];
 }
 
 export function PointOfInterestList({ points }: PointOfInterestListProps): JSX.Element {

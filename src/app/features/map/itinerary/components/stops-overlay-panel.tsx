@@ -8,7 +8,7 @@ import { PointOfInterestList } from "../../../../components/point-of-interest-li
 import type { WalkPointOfInterest } from "../../../../data/map";
 
 export type StopsOverlayPanelProps = {
-  readonly points: WalkPointOfInterest[];
+  readonly points: readonly WalkPointOfInterest[];
   readonly onDismiss: () => void;
 };
 

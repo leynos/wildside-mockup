@@ -115,12 +115,24 @@ export const walkCompletionMapImage = walkRouteMap1;
 
 const withBasePath = (path: string, alt: string): ImageAsset => {
   const base = import.meta.env.BASE_URL ?? "/";
+  // Ensure base ends with / before concatenation
+  const normalisedBase = base.endsWith("/") ? base : `${base}/`;
   const cleanedPath = path.replace(/^\/+/, "");
   // Collapse duplicate slashes but preserve protocol separators (://)
-  const url = `${base}${cleanedPath}`.replace(/([^:]\/)\/+/g, "$1");
+  const url = `${normalisedBase}${cleanedPath}`.replace(/([^:]\/)\/+/g, "$1");
   return { url, alt };
 };
 
+/**
+ * A suggested offline map area for the user to download.
+ *
+ * @property id - Unique identifier for the suggestion.
+ * @property localizations - Localised name and description for display.
+ * @property ctaLocalizations - Localised call-to-action button label.
+ * @property iconToken - Design token for the suggestion icon.
+ * @property accentClass - Tailwind gradient classes for the card background.
+ * @property iconClassName - Optional additional classes for icon styling.
+ */
 export interface OfflineSuggestion {
   readonly id: string;
   readonly localizations: EntityLocalizations;
@@ -130,6 +142,17 @@ export interface OfflineSuggestion {
   readonly iconClassName?: string;
 }
 
+/**
+ * A downloaded offline map area with progress and status metadata.
+ *
+ * @property id - Unique identifier for the map area.
+ * @property localizations - Localised name and description for display.
+ * @property image - Thumbnail image asset for the area.
+ * @property sizeBytes - Total download size in bytes.
+ * @property progress - Download progress as a decimal (0 to 1).
+ * @property status - Current download state: complete, updating, or downloading.
+ * @property lastUpdatedAt - ISO 8601 timestamp of last update.
+ */
 export interface OfflineMapArea {
   readonly id: string;
   readonly localizations: EntityLocalizations;
@@ -140,6 +163,16 @@ export interface OfflineMapArea {
   readonly lastUpdatedAt: string;
 }
 
+/**
+ * Configuration option for automatic offline map management.
+ *
+ * @property id - Unique identifier for the option.
+ * @property localizations - Localised name and description for display.
+ * @property iconToken - Design token for the option icon.
+ * @property iconClassName - Tailwind classes for icon styling.
+ * @property defaultEnabled - Whether the option is enabled by default.
+ * @property retentionDays - Number of days to retain maps (for auto-delete option).
+ */
 export interface AutoManagementOption {
   readonly id: string;
   readonly localizations: EntityLocalizations;

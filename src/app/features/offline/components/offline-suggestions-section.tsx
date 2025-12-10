@@ -5,7 +5,7 @@ import type { JSX } from "react";
 import type { OfflineSuggestion } from "../../../data/stage-four";
 import { OfflineSuggestionCard } from "./offline-suggestion-card";
 
-type OfflineSuggestionsSectionProps = {
+export type OfflineSuggestionsSectionProps = {
   readonly suggestions: OfflineSuggestion[];
   readonly heading: string;
   readonly dismissLabel: string;
