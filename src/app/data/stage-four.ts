@@ -141,12 +141,12 @@ export interface OfflineMapArea {
 }
 
 export interface AutoManagementOption {
-  id: string;
-  localizations: EntityLocalizations;
-  iconToken: string;
-  iconClassName: string;
-  defaultEnabled: boolean;
-  retentionDays?: number;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly iconToken: string;
+  readonly iconClassName: string;
+  readonly defaultEnabled: boolean;
+  readonly retentionDays?: number;
 }
 
 export const offlineSuggestions: OfflineSuggestion[] = [
