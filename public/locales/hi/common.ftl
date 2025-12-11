@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = आपकी प्राथमिकत
 wizard-step-three-stops-panel-aria = प्रमुख स्टॉप
 wizard-step-three-stops-heading = प्रमुख स्टॉप
 wizard-step-three-weather-summary = { $temperature }, { $wind }, { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = सुरक्षा और पहुँचयोग्यता
 safety-header-description = आराम और सुरक्षा के लिए अपने वॉक मार्गों को वैयक्तिक बनाएं
 safety-save-button = प्राथमिकताएँ सहेजें

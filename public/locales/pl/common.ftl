@@ -118,6 +118,7 @@ wizard-step-three-preferences-heading = Twoje preferencje zastosowane
 wizard-step-three-stops-panel-aria = Polecane przystanki
 wizard-step-three-stops-heading = Polecane przystanki
 wizard-step-three-weather-summary = {$temperature}, {$wind} i {$sky}
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = Bezpieczeństwo i dostępność
 safety-header-description = Dostosuj trasy spacerowe dla większego komfortu i bezpieczeństwa
 safety-save-button = Zapisz preferencje

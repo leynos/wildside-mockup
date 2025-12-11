@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = 設定が適用されました
 wizard-step-three-stops-panel-aria = 注目の立ち寄り場所
 wizard-step-three-stops-heading = 注目の立ち寄り場所
 wizard-step-three-weather-summary = { $temperature }、{ $wind }と{ $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = 安全性とアクセシビリティ
 safety-header-description = 快適さと安心を高めるようウォーキングルートを調整しましょう
 safety-save-button = 設定を保存

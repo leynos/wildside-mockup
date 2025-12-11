@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = 已套用你的偏好
 wizard-step-three-stops-panel-aria = 精選停靠點
 wizard-step-three-stops-heading = 精選停靠點
 wizard-step-three-weather-summary = { $temperature }、{ $wind }、{ $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = 安全與無障礙
 safety-header-description = 依照舒適與安全需求自訂步行路線
 safety-save-button = 儲存偏好

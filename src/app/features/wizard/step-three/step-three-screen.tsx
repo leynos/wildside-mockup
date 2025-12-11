@@ -222,7 +222,11 @@ export function WizardStepThree(): JSX.Element {
                   })()
                 : undefined;
             const note = distanceLabel
-              ? `${noteLocalized.name} • ${distanceLabel.value} ${distanceLabel.unitLabel}`
+              ? t("wizard-step-three-stop-note-with-distance", {
+                  note: noteLocalized.name,
+                  distance: `${distanceLabel.value} ${distanceLabel.unitLabel}`,
+                  defaultValue: `${noteLocalized.name} • ${distanceLabel.value} ${distanceLabel.unitLabel}`,
+                })
               : noteLocalized.name;
             return (
               <div key={stop.id} className="wizard-summary__stop">

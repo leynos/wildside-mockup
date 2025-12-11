@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = As suas preferências aplicadas
 wizard-step-three-stops-panel-aria = Paragens em destaque
 wizard-step-three-stops-heading = Paragens em destaque
 wizard-step-three-weather-summary = { $temperature }, { $wind } e { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = Segurança e acessibilidade
 safety-header-description = Ajuste as suas rotas para mais conforto e segurança
 safety-save-button = Guardar preferências

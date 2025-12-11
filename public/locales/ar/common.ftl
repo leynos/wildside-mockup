@@ -122,6 +122,7 @@ wizard-step-three-preferences-heading = تفضيلاتك المطبقة
 wizard-step-three-stops-panel-aria = محطات مميزة
 wizard-step-three-stops-heading = محطات مميزة
 wizard-step-three-weather-summary = { $temperature }، { $wind } و { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = السلامة وإمكانية الوصول
 safety-header-description = خصّص مساراتك لراحة وأمان أكبر
 safety-save-button = حفظ التفضيلات

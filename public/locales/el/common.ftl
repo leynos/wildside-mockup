@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = Οι προτιμήσεις σου εφ�
 wizard-step-three-stops-panel-aria = Επιλεγμένες στάσεις
 wizard-step-three-stops-heading = Επιλεγμένες στάσεις
 wizard-step-three-weather-summary = { $temperature }, { $wind } και { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = Ασφάλεια & προσβασιμότητα
 safety-header-description = Προσαρμόστε τις διαδρομές σας για άνεση και ασφάλεια
 safety-save-button = Αποθήκευση προτιμήσεων

@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = உங்கள் விருப்ப
 wizard-step-three-stops-panel-aria = சிறப்புப் நிறுத்தங்கள்
 wizard-step-three-stops-heading = சிறப்புப் நிறுத்தங்கள்
 wizard-step-three-weather-summary = { $temperature }, { $wind }, { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = பாதுகாப்பு & அணுகல்
 safety-header-description = பாதுகாப்பும் வசதியும் கலந்த நடைபாதைகளைக் தனிப்பயன் செய்யுங்கள்
 safety-save-button = விருப்பங்களை சேமி

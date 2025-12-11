@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = ใช้งานตามความ�
 wizard-step-three-stops-panel-aria = จุดแวะเด่น
 wizard-step-three-stops-heading = จุดแวะเด่น
 wizard-step-three-weather-summary = { $temperature }, { $wind }, { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = ความปลอดภัยและการเข้าถึง
 safety-header-description = ปรับแต่งเส้นทางเดินให้สบายและอุ่นใจ
 safety-save-button = บันทึกการตั้งค่า

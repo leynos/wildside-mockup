@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = Đã áp dụng các tùy chọn của b
 wizard-step-three-stops-panel-aria = Điểm dừng nổi bật
 wizard-step-three-stops-heading = Điểm dừng nổi bật
 wizard-step-three-weather-summary = { $temperature }, { $wind }, { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = An toàn & khả năng tiếp cận
 safety-header-description = Tùy chỉnh lộ trình đi bộ để thêm thoải mái và an toàn
 safety-save-button = Lưu tùy chọn

@@ -120,6 +120,7 @@ wizard-step-three-preferences-heading = Chaidh na roghainnean agad a chur an sà
 wizard-step-three-stops-panel-aria = Stadan sònraichte
 wizard-step-three-stops-heading = Stadan sònraichte
 wizard-step-three-weather-summary = { $temperature }, { $wind } agus { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = Sàbhailteachd & so-ruigsinneachd
 safety-header-description = Gnàthaich na slighean-coiseachd agad airson barrachd comhfhurtachd is tèarainteachd
 safety-save-button = Sàbhail na roghainnean

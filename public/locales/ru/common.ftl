@@ -118,6 +118,7 @@ wizard-step-three-preferences-heading = Ваши предпочтения учт
 wizard-step-three-stops-panel-aria = Избранные остановки
 wizard-step-three-stops-heading = Избранные остановки
 wizard-step-three-weather-summary = { $temperature }, { $wind } и { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = Безопасность и доступность
 safety-header-description = Настройте маршруты прогулок для большего комфорта и безопасности
 safety-save-button = Сохранить предпочтения

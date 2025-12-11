@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = Asetuksesi käytössä
 wizard-step-three-stops-panel-aria = Esitellyt pysähdykset
 wizard-step-three-stops-heading = Esitellyt pysähdykset
 wizard-step-three-weather-summary = { $temperature }, { $wind } ja { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = Turvallisuus ja esteettömyys
 safety-header-description = Räätälöi kävelyreittisi mukavuuden ja turvallisuuden mukaan
 safety-save-button = Tallenna asetukset

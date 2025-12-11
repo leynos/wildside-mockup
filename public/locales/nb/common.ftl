@@ -114,6 +114,7 @@ wizard-step-three-preferences-heading = Preferansene dine er brukt
 wizard-step-three-stops-panel-aria = Fremhevede stopp
 wizard-step-three-stops-heading = Fremhevede stopp
 wizard-step-three-weather-summary = { $temperature }, { $wind } og { $sky }
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = Sikkerhet og tilgjengelighet
 safety-header-description = Tilpass gåturene for mer komfort og trygghet
 safety-save-button = Lagre preferanser
