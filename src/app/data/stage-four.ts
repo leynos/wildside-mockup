@@ -3,7 +3,11 @@
 import walkRouteMap1 from "../../assets/walks/walk-route-map-1.png";
 import type { EntityLocalizations, ImageAsset } from "../domain/entities/localization";
 import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
-import { fillLocalizations, localizeAcrossLocales } from "./fixture-localization";
+import {
+  brandLocalizations,
+  fillLocalizations,
+  localizeAcrossLocales,
+} from "./fixture-localization";
 
 export interface WalkCompletionStat {
   readonly id: string;
@@ -277,18 +281,9 @@ export interface WalkCompletionShareOption {
 export const walkCompletionShareOptions: ReadonlyArray<WalkCompletionShareOption> = [
   {
     id: "facebook",
-    localizations: fillLocalizations(
-      localizeAcrossLocales(
-        { name: "Facebook" },
-        {
-          ar: { name: "فيسبوك" },
-          he: { name: "פייסבוק" },
-          hi: { name: "फ़ेसबुक" },
-          ko: { name: "페이스북" },
-          ta: { name: "பேஸ்புக்" },
-        },
-      ),
-      "en-GB",
+    localizations: brandLocalizations(
+      "Facebook",
+      { ar: "فيسبوك", he: "פייסבוק", hi: "फ़ेसबुक", ko: "페이스북", ta: "பேஸ்புக்" },
       "share-option: facebook",
     ),
     iconToken: "{icon.brand.facebook}",
@@ -296,18 +291,9 @@ export const walkCompletionShareOptions: ReadonlyArray<WalkCompletionShareOption
   },
   {
     id: "instagram",
-    localizations: fillLocalizations(
-      localizeAcrossLocales(
-        { name: "Instagram" },
-        {
-          ar: { name: "إنستغرام" },
-          he: { name: "אינסטגרם" },
-          hi: { name: "इंस्टाग्राम" },
-          ko: { name: "인스타그램" },
-          ta: { name: "இன்ஸ்டாகிராம்" },
-        },
-      ),
-      "en-GB",
+    localizations: brandLocalizations(
+      "Instagram",
+      { ar: "إنستغرام", he: "אינסטגרם", hi: "इंस्टाग्राम", ko: "인스타그램", ta: "இன்ஸ்டாகிராம்" },
       "share-option: instagram",
     ),
     iconToken: "{icon.brand.instagram}",
