@@ -1,4 +1,11 @@
-/** @file Suggestions section wrapper for offline screen. */
+/**
+ * @file Suggestions section for the offline screen.
+ *
+ * Renders a titled list of offline suggestions as cards, or null when empty.
+ * Localization is delegated to OfflineSuggestionCard; this component wires
+ * user actions (onAction/onDismiss) by suggestion ID. Extracted to reduce
+ * OfflineScreen complexity.
+ */
 
 import type { JSX } from "react";
 
@@ -27,8 +34,10 @@ export function OfflineSuggestionsSection({
   }
 
   return (
-    <section className="space-y-3">
-      <h2 className="text-base font-semibold text-base-content">{heading}</h2>
+    <section className="space-y-3" aria-labelledby="offline-suggestions-heading">
+      <h2 id="offline-suggestions-heading" className="text-base font-semibold text-base-content">
+        {heading}
+      </h2>
       {suggestions.map((suggestion) => (
         <OfflineSuggestionCard
           key={suggestion.id}
