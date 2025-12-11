@@ -11,6 +11,7 @@ import { DRAGGABLE_HANDLE_CLASS } from "../../../components/map/map-panel-consta
 import { MapViewport } from "../../../components/map-viewport";
 import { PointOfInterestList } from "../../../components/point-of-interest-list";
 import { WildsideMap } from "../../../components/wildside-map";
+import { getRouteShareUrl } from "../../../config/route-urls";
 import type { WalkRouteSummary } from "../../../data/map";
 import { getTagDescriptor } from "../../../data/registries/tags";
 import { pickLocalization } from "../../../domain/entities/localization";
@@ -136,9 +137,7 @@ export function MapTabContent({
                         "Sharing is not wired up yet, but this is where the integration will live.",
                     })}
                   </Dialog.Description>
-                  <div className="route-share__preview">
-                    https://wildside.app/routes/{savedRoute.id}
-                  </div>
+                  <div className="route-share__preview">{getRouteShareUrl(savedRoute.id)}</div>
                   <Dialog.Close asChild>
                     <button type="button" className="btn btn-accent btn-sm self-end">
                       {t("action-close", { defaultValue: "Close" })}
