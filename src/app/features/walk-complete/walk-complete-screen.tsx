@@ -23,7 +23,7 @@ import { formatDistance, formatDuration, formatEnergy, formatStops } from "../..
 import { useUnitPreferences } from "../../units/unit-preferences-provider";
 
 const secondaryStatIconTone: Record<string, string> = {
-  calories: "text-orange-400",
+  energy: "text-orange-400",
   stops: "text-amber-300",
   starred: "text-pink-400",
 };

@@ -40,14 +40,14 @@ describe("WalkComplete energy stat", () => {
   it("shows kilojoules for metric locales", async () => {
     await renderWalkComplete("en-GB", "metric");
 
-    const caloriesCard = screen.getByText(/Calories/i).closest("article");
-    expect(caloriesCard?.textContent).toMatch(/kJ/);
+    const energyCard = screen.getByText(/Energy/i).closest("article");
+    expect(energyCard?.textContent).toMatch(/kJ/);
   });
 
   it("shows kilocalories for imperial preference", async () => {
     await renderWalkComplete("en-US", "imperial");
 
-    const caloriesCard = screen.getByText(/Calories/i).closest("article");
-    expect(caloriesCard?.textContent).toMatch(/kcal/i);
+    const energyCard = screen.getByText(/Energy/i).closest("article");
+    expect(energyCard?.textContent).toMatch(/kcal/i);
   });
 });
