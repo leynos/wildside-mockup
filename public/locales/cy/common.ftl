@@ -264,7 +264,7 @@ unit-count-stop =
         [two] stop
         [few] stop
         [many] stopiau
-        *[other] stopiau
+       *[other] stopiau
     }
 unit-weight-kilogram = kg
 unit-weight-pound = lb

@@ -215,12 +215,6 @@ offline-dialog-cancel = ยกเลิก
 offline-dialog-preview = ดูตัวอย่างการดาวน์โหลด
 unit-distance-kilometre = กม.
 unit-distance-mile = ไมล์
--unit-duration-minute =
-    { $count ->
-        [one] นาที
-       *[other] นาที
-    }
-
 unit-duration-minute-label =
     { $count ->
         [one] นาที

@@ -20,6 +20,12 @@ import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
 
+/** Maps unit tokens to translation key suffixes for stop distance units. */
+const unitTokenToSuffix: Record<string, string> = {
+  "distance-mile": "mi",
+  "distance-kilometre": "km",
+};
+
 type WizardSummaryPanelProps = WizardSectionProps & {
   readonly className?: string;
   readonly children: ReactNode;
@@ -208,13 +214,8 @@ export function WizardStepThree(): JSX.Element {
                       unitSystem,
                     });
                     const unitKeySuffix =
-                      formatted.unitToken === "distance-mile"
-                        ? "mi"
-                        : formatted.unitToken === "distance-kilometre"
-                          ? "km"
-                          : unitSystem === "imperial"
-                            ? "mi"
-                            : "km";
+                      unitTokenToSuffix[formatted.unitToken] ??
+                      (unitSystem === "imperial" ? "mi" : "km");
                     const unitLabel = t(`wizard-step-three-stop-distance-unit-${unitKeySuffix}`, {
                       defaultValue: formatted.unitLabel,
                     });

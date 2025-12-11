@@ -410,7 +410,7 @@ export interface AutoManagementOption {
 
 export { offlineSuggestions } from "./offline-fixtures";
 
-export const offlineMapAreas: OfflineMapArea[] = [
+export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
   {
     id: "nyc",
     localizations: fillLocalizations(
@@ -461,7 +461,7 @@ export const offlineMapAreas: OfflineMapArea[] = [
   },
 ];
 
-export const autoManagementOptions: AutoManagementOption[] = [
+export const autoManagementOptions: ReadonlyArray<AutoManagementOption> = [
   {
     id: "auto-delete",
     localizations: fillLocalizations(
