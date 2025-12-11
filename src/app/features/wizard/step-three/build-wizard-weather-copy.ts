@@ -3,6 +3,7 @@
 import type { TFunction } from "i18next";
 
 import { wizardWeatherSummary } from "../../../data/wizard";
+import { pickLocalization } from "../../../domain/entities/localization";
 import { formatTemperature } from "../../../units/unit-format";
 import type { UnitSystem } from "../../../units/unit-system";
 
@@ -19,25 +20,13 @@ export const buildWizardWeatherCopy = (
   locale: string,
   unitSystem: UnitSystem,
 ): WizardWeatherCopy => {
-  const title = t(wizardWeatherSummary.titleKey, {
-    defaultValue: wizardWeatherSummary.defaultTitle,
-  });
+  const localized = pickLocalization(wizardWeatherSummary.localizations, locale);
+  const title = localized.name;
+  const reminder = localized.description ?? "";
 
-  const reminder = t(wizardWeatherSummary.reminderKey, {
-    defaultValue: wizardWeatherSummary.defaultReminder,
-  });
-
-  const sentiment = t(wizardWeatherSummary.sentimentKey, {
-    defaultValue: wizardWeatherSummary.defaultSentiment,
-  });
-
-  const windDescriptor = t(wizardWeatherSummary.windDescriptorKey, {
-    defaultValue: wizardWeatherSummary.defaultWindDescriptor,
-  });
-
-  const skyDescriptor = t(wizardWeatherSummary.skyDescriptorKey, {
-    defaultValue: wizardWeatherSummary.defaultSkyDescriptor,
-  });
+  const sentiment = pickLocalization(wizardWeatherSummary.sentimentLocalizations, locale).name;
+  const windDescriptor = pickLocalization(wizardWeatherSummary.windLocalizations, locale).name;
+  const skyDescriptor = pickLocalization(wizardWeatherSummary.skyLocalizations, locale).name;
 
   const { value: temperatureValue, unitLabel: temperatureUnit } = formatTemperature(
     wizardWeatherSummary.temperatureCelsius,
@@ -54,8 +43,8 @@ export const buildWizardWeatherCopy = (
     temperatureUnit.trimStart().startsWith("°") ? "" : " "
   }${temperatureUnit}`;
 
-  const summary = t(wizardWeatherSummary.summaryKey, {
-    defaultValue: wizardWeatherSummary.defaultSummary,
+  const summary = t("wizard-step-three-weather-summary", {
+    defaultValue: `${temperatureLabel}, ${windDescriptor}, ${skyDescriptor}`,
     temperature: temperatureLabel,
     wind: windDescriptor,
     sky: skyDescriptor,

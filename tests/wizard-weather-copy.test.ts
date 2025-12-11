@@ -2,6 +2,7 @@ import { describe, expect, it } from "bun:test";
 import type { TFunction } from "i18next";
 
 import { wizardWeatherSummary } from "../src/app/data/wizard";
+import { pickLocalization } from "../src/app/domain/entities/localization";
 import { buildWizardWeatherCopy } from "../src/app/features/wizard/step-three/build-wizard-weather-copy";
 
 type TranslationOptions = {
@@ -46,18 +47,21 @@ describe("buildWizardWeatherCopy", () => {
         .replaceAll("{{sky}}", sky);
     }) as unknown as TFunction;
 
-    const weatherCopy = buildWizardWeatherCopy(stubT, "en-GB", "metric");
+    const locale = "en-GB";
+    const weatherCopy = buildWizardWeatherCopy(stubT, locale, "metric");
+    const windDescriptor = pickLocalization(wizardWeatherSummary.windLocalizations, locale).name;
+    const skyDescriptor = pickLocalization(wizardWeatherSummary.skyLocalizations, locale).name;
 
     expect(weatherCopy.temperatureLabel).toBe(
       `${wizardWeatherSummary.temperatureCelsius.toFixed(1)}\u00B0C`,
     );
-    const expectedSummary = `${wizardWeatherSummary.temperatureCelsius.toFixed(1)}\u00B0C, ${wizardWeatherSummary.defaultWindDescriptor}, ${wizardWeatherSummary.defaultSkyDescriptor}`;
+    const expectedSummary = `${wizardWeatherSummary.temperatureCelsius.toFixed(1)}\u00B0C, ${windDescriptor}, ${skyDescriptor}`;
     expect(weatherCopy.summary).toBe(expectedSummary);
 
-    const summaryCall = calls.find((call) => call.key === wizardWeatherSummary.summaryKey);
+    const summaryCall = calls.find((call) => call.key === "wizard-step-three-weather-summary");
     expect(summaryCall?.options?.temperature).toBe(weatherCopy.temperatureLabel);
-    expect(summaryCall?.options?.wind).toBe(wizardWeatherSummary.defaultWindDescriptor);
-    expect(summaryCall?.options?.sky).toBe(wizardWeatherSummary.defaultSkyDescriptor);
+    expect(summaryCall?.options?.wind).toBe(windDescriptor);
+    expect(summaryCall?.options?.sky).toBe(skyDescriptor);
 
     const temperatureUnitCall = calls.find((call) => call.key === "unit-temperature-celsius");
     expect(temperatureUnitCall?.options?.defaultValue).toBe("°C");

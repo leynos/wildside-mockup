@@ -17,6 +17,7 @@ import {
   wizardSummaryHighlights,
   wizardWeatherSummary,
 } from "../src/app/data/wizard";
+import { pickLocalization } from "../src/app/domain/entities/localization";
 import { buildWizardRouteStats } from "../src/app/features/wizard/step-three/build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "../src/app/features/wizard/step-three/build-wizard-weather-copy";
 import { DisplayModeProvider } from "../src/app/providers/display-mode-provider";
@@ -962,9 +963,7 @@ describe("Stage 3 wizard flows", () => {
       ({ mount, root } = await renderRoute("/wizard/step-3"));
       const container = requireContainer(mount);
       const view = within(container);
-      const routeTitle =
-        translate(wizardRouteSummary.titleKey, wizardRouteSummary.defaultTitle) ??
-        wizardRouteSummary.defaultTitle;
+      const routeTitle = pickLocalization(wizardRouteSummary.localizations, "es").name;
       await assertions({ view, container, routeTitle });
     });
   };
@@ -1156,8 +1155,8 @@ describe("Stage 3 wizard flows", () => {
       expect(view.getByRole("button", { name: localizedRegex(startOverLabel) })).toBeTruthy();
 
       const summaryRegionLabel =
-        translate(wizardRouteSummary.ariaLabelKey, wizardRouteSummary.defaultAriaLabel) ??
-        wizardRouteSummary.defaultAriaLabel;
+        translate("wizard-step-three-route-panel-aria", "Hidden Gems Loop summary") ??
+        "Hidden Gems Loop summary";
       const summaryRegion = view.getByRole("region", {
         name: localizedRegex(summaryRegionLabel),
       });
@@ -1183,8 +1182,7 @@ describe("Stage 3 wizard flows", () => {
       });
 
       wizardSummaryHighlights.forEach((highlight) => {
-        const label =
-          translate(highlight.labelKey, highlight.defaultLabel) ?? highlight.defaultLabel;
+        const label = pickLocalization(highlight.localizations, "es").name;
         expect(within(preferencesPanel).getByText(localizedRegex(label))).toBeTruthy();
       });
     });
@@ -1203,9 +1201,9 @@ describe("Stage 3 wizard flows", () => {
       });
 
       wizardGeneratedStops.forEach((stop) => {
-        const name = translate(stop.nameKey, stop.defaultName) ?? stop.defaultName;
-        const description =
-          translate(stop.descriptionKey, stop.defaultDescription) ?? stop.defaultDescription;
+        const localized = pickLocalization(stop.localizations, "es");
+        const name = localized.name;
+        const description = localized.description ?? "";
         expect(within(stopsPanel).getByText(localizedRegex(name))).toBeTruthy();
         expect(within(stopsPanel).getByText(localizedRegex(description))).toBeTruthy();
       });
@@ -1214,9 +1212,7 @@ describe("Stage 3 wizard flows", () => {
 
   it("localises wizard step three weather panel for Spanish", async () => {
     await runWizardStepThreeSpanish(async ({ view }) => {
-      const weatherHeading =
-        translate(wizardWeatherSummary.titleKey, wizardWeatherSummary.defaultTitle) ??
-        wizardWeatherSummary.defaultTitle;
+      const weatherHeading = pickLocalization(wizardWeatherSummary.localizations, "es").name;
       expect(view.getByRole("heading", { name: localizedRegex(weatherHeading) })).toBeTruthy();
 
       const weatherPanel = view.getByRole("region", {
@@ -1322,16 +1318,14 @@ describe("Stage 3 wizard flows", () => {
     const container = requireContainer(mount);
     const view = within(container);
     const routePanelLabel =
-      translate(wizardRouteSummary.ariaLabelKey, wizardRouteSummary.defaultAriaLabel) ??
-      wizardRouteSummary.defaultAriaLabel;
+      translate("wizard-step-three-route-panel-aria", "Hidden Gems Loop summary") ??
+      "Hidden Gems Loop summary";
     const preferencesPanelLabel =
       translate("wizard-step-three-preferences-panel-aria", "Your preferences applied") ??
       "Your preferences applied";
     const stopsPanelLabel =
       translate("wizard-step-three-stops-panel-aria", "Featured stops") ?? "Featured stops";
-    const weatherPanelTitle =
-      translate(wizardWeatherSummary.titleKey, wizardWeatherSummary.defaultTitle) ??
-      wizardWeatherSummary.defaultTitle;
+    const weatherPanelTitle = pickLocalization(wizardWeatherSummary.localizations, "en-GB").name;
 
     const routePanel = view.getByRole("region", {
       name: localizedRegex(routePanelLabel),
@@ -1351,19 +1345,17 @@ describe("Stage 3 wizard flows", () => {
       expect(panel.classList.contains("wizard-section")).toBe(true);
     });
 
-    const badgeLabel =
-      translate(wizardRouteSummary.badgeKey, wizardRouteSummary.defaultBadge) ??
-      wizardRouteSummary.defaultBadge;
+    const badgeLabel = pickLocalization(wizardRouteSummary.badgeLocalizations, "en-GB").name;
     const summaryBadge = within(routePanel).getByText(localizedRegex(badgeLabel));
     expect(summaryBadge.classList.contains("wizard-badge")).toBe(true);
 
     wizardSummaryHighlights.forEach((highlight) => {
-      const label = translate(highlight.labelKey, highlight.defaultLabel) ?? highlight.defaultLabel;
+      const label = pickLocalization(highlight.localizations, "en-GB").name;
       expect(within(preferencesPanel).getByText(localizedRegex(label))).toBeTruthy();
     });
 
     wizardGeneratedStops.forEach((stop) => {
-      const name = translate(stop.nameKey, stop.defaultName) ?? stop.defaultName;
+      const name = pickLocalization(stop.localizations, "en-GB").name;
       expect(within(stopsPanel).getByText(localizedRegex(name))).toBeTruthy();
     });
 
@@ -1446,7 +1438,8 @@ describe("Stage 4 completion flows", () => {
       name: localizedRegex(dialogTitle),
     });
     walkCompletionShareOptions.forEach((option) => {
-      expect(within(dialog).getByText(new RegExp(option.label, "i"))).toBeInTheDocument();
+      const label = pickLocalization(option.localizations, "en-GB").name;
+      expect(within(dialog).getByText(new RegExp(escapeRegExp(label), "i"))).toBeInTheDocument();
     });
     const cancelLabel = translate("walk-complete-share-dialog-cancel", "Cancel");
     const cancelButton = within(dialog).getByRole("button", {

@@ -6,106 +6,355 @@ import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
 import { fillLocalizations, localizeAcrossLocales } from "./fixture-localization";
 
 export interface WalkCompletionStat {
-  id: string;
-  label: string;
-  value:
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly value:
     | { kind: "distance"; metres: number }
     | { kind: "duration"; seconds: number }
     | { kind: "count"; value: number; unitToken?: string }
     | { kind: "energy"; kilocalories: number };
-  iconToken: string;
+  readonly iconToken: string;
 }
 
-export const walkCompletionPrimaryStats: WalkCompletionStat[] = [
+export const walkCompletionPrimaryStats: ReadonlyArray<WalkCompletionStat> = [
   {
     id: "distance",
-    label: "Distance",
+    localizations: {
+      "en-GB": { name: "Distance" },
+      "en-US": { name: "Distance" },
+      ar: { name: "المسافة" },
+      cy: { name: "Pellter" },
+      da: { name: "Distance" },
+      de: { name: "Distanz" },
+      el: { name: "Απόσταση" },
+      es: { name: "Distancia" },
+      fi: { name: "Matka" },
+      fr: { name: "Distance" },
+      gd: { name: "Astar" },
+      he: { name: "מרחק" },
+      hi: { name: "दूरी" },
+      it: { name: "Distanza" },
+      ja: { name: "距離" },
+      ko: { name: "거리" },
+      nb: { name: "Distanse" },
+      nl: { name: "Afstand" },
+      pl: { name: "Dystans" },
+      pt: { name: "Distância" },
+      ru: { name: "Дистанция" },
+      sv: { name: "Distans" },
+      ta: { name: "தூரம்" },
+      th: { name: "ระยะทาง" },
+      tr: { name: "Mesafe" },
+      vi: { name: "Quãng đường" },
+      "zh-CN": { name: "距离" },
+      "zh-TW": { name: "距離" },
+    },
     value: { kind: "distance", metres: metresFromKilometres(3.2) },
     iconToken: "{icon.object.distance}",
   },
   {
     id: "duration",
-    label: "Duration",
+    localizations: {
+      "en-GB": { name: "Duration" },
+      "en-US": { name: "Duration" },
+      ar: { name: "المدة" },
+      cy: { name: "Hyd" },
+      da: { name: "Varighed" },
+      de: { name: "Dauer" },
+      el: { name: "Διάρκεια" },
+      es: { name: "Duración" },
+      fi: { name: "Kesto" },
+      fr: { name: "Durée" },
+      gd: { name: "Ùine" },
+      he: { name: "משך" },
+      hi: { name: "अवधि" },
+      it: { name: "Durata" },
+      ja: { name: "所要時間" },
+      ko: { name: "소요 시간" },
+      nb: { name: "Varighet" },
+      nl: { name: "Duur" },
+      pl: { name: "Czas trwania" },
+      pt: { name: "Duração" },
+      ru: { name: "Длительность" },
+      sv: { name: "Varaktighet" },
+      ta: { name: "காலம்" },
+      th: { name: "ระยะเวลา" },
+      tr: { name: "Süre" },
+      vi: { name: "Thời gian" },
+      "zh-CN": { name: "时长" },
+      "zh-TW": { name: "時間" },
+    },
     value: { kind: "duration", seconds: secondsFromMinutes(58) },
     iconToken: "{icon.object.duration}",
   },
 ];
 
-export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
+export const walkCompletionSecondaryStats: ReadonlyArray<WalkCompletionStat> = [
   {
     id: "calories",
-    label: "Calories",
+    localizations: {
+      "en-GB": { name: "Calories" },
+      "en-US": { name: "Calories" },
+      ar: { name: "السعرات" },
+      cy: { name: "Calorïau" },
+      da: { name: "Kalorier" },
+      de: { name: "Kalorien" },
+      el: { name: "Θερμίδες" },
+      es: { name: "Calorías" },
+      fi: { name: "Kalorit" },
+      fr: { name: "Calories" },
+      gd: { name: "Calaraidhean" },
+      he: { name: "קלוריות" },
+      hi: { name: "कैलोरी" },
+      it: { name: "Calorie" },
+      ja: { name: "消費カロリー" },
+      ko: { name: "칼로리" },
+      nb: { name: "Kalorier" },
+      nl: { name: "Calorieën" },
+      pl: { name: "Kalorie" },
+      pt: { name: "Calorias" },
+      ru: { name: "Калории" },
+      sv: { name: "Kalorier" },
+      ta: { name: "கலோரிகள்" },
+      th: { name: "แคลอรี" },
+      tr: { name: "Kalori" },
+      vi: { name: "Calo" },
+      "zh-CN": { name: "卡路里" },
+      "zh-TW": { name: "卡路里" },
+    },
     value: { kind: "energy", kilocalories: 247 },
     iconToken: "{icon.object.calories}",
   },
   {
     id: "stops",
-    label: "Stops",
+    localizations: {
+      "en-GB": { name: "Stops" },
+      "en-US": { name: "Stops" },
+      ar: { name: "المحطات" },
+      cy: { name: "Safleoedd" },
+      da: { name: "Stop" },
+      de: { name: "Stopps" },
+      el: { name: "Στάσεις" },
+      es: { name: "Paradas" },
+      fi: { name: "Pysähdykset" },
+      fr: { name: "Arrêts" },
+      gd: { name: "Stadan" },
+      he: { name: "עצירות" },
+      hi: { name: "स्टॉप" },
+      it: { name: "Fermate" },
+      ja: { name: "立ち寄り" },
+      ko: { name: "정차" },
+      nb: { name: "Stopp" },
+      nl: { name: "Stops" },
+      pl: { name: "Przystanki" },
+      pt: { name: "Paragens" },
+      ru: { name: "Остановки" },
+      sv: { name: "Stopp" },
+      ta: { name: "நிறுத்தங்கள்" },
+      th: { name: "จุดแวะ" },
+      tr: { name: "Duraklar" },
+      vi: { name: "Điểm dừng" },
+      "zh-CN": { name: "站点" },
+      "zh-TW": { name: "停靠點" },
+    },
     value: { kind: "count", value: 7, unitToken: "count-stop" },
     iconToken: "{icon.object.stops}",
   },
   {
     id: "starred",
-    label: "Starred",
+    localizations: {
+      "en-GB": { name: "Starred" },
+      "en-US": { name: "Starred" },
+      ar: { name: "المفضلة" },
+      cy: { name: "Ffefrynnau" },
+      da: { name: "Favoritter" },
+      de: { name: "Favoriten" },
+      el: { name: "Αγαπημένα" },
+      es: { name: "Favoritos" },
+      fi: { name: "Suosikit" },
+      fr: { name: "Favoris" },
+      gd: { name: "Favouritan" },
+      he: { name: "מועדפים" },
+      hi: { name: "पसंदीदा" },
+      it: { name: "Preferiti" },
+      ja: { name: "お気に入り" },
+      ko: { name: "즐겨찾기" },
+      nb: { name: "Favoritter" },
+      nl: { name: "Favorieten" },
+      pl: { name: "Ulubione" },
+      pt: { name: "Favoritos" },
+      ru: { name: "Избранное" },
+      sv: { name: "Favoriter" },
+      ta: { name: "விருப்பமானவை" },
+      th: { name: "รายการโปรด" },
+      tr: { name: "Favoriler" },
+      vi: { name: "Yêu thích" },
+      "zh-CN": { name: "收藏" },
+      "zh-TW": { name: "最愛" },
+    },
     value: { kind: "count", value: 3 },
     iconToken: "{icon.object.star}",
   },
 ];
 
 export interface WalkCompletionMoment {
-  id: string;
-  name: string;
-  description: string;
-  imageUrl: string;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly imageUrl: string;
 }
 
-export const walkCompletionMoments: WalkCompletionMoment[] = [
+export const walkCompletionMoments: ReadonlyArray<WalkCompletionMoment> = [
   {
     id: "coffee",
-    name: "Blue Bottle Coffee",
-    description: "Perfect cortado & friendly barista",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Blue Bottle Coffee",
+        description: "Perfect cortado & friendly barista",
+      }),
+      "en-GB",
+      "moment: coffee",
+    ),
     imageUrl:
       "https://storage.googleapis.com/uxpilot-auth.appspot.com/03fdb8eff5-0706dc4eec4e2208ca2d.png",
   },
   {
     id: "mural",
-    name: "Hidden Mural",
-    description: "Amazing street art in quiet alley",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Hidden Mural",
+        description: "Amazing street art in quiet alley",
+      }),
+      "en-GB",
+      "moment: mural",
+    ),
     imageUrl:
       "https://storage.googleapis.com/uxpilot-auth.appspot.com/7c8c56a54b-101578a06001bb190271.png",
   },
   {
     id: "park",
-    name: "Meridian Hill Park",
-    description: "Peaceful pond with friendly ducks",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Meridian Hill Park",
+        description: "Peaceful pond with friendly ducks",
+      }),
+      "en-GB",
+      "moment: park",
+    ),
     imageUrl:
       "https://storage.googleapis.com/uxpilot-auth.appspot.com/ad4258f4ad-817a02de971280a8ef8b.png",
   },
 ];
 
 export interface WalkCompletionShareOption {
-  id: string;
-  label: string;
-  iconToken: string;
-  accentClass: string;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly iconToken: string;
+  readonly accentClass: string;
 }
 
-export const walkCompletionShareOptions: WalkCompletionShareOption[] = [
+export const walkCompletionShareOptions: ReadonlyArray<WalkCompletionShareOption> = [
   {
     id: "facebook",
-    label: "Facebook",
+    localizations: {
+      "en-GB": { name: "Facebook" },
+      "en-US": { name: "Facebook" },
+      ar: { name: "فيسبوك" },
+      cy: { name: "Facebook" },
+      da: { name: "Facebook" },
+      de: { name: "Facebook" },
+      el: { name: "Facebook" },
+      es: { name: "Facebook" },
+      fi: { name: "Facebook" },
+      fr: { name: "Facebook" },
+      gd: { name: "Facebook" },
+      he: { name: "פייסבוק" },
+      hi: { name: "फ़ेसबुक" },
+      it: { name: "Facebook" },
+      ja: { name: "Facebook" },
+      ko: { name: "페이스북" },
+      nb: { name: "Facebook" },
+      nl: { name: "Facebook" },
+      pl: { name: "Facebook" },
+      pt: { name: "Facebook" },
+      ru: { name: "Facebook" },
+      sv: { name: "Facebook" },
+      ta: { name: "பேஸ்புக்" },
+      th: { name: "Facebook" },
+      tr: { name: "Facebook" },
+      vi: { name: "Facebook" },
+      "zh-CN": { name: "Facebook" },
+      "zh-TW": { name: "Facebook" },
+    },
     iconToken: "{icon.brand.facebook}",
     accentClass: "bg-blue-600",
   },
   {
     id: "instagram",
-    label: "Instagram",
+    localizations: {
+      "en-GB": { name: "Instagram" },
+      "en-US": { name: "Instagram" },
+      ar: { name: "إنستغرام" },
+      cy: { name: "Instagram" },
+      da: { name: "Instagram" },
+      de: { name: "Instagram" },
+      el: { name: "Instagram" },
+      es: { name: "Instagram" },
+      fi: { name: "Instagram" },
+      fr: { name: "Instagram" },
+      gd: { name: "Instagram" },
+      he: { name: "אינסטגרם" },
+      hi: { name: "इंस्टाग्राम" },
+      it: { name: "Instagram" },
+      ja: { name: "Instagram" },
+      ko: { name: "인스타그램" },
+      nb: { name: "Instagram" },
+      nl: { name: "Instagram" },
+      pl: { name: "Instagram" },
+      pt: { name: "Instagram" },
+      ru: { name: "Instagram" },
+      sv: { name: "Instagram" },
+      ta: { name: "இன்ஸ்டாகிராம்" },
+      th: { name: "Instagram" },
+      tr: { name: "Instagram" },
+      vi: { name: "Instagram" },
+      "zh-CN": { name: "Instagram" },
+      "zh-TW": { name: "Instagram" },
+    },
     iconToken: "{icon.brand.instagram}",
     accentClass: "bg-pink-600",
   },
   {
     id: "twitter",
-    label: "Twitter",
+    localizations: {
+      "en-GB": { name: "X (Twitter)" },
+      "en-US": { name: "X (Twitter)" },
+      ar: { name: "X ‏(تويتر)" },
+      cy: { name: "X (Twitter)" },
+      da: { name: "X (Twitter)" },
+      de: { name: "X (Twitter)" },
+      el: { name: "X (Twitter)" },
+      es: { name: "X (Twitter)" },
+      fi: { name: "X (Twitter)" },
+      fr: { name: "X (Twitter)" },
+      gd: { name: "X (Twitter)" },
+      he: { name: "X ‏(טוויטר)" },
+      hi: { name: "X (ट्विटर)" },
+      it: { name: "X (Twitter)" },
+      ja: { name: "X（Twitter）" },
+      ko: { name: "X(트위터)" },
+      nb: { name: "X (Twitter)" },
+      nl: { name: "X (Twitter)" },
+      pl: { name: "X (Twitter)" },
+      pt: { name: "X (Twitter)" },
+      ru: { name: "X (Twitter)" },
+      sv: { name: "X (Twitter)" },
+      ta: { name: "X (ட்விட்டர்)" },
+      th: { name: "X (Twitter)" },
+      tr: { name: "X (Twitter)" },
+      vi: { name: "X (Twitter)" },
+      "zh-CN": { name: "X（Twitter）" },
+      "zh-TW": { name: "X（Twitter）" },
+    },
     iconToken: "{icon.brand.x}",
     accentClass: "bg-blue-400",
   },

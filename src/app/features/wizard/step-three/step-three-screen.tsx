@@ -14,6 +14,7 @@ import {
   wizardSteps,
   wizardSummaryHighlights,
 } from "../../../data/wizard";
+import { pickLocalization } from "../../../domain/entities/localization";
 import { formatDistance } from "../../../units/unit-format";
 import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
@@ -83,9 +84,10 @@ export function WizardStepThree(): JSX.Element {
               <Dialog.Content className="dialog-surface">
                 {dialogOpen
                   ? (() => {
-                      const routeTitle = t(wizardRouteSummary.titleKey, {
-                        defaultValue: wizardRouteSummary.defaultTitle,
-                      });
+                      const routeTitle = pickLocalization(
+                        wizardRouteSummary.localizations,
+                        i18n.language,
+                      ).name;
                       return (
                         <>
                           <Dialog.Title className="text-lg font-semibold text-base-content">
@@ -128,20 +130,16 @@ export function WizardStepThree(): JSX.Element {
       }
     >
       <WizardSummaryPanel
-        aria-label={t(wizardRouteSummary.ariaLabelKey, {
-          defaultValue: wizardRouteSummary.defaultAriaLabel,
+        aria-label={t("wizard-step-three-route-panel-aria", {
+          defaultValue: "Hidden Gems Loop summary",
         })}
       >
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">
-            {t(wizardRouteSummary.titleKey, {
-              defaultValue: wizardRouteSummary.defaultTitle,
-            })}
+            {pickLocalization(wizardRouteSummary.localizations, i18n.language).name}
           </h2>
           <span className="wizard-badge font-semibold">
-            {t(wizardRouteSummary.badgeKey, {
-              defaultValue: wizardRouteSummary.defaultBadge,
-            })}
+            {pickLocalization(wizardRouteSummary.badgeLocalizations, i18n.language).name}
           </span>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
@@ -153,9 +151,7 @@ export function WizardStepThree(): JSX.Element {
           ))}
         </div>
         <p className="mt-4 text-sm text-base-content/70">
-          {t(wizardRouteSummary.descriptionKey, {
-            defaultValue: wizardRouteSummary.defaultDescription,
-          })}
+          {pickLocalization(wizardRouteSummary.localizations, i18n.language).description}
         </p>
       </WizardSummaryPanel>
 
@@ -171,12 +167,7 @@ export function WizardStepThree(): JSX.Element {
         </h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {wizardSummaryHighlights.map((highlight) => {
-            const label = t(highlight.labelKey, {
-              defaultValue: highlight.defaultLabel,
-            });
-            const detail = t(highlight.detailKey, {
-              defaultValue: highlight.defaultDetail,
-            });
+            const localized = pickLocalization(highlight.localizations, i18n.language);
             return (
               <div key={highlight.id} className="wizard-summary__highlight">
                 <Icon
@@ -185,8 +176,8 @@ export function WizardStepThree(): JSX.Element {
                   aria-hidden
                 />
                 <div>
-                  <p className="font-semibold">{label}</p>
-                  <p className="text-xs text-base-content/60">{detail}</p>
+                  <p className="font-semibold">{localized.name}</p>
+                  <p className="text-xs text-base-content/60">{localized.description}</p>
                 </div>
               </div>
             );
@@ -206,10 +197,8 @@ export function WizardStepThree(): JSX.Element {
         </h3>
         <div className="mt-4 space-y-3">
           {wizardGeneratedStops.map((stop) => {
-            const name = t(stop.nameKey, { defaultValue: stop.defaultName });
-            const description = t(stop.descriptionKey, {
-              defaultValue: stop.defaultDescription,
-            });
+            const localized = pickLocalization(stop.localizations, i18n.language);
+            const noteLocalized = pickLocalization(stop.noteLocalizations, i18n.language);
             const distanceLabel =
               stop.noteDistanceMetres != null
                 ? (() => {
@@ -232,23 +221,17 @@ export function WizardStepThree(): JSX.Element {
                     return { ...formatted, unitLabel };
                   })()
                 : undefined;
-            const note = t(stop.noteKey, {
-              defaultValue: stop.defaultNote,
-              ...(distanceLabel
-                ? {
-                    distance: distanceLabel.value,
-                    unit: distanceLabel.unitLabel,
-                  }
-                : {}),
-            });
+            const note = distanceLabel
+              ? `${noteLocalized.name} • ${distanceLabel.value} ${distanceLabel.unitLabel}`
+              : noteLocalized.name;
             return (
               <div key={stop.id} className="wizard-summary__stop">
                 <span className="wizard-summary__stop-icon">
                   <Icon token={stop.iconToken} className={stop.accentClass} aria-hidden />
                 </span>
                 <div>
-                  <p className="text-base font-semibold">{name}</p>
-                  <p className="text-sm text-base-content/70">{description}</p>
+                  <p className="text-base font-semibold">{localized.name}</p>
+                  <p className="text-sm text-base-content/70">{localized.description}</p>
                   <p className="mt-1 text-xs text-base-content/60">{note}</p>
                 </div>
               </div>

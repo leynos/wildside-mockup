@@ -17,6 +17,7 @@ import {
   walkCompletionSecondaryStats,
   walkCompletionShareOptions,
 } from "../../data/stage-four";
+import { pickLocalization } from "../../domain/entities/localization";
 import { MobileShell } from "../../layout/mobile-shell";
 import { formatDistance, formatDuration, formatEnergy, formatStops } from "../../units/unit-format";
 import { useUnitPreferences } from "../../units/unit-preferences-provider";
@@ -96,12 +97,10 @@ export function WalkCompleteScreen(): JSX.Element {
   const shareChannelLabels = useMemo(() => {
     const labels: Record<string, string> = {};
     for (const option of walkCompletionShareOptions) {
-      labels[option.id] = t(`walk-complete-share-channel-${option.id}`, {
-        defaultValue: option.label,
-      });
+      labels[option.id] = pickLocalization(option.localizations, i18n.language).name;
     }
     return labels;
-  }, [t]);
+  }, [i18n.language]);
 
   const unitOptions = useMemo(
     () => ({ t, locale: i18n.language, unitSystem }),
@@ -179,7 +178,7 @@ export function WalkCompleteScreen(): JSX.Element {
                       <img
                         key={moment.id}
                         src={moment.imageUrl}
-                        alt={moment.name}
+                        alt={pickLocalization(moment.localizations, i18n.language).name}
                         className="h-9 w-9 rounded-full border-2 border-accent object-cover shadow"
                       />
                     ))}
@@ -195,9 +194,7 @@ export function WalkCompleteScreen(): JSX.Element {
                     <div className="mb-2 flex items-center gap-3 text-base-content/70">
                       <Icon token={stat.iconToken} className="text-accent" aria-hidden />
                       <span className="text-sm font-medium">
-                        {t(`walk-complete-primary-${stat.id}-label`, {
-                          defaultValue: stat.label,
-                        })}
+                        {pickLocalization(stat.localizations, i18n.language).name}
                       </span>
                     </div>
                     <p className="text-2xl font-semibold">{formatStatValue(stat.value)}</p>
@@ -222,9 +219,7 @@ export function WalkCompleteScreen(): JSX.Element {
                       {formatStatValue(stat.value)}
                     </p>
                     <p className="text-xs text-base-content/70">
-                      {t(`walk-complete-secondary-${stat.id}-label`, {
-                        defaultValue: stat.label,
-                      })}
+                      {pickLocalization(stat.localizations, i18n.language).name}
                     </p>
                   </article>
                 ))}
@@ -236,23 +231,26 @@ export function WalkCompleteScreen(): JSX.Element {
                 {favouriteHeading}
               </SectionHeading>
               <div className="space-y-3">
-                {walkCompletionMoments.map((moment) => (
-                  <article
-                    key={moment.id}
-                    className="flex items-center gap-4 rounded-2xl border border-base-300/60 bg-base-200/30 p-4"
-                  >
-                    <img
-                      src={moment.imageUrl}
-                      alt={moment.name}
-                      className="h-12 w-12 flex-shrink-0 rounded-lg object-cover"
-                    />
-                    <div className="flex-1 text-start text-base-content">
-                      <p className="font-semibold">{moment.name}</p>
-                      <p className="text-sm text-base-content/70">{moment.description}</p>
-                    </div>
-                    <Icon token="{icon.object.star}" className="text-amber-300" aria-hidden />
-                  </article>
-                ))}
+                {walkCompletionMoments.map((moment) => {
+                  const localized = pickLocalization(moment.localizations, i18n.language);
+                  return (
+                    <article
+                      key={moment.id}
+                      className="flex items-center gap-4 rounded-2xl border border-base-300/60 bg-base-200/30 p-4"
+                    >
+                      <img
+                        src={moment.imageUrl}
+                        alt={localized.name}
+                        className="h-12 w-12 flex-shrink-0 rounded-lg object-cover"
+                      />
+                      <div className="flex-1 text-start text-base-content">
+                        <p className="font-semibold">{localized.name}</p>
+                        <p className="text-sm text-base-content/70">{localized.description}</p>
+                      </div>
+                      <Icon token="{icon.object.star}" className="text-amber-300" aria-hidden />
+                    </article>
+                  );
+                })}
               </div>
             </WalkCompleteSection>
 
@@ -315,7 +313,7 @@ export function WalkCompleteScreen(): JSX.Element {
                   <button
                     key={option.id}
                     type="button"
-                    aria-label={shareChannelLabels[option.id] ?? option.label}
+                    aria-label={shareChannelLabels[option.id]}
                     className={`walk-share__icon ${option.accentClass}`}
                   >
                     <Icon token={option.iconToken} aria-hidden />
@@ -341,7 +339,7 @@ export function WalkCompleteScreen(): JSX.Element {
               {walkCompletionShareOptions.map((option) => (
                 <span key={option.id} className="walk-share__option">
                   <Icon token={option.iconToken} aria-hidden />
-                  {shareChannelLabels[option.id] ?? option.label}
+                  {shareChannelLabels[option.id]}
                 </span>
               ))}
             </div>
