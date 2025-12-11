@@ -221,7 +221,7 @@ export function StopsTabContent({ savedRoute, onClose, t }: StopsTabContentProps
 /**
  * Props for the NotesTabContent component.
  */
-type NotesTabContentProps = {
+export type NotesTabContentProps = {
   readonly savedRoute: WalkRouteSummary;
   readonly routeCopy: SavedRouteData["routeCopy"];
   readonly difficultyLabel: SavedRouteData["difficultyLabel"];
