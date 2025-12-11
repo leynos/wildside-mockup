@@ -11,6 +11,7 @@
  * />
  */
 
+import clsx from "clsx";
 import type { JSX } from "react";
 
 import { Button } from "../../../components/button";
@@ -38,13 +39,16 @@ export function OfflineSuggestionCard({
 
   return (
     <article
-      className={`rounded-2xl border border-base-300/60 bg-gradient-to-r p-4 shadow-lg ${suggestion.accentClass}`}
+      className={clsx(
+        "rounded-2xl border border-base-300/60 bg-gradient-to-r p-4 shadow-lg",
+        suggestion.accentClass,
+      )}
       aria-label={suggestionCopy.name}
     >
       <div className="flex items-start gap-3 text-base-100">
         <Icon
           token={suggestion.iconToken}
-          className={`text-xl ${suggestion.iconClassName ?? ""}`.trim()}
+          className={clsx("text-xl", suggestion.iconClassName)}
           aria-hidden
         />
         <div className="flex-1">
