@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { Button } from "../../../../components/button";
 import { Icon } from "../../../../components/icon";
+import { getRouteShareUrl } from "../../../../config/route-urls";
 
 export type RouteActionButtonsProps = {
   readonly routeId: string;
@@ -55,7 +56,7 @@ export function RouteActionButtons({ routeId }: RouteActionButtonsProps): JSX.El
             <Dialog.Description className="text-sm text-base-content/70">
               {shareDialogDescription}
             </Dialog.Description>
-            <div className="route-share__preview">https://wildside.app/routes/{routeId}</div>
+            <div className="route-share__preview">{getRouteShareUrl(routeId)}</div>
             <div className="flex justify-end gap-2">
               <Dialog.Close asChild>
                 <Button variant="ghost" size="sm">
