@@ -1,7 +1,9 @@
 /** @file Data fixtures supporting Stage 4 routes (completion and safety flows). */
 
 import walkRouteMap1 from "../../assets/walks/walk-route-map-1.png";
+import type { EntityLocalizations, ImageAsset } from "../domain/entities/localization";
 import { metresFromKilometres, secondsFromMinutes } from "../units/unit-format";
+import { fillLocalizations, localizeAcrossLocales } from "./fixture-localization";
 
 export interface WalkCompletionStat {
   id: string;
@@ -49,12 +51,6 @@ export const walkCompletionSecondaryStats: WalkCompletionStat[] = [
     iconToken: "{icon.object.star}",
   },
 ];
-
-const withBasePath = (path: string): string => {
-  const base = import.meta.env.BASE_URL ?? "/";
-  const cleanedPath = path.replace(/^\/+/, "");
-  return `${base}${cleanedPath}`.replace(/\/+/g, "/");
-};
 
 export interface WalkCompletionMoment {
   id: string;
@@ -117,98 +113,168 @@ export const walkCompletionShareOptions: WalkCompletionShareOption[] = [
 
 export const walkCompletionMapImage = walkRouteMap1;
 
+const withBasePath = (path: string, alt: string): ImageAsset => {
+  const base = import.meta.env.BASE_URL ?? "/";
+  // Ensure base ends with / before concatenation
+  const normalisedBase = base.endsWith("/") ? base : `${base}/`;
+  const cleanedPath = path.replace(/^\/+/, "");
+  // Collapse duplicate slashes but preserve protocol separators (://)
+  const url = `${normalisedBase}${cleanedPath}`.replace(/([^:]\/)\/+/g, "$1");
+  return { url, alt };
+};
+
+/**
+ * A suggested offline map area for the user to download.
+ *
+ * @property id - Unique identifier for the suggestion.
+ * @property localizations - Localised name and description for display.
+ * @property ctaLocalizations - Localised call-to-action button label.
+ * @property iconToken - Design token for the suggestion icon.
+ * @property accentClass - Tailwind gradient classes for the card background.
+ * @property iconClassName - Optional additional classes for icon styling.
+ */
 export interface OfflineSuggestion {
-  id: string;
-  title: string;
-  description: string;
-  callToAction: string;
-  iconToken: string;
-  accentClass: string;
-  iconClassName?: string;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly ctaLocalizations: EntityLocalizations;
+  readonly iconToken: string;
+  readonly accentClass: string;
+  readonly iconClassName?: string;
 }
 
+/**
+ * A downloaded offline map area with progress and status metadata.
+ *
+ * @property id - Unique identifier for the map area.
+ * @property localizations - Localised name and description for display.
+ * @property image - Thumbnail image asset for the area.
+ * @property sizeBytes - Total download size in bytes.
+ * @property progress - Download progress as a decimal (0 to 1).
+ * @property status - Current download state: complete, updating, or downloading.
+ * @property lastUpdatedAt - ISO 8601 timestamp of last update.
+ */
+export interface OfflineMapArea {
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly image: ImageAsset;
+  readonly sizeBytes: number;
+  readonly progress: number;
+  readonly status: "complete" | "updating" | "downloading";
+  readonly lastUpdatedAt: string;
+}
+
+/**
+ * Configuration option for automatic offline map management.
+ *
+ * @property id - Unique identifier for the option.
+ * @property localizations - Localised name and description for display.
+ * @property iconToken - Design token for the option icon.
+ * @property iconClassName - Tailwind classes for icon styling.
+ * @property defaultEnabled - Whether the option is enabled by default.
+ * @property retentionDays - Number of days to retain maps (for auto-delete option).
+ */
 export interface AutoManagementOption {
-  id: string;
-  title: string;
-  description: string;
-  iconToken: string;
-  iconClassName: string;
-  defaultEnabled: boolean;
+  readonly id: string;
+  readonly localizations: EntityLocalizations;
+  readonly iconToken: string;
+  readonly iconClassName: string;
+  readonly defaultEnabled: boolean;
+  readonly retentionDays?: number;
 }
 
-export const offlineSuggestions: OfflineSuggestion[] = [
-  {
-    id: "reykjavik",
-    title: "Upcoming Trip Detected",
-    description: "Add Reykjavik before your Iceland trip next week",
-    callToAction: "Download Reykjavik",
-    iconToken: "{icon.object.travel}",
-    accentClass: "from-sky-500 via-indigo-500 to-purple-600",
-    iconClassName: "text-[color:var(--b3)]",
-  },
-];
+export { offlineSuggestions } from "./offline-fixtures";
 
-export interface OfflineDownload {
-  id: string;
-  title: string;
-  subtitle: string;
-  size: string;
-  progress: number;
-  imageUrl: string;
-  status?: "complete" | "updating" | "downloading";
-}
-
-export const offlineDownloads: OfflineDownload[] = [
+export const offlineMapAreas: OfflineMapArea[] = [
   {
     id: "nyc",
-    title: "New York, NY",
-    subtitle: "Downloaded 3 days ago",
-    size: "847 MB",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        { name: "New York, NY", description: "Downtown and Brooklyn offline pack" },
+        { es: { name: "Nueva York, NY", description: "Paquete offline de Downtown y Brooklyn" } },
+      ),
+      "en-GB",
+      "offline-area: nyc",
+    ),
+    image: withBasePath("images/empire.png", "Empire State Building viewed from above"),
+    sizeBytes: 847 * 1024 ** 2,
     progress: 1,
-    imageUrl: withBasePath("images/empire.png"),
     status: "complete",
+    lastUpdatedAt: "2025-11-29T15:00:00Z",
   },
   {
     id: "sf",
-    title: "San Francisco, CA",
-    subtitle: "Downloaded 1 week ago",
-    size: "623 MB",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        { name: "San Francisco, CA", description: "Waterfront and downtown core" },
+        { es: { name: "San Francisco, CA", description: "Embarcadero y centro de la ciudad" } },
+      ),
+      "en-GB",
+      "offline-area: sf",
+    ),
+    image: withBasePath("images/goldengate.png", "Golden Gate Bridge from an overlook"),
+    sizeBytes: 623 * 1024 ** 2,
     progress: 1,
-    imageUrl: withBasePath("images/goldengate.png"),
     status: "complete",
+    lastUpdatedAt: "2025-11-23T10:00:00Z",
   },
   {
     id: "london",
-    title: "London, UK",
-    subtitle: "Downloading • 1.2 GB",
-    size: "1.2 GB",
+    localizations: fillLocalizations(
+      localizeAcrossLocales(
+        { name: "London, UK", description: "Central London with Thames overlays" },
+        { es: { name: "Londres, Reino Unido", description: "Centro de Londres y el Támesis" } },
+      ),
+      "en-GB",
+      "offline-area: london",
+    ),
+    image: withBasePath("images/londoneye.png", "London skyline with the London Eye"),
+    sizeBytes: Math.round(1.2 * 1024 ** 3),
     progress: 0.65,
-    imageUrl: withBasePath("images/londoneye.png"),
     status: "downloading",
+    lastUpdatedAt: "2025-12-04T08:30:00Z",
   },
 ];
 
 export const autoManagementOptions: AutoManagementOption[] = [
   {
     id: "auto-delete",
-    title: "Auto-delete old maps",
-    description: "Remove maps older than 30 days automatically",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Auto-delete old maps",
+        description: "Remove maps after a retention window",
+      }),
+      "en-GB",
+      "offline-auto: auto-delete",
+    ),
     iconToken: "{icon.offline.delete}",
     iconClassName: "text-amber-400",
     defaultEnabled: true,
+    retentionDays: 30,
   },
   {
     id: "wifi-only",
-    title: "Wi-Fi-only downloads",
-    description: "Only download maps when connected to Wi-Fi",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Wi-Fi-only downloads",
+        description: "Download maps only on trusted networks",
+      }),
+      "en-GB",
+      "offline-auto: wifi-only",
+    ),
     iconToken: "{icon.offline.connectivity}",
     iconClassName: "text-accent",
     defaultEnabled: true,
   },
   {
     id: "auto-update",
-    title: "Auto-update maps",
-    description: "Automatically update maps when new versions are available",
+    localizations: fillLocalizations(
+      localizeAcrossLocales({
+        name: "Auto-update maps",
+        description: "Keep offline areas fresh in the background",
+      }),
+      "en-GB",
+      "offline-auto: auto-update",
+    ),
     iconToken: "{icon.offline.sync}",
     iconClassName: "text-purple-400",
     defaultEnabled: false,

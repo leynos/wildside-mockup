@@ -14,6 +14,8 @@ export interface TagDescriptor {
   readonly accentClass?: string;
 }
 
+export type TagId = TagDescriptor["id"];
+
 export type ResolvedTagDescriptor = TagDescriptor & { readonly localization: LocalizedStringSet };
 
 export const tagDescriptors: ReadonlyArray<TagDescriptor> = [

@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import { waterfrontDiscoveryRoute } from "../../data/map";
+import { type LocaleCode, pickLocalization } from "../../domain/entities/localization";
 
 type LngLatTuple = [number, number];
 
@@ -32,6 +33,7 @@ export interface MapStateActions {
   setViewport(options: SetViewportOptions): void;
   highlightPois(ids: readonly string[]): void;
   toggleLayer(id: string, visible: boolean): void;
+  setLocale(locale: LocaleCode): void;
   registerMap(map: MapLibreMap): void;
   unregisterMap(map: MapLibreMap): void;
 }
@@ -52,6 +54,7 @@ export interface MapStateStore {
 
 interface InternalState extends MapStateSnapshot {
   map: MapLibreMap | null;
+  locale: LocaleCode;
 }
 
 const DEFAULT_CENTER: LngLatTuple = [11.404, 47.267];
@@ -77,29 +80,43 @@ const poiCoordinates: Record<string, LngLatTuple> = {
   "skyline-bridge": [11.4078, 47.2712],
 };
 
-const poiData: FeatureCollection<Point, { id: string; name: string }> = {
-  type: "FeatureCollection",
-  features: waterfrontDiscoveryRoute.pointsOfInterest.map((poi) => {
-    const coordinates = poiCoordinates[poi.id] ?? DEFAULT_CENTER;
-    return {
-      type: "Feature",
-      id: poi.id,
-      properties: {
-        id: poi.id,
-        name: poi.name,
-      },
-      geometry: {
-        type: "Point",
-        coordinates,
-      },
-    };
-  }),
-};
+function buildPoiData(locale: LocaleCode): FeatureCollection<Point, { id: string; name: string }> {
+  // Filter out POIs with missing/invalid localizations to prevent map init crash
+  const validFeatures = waterfrontDiscoveryRoute.pointsOfInterest
+    .map((poi) => {
+      try {
+        const coordinates = poiCoordinates[poi.id] ?? DEFAULT_CENTER;
+        const localization = pickLocalization(poi.localizations, locale);
+        return {
+          type: "Feature" as const,
+          id: poi.id,
+          properties: {
+            id: poi.id,
+            name: localization.name,
+          },
+          geometry: {
+            type: "Point" as const,
+            coordinates,
+          },
+        };
+      } catch {
+        // Skip POIs with invalid localizations rather than crash the map
+        return null;
+      }
+    })
+    .filter((feature) => feature !== null);
+
+  return {
+    type: "FeatureCollection",
+    features: validFeatures,
+  };
+}
 
 function createInternalState(): InternalState {
   return {
     ...defaultSnapshot,
     map: null,
+    locale: "en-GB",
   };
 }
 
@@ -151,11 +168,11 @@ function createMapStateStore(): MapStateStore {
     });
   }
 
-  function ensureBaseLayers(map: MapLibreMap) {
+  function ensureBaseLayers(map: MapLibreMap, locale: LocaleCode) {
     if (!map.getSource("wildside-pois")) {
       map.addSource("wildside-pois", {
         type: "geojson",
-        data: poiData,
+        data: buildPoiData(locale),
       });
     }
 
@@ -250,7 +267,7 @@ function createMapStateStore(): MapStateStore {
       ...state,
       map,
     };
-    ensureBaseLayers(map);
+    ensureBaseLayers(map, state.locale);
     applyVisibleLayers(map, state.visibleLayers);
     applyHighlights(map, [], state.highlightedPoiIds);
     applyViewportToMap(map, state.viewport, false);
@@ -330,6 +347,23 @@ function createMapStateStore(): MapStateStore {
     }
   }
 
+  function setLocale(locale: LocaleCode) {
+    if (state.locale === locale) {
+      return;
+    }
+    state = {
+      ...state,
+      locale,
+    };
+    emit();
+    if (state.map) {
+      const source = state.map.getSource("wildside-pois") as GeoJSONSource | undefined;
+      if (source) {
+        source.setData(buildPoiData(locale));
+      }
+    }
+  }
+
   return {
     getSnapshot,
     subscribe,
@@ -337,6 +371,7 @@ function createMapStateStore(): MapStateStore {
       setViewport,
       highlightPois,
       toggleLayer,
+      setLocale,
       registerMap,
       unregisterMap,
     },

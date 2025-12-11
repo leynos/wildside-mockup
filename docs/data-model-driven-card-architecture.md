@@ -408,6 +408,10 @@ classDiagram
     localization maps; update cards and undo states.
   - Reshape `WalkPointOfInterest` and saved routes; ensure tags use registries
     and unit formatting covers all numerical values.
+- Status (6 Dec 2025): Offline suggestions/downloads now expose
+  localisation maps with SI sizes and relative timestamps; saved routes/POIs
+  resolve tags via registries and route metrics render through the unit
+  formatters.
 - **Phase 4: wizard & completion**
   - Move wizard route summary and generated stops to the shared route/stop
     schemas; delete entity strings from Fluent.

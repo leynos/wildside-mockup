@@ -2,13 +2,12 @@ import { afterAll, afterEach, beforeEach, describe, expect, it } from "bun:test"
 import { screen, within } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 import { act } from "react";
-import type { Root } from "react-dom/client";
-import { createRoot } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 import { OFFLINE_STORAGE_PLACEHOLDERS } from "../src/app/config/offline-metrics";
 import { advancedOptions, resolvedRoutePreviews } from "../src/app/data/customize";
-import type { WalkRouteSummary } from "../src/app/data/map";
-import { savedRoutes, waterfrontDiscoveryRoute } from "../src/app/data/map";
+import { savedRoutes, type WalkRouteSummary, waterfrontDiscoveryRoute } from "../src/app/data/map";
 import { getInterestDescriptor } from "../src/app/data/registries/interests";
+import { getTagDescriptor } from "../src/app/data/registries/tags";
 import { safetyAccordionSections, safetyToggles } from "../src/app/data/safety-fixtures";
 import { autoManagementOptions, walkCompletionShareOptions } from "../src/app/data/stage-four";
 import {
@@ -231,6 +230,25 @@ const buildOfflineDownloadsCopy = () => {
     undoAriaLabel,
   } as const;
 };
+
+const resolveRouteName = (
+  localizations: Parameters<typeof resolveLocalizationNameForTest>[0] | undefined,
+) =>
+  resolveLocalizationNameForTest(
+    localizations ?? {},
+    localizations?.["en-GB"]?.name ?? "Route",
+    i18n.language,
+  );
+
+const resolvePoiName = (poi: {
+  id: string;
+  localizations?: Parameters<typeof resolveLocalizationNameForTest>[0];
+}) =>
+  resolveLocalizationNameForTest(
+    poi.localizations ?? {},
+    poi.localizations?.["en-GB"]?.name ?? poi.id,
+    i18n.language,
+  );
 
 async function renderRoute(
   path: TestRoute,
@@ -635,10 +653,11 @@ describe("Stage 2 routed flows", () => {
 
     await user.click(saveAction);
 
+    const savedRouteName = resolveRouteName(savedRoute.localizations);
     const savedHeading = await screen.findByRole(
       "heading",
       {
-        name: localizedRegex(savedRoute.title),
+        name: localizedRegex(savedRouteName),
       },
       { timeout: 3000 },
     );
@@ -775,8 +794,9 @@ describe("Stage 2 routed flows", () => {
     const tabPanels = view.getAllByRole("tabpanel");
     expect(tabPanels.length).toBeGreaterThanOrEqual(3);
 
+    const itineraryRouteName = resolveRouteName(waterfrontDiscoveryRoute.localizations);
     const routeSummaryHeading = view.getByRole("heading", {
-      name: new RegExp(waterfrontDiscoveryRoute.title, "i"),
+      name: new RegExp(escapeRegExp(itineraryRouteName), "i"),
     });
     expect(routeSummaryHeading).toBeTruthy();
 
@@ -785,8 +805,9 @@ describe("Stage 2 routed flows", () => {
     expect(view.getByText(localizedRegex(itineraryMetrics.durationText))).toBeTruthy();
     expect(view.getByText(localizedRegex(itineraryMetrics.stopsText))).toBeTruthy();
 
-    waterfrontDiscoveryRoute.highlights.forEach((highlight) => {
-      expect(view.getAllByText(new RegExp(highlight, "i"))[0]).toBeTruthy();
+    waterfrontDiscoveryRoute.highlightTagIds.forEach((tagId) => {
+      const label = getTagDescriptor(tagId, i18n.language)?.localization.name ?? tagId;
+      expect(view.getAllByText(new RegExp(escapeRegExp(label), "i"))[0]).toBeTruthy();
     });
 
     const notesList = view.getByRole("list", { name: /route notes/i });
@@ -804,7 +825,7 @@ describe("Stage 2 routed flows", () => {
     waterfrontDiscoveryRoute.pointsOfInterest.forEach((poi) => {
       expect(
         within(stopsPanel).getByRole("button", {
-          name: new RegExp(poi.name, "i"),
+          name: new RegExp(escapeRegExp(resolvePoiName(poi)), "i"),
         }),
       ).toBeTruthy();
     });
@@ -858,12 +879,15 @@ describe("Stage 2 routed flows", () => {
     savedRoute.pointsOfInterest.forEach((poi) => {
       expect(
         within(stopsTabpanel).getByRole("button", {
-          name: new RegExp(poi.name, "i"),
+          name: new RegExp(escapeRegExp(resolvePoiName(poi)), "i"),
         }),
       ).toBeTruthy();
     });
 
-    expect(view.getByRole("heading", { name: new RegExp(savedRoute.title, "i") })).toBeTruthy();
+    const savedRouteName = resolveRouteName(savedRoute.localizations);
+    expect(
+      view.getByRole("heading", { name: new RegExp(escapeRegExp(savedRouteName), "i") }),
+    ).toBeTruthy();
     const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
       buildSavedRouteCopy(savedRoute);
 
@@ -1282,7 +1306,7 @@ describe("Stage 3 wizard flows", () => {
     const view = within(container);
     expect(
       view.getByRole("heading", {
-        name: new RegExp(savedRoute.title ?? "", "i"),
+        name: new RegExp(escapeRegExp(resolveRouteName(savedRoute.localizations)), "i"),
       }),
     ).toBeTruthy();
     const { savedDistanceCopy, savedDurationCopy, savedStopsCopy } =
@@ -1654,9 +1678,14 @@ describe("Stage 4 completion flows", () => {
   it("toggles auto-management switches", async () => {
     ({ mount, root } = await renderRoute("/offline"));
     const view = within(requireContainer(mount));
-    const switches = autoManagementOptions.map((option) =>
-      view.getByRole("switch", { name: new RegExp(option.title, "i") }),
-    );
+    const switches = autoManagementOptions.map((option) => {
+      const optionName = resolveLocalizationNameForTest(
+        option.localizations,
+        option.id,
+        i18n.language,
+      );
+      return view.getByRole("switch", { name: localizedRegex(optionName) });
+    });
     const firstSwitch = switches.at(0);
     if (!firstSwitch) {
       throw new Error("Expected at least one auto-management switch");
