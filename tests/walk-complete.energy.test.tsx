@@ -92,6 +92,34 @@ describe.serial("WalkComplete screen", () => {
     return dialog;
   };
 
+  const testShareChannelAriaLabels = async (locale: string): Promise<void> => {
+    await renderWalkComplete(locale, "metric");
+
+    walkCompletionShareOptions.forEach((option) => {
+      const localizedName = pickLocalization(option.localizations, locale).name;
+      expect(screen.getByRole("button", { name: localizedName })).toBeTruthy();
+    });
+
+    const dialog = await openShareDialog();
+    walkCompletionShareOptions.forEach((option) => {
+      const localizedName = pickLocalization(option.localizations, locale).name;
+      expect(within(dialog).getByText(localizedName)).toBeTruthy();
+    });
+  };
+
+  const testMomentAltText = async (locale: string): Promise<void> => {
+    await renderWalkComplete(locale, "metric");
+
+    walkCompletionMoments.forEach((moment) => {
+      const name = pickLocalization(moment.localizations, locale).name;
+      const momentCard = screen.getByText(name).closest("article");
+      if (!momentCard) {
+        throw new Error(`Expected moment "${name}" to be inside an article`);
+      }
+      expect(within(momentCard).getByRole("img", { name })).toBeTruthy();
+    });
+  };
+
   describe("WalkComplete energy stat", () => {
     it("shows kilojoules for metric locales", async () => {
       await renderWalkComplete("en-GB", "metric");
@@ -164,14 +192,7 @@ describe.serial("WalkComplete screen", () => {
 
   describe("WalkComplete moments section", () => {
     it("renders moment images with alt text from localized names", async () => {
-      await renderWalkComplete("en-GB", "metric");
-
-      walkCompletionMoments.forEach((moment) => {
-        const name = pickLocalization(moment.localizations, "en-GB").name;
-        const momentCard = screen.getByText(name).closest("article");
-        if (!momentCard) throw new Error(`Expected moment "${name}" to be inside an article`);
-        expect(within(momentCard).getByRole("img", { name })).toBeTruthy();
-      });
+      await testMomentAltText("en-GB");
     });
 
     it("renders moment descriptions", async () => {
@@ -187,25 +208,11 @@ describe.serial("WalkComplete screen", () => {
     });
 
     it("renders moment images with localized alt text in Spanish", async () => {
-      await renderWalkComplete("es", "metric");
-
-      walkCompletionMoments.forEach((moment) => {
-        const name = pickLocalization(moment.localizations, "es").name;
-        const momentCard = screen.getByText(name).closest("article");
-        if (!momentCard) throw new Error(`Expected moment "${name}" to be inside an article`);
-        expect(within(momentCard).getByRole("img", { name })).toBeTruthy();
-      });
+      await testMomentAltText("es");
     });
 
     it("renders moment images with localized alt text in Japanese", async () => {
-      await renderWalkComplete("ja", "metric");
-
-      walkCompletionMoments.forEach((moment) => {
-        const name = pickLocalization(moment.localizations, "ja").name;
-        const momentCard = screen.getByText(name).closest("article");
-        if (!momentCard) throw new Error(`Expected moment "${name}" to be inside an article`);
-        expect(within(momentCard).getByRole("img", { name })).toBeTruthy();
-      });
+      await testMomentAltText("ja");
     });
   });
 
@@ -234,48 +241,15 @@ describe.serial("WalkComplete screen", () => {
 
   describe("WalkComplete share controls ARIA labels in multiple locales", () => {
     it("share channel buttons have localized aria-labels in Spanish", async () => {
-      await renderWalkComplete("es", "metric");
-
-      walkCompletionShareOptions.forEach((option) => {
-        const localizedName = pickLocalization(option.localizations, "es").name;
-        expect(screen.getByRole("button", { name: localizedName })).toBeTruthy();
-      });
-
-      const dialog = await openShareDialog();
-      walkCompletionShareOptions.forEach((option) => {
-        const localizedName = pickLocalization(option.localizations, "es").name;
-        expect(within(dialog).getByText(localizedName)).toBeTruthy();
-      });
+      await testShareChannelAriaLabels("es");
     });
 
     it("share channel buttons have localized aria-labels in Arabic", async () => {
-      await renderWalkComplete("ar", "metric");
-
-      walkCompletionShareOptions.forEach((option) => {
-        const localizedName = pickLocalization(option.localizations, "ar").name;
-        expect(screen.getByRole("button", { name: localizedName })).toBeTruthy();
-      });
-
-      const dialog = await openShareDialog();
-      walkCompletionShareOptions.forEach((option) => {
-        const localizedName = pickLocalization(option.localizations, "ar").name;
-        expect(within(dialog).getByText(localizedName)).toBeTruthy();
-      });
+      await testShareChannelAriaLabels("ar");
     });
 
     it("share channel buttons have localized aria-labels in Korean", async () => {
-      await renderWalkComplete("ko", "metric");
-
-      walkCompletionShareOptions.forEach((option) => {
-        const localizedName = pickLocalization(option.localizations, "ko").name;
-        expect(screen.getByRole("button", { name: localizedName })).toBeTruthy();
-      });
-
-      const dialog = await openShareDialog();
-      walkCompletionShareOptions.forEach((option) => {
-        const localizedName = pickLocalization(option.localizations, "ko").name;
-        expect(within(dialog).getByText(localizedName)).toBeTruthy();
-      });
+      await testShareChannelAriaLabels("ko");
     });
   });
 });
