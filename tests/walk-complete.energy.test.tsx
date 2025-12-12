@@ -17,6 +17,10 @@ import { renderWithProviders } from "./utils/render-with-providers";
 const navigateSpy = vi.fn();
 vi.spyOn(router, "useNavigate").mockReturnValue(navigateSpy);
 
+afterAll(() => {
+  vi.restoreAllMocks();
+});
+
 const renderWalkComplete = async (locale: string, unitSystem?: "metric" | "imperial") => {
   await setupI18nTestHarness();
   const i18n = (await import("../src/i18n")).default;
@@ -40,10 +44,6 @@ describe("WalkComplete energy stat", () => {
     localStorage.clear();
   });
 
-  afterAll(() => {
-    vi.restoreAllMocks();
-  });
-
   it("shows kilojoules for metric locales", async () => {
     await renderWalkComplete("en-GB", "metric");
 
@@ -64,15 +64,11 @@ describe("WalkComplete stat labels in non-default locales", () => {
     localStorage.clear();
   });
 
-  afterAll(() => {
-    vi.restoreAllMocks();
-  });
-
   it("renders primary stat labels in Spanish", async () => {
     await renderWalkComplete("es", "metric");
 
-    const distanceStat = walkCompletionPrimaryStats[0];
-    const durationStat = walkCompletionPrimaryStats[1];
+    const distanceStat = walkCompletionPrimaryStats.find((s) => s.id === "distance");
+    const durationStat = walkCompletionPrimaryStats.find((s) => s.id === "duration");
     expect(distanceStat).toBeDefined();
     expect(durationStat).toBeDefined();
     if (!distanceStat || !durationStat) return;
@@ -99,9 +95,9 @@ describe("WalkComplete stat labels in non-default locales", () => {
   it("renders stat labels in Japanese", async () => {
     await renderWalkComplete("ja", "metric");
 
-    const distanceStat = walkCompletionPrimaryStats[0];
+    const distanceStat = walkCompletionPrimaryStats.find((s) => s.id === "distance");
     expect(distanceStat).toBeDefined();
-    if (!distanceStat) return;
+    if (!distanceStat) throw new Error("Missing primary stat: distance");
 
     const distanceLabel = pickLocalization(distanceStat.localizations, "ja").name;
     expect(screen.getByText(distanceLabel)).toBeTruthy();
@@ -111,10 +107,6 @@ describe("WalkComplete stat labels in non-default locales", () => {
 describe("WalkComplete moments section", () => {
   beforeEach(() => {
     localStorage.clear();
-  });
-
-  afterAll(() => {
-    vi.restoreAllMocks();
   });
 
   it("renders moment images with alt text from localized names", async () => {
@@ -181,10 +173,6 @@ describe("WalkComplete ARIA labels", () => {
     localStorage.clear();
   });
 
-  afterAll(() => {
-    vi.restoreAllMocks();
-  });
-
   it("share button has accessible label", async () => {
     await renderWalkComplete("en-GB", "metric");
 
@@ -210,10 +198,6 @@ describe("WalkComplete ARIA labels", () => {
 describe("WalkComplete share controls ARIA labels in multiple locales", () => {
   beforeEach(() => {
     localStorage.clear();
-  });
-
-  afterAll(() => {
-    vi.restoreAllMocks();
   });
 
   it("share channel buttons have localized aria-labels in Spanish", async () => {

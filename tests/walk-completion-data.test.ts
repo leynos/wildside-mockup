@@ -1,3 +1,5 @@
+/** @file Walk completion stage-four localisation fixtures tests. */
+
 import { describe, expect, it } from "bun:test";
 
 import {
@@ -22,7 +24,7 @@ const testStatLocalization = (
 ) => {
   const stat = stats.find((s) => s.id === statId);
   expect(stat).toBeDefined();
-  if (!stat) return;
+  if (!stat) throw new Error(`Missing stat with id ${statId}`);
 
   testLocales.forEach((locale) => {
     const localized = pickLocalization(stat.localizations, locale);
@@ -95,6 +97,16 @@ describe("walkCompletionMoments localizations", () => {
     const localized = pickLocalization(coffeeMoment.localizations, "en-GB");
     expect(localized.name).toBe("Blue Bottle Coffee");
     expect(localized.description).toBe("Perfect cortado & friendly barista");
+  });
+
+  it("coffee moment has non-English localisations", () => {
+    const coffeeMoment = walkCompletionMoments.find((m) => m.id === "coffee");
+    expect(coffeeMoment).toBeDefined();
+    if (!coffeeMoment) throw new Error("Missing moment: coffee");
+
+    const es = pickLocalization(coffeeMoment.localizations, "es");
+    expect(es.name).toBeTruthy();
+    expect(es.description).toBeTruthy();
   });
 
   it("mural moment has correct English localization", () => {

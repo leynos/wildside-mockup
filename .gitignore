@@ -5,6 +5,8 @@ dist/
 .bun-install/
 .bun-cache/
 tmp/
+.tmp/
+.serena/
 
 tokens/node_modules/
 tokens/dist/
