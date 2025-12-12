@@ -12,12 +12,19 @@ export type { OfflineSuggestion } from "./offline-models";
  * The URL normalisation collapses duplicate slashes whilst preserving protocol
  * separators (so `https://example.com//foo` remains a valid absolute URL).
  *
+ * Absolute URLs (including protocol-relative ones) are returned unchanged so
+ * fixture authors can reference remote thumbnails when needed.
+ *
  * @example
  * // BASE_URL = "/app/"
  * // path = "images/foo.png"
  * // url = "/app/images/foo.png"
  */
 const withBasePath = (path: string, alt: string): ImageAsset => {
+  if (/^(https?:)?\/\//u.test(path) || /^[a-zA-Z][a-zA-Z\d+\-.]*:/u.test(path)) {
+    return { url: path, alt };
+  }
+
   const base = import.meta.env.BASE_URL ?? "/";
   const normalisedBase = base.endsWith("/") ? base : `${base}/`;
   const cleanedPath = path.replace(/^\/+/, "");
@@ -25,6 +32,13 @@ const withBasePath = (path: string, alt: string): ImageAsset => {
   const url = `${normalisedBase}${cleanedPath}`.replace(/([^:]\/)\/+/g, "$1");
   return { url, alt };
 };
+
+const localise = (
+  base: Parameters<typeof localizeAcrossLocales>[0],
+  overrides: Parameters<typeof localizeAcrossLocales>[1] = {},
+  context?: string,
+): EntityLocalizations =>
+  fillLocalizations(localizeAcrossLocales(base, overrides), "en-GB", context);
 
 /**
  * A downloaded offline map area with progress and status metadata.
@@ -57,8 +71,10 @@ export interface OfflineMapArea {
  * @property defaultEnabled - Whether the option is enabled by default.
  * @property retentionDays - Number of days to retain maps (for auto-delete option).
  */
+export type AutoManagementOptionId = "auto-delete" | "wifi-only" | "auto-update";
+
 export interface AutoManagementOption {
-  readonly id: string;
+  readonly id: AutoManagementOptionId;
   readonly localizations: EntityLocalizations;
   readonly iconToken: string;
   readonly iconClassName: string;
@@ -71,12 +87,9 @@ export { offlineSuggestions } from "./offline-fixtures";
 export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
   {
     id: "nyc",
-    localizations: fillLocalizations(
-      localizeAcrossLocales(
-        { name: "New York, NY", description: "Downtown and Brooklyn offline pack" },
-        { es: { name: "Nueva York, NY", description: "Paquete offline de Downtown y Brooklyn" } },
-      ),
-      "en-GB",
+    localizations: localise(
+      { name: "New York, NY", description: "Downtown and Brooklyn offline pack" },
+      { es: { name: "Nueva York, NY", description: "Paquete offline de Downtown y Brooklyn" } },
       "offline-area: nyc",
     ),
     image: withBasePath("images/empire.png", "Empire State Building viewed from above"),
@@ -87,12 +100,9 @@ export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
   },
   {
     id: "sf",
-    localizations: fillLocalizations(
-      localizeAcrossLocales(
-        { name: "San Francisco, CA", description: "Waterfront and downtown core" },
-        { es: { name: "San Francisco, CA", description: "Embarcadero y centro de la ciudad" } },
-      ),
-      "en-GB",
+    localizations: localise(
+      { name: "San Francisco, CA", description: "Waterfront and downtown core" },
+      { es: { name: "San Francisco, CA", description: "Embarcadero y centro de la ciudad" } },
       "offline-area: sf",
     ),
     image: withBasePath("images/goldengate.png", "Golden Gate Bridge from an overlook"),
@@ -103,12 +113,9 @@ export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
   },
   {
     id: "london",
-    localizations: fillLocalizations(
-      localizeAcrossLocales(
-        { name: "London, UK", description: "Central London with Thames overlays" },
-        { es: { name: "Londres, Reino Unido", description: "Centro de Londres y el Támesis" } },
-      ),
-      "en-GB",
+    localizations: localise(
+      { name: "London, UK", description: "Central London with Thames overlays" },
+      { es: { name: "Londres, Reino Unido", description: "Centro de Londres y el Támesis" } },
       "offline-area: london",
     ),
     image: withBasePath("images/londoneye.png", "London skyline with the London Eye"),
@@ -122,12 +129,9 @@ export const offlineMapAreas: ReadonlyArray<OfflineMapArea> = [
 export const autoManagementOptions: ReadonlyArray<AutoManagementOption> = [
   {
     id: "auto-delete",
-    localizations: fillLocalizations(
-      localizeAcrossLocales({
-        name: "Auto-delete old maps",
-        description: "Remove maps after a retention window",
-      }),
-      "en-GB",
+    localizations: localise(
+      { name: "Auto-delete old maps", description: "Remove maps after a retention window" },
+      {},
       "offline-auto: auto-delete",
     ),
     iconToken: "{icon.offline.delete}",
@@ -137,12 +141,9 @@ export const autoManagementOptions: ReadonlyArray<AutoManagementOption> = [
   },
   {
     id: "wifi-only",
-    localizations: fillLocalizations(
-      localizeAcrossLocales({
-        name: "Wi-Fi-only downloads",
-        description: "Download maps only on trusted networks",
-      }),
-      "en-GB",
+    localizations: localise(
+      { name: "Wi-Fi-only downloads", description: "Download maps only on trusted networks" },
+      {},
       "offline-auto: wifi-only",
     ),
     iconToken: "{icon.offline.connectivity}",
@@ -151,12 +152,9 @@ export const autoManagementOptions: ReadonlyArray<AutoManagementOption> = [
   },
   {
     id: "auto-update",
-    localizations: fillLocalizations(
-      localizeAcrossLocales({
-        name: "Auto-update maps",
-        description: "Keep offline areas fresh in the background",
-      }),
-      "en-GB",
+    localizations: localise(
+      { name: "Auto-update maps", description: "Keep offline areas fresh in the background" },
+      {},
       "offline-auto: auto-update",
     ),
     iconToken: "{icon.offline.sync}",

@@ -9,6 +9,7 @@ import { screen } from "@testing-library/react";
 import { wizardGeneratedStops, wizardRouteSummary } from "../src/app/data/wizard";
 import { pickLocalization } from "../src/app/domain/entities/localization";
 import { WizardStepThreeView } from "../src/app/features/wizard/step-three/step-three-screen";
+import { formatDistance } from "../src/app/units/unit-format";
 import { createStubT } from "./i18n-stub";
 import { renderWithProviders } from "./utils/render-with-providers";
 
@@ -27,10 +28,28 @@ describe("wizard step-three stop note distance interpolation", () => {
 
   it("renders stop note with interpolated distance", () => {
     const { t, calls } = createStubT();
+    const stop = wizardGeneratedStops.find((candidate) => candidate.id === "art");
+    expect(stop).toBeDefined();
+    if (!stop) throw new Error("Expected wizard stops fixture to include art stop");
+    if (stop.noteDistanceMetres == null) {
+      throw new Error("Expected art stop to include noteDistanceMetres");
+    }
 
     renderWithProviders(
       <WizardStepThreeView t={t} language="en-GB" unitSystem="metric" navigateTo={() => {}} />,
     );
+
+    const note = pickLocalization(stop.noteLocalizations, "en-GB").name;
+    const formatted = formatDistance(stop.noteDistanceMetres, {
+      t,
+      locale: "en-GB",
+      unitSystem: "metric",
+    });
+    const hasLeadingWhitespace = /^[\s\u00A0\u202F]/u.test(formatted.unitLabel);
+    const distance = `${formatted.value}${hasLeadingWhitespace ? "" : " "}${formatted.unitLabel}`;
+    const expected = `${note} • ${distance}`;
+
+    expect(screen.getByText(expected)).toBeTruthy();
 
     const interpolationCall = calls.find(
       (call) => call.key === "wizard-step-three-stop-note-with-distance",
@@ -41,16 +60,8 @@ describe("wizard step-three stop note distance interpolation", () => {
     }
 
     const options = interpolationCall.options as { note?: unknown; distance?: unknown };
-    const note = options.note;
-    const distance = options.distance;
-    if (typeof note !== "string") {
-      throw new Error("Expected stop note translation call option 'note' to be a string");
-    }
-    if (typeof distance !== "string") {
-      throw new Error("Expected stop note translation call option 'distance' to be a string");
-    }
-
-    expect(screen.getByText(`${note} • ${distance}`)).toBeTruthy();
+    expect(options.note).toBe(note);
+    expect(options.distance).toBe(distance);
   });
 
   it("stop notes have localizations for multiple locales", () => {
@@ -59,9 +70,28 @@ describe("wizard step-three stop note distance interpolation", () => {
     wizardGeneratedStops.forEach((stop) => {
       testLocales.forEach((locale) => {
         const noteLocalized = pickLocalization(stop.noteLocalizations, locale);
-        expect(noteLocalized.name).toBeTruthy();
+        expect(typeof noteLocalized.name).toBe("string");
+        expect(noteLocalized.name.length).toBeGreaterThan(0);
       });
     });
+
+    const cafeStop = wizardGeneratedStops.find((stop) => stop.id === "café");
+    expect(cafeStop).toBeDefined();
+    if (!cafeStop) throw new Error("Expected wizard stops fixture to include café stop");
+    const spanishCafeNote = pickLocalization(cafeStop.noteLocalizations, "es").name;
+    expect(spanishCafeNote).toBe("Baristas amables, ideal para llevar");
+
+    const artStop = wizardGeneratedStops.find((stop) => stop.id === "art");
+    expect(artStop).toBeDefined();
+    if (!artStop) throw new Error("Expected wizard stops fixture to include art stop");
+    const germanArtNote = pickLocalization(artStop.noteLocalizations, "de").name;
+    expect(germanArtNote).toBe("Fotospot");
+
+    const gardenStop = wizardGeneratedStops.find((stop) => stop.id === "garden");
+    expect(gardenStop).toBeDefined();
+    if (!gardenStop) throw new Error("Expected wizard stops fixture to include garden stop");
+    const frenchGardenNote = pickLocalization(gardenStop.noteLocalizations, "fr").name;
+    expect(frenchGardenNote).toBe("Zone de repos");
   });
 });
 
@@ -75,7 +105,8 @@ describe("wizard step-three badge localization", () => {
 
     testLocales.forEach((locale) => {
       const badgeLocalized = pickLocalization(wizardRouteSummary.badgeLocalizations, locale);
-      expect(badgeLocalized.name).toBeTruthy();
+      expect(typeof badgeLocalized.name).toBe("string");
+      expect(badgeLocalized.name.length).toBeGreaterThan(0);
     });
   });
 
@@ -98,8 +129,10 @@ describe("wizard step-three badge localization", () => {
 describe("wizard step-three route description localization", () => {
   it("route has description in localizations", () => {
     const enGbRoute = pickLocalization(wizardRouteSummary.localizations, "en-GB");
-    expect(enGbRoute.description).toBeTruthy();
-    expect(enGbRoute.description?.toLowerCase()).toContain("street-art");
+    if (typeof enGbRoute.description !== "string") {
+      throw new Error("Expected en-GB route description to be a string");
+    }
+    expect(enGbRoute.description.toLowerCase()).toContain("street-art");
   });
 
   it("route description has localizations for multiple locales", () => {
@@ -107,14 +140,19 @@ describe("wizard step-three route description localization", () => {
 
     testLocales.forEach((locale) => {
       const localized = pickLocalization(wizardRouteSummary.localizations, locale);
-      expect(localized.description).toBeTruthy();
+      if (typeof localized.description !== "string") {
+        throw new Error(`Expected ${locale} route description to be a string`);
+      }
+      expect(localized.description.length).toBeGreaterThan(0);
     });
   });
 
   it("Spanish route description is properly translated", () => {
     const spanishRoute = pickLocalization(wizardRouteSummary.localizations, "es");
-    expect(spanishRoute.description).toBeTruthy();
+    if (typeof spanishRoute.description !== "string") {
+      throw new Error("Expected Spanish route description to be a string");
+    }
     // Spanish should have "arte urbano" for street art
-    expect(spanishRoute.description?.toLowerCase()).toContain("arte urbano");
+    expect(spanishRoute.description.toLowerCase()).toContain("arte urbano");
   });
 });

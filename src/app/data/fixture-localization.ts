@@ -75,21 +75,23 @@ export const localisation = (
 ): EntityLocalizations =>
   fillLocalizations(localizeAcrossLocales(base, overrides), DEFAULT_LOCALE as LocaleCode, context);
 
+type BrandTransliterationLocale = Extract<
+  LocaleCode,
+  "ar" | "el" | "he" | "hi" | "ja" | "ko" | "ru" | "ta" | "th" | "zh-CN" | "zh-TW"
+>;
+
 /**
  * Create localizations for brand names that need transliteration in specific scripts.
  * Most locales use the original brand name, but RTL and non-Latin scripts may need overrides.
  *
  * @param latinName - The brand name in Latin script (e.g., "Facebook")
- * @param scriptOverrides - Names for locales using non-Latin scripts (ar, he, hi, ko, ta).
- *   This intentionally targets the scripts where we most commonly transliterate brand names in the UI; most other
- *   supported locales keep the Latin spelling rather than introducing a locale-specific translation.
+ * @param scriptOverrides - Locale overrides for scripts that commonly transliterate brand names.
+ *   This is intentionally a narrow set to keep call sites explicit, but includes the major non-Latin locales we ship.
  * @param context - Optional context string for debugging
  */
 export const brandLocalizations = (
   latinName: string,
-  // Only RTL and select Indic/CJK scripts typically transliterate brand names; Japanese, Chinese, Thai, Greek, and
-  // Cyrillic usually retain the Latin spellings shown in apps and maps.
-  scriptOverrides: Partial<Record<"ar" | "he" | "hi" | "ko" | "ta", string>> = {},
+  scriptOverrides: Partial<Record<BrandTransliterationLocale, string>> = {},
   context?: string,
 ): EntityLocalizations => {
   const overrides: Partial<Record<LocaleCode, BaseLocalization>> = {};

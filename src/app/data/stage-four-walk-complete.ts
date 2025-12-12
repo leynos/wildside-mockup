@@ -41,6 +41,7 @@ export const walkCompletionPrimaryStats = [
           el: { name: "Απόσταση" },
           es: { name: "Distancia" },
           fi: { name: "Matka" },
+          fr: { name: "Distance" },
           gd: { name: "Astar" },
           he: { name: "מרחק" },
           hi: { name: "दूरी" },
@@ -148,7 +149,7 @@ export const walkCompletionSecondaryStats = [
       "stat: energy",
     ),
     value: { kind: "energy", kilocalories: 247 },
-    iconToken: "{icon.object.calories}",
+    iconToken: "{icon.object.energy}",
   },
   {
     id: "stops",
@@ -171,6 +172,7 @@ export const walkCompletionSecondaryStats = [
           ja: { name: "立ち寄り" },
           ko: { name: "정차" },
           nb: { name: "Stopp" },
+          nl: { name: "Haltes" },
           pl: { name: "Przystanki" },
           pt: { name: "Paragens" },
           ru: { name: "Остановки" },
@@ -231,13 +233,15 @@ export const walkCompletionSecondaryStats = [
   },
 ] as const satisfies ReadonlyArray<WalkCompletionStat>;
 
+export type WalkCompletionMomentId = "coffee" | "mural" | "park";
+
 export interface WalkCompletionMoment {
-  readonly id: string;
+  readonly id: WalkCompletionMomentId;
   readonly localizations: EntityLocalizations;
   readonly imageUrl: string;
 }
 
-export const walkCompletionMoments: ReadonlyArray<WalkCompletionMoment> = [
+export const walkCompletionMoments = [
   {
     id: "coffee",
     localizations: coffeeMomentLocalizations,
@@ -256,16 +260,18 @@ export const walkCompletionMoments: ReadonlyArray<WalkCompletionMoment> = [
     imageUrl:
       "https://storage.googleapis.com/uxpilot-auth.appspot.com/ad4258f4ad-817a02de971280a8ef8b.png",
   },
-];
+] as const satisfies ReadonlyArray<WalkCompletionMoment>;
+
+export type WalkCompletionShareOptionId = "facebook" | "instagram" | "twitter";
 
 export interface WalkCompletionShareOption {
-  readonly id: string;
+  readonly id: WalkCompletionShareOptionId;
   readonly localizations: EntityLocalizations;
   readonly iconToken: string;
   readonly accentClass: string;
 }
 
-export const walkCompletionShareOptions: ReadonlyArray<WalkCompletionShareOption> = [
+export const walkCompletionShareOptions = [
   {
     id: "facebook",
     localizations: brandLocalizations(
@@ -288,23 +294,24 @@ export const walkCompletionShareOptions: ReadonlyArray<WalkCompletionShareOption
   },
   {
     id: "twitter",
-    localizations: fillLocalizations(
+    // Prefer full-width brackets in CJK locales to match common typographic styling.
+    localizations: brandLocalizations(
+      "X (Twitter)",
       {
-        ...brandLocalizations(
-          "X (Twitter)",
-          { ar: "X ‏(تويتر)", he: "X ‏(טוויטר)", hi: "X (ट्विटर)", ko: "X(트위터)", ta: "X (ட்விட்டர்)" },
-          "share-option: twitter",
-        ),
-        ja: { name: "X（Twitter）" },
-        "zh-CN": { name: "X（Twitter）" },
-        "zh-TW": { name: "X（Twitter）" },
+        ar: "X ‏(تويتر)",
+        he: "X ‏(טוויטר)",
+        hi: "X (ट्विटर)",
+        ja: "X（Twitter）",
+        ko: "X(트위터)",
+        ta: "X (ட்விட்டர்)",
+        "zh-CN": "X（Twitter）",
+        "zh-TW": "X（Twitter）",
       },
-      "en-GB",
       "share-option: twitter",
     ),
     iconToken: "{icon.brand.x}",
     accentClass: "bg-blue-400",
   },
-];
+] as const satisfies ReadonlyArray<WalkCompletionShareOption>;
 
 export const walkCompletionMapImage = walkRouteMap1;

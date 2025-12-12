@@ -36,7 +36,8 @@ const unitTokenToKey = {
 
 const formatValueWithUnitLabel = (value: string, unitLabel: string): string => {
   if (!unitLabel) return value;
-  return `${value}${unitLabel.startsWith(" ") ? "" : " "}${unitLabel}`;
+  const hasLeadingWhitespace = /^[\s\u00A0\u202F]/u.test(unitLabel);
+  return `${value}${hasLeadingWhitespace ? "" : " "}${unitLabel}`;
 };
 
 type WizardSummaryPanelProps = WizardSectionProps & {
@@ -58,11 +59,14 @@ function WizardSummaryPanel({
   );
 }
 
+type NavigateFn = ReturnType<typeof useNavigate>;
+type NavigateTo = NonNullable<Parameters<NavigateFn>[0]["to"]>;
+
 export interface WizardStepThreeViewProps {
   readonly t: TFunction;
   readonly language: string;
   readonly unitSystem: UnitSystem;
-  readonly navigateTo: (to: string) => void;
+  readonly navigateTo: (to: NavigateTo) => void;
 }
 
 export function WizardStepThreeView({
@@ -289,7 +293,7 @@ export function WizardStepThree(): JSX.Element {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { unitSystem } = useUnitPreferences();
-  const navigateTo = useCallback((to: string) => navigate({ to }), [navigate]);
+  const navigateTo = useCallback((to: NavigateTo) => navigate({ to }), [navigate]);
 
   return (
     <WizardStepThreeView
