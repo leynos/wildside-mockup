@@ -49,7 +49,7 @@ describe("wizard step-three stop note distance interpolation", () => {
     const distance = `${formatted.value}${hasLeadingWhitespace ? "" : " "}${formatted.unitLabel}`;
     const expected = `${note} • ${distance}`;
 
-    expect(screen.getByText(expected)).toBeTruthy();
+    screen.getByText(expected);
 
     const interpolationCall = calls.find(
       (call) => call.key === "wizard-step-three-stop-note-with-distance",

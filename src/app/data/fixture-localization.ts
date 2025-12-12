@@ -96,10 +96,9 @@ export const brandLocalizations = (
 ): EntityLocalizations => {
   const overrides: Partial<Record<LocaleCode, BaseLocalization>> = {};
 
-  for (const [locale, name] of Object.entries(scriptOverrides)) {
-    if (name) {
-      overrides[locale as LocaleCode] = { name };
-    }
+  for (const locale of Object.keys(scriptOverrides) as BrandTransliterationLocale[]) {
+    const name = scriptOverrides[locale];
+    if (name) overrides[locale] = { name };
   }
 
   return fillLocalizations(
