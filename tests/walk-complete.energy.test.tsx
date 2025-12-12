@@ -19,10 +19,12 @@ import { renderWithProviders } from "./utils/render-with-providers";
 type StorageSnapshot = ReadonlyArray<readonly [string, string]>;
 
 const snapshotLocalStorage = (): StorageSnapshot =>
-  Object.keys(localStorage).map((key) => {
-    const value = localStorage.getItem(key);
-    return [key, value ?? ""] as const;
-  });
+  Object.keys(localStorage)
+    .sort()
+    .map((key) => {
+      const value = localStorage.getItem(key);
+      return [key, value ?? ""] as const;
+    });
 
 const restoreLocalStorage = (snapshot: StorageSnapshot) => {
   localStorage.clear();
@@ -42,8 +44,8 @@ const getStatCardByLabel = (label: string): HTMLElement => {
 
 describe.serial("WalkComplete screen", () => {
   const navigateSpy = vi.fn();
-  let i18n: typeof import("../src/i18n")["default"];
-  let localStorageSnapshot: StorageSnapshot;
+  let i18n: typeof import("../src/i18n")["default"] | undefined;
+  let localStorageSnapshot: StorageSnapshot | undefined;
 
   beforeAll(async () => {
     vi.spyOn(router, "useNavigate").mockReturnValue(navigateSpy);
@@ -57,12 +59,22 @@ describe.serial("WalkComplete screen", () => {
 
   afterEach(async () => {
     cleanup();
-    restoreLocalStorage(localStorageSnapshot);
+    if (localStorageSnapshot) {
+      restoreLocalStorage(localStorageSnapshot);
+    } else {
+      localStorage.clear();
+    }
+    localStorageSnapshot = undefined;
     navigateSpy.mockClear();
-    await i18n.changeLanguage("en-GB");
+    if (i18n) {
+      await i18n.changeLanguage("en-GB");
+    }
   });
 
   const renderWalkComplete = async (locale: string, unitSystem?: "metric" | "imperial") => {
+    if (!i18n) {
+      throw new Error("Expected i18n to be initialized before rendering WalkCompleteScreen");
+    }
     localStorageSnapshot = snapshotLocalStorage();
     await i18n.changeLanguage(locale);
 
@@ -80,30 +92,48 @@ describe.serial("WalkComplete screen", () => {
   };
 
   const openShareDialog = async (): Promise<HTMLElement> => {
+    if (!i18n) {
+      throw new Error("Expected i18n to be initialized before opening the share dialog");
+    }
     const shareActionLabel = i18n.t("walk-complete-actions-share", { defaultValue: "Share" });
     const shareDialogTitle = i18n.t("walk-complete-share-dialog-title", {
-      defaultValue: "Share your adventure",
+      defaultValue: "Share highlights",
     });
 
     fireEvent.click(screen.getByRole("button", { name: shareActionLabel }));
 
     const dialog = await screen.findByRole("dialog");
-    expect(within(dialog).getByText(shareDialogTitle)).toBeTruthy();
+    within(dialog).getByText(shareDialogTitle);
     return dialog;
   };
 
   const testShareChannelAriaLabels = async (locale: string): Promise<void> => {
     await renderWalkComplete(locale, "metric");
 
+    if (!i18n) {
+      throw new Error("Expected i18n to be initialized before asserting share channel labels");
+    }
+
+    const shareSectionHeading = i18n.t("walk-complete-share-section", {
+      defaultValue: "Share your adventure",
+    });
+    const shareHeading = screen.getByRole("heading", { name: shareSectionHeading });
+    const shareSection = shareHeading.closest("section");
+    if (!shareSection) {
+      throw new Error(
+        `Expected share section heading "${shareSectionHeading}" to be inside a section`,
+      );
+    }
+
     walkCompletionShareOptions.forEach((option) => {
       const localizedName = pickLocalization(option.localizations, locale).name;
-      expect(screen.getByRole("button", { name: localizedName })).toBeTruthy();
+      within(shareSection).getByRole("button", { name: localizedName });
     });
 
     const dialog = await openShareDialog();
     walkCompletionShareOptions.forEach((option) => {
       const localizedName = pickLocalization(option.localizations, locale).name;
-      expect(within(dialog).getByText(localizedName)).toBeTruthy();
+      within(dialog).getByRole("button", { name: localizedName });
     });
   };
 
@@ -240,16 +270,15 @@ describe.serial("WalkComplete screen", () => {
   });
 
   describe("WalkComplete share controls ARIA labels in multiple locales", () => {
-    it("share channel buttons have localized aria-labels in Spanish", async () => {
-      await testShareChannelAriaLabels("es");
-    });
-
-    it("share channel buttons have localized aria-labels in Arabic", async () => {
-      await testShareChannelAriaLabels("ar");
-    });
-
-    it("share channel buttons have localized aria-labels in Korean", async () => {
-      await testShareChannelAriaLabels("ko");
-    });
+    it.each([
+      ["Spanish", "es"],
+      ["Arabic", "ar"],
+      ["Korean", "ko"],
+    ] as const)(
+      "share channel buttons have localized aria-labels in %s",
+      async (_label, locale) => {
+        await testShareChannelAriaLabels(locale);
+      },
+    );
   });
 });

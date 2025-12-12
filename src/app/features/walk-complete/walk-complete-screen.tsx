@@ -337,10 +337,15 @@ export function WalkCompleteScreen(): JSX.Element {
             </Dialog.Description>
             <div className="flex flex-wrap gap-2 text-sm text-base-content/80">
               {walkCompletionShareOptions.map((option) => (
-                <span key={option.id} className="walk-share__option">
+                <button
+                  key={option.id}
+                  type="button"
+                  aria-label={shareChannelLabels[option.id]}
+                  className="walk-share__option"
+                >
                   <Icon token={option.iconToken} aria-hidden />
                   {shareChannelLabels[option.id]}
-                </span>
+                </button>
               ))}
             </div>
             <div className="flex justify-end gap-2">
