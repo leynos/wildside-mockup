@@ -16,16 +16,27 @@ import {
   wizardSummaryHighlights,
 } from "../../../data/wizard";
 import { pickLocalization } from "../../../domain/entities/localization";
-import { formatDistance } from "../../../units/unit-format";
+import { formatDistance, type UnitToken } from "../../../units/unit-format";
 import { useUnitPreferences } from "../../../units/unit-preferences-provider";
 import type { UnitSystem } from "../../../units/unit-system";
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
 
-/** Maps unit tokens to translation key suffixes for stop distance units. */
-const unitTokenToSuffix: Record<string, string> = {
-  "distance-mile": "mi",
-  "distance-kilometre": "km",
+type DistanceUnitToken = Extract<UnitToken, "distance-mile" | "distance-kilometre">;
+
+type StopDistanceUnitKey =
+  | "wizard-step-three-stop-distance-unit-km"
+  | "wizard-step-three-stop-distance-unit-mi";
+
+/** Maps unit tokens to translation keys for stop distance units. */
+const unitTokenToKey = {
+  "distance-mile": "wizard-step-three-stop-distance-unit-mi",
+  "distance-kilometre": "wizard-step-three-stop-distance-unit-km",
+} as const satisfies Record<DistanceUnitToken, StopDistanceUnitKey>;
+
+const formatValueWithUnitLabel = (value: string, unitLabel: string): string => {
+  if (!unitLabel) return value;
+  return `${value}${unitLabel.startsWith(" ") ? "" : " "}${unitLabel}`;
 };
 
 type WizardSummaryPanelProps = WizardSectionProps & {
@@ -220,10 +231,12 @@ export function WizardStepThreeView({
                       locale: language,
                       unitSystem,
                     });
-                    const unitKeySuffix =
-                      unitTokenToSuffix[formatted.unitToken] ??
-                      (unitSystem === "imperial" ? "mi" : "km");
-                    const unitLabel = t(`wizard-step-three-stop-distance-unit-${unitKeySuffix}`, {
+                    const unitKey =
+                      unitTokenToKey[formatted.unitToken as DistanceUnitToken] ??
+                      (unitSystem === "imperial"
+                        ? "wizard-step-three-stop-distance-unit-mi"
+                        : "wizard-step-three-stop-distance-unit-km");
+                    const unitLabel = t(unitKey, {
                       defaultValue: formatted.unitLabel,
                     });
                     return { ...formatted, unitLabel };
@@ -232,7 +245,7 @@ export function WizardStepThreeView({
             const note = distanceLabel
               ? t("wizard-step-three-stop-note-with-distance", {
                   note: noteLocalized.name,
-                  distance: `${distanceLabel.value} ${distanceLabel.unitLabel}`,
+                  distance: formatValueWithUnitLabel(distanceLabel.value, distanceLabel.unitLabel),
                   defaultValue: "{{note}} • {{distance}}",
                 })
               : noteLocalized.name;

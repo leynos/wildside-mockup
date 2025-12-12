@@ -1,3 +1,8 @@
+/**
+ * @file Tests for wizard step-three localisation, covering stop note interpolation, badge labels,
+ * and route description copy.
+ */
+
 import { describe, expect, it } from "bun:test";
 import { screen } from "@testing-library/react";
 

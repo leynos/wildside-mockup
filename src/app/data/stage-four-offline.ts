@@ -5,6 +5,18 @@ import { fillLocalizations, localizeAcrossLocales } from "./fixture-localization
 
 export type { OfflineSuggestion } from "./offline-models";
 
+/**
+ * Prefix an asset path with the Vite `BASE_URL` so fixtures resolve correctly
+ * when the app is hosted under a sub-path.
+ *
+ * The URL normalisation collapses duplicate slashes whilst preserving protocol
+ * separators (so `https://example.com//foo` remains a valid absolute URL).
+ *
+ * @example
+ * // BASE_URL = "/app/"
+ * // path = "images/foo.png"
+ * // url = "/app/images/foo.png"
+ */
 const withBasePath = (path: string, alt: string): ImageAsset => {
   const base = import.meta.env.BASE_URL ?? "/";
   const normalisedBase = base.endsWith("/") ? base : `${base}/`;

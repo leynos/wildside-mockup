@@ -14,8 +14,10 @@ import {
   parkMomentLocalizations,
 } from "./walk-complete-moment-localizations";
 
+export type WalkCompletionStatId = "distance" | "duration" | "energy" | "stops" | "starred";
+
 export interface WalkCompletionStat {
-  readonly id: string;
+  readonly id: WalkCompletionStatId;
   readonly localizations: EntityLocalizations;
   readonly value:
     | { kind: "distance"; metres: number }
@@ -25,7 +27,7 @@ export interface WalkCompletionStat {
   readonly iconToken: string;
 }
 
-export const walkCompletionPrimaryStats: ReadonlyArray<WalkCompletionStat> = [
+export const walkCompletionPrimaryStats = [
   {
     id: "distance",
     localizations: fillLocalizations(
@@ -105,9 +107,9 @@ export const walkCompletionPrimaryStats: ReadonlyArray<WalkCompletionStat> = [
     value: { kind: "duration", seconds: secondsFromMinutes(58) },
     iconToken: "{icon.object.duration}",
   },
-];
+] as const satisfies ReadonlyArray<WalkCompletionStat>;
 
-export const walkCompletionSecondaryStats: ReadonlyArray<WalkCompletionStat> = [
+export const walkCompletionSecondaryStats = [
   {
     id: "energy",
     localizations: fillLocalizations(
@@ -227,7 +229,7 @@ export const walkCompletionSecondaryStats: ReadonlyArray<WalkCompletionStat> = [
     value: { kind: "count", value: 3 },
     iconToken: "{icon.object.star}",
   },
-];
+] as const satisfies ReadonlyArray<WalkCompletionStat>;
 
 export interface WalkCompletionMoment {
   readonly id: string;
@@ -287,19 +289,16 @@ export const walkCompletionShareOptions: ReadonlyArray<WalkCompletionShareOption
   {
     id: "twitter",
     localizations: fillLocalizations(
-      localizeAcrossLocales(
-        { name: "X (Twitter)" },
-        {
-          ar: { name: "X ‏(تويتر)" },
-          he: { name: "X ‏(טוויטר)" },
-          hi: { name: "X (ट्विटर)" },
-          ja: { name: "X（Twitter）" },
-          ko: { name: "X(트위터)" },
-          ta: { name: "X (ட்விட்டர்)" },
-          "zh-CN": { name: "X（Twitter）" },
-          "zh-TW": { name: "X（Twitter）" },
-        },
-      ),
+      {
+        ...brandLocalizations(
+          "X (Twitter)",
+          { ar: "X ‏(تويتر)", he: "X ‏(טוויטר)", hi: "X (ट्विटर)", ko: "X(트위터)", ta: "X (ட்விட்டர்)" },
+          "share-option: twitter",
+        ),
+        ja: { name: "X（Twitter）" },
+        "zh-CN": { name: "X（Twitter）" },
+        "zh-TW": { name: "X（Twitter）" },
+      },
       "en-GB",
       "share-option: twitter",
     ),
