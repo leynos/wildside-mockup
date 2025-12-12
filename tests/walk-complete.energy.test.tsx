@@ -34,10 +34,22 @@ const restoreLocalStorage = (snapshot: StorageSnapshot) => {
 };
 
 const getStatCardByLabel = (label: string): HTMLElement => {
-  const labelNode = screen.getByText(label);
-  const card = labelNode.closest("article");
+  const cards = screen.getAllByRole("article");
+  const matchingCards = cards.filter((card) => within(card).queryByText(label));
+
+  if (matchingCards.length === 0) {
+    throw new Error(`Expected to find a stat card containing label "${label}"`);
+  }
+
+  if (matchingCards.length > 1) {
+    throw new Error(
+      `Expected exactly one stat card to contain label "${label}", but found ${matchingCards.length}`,
+    );
+  }
+
+  const card = matchingCards[0];
   if (!card) {
-    throw new Error(`Expected "${label}" to be inside an article card`);
+    throw new Error(`Expected to find a stat card containing label "${label}"`);
   }
   return card;
 };
@@ -270,15 +282,16 @@ describe.serial("WalkComplete screen", () => {
   });
 
   describe("WalkComplete share controls ARIA labels in multiple locales", () => {
-    it.each([
-      ["Spanish", "es"],
-      ["Arabic", "ar"],
-      ["Korean", "ko"],
-    ] as const)(
-      "share channel buttons have localized aria-labels in %s",
-      async (_label, locale) => {
-        await testShareChannelAriaLabels(locale);
-      },
-    );
+    it("share channel buttons have localized aria-labels in Spanish", async () => {
+      await testShareChannelAriaLabels("es");
+    });
+
+    it("share channel buttons have localized aria-labels in Arabic", async () => {
+      await testShareChannelAriaLabels("ar");
+    });
+
+    it("share channel buttons have localized aria-labels in Korean", async () => {
+      await testShareChannelAriaLabels("ko");
+    });
   });
 });
