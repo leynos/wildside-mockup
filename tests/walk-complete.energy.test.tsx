@@ -71,7 +71,8 @@ describe("WalkComplete stat labels in non-default locales", () => {
     const durationStat = walkCompletionPrimaryStats.find((s) => s.id === "duration");
     expect(distanceStat).toBeDefined();
     expect(durationStat).toBeDefined();
-    if (!distanceStat || !durationStat) return;
+    if (!distanceStat) throw new Error("Missing primary stat: distance");
+    if (!durationStat) throw new Error("Missing primary stat: duration");
 
     const distanceLabel = pickLocalization(distanceStat.localizations, "es").name;
     const durationLabel = pickLocalization(durationStat.localizations, "es").name;
@@ -85,7 +86,7 @@ describe("WalkComplete stat labels in non-default locales", () => {
 
     const energyStat = walkCompletionSecondaryStats.find((s) => s.id === "energy");
     expect(energyStat).toBeDefined();
-    if (!energyStat) return;
+    if (!energyStat) throw new Error("Missing secondary stat: energy");
 
     const energyLabel = pickLocalization(energyStat.localizations, "de").name;
 

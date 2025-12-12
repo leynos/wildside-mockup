@@ -1,48 +1,11 @@
 import { describe, expect, it } from "bun:test";
-import type { TFunction } from "i18next";
+import { screen } from "@testing-library/react";
 
 import { wizardGeneratedStops, wizardRouteSummary } from "../src/app/data/wizard";
 import { pickLocalization } from "../src/app/domain/entities/localization";
-
-type TranslationCall = {
-  key: string;
-  options?: Record<string, unknown>;
-};
-
-const createStubT = () => {
-  const calls: TranslationCall[] = [];
-  const stubT = ((
-    key: string,
-    optionsOrDefault?: string | Record<string, unknown>,
-    maybeOptions?: Record<string, unknown>,
-  ) => {
-    const options: Record<string, unknown> | undefined =
-      typeof optionsOrDefault === "string"
-        ? { ...maybeOptions, defaultValue: optionsOrDefault }
-        : optionsOrDefault;
-
-    if (options !== undefined) {
-      calls.push({ key, options });
-    } else {
-      calls.push({ key });
-    }
-
-    // biome-ignore lint/complexity/useLiteralKeys: Record<string, unknown> requires bracket notation
-    const defaultValue = options?.["defaultValue"] ?? key;
-    // biome-ignore lint/complexity/useLiteralKeys: Record<string, unknown> requires bracket notation
-    const note = options?.["note"] ?? "";
-    // biome-ignore lint/complexity/useLiteralKeys: Record<string, unknown> requires bracket notation
-    const distance = options?.["distance"] ?? "";
-
-    return String(defaultValue)
-      .replaceAll("{{note}}", String(note))
-      .replaceAll("{$note}", String(note))
-      .replaceAll("{{distance}}", String(distance))
-      .replaceAll("{$distance}", String(distance));
-  }) as unknown as TFunction;
-
-  return { stubT, calls };
-};
+import { WizardStepThreeView } from "../src/app/features/wizard/step-three/step-three-screen";
+import { createStubT } from "./i18n-stub";
+import { renderWithProviders } from "./utils/render-with-providers";
 
 describe("wizard step-three stop note distance interpolation", () => {
   it("generated stops have noteDistanceMetres for distance calculation", () => {
@@ -57,33 +20,32 @@ describe("wizard step-three stop note distance interpolation", () => {
     });
   });
 
-  it("stop note translations use distance interpolation key", () => {
-    const { stubT, calls } = createStubT();
+  it("renders stop note with interpolated distance", () => {
+    const { t, calls } = createStubT();
 
-    // Simulate calling the translation function with a stop that has distance
-    const stopWithDistance = wizardGeneratedStops.find((s) => s.noteDistanceMetres !== undefined);
-    expect(stopWithDistance).toBeDefined();
+    renderWithProviders(
+      <WizardStepThreeView t={t} language="en-GB" unitSystem="metric" navigateTo={() => {}} />,
+    );
 
-    if (stopWithDistance) {
-      const noteLocalized = pickLocalization(stopWithDistance.noteLocalizations, "en-GB");
-      const distanceLabel = "1.1 mi";
-
-      // Call the translation the same way step-three-screen does
-      stubT("wizard-step-three-stop-note-with-distance", {
-        note: noteLocalized.name,
-        distance: distanceLabel,
-        defaultValue: `${noteLocalized.name} • ${distanceLabel}`,
-      });
-
-      const interpolationCall = calls.find(
-        (call) => call.key === "wizard-step-three-stop-note-with-distance",
-      );
-      expect(interpolationCall).toBeDefined();
-      // biome-ignore lint/complexity/useLiteralKeys: Record<string, unknown> requires bracket notation
-      expect(interpolationCall?.options?.["note"]).toBe(noteLocalized.name);
-      // biome-ignore lint/complexity/useLiteralKeys: Record<string, unknown> requires bracket notation
-      expect(interpolationCall?.options?.["distance"]).toBe(distanceLabel);
+    const interpolationCall = calls.find(
+      (call) => call.key === "wizard-step-three-stop-note-with-distance",
+    );
+    expect(interpolationCall).toBeDefined();
+    if (!interpolationCall?.options) {
+      throw new Error("Expected stop note translation call to include options");
     }
+
+    const options = interpolationCall.options as { note?: unknown; distance?: unknown };
+    const note = options.note;
+    const distance = options.distance;
+    if (typeof note !== "string") {
+      throw new Error("Expected stop note translation call option 'note' to be a string");
+    }
+    if (typeof distance !== "string") {
+      throw new Error("Expected stop note translation call option 'distance' to be a string");
+    }
+
+    expect(screen.getByText(`${note} • ${distance}`)).toBeTruthy();
   });
 
   it("stop notes have localizations for multiple locales", () => {

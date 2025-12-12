@@ -2,7 +2,8 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { useNavigate } from "@tanstack/react-router";
-import { type JSX, type ReactNode, useMemo, useState } from "react";
+import type { TFunction } from "i18next";
+import { type JSX, type ReactNode, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "../../../components/icon";
@@ -17,6 +18,7 @@ import {
 import { pickLocalization } from "../../../domain/entities/localization";
 import { formatDistance } from "../../../units/unit-format";
 import { useUnitPreferences } from "../../../units/unit-preferences-provider";
+import type { UnitSystem } from "../../../units/unit-system";
 import { buildWizardRouteStats } from "./build-wizard-route-stats";
 import { buildWizardWeatherCopy } from "./build-wizard-weather-copy";
 
@@ -45,35 +47,49 @@ function WizardSummaryPanel({
   );
 }
 
-export function WizardStepThree(): JSX.Element {
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-  const { unitSystem } = useUnitPreferences();
+export interface WizardStepThreeViewProps {
+  readonly t: TFunction;
+  readonly language: string;
+  readonly unitSystem: UnitSystem;
+  readonly navigateTo: (to: string) => void;
+}
+
+export function WizardStepThreeView({
+  t,
+  language,
+  unitSystem,
+  navigateTo,
+}: WizardStepThreeViewProps): JSX.Element {
   const [dialogOpen, setDialogOpen] = useState(false);
   const helpMessage = t("wizard-help-placeholder", {
     defaultValue: "Contextual help coming soon",
   });
   const routeStats = useMemo(
-    () => buildWizardRouteStats(t, i18n.language, unitSystem),
-    [t, i18n.language, unitSystem],
+    () => buildWizardRouteStats(t, language, unitSystem),
+    [t, language, unitSystem],
   );
   const weatherCopy = useMemo(
-    () => buildWizardWeatherCopy(t, i18n.language, unitSystem),
-    [t, i18n.language, unitSystem],
+    () => buildWizardWeatherCopy(t, language, unitSystem),
+    [t, language, unitSystem],
   );
+
+  const routeLocalization = pickLocalization(wizardRouteSummary.localizations, language);
+  const routeTitle = routeLocalization.name;
+  const routeDescription = routeLocalization.description;
+  const badgeTitle = pickLocalization(wizardRouteSummary.badgeLocalizations, language).name;
 
   return (
     <WizardLayout
       steps={wizardSteps}
       activeStepId="step-3"
-      onBack={() => navigate({ to: "/wizard/step-2" })}
+      onBack={() => navigateTo("/wizard/step-2")}
       onHelp={() => window.alert(helpMessage)}
       footer={
         <div className="flex flex-col gap-3">
           <button
             type="button"
             className="btn btn-ghost"
-            onClick={() => navigate({ to: "/wizard/step-1" })}
+            onClick={() => navigateTo("/wizard/step-1")}
           >
             {t("wizard-step-three-start-over", { defaultValue: "Start over" })}
           </button>
@@ -90,10 +106,6 @@ export function WizardStepThree(): JSX.Element {
               <Dialog.Content className="dialog-surface">
                 {dialogOpen
                   ? (() => {
-                      const routeTitle = pickLocalization(
-                        wizardRouteSummary.localizations,
-                        i18n.language,
-                      ).name;
                       return (
                         <>
                           <Dialog.Title className="text-lg font-semibold text-base-content">
@@ -122,7 +134,7 @@ export function WizardStepThree(): JSX.Element {
                   <button
                     type="button"
                     className="btn btn-accent btn-sm"
-                    onClick={() => navigate({ to: "/map/quick" })}
+                    onClick={() => navigateTo("/map/quick")}
                   >
                     {t("wizard-step-three-dialog-view-map", {
                       defaultValue: "View on map",
@@ -137,16 +149,13 @@ export function WizardStepThree(): JSX.Element {
     >
       <WizardSummaryPanel
         aria-label={t("wizard-step-three-route-panel-aria", {
-          defaultValue: "Hidden Gems Loop summary",
+          routeName: routeTitle,
+          defaultValue: "{{routeName}}",
         })}
       >
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">
-            {pickLocalization(wizardRouteSummary.localizations, i18n.language).name}
-          </h2>
-          <span className="wizard-badge font-semibold">
-            {pickLocalization(wizardRouteSummary.badgeLocalizations, i18n.language).name}
-          </span>
+          <h2 className="text-xl font-semibold">{routeTitle}</h2>
+          <span className="wizard-badge font-semibold">{badgeTitle}</span>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-4 text-center text-sm text-base-content/70">
           {routeStats.map((stat) => (
@@ -156,9 +165,7 @@ export function WizardStepThree(): JSX.Element {
             </div>
           ))}
         </div>
-        <p className="mt-4 text-sm text-base-content/70">
-          {pickLocalization(wizardRouteSummary.localizations, i18n.language).description}
-        </p>
+        <p className="mt-4 text-sm text-base-content/70">{routeDescription}</p>
       </WizardSummaryPanel>
 
       <WizardSummaryPanel
@@ -173,7 +180,7 @@ export function WizardStepThree(): JSX.Element {
         </h3>
         <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
           {wizardSummaryHighlights.map((highlight) => {
-            const localized = pickLocalization(highlight.localizations, i18n.language);
+            const localized = pickLocalization(highlight.localizations, language);
             return (
               <div key={highlight.id} className="wizard-summary__highlight">
                 <Icon
@@ -203,14 +210,14 @@ export function WizardStepThree(): JSX.Element {
         </h3>
         <div className="mt-4 space-y-3">
           {wizardGeneratedStops.map((stop) => {
-            const localized = pickLocalization(stop.localizations, i18n.language);
-            const noteLocalized = pickLocalization(stop.noteLocalizations, i18n.language);
+            const localized = pickLocalization(stop.localizations, language);
+            const noteLocalized = pickLocalization(stop.noteLocalizations, language);
             const distanceLabel =
               stop.noteDistanceMetres != null
                 ? (() => {
                     const formatted = formatDistance(stop.noteDistanceMetres, {
                       t,
-                      locale: i18n.language,
+                      locale: language,
                       unitSystem,
                     });
                     const unitKeySuffix =
@@ -226,7 +233,7 @@ export function WizardStepThree(): JSX.Element {
               ? t("wizard-step-three-stop-note-with-distance", {
                   note: noteLocalized.name,
                   distance: `${distanceLabel.value} ${distanceLabel.unitLabel}`,
-                  defaultValue: `${noteLocalized.name} • ${distanceLabel.value} ${distanceLabel.unitLabel}`,
+                  defaultValue: "{{note}} • {{distance}}",
                 })
               : noteLocalized.name;
             return (
@@ -262,5 +269,21 @@ export function WizardStepThree(): JSX.Element {
         </div>
       </WizardSummaryPanel>
     </WizardLayout>
+  );
+}
+
+export function WizardStepThree(): JSX.Element {
+  const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const { unitSystem } = useUnitPreferences();
+  const navigateTo = useCallback((to: string) => navigate({ to }), [navigate]);
+
+  return (
+    <WizardStepThreeView
+      t={t}
+      language={i18n.language}
+      unitSystem={unitSystem}
+      navigateTo={navigateTo}
+    />
   );
 }

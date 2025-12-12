@@ -1,7 +1,7 @@
 /** @file Fixture data for offline suggestions. */
 
 import { fillLocalizations, localizeAcrossLocales } from "./fixture-localization";
-import type { OfflineSuggestion } from "./stage-four";
+import type { OfflineSuggestion } from "./offline-models";
 
 export const offlineSuggestions: OfflineSuggestion[] = [
   {
