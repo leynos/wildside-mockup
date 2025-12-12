@@ -1,6 +1,7 @@
 import { describe, expect, it } from "bun:test";
 
 import {
+  type WalkCompletionStat,
   walkCompletionMoments,
   walkCompletionPrimaryStats,
   walkCompletionSecondaryStats,
@@ -8,47 +9,50 @@ import {
 } from "../src/app/data/stage-four";
 import { pickLocalization } from "../src/app/domain/entities/localization";
 
+/**
+ * Helper to test stat localizations across multiple locales.
+ * Finds the stat by ID, verifies it exists, checks all locales have names,
+ * and optionally verifies specific translations.
+ */
+const testStatLocalization = (
+  stats: readonly WalkCompletionStat[],
+  statId: string,
+  testLocales: readonly string[],
+  expectedTranslations?: Record<string, string>,
+) => {
+  const stat = stats.find((s) => s.id === statId);
+  expect(stat).toBeDefined();
+  if (!stat) return;
+
+  testLocales.forEach((locale) => {
+    const localized = pickLocalization(stat.localizations, locale);
+    expect(localized.name).toBeTruthy();
+  });
+
+  if (expectedTranslations) {
+    for (const [locale, expected] of Object.entries(expectedTranslations)) {
+      expect(pickLocalization(stat.localizations, locale).name).toBe(expected);
+    }
+  }
+};
+
 describe("walkCompletionPrimaryStats localizations", () => {
   const testLocales = ["en-GB", "es", "de", "ja", "ar"] as const;
 
   it("Distance stat has localized names across multiple locales", () => {
-    const distanceStat = walkCompletionPrimaryStats.find((s) => s.id === "distance");
-    expect(distanceStat).toBeDefined();
-    if (!distanceStat) return;
-
-    // Verify each locale has a name
-    testLocales.forEach((locale) => {
-      const localized = pickLocalization(distanceStat.localizations, locale);
-      expect(localized.name).toBeTruthy();
+    testStatLocalization(walkCompletionPrimaryStats, "distance", testLocales, {
+      es: "Distancia",
+      de: "Distanz",
+      ja: "距離",
     });
-
-    // Verify locales have different names (not all defaulting to English)
-    const spanishName = pickLocalization(distanceStat.localizations, "es").name;
-    const germanName = pickLocalization(distanceStat.localizations, "de").name;
-    const japaneseName = pickLocalization(distanceStat.localizations, "ja").name;
-
-    expect(spanishName).toBe("Distancia");
-    expect(germanName).toBe("Distanz");
-    expect(japaneseName).toBe("距離");
   });
 
   it("Duration stat has localized names across multiple locales", () => {
-    const durationStat = walkCompletionPrimaryStats.find((s) => s.id === "duration");
-    expect(durationStat).toBeDefined();
-    if (!durationStat) return;
-
-    testLocales.forEach((locale) => {
-      const localized = pickLocalization(durationStat.localizations, locale);
-      expect(localized.name).toBeTruthy();
+    testStatLocalization(walkCompletionPrimaryStats, "duration", testLocales, {
+      es: "Duración",
+      de: "Dauer",
+      ja: "所要時間",
     });
-
-    const spanishName = pickLocalization(durationStat.localizations, "es").name;
-    const germanName = pickLocalization(durationStat.localizations, "de").name;
-    const japaneseName = pickLocalization(durationStat.localizations, "ja").name;
-
-    expect(spanishName).toBe("Duración");
-    expect(germanName).toBe("Dauer");
-    expect(japaneseName).toBe("所要時間");
   });
 });
 
@@ -56,44 +60,19 @@ describe("walkCompletionSecondaryStats localizations", () => {
   const testLocales = ["en-GB", "es", "fr", "ko", "he"] as const;
 
   it("Energy stat has localized names across multiple locales", () => {
-    const energyStat = walkCompletionSecondaryStats.find((s) => s.id === "energy");
-    expect(energyStat).toBeDefined();
-    if (!energyStat) return;
-
-    testLocales.forEach((locale) => {
-      const localized = pickLocalization(energyStat.localizations, locale);
-      expect(localized.name).toBeTruthy();
+    testStatLocalization(walkCompletionSecondaryStats, "energy", testLocales, {
+      es: "Energía",
+      fr: "Énergie",
+      ko: "에너지",
     });
-
-    const spanishName = pickLocalization(energyStat.localizations, "es").name;
-    const frenchName = pickLocalization(energyStat.localizations, "fr").name;
-    const koreanName = pickLocalization(energyStat.localizations, "ko").name;
-
-    expect(spanishName).toBe("Energía");
-    expect(frenchName).toBe("Énergie");
-    expect(koreanName).toBe("에너지");
   });
 
   it("Stops stat has localized names across multiple locales", () => {
-    const stopsStat = walkCompletionSecondaryStats.find((s) => s.id === "stops");
-    expect(stopsStat).toBeDefined();
-    if (!stopsStat) return;
-
-    testLocales.forEach((locale) => {
-      const localized = pickLocalization(stopsStat.localizations, locale);
-      expect(localized.name).toBeTruthy();
-    });
+    testStatLocalization(walkCompletionSecondaryStats, "stops", testLocales);
   });
 
   it("Starred stat has localized names across multiple locales", () => {
-    const starredStat = walkCompletionSecondaryStats.find((s) => s.id === "starred");
-    expect(starredStat).toBeDefined();
-    if (!starredStat) return;
-
-    testLocales.forEach((locale) => {
-      const localized = pickLocalization(starredStat.localizations, locale);
-      expect(localized.name).toBeTruthy();
-    });
+    testStatLocalization(walkCompletionSecondaryStats, "starred", testLocales);
   });
 });
 

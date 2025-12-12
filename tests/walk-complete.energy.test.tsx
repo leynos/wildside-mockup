@@ -6,6 +6,7 @@ import {
   walkCompletionMoments,
   walkCompletionPrimaryStats,
   walkCompletionSecondaryStats,
+  walkCompletionShareOptions,
 } from "../src/app/data/stage-four";
 import { pickLocalization } from "../src/app/domain/entities/localization";
 import { WalkCompleteScreen } from "../src/app/features/walk-complete/walk-complete-screen";
@@ -145,6 +146,34 @@ describe("WalkComplete moments section", () => {
       }
     });
   });
+
+  it("renders moment images with localized alt text in Spanish", async () => {
+    await renderWalkComplete("es", "metric");
+
+    const images = screen.getAllByRole("img");
+    const momentNames = walkCompletionMoments.map(
+      (m) => pickLocalization(m.localizations, "es").name,
+    );
+
+    momentNames.forEach((name) => {
+      const matchingImage = images.find((img) => img.getAttribute("alt") === name);
+      expect(matchingImage).toBeTruthy();
+    });
+  });
+
+  it("renders moment images with localized alt text in Japanese", async () => {
+    await renderWalkComplete("ja", "metric");
+
+    const images = screen.getAllByRole("img");
+    const momentNames = walkCompletionMoments.map(
+      (m) => pickLocalization(m.localizations, "ja").name,
+    );
+
+    momentNames.forEach((name) => {
+      const matchingImage = images.find((img) => img.getAttribute("alt") === name);
+      expect(matchingImage).toBeTruthy();
+    });
+  });
 });
 
 describe("WalkComplete ARIA labels", () => {
@@ -175,5 +204,52 @@ describe("WalkComplete ARIA labels", () => {
 
     const saveButton = screen.getByRole("button", { name: /save/i });
     expect(saveButton).toBeTruthy();
+  });
+});
+
+describe("WalkComplete share controls ARIA labels in multiple locales", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("share channel buttons have localized aria-labels in Spanish", async () => {
+    await renderWalkComplete("es", "metric");
+
+    // Open the share modal to access share channel buttons
+    const shareButton = screen.getByRole("button", { name: /compartir/i });
+    expect(shareButton).toBeTruthy();
+
+    // Verify share options have aria-labels from localizations
+    walkCompletionShareOptions.forEach((option) => {
+      const localizedName = pickLocalization(option.localizations, "es").name;
+      const button = screen.queryByRole("button", { name: localizedName });
+      expect(button).toBeTruthy();
+    });
+  });
+
+  it("share channel buttons have localized aria-labels in Arabic", async () => {
+    await renderWalkComplete("ar", "metric");
+
+    // Verify share options have Arabic aria-labels
+    walkCompletionShareOptions.forEach((option) => {
+      const localizedName = pickLocalization(option.localizations, "ar").name;
+      const button = screen.queryByRole("button", { name: localizedName });
+      expect(button).toBeTruthy();
+    });
+  });
+
+  it("share channel buttons have localized aria-labels in Korean", async () => {
+    await renderWalkComplete("ko", "metric");
+
+    // Verify share options have Korean aria-labels
+    walkCompletionShareOptions.forEach((option) => {
+      const localizedName = pickLocalization(option.localizations, "ko").name;
+      const button = screen.queryByRole("button", { name: localizedName });
+      expect(button).toBeTruthy();
+    });
   });
 });
