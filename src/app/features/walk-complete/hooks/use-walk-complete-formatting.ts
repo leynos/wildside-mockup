@@ -20,6 +20,8 @@ export function useWalkCompleteFormatting(): WalkCompleteFormatting {
   const { t, i18n } = useTranslation();
   const { unitSystem } = useUnitPreferences();
 
+  const numberFormatter = useMemo(() => new Intl.NumberFormat(i18n.language), [i18n.language]);
+
   const unitOptions = useMemo(
     () => ({ t, locale: i18n.language, unitSystem }),
     [i18n.language, t, unitSystem],
@@ -49,7 +51,7 @@ export function useWalkCompleteFormatting(): WalkCompleteFormatting {
             });
             return `${formatted} ${unitLabel}`;
           }
-          return new Intl.NumberFormat(unitOptions.locale).format(value.value);
+          return numberFormatter.format(value.value);
         }
         case "energy": {
           const { value: formatted, unitLabel } = formatEnergy(value.kilocalories, {
@@ -59,11 +61,13 @@ export function useWalkCompleteFormatting(): WalkCompleteFormatting {
           });
           return `${formatted} ${unitLabel}`;
         }
-        default:
-          return "";
+        default: {
+          const _exhaustive: never = value;
+          return _exhaustive;
+        }
       }
     },
-    [unitOptions],
+    [numberFormatter, unitOptions],
   );
 
   return { formatStatValue };

@@ -282,16 +282,15 @@ describe.serial("WalkComplete screen", () => {
   });
 
   describe("WalkComplete share controls ARIA labels in multiple locales", () => {
-    it("share channel buttons have localized aria-labels in Spanish", async () => {
-      await testShareChannelAriaLabels("es");
-    });
-
-    it("share channel buttons have localized aria-labels in Arabic", async () => {
-      await testShareChannelAriaLabels("ar");
-    });
-
-    it("share channel buttons have localized aria-labels in Korean", async () => {
-      await testShareChannelAriaLabels("ko");
-    });
+    it.each([
+      ["Spanish", "es"],
+      ["Arabic", "ar"],
+      ["Korean", "ko"],
+    ] as const)(
+      "share channel buttons have localized aria-labels in %s",
+      async (_label, locale) => {
+        await testShareChannelAriaLabels(locale);
+      },
+    );
   });
 });

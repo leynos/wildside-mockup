@@ -51,9 +51,11 @@ describe("wizard step-three stop note distance interpolation", () => {
 
     screen.getByText(expected);
 
-    const interpolationCall = calls.find(
-      (call) => call.key === "wizard-step-three-stop-note-with-distance",
-    );
+    const interpolationCall = calls.find((call) => {
+      if (call.key !== "wizard-step-three-stop-note-with-distance") return false;
+      const options = call.options as { note?: unknown } | undefined;
+      return options?.note === note;
+    });
     expect(interpolationCall).toBeDefined();
     if (!interpolationCall?.options) {
       throw new Error("Expected stop note translation call to include options");

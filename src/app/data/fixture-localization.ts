@@ -84,6 +84,11 @@ type BrandTransliterationLocale = Extract<
  * Create localizations for brand names that need transliteration in specific scripts.
  * Most locales use the original brand name, but RTL and non-Latin scripts may need overrides.
  *
+ * @example
+ * const localizations = brandLocalizations("Facebook", { ar: "فيسبوك" });
+ * // localizations["en-GB"].name === "Facebook"
+ * // localizations["ar"].name === "فيسبوك"
+ *
  * @param latinName - The brand name in Latin script (e.g., "Facebook")
  * @param scriptOverrides - Locale overrides for scripts that commonly transliterate brand names.
  *   This is intentionally a narrow set to keep call sites explicit, but includes the major non-Latin locales we ship.

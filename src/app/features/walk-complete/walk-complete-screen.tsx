@@ -91,17 +91,20 @@ function WalkCompleteShareDialog({
             {shareDialogDescription}
           </Dialog.Description>
           <div className="flex flex-wrap gap-2 text-sm text-base-content/80">
-            {walkCompletionShareOptions.map((option) => (
-              <button
-                key={option.id}
-                type="button"
-                aria-label={shareChannelLabels[option.id]}
-                className="walk-share__option"
-              >
-                <Icon token={option.iconToken} aria-hidden />
-                {shareChannelLabels[option.id]}
-              </button>
-            ))}
+            {walkCompletionShareOptions.map((option) => {
+              const label = shareChannelLabels[option.id] ?? option.id;
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  aria-label={label}
+                  className="walk-share__option"
+                >
+                  <Icon token={option.iconToken} aria-hidden />
+                  {label}
+                </button>
+              );
+            })}
           </div>
           <div className="flex justify-end gap-2">
             <Dialog.Close asChild>
@@ -173,16 +176,19 @@ function WalkCompleteShareChannelsSection({
         {shareSectionHeading}
       </h3>
       <div className="flex justify-center gap-4">
-        {walkCompletionShareOptions.map((option) => (
-          <button
-            key={option.id}
-            type="button"
-            aria-label={shareChannelLabels[option.id]}
-            className={`walk-share__icon ${option.accentClass}`}
-          >
-            <Icon token={option.iconToken} aria-hidden />
-          </button>
-        ))}
+        {walkCompletionShareOptions.map((option) => {
+          const label = shareChannelLabels[option.id] ?? option.id;
+          return (
+            <button
+              key={option.id}
+              type="button"
+              aria-label={label}
+              className={`walk-share__icon ${option.accentClass}`}
+            >
+              <Icon token={option.iconToken} aria-hidden />
+            </button>
+          );
+        })}
       </div>
     </WalkCompleteSection>
   );
