@@ -89,12 +89,11 @@ export function useWalkCompleteTranslations(): WalkCompleteTranslations {
 
   const shareChannelLabels = useMemo(() => {
     const entries = walkCompletionShareOptions.map(
-      (option) =>
-        [option.id, pickLocalization(option.localizations, translations.locale).name] as const,
+      (option) => [option.id, pickLocalization(option.localizations, i18n.language).name] as const,
     );
 
     return Object.fromEntries(entries) as ShareChannelLabels;
-  }, [translations.locale]);
+  }, [i18n.language]);
 
   return { ...translations, shareChannelLabels };
 }
