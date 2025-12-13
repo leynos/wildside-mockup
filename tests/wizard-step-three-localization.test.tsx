@@ -5,13 +5,65 @@
 
 import { describe, expect, it } from "bun:test";
 import { screen } from "@testing-library/react";
+import type { TFunction } from "i18next";
 
 import { wizardGeneratedStops, wizardRouteSummary } from "../src/app/data/wizard";
 import { pickLocalization } from "../src/app/domain/entities/localization";
 import { WizardStepThreeView } from "../src/app/features/wizard/step-three/step-three-screen";
 import { formatDistance } from "../src/app/units/unit-format";
-import { createStubT } from "./i18n-stub";
+import { createStubT, type TranslationCall } from "./i18n-stub";
 import { renderWithProviders } from "./utils/render-with-providers";
+
+type WizardStop = (typeof wizardGeneratedStops)[number];
+
+function getStopById(
+  stopId: string,
+  requireDistance: true,
+): WizardStop & { noteDistanceMetres: number };
+function getStopById(stopId: string, requireDistance?: false): WizardStop;
+function getStopById(stopId: string, requireDistance = false): WizardStop {
+  const stop = wizardGeneratedStops.find((candidate) => candidate.id === stopId);
+  if (!stop) {
+    throw new Error(`Expected wizard stops fixture to include "${stopId}" stop`);
+  }
+
+  if (requireDistance && stop.noteDistanceMetres == null) {
+    throw new Error(`Expected "${stopId}" stop to include noteDistanceMetres`);
+  }
+
+  return stop;
+}
+
+function formatStopDistance(
+  distanceMetres: number,
+  t: TFunction,
+  locale: string,
+  unitSystem: "metric" | "imperial",
+): string {
+  const formatted = formatDistance(distanceMetres, { t, locale, unitSystem });
+  const hasLeadingWhitespace = /^[\s\u00A0\u202F]/u.test(formatted.unitLabel);
+  const space = hasLeadingWhitespace ? "" : " ";
+  return `${formatted.value}${space}${formatted.unitLabel}`;
+}
+
+function findStopNoteCall(
+  calls: readonly TranslationCall[],
+  expectedNote: string,
+): { note: string; distance: string } {
+  const call = calls.find((candidate) => {
+    if (candidate.key !== "wizard-step-three-stop-note-with-distance") return false;
+    const options = candidate.options as { note?: unknown } | undefined;
+    return options?.note === expectedNote;
+  });
+
+  if (!call?.options) {
+    throw new Error(
+      `Expected translation call "wizard-step-three-stop-note-with-distance" for note "${expectedNote}"`,
+    );
+  }
+
+  return call.options as { note: string; distance: string };
+}
 
 describe("wizard step-three stop note distance interpolation", () => {
   it("generated stops have noteDistanceMetres for distance calculation", () => {
@@ -28,42 +80,21 @@ describe("wizard step-three stop note distance interpolation", () => {
 
   it("renders stop note with interpolated distance", () => {
     const { t, calls } = createStubT();
-    const stop = wizardGeneratedStops.find((candidate) => candidate.id === "art");
-    expect(stop).toBeDefined();
-    if (!stop) throw new Error("Expected wizard stops fixture to include art stop");
-    if (stop.noteDistanceMetres == null) {
-      throw new Error("Expected art stop to include noteDistanceMetres");
-    }
+    const stop = getStopById("art", true);
 
     renderWithProviders(
       <WizardStepThreeView t={t} language="en-GB" unitSystem="metric" navigateTo={() => {}} />,
     );
 
     const note = pickLocalization(stop.noteLocalizations, "en-GB").name;
-    const formatted = formatDistance(stop.noteDistanceMetres, {
-      t,
-      locale: "en-GB",
-      unitSystem: "metric",
-    });
-    const hasLeadingWhitespace = /^[\s\u00A0\u202F]/u.test(formatted.unitLabel);
-    const distance = `${formatted.value}${hasLeadingWhitespace ? "" : " "}${formatted.unitLabel}`;
+    const distance = formatStopDistance(stop.noteDistanceMetres, t, "en-GB", "metric");
     const expected = `${note} • ${distance}`;
 
     screen.getByText(expected);
 
-    const interpolationCall = calls.find((call) => {
-      if (call.key !== "wizard-step-three-stop-note-with-distance") return false;
-      const options = call.options as { note?: unknown } | undefined;
-      return options?.note === note;
-    });
-    expect(interpolationCall).toBeDefined();
-    if (!interpolationCall?.options) {
-      throw new Error("Expected stop note translation call to include options");
-    }
-
-    const options = interpolationCall.options as { note?: unknown; distance?: unknown };
-    expect(options.note).toBe(note);
-    expect(options.distance).toBe(distance);
+    const callOptions = findStopNoteCall(calls, note);
+    expect(callOptions.note).toBe(note);
+    expect(callOptions.distance).toBe(distance);
   });
 
   it("stop notes have localizations for multiple locales", () => {
@@ -77,21 +108,15 @@ describe("wizard step-three stop note distance interpolation", () => {
       });
     });
 
-    const cafeStop = wizardGeneratedStops.find((stop) => stop.id === "café");
-    expect(cafeStop).toBeDefined();
-    if (!cafeStop) throw new Error("Expected wizard stops fixture to include café stop");
+    const cafeStop = getStopById("café");
     const spanishCafeNote = pickLocalization(cafeStop.noteLocalizations, "es").name;
     expect(spanishCafeNote).toBe("Baristas amables, ideal para llevar");
 
-    const artStop = wizardGeneratedStops.find((stop) => stop.id === "art");
-    expect(artStop).toBeDefined();
-    if (!artStop) throw new Error("Expected wizard stops fixture to include art stop");
+    const artStop = getStopById("art");
     const germanArtNote = pickLocalization(artStop.noteLocalizations, "de").name;
     expect(germanArtNote).toBe("Fotospot");
 
-    const gardenStop = wizardGeneratedStops.find((stop) => stop.id === "garden");
-    expect(gardenStop).toBeDefined();
-    if (!gardenStop) throw new Error("Expected wizard stops fixture to include garden stop");
+    const gardenStop = getStopById("garden");
     const frenchGardenNote = pickLocalization(gardenStop.noteLocalizations, "fr").name;
     expect(frenchGardenNote).toBe("Zone de repos");
   });
