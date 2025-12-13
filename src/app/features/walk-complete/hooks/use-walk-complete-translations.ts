@@ -15,11 +15,11 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { walkCompletionShareOptions } from "../../../data/stage-four";
-import { pickLocalization } from "../../../domain/entities/localization";
+import { safePickLocalization } from "../../../domain/entities/localization";
 
 export type WalkCompletionShareChannelId = (typeof walkCompletionShareOptions)[number]["id"];
 
-type ShareChannelLabels = Readonly<Record<WalkCompletionShareChannelId, string>>;
+export type ShareChannelLabels = Readonly<Record<WalkCompletionShareChannelId, string>>;
 
 export type WalkCompleteTranslations = {
   readonly locale: string;
@@ -89,11 +89,20 @@ export function useWalkCompleteTranslations(): WalkCompleteTranslations {
 
   const shareChannelLabels = useMemo(() => {
     const entries = walkCompletionShareOptions.map(
-      (option) => [option.id, pickLocalization(option.localizations, i18n.language).name] as const,
+      (option) =>
+        [
+          option.id,
+          safePickLocalization(option.localizations, i18n.language, option.id).name,
+        ] as const,
     );
 
     return Object.fromEntries(entries) as ShareChannelLabels;
   }, [i18n.language]);
 
-  return { ...translations, shareChannelLabels };
+  const value = useMemo(
+    () => ({ ...translations, shareChannelLabels }),
+    [shareChannelLabels, translations],
+  );
+
+  return value;
 }
