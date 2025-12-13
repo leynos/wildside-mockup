@@ -107,3 +107,30 @@ export function pickLocalization(
 }
 
 export const defaultFallbackLocales = defaultFallbackChain;
+
+/**
+ * Safely pick a localization, falling back to an id-based name if unavailable.
+ *
+ * This is intended for "best effort" UI surfaces where missing localisation
+ * data should not crash rendering.
+ *
+ * @example
+ * const localised = safePickLocalization(undefined, "es", "mural");
+ * // localised.name === "mural"
+ *
+ * @example
+ * const localisations = { "en-GB": { name: "Coffee stop", description: "…" } };
+ * const localised = safePickLocalization(localisations, "en-GB", "coffee");
+ * // localised.name === "Coffee stop"
+ */
+export function safePickLocalization(
+  localizations: EntityLocalizations | undefined,
+  locale: string,
+  fallbackName: string,
+): LocalizedStringSet {
+  try {
+    return pickLocalization(localizations, locale);
+  } catch {
+    return { name: fallbackName, description: "" };
+  }
+}

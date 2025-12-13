@@ -14,8 +14,8 @@ import type { JSX } from "react";
 
 import { Icon } from "../../../components/icon";
 import { SectionHeading } from "../../../components/section-heading";
-import { walkCompletionMoments } from "../../../data/stage-four";
-import { pickLocalization } from "../../../domain/entities/localization";
+import { walkCompletionMoments } from "../../../data/stage-four-walk-complete";
+import { safePickLocalization } from "../../../domain/entities/localization";
 
 type WalkCompleteMomentsProps = {
   readonly heading: string;
@@ -30,13 +30,7 @@ export function WalkCompleteMoments({ heading, locale }: WalkCompleteMomentsProp
       </SectionHeading>
       <ul className="space-y-3">
         {walkCompletionMoments.map((moment) => {
-          const localized = (() => {
-            try {
-              return pickLocalization(moment.localizations, locale);
-            } catch {
-              return { name: moment.id, description: "" };
-            }
-          })();
+          const localized = safePickLocalization(moment.localizations, locale, moment.id);
 
           return (
             <li key={moment.id}>

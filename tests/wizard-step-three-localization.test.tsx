@@ -61,7 +61,14 @@ function findStopNoteCall(
     );
   }
 
-  return call.options as { note: string; distance: string };
+  const options = call.options as { note?: unknown; distance?: unknown };
+  if (typeof options.note !== "string" || typeof options.distance !== "string") {
+    throw new Error(
+      `Expected translation call options to include { note: string, distance: string } for note "${expectedNote}"`,
+    );
+  }
+
+  return { note: options.note, distance: options.distance };
 }
 
 describe("wizard step-three stop note distance interpolation", () => {
