@@ -1,4 +1,14 @@
-/** @file Walk completion favourite moments list. */
+/**
+ * @file Walk completion favourite moments list.
+ *
+ * Responsibilities:
+ * - Render the "Favourite moments" section heading and list.
+ * - Localise moment names and descriptions for the current locale.
+ * - Fail safely if a localisation entry is missing for a moment.
+ *
+ * Usage:
+ * - `<WalkCompleteMoments heading="Favourite moments" locale="en-GB" />`
+ */
 
 import type { JSX } from "react";
 

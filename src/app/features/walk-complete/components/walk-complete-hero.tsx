@@ -1,4 +1,14 @@
-/** @file Walk completion hero title and map preview card. */
+/**
+ * @file Walk completion hero title and map preview card.
+ *
+ * Responsibilities:
+ * - Render the walk completion hero (title and description).
+ * - Show a map preview and completion badge.
+ * - Display a localised avatar stack for favourite moments.
+ *
+ * Usage:
+ * - `<WalkCompleteHero heroTitle="…" heroDescription="…" locale="en-GB" />`
+ */
 
 import type { JSX } from "react";
 
@@ -51,7 +61,13 @@ export function WalkCompleteHero({
             <span className="walk-complete__badge">{routeBadgeLabel}</span>
             <div className="walk-complete__avatar-stack">
               {walkCompletionMoments.slice(0, 3).map((moment) => {
-                const localized = pickLocalization(moment.localizations, locale);
+                const localized = (() => {
+                  try {
+                    return pickLocalization(moment.localizations, locale);
+                  } catch {
+                    return { name: moment.id, description: "" };
+                  }
+                })();
                 return (
                   <img
                     key={moment.id}

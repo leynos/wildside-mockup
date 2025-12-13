@@ -75,7 +75,7 @@ export const localisation = (
 ): EntityLocalizations =>
   fillLocalizations(localizeAcrossLocales(base, overrides), DEFAULT_LOCALE as LocaleCode, context);
 
-type BrandTransliterationLocale = Extract<
+export type BrandTransliterationLocale = Extract<
   LocaleCode,
   "ar" | "el" | "he" | "hi" | "ja" | "ko" | "ru" | "ta" | "th" | "zh-CN" | "zh-TW"
 >;

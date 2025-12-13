@@ -6,6 +6,10 @@ import { useTranslation } from "react-i18next";
 import { walkCompletionShareOptions } from "../../../data/stage-four";
 import { pickLocalization } from "../../../domain/entities/localization";
 
+export type WalkCompletionShareChannelId = (typeof walkCompletionShareOptions)[number]["id"];
+
+type ShareChannelLabels = Readonly<Record<WalkCompletionShareChannelId, string>>;
+
 export type WalkCompleteTranslations = {
   readonly locale: string;
   readonly heroTitle: string;
@@ -25,7 +29,7 @@ export type WalkCompleteTranslations = {
   readonly shareDialogCancel: string;
   readonly shareDialogGenerate: string;
   readonly ratingSavedLabel: string;
-  readonly shareChannelLabels: Readonly<Record<string, string>>;
+  readonly shareChannelLabels: ShareChannelLabels;
 };
 
 export function useWalkCompleteTranslations(): WalkCompleteTranslations {
@@ -73,12 +77,13 @@ export function useWalkCompleteTranslations(): WalkCompleteTranslations {
   );
 
   const shareChannelLabels = useMemo(() => {
-    const entries = walkCompletionShareOptions.map((option) => [
-      option.id,
-      pickLocalization(option.localizations, translations.locale).name,
-    ]);
+    const labels: Partial<Record<WalkCompletionShareChannelId, string>> = {};
 
-    return Object.fromEntries(entries) as Readonly<Record<string, string>>;
+    for (const option of walkCompletionShareOptions) {
+      labels[option.id] = pickLocalization(option.localizations, translations.locale).name;
+    }
+
+    return labels as ShareChannelLabels;
   }, [translations.locale]);
 
   return { ...translations, shareChannelLabels };

@@ -7,6 +7,7 @@ import { type JSX, type ReactNode, useState } from "react";
 
 import { Icon } from "../../components/icon";
 import { walkCompletionShareOptions } from "../../data/stage-four";
+import { isRtlLocale } from "../../i18n/supported-locales";
 import { MobileShell } from "../../layout/mobile-shell";
 import { WalkCompleteActions } from "./components/walk-complete-actions";
 import { WalkCompleteHero } from "./components/walk-complete-hero";
@@ -16,7 +17,10 @@ import {
   WalkCompleteSecondaryStats,
 } from "./components/walk-complete-stats";
 import { useWalkCompleteFormatting } from "./hooks/use-walk-complete-formatting";
-import { useWalkCompleteTranslations } from "./hooks/use-walk-complete-translations";
+import {
+  useWalkCompleteTranslations,
+  type WalkCompletionShareChannelId,
+} from "./hooks/use-walk-complete-translations";
 
 type WalkCompleteSectionProps = {
   readonly spacing?: "default" | "tight" | "spacious";
@@ -31,7 +35,7 @@ type WalkCompleteShareDialogProps = {
   readonly shareDialogDescription: string;
   readonly shareDialogCancel: string;
   readonly shareDialogGenerate: string;
-  readonly shareChannelLabels: Readonly<Record<string, string>>;
+  readonly shareChannelLabels: Readonly<Record<WalkCompletionShareChannelId, string>>;
 };
 
 type WalkCompleteRatingToastProps = {
@@ -49,7 +53,7 @@ type WalkCompleteRemixSectionProps = {
 
 type WalkCompleteShareChannelsSectionProps = {
   readonly shareSectionHeading: string;
-  readonly shareChannelLabels: Readonly<Record<string, string>>;
+  readonly shareChannelLabels: Readonly<Record<WalkCompletionShareChannelId, string>>;
 };
 
 function WalkCompleteSection({
@@ -222,8 +226,10 @@ export function WalkCompleteScreen(): JSX.Element {
     shareChannelLabels,
   } = useWalkCompleteTranslations();
 
+  const toastSwipeDirection = isRtlLocale(locale) ? "left" : "right";
+
   return (
-    <Toast.Provider swipeDirection="right">
+    <Toast.Provider swipeDirection={toastSwipeDirection}>
       <MobileShell tone="dark">
         <div className="relative screen-stack">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(74,240,213,0.12),_transparent_55%)]" />
