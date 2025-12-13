@@ -23,8 +23,6 @@ type WalkCompleteMomentsProps = {
 };
 
 export function WalkCompleteMoments({ heading, locale }: WalkCompleteMomentsProps): JSX.Element {
-  const momentImageSize = 48;
-
   return (
     <>
       <SectionHeading iconToken="{icon.action.like}" iconClassName="text-pink-400">
@@ -46,8 +44,8 @@ export function WalkCompleteMoments({ heading, locale }: WalkCompleteMomentsProp
                 <img
                   src={moment.imageUrl}
                   alt={localized.name}
-                  width={momentImageSize}
-                  height={momentImageSize}
+                  width={48}
+                  height={48}
                   loading="lazy"
                   decoding="async"
                   className="h-12 w-12 flex-shrink-0 rounded-lg object-cover"

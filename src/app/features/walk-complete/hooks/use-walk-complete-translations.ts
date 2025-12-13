@@ -1,4 +1,15 @@
-/** @file Provides walk completion translations and share channel labels. */
+/**
+ * @file Walk completion translations and share channel labels hook.
+ *
+ * Responsibilities:
+ * - Expose all localized strings for the walk-complete UI.
+ * - Compute share-channel labels by resolving localisation entries for each
+ *   configured share option.
+ * - Memoize translations and derived labels to avoid unnecessary recomputation.
+ *
+ * Usage:
+ * - `const { locale, heroTitle, shareChannelLabels } = useWalkCompleteTranslations();`
+ */
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";

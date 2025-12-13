@@ -11,6 +11,7 @@ import { wizardGeneratedStops, wizardRouteSummary } from "../src/app/data/wizard
 import { pickLocalization } from "../src/app/domain/entities/localization";
 import { WizardStepThreeView } from "../src/app/features/wizard/step-three/step-three-screen";
 import { formatDistance } from "../src/app/units/unit-format";
+import { joinUnit } from "../src/app/units/unit-format-helpers";
 import { createStubT, type TranslationCall } from "./i18n-stub";
 import { renderWithProviders } from "./utils/render-with-providers";
 
@@ -41,9 +42,7 @@ function formatStopDistance(
   unitSystem: "metric" | "imperial",
 ): string {
   const formatted = formatDistance(distanceMetres, { t, locale, unitSystem });
-  const hasLeadingWhitespace = /^[\s\u00A0\u202F]/u.test(formatted.unitLabel);
-  const space = hasLeadingWhitespace ? "" : " ";
-  return `${formatted.value}${space}${formatted.unitLabel}`;
+  return joinUnit(formatted.value, formatted.unitLabel);
 }
 
 function findStopNoteCall(

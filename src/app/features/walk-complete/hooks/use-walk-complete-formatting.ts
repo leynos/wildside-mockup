@@ -21,14 +21,8 @@ import {
   formatEnergy,
   formatStops,
 } from "../../../units/unit-format";
+import { joinUnit } from "../../../units/unit-format-helpers";
 import { useUnitPreferences } from "../../../units/unit-preferences-provider";
-
-const joinUnit = (value: string, unitLabel: string): string => {
-  if (!unitLabel) return value;
-
-  const hasLeadingWhitespace = /^[\s\u00A0\u202F]/u.test(unitLabel);
-  return `${value}${hasLeadingWhitespace ? "" : " "}${unitLabel}`;
-};
 
 export type WalkCompleteFormatting = {
   readonly formatStatValue: (value: WalkCompletionStat["value"]) => string;

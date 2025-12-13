@@ -31,9 +31,6 @@ export function WalkCompleteHero({
   routeBadgeLabel,
   locale,
 }: WalkCompleteHeroProps): JSX.Element {
-  const mapPreviewImageSize = 1024;
-  const avatarImageSize = 36;
-
   return (
     <>
       <div className="px-6 pt-16 pb-8">
@@ -52,8 +49,8 @@ export function WalkCompleteHero({
             <img
               src={walkCompletionMapImage}
               alt={mapAlt}
-              width={mapPreviewImageSize}
-              height={mapPreviewImageSize}
+              width={1024}
+              height={1024}
               loading="lazy"
               decoding="async"
               className="h-full w-full object-cover"
@@ -73,8 +70,8 @@ export function WalkCompleteHero({
                     key={moment.id}
                     src={moment.imageUrl}
                     alt={localized.name}
-                    width={avatarImageSize}
-                    height={avatarImageSize}
+                    width={36}
+                    height={36}
                     loading="lazy"
                     decoding="async"
                     className="h-9 w-9 rounded-full border-2 border-accent object-cover shadow"

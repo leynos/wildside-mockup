@@ -88,6 +88,14 @@ export type BrandTransliterationLocale = Extract<
  * const localizations = brandLocalizations("Facebook", { ar: "فيسبوك" });
  * // localizations["en-GB"].name === "Facebook"
  * // localizations["ar"].name === "فيسبوك"
+ * // localizations["fr"].name === "Facebook" (falls back to Latin)
+ *
+ * @example
+ * const localizations = brandLocalizations("Google", { ja: "グーグル", "zh-CN": "谷歌" });
+ * // localizations["ja"].name === "グーグル"
+ * // localizations["zh-CN"].name === "谷歌"
+ * // localizations["en-GB"].name === "Google"
+ * // localizations["es"].name === "Google"
  *
  * @param latinName - The brand name in Latin script (e.g., "Facebook")
  * @param scriptOverrides - Locale overrides for scripts that commonly transliterate brand names.
