@@ -10,7 +10,7 @@ import { pickLocalization } from "../../../domain/entities/localization";
 
 type OfflineAutoManagementProps = {
   readonly autoHeading: string;
-  readonly autoManagementOptions: AutoManagementOption[];
+  readonly autoManagementOptions: ReadonlyArray<AutoManagementOption>;
   readonly autoSettings: Record<string, boolean>;
   readonly onToggle: (id: string, next: boolean) => void;
   readonly integerFormatter: Intl.NumberFormat;

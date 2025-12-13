@@ -19,6 +19,17 @@ export type StubT = {
 
 export const createStubT = (): StubT => {
   const calls: TranslationCall[] = [];
+  const interpolateDefaultValue = (template: string, options: TranslationOptions): string => {
+    let output = template;
+    for (const [key, value] of Object.entries(options)) {
+      if (key === "defaultValue" || key === "count") {
+        continue;
+      }
+      const asString = value == null ? "" : String(value);
+      output = output.replaceAll(`{{${key}}}`, asString).replaceAll(`{$${key}}`, asString);
+    }
+    return output;
+  };
   const t = (
     key: string,
     optionsOrDefault?: string | TranslationOptions,
@@ -36,7 +47,7 @@ export const createStubT = (): StubT => {
     }
 
     if (typeof options?.defaultValue === "string") {
-      return options.defaultValue;
+      return interpolateDefaultValue(options.defaultValue, options);
     }
 
     const count = options?.count;

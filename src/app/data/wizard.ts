@@ -1,6 +1,25 @@
 /** @file Data backing the walk wizard flow. */
 
+import type { EntityLocalizations } from "../domain/entities/localization";
 import { metresFromMiles } from "../units/unit-format";
+import {
+  artStopLocalizations,
+  artStopNoteLocalizations,
+  cafeStopLocalizations,
+  cafeStopNoteLocalizations,
+  easyDifficultyLocalizations,
+  gardenStopLocalizations,
+  gardenStopNoteLocalizations,
+  hiddenGemsLocalizations,
+  lightingLocalizations,
+  loopRouteLocalizations,
+  routeBadgeLocalizations,
+  routeTitleLocalizations,
+  weatherSentimentLocalizations,
+  weatherSkyLocalizations,
+  weatherTitleLocalizations,
+  weatherWindLocalizations,
+} from "./wizard-localizations";
 
 export interface WizardStep {
   id: string;
@@ -45,111 +64,64 @@ export const accessibilityOptions: DiscoveryPreferenceOption[] = [
 export interface WizardSummaryHighlight {
   readonly id: string;
   readonly iconToken: string;
-  readonly labelKey: string;
-  readonly defaultLabel: string;
-  readonly detailKey: string;
-  readonly defaultDetail: string;
+  readonly localizations: EntityLocalizations;
 }
 
 export const wizardSummaryHighlights: ReadonlyArray<WizardSummaryHighlight> = [
-  {
-    id: "lighting",
-    iconToken: "{icon.object.guidance}",
-    labelKey: "wizard-step-two-accessibility-well-lit-label",
-    defaultLabel: "Well-lit paths",
-    detailKey: "wizard-step-three-highlight-lighting-detail",
-    defaultDetail: "Safe evening sections with smart lighting",
-  },
-  {
-    id: "hidden-gems",
-    iconToken: "{icon.safety.hide}",
-    labelKey: "wizard-step-three-highlight-hidden-gems-label",
-    defaultLabel: "Hidden gems focus",
-    detailKey: "wizard-step-three-highlight-hidden-gems-detail",
-    defaultDetail: "Expect quiet street art laneways and indie cafés",
-  },
-  {
-    id: "loop",
-    iconToken: "{icon.object.route}",
-    labelKey: "wizard-step-three-highlight-loop-label",
-    defaultLabel: "Loop route",
-    detailKey: "wizard-step-three-highlight-loop-detail",
-    defaultDetail: "Starts and ends near your current location",
-  },
-  {
-    id: "easy",
-    iconToken: "{icon.customizer.gauge}",
-    labelKey: "wizard-step-three-highlight-easy-label",
-    defaultLabel: "Easy difficulty",
-    detailKey: "wizard-step-three-highlight-easy-detail",
-    defaultDetail: "Gradual inclines suitable for relaxed pacing",
-  },
+  { id: "lighting", iconToken: "{icon.object.guidance}", localizations: lightingLocalizations },
+  { id: "hidden-gems", iconToken: "{icon.safety.hide}", localizations: hiddenGemsLocalizations },
+  { id: "loop", iconToken: "{icon.object.route}", localizations: loopRouteLocalizations },
+  { id: "easy", iconToken: "{icon.customizer.gauge}", localizations: easyDifficultyLocalizations },
 ] as const;
 
-export const wizardWeatherSummary = {
-  titleKey: "wizard-step-three-weather-title",
-  defaultTitle: "Perfect walking weather",
-  summaryKey: "wizard-step-three-weather-summary",
-  defaultSummary: "{{temperature}}, {{wind}}, {{sky}}",
-  reminderKey: "wizard-step-three-weather-reminder",
-  defaultReminder: "Pack light layers just in case.",
+export interface WizardWeatherSummary {
+  readonly localizations: EntityLocalizations;
+  readonly windLocalizations: EntityLocalizations;
+  readonly skyLocalizations: EntityLocalizations;
+  readonly sentimentLocalizations: EntityLocalizations;
+  readonly temperatureCelsius: number;
+}
+
+export const wizardWeatherSummary: WizardWeatherSummary = {
   temperatureCelsius: 22,
-  windDescriptorKey: "wizard-step-three-weather-wind",
-  defaultWindDescriptor: "light breeze",
-  skyDescriptorKey: "wizard-step-three-weather-sky",
-  defaultSkyDescriptor: "clear skies",
-  sentimentKey: "wizard-step-three-weather-sentiment",
-  defaultSentiment: "Ideal",
+  localizations: weatherTitleLocalizations,
+  windLocalizations: weatherWindLocalizations,
+  skyLocalizations: weatherSkyLocalizations,
+  sentimentLocalizations: weatherSentimentLocalizations,
 } as const;
 
 export interface WizardGeneratedStop {
   readonly id: string;
-  readonly nameKey: string;
-  readonly defaultName: string;
-  readonly descriptionKey: string;
-  readonly defaultDescription: string;
+  readonly localizations: EntityLocalizations;
+  readonly noteLocalizations: EntityLocalizations;
   readonly iconToken: string;
   readonly accentClass: string;
-  readonly noteKey: string;
-  readonly defaultNote: string;
   readonly noteDistanceMetres?: number;
 }
 
 export const wizardGeneratedStops: ReadonlyArray<WizardGeneratedStop> = [
   {
     id: "café",
-    nameKey: "wizard-step-three-stop-cafe-name",
-    defaultName: "Midtown Roastery",
-    descriptionKey: "wizard-step-three-stop-cafe-description",
-    defaultDescription: "Small-batch espresso with window seating",
     iconToken: "{icon.customizer.warmBeverage}",
     accentClass: "text-amber-400",
-    noteKey: "wizard-step-three-stop-cafe-note",
-    defaultNote: "Friendly baristas, ideal for takeaway",
+    localizations: cafeStopLocalizations,
+    noteLocalizations: cafeStopNoteLocalizations,
   },
   {
     id: "art",
-    nameKey: "wizard-step-three-stop-art-name",
-    defaultName: "Graffiti Passage",
-    descriptionKey: "wizard-step-three-stop-art-description",
-    defaultDescription: "Open-air gallery of rotating murals",
     iconToken: "{icon.customizer.decoration}",
     accentClass: "text-purple-400",
-    noteKey: "wizard-step-three-stop-art-note",
-    defaultNote: "Photo spot • {{distance}} {{unit}} in",
     noteDistanceMetres: metresFromMiles(1.1),
+    localizations: artStopLocalizations,
+    noteLocalizations: artStopNoteLocalizations,
   },
   {
     id: "garden",
-    nameKey: "wizard-step-three-stop-garden-name",
-    defaultName: "Whispering Oak Garden",
-    descriptionKey: "wizard-step-three-stop-garden-description",
-    defaultDescription: "Peaceful pocket park with shaded benches",
     iconToken: "{icon.category.trails}",
     accentClass: "text-emerald-400",
-    noteKey: "wizard-step-three-stop-garden-note",
-    defaultNote: "Rest area • {{distance}} {{unit}} in",
     noteDistanceMetres: metresFromMiles(1.8),
+    localizations: gardenStopLocalizations,
+    noteLocalizations: gardenStopNoteLocalizations,
   },
 ] as const;
 
@@ -162,39 +134,17 @@ export interface WizardRouteStat {
 }
 
 export interface WizardRouteSummary {
-  readonly ariaLabelKey: string;
-  readonly defaultAriaLabel: string;
-  readonly titleKey: string;
-  readonly defaultTitle: string;
-  readonly badgeKey: string;
-  readonly defaultBadge: string;
-  readonly descriptionKey: string;
-  readonly defaultDescription: string;
+  readonly localizations: EntityLocalizations;
+  readonly badgeLocalizations: EntityLocalizations;
   readonly stats: ReadonlyArray<WizardRouteStat>;
 }
 
 export const wizardRouteSummary: WizardRouteSummary = {
-  ariaLabelKey: "wizard-step-three-route-panel-aria",
-  defaultAriaLabel: "Hidden gems loop summary",
-  titleKey: "wizard-step-three-route-title",
-  defaultTitle: "Hidden Gems Loop",
-  badgeKey: "wizard-step-three-route-badge",
-  defaultBadge: "Custom",
-  descriptionKey: "wizard-step-three-route-description",
-  defaultDescription:
-    "A personalised walk blending street art laneways, independent cafés, and quiet waterfront viewpoints.",
+  localizations: routeTitleLocalizations,
+  badgeLocalizations: routeBadgeLocalizations,
   stats: [
-    {
-      id: "distance",
-      quantity: { kind: "distance", metres: 3_700 },
-    },
-    {
-      id: "duration",
-      quantity: { kind: "duration", seconds: 2_700 },
-    },
-    {
-      id: "stops",
-      quantity: { kind: "count", value: 7 },
-    },
+    { id: "distance", quantity: { kind: "distance", metres: 3_700 } },
+    { id: "duration", quantity: { kind: "duration", seconds: 2_700 } },
+    { id: "stops", quantity: { kind: "count", value: 7 } },
   ],
 } as const;

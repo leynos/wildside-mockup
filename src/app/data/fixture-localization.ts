@@ -74,3 +74,49 @@ export const localisation = (
   context?: string,
 ): EntityLocalizations =>
   fillLocalizations(localizeAcrossLocales(base, overrides), DEFAULT_LOCALE as LocaleCode, context);
+
+export type BrandTransliterationLocale = Extract<
+  LocaleCode,
+  "ar" | "el" | "he" | "hi" | "ja" | "ko" | "ru" | "ta" | "th" | "zh-CN" | "zh-TW"
+>;
+
+/**
+ * Create localizations for brand names that need transliteration in specific scripts.
+ * Most locales use the original brand name, but RTL and non-Latin scripts may need overrides.
+ *
+ * @example
+ * const localizations = brandLocalizations("Facebook", { ar: "فيسبوك" });
+ * // localizations["en-GB"].name === "Facebook"
+ * // localizations["ar"].name === "فيسبوك"
+ * // localizations["fr"].name === "Facebook" (falls back to Latin)
+ *
+ * @example
+ * const localizations = brandLocalizations("Google", { ja: "グーグル", "zh-CN": "谷歌" });
+ * // localizations["ja"].name === "グーグル"
+ * // localizations["zh-CN"].name === "谷歌"
+ * // localizations["en-GB"].name === "Google"
+ * // localizations["es"].name === "Google"
+ *
+ * @param latinName - The brand name in Latin script (e.g., "Facebook")
+ * @param scriptOverrides - Locale overrides for scripts that commonly transliterate brand names.
+ *   This is intentionally a narrow set to keep call sites explicit, but includes the major non-Latin locales we ship.
+ * @param context - Optional context string for debugging
+ */
+export const brandLocalizations = (
+  latinName: string,
+  scriptOverrides: Partial<Record<BrandTransliterationLocale, string>> = {},
+  context?: string,
+): EntityLocalizations => {
+  const overrides: Partial<Record<LocaleCode, BaseLocalization>> = {};
+
+  for (const locale of Object.keys(scriptOverrides) as BrandTransliterationLocale[]) {
+    const name = scriptOverrides[locale];
+    if (name) overrides[locale] = { name };
+  }
+
+  return fillLocalizations(
+    localizeAcrossLocales({ name: latinName }, overrides),
+    DEFAULT_LOCALE as LocaleCode,
+    context,
+  );
+};

@@ -104,40 +104,17 @@ wizard-step-three-dialog-description = {$routeTitle} พร้อมอยู่
 wizard-step-three-dialog-close = ปิด
 wizard-step-three-dialog-view-map = ดูบนแผนที่
 wizard-step-three-route-panel-aria = สรุปลูปอัญมณีที่ซ่อนอยู่
-wizard-step-three-route-title = ลูปอัญมณีที่ซ่อนอยู่
-wizard-step-three-route-badge = ปรับแต่ง
 wizard-step-three-route-distance-unit = { unit-distance-kilometre }
 wizard-step-three-stop-distance-unit-km = { unit-distance-kilometre }
 wizard-step-three-route-duration-unit = { unit-duration-minute-label }
 wizard-step-three-route-stops-unit = { unit-count-stop }
 wizard-step-three-stop-distance-unit-mi = { unit-distance-mile }
-wizard-step-three-route-description = เส้นทางแบบเฉพาะตัวที่ผสมตรอกศิลปะข้างถนน คาเฟ่อิสระ และจุดชมวิวริมน้ำอันเงียบสงบ
 wizard-step-three-preferences-panel-aria = ใช้งานตามความต้องการของคุณแล้ว
 wizard-step-three-preferences-heading = ใช้งานตามความต้องการของคุณแล้ว
 wizard-step-three-stops-panel-aria = จุดแวะเด่น
 wizard-step-three-stops-heading = จุดแวะเด่น
-wizard-step-three-highlight-lighting-detail = ช่วงค่ำปลอดภัยด้วยไฟอัจฉริยะ
-wizard-step-three-highlight-hidden-gems-label = โฟกัสอัญมณีที่ซ่อนอยู่
-wizard-step-three-highlight-hidden-gems-detail = เตรียมพบตรอกศิลปะเงียบสงบและคาเฟ่อินดี้
-wizard-step-three-highlight-loop-label = เส้นทางวนรอบ
-wizard-step-three-highlight-loop-detail = เริ่มและจบใกล้ตำแหน่งปัจจุบันของคุณ
-wizard-step-three-highlight-easy-label = ระดับง่าย
-wizard-step-three-highlight-easy-detail = ทางลาดชันเล็กน้อยเหมาะกับจังหวะสบาย ๆ
-wizard-step-three-stop-cafe-name = Midtown Roastery
-wizard-step-three-stop-cafe-description = เอสเปรสโซคั่วจำนวนน้อยพร้อมที่นั่งริมหน้าต่าง
-wizard-step-three-stop-cafe-note = บาริสตาเป็นกันเอง เหมาะสำหรับซื้อกลับ
-wizard-step-three-stop-art-name = Graffiti Passage
-wizard-step-three-stop-art-description = แกลเลอรีกลางแจ้งกับจิตรกรรมฝาผนังหมุนเวียน
-wizard-step-three-stop-art-note = จุดถ่ายรูป • ระยะ {$distance} {$unit}
-wizard-step-three-stop-garden-name = Whispering Oak Garden
-wizard-step-three-stop-garden-description = สวนเล็กเงียบสงบพร้อมม้านั่งร่มรื่น
-wizard-step-three-stop-garden-note = พื้นที่พัก • ระยะ {$distance} {$unit}
-wizard-step-three-weather-title = อากาศเหมาะกับการเดิน
 wizard-step-three-weather-summary = { $temperature }, { $wind }, { $sky }
-wizard-step-three-weather-reminder = พกเสื้อผ้าบาง ๆ เผื่อไว้
-wizard-step-three-weather-sentiment = ยอดเยี่ยม
-wizard-step-three-weather-wind = ลมอ่อน
-wizard-step-three-weather-sky = ท้องฟ้าโปร่ง
+wizard-step-three-stop-note-with-distance = { $note } • { $distance }
 safety-header-title = ความปลอดภัยและการเข้าถึง
 safety-header-description = ปรับแต่งเส้นทางเดินให้สบายและอุ่นใจ
 safety-save-button = บันทึกการตั้งค่า
@@ -151,11 +128,6 @@ walk-complete-hero-title = เดินจบเรียบร้อย!
 walk-complete-hero-description = การผจญภัยสุดมหัศจรรย์รอบเมือง · ลูปอัญมณีที่ซ่อนอยู่
 walk-complete-map-alt = ภาพรวมของเส้นทางที่เสร็จสมบูรณ์
 walk-complete-badge-route = เส้นทางเสร็จแล้ว
-walk-complete-primary-distance-label = ระยะทาง
-walk-complete-primary-duration-label = ระยะเวลา
-walk-complete-secondary-calories-label = แคลอรี
-walk-complete-secondary-stops-label = จุดแวะ
-walk-complete-secondary-starred-label = รายการโปรด
 walk-complete-favourite-heading = ช่วงเวลาที่ชอบ
 walk-complete-actions-rate = ให้คะแนนการเดินนี้
 walk-complete-actions-share = แชร์
@@ -169,9 +141,6 @@ walk-complete-share-dialog-description = ส่งออกวิดีโอไ
 walk-complete-share-dialog-cancel = ยกเลิก
 walk-complete-share-dialog-generate = สร้างวิดีโอ
 walk-complete-toast-rating-saved = ขอบคุณ! บันทึกคะแนนไว้สำหรับคำแนะนำครั้งต่อไปแล้ว
-walk-complete-share-channel-facebook = Facebook
-walk-complete-share-channel-instagram = Instagram
-walk-complete-share-channel-twitter = X (Twitter)
 discover-skip = ข้าม
 discover-hero-title = ค้นพบเส้นทางเดินที่ใช่สำหรับคุณ
 discover-hero-description = บอกเราว่าคุณสนใจอะไร แล้วเราจะสร้างเส้นทางพิเศษที่ออกแบบให้เหมาะกับคุณ
@@ -246,12 +215,6 @@ offline-dialog-cancel = ยกเลิก
 offline-dialog-preview = ดูตัวอย่างการดาวน์โหลด
 unit-distance-kilometre = กม.
 unit-distance-mile = ไมล์
--unit-duration-minute =
-    { $count ->
-        [one] นาที
-       *[other] นาที
-    }
-
 unit-duration-minute-label =
     { $count ->
         [one] นาที

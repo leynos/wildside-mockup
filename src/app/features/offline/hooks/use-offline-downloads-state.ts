@@ -13,7 +13,9 @@ export type OfflineDownloadsState = {
   readonly toggleManaging: () => void;
 };
 
-export const useOfflineDownloadsState = (initialAreas: OfflineMapArea[]): OfflineDownloadsState => {
+export const useOfflineDownloadsState = (
+  initialAreas: ReadonlyArray<OfflineMapArea>,
+): OfflineDownloadsState => {
   const [downloads, setDownloads] = useState<DownloadEntry[]>(() =>
     initialAreas.map((area) => ({ kind: "download", area })),
   );
