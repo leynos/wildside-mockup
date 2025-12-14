@@ -5,7 +5,7 @@ Last updated: 13 December 2025
 ## Purpose
 
 The Wildside front-end mockup currently renders its screens from hard-coded
-fixtures under `src/app/data/` (for example Explore route cards, offline
+fixtures under `src/app/data/` (for example, Explore route cards, offline
 download cards, safety toggles, and map route summaries).
 
 This document specifies a **backend-compatible data model** for those fixtures
@@ -35,10 +35,10 @@ In scope:
 
 Out of scope:
 
-- Full route-generation engine design (scoring, optimisation, enrichment).
+- Full route-generation engine design (scoring, optimization, enrichment).
 - Exact PostGIS table layouts for Martin tiles beyond what the mockup requires.
-- Multi-writer conflict-free replication (CRDTs). The model remains compatible
-  with later upgrades, but does not require them for MVP.
+- Multi-writer conflict-free replicated data types (CRDTs). The model remains
+  compatible with later upgrades, but does not require them for MVP.
 
 ## Constraints derived from the existing docs
 
@@ -75,7 +75,8 @@ The mockup renders cards from projections over these layers.
 
 ### Identifiers
 
-Use UUIDs for entities that can be created on the client while offline:
+Use universally unique identifiers (UUIDs) for entities that can be created on
+the client while offline:
 
 - Notes, favourites, offline bundles, and walk sessions use client-generated
   UUIDs (prefer UUIDv7) so they can be created offline without coordination.
@@ -90,7 +91,8 @@ Where humans benefit from stable, readable references, include an optional
 
 ### Time and versions
 
-All timestamps are ISO 8601 UTC on the wire.
+All timestamps are International Organization for Standardization (ISO) 8601
+Coordinated Universal Time (UTC) on the wire.
 
 For user-authored content, include an integer `revision` (or `etag`) for
 optimistic concurrency. The mockup can ignore this initially, but it provides a
@@ -98,14 +100,15 @@ clean upgrade path for multi-device consistency.
 
 ### Units
 
-Store numeric quantities in SI base units in all persisted models:
+Store numeric quantities in International System of Units (SI) base units in
+all persisted models:
 
 - Distances in metres.
 - Durations in seconds.
-- Areas as bounding boxes in WGS84 coordinates.
+- Areas as bounding boxes in World Geodetic System 1984 (WGS84) coordinates.
 - Byte sizes as integers.
 
-### Localisation
+### Localization
 
 To align with the mockup’s current `EntityLocalizations`, use a map keyed by a
 restricted set of locale codes:
@@ -152,7 +155,7 @@ type DifficultyCode = "easy" | "moderate" | "challenging";
 ### Badge, tag, and interest theme
 
 Interests, tags, and badges are better modelled as catalogue entities because
-they will grow and can be localised.
+they will grow and can be localized.
 
 ```ts
 type InterestTheme = {
@@ -175,7 +178,7 @@ type Badge = {
 };
 ```
 
-`iconKey` is a semantic identifier (for example `category:nature`) that the
+`iconKey` is a semantic identifier (for example, `category:nature`) that the
 client maps to its design tokens. The backend must not store Tailwind class
 strings.
 
@@ -380,7 +383,7 @@ lookup layer.
 
 ## User state (local-first and syncable)
 
-User state should be writable offline and synchronised opportunistically.
+User state should be writable offline and synchronized opportunistically.
 
 ### User profile and preferences
 
@@ -445,7 +448,7 @@ type WalkSession = {
 ```
 
 The client can render the Walk completion screen directly from `WalkSession`,
-optionally denormalising a small “moment” projection from the POIs referenced.
+optionally denormalizing a small “moment” projection from the POIs referenced.
 
 ## Offline bundles
 
@@ -477,7 +480,7 @@ type OfflineBundle = {
 ```
 
 The mockup’s `OfflineMapArea` fixture maps cleanly onto `OfflineBundle` with a
-`kind: "region"` and a localised display name drawn from either the region
+`kind: "region"` and a localized display name drawn from either the region
 catalogue entity or a client label.
 
 ### Tile storage
@@ -497,7 +500,7 @@ The backend does not need to store tile bytes, but it can provide:
 
 ### Outbox (offline mutations)
 
-To synchronise offline writes (notes, favourites, preferences, bundle creates
+To synchronize offline writes (notes, favourites, preferences, bundle creates
 and deletes), store an explicit outbox table in Dexie:
 
 ```ts
@@ -609,7 +612,7 @@ erDiagram
 
 ## Cross-document links
 
-- Card-level entity schemas and localisation rules:
+- Card-level entity schemas and localization rules:
   `docs/data-model-driven-card-architecture.md`.
 - Mockup migration notes and the current fixture layout:
   `docs/wildside-mockup-design.md`.
