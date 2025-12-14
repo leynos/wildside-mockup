@@ -336,7 +336,7 @@ To support Map and Walk completion screens, the final route object needs:
 
 - A stable `routeId`.
 - Geometry (polyline/LineString) suitable for tile rendering.
-- An ordered list of stops which refer to POIs.
+- An ordered list of stops which refer to points of interest (POIs).
 
 ```ts
 type GeoPoint = {
