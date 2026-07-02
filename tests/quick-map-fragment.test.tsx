@@ -1,3 +1,11 @@
+/** @file Verifies quick-walk map hash fragments activate the expected tab panels.
+ *
+ * The route renders localized accessible names, so these tests reset i18n to
+ * `en-GB` through `resetLanguage` and the `i18nextLng` storage key before each
+ * render. That keeps the hash-fragment assertions deterministic while still
+ * exercising the production i18n runtime.
+ */
+
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { within } from "@testing-library/dom";
 import React, { act } from "react";

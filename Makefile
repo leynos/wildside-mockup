@@ -1,7 +1,7 @@
 .PHONY: check-fmt lint typecheck test
 
 check-fmt:
-	bunx biome format --write src tests tools package.json biome.jsonc bunfig.toml
+	bunx biome format --write src tests tools docs/developers-guide.md package.json biome.jsonc bunfig.toml
 
 lint:
 	bun lint
