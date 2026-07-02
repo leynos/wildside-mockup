@@ -83,7 +83,7 @@
     "semgrep": "^0.0.1",
     "style-dictionary": "^4.0.0",
     "stylelint": "^16.25.0",
-    "stylelint-declaration-strict-value": "^1.10.11",
+    "stylelint-declaration-strict-value": "^1.11.1",
     "tsx": "^4.19.0",
     "typescript": "^5.6.3",
     "vite": "^5.4.10",
