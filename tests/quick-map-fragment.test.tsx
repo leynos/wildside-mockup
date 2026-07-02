@@ -1,3 +1,11 @@
+/** @file Verifies quick-walk map hash fragments activate the expected tab panels.
+ *
+ * The route renders localized accessible names, so these tests reset i18n to
+ * `en-GB` through `resetLanguage` and the `i18nextLng` storage key before each
+ * render. That keeps the hash-fragment assertions deterministic while still
+ * exercising the production i18n runtime.
+ */
+
 import { afterEach, beforeEach, describe, expect, it } from "bun:test";
 import { within } from "@testing-library/dom";
 import React, { act } from "react";
@@ -7,6 +15,7 @@ import { DisplayModeProvider } from "../src/app/providers/display-mode-provider"
 import { ThemeProvider } from "../src/app/providers/theme-provider";
 import { AppRoutes, createAppRouter } from "../src/app/routes/app-routes";
 import { UnitPreferencesProvider } from "../src/app/units/unit-preferences-provider";
+import { resetLanguage } from "./helpers/i18nTestHelpers";
 
 async function renderRoute(path: string) {
   window.history.replaceState(null, "", path);
@@ -51,8 +60,16 @@ describe("quick map hash fragments", () => {
     host = null;
   };
 
-  beforeEach(() => cleanup());
-  afterEach(() => cleanup());
+  beforeEach(async () => {
+    cleanup();
+    window.localStorage.setItem("i18nextLng", "en-GB");
+    await resetLanguage();
+  });
+
+  afterEach(async () => {
+    cleanup();
+    await resetLanguage();
+  });
 
   it("activates the stops tab when loading #stops", async () => {
     ({ root, host } = await renderRoute("/map/quick#stops"));
