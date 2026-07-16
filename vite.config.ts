@@ -1,3 +1,5 @@
+/** @file Vite configuration for the Wildside mockup application and token generation. */
+
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 

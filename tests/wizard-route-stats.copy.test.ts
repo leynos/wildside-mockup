@@ -1,3 +1,5 @@
+/** @file Tests for localized wizard route-stat copy and units. */
+
 import { describe, expect, it } from "bun:test";
 import { buildWizardRouteStats } from "../src/app/features/wizard/step-three/build-wizard-route-stats";
 import { createStubT } from "./i18n-stub";

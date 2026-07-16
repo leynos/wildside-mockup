@@ -1,3 +1,5 @@
+/** @file Behavioural tests for the localized interest toggle group. */
+
 import { beforeAll, describe, expect, it } from "bun:test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import type { JSX } from "react";

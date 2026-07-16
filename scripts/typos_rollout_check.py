@@ -85,27 +85,30 @@ def _document(path: Path) -> dict[str, object]:
 
 
 def _table(document: dict[str, object], name: str) -> dict[str, object]:
-    """Return a TOML table or an empty table when it is absent."""
+    """Return a TOML table, rejecting a present value of the wrong shape."""
     value = document.get(name, {})
-    return value if isinstance(value, dict) else {}
+    if not isinstance(value, dict):
+        message = f"{name!r} must be a table"
+        raise TypeError(message)
+    return value
 
 
 def _strings(table: dict[str, object], key: str) -> tuple[str, ...]:
-    """Return string entries from an effective Typos list."""
+    """Return a validated string list from effective Typos policy."""
     value = table.get(key, [])
-    if not isinstance(value, list):
-        return ()
-    return tuple(item for item in value if isinstance(item, str))
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        message = f"{key!r} must be a list of strings"
+        raise TypeError(message)
+    return tuple(value)
 
 
 def _phrases(document: dict[str, object]) -> dict[str, str]:
-    """Return phrase corrections from one shared-policy document."""
+    """Return validated phrase corrections from one policy document."""
     corrections = _table(_table(document, "phrases"), "corrections")
-    return {
-        phrase: correction
-        for phrase, correction in corrections.items()
-        if isinstance(correction, str)
-    }
+    if not all(isinstance(correction, str) for correction in corrections.values()):
+        message = "phrase corrections must map strings to strings"
+        raise TypeError(message)
+    return {phrase: correction for phrase, correction in corrections.items()}
 
 
 def load_policy(repository: Path) -> PhrasePolicy:
@@ -127,6 +130,8 @@ def load_policy(repository: Path) -> PhrasePolicy:
         A required generated or shared policy file is missing.
     OSError
         A policy file cannot be read.
+    TypeError
+        A policy document contains a value of the wrong shape.
     tomllib.TOMLDecodeError
         A policy file contains invalid TOML.
     """
@@ -174,6 +179,7 @@ def _masked(text: str, patterns: tuple[str, ...]) -> str:
     """Blank ignored spans while preserving line and column positions."""
 
     def blank(match: re.Match[str]) -> str:
+        """Blank a matched span without changing source positions."""
         return "".join(
             "\n" if character == "\n" else " " for character in match.group()
         )
@@ -223,6 +229,10 @@ def check_phrase_corrections(
 
     Raises
     ------
+    OSError
+        An eligible tracked file cannot be read.
+    UnicodeDecodeError
+        An eligible tracked file is not UTF-8 text.
     subprocess.CalledProcessError
         Git cannot enumerate the repository's tracked files.
     """
@@ -231,10 +241,7 @@ def check_phrase_corrections(
     for relative in _tracked(repository):
         if relative in POLICY_PATHS or _excluded(relative, exclusion_spec):
             continue
-        try:
-            text = (repository / relative).read_text(encoding="utf-8")
-        except (OSError, UnicodeDecodeError):
-            continue
+        text = (repository / relative).read_text(encoding="utf-8")
         masked = _masked(text, policy.ignore_patterns)
         found.extend(
             _phrase_findings(relative, text, masked, policy.phrase_corrections)
@@ -261,7 +268,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     FileNotFoundError
         A required generated or shared policy file is missing.
     OSError
-        A policy file cannot be read.
+        A policy file or eligible tracked file cannot be read.
+    TypeError
+        A policy document contains a value of the wrong shape.
+    UnicodeDecodeError
+        An eligible tracked file is not UTF-8 text.
     subprocess.CalledProcessError
         Git cannot enumerate the repository's tracked files.
     tomllib.TOMLDecodeError

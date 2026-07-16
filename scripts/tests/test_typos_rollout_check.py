@@ -25,7 +25,7 @@ def initialize(path: Path, files: dict[str, str]) -> None:
     for relative, content in files.items():
         target = path / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(content)
+        target.write_text(content, encoding="utf-8")
     subprocess.run(["git", "init", "--quiet"], cwd=path, check=True)
     subprocess.run(["git", "add", "."], cwd=path, check=True)
 
@@ -74,6 +74,57 @@ class TestPhrasePolicyChecker:
         with pytest.raises(FileNotFoundError, match=r"docs/developers-guide\.md"):
             checker.load_policy(tmp_path)
 
+    @pytest.mark.parametrize(
+        ("relative", "malformed", "message"),
+        [
+            pytest.param(
+                ".typos-oxendict-base.toml",
+                "phrases = []\n",
+                "'phrases' must be a table",
+                id="shared-phrases-table",
+            ),
+            pytest.param(
+                ".typos-oxendict-base.toml",
+                "[phrases]\ncorrections = []\n",
+                "'corrections' must be a table",
+                id="shared-corrections-table",
+            ),
+            pytest.param(
+                "typos.local.toml",
+                "phrases = []\n",
+                "'phrases' must be a table",
+                id="local-phrases-table",
+            ),
+            pytest.param(
+                "typos.local.toml",
+                "[phrases.corrections]\ninvalid = 1\n",
+                "phrase corrections must map strings to strings",
+                id="local-correction-value",
+            ),
+            pytest.param(
+                "typos.toml",
+                "[files]\nextend-exclude = [1]\n[default]\nextend-ignore-re = []\n",
+                "'extend-exclude' must be a list of strings",
+                id="generated-exclusions-list",
+            ),
+        ],
+    )
+    def test_load_policy_rejects_malformed_shapes(
+        self,
+        checker: types.ModuleType,
+        tmp_path: Path,
+        relative: str,
+        malformed: str,
+        message: str,
+    ) -> None:
+        """Reject malformed shared, local, and generated policy values."""
+        files = policy_files()
+        files[relative] = malformed
+        initialize(tmp_path, files)
+
+        with pytest.raises(TypeError, match=message):
+            checker.load_policy(tmp_path)
+
     def test_checker_preserves_boundaries_masking_and_exclusions(
         self, checker: types.ModuleType, tmp_path: Path
     ) -> None:
@@ -101,6 +152,76 @@ class TestPhrasePolicyChecker:
             (2, TITLE_PROHIBITED),
         ], "phrase boundaries, masking, or exclusions changed"
 
+    @pytest.mark.parametrize(
+        ("text", "patterns"),
+        [
+            pytest.param("plain text", (), id="unmasked"),
+            pytest.param("before `masked` after", (r"`[^`]+`",), id="single-line"),
+            pytest.param(
+                "before\n<!-- masked\nspan -->\nafter",
+                (r"(?s)<!--.*?-->",),
+                id="multiline",
+            ),
+        ],
+    )
+    def test_masking_preserves_offsets(
+        self,
+        checker: types.ModuleType,
+        text: str,
+        patterns: tuple[str, ...],
+    ) -> None:
+        """Masking preserves every source offset and newline position."""
+        masked = checker._masked(text, patterns)
+
+        assert len(masked) == len(text), "masking changed source length"
+        assert [index for index, value in enumerate(masked) if value == "\n"] == [
+            index for index, value in enumerate(text) if value == "\n"
+        ], "masking changed newline positions"
+
+    @pytest.mark.parametrize(
+        "content",
+        [
+            pytest.param(b"\xff", id="invalid-leading-byte"),
+            pytest.param(b"text\n\x80", id="invalid-continuation-byte"),
+        ],
+    )
+    def test_checker_surfaces_decode_errors(
+        self,
+        checker: types.ModuleType,
+        tmp_path: Path,
+        content: bytes,
+    ) -> None:
+        """Invalid UTF-8 in an eligible tracked file fails the query."""
+        initialize(tmp_path, {"README.md": "placeholder\n", **policy_files()})
+        (tmp_path / "README.md").write_bytes(content)
+
+        with pytest.raises(UnicodeDecodeError):
+            checker.check_phrase_corrections(tmp_path, checker.load_policy(tmp_path))
+
+    def test_checker_surfaces_read_errors(
+        self,
+        checker: types.ModuleType,
+        monkeypatch: pytest.MonkeyPatch,
+        tmp_path: Path,
+    ) -> None:
+        """An unreadable eligible tracked file fails the query."""
+        initialize(tmp_path, {"README.md": "allowed prose\n", **policy_files()})
+        original_read_text = checker.Path.read_text
+        failure = PermissionError("read denied")
+
+        def fail_read(path: Path, *args: object, **kwargs: object) -> str:
+            """Raise the selected read failure for the tracked fixture."""
+            if path.name == "README.md":
+                raise failure
+            return original_read_text(path, *args, **kwargs)
+
+        monkeypatch.setattr(checker.Path, "read_text", fail_read)
+
+        with pytest.raises(PermissionError) as raised:
+            checker.check_phrase_corrections(tmp_path, checker.load_policy(tmp_path))
+
+        assert raised.value is failure, "the checker replaced the file read failure"
+
     def test_main_reports_location_and_exit_two(
         self,
         checker: types.ModuleType,
@@ -119,3 +240,19 @@ class TestPhrasePolicyChecker:
         assert capsys.readouterr().out == (
             f"README.md:1:8: {PROHIBITED} -> handwritten\n"
         ), "the diagnostic omitted its source location or correction"
+
+    def test_main_accepts_clean_repository_without_output(
+        self,
+        checker: types.ModuleType,
+        tmp_path: Path,
+        capsys: pytest.CaptureFixture[str],
+    ) -> None:
+        """Return zero without output when no prohibited phrase is present."""
+        initialize(tmp_path, {"README.md": "Allowed prose.\n", **policy_files()})
+
+        assert checker.main(["--repository", str(tmp_path)]) == 0, (
+            "the command rejected a clean repository"
+        )
+        captured = capsys.readouterr()
+        assert captured.out == "", "the successful command wrote to stdout"
+        assert captured.err == "", "the successful command wrote to stderr"

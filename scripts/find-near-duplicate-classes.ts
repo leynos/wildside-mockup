@@ -1,3 +1,5 @@
+/** @file Detect near-duplicate Tailwind utility groups and suggest semantic classes. */
+
 import { readFileSync } from "node:fs";
 import { relative } from "node:path";
 import ts from "typescript";

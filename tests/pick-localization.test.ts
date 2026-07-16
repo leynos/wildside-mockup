@@ -1,3 +1,5 @@
+/** @file Tests for localized entity selection and fallback behaviour. */
+
 import { describe, expect, it } from "bun:test";
 
 import type { EntityLocalizations } from "../src/app/domain/entities/localization";

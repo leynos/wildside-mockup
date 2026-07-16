@@ -34,7 +34,11 @@ daisyUI 5 provides class names for common UI components
 ## daisyUI 5 usage rules
 1. We can give styles to a HTML element by adding daisyUI class names to it. By adding a component class name, part class names (if there's any available for that component), and modifier class names (if there's any available for that component)
 2. Components can be customized using Tailwind CSS utility classes if the customization is not possible using the existing daisyUI classes. For example `btn px-10` sets a custom horizontal padding to a `btn`
-3. If customization of daisyUI styles using Tailwind CSS utility classes didn't work because of CSS specificity issues, you can use the `!` at the end of the Tailwind CSS utility class to override the existing styles. For example `btn bg-red-500!` sets a custom background colour to a `btn` forcefully. This is a last resort solution and should be used sparingly
+3. If customization of daisyUI styles using Tailwind CSS utility classes didn't
+   work because of CSS specificity issues, you can use the `!` at the end of
+   the Tailwind CSS utility class to override the existing styles. For example,
+   `btn bg-red-500!` forcefully sets a custom background colour on a `btn`.
+   This is a last resort solution and should be used sparingly.
 4. If a specific component or something similar to it doesn't exist in daisyUI, you can create your own component using Tailwind CSS utility
 5. when using Tailwind CSS `flex` and `grid` for layout, it should be responsive using Tailwind CSS responsive utility prefixes.
 6. Only allowed class names are existing daisyUI class names or Tailwind CSS utility classes.
@@ -93,45 +97,54 @@ root scrollbar gutter is excluded. `daisy-` prefix is used for all daisyUI class
   logs: false;
 }
 ```
+
 ## daisyUI 5 colours
 
 ### daisyUI colour names
-- `primary`: Primary brand colour, The main colour of your brand
-- `primary-content`: Foreground content colour to use on primary colour
-- `secondary`: Secondary brand colour, The optional, secondary colour of your brand
-- `secondary-content`: Foreground content colour to use on secondary colour
-- `accent`: Accent brand colour, The optional, accent colour of your brand
-- `accent-content`: Foreground content colour to use on accent colour
-- `neutral`: Neutral dark colour, For not-saturated parts of UI
-- `neutral-content`: Foreground content colour to use on neutral colour
-- `base-100`:-100 Base surface colour of page, used for blank backgrounds
-- `base-200`:-200 Base colour, darker shade, to create elevations
-- `base-300`:-300 Base colour, even more darker shade, to create elevations
-- `base-content`: Foreground content colour to use on base colour
-- `info`: Info colour, For informative/helpful messages
-- `info-content`: Foreground content colour to use on info colour
-- `success`: Success colour, For success/safe messages
-- `success-content`: Foreground content colour to use on success colour
-- `warning`: Warning colour, For warning/caution messages
-- `warning-content`: Foreground content colour to use on warning colour
-- `error`: Error colour, For error/danger/destructive messages
-- `error-content`: Foreground content colour to use on error colour
+
+- `primary`: Primary brand colour: the main colour of your brand.
+- `primary-content`: Foreground content colour to use on the primary colour.
+- `secondary`: Secondary brand colour: the optional secondary colour of your
+  brand.
+- `secondary-content`: Foreground content colour to use on the secondary colour.
+- `accent`: Accent brand colour: the optional accent colour of your brand.
+- `accent-content`: Foreground content colour to use on the accent colour.
+- `neutral`: Neutral dark colour for non-saturated parts of the UI.
+- `neutral-content`: Foreground content colour to use on the neutral colour.
+- `base-100`: Base surface colour of the page, used for blank backgrounds.
+- `base-200`: A darker base colour used to create elevations.
+- `base-300`: An even darker base colour used to create elevations.
+- `base-content`: Foreground content colour to use on the base colour.
+- `info`: Information colour for informative or helpful messages.
+- `info-content`: Foreground content colour to use on the information colour.
+- `success`: Success colour for success or safety messages.
+- `success-content`: Foreground content colour to use on the success colour.
+- `warning`: Warning colour for warning or caution messages.
+- `warning-content`: Foreground content colour to use on the warning colour.
+- `error`: Error colour for error, danger or destructive messages.
+- `error-content`: Foreground content colour to use on the error colour.
 
 ### daisyUI colour rules
+
 1. daisyUI adds semantic colour names to Tailwind CSS colours
 2. daisyUI colour names can be used in utility classes, like other Tailwind CSS colour names. for example, `bg-primary` will use the primary colour for the background
-3. daisyUI colour names include variables as value so they can change based the
-   theme
+3. daisyUI colour names include variables as value so they can change based on
+   the theme
 4. There's no need to use `dark:` for daisyUI colour names
-5. Ideally only daisyUI colour names should be used for colours so the colours can change automatically based on the theme
+5. Ideally only daisyUI colour names should be used for colours, so the colours
+   can change automatically based on the theme
 6. If a Tailwind CSS colour name (like `red-500`) is used, it will be same red colour on all themes
 7. If a daisyUI colour name (like `primary`) is used, it will change colour based on the theme
-8. Using Tailwind CSS colour names for text colours should be avoided because Tailwind CSS colour `text-gray-800` on `bg-base-100` would be unreadable on a dark theme - because on dark theme, `bg-base-100` is a dark colour
+8. Using Tailwind CSS colour names for text colours should be avoided because
+   Tailwind CSS colour `text-gray-800` on `bg-base-100` would be unreadable on a
+   dark theme — because in the dark theme, `bg-base-100` is a dark colour
 9. `*-content` colours should have a good contrast compared to their associated
    colours
-10. suggestion - when designing a page use `base-*` colours for majority of the page. use `primary` colour for important elements
+10. Suggestion: when designing a page, use `base-*` colours for the majority of
+    the page. Use `primary` colour for important elements.
 
 ### daisyUI custom theme with custom colours
+
 A CSS file with Tailwind CSS, daisyUI and a custom daisyUI theme looks like this:
 ```css
 @import "tailwindcss";
@@ -888,7 +901,7 @@ where content can contain several `<nav>` tags with `footer-title` and links ins
 #### Rules
 - {MODIFIER} is optional and can have one of each placement/direction class names
 - try to use `sm:footer-horizontal` to make footer responsive
-- suggestion - use `base-200` for background colour
+- Suggestion: use `base-200` for the background colour.
 
 ### hero
 Hero is a component for displaying a large box or image with a title and description
@@ -1292,7 +1305,7 @@ Navbar is used to show a navigation bar on the top of the page
 #### Rules
 - use `navbar-start`, `navbar-center`, `navbar-end` to position content horizontally
 - put anything inside each section
-- suggestion - use `base-200` for background colour
+- Suggestion: use `base-200` for the background colour.
 
 ### pagination
 Pagination is a group of buttons

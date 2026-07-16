@@ -9,6 +9,7 @@ UV_ENV = UV_CACHE_DIR=.uv-cache UV_TOOL_DIR=.uv-tools
 NIXIE_VERSION ?= 1.1.0
 NIXIE = $(UV_ENV) $(UV) tool run --python 3.14 \
 	--from nixie-cli@$(NIXIE_VERSION) nixie
+NIXIE_ARGS ?=
 RUFF_VERSION ?= 0.15.12
 PATHSPEC_VERSION ?= 1.1.1
 TYPOS_VERSION ?= 1.48.0
@@ -64,6 +65,4 @@ spelling-helper-test:
 	@$(SPELLING_HELPER_PYTEST) $(SPELLING_PY_TESTS) -c /dev/null --rootdir=. -p no:cacheprovider $(SPELLING_COVERAGE_ARGS)
 
 nixie:
-	# CI currently requires --no-sandbox; remove once nixie supports
-	# environment variable control for this option
-	$(NIXIE) --no-sandbox
+	$(NIXIE) $(NIXIE_ARGS)

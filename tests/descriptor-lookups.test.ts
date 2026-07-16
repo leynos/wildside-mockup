@@ -1,3 +1,5 @@
+/** @file Tests for localized tag and badge descriptor lookup helpers. */
+
 import { describe, expect, it } from "bun:test";
 
 import { getBadgeDescriptor } from "../src/app/data/registries/badges";

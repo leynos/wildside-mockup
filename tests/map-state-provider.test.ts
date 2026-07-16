@@ -1,3 +1,5 @@
+/** @file Tests for map-state storage and viewport synchronization. */
+
 import { beforeEach, describe, expect, it } from "bun:test";
 import type { Map as MapLibreMap } from "maplibre-gl";
 

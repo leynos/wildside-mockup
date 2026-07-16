@@ -32,7 +32,10 @@ Under this hybrid model, **Bun** remains the primary test engine for the vast ma
 
 - **Standards-compliant DOM for accessibility rules:** A Node environment can host JSDOM, a more complete DOM implementation that `axe-core` supports. By running `axe` in this context, we can catch semantic and structural accessibility issues that Bun/Happy DOM would miss or error on.
 
-To keep the Node-based tests efficient, we leverage **tsgo** (TypeScript’s new fast compiler) to compile and launch these tests. A typical setup could use a lightweight command (for example, `npx tsgo`) to transpile the `*.a11y.test.tsx` files on the fly and execute them in Node. This avoids the overhead of a full Jest or Vitest context for the accessibility suite. Essentially, we treat these a11y tests as a specialized batch of scripts: they set up JSDOM, render components, run `axe-core`, and report results.
+To keep the Node-based tests efficient, we can use **tsgo** (TypeScript’s new
+fast compiler) to type-check or transpile the tests. A separate runner, such as
+Vitest using its Node pool, loads and executes the `*.a11y.test.tsx` files. The
+tests set up JSDOM, render components, run `axe-core`, and report results.
 
 Crucially, the separation of test files by naming convention means we can run the two suites independently. A typical workflow might include two NPM scripts: one for the **fast tests** (`npm run test:unit` using Bun) and one for the **a11y tests** (`npm run test:a11y` using Node). In continuous integration, these can run in parallel or in sequence, but they are logically isolated. This prevents any slow-down of the primary suite; if accessibility scans are a bit slower due to JSDOM’s overhead, they won’t make the core test run (which developers execute frequently) any slower. It also provides flexibility – for example, a developer in rapid prototyping mode can run just the Bun tests, and only run the axe checks when needed or in a pre-commit hook.
 
@@ -619,8 +622,39 @@ To help manage this, we integrate severity tagging:
 
 The proposed testing framework delivers a **holistic, layered approach** to accessibility testing without sacrificing development speed. We combine fast component-level checks with full browser validation to ensure that every new UI piece is both **rapidly verified** and **truly accessible** in practice. Below is a summary of the two major layers and their roles:
 
-**Dimension****Component Layer (Bun + Node/JSDOM)****E2E Layer (Playwright)****Primary Tools**Bun test runner (Happy DOM) for units; Node + JSDOM for axe scansPlaywright test runner (Chromium, Firefox, WebKit) with Axe**Environment**Simulated DOM (Happy DOM for speed; JSDOM for standards)Real browser environment (headless or headed as needed)**Scope of Tests**Isolated components and small integration pieces in memoryFull pages and user flows in the deployed app context**Execution Speed**Very fast (milliseconds per test file under Bun; a bit more for axe)Slower (seconds per test, overall minutes per suite)**Defects Caught****Structural/Semantic issues:** missing labels, incorrect roles, improper ARIA, form associations. Basic functional bugs in components. 
-*(Visual/style issues generally not caught here due to Happy DOM/JSDOM limits.)***Visual & Interactive issues:** colour contrast failures, element focus order, keyboard traps, missing focus outlines, responsive layout breakages, incorrect `lang` attributes, any integration logic issues. Plus validation of flows (modals, nav, etc.).**When to Run**On every code change or commit (developer inner loop); each PR as quick check.On each PR merge request (CI gating) and nightly full runs. Can be run locally for full regression before major releases.**CI Role**Fast feedback – fails the build quickly if a core test or axe rule fails, preventing bad code early.Final quality gate – ensures the merged product is accessible in reality. Also provides artefacts (screenshots, trace) for review.
+| Dimension | Component layer | E2E layer |
+| --- | --- | --- |
+| Tools | Bun, Node, JSDOM and axe | Playwright and Axe |
+| Environment | Simulated DOM | Real browser |
+| Scope | Components | Pages and user flows |
+| Speed | Milliseconds | Seconds; minutes per suite |
+| Defects | Structure and semantics | Visuals and interaction |
+| Schedule | Every change and pull request | Merge gate and nightly |
+| CI role | Early failure | Integrated-product gate |
+
+The table summarizes these distinctions:
+
+- **Tools:** Bun runs unit tests in Happy DOM. Node and JSDOM run component axe
+  scans. Playwright runs Axe in Chromium, Firefox and WebKit for E2E tests.
+- **Environment:** the component layer uses Happy DOM for speed and JSDOM for
+  standards support. The E2E layer uses a real browser, headless or headed.
+- **Scope:** the component layer checks isolated components and small in-memory
+  integrations. The E2E layer checks full pages and user flows in the deployed
+  application.
+- **Speed:** Bun usually takes milliseconds per test file, with some overhead
+  for axe. Browser tests take seconds each and minutes for the whole suite.
+- **Defects:** component tests find missing labels, incorrect roles, improper
+  ARIA, form-association errors and basic functional bugs. Browser tests find
+  colour contrast failures, focus order errors, keyboard traps, missing focus
+  outlines, responsive layout breakages, incorrect `lang` attributes and
+  integration errors in flows such as modals and navigation. Visual and style
+  defects remain outside the Happy DOM and JSDOM scope.
+- **Schedule:** component tests run on every change and pull request. Browser
+  tests run as a merge gate, nightly and locally before major releases.
+- **CI role:** component tests fail the build quickly when a core test or axe
+  rule fails. Browser tests validate the integrated product and provide
+  artefacts such as screenshots and traces.
+
 This model ensures **accessibility is woven into every stage**: a developer gets immediate feedback in their IDE or terminal for obvious issues, and the CI catches anything that requires a real browser to detect.
 
 ### 5.1 Implementation Plan
@@ -719,4 +753,5 @@ By modernizing the original design to use **Bun for speed** and a **Node assist 
 
 - *Bun GitHub issue #3554 – tracking request for JSDOM support in Bun’s test runner (unresolved as of 2025).* ↩
 
-- *Deque `axe-core` documentation – notes on JSDOM support and rules like colour-contrast being inapplicable in headless DOM.* ↩
+- *Deque `axe-core` documentation – notes on JSDOM support and rules like
+  `color-contrast` being inapplicable in headless DOM.* ↩

@@ -35,6 +35,9 @@ Last updated: 29 October 2025
 - Presentational helpers (`formatDistance`, `formatDuration`, `formatTemperature`)
   convert SI values and inject translated unit names, ensuring wizard, explore,
   customize, and map flows respect both locale and user preferences.
+- The en-GB bundle and fallback copy use Oxford British spelling throughout
+  customize, wizard and safety flows. This affects wording only; localization
+  keys, route identifiers and external API names remain stable.
 
 ## Current assets
 

@@ -1,3 +1,5 @@
+/** @file Tests for Fluent bundle paths under configurable application bases. */
+
 import { describe, expect, it } from "bun:test";
 
 import { buildFluentLoadPath, normaliseBasePath } from "../src/i18n";
