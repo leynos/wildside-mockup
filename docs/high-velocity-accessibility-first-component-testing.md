@@ -324,14 +324,13 @@ In this snippet, the first test scans the full page and expects zero violations 
 
 By **scoping axe scans and using them sparingly**, we avoid a performance hit. Each scan might take a second or two on a large page, so we do it only where it yields new information. The principle is: **treat accessibility scans as assertions, not as a blanket afterthought**. This way, our E2E tests remain fast enough to run in CI while still covering critical scenarios.
 
-
 ### 3.2 Interactive Behaviour and Focus Management
 
-Automated accessibility testing must extend beyond static analysis. Many accessibility issues are only apparent when users actually interact with the UI. With Playwright’s control of the browser, we can simulate these interactions and validate the application’s response. Two major areas we concentrate on are **keyboard navigation** and **focus handling**.
-
-### 3.2 Interactive Behaviour and Focus Management
-
-Automated accessibility testing must extend beyond static analysis. Many accessibility issues are only apparent when users actually interact with the UI. With Playwright’s control of the browser, we can simulate these interactions and validate the application’s response. Two major areas we concentrate on are **keyboard navigation** and **focus handling**.
+Automated accessibility testing must extend beyond static analysis. Many
+accessibility issues are only apparent when users actually interact with the UI.
+With Playwright’s control of the browser, we can simulate these interactions and
+validate the application’s response. Two major areas we concentrate on are
+**keyboard navigation** and **focus handling**.
 
 #### 3.2.1 Keyboard Navigation Flow Tests
 

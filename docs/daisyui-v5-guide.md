@@ -120,13 +120,15 @@ root scrollbar gutter is excluded. `daisy-` prefix is used for all daisyUI class
 ### daisyUI colour rules
 1. daisyUI adds semantic colour names to Tailwind CSS colours
 2. daisyUI colour names can be used in utility classes, like other Tailwind CSS colour names. for example, `bg-primary` will use the primary colour for the background
-3. daisyUI colour names include variables as value so they can change based the theme
+3. daisyUI colour names include variables as value so they can change based the
+   theme
 4. There's no need to use `dark:` for daisyUI colour names
 5. Ideally only daisyUI colour names should be used for colours so the colours can change automatically based on the theme
 6. If a Tailwind CSS colour name (like `red-500`) is used, it will be same red colour on all themes
 7. If a daisyUI colour name (like `primary`) is used, it will change colour based on the theme
 8. Using Tailwind CSS colour names for text colours should be avoided because Tailwind CSS colour `text-gray-800` on `bg-base-100` would be unreadable on a dark theme - because on dark theme, `bg-base-100` is a dark colour
-9. `*-content` colours should have a good contrast compared to their associated colours
+9. `*-content` colours should have a good contrast compared to their associated
+   colours
 10. suggestion - when designing a page use `base-*` colours for majority of the page. use `primary` colour for important elements
 
 ### daisyUI custom theme with custom colours
@@ -1742,4 +1744,3 @@ Validator class changes the colour of form elements to error or success based on
 
 #### Rules
 - Use with `input`, `select`, `textarea`
-
