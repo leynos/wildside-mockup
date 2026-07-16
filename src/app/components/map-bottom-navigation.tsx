@@ -42,7 +42,7 @@ export function MapBottomNavigation({
               onClick={() => item.href && navigate({ to: item.href })}
               className={`bottom-nav__item ${isActive ? "bottom-nav__item--active" : ""}`}
             >
-              <Icon token={item.iconToken} className="text-lg" label={item.label} />
+              <Icon token={item.iconToken} className="text-lg" />
               {item.label}
             </button>
           );

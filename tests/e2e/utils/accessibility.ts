@@ -1,5 +1,14 @@
+/** @file Accessibility helpers shared by the Playwright end-to-end tests. */
+
 import type { Page } from "@playwright/test";
 
+/**
+ * Capture Playwright's raw textual ARIA snapshot for the current page.
+ *
+ * @example
+ * const snapshot = await captureAccessibilityTree(page);
+ * expect(snapshot).toContain("- main:");
+ */
 export function captureAccessibilityTree(page: Page): Promise<string> {
   return page.ariaSnapshot();
 }

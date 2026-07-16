@@ -1,3 +1,5 @@
+/** @file Unit tests for the Wildside MapLibre integration helpers. */
+
 import { describe, expect, it } from "bun:test";
 
 import {

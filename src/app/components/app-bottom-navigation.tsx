@@ -38,7 +38,7 @@ export function AppBottomNavigation({
               }
             }}
           >
-            <Icon token={item.iconToken} className="text-lg" label={item.label} />
+            <Icon token={item.iconToken} className="text-lg" />
             {item.label}
           </button>
         ))}

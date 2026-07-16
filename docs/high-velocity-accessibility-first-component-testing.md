@@ -420,41 +420,26 @@ Such tests ensure **operability** – one of the four principles of accessibilit
 
 In a complex UI, it’s possible to inadvertently change or break semantic structure while refactoring, even if everything “looks” fine visually. To guard against this, we use **accessibility tree snapshots** in Playwright. The accessibility tree is what assistive technologies actually interact with – essentially a computed structure derived from the DOM, listing elements with roles, names, and properties as a screen reader would perceive them.
 
-Playwright provides an API `page.accessibility.snapshot()` that returns this tree. We have adopted a pattern of taking **snapshot files** (in a serialized format like JSON or YAML) of key components or pages, and then using a custom matcher to compare future runs against the baseline. This is analogous to visual snapshot testing, but for semantics.
+Playwright's `page.ariaSnapshot()` API returns a raw, YAML-like textual
+representation of the page's accessible roles, names, and structure. The test
+suite preserves that text without a custom normalizer so Playwright remains the
+authority for the snapshot format.
 
-We created a custom Expect matcher (e.g., `toMatchAriaSnapshot()`) which simplifies this. The first time a test runs, it will generate a snapshot file (for example, `product-card.spec.ts-snapshots/product-card-accessibility.yml`). Subsequent runs will diff the current accessibility tree against that file and fail the test if there’s any difference (except for whitelisted changes).
+Each route snapshot stores the raw text under `accessibilityTree` in a JSON
+envelope, alongside any focused computed-style samples. Playwright's generic
+`toMatchSnapshot()` matcher owns the file boundary and reports differences on
+subsequent runs.
 
-**Example – Product Card Component:**
+```typescript
+const accessibilityTree = await page.ariaSnapshot();
+const snapshotPayload = `${JSON.stringify({ accessibilityTree }, null, 2)}\n`;
 
-```
-tsCopy code`test('ProductCard maintains accessible structure', async ({ page }) => {
-  await page.goto('/products/widget-pro');
-  const card = page.locator('.product-card');
-  // Expect the accessibility tree of the product card to match the stored baseline
-  await expect(card).toMatchAriaSnapshot();
-});
-`
-```
-
-On first run, `toMatchAriaSnapshot()` will save something like:
-
-```
-yamlCopy code`role: 'group'
-name: 'Widget Pro'
-children:
-  - role: 'image'
-    name: 'Widget Pro product image'
-  - role: 'heading'
-    name: 'Widget Pro'
-    level: 2
-  - role: 'paragraph'
-    name: '$19.99'
-  - role: 'button'
-    name: 'Add to Cart'
-`
+expect(snapshotPayload).toMatchSnapshot("product-card-aria-tree.json");
 ```
 
-(This is a conceptual illustration of what the accessibility snapshot might contain.)
+Regenerate only the affected route snapshots after an intentional semantic
+change, then audit the resulting roles and accessible names before accepting
+the new baseline.
 
 If a developer accidentally changed the `h2` in `ProductCard` to an `h3` or removed an aria-label on the image, the next test run would produce a different snapshot and cause a failure. This kind of regression test is **highly sensitive to meaningful changes** but **robust to cosmetic ones**. Unlike raw HTML snapshots (which would break on any minor markup change), the accessibility snapshot ignores irrelevant container `<div>`s or styling hooks and focuses purely on roles, names, and structure. If an extra `<div>` is added for layout but doesn’t affect roles or names, the snapshot remains the same. But if, say, a heading level changes or a label is lost, the difference is caught immediately.
 
@@ -672,7 +657,11 @@ To adopt this framework, a phased rollout is advisable:
 
 - **Visual Baseline:** Write a simple visual test for a static page and generate the baseline screenshot. Commit this baseline image to the repo (we generally commit reference snapshots to track changes over time). Ensure that small pixel differences don’t cause noise – adjust threshold or screenshot options if needed (like disabling anti-aliasing via CSS in test).
 
-- **Accessibility Snapshots:** Implement the `toMatchAriaSnapshot` matcher. This might involve calling `page.accessibility.snapshot()` and doing a deep comparison with a stored object. We can also use existing example implementations from Playwright community if available. Start by snapshotting a simple component or page to test the flow (store file, compare on next run).
+- **Accessibility Snapshots:** Capture the raw text returned by
+  `page.ariaSnapshot()`, store it in the snapshot JSON envelope, and compare the
+  payload through Playwright's generic `toMatchSnapshot()` boundary. Start by
+  snapshotting a simple component or page to test the flow before expanding
+  route coverage.
 
 **Phase 5: Full E2E Test Development (Week 2-3)**
 
