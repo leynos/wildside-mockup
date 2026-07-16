@@ -38,7 +38,7 @@ function watchGeneratedTokens() {
 }
 
 export default defineConfig({
-  // Allow deployments to customise the served base path (e.g., GitHub Pages).
+  // Allow deployments to customize the served base path (e.g., GitHub Pages).
   base: basePath,
   plugins: [tailwindcss(), react(), watchGeneratedTokens()],
 });

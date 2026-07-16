@@ -8,6 +8,8 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    env:
+      MERMAN_CLI_VERSION: '0.7.0'
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
@@ -16,5 +18,28 @@ jobs:
       # uv provides uvx, which `bun semantic` uses to run semgrep.
       # Pinned to astral-sh/setup-uv v7.
       - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          python-version: '3.14'
+      - name: Set up Rust for Merman
+        run: rustup toolchain install 1.95.0 --profile minimal
+      - name: Cache Merman CLI
+        id: cache-merman-cli
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306
+        with:
+          path: ~/.cargo/bin/merman-cli
+          key: >-
+            merman-cli-${{ runner.os }}-${{ runner.arch }}-${{
+            env.MERMAN_CLI_VERSION }}
+      - name: Install Merman CLI
+        if: steps.cache-merman-cli.outputs.cache-hit != 'true'
+        run: >-
+          cargo +1.95.0 install merman-cli
+          --version "=${MERMAN_CLI_VERSION}" --locked
+      - name: Install Nixie
+        run: uv tool install --python 3.14 nixie-cli==1.1.0
       - run: bun install --frozen-lockfile
+      - name: Enforce en-GB-oxendict spelling
+        run: make spelling
+      - name: Validate Mermaid diagrams
+        run: make nixie
       - run: bun semantic

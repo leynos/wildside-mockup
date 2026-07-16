@@ -19,3 +19,9 @@ tokens/.npm-cache/
 df12-www/
 playwright-report/
 test-results/
+
+# Local spelling-policy caches and helper tool state
+.typos-oxendict-base.json
+.typos-oxendict-base.toml
+.uv-cache/
+.uv-tools/
