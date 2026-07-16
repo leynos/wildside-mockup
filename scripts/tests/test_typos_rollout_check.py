@@ -75,35 +75,45 @@ class TestPhrasePolicyChecker:
             checker.load_policy(tmp_path)
 
     @pytest.mark.parametrize(
-        ("relative", "malformed", "message"),
+        ("invalid_policy", "message"),
         [
             pytest.param(
-                ".typos-oxendict-base.toml",
-                "phrases = []\n",
+                (
+                    ".typos-oxendict-base.toml",
+                    "phrases = []\n",
+                ),
                 "'phrases' must be a table",
                 id="shared-phrases-table",
             ),
             pytest.param(
-                ".typos-oxendict-base.toml",
-                "[phrases]\ncorrections = []\n",
+                (
+                    ".typos-oxendict-base.toml",
+                    "[phrases]\ncorrections = []\n",
+                ),
                 "'corrections' must be a table",
                 id="shared-corrections-table",
             ),
             pytest.param(
-                "typos.local.toml",
-                "phrases = []\n",
+                (
+                    "typos.local.toml",
+                    "phrases = []\n",
+                ),
                 "'phrases' must be a table",
                 id="local-phrases-table",
             ),
             pytest.param(
-                "typos.local.toml",
-                "[phrases.corrections]\ninvalid = 1\n",
+                (
+                    "typos.local.toml",
+                    "[phrases.corrections]\ninvalid = 1\n",
+                ),
                 "phrase corrections must map strings to strings",
                 id="local-correction-value",
             ),
             pytest.param(
-                "typos.toml",
-                "[files]\nextend-exclude = [1]\n[default]\nextend-ignore-re = []\n",
+                (
+                    "typos.toml",
+                    "[files]\nextend-exclude = [1]\n[default]\nextend-ignore-re = []\n",
+                ),
                 "'extend-exclude' must be a list of strings",
                 id="generated-exclusions-list",
             ),
@@ -113,11 +123,11 @@ class TestPhrasePolicyChecker:
         self,
         checker: types.ModuleType,
         tmp_path: Path,
-        relative: str,
-        malformed: str,
+        invalid_policy: tuple[str, str],
         message: str,
     ) -> None:
         """Reject malformed shared, local, and generated policy values."""
+        relative, malformed = invalid_policy
         files = policy_files()
         files[relative] = malformed
         initialize(tmp_path, files)
