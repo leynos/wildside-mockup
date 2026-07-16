@@ -1,3 +1,5 @@
+/** @file Behavioural tests for wizard step-one markers and controls. */
+
 import { afterAll, beforeEach, describe, expect, it, vi } from "bun:test";
 import * as router from "@tanstack/react-router";
 import { screen } from "@testing-library/react";
@@ -32,7 +34,7 @@ describe("WizardStepOne duration markers", () => {
     localStorage.clear();
   });
 
-  it("renders pluralised markers in en-GB", async () => {
+  it("renders pluralized markers in en-GB", async () => {
     await renderStepOne("en-GB");
 
     expect(screen.getByText("15 minutes")).toBeInTheDocument();

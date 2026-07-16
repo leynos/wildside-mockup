@@ -1,4 +1,4 @@
-/** @file Re-exports all wizard localisation maps. */
+/** @file Re-exports all wizard localization maps. */
 
 export * from "./wizard-highlight-localizations";
 export * from "./wizard-route-localizations";

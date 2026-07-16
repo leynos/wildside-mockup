@@ -1,3 +1,5 @@
+/** @file Behavioural tests for the localized interest toggle group. */
+
 import { beforeAll, describe, expect, it } from "bun:test";
 import { fireEvent, render, screen } from "@testing-library/react";
 import type { JSX } from "react";
@@ -14,7 +16,7 @@ const renderWithI18n = (ui: JSX.Element) =>
   render(<I18nextProvider i18n={i18n}>{ui}</I18nextProvider>);
 
 describe("InterestToggleGroup", () => {
-  it("renders localised interest labels and toggles selection", async () => {
+  it("renders localized interest labels and toggles selection", async () => {
     await changeLanguage("es");
 
     let selected: string[] = ["street-art"];

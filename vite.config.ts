@@ -1,3 +1,5 @@
+/** @file Vite configuration for the Wildside mockup application and token generation. */
+
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -38,7 +40,7 @@ function watchGeneratedTokens() {
 }
 
 export default defineConfig({
-  // Allow deployments to customise the served base path (e.g., GitHub Pages).
+  // Allow deployments to customize the served base path (e.g., GitHub Pages).
   base: basePath,
   plugins: [tailwindcss(), react(), watchGeneratedTokens()],
 });

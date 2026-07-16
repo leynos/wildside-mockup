@@ -127,7 +127,7 @@ test.describe("Stage 4 routes", () => {
     expect(onBackground).not.toBe(offBackground);
     expect(onAlpha).toBeGreaterThan(offAlpha);
     if (!Number.isNaN(onLightness) && !Number.isNaN(offLightness)) {
-      // Chrome serialises `background-color` in oklab space and clamps the slash component,
+      // Chrome serializes `background-color` in oklab space and clamps the slash component,
       // so assert on the relative lightness delta instead of an absolute alpha threshold.
       expect(onLightness).toBeGreaterThan(offLightness + 0.03);
     } else {

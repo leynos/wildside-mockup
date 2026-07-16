@@ -1,6 +1,6 @@
 /** @file Tests for localization runtime helpers and fallbacks. */
 import { describe, expect, it } from "bun:test";
-
+import { SUPPORTED_LOCALES } from "../src/app/i18n/supported-locales";
 import {
   coerceLocaleCode,
   fallbackLocalization,
@@ -22,14 +22,22 @@ describe("localization runtime helpers", () => {
     expect(coerceLocaleCode("fr" as string)).toBe("fr");
     expect(coerceLocaleCode("fr-CA" as string)).toBe("fr");
     expect(coerceLocaleCode("en" as string)).toBe("en-GB");
+    expect(coerceLocaleCode("EN-gb" as string)).toBe("en-GB");
   });
 
-  it("returns the first available localisation when none match", () => {
+  it("normalizes case for every configured locale", () => {
+    for (const locale of SUPPORTED_LOCALES) {
+      expect(coerceLocaleCode(locale.code.toUpperCase())).toBe(locale.code);
+      expect(coerceLocaleCode(locale.code.toLowerCase())).toBe(locale.code);
+    }
+  });
+
+  it("returns the first available localization when none match", () => {
     const fallback = fallbackLocalization({}, "Fallback");
     expect(fallback.name).toBe("Fallback");
   });
 
-  it("resolves a localisation for the requested locale", () => {
+  it("resolves a localization for the requested locale", () => {
     const resolved = resolveLocalization(localizations, "fr", "Harbour Loop");
     expect(resolved.name).toBe("Boucle du port");
   });
