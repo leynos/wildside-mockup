@@ -8,6 +8,9 @@ tmp/
 .tmp/
 .serena/
 .memdb/
+__pycache__/
+*.py[cod]
+*$py.class
 
 tokens/node_modules/
 tokens/dist/

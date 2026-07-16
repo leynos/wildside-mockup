@@ -9,7 +9,7 @@ const MAPLIBRE_RTL_PLUGIN_URL =
   "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.3.0/dist/mapbox-gl-rtl-text.js";
 
 let hasRegisteredRtlTextPlugin = false;
-type MapLibreNamespace = typeof import("maplibre-gl")["default"];
+type MapLibreNamespace = typeof import("maplibre-gl");
 
 type MapLibreWithRtl = MapLibreNamespace & {
   setRTLTextPlugin?: (pluginUrl: string, callback?: () => void, deferred?: boolean) => void;
@@ -99,7 +99,7 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
       ensureRtlTextPlugin(maplibreNamespace);
 
       try {
-        mapInstance = new maplibreNamespace.Map({
+        const initializedMap = new maplibreNamespace.Map({
           container: containerElement,
           style: "https://demotiles.maplibre.org/styles/osm-bright-gl-style/style.json",
           center: [...centerRef.current] as MutableLngLat,
@@ -108,19 +108,19 @@ export function WildsideMap({ center, zoom }: WildsideMapProps) {
           pitch: pitchRef.current,
           attributionControl: false,
         });
-        mapRef.current = mapInstance;
-        mapInstance.addControl(
+        mapInstance = initializedMap;
+        mapRef.current = initializedMap;
+        initializedMap.addControl(
           new maplibreNamespace.NavigationControl({ visualizePitch: true }),
           "top-right",
         );
-        mapInstance.addControl(new maplibreNamespace.AttributionControl({ compact: true }));
+        initializedMap.addControl(new maplibreNamespace.AttributionControl({ compact: true }));
 
-        mapInstance.on("load", () => {
-          if (!mapInstance) return;
+        initializedMap.on("load", () => {
           if (actions) {
-            actions.registerMap(mapInstance);
+            actions.registerMap(initializedMap);
           } else {
-            ensureFallbackLayers(mapInstance);
+            ensureFallbackLayers(initializedMap);
           }
         });
       } catch (error) {
