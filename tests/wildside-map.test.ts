@@ -6,7 +6,7 @@ import {
   resetRtlTextPluginRegistrationForTests,
 } from "../src/app/components/wildside-map";
 
-type MapLibreNamespace = typeof import("maplibre-gl")["default"];
+type MapLibreNamespace = typeof import("maplibre-gl");
 
 describe("Wildside map RTL helpers", () => {
   it("registers the RTL text plugin only once when MapLibre exposes the hook", () => {
