@@ -8,9 +8,9 @@ these rules to keep the documentation clear and consistent for developers.
 - Use British English based on the
   [Oxford English Dictionary](https://public.oed.com/) (en-GB-oxendict):
   - suffix -ize in words like _realize_ and _organization_ instead of
-     -ise endings,
+    -ise endings,
   - suffix ‑lyse in words not traced to the Greek ‑izo, ‑izein suffixes,
-     such as _analyse_, _paralyse_ and _catalyse_,
+    such as _analyse_, _paralyse_ and _catalyse_,
   - suffix -our in words such as _colour_, _behaviour_ and _neighbour_,
   - suffix -re in words such as _calibre_, _centre_ and fibre,
   - double "l" in words such as _cancelled_, _counsellor_ and _cruellest_,

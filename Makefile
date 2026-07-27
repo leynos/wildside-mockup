@@ -1,4 +1,4 @@
-.PHONY: check-fmt lint typecheck test markdownlint spelling \
+.PHONY: fmt check-fmt lint typecheck test markdownlint spelling \
 	spelling-phrase-check spelling-config spelling-config-write \
 	spelling-helper-test nixie
 
@@ -27,6 +27,10 @@ SPELLING_HELPER_PYTEST = PYTHONPATH=scripts $(SPELLING_PY_ENV) \
 	COVERAGE_FILE=$(SPELLING_COVERAGE_FILE) $(UV_ENV) $(UV) run --no-project \
 	--python 3.14 --with pathspec==$(PATHSPEC_VERSION) --with pytest==9.0.2 \
 	--with pytest-cov==7.0.0 python -m pytest
+
+fmt:
+	bun run fmt
+	mdformat-all
 
 check-fmt:
 	bunx biome format --write src tests tools docs/developers-guide.md package.json biome.jsonc bunfig.toml
