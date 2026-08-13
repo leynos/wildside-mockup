@@ -25,3 +25,9 @@ test-results/
 .typos-oxendict-base.toml
 .uv-cache/
 .uv-tools/
+.vtcode/
+.claude/
+.grepai/
+*.swp
+*.swo
+*~
