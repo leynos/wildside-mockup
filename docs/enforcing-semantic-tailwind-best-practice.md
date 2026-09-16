@@ -3,9 +3,9 @@
 **Audience:** Implementers working on `wildside-mockup` (and later `wildside`).
 **Goal:** Enforce semantic, accessible HTML with clean, token‑driven
 Tailwind/DaisyUI usage. Prefer **BiomeJS + GritQL** rules; fall back to
-**Semgrep**/**Stylelint** when they express rules better.
-**Outcome:** Readable, queryable markup; reusable semantic classes via
-`@apply`; consistent DaisyUI/Radix‑aligned naming; single CLI for local + CI.
+**Semgrep**/**Stylelint** when they express rules better. **Outcome:**
+Readable, queryable markup; reusable semantic classes via `@apply`; consistent
+DaisyUI/Radix‑aligned naming; single CLI for local + CI.
 
 ______________________________________________________________________
 
@@ -646,9 +646,9 @@ ______________________________________________________________________
 A: We extract only repeated patterns. Tailwind still tree‑shakes class‑based
 styles; the few semantic classes you add are minimal and intentionally reused.
 
-**Q: When is it _okay_ to keep utilities inline?**
-A: One‑offs, quick prototypes, and tiny adjustments local to a component. Once
-the same chunk appears twice, prefer extracting it.
+**Q: When is it _okay_ to keep utilities inline?** A: One‑offs, quick
+prototypes, and tiny adjustments local to a component. Once the same chunk
+appears twice, prefer extracting it.
 
 **Q: How strict are thresholds?**  
 A: Configurable. Start with `repeatMinClasses=4`, `repeatMinOccurrences=2`.
