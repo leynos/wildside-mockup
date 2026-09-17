@@ -17,7 +17,7 @@ jobs:
           bun-version: "latest"
       # uv provides uvx, which `bun semantic` uses to run semgrep.
       # Pinned to astral-sh/setup-uv v7.
-      - uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
         with:
           python-version: '3.14'
       - name: Set up Rust for Merman
@@ -37,12 +37,12 @@ jobs:
           --version "=${MERMAN_CLI_VERSION}" --locked
       - run: bun install --frozen-lockfile
       - name: Install mdtablefix
-        uses: leynos/shared-actions/.github/actions/install-mdtablefix@c5a54701c8603a0fa756a6b34c49bc2af75a6c11
+        uses: leynos/shared-actions/.github/actions/install-mdtablefix@f68e8e2e05ff03ab91ef01bb7175582a04e3428d
         with:
           version: "0.6.0"
       - run: make check-fmt
       - name: Lint Markdown
-        uses: DavidAnson/markdownlint-cli2-action@4580e1612f6407034edd6c0e4e316d725920867b  # v24.2.0
+        uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff  # v24.2.0
         with:
           globs: '**/*.md'
       - name: Enforce en-GB-oxendict spelling
