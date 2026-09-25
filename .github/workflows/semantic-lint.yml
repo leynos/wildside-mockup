@@ -50,3 +50,22 @@ jobs:
       - name: Validate Mermaid diagrams
         run: make nixie NIXIE_ARGS=--no-sandbox
       - run: bun semantic
+
+  # Builds the site and runs the test suite on every pull request, so a
+  # change that breaks either (including a Dependabot bump that automerge
+  # would otherwise land) turns the required `build-test` check red.
+  build-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
+      - run: bun install --frozen-lockfile
+      # `tokens:build` runs the Style Dictionary build under node, as the
+      # Pages build does.
+      - run: bun run tokens:build
+      - run: bun run build
+      - run: bun run test
