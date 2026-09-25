@@ -62,6 +62,23 @@ running `bun semantic`. Keep third-party workflow actions pinned to immutable
 commit SHAs, and run `make lint` after workflow changes so `actionlint`
 validates the edited YAML.
 
+## Pull-request build and tests
+
+`semantic-lint.yml` also runs a `build-test` job on every pull request and on
+pushes to `main` and `develop`. It runs `bun install --frozen-lockfile`,
+`bun run tokens:build` (the Style Dictionary build under node, as the Pages
+build runs it), `bun run build` and `bun run test`. The job is not a matrix, so
+it reports under the single context `build-test`, which is a required check
+beside `lint`. Before it existed, no pull-request job built the site or ran the
+suite, so automerge could land a Dependabot bump that broke either.
+
+The suite runs under happy-dom. `tests/setup-happy-dom.ts` copies the browser
+globals the app and its libraries reach for onto `globalThis`: `window`,
+`document`, the DOM constructors including `HTMLFormElement` (Radix's slider
+tests `instanceof HTMLFormElement`), storage, history, `scrollTo` and the
+animation-frame functions. When a test fails with
+`ReferenceError: X is not defined`, add `X` there from the happy-dom window.
+
 ## Spelling policy
 
 The `make spelling` gate enforces en-GB-oxendict spelling across tracked text.
