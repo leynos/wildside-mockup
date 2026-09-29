@@ -12,6 +12,9 @@ accepted = []
 
 [patterns]
 ignore = [
+  # Inline code spans, which this repository's spelling check has always
+  # masked; preserved through the migration to the shared gate.
+  '`[^`\n]+`',
   "(?m)^\\s*types: \\[opened, reopened, synchronize, labeled, ready_for_review\\]\\s*$",
   "(?m)^\\s*-   \\*\\*`background_color` and `theme_color`\\*\\*: These members allow for theming of the application's presentation\\. `background_color` defines a placeholder background color that is displayed before the application's stylesheet has loaded, creating a smoother transition on startup\\. `theme_color` suggests a color for the user agent to use in its UI, such as the address bar or taskbar, helping the PWA feel more integrated with the host operating system\\.\\^3\\^\\s*$",
   "(?m)^\\s*\\| `theme_color` \\| Sets the color of the browser UI/toolbar\\. \\| `\"#3367D6\"` \\| Creates a more integrated, native-like appearance\\. \\|\\s*$",
