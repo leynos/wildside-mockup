@@ -37,7 +37,7 @@ jobs:
           --version "=${MERMAN_CLI_VERSION}" --locked
       - run: bun install --frozen-lockfile
       - name: Install mdtablefix
-        uses: leynos/shared-actions/.github/actions/install-mdtablefix@43f856c5d807eb9c2c7e6bf59c6612c618988d85
+        uses: leynos/shared-actions/.github/actions/install-mdtablefix@8091b7cb5f9bab2d4a76ced2e749fd4c1bccdb02
         with:
           version: "0.6.1"
       - run: make check-fmt
